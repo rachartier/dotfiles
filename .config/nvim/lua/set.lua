@@ -35,3 +35,8 @@ vim.opt.isfname:append("@-@")
 
 vim.opt.updatetime = 50
 vim.opt.fillchars='eob: '
+
+vim.cmd [[
+    set cursorline
+    set cursorlineopt=number
+]]

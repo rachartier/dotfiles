@@ -12,7 +12,6 @@ require "noice".setup {
         cmdline_popup = {
             border = {
                 style = u.border_chars_outer_thin,
-                padding = { 0, 1 },
             },
             win_options = {
                 winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder",
