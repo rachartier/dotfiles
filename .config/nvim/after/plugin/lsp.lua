@@ -1,4 +1,6 @@
 local lsp = require("lsp-zero")
+local u = require("utils")
+
 lsp.preset("recommended")
 
 local on_attach = function(client, bufnr)
@@ -92,9 +94,6 @@ require('lspconfig')['lua_ls'].setup {
     }
 }
 
---require('lspconfig')['remark_ls'].setup {
-    --    capabilities = capabilities,
-    --    on_attach = on_attach,
-    --}
-
-
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+  border = u.border_chars_outer_thin,
+})

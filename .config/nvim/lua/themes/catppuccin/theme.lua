@@ -1,4 +1,4 @@
-local flavour = "frappe"
+local flavour = "macchiato"
 
 require("catppuccin").setup({
     flavour = flavour, -- latte, frappe, macchiato, mocha
@@ -31,7 +31,8 @@ require("catppuccin").setup({
     highlight_overrides = {
         all = function(colors)
             return {
-                LineNr = { fg = colors.overlay0 },
+                LineNr = { fg = colors.surface2 },
+                CursorLineNr = { fg = colors.peach },
                 NormalFloat = {
                     bg = colors.crust,
                 },
@@ -109,18 +110,18 @@ require("catppuccin").setup({
     },
 })
 
-local colors = require("catppuccin.palettes").get_palette("macchiato")
 
 --require('catppuccin').load()
 vim.cmd.colorscheme "catppuccin"
+local colors = require("catppuccin.palettes").get_palette("mocha")
 
 local TelescopeColor = {
     TelescopeMatching = { fg = colors.flamingo },
-    TelescopeSelection = { fg = colors.text, bg = colors.surface0, bold = true },
+    TelescopeSelection = { fg = colors.text, bold = true },
 
     TelescopePromptPrefix = { bg = colors.surface0 },
     TelescopePromptNormal = { bg = colors.surface0 },
-    TelescopeResultsNormal = { bg = colors.mantle },
+    TelescopeResultsNormal = { bg = colors.mantle, fg = colors.overlay1 },
     TelescopePreviewNormal = { bg = colors.mantle },
     TelescopePromptBorder = { bg = colors.surface0, fg = colors.surface0 },
     TelescopeResultsBorder = { bg = colors.mantle, fg = colors.mantle },
@@ -134,5 +135,3 @@ for hl, col in pairs(TelescopeColor) do
     vim.api.nvim_set_hl(0, hl, col)
 end
 
-
---vim.api.nvim_set_hl(0, "NormalFloat", {bg="None"})

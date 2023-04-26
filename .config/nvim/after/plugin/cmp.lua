@@ -30,11 +30,9 @@ local function format(_, item)
     end
 
     item.kind = ' ' .. (u.kind_icons[item.kind] or u.kind_icons.Unknown) .. '│'
-
     item.menu = nil
 
     return item
-
 end
 
 -- Setup.
