@@ -37,13 +37,14 @@ require("catppuccin").setup({
                 },
                 PopupNormal = {
                     bg = colors.crust,
+                    fg = colors.overlay1,
                 },
                 PopupBorder = {
                     bg = colors.crust,
                     fg = colors.subtext1
                 },
                 Pmenu = {
-                    link = 'PopupNormal'
+                    link = 'PopupNormal',
                 },
                 PmenuSel = {
                     bg = colors.crust,
@@ -59,7 +60,6 @@ require("catppuccin").setup({
                 },
                 NvimTreeNormal = {
                     bg = colors.crust,
-                    fg = colors.text
                 },
                 FloatBorder = {
                     bg = colors.crust,
@@ -67,7 +67,6 @@ require("catppuccin").setup({
                 TerminalBorder = {
                     bg = colors.surface0,
                 },
-
                 TerminalNormal = {
                     bg = colors.surface0,
                 },
@@ -135,8 +134,5 @@ for hl, col in pairs(TelescopeColor) do
     vim.api.nvim_set_hl(0, hl, col)
 end
 
-vim.cmd [[
-hi NvimTreeNormal guibg=NONE ctermbg=NONE
-]]
 
 --vim.api.nvim_set_hl(0, "NormalFloat", {bg="None"})
