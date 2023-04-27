@@ -139,7 +139,7 @@ local function get_git_compare()
 end
 
 -- Required to properly set the colors.
-local c = require("catppuccin.palettes").get_palette "frappe"
+local c = require("catppuccin.palettes").get_palette "macchiato"
 
 require 'lualine'.setup {
     sections = {
@@ -268,7 +268,6 @@ require 'lualine'.setup {
     },
     extensions = {
         "toggleterm",
-
         "nvim-tree"
     }
 }

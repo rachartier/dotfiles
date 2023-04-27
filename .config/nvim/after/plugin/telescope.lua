@@ -23,7 +23,7 @@ ts.setup({
         selection_caret = '  ',
         hl_result_eol = true,
         results_title = "",
-        winblend = 0,
+        winblend = 10,
     }
 })
 
