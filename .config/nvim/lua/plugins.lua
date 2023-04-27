@@ -8,16 +8,11 @@ return require('lazy').setup({
             'nvim-telescope/telescope-dap.nvim'
         }
     },
-    { "aserowy/tmux.nvim" },
+    { "aserowy/tmux.nvim", },
     {
         'navarasu/onedark.nvim',
         priority = 1000
     },
-    {
-    'AlexvZyl/nordic.nvim',
-    lazy = false,
-    priority = 1000,
-},
     { 'nvim-treesitter/nvim-treesitter' },
     { 'nvim-tree/nvim-tree.lua' },
     { 'mbbill/undotree' },
@@ -32,7 +27,6 @@ return require('lazy').setup({
 
             -- Autocompletion
             'hrsh7th/nvim-cmp',
-            'hrsh7th/cmp-cmdline',
             'hrsh7th/cmp-buffer',
             'hrsh7th/cmp-path',
             'saadparwaiz1/cmp_luasnip',
@@ -50,15 +44,12 @@ return require('lazy').setup({
             "nvim-tree/nvim-web-devicons"
         }
     },
-
-    { 'kdheepak/lazygit.nvim' },
     { 'onsails/lspkind.nvim' },
     { 'lukas-reineke/indent-blankline.nvim' },
     {
         'kosayoda/nvim-lightbulb',
         dependencies = 'antoinemadec/FixCursorHold.nvim',
     },
-
     { 'mfussenegger/nvim-jdtls' },
     {
         'weilbith/nvim-code-action-menu',
