@@ -100,3 +100,4 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias config='/usr/bin/git --git-dir=/home/rachartier/.cfg/ --work-tree=/home/rachartier'
+if [ "$TMUX" = "" ]; then tmux; fi
