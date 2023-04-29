@@ -2,6 +2,8 @@ local M = {
 
     'VonHeikemen/lsp-zero.nvim',
     dependencies = {
+        'onsails/lspkind.nvim',
+
         -- LSP Support
         'neovim/nvim-lspconfig',
 
