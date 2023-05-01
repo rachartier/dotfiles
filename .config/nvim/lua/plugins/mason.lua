@@ -1,6 +1,8 @@
 local M = {
     'williamboman/mason.nvim',
-    'williamboman/mason-lspconfig.nvim',
+    dependencies = {
+        'williamboman/mason-lspconfig.nvim'
+    }
 }
 
 function M.config()
