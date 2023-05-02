@@ -34,7 +34,17 @@ function M.config()
         vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename,bufopts, {desc = "Rename"})
         vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help,bufopts, {desc = "Help"})
 
-        require 'illuminate'.on_attach(client)
+            vim.api.nvim_create_augroup('lsp_document_highlight', {})
+            vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+                group = 'lsp_document_highlight',
+                buffer = 0,
+                callback = vim.lsp.buf.document_highlight,
+            })
+            vim.api.nvim_create_autocmd('CursorMoved', {
+                group = 'lsp_document_highlight',
+                buffer = 0,
+                callback = vim.lsp.buf.clear_references,
+            })
     end
 
     vim.cmd([[

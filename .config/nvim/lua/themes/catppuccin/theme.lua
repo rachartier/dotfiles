@@ -71,6 +71,18 @@ require("catppuccin").setup({
                 TerminalNormal = {
                     bg = colors.surface0,
                 },
+                LspReferenceRead = {
+                    bold = true,
+                    bg = colors.surface0
+                },
+                LspReferenceText = {
+                    bold = true,
+                    bg = colors.surface0
+                },
+                LspReferenceWrite = {
+                    bold = true,
+                    bg = colors.surface0
+                }
             }
         end,
     },
