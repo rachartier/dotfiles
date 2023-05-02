@@ -41,3 +41,5 @@ vim.keymap.set("n", "C-left", "<cmd>lua require('tmux').move_left()<cr>", { sile
 vim.keymap.set("n", "C-right", "<cmd>lua require('tmux').move_right()<cr>", { silent = true })
 vim.keymap.set("n", "C-up", "<cmd>lua require('tmux').move_top()<cr>", { silent = true })
 vim.keymap.set("n", "C-down", "<cmd>lua require('tmux').move_bottom()<cr>", { silent = true })
+
+vim.keymap.set("n", "<leader>te", "<cmd>NvimTreeToggle<CR>", { silent = true })

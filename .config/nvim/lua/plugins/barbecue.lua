@@ -1,4 +1,15 @@
-if require("lazy.core.config").plugins["barbecue"] then
+local M = {
+    "utilyre/barbecue.nvim",
+    enabled = true,
+    name = "barbecue",
+    version = "*",
+    dependencies = {
+        "SmiteshP/nvim-navic",
+        "nvim-tree/nvim-web-devicons", -- optional dependency
+    },
+}
+
+function M.config()
     require('barbecue').setup({
         theme = "catppuccin",
         integrations = {
@@ -10,3 +21,5 @@ if require("lazy.core.config").plugins["barbecue"] then
         }
     })
 end
+
+return M
