@@ -33,8 +33,8 @@ dap.adapters.python = {
 
 local sign = vim.fn.sign_define
 
-sign("DapBreakpoint", { text = "🟥", texthl = "DapBreakpoint", linehl = "", numhl = "red"})
-sign("DapBreakpointRejected", { text = "🟦", texthl = "DapBreakpoint", linehl = "", numhl = "red"})
+sign("DapBreakpoint", { text = "●", texthl = "DapBreakpoint", linehl = "", numhl = "red"})
+sign("DapBreakpointRejected", { text = "●", texthl = "DapBreakpoint", linehl = "", numhl = "red"})
 sign("DapBreakpointCondition", { text = "●", texthl = "DapBreakpointCondition", linehl = "", numhl = "red"})
 sign("DapLogPoint", { text = "◆", texthl = "DapLogPoint", linehl = "", numhl = ""})
 sign("DapStopped", { text = "▶", texthl = "DapStopped", linehl = "", numhl = ""})

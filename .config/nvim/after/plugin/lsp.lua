@@ -3,6 +3,14 @@ local u = require("utils")
 
 lsp.preset("recommended")
 
+--vim.cmd [[
+--
+-- hi LspReferenceRead cterm=bold  guibg=#4540ff
+--hi LspReferenceText cterm=bold  guibg=#4540ff
+--hi LspReferenceWrite cterm=bold guibg=#4540ff
+--
+--]]
+
 local on_attach = function(client, bufnr)
     local bufopts = {buffer = bufnr, remap = false}
     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration,bufopts)
@@ -18,14 +26,24 @@ local on_attach = function(client, bufnr)
     vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename,bufopts, {desc = "Rename"})
     vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help,bufopts, {desc = "Help"})
 
-    require 'illuminate'.on_attach(client)
+
+    local augroup = vim.api.nvim_create_augroup("LspDocumentHighlight", { clear = false })
+    vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+    vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+        group = augroup,
+        buffer = bufnr,
+        callback = function()
+            vim.lsp.buf.clear_references()
+            vim.lsp.buf.document_highlight()
+        end,
+    })
 end
 
 vim.cmd([[
-    sign define DiagnosticSignError text= texthl= linehl= numhl=DiagnosticSignError
-    sign define DiagnosticSignWarn  text= texthl= linehl= numhl=DiagnosticSignWarn
-    sign define DiagnosticSignInfo  text= texthl= linehl= numhl=DiagnosticSignInfo
-    sign define DiagnosticSignHint  text=󱤅 texthl= linehl= numhl=DiagnosticSignHint
+sign define DiagnosticSignError text= texthl= linehl= numhl=DiagnosticSignError
+sign define DiagnosticSignWarn  text= texthl= linehl= numhl=DiagnosticSignWarn
+sign define DiagnosticSignInfo  text= texthl= linehl= numhl=DiagnosticSignInfo
+sign define DiagnosticSignHint  text=󱤅 texthl= linehl= numhl=DiagnosticSignHint
 ]])
 
 local util = require 'lspconfig/util'
@@ -95,5 +113,7 @@ require('lspconfig')['lua_ls'].setup {
 }
 
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-  border = u.border_chars_outer_thin,
+    border = u.border_chars_outer_thin,
 })
+
+
