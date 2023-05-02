@@ -5,7 +5,6 @@ local M = {
         'godlygeek/tabular',
         'preservim/vim-markdown'
     },
-    cmd = "Telekasten"
 }
 
 function M.config()
