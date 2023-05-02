@@ -1,8 +1,19 @@
-require('telekasten').setup({
+local M = {
+    'renerocksai/telekasten.nvim',
+
+    dependencies = {
+        'godlygeek/tabular',
+        'preservim/vim-markdown'
+    },
+    cmd = "Telekasten"
+}
+
+function M.config()
+    require('telekasten').setup({
         home = vim.fn.expand("~/notes"),
     })
 
--- Launch panel if nothing is typed after <leader>z
+    -- Launch panel if nothing is typed after <leader>z
     vim.keymap.set("n", "<leader>z", "<cmd>Telekasten panel<CR>", {desc = "Show Telekasten panel"})
 
     -- Most used functions
@@ -22,13 +33,16 @@ require('telekasten').setup({
     -- Call insert link automatically when we start typing a link
 
     vim.api.nvim_create_autocmd(
-        "FileType",
-        {
-            pattern = "markdown",
-            callback = function()
-                vim.keymap.set("i", "[[", "<cmd>Telekasten insert_link<CR>")
-            end
-        }
-        )
+    "FileType",
+    {
+        pattern = "markdown",
+        callback = function()
+            vim.keymap.set("i", "[[", "<cmd>Telekasten insert_link<CR>")
+        end
+    }
+    )
 
     vim.g.vim_markdown_folding_disabled = 1
+end
+
+return M

@@ -53,6 +53,3 @@ end
 --vim.api.nvim_set_hl(0, "IlluminatedWordRead", IlluminateColor)
 vim.api.nvim_set_hl(0, "Cursor", { bg = colors.fg_alt})
 vim.api.nvim_set_hl(0, "Visual", { bg = "#69698E"})
-
-
---
