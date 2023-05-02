@@ -11,7 +11,6 @@ function M.config()
     require("telescope").load_extension('harpoon')
 
     local ts = require 'telescope'
-    local u = require 'utils'
 
     ts.setup({
         defaults = {
@@ -20,12 +19,6 @@ function M.config()
             layout_config = {
                 prompt_position = 'top'
             },
-            borderchars = {
-                prompt = u.border_chars_outer_thin_telescope,
-                results = u.border_chars_outer_thin_telescope,
-                preview = u.border_chars_outer_thin_telescope
-            },
-            border = true,
             multi_icon = '',
             entry_prefix = '   ',
             prompt_prefix = '   ',
