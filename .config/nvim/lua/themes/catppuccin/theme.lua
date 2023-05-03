@@ -71,15 +71,15 @@ require("catppuccin").setup({
                 TerminalNormal = {
                     bg = colors.surface0,
                 },
-                LspReferenceRead = {
+                IlluminatedWordRead = {
                     bold = true,
                     bg = colors.surface0
                 },
-                LspReferenceText = {
+                IlluminatedWordWrite = {
                     bold = true,
                     bg = colors.surface0
                 },
-                LspReferenceWrite = {
+                IluminatedReferenceText = {
                     bold = true,
                     bg = colors.surface0
                 }
