@@ -20,6 +20,9 @@ function M.config()
         --  - middle-click: delete buffer
         clickable = true,
     }
+
+    vim.keymap.set("n", "<Tab>", "<cmd>BufferNext<cr>", { silent = true })
+    vim.keymap.set("n", "<S-Tab>", "<cmd>BufferPrevious<cr>", { silent = true })
 end
 
 return M
