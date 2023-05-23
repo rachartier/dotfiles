@@ -9,7 +9,7 @@ local M = {
 
 function M.config()
     require('telekasten').setup({
-        home = vim.fn.expand("~/notes"),
+        home = vim.fn.expand("~/.config/nvim/notes"),
     })
 
     -- Launch panel if nothing is typed after <leader>z
