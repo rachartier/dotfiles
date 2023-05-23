@@ -25,16 +25,16 @@ function M.config()
         autocmds = {
             enableOnVimEnter = true,
         },
-        mappings = {
-            -- When `true`, creates all the mappings that are not set to `false`.
-            --- @type boolean
-            enabled = true,
-            toggle = "<Leader>np",
-            widthUp = false,
-            widthDown = false,
-            scratchPad = false,
-        }
+        integrations = {
+            undotree = {
+                -- The position of the tree.
+                --- @type "left"|"right"
+                position = "left",
+            },
+        },
     })
+
+    vim.keymap.set("n", "<leader>pp", "<cmd>NoNeckPain<CR>", {desc="Toggle NoNeckPain"})
 end
 
 return M
