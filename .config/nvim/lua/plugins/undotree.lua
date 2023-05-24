@@ -4,6 +4,7 @@ local M = {
 
 function M.config()
     vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, {desc = "Open UndoTree"})
+    vim.g.undotree_WindowLayout = 2
 end
 
 return M
