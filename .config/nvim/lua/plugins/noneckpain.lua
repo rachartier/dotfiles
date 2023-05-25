@@ -7,7 +7,9 @@ function M.config()
         width = 150,
         buffers = {
             setNames = false,
+            colors = {
                 blend = -0.3,
+            },
             left = {
                 enabled = false,
             },
