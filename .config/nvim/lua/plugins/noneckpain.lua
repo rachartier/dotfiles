@@ -7,23 +7,21 @@ function M.config()
         width = 150,
         buffers = {
             setNames = false,
-            colors = {
                 blend = -0.3,
-            },
-            right = {
+            left = {
                 enabled = false,
             },
-
             scratchPad = {
                 enabled = true,
                 location = "~/.config/nvim/notes/scratchpad/",
+                fileName = "scratchpad",
             },
             bo = {
                 filetype = "md"
             },
         },
         autocmds = {
-            enableOnVimEnter = true,
+            enableOnTabEnter = true
         },
         integrations = {
             undotree = {
@@ -34,7 +32,7 @@ function M.config()
         },
     })
 
-    vim.keymap.set("n", "<leader>pp", "<cmd>NoNeckPain<CR>", {desc="Toggle NoNeckPain"})
+    vim.keymap.set("n", "<leader>pp", "<cmd>NoNeckPain<CR>", { desc = "Toggle NoNeckPain" })
 end
 
 return M
