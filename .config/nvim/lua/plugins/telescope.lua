@@ -1,7 +1,6 @@
 local M = {
     'nvim-telescope/telescope.nvim',
     -- TODO: vérifier les nouveaux commits pour éviter le bug de treesitter...
-    commit = "057ee0f8783872635bc9bc9249a4448da9f99123",
     dependencies = {
         'nvim-lua/plenary.nvim',
         'nvim-telescope/telescope-dap.nvim'
