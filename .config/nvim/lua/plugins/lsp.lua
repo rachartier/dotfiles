@@ -19,6 +19,10 @@ function M.config()
 
     lsp.preset("recommended")
 
+    vim.diagnostic.config {
+        float = { border = "rounded" },
+    }
+
     local on_attach = function(client, bufnr)
         local bufopts = {buffer = bufnr, remap = false}
         vim.keymap.set('n', 'gD', vim.lsp.buf.declaration,bufopts)
