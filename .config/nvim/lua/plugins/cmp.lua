@@ -19,7 +19,7 @@ function M.config()
 
     vim.cmd 'set completeopt=menu,menuone,noselect'
 
-    -- Used for tabbing in cmp results.
+
     local has_words_before = function()
         if not table.unpack then
             table.unpack = unpack
@@ -48,17 +48,29 @@ function M.config()
         return item
     end
 
-    -- Setup.
+
+    local filter_text = function (entry, _)
+        local kind = require('cmp.types').lsp.CompletionItemKind[entry:get_kind()]
+        return kind ~= 'Text'
+    end
+
+
     cmp.setup {
-        -- Snippet engine.
         snippet = {
             expand = function(args)
                 luasnip.lsp_expand(args.body)
             end,
         },
-
-        -- Key maps.
+        sources = cmp.config.sources {
+            { name = 'nvim_lsp', entry_filter = filter_text },
+            { name = 'buffer', entry_filter = filter_text },
+            { name = 'luasnip', entry_filter = filter_text },
+            { name = 'latex_symbols' },
+        },
         mapping = cmp.mapping.preset.insert {
+            ['<C-BS>'] = {
+                i = cmp.config.disable
+            },
             ['<C-u>'] = cmp.mapping.scroll_docs(-4),
             ['<C-d>'] = cmp.mapping.scroll_docs(4),
             ['<C-Space>'] = cmp.mapping.complete(),
@@ -86,13 +98,11 @@ function M.config()
             end, { "i", "s" }),
         },
 
-        -- Format UI.
         formatting = {
             fields = { 'kind', 'abbr' },
             format = format
         },
 
-        -- Popup window.
         window = {
             completion = cmp.config.window.bordered {
                 winhighlight = "Normal:Pmenu,FloatBorder:PmenuBorder,CursorLine:PmenuSel,Search:None",
@@ -111,32 +121,14 @@ function M.config()
 
     }
 
-    -- Filter out the text.
-    local filter_text = function (entry, _)
-        local kind = require('cmp.types').lsp.CompletionItemKind[entry:get_kind()]
-        return kind ~= 'Text'
-    end
-
-    -- Sources.
-    cmp.setup {
-        sources = cmp.config.sources {
-            { name = 'nvim_lsp', entry_filter = filter_text },
-            { name = 'buffer', entry_filter = filter_text },
-            { name = 'luasnip', entry_filter = filter_text },
-            { name = 'latex_symbols' },
-        }
-    }
-
-    -- Set configuration for specific filetype.
     cmp.setup.filetype('gitcommit', {
         sources = cmp.config.sources({
-            { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
+            { name = 'cmp_git' },
         }, {
             { name = 'buffer' },
         })
     })
 
-    -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
     cmp.setup.cmdline({ '/', '?' }, {
         mapping = cmp.mapping.preset.cmdline(),
         sources = {
@@ -144,7 +136,6 @@ function M.config()
         }
     })
 
-    -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
     cmp.setup.cmdline(':', {
         mapping = cmp.mapping.preset.cmdline(),
         sources = cmp.config.sources({

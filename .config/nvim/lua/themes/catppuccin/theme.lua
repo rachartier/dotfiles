@@ -31,8 +31,15 @@ require("catppuccin").setup({
     highlight_overrides = {
         all = function(colors)
             return {
-                LineNr = { fg = colors.surface2 },
-                CursorLineNr = { fg = colors.peach },
+                LineNr = {
+                    fg = colors.surface2
+                },
+                CursorLineNr = {
+                    fg = colors.peach
+                },
+                LspSignatureActiveParameter = {
+                    bg = colors.base
+                },
                 NormalFloat = {
                     bg = colors.crust,
                 },
