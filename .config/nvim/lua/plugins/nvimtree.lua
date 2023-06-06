@@ -6,11 +6,16 @@ local M = {
 function M.config()
     local nvim_tree = require('nvim-tree')
     local u = require("utils")
+    local api = require("nvim-tree.api")
 
     local gwidth = vim.api.nvim_list_uis()[1].width
     local gheight = vim.api.nvim_list_uis()[1].height
     local width = 60
     local height = 20
+
+    api.events.subscribe(api.events.Event.FileCreated, function(file)
+        vim.cmd("edit " .. file.fname)
+    end)
 
     nvim_tree.setup{
         view = {
@@ -29,6 +34,9 @@ function M.config()
             }
         },
         renderer = {
+            indent_markers = {
+                enable = true,
+            },
             root_folder_label = function(path)
                 return vim.fn.fnamemodify(path, ":t")
             end,
