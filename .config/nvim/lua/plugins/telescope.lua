@@ -48,6 +48,7 @@ function M.config()
     vim.keymap.set('n', '*', fuzzy_find_under_cursor, { desc = "Fuzzy find in file under cursor" })
 
     vim.keymap.set("n", "<leader>ft", builtin.colorscheme, { desc = "Select theme" })
+    vim.keymap.set("n", "<leader>fl", builtin.resume)
 end
 
 return M

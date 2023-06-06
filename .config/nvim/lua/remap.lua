@@ -40,3 +40,12 @@ vim.keymap.set("n", "C-up", "<cmd>lua require('tmux').move_top()<cr>", { silent 
 vim.keymap.set("n", "C-down", "<cmd>lua require('tmux').move_bottom()<cr>", { silent = true })
 
 vim.keymap.set("n", "<leader>te", "<cmd>NvimTreeToggle<CR>", { silent = true })
+
+
+-- from https://www.reddit.com/r/neovim/comments/13y3thq/whats_a_very_simple_config_change_that_you_cant/
+vim.keymap.set("i", "<C-BS>", "<Esc>cvb", { })
+vim.keymap.set("n", "<cr>", "ciw")
+vim.keymap.set("v", "y", "ygv<esc>")
+vim.keymap.set("n", "<BS>", ":b#<CR>", { silent=true })
+vim.keymap.set("n", "p", "p=`]", { silent=true })
+
