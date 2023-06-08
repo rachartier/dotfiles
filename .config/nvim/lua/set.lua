@@ -37,6 +37,12 @@ vim.opt.updatetime = 50
 vim.opt.fillchars='eob: '
 
 vim.cmd [[
+    set shellcmdflag=-c
     set cursorline
     set cursorlineopt=number
 ]]
+
+vim.cmd [[
+    command! -nargs=1 Google !google <args>
+]]
+

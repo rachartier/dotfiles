@@ -56,7 +56,7 @@ require("catppuccin").setup({
                 },
                 PmenuSel = {
                     bg = colors.crust,
-                    fg = colors.text,
+                    fg = colors.peach,
                     bold = true
                 },
                 PmenuBorder = {

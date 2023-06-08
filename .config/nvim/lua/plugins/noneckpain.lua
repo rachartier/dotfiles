@@ -4,19 +4,17 @@ local M = {
 
 function M.config()
     require("no-neck-pain").setup({
-        width = 150,
         buffers = {
             setNames = false,
             colors = {
                 blend = -0.3,
             },
-            left = {
+            right = {
                 enabled = false,
             },
             scratchPad = {
                 enabled = true,
                 location = "~/.config/nvim/notes/scratchpad/",
-                fileName = "scratchpad",
             },
             bo = {
                 filetype = "md"

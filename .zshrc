@@ -74,7 +74,15 @@ ZSH_TMUX_AUTOSTART=true
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(tmux)
+plugins=(
+    sudo
+    web-search
+    ripgrep
+    git
+    tmux
+    zsh-autosuggestions
+    zsh-syntax-highlighting
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -110,3 +118,4 @@ alias config='/usr/bin/git --git-dir=/home/rachartier/.cfg/ --work-tree=/home/ra
 fpath+=($HOME/.zsh/pure)
 autoload -U promptinit; promptinit
 prompt pure
+
