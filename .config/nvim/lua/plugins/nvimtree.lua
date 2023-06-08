@@ -1,6 +1,5 @@
 local M = {
     'nvim-tree/nvim-tree.lua',
-    cmd = "NvimTreeToggle"
 }
 
 function M.config()
