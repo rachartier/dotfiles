@@ -41,6 +41,8 @@ vim.keymap.set("n", "<M-down>", "<cmd>lua require('tmux').move_bottom()<cr>", { 
 vim.keymap.set("n", "<leader>te", "<cmd>NvimTreeToggle<CR>", { silent = true })
 
 
+vim.keymap.set("n", "<C-g>", "<cmd>lua require(\"user_plugins.websearch\").websearch_input(\"google\")<cr>")
+
 -- from https://www.reddit.com/r/neovim/comments/13y3thq/whats_a_very_simple_config_change_that_you_cant/
 vim.keymap.set("i", "<C-BS>", "<Esc>cvb", { })
 vim.keymap.set("n", "<cr>", "ciw")
