@@ -23,7 +23,6 @@ M.search_engines = {
     ["startpage"]     =  "https://www.startpage.com/do/search?q=",
     ["yandex"]        =  "https://yandex.ru/yandsearch?text=",
     ["github"]        =  "https://github.com/search?q=",
-    ["baidu"]         =  "https://www.baidu.com/s?wd=",
     ["ecosia"]        =  "https://www.ecosia.org/search?q=",
     ["goodreads"]     =  "https://www.goodreads.com/search?q=",
     ["qwant"]         =  "https://www.qwant.com/?q=",
@@ -37,9 +36,13 @@ M.search_engines = {
 M.default_engine = "google"
 
 function M.urlencode(str)
-    str = string.gsub (str, "([^0-9a-zA-Z !'()*._~-])", -- locale independent
-    function (c) return string.format ("%%%02X", string.byte(c)) end)
-    str = string.gsub (str, " ", "+")
+    str = string.gsub(str, "([^0-9a-zA-Z !'()*._~-])",
+        function (c)
+            return string.format ("%%%02X", string.byte(c))
+        end
+    )
+
+    str = string.gsub(str, " ", "+")
     return str
 end
 
@@ -47,11 +50,25 @@ function M.capitalize(str)
     return (str:gsub("^%l", string.upper))
 end
 
+
+function M.execute_search(url)
+    local command = nil
+
+    if M.IS_MAC then
+        command = "open "
+    elseif M.IS_LINUX then
+        command = "nohup xdg-open "
+    elseif M.IS_WSL or M.IS_WINDOWS then
+        command = "cmd.exe /c start "
+    end
+
+    os.execute(command .. url .. " >/dev/null 2>&1 &")
+end
+
 function M.websearch(engine, query)
     local url = M.search_engines[engine] .. M.urlencode(query)
 
-    -- only for WSL2
-    os.execute("cmd.exe /c start " .. url .. " >/dev/null 2>&1 &")
+    M.execute_search(url)
 end
 
 function M.websearch_input(engine)
@@ -66,17 +83,7 @@ function M.websearch_input(engine)
     end
 
     local url = M.search_engines[engine] .. M.urlencode(query)
-    local command = nil
-
-    if M.IS_MAC then
-        command = "open "
-    elseif M.IS_LINUX then
-        command = "nohup xdg-open "
-    elseif M.IS_WSL or M.IS_WINDOWS then
-        command = "cmd.exe /c start "
-    end
-
-    os.execute(command .. url .. " >/dev/null 2>&1 &")
+    M.execute_search(url)
 end
 
 function M.get_keys_search_engine()
@@ -95,7 +102,7 @@ function M.select_engine(opts)
     opts = opts or require("telescope.themes").get_dropdown{}
 
     pickers.new(opts, {
-        prompt_title = "Search engine",
+        prompt_title = "Search engines",
         finder = finders.new_table {
             results = M.get_keys_search_engine()
         },
@@ -129,7 +136,6 @@ function(opts)
 end,
 { nargs = "*" }
 )
-
 
 return M
 
