@@ -1,19 +1,19 @@
 local M = {
-    "jose-elias-alvarez/null-ls.nvim"
+    "jose-elias-alvarez/null-ls.nvim",
 }
 
 local with_diagnostics_code = function(builtin)
-    return builtin.with {
+    return builtin.with({
         diagnostics_format = "#{m} [#{c}]",
-    }
+    })
 end
 
 local with_root_file = function(builtin, file)
-    return builtin.with {
+    return builtin.with({
         condition = function(utils)
             return utils.root_has_file(file)
         end,
-    }
+    })
 end
 
 function M.config()
@@ -44,6 +44,7 @@ function M.config()
             null_ls.builtins.formatting.autoflake,
             null_ls.builtins.formatting.autopep8,
             null_ls.builtins.formatting.black,
+            null_ls.builtins.formatting.ruff,
             null_ls.builtins.formatting.isort,
             with_root_file(null_ls.builtins.formatting.stylua, "stylua.toml"),
 
