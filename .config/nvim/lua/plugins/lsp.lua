@@ -1,5 +1,4 @@
 local M = {
-
     'VonHeikemen/lsp-zero.nvim',
     dependencies = {
         'onsails/lspkind.nvim',
@@ -38,13 +37,6 @@ function M.config()
         vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename,bufopts, {desc = "Rename"})
         vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help,bufopts, {desc = "Help"})
     end
-
-    vim.cmd([[
-    sign define DiagnosticSignError text= texthl= linehl= numhl=DiagnosticSignError
-    sign define DiagnosticSignWarn  text= texthl= linehl= numhl=DiagnosticSignWarn
-    sign define DiagnosticSignInfo  text= texthl= linehl= numhl=DiagnosticSignInfo
-    sign define DiagnosticSignHint  text=󱤅 texthl= linehl= numhl=DiagnosticSignHint
-    ]])
 
     local util = require 'lspconfig/util'
     local capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -105,6 +97,9 @@ function M.config()
         on_attach = on_attach,
         settings = {
             Lua = {
+                hint = {
+                    enabled = true
+                },
                 diagnostics = {
                     globals = { 'vim' }
                 }

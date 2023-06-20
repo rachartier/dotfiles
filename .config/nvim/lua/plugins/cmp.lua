@@ -19,7 +19,6 @@ function M.config()
 
     vim.cmd 'set completeopt=menu,menuone,noselect'
 
-
     local has_words_before = function()
         if not table.unpack then
             table.unpack = unpack
