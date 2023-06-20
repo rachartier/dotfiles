@@ -32,6 +32,19 @@ function M.config()
             selection_caret = '  ',
             hl_result_eol = true,
             results_title = "",
+        },
+        pickers = {
+            buffers = {
+                show_all_buffers = true,
+                sort_lastused = true,
+                theme = "dropdown",
+                previewer = false,
+                mappings = {
+                    i = {
+                        ["<c-d>"] = "delete_buffer",
+                    }
+                }
+            }
         }
     })
 

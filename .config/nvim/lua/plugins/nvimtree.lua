@@ -1,5 +1,6 @@
 local M = {
     'nvim-tree/nvim-tree.lua',
+    enabled = false
 }
 
 function M.config()
@@ -55,6 +56,8 @@ function M.config()
             }
         },
     }
+
+    vim.keymap.set("n", "<leader>te", "<cmd>NvimTreeToggle<CR>", { silent = true })
 end
 
 return M

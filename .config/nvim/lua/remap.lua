@@ -38,15 +38,11 @@ vim.keymap.set("n", "<M-right>", "<cmd>lua require('tmux').move_right()<cr>", { 
 vim.keymap.set("n", "<M-up>", "<cmd>lua require('tmux').move_top()<cr>", { silent = true })
 vim.keymap.set("n", "<M-down>", "<cmd>lua require('tmux').move_bottom()<cr>", { silent = true })
 
-vim.keymap.set("n", "<leader>te", "<cmd>NvimTreeToggle<CR>", { silent = true })
-
-
 vim.keymap.set("n", "<leader>g", "<cmd>lua require(\"user_plugins.websearch\").websearch_input(\"google\")<cr>")
 vim.keymap.set("n", "<leader>G", "<cmd>WebSearchInput<cr>")
 
 -- from https://www.reddit.com/r/neovim/comments/13y3thq/whats_a_very_simple_config_change_that_you_cant/
 vim.keymap.set("i", "<C-BS>", "<Esc>cvb", { })
-vim.keymap.set("n", "<cr>", "ciw")
 vim.keymap.set("v", "y", "ygv<esc>")
 vim.keymap.set("n", "p", "p=`]", { silent=true })
 
