@@ -33,10 +33,17 @@ vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
 vim.keymap.set("n", "<leader>o", "<cmd>!feh <cfile> &<CR>", { silent = true })
 
-vim.keymap.set("n", "<M-left>", "<cmd>lua require('tmux').move_left()<cr>", { silent = true })
-vim.keymap.set("n", "<M-right>", "<cmd>lua require('tmux').move_right()<cr>", { silent = true })
-vim.keymap.set("n", "<M-up>", "<cmd>lua require('tmux').move_top()<cr>", { silent = true })
-vim.keymap.set("n", "<M-down>", "<cmd>lua require('tmux').move_bottom()<cr>", { silent = true })
+if os.getenv("TMUX") then
+    vim.keymap.set("n", "<M-left>", "<cmd>lua require('tmux').move_left()<cr>", { silent = true })
+    vim.keymap.set("n", "<M-right>", "<cmd>lua require('tmux').move_right()<cr>", { silent = true })
+    vim.keymap.set("n", "<M-up>", "<cmd>lua require('tmux').move_top()<cr>", { silent = true })
+    vim.keymap.set("n", "<M-down>", "<cmd>lua require('tmux').move_bottom()<cr>", { silent = true })
+else
+    vim.keymap.set("n", "<M-left>", "<C-W>h", { silent = true })
+    vim.keymap.set("n", "<M-right>", "<C-W>l", { silent = true })
+    vim.keymap.set("n", "<M-up>", "<C-W>k", { silent = true })
+    vim.keymap.set("n", "<M-down>", "<C-W>j", { silent = true })
+end
 
 vim.keymap.set("n", "<leader>te", "<cmd>NvimTreeToggle<CR>", { silent = true })
 

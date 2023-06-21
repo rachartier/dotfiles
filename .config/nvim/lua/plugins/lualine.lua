@@ -258,14 +258,14 @@ function M.config()
                             align = 'left',
                             color = { fg = c.black },
                         },
-                        separator = { right = '█', left = { '' } }
+                        separator = { right = '█', left = { '░▒▓' } }
                     }
                 },
             },
             options = {
                 disabled_filetypes = { "dashboard" },
                 globalstatus = true,
-                section_separators = { left = ' ', right = ' ' },
+                section_separators = { right = '░▒▓', left = '▓▒░' },
                 component_separators = { left = '', right = ''},
                 theme = "auto",
             },
