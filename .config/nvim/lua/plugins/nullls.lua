@@ -41,11 +41,8 @@ function M.config()
             null_ls.builtins.formatting.prettierd,
             null_ls.builtins.formatting.shfmt,
             null_ls.builtins.formatting.fixjson,
-            null_ls.builtins.formatting.autoflake,
-            null_ls.builtins.formatting.autopep8,
             null_ls.builtins.formatting.black,
             null_ls.builtins.formatting.ruff,
-            null_ls.builtins.formatting.isort,
             with_root_file(null_ls.builtins.formatting.stylua, "stylua.toml"),
 
             -- diagnostics
