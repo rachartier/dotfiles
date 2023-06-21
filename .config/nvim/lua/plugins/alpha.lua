@@ -5,6 +5,26 @@ local M = {
 function M.config()
     local alpha = require'alpha'
     local dashboard = require'alpha.themes.dashboard'
+
+
+    vim.api.nvim_create_autocmd("User", {
+        pattern = "LazyVimStarted",
+        desc = "Add Alpha dashboard footer",
+        once = true,
+        callback = function()
+            local stats = require("lazy").stats()
+            local ms = math.floor(stats.startuptime * 100 + 0.5) / 100
+            dashboard.section.footer.val = {
+                " ",
+                " ",
+                "Loaded " .. stats.count .. " plugins  in " .. ms .. "ms",
+            }
+            dashboard.section.footer.opts.hl = "DashboardFooter"
+            vim.cmd "highlight DashboardFooter guifg=#D29B68"
+            pcall(vim.cmd.AlphaRedraw)
+        end,
+    })
+
     dashboard.section.header.val = {
 
         [[         ,--.              ,----..                                 ____  ]],
@@ -30,13 +50,6 @@ function M.config()
         dashboard.button("l", "  Open Lazy", "<cmd>Lazy<CR>"),
         dashboard.button("q", "  Quit", "<cmd>qa<CR>"),
     }
-    local handle = io.popen('fortune')
-
-    if handle ~= nil then
-        local fortune = handle:read("*a")
-        handle:close()
-        dashboard.section.footer.val = fortune
-    end
 
     dashboard.config.opts.noautocmd = true
 
