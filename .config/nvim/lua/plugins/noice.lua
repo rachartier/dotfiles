@@ -3,7 +3,7 @@ local M = {
     dependencies = {
         "MunifTanjim/nui.nvim",
         "rcarriga/nvim-notify",
-    }
+    },
 }
 
 function M.config()
@@ -42,6 +42,12 @@ function M.config()
             long_message_to_split = true, -- long messages will be sent to a split
             inc_rename = false, -- enables an input dialog for inc-rename.nvim
             lsp_doc_border = true, -- add a border to hover docs and signature help
+        },
+        hover = {
+            enabled = true,
+            silent = false, -- set to true to not show a message if hover is not available
+            view = nil, -- when nil, use defaults from documentation
+            opts = {}, -- merged with defaults from documentation
         },
     }
 end

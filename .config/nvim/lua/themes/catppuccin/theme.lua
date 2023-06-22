@@ -66,7 +66,7 @@ require("catppuccin").setup({
                     bg = colors.crust,
                     fg = colors.text
                 },
-                NvimTreeNormal = {
+                NeoTreeNormal = {
                     bg = colors.crust,
                 },
                 FloatBorder = {
