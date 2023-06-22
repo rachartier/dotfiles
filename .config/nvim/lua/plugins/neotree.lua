@@ -5,7 +5,7 @@ local M = {
         "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
         "MunifTanjim/nui.nvim",
     },
-    keys = "<leader>te"
+    keys = "<leader>te",
 }
 
 function M.config()
@@ -17,10 +17,10 @@ function M.config()
         open_files_do_not_replace_types = { "terminal", "trouble", "qf" },
         default_component_configs = {
             container = {
-                enable_character_fade = true
+                enable_character_fade = true,
             },
             indent = {
-                indent_size = 4,
+                indent_size = 2,
                 padding = 1, -- extra padding on left hand side
                 -- indent guides
                 with_markers = true,
@@ -40,7 +40,7 @@ function M.config()
                 -- The next two settings are only a fallback, if you use nvim-web-devicons and configure default icons there
                 -- then these will never be used.
                 default = "*",
-                highlight = "NeoTreeFileIcon"
+                highlight = "NeoTreeFileIcon",
             },
             modified = {
                 symbol = "[+]",
@@ -53,17 +53,17 @@ function M.config()
             },
             git_status = {
                 symbols = {
-                    added     = "", -- or "✚", but this is redundant info if you use git_status_colors on the name
-                    modified  = "", -- or "", but this is redundant info if you use git_status_colors on the name
-                    renamed   = "",-- this can only be used in the git_status source
+                    added = "", -- or "✚", but this is redundant info if you use git_status_colors on the name
+                    modified = "", -- or "", but this is redundant info if you use git_status_colors on the name
+                    renamed = "", -- this can only be used in the git_status source
                     untracked = "",
-                    conflict  = "",
+                    conflict = "",
                     unstaged = "",
                     staged = "",
                     unmerged = "",
                     deleted = "",
                     ignored = "◌",
-                }
+                },
             },
         },
     })
