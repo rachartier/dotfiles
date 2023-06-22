@@ -38,11 +38,16 @@ function M.config()
         vim.keymap.set("n", "<leader>gn", vim.diagnostic.goto_next, bufopts, { desc = "Go to next diagnostic" })
         vim.keymap.set("n", "<leader>gp", vim.diagnostic.goto_prev, bufopts, { desc = "Go to previous diagnostic" })
         -- vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action,bufopts)
-        vim.keymap.set("n", "<leader>ca", "<cmd>CodeActionMenu<cr>",bufopts, {desc = "Open code action menu"})
-        vim.keymap.set("n", "<leader>rr", vim.lsp.buf.references,bufopts, {desc = "Find references"})
-        vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename,bufopts, {desc = "Rename"})
-        vim.keymap.set("n", '<leader>e', '<cmd>lua vim.lsp.util.show_line_diagnostics()<CR>', { desc = "Show line diagnostics"})
-        vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help,bufopts, {desc = "Help"})
+        vim.keymap.set("n", "<leader>ca", "<cmd>CodeActionMenu<cr>", bufopts, { desc = "Open code action menu" })
+        vim.keymap.set("n", "<leader>rr", vim.lsp.buf.references, bufopts, { desc = "Find references" })
+        vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, bufopts, { desc = "Rename" })
+        vim.keymap.set(
+            "n",
+            "<leader>e",
+            "<cmd>lua vim.lsp.util.show_line_diagnostics()<CR>",
+            { desc = "Show line diagnostics" }
+        )
+        vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, bufopts, { desc = "Help" })
     end
 
     local util = require("lspconfig/util")

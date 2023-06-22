@@ -40,8 +40,8 @@ function M.config()
             null_ls.builtins.formatting.prettierd,
             null_ls.builtins.formatting.shfmt,
             null_ls.builtins.formatting.fixjson,
+            null_ls.builtins.formatting.black,
             null_ls.builtins.formatting.ruff,
-            with_root_file(null_ls.builtins.formatting.stylua, "stylua.toml"),
 
             -- diagnostics
             null_ls.builtins.diagnostics.write_good,

@@ -18,6 +18,7 @@ function M.config()
             "shellcheck",
             "autoflake",
             "autopep8",
+            "ruff",
         },
         automatic_installation = true,
         automatic_setup = true,
