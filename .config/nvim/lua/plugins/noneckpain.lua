@@ -1,5 +1,6 @@
 local M = {
-    "shortcuts/no-neck-pain.nvim"
+    "shortcuts/no-neck-pain.nvim",
+    enabled = false,
 }
 
 function M.config()
@@ -17,11 +18,11 @@ function M.config()
                 location = "~/.config/nvim/notes/scratchpad/",
             },
             bo = {
-                filetype = "md"
+                filetype = "md",
             },
         },
         autocmds = {
-            enableOnTabEnter = true
+            enableOnTabEnter = true,
         },
         integrations = {
             undotree = {
