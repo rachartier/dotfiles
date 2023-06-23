@@ -1,7 +1,7 @@
 local flavour = "macchiato"
 
 require("catppuccin").setup({
-    flavour = flavour, -- latte, frappe, macchiato, mocha
+    flavour = flavour,       -- latte, frappe, macchiato, mocha
     transparent_background = false,
     show_end_of_buffer = false, -- show the '~' characters after the end of buffers
     term_colors = false,
@@ -26,19 +26,18 @@ require("catppuccin").setup({
         types = { "italic" },
         operators = {},
     },
-    color_overrides = {
-    },
+    color_overrides = {},
     highlight_overrides = {
         all = function(colors)
             return {
                 LineNr = {
-                    fg = colors.surface2
+                    fg = colors.surface2,
                 },
                 CursorLineNr = {
-                    fg = colors.peach
+                    fg = colors.peach,
                 },
                 LspSignatureActiveParameter = {
-                    bg = colors.base
+                    bg = colors.base,
                 },
                 NormalFloat = {
                     bg = colors.crust,
@@ -49,22 +48,22 @@ require("catppuccin").setup({
                 },
                 PopupBorder = {
                     bg = colors.crust,
-                    fg = colors.subtext1
+                    fg = colors.subtext1,
                 },
                 Pmenu = {
-                    link = 'PopupNormal',
+                    link = "PopupNormal",
                 },
                 PmenuSel = {
                     bg = colors.crust,
                     fg = colors.peach,
-                    bold = true
+                    bold = true,
                 },
                 PmenuBorder = {
-                    link = 'PopupBorder'
+                    link = "PopupBorder",
                 },
                 PmenuDocBorder = {
                     bg = colors.crust,
-                    fg = colors.text
+                    fg = colors.text,
                 },
                 NeoTreeNormal = {
                     bg = colors.crust,
@@ -80,16 +79,16 @@ require("catppuccin").setup({
                 },
                 IlluminatedWordRead = {
                     bold = true,
-                    bg = colors.surface0
+                    bg = colors.surface0,
                 },
                 IlluminatedWordWrite = {
                     bold = true,
-                    bg = colors.surface0
+                    bg = colors.surface0,
                 },
                 IluminatedReferenceText = {
                     bold = true,
-                    bg = colors.surface0
-                }
+                    bg = colors.surface0,
+                },
             }
         end,
     },
@@ -129,9 +128,8 @@ require("catppuccin").setup({
     },
 })
 
-
 --require('catppuccin').load()
-vim.cmd.colorscheme "catppuccin"
+vim.cmd.colorscheme("catppuccin")
 local colors = require("catppuccin.palettes").get_palette("mocha")
 
 local TelescopeColor = {
@@ -148,9 +146,9 @@ local TelescopeColor = {
     TelescopePromptTitle = { bg = colors.pink, fg = colors.mantle },
     TelescopeResultsTitle = { fg = colors.mantle },
     TelescopePreviewTitle = { bg = colors.green, fg = colors.mantle },
+    TelescopeBorder = { fg = colors.text },
 }
 
 for hl, col in pairs(TelescopeColor) do
     vim.api.nvim_set_hl(0, hl, col)
 end
-
