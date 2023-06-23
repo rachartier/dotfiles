@@ -42,6 +42,7 @@ function M.config()
             null_ls.builtins.formatting.fixjson,
             null_ls.builtins.formatting.black,
             null_ls.builtins.formatting.ruff,
+            null_ls.builtins.formatting.isort,
 
             -- diagnostics
             null_ls.builtins.diagnostics.write_good,
