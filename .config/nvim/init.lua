@@ -20,21 +20,21 @@ require("remap")
 require("set")
 
 local augroup = vim.api.nvim_create_augroup
-local Group = augroup('Group', {})
+local Group = augroup("Group", {})
 
 local autocmd = vim.api.nvim_create_autocmd
-local yank_group = augroup('HighlightYank', {})
+local yank_group = augroup("HighlightYank", {})
 
 function R(name)
     require("plenary.reload").reload_module(name)
 end
 
-autocmd('TextYankPost', {
+autocmd("TextYankPost", {
     group = yank_group,
-    pattern = '*',
+    pattern = "*",
     callback = function()
         vim.highlight.on_yank({
-            higroup = 'IncSearch',
+            higroup = "IncSearch",
             timeout = 40,
         })
     end,
@@ -51,38 +51,36 @@ vim.g.netrw_banner = 0
 vim.g.netrw_winsize = 25
 
 local id = vim.api.nvim_create_augroup("startup", {
-    clear = false
+    clear = false,
 })
 
 local persistbuffer = function(bufnr)
     bufnr = bufnr or vim.api.nvim_get_current_buf()
-    vim.fn.setbufvar(bufnr, 'bufpersist', 1)
+    vim.fn.setbufvar(bufnr, "bufpersist", 1)
 end
 
-vim.api.nvim_create_autocmd({"BufRead"}, {
+vim.api.nvim_create_autocmd({ "BufRead" }, {
     group = id,
-    pattern = {"*"},
+    pattern = { "*" },
     callback = function()
-        vim.api.nvim_create_autocmd({"InsertEnter","BufModifiedSet"}, {
+        vim.api.nvim_create_autocmd({ "InsertEnter", "BufModifiedSet" }, {
             buffer = 0,
             once = true,
             callback = function()
                 persistbuffer()
-            end
+            end,
         })
-    end
+    end,
 })
 
-vim.keymap.set('n', '<Leader>db',
-function()
+vim.keymap.set("n", "<Leader>db", function()
     local curbufnr = vim.api.nvim_get_current_buf()
     local buflist = vim.api.nvim_list_bufs()
     for _, bufnr in ipairs(buflist) do
-        if vim.bo[bufnr].buflisted and bufnr ~= curbufnr and (vim.fn.getbufvar(bufnr, 'bufpersist') ~= 1) then
-            vim.cmd('bd ' .. tostring(bufnr))
+        if vim.bo[bufnr].buflisted and bufnr ~= curbufnr and (vim.fn.getbufvar(bufnr, "bufpersist") ~= 1) then
+            vim.cmd("bd " .. tostring(bufnr))
         end
     end
-end, { silent = true, desc = 'Close unused buffers' })
+end, { silent = true, desc = "Close unused buffers" })
 
 require("theme")
-

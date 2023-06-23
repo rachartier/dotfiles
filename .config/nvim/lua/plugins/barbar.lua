@@ -1,12 +1,13 @@
 local M = {
-    'romgrk/barbar.nvim',
-    dependencies = 'nvim-tree/nvim-web-devicons',
+    "romgrk/barbar.nvim",
+    dependencies = "nvim-tree/nvim-web-devicons",
+    enabled = false,
 }
 
 function M.config()
     vim.g.barbar_auto_setup = false
 
-    require'barbar'.setup {
+    require("barbar").setup({
         animation = true,
 
         -- Enable/disable auto-hiding the tab bar when there is a single buffer
@@ -19,10 +20,10 @@ function M.config()
         --  - left-click: go to buffer
         --  - middle-click: delete buffer
         clickable = true,
-    }
+    })
 
-    vim.keymap.set("n", "<Tab>", "<cmd>BufferNext<cr>", { silent = true })
-    vim.keymap.set("n", "<S-Tab>", "<cmd>BufferPrevious<cr>", { silent = true })
+    -- vim.keymap.set("n", "<Tab>", "<cmd>BufferNext<cr>", { silent = true })
+    -- vim.keymap.set("n", "<S-Tab>", "<cmd>BufferPrevious<cr>", { silent = true })
 end
 
 return M
