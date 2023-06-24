@@ -14,7 +14,8 @@ sudo mv squashfs-root /
 sudo ln -s /squashfs-root/AppRun /usr/bin/nvim
 
 sudo apt install python3.10-venv
-sudo apt install nodejs npm 
+sudo apt install nodejs npm
+sudo apt install unzip
 
 # ZSH
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
