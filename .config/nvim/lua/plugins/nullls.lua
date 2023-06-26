@@ -39,7 +39,7 @@ function M.config()
             null_ls.builtins.completion.spell,
             null_ls.builtins.formatting.prettierd,
             null_ls.builtins.formatting.shfmt,
-            null_ls.builtins.formatting.fixjson,
+            -- null_ls.builtins.formatting.fixjson,
             null_ls.builtins.formatting.black.with({ extraArgs = "--line-length=400" }),
             null_ls.builtins.formatting.ruff,
             null_ls.builtins.formatting.isort,
