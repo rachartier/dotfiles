@@ -22,7 +22,9 @@ function M.config()
         float = { border = "rounded" },
     })
 
-    local on_attach = function(_, bufnr)
+    local on_attach = function(client, bufnr)
+        client.server_capabilities.semanticTokensProvider = nil
+
         local bufopts = { buffer = bufnr, remap = false }
         vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
         vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
@@ -51,6 +53,7 @@ function M.config()
     end
 
     local util = require("lspconfig/util")
+
     local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
     local path = util.path
