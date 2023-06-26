@@ -108,7 +108,8 @@ require("catppuccin").setup({
         telekasten = true,
         leap = true,
         noice = true,
-        lsp_saga = true,
+        lsp_saga = false,
+        illuminate = true,
         native_lsp = {
             enabled = true,
             virtual_text = {

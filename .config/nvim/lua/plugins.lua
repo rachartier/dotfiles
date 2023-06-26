@@ -1,10 +1,14 @@
 return {
     {
-        'catppuccin/nvim',
-        priority = 1000
+        "catppuccin/nvim",
+        priority = 1000,
     },
     {
-        'NTBBloodbath/sweetie.nvim',
+        "NTBBloodbath/sweetie.nvim",
+        priority = 1000,
+    },
+    {
+        "RRethy/nvim-base16",
         priority = 1000,
     },
 }
