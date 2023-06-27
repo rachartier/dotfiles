@@ -94,6 +94,9 @@ local global_highlight = {
     DiagnosticInfo = {
         fg = colors.blue,
     },
+    TelescopeMatching = {
+        fg = colors.blue,
+    },
 }
 
 for hl, col in pairs(global_highlight) do
