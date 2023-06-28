@@ -54,8 +54,8 @@ require("catppuccin").setup({
                     link = "PopupNormal",
                 },
                 PmenuSel = {
-                    bg = colors.crust,
-                    fg = colors.peach,
+                    bg = colors.blue,
+                    fg = colors.base,
                     bold = true,
                 },
                 PmenuBorder = {
@@ -134,7 +134,7 @@ vim.cmd.colorscheme("catppuccin")
 local colors = require("catppuccin.palettes").get_palette("mocha")
 
 local TelescopeColor = {
-    TelescopeMatching = { fg = colors.flamingo },
+    TelescopeMatching = { fg = colors.blue },
     TelescopeSelection = { fg = colors.text, bold = true },
 
     TelescopePromptPrefix = { bg = colors.surface0 },
@@ -153,3 +153,5 @@ local TelescopeColor = {
 for hl, col in pairs(TelescopeColor) do
     vim.api.nvim_set_hl(0, hl, col)
 end
+
+vim.api.nvim_set_hl(0, "@variable", { fg = colors.text })
