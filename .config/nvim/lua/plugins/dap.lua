@@ -30,7 +30,7 @@ function M.config()
 			type = "python",
 			request = "launch",
 			name = "Launch PQC",
-			program = "/workspaces/pie-qui-chante/pqc_workspace/core_ws/main.py",
+			program = "/workspaces/pie-qui-chante/pqc_workspace/core_ws/src/main.py",
 			pythonPath = function()
 				return "/usr/bin/python3"
 			end,

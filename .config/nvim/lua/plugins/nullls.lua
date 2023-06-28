@@ -40,8 +40,8 @@ function M.config()
             null_ls.builtins.formatting.prettierd,
             null_ls.builtins.formatting.shfmt,
             -- null_ls.builtins.formatting.fixjson,
-            null_ls.builtins.formatting.black.with({ extraArgs = "--line-length=400" }),
-            null_ls.builtins.formatting.ruff,
+            null_ls.builtins.formatting.black.with({ extra_args = { "--line-length=120" } }),
+            null_ls.builtins.formatting.ruff.with({ extra_args = { "--ignore E501" } }),
             null_ls.builtins.formatting.isort,
 
             -- code actions

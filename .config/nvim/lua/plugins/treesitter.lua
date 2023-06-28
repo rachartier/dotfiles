@@ -42,7 +42,6 @@ function M.config()
     })
 
     vim.api.nvim_set_hl(0, "@string.documentation.python", { link = "Comment" })
-    vim.api.nvim_set_hl(0, "@variable", { link = "Normal" })
 end
 
 return M
