@@ -8,7 +8,7 @@ require("catppuccin").setup({
     dim_inactive = {
         enabled = true,
         shade = "dark",
-        percentage = 0.01,
+        percentage = 0.65,
     },
     no_italic = false, -- Force no italic
     no_bold = false, -- Force no bold
@@ -26,7 +26,11 @@ require("catppuccin").setup({
         types = { "italic" },
         operators = {},
     },
-    color_overrides = {},
+    color_overrides = {
+        all = {
+            base = "#16161D",
+        },
+    },
     highlight_overrides = {
         all = function(colors)
             return {
@@ -40,42 +44,34 @@ require("catppuccin").setup({
                     bg = colors.base,
                 },
                 NormalFloat = {
-                    bg = colors.crust,
+                    bg = colors.base,
                 },
-                PopupNormal = {
-                    bg = colors.crust,
-                    fg = colors.overlay1,
+                FloatBorder = {
+                    bg = colors.base,
+                    fg = colors.text,
                 },
                 PopupBorder = {
-                    bg = colors.crust,
-                    fg = colors.subtext1,
+                    link = "FloatBorder",
+                },
+                PopupNormal = {
+                    bg = colors.base,
+                    fg = colors.overlay1,
                 },
                 Pmenu = {
                     link = "PopupNormal",
                 },
                 PmenuSel = {
-                    bg = colors.blue,
-                    fg = colors.base,
-                    bold = true,
+                    link = "Visual",
                 },
                 PmenuBorder = {
                     link = "PopupBorder",
                 },
                 PmenuDocBorder = {
-                    bg = colors.crust,
+                    bg = colors.base,
                     fg = colors.text,
                 },
                 NeoTreeNormal = {
-                    bg = colors.crust,
-                },
-                FloatBorder = {
-                    bg = colors.crust,
-                },
-                TerminalBorder = {
-                    bg = colors.surface0,
-                },
-                TerminalNormal = {
-                    bg = colors.surface0,
+                    bg = colors.base,
                 },
                 IlluminatedWordRead = {
                     bold = true,
@@ -88,6 +84,12 @@ require("catppuccin").setup({
                 IluminatedReferenceText = {
                     bold = true,
                     bg = colors.surface0,
+                },
+                CmpItemAbbrMatch = {
+                    fg = colors.mauve,
+                },
+                CmpItemAbbrMatchFuzzy = {
+                    link = "CmpItemAbbrMatch",
                 },
             }
         end,
@@ -134,24 +136,24 @@ vim.cmd.colorscheme("catppuccin")
 local colors = require("catppuccin.palettes").get_palette("mocha")
 
 local TelescopeColor = {
-    TelescopeMatching = { fg = colors.blue },
-    TelescopeSelection = { fg = colors.text, bold = true },
+    TelescopeMatching = { link = "CmpItemAbbrMatch" },
 
     TelescopePromptPrefix = { bg = colors.surface0 },
     TelescopePromptNormal = { bg = colors.surface0 },
-    TelescopeResultsNormal = { bg = colors.mantle, fg = colors.overlay1 },
-    TelescopePreviewNormal = { bg = colors.mantle },
+    TelescopeResultsNormal = { bg = colors.base, fg = colors.overlay1 },
+    TelescopePreviewNormal = { bg = colors.base },
     TelescopePromptBorder = { bg = colors.surface0, fg = colors.surface0 },
-    TelescopeResultsBorder = { bg = colors.mantle, fg = colors.mantle },
-    TelescopePreviewBorder = { bg = colors.mantle, fg = colors.mantle },
-    TelescopePromptTitle = { bg = colors.pink, fg = colors.mantle },
-    TelescopeResultsTitle = { fg = colors.mantle },
-    TelescopePreviewTitle = { bg = colors.green, fg = colors.mantle },
-    TelescopeBorder = { fg = colors.text },
+    TelescopeResultsBorder = { bg = colors.base, fg = colors.base },
+    TelescopePreviewBorder = { bg = colors.base, fg = colors.base },
+    TelescopePromptTitle = { bg = colors.pink, fg = colors.base },
+    TelescopeResultsTitle = { fg = colors.base },
+    TelescopePreviewTitle = { bg = colors.green, fg = colors.base },
+    TelescopeBorder = { fg = colors.base },
 }
 
 for hl, col in pairs(TelescopeColor) do
     vim.api.nvim_set_hl(0, hl, col)
 end
 
-vim.api.nvim_set_hl(0, "@variable", { fg = colors.text })
+vim.api.nvim_set_hl(0, "@variable", { fg = colors.red })
+vim.api.nvim_set_hl(0, "@field", { fg = colors.text })
