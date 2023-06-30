@@ -21,6 +21,7 @@ function M.config()
             "dirvish",
             "fugitive",
             "neo-tree",
+            "TelescopePrompt",
         },
         -- filetypes_allowlist: filetypes to illuminate, this is overriden by filetypes_denylist
         filetypes_allowlist = {},
