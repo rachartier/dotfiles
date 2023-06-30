@@ -1,16 +1,17 @@
 local M = {
-    'echasnovski/mini.splitjoin',
-    version = false
+    "echasnovski/mini.splitjoin",
+    dependencies = {},
+    version = false,
 }
 
 function M.config()
-    require('mini.splitjoin').setup {
+    require("mini.splitjoin").setup({
         -- Module mappings. Use `''` (empty string) to disable one.
         -- Created for both Normal and Visual modes.
         mappings = {
-            toggle = 'gS',
-            split = '',
-            join = '',
+            toggle = "gS",
+            split = "",
+            join = "",
         },
 
         -- Detection options: where split/join should be done
@@ -20,7 +21,7 @@ function M.config()
             brackets = nil,
 
             -- String Lua pattern defining argument separator
-            separator = ',',
+            separator = ",",
 
             -- Array of Lua patterns for sub-regions to exclude separators from.
             -- Enables correct detection in presence of nested brackets and quotes.
@@ -39,7 +40,7 @@ function M.config()
             hooks_pre = {},
             hooks_post = {},
         },
-    }
+    })
 end
 
 return M
