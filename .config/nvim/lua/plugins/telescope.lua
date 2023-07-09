@@ -36,6 +36,7 @@ function M.config()
             action = function(match)
                 local picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
                 picker:set_selection(match.pos[1] - 1)
+                actions.select_default()
             end,
         })
     end
