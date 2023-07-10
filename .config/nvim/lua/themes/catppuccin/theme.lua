@@ -155,5 +155,5 @@ for hl, col in pairs(TelescopeColor) do
     vim.api.nvim_set_hl(0, hl, col)
 end
 
-vim.api.nvim_set_hl(0, "@variable", { fg = colors.red })
-vim.api.nvim_set_hl(0, "@field", { fg = colors.text })
+vim.api.nvim_set_hl(0, "@variable", { fg = colors.text })
+vim.api.nvim_set_hl(0, "@field", { fg = colors.red })

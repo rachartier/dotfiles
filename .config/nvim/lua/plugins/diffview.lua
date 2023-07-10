@@ -171,12 +171,6 @@ function M.config()
                     actions.conflict_choose("base"),
                     { desc = "Choose the BASE version of a conflict" },
                 },
-                {
-                    "n",
-                    "<leader>ca",
-                    actions.conflict_choose("all"),
-                    { desc = "Choose all the versions of a conflict" },
-                },
                 { "n", "dx",        actions.conflict_choose("none"), { desc = "Delete the conflict region" } },
                 {
                     "n",
