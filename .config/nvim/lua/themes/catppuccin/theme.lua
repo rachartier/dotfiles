@@ -34,6 +34,8 @@ require("catppuccin").setup({
     highlight_overrides = {
         all = function(colors)
             return {
+                Visual = { bg = "#234370" },
+                --Visual = { bg = colors.blue, fg = colors.crust },
                 LineNr = {
                     fg = colors.surface2,
                 },
@@ -61,7 +63,9 @@ require("catppuccin").setup({
                     link = "PopupNormal",
                 },
                 PmenuSel = {
-                    link = "Visual",
+                    -- link = "Visual",
+                    bg = colors.surface0,
+                    fg = colors.text,
                 },
                 PmenuBorder = {
                     link = "PopupBorder",
@@ -90,6 +94,9 @@ require("catppuccin").setup({
                 },
                 CmpItemAbbrMatchFuzzy = {
                     link = "CmpItemAbbrMatch",
+                },
+                TelescopeSelection = {
+                    link = "PmenuSel",
                 },
             }
         end,
