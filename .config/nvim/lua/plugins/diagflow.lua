@@ -13,6 +13,8 @@ function M.config()
         },
         gap_size = 1,
         scope = "cursor", -- 'cursor', 'line'
+        placement = "inline",
+        inline_padding_left = 3,
     })
 end
 
