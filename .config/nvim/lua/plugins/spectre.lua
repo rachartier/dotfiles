@@ -1,15 +1,22 @@
 local M = {
-    'windwp/nvim-spectre'
+	"windwp/nvim-spectre",
 }
 
 function M.config()
-    require('spectre').setup()
+	require("spectre").setup()
 
-    vim.keymap.set("n", "<leader>S", "<cmd>lua require('spectre').open()<CR>", {desc="Open Spectre to search & replace across all project"})
-    vim.keymap.set("n", "<leader>sw", "<cmd>lua require('spectre').open_visual({select_word=true})<CR>", {desc="Open Spectre to search & replace the under the cursors word"})
-
-    vim.keymap.set("n", "<leader>s", "<esc>:lua require('spectre').open_visual()<CR>", {desc="Open the vim command line way for search & replace"})
-    vim.keymap.set("n", "<leader>sp", "viw:lua require('spectre').open_file_search()<cr>", {desc="Search inside the file"})
+	vim.keymap.set("n", "<leader>R", '<cmd>lua require("spectre").open()<CR>', {
+		desc = "Open Spectre",
+	})
+	vim.keymap.set("n", "<leader>rw", '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', {
+		desc = "Search current word",
+	})
+	vim.keymap.set("v", "<leader>rw", '<esc><cmd>lua require("spectre").open_visual()<CR>', {
+		desc = "Search current word",
+	})
+	vim.keymap.set("n", "<leader>rp", '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>', {
+		desc = "Search on current file",
+	})
 end
 
 return M
