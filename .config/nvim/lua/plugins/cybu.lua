@@ -1,5 +1,6 @@
 local M = {
     "ghillb/cybu.nvim",
+    enabled = false,
 }
 
 function M.config()
