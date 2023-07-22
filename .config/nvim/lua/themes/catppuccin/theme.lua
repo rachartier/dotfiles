@@ -42,9 +42,6 @@ require("catppuccin").setup({
                 CursorLineNr = {
                     fg = colors.peach,
                 },
-                LspSignatureActiveParameter = {
-                    bg = colors.base,
-                },
                 NormalFloat = {
                     bg = colors.base,
                 },
@@ -102,6 +99,9 @@ require("catppuccin").setup({
                     fg = "#000000",
                     bg = "#FFFF00",
                     bold = true,
+                },
+                NeoTreeIndentMarker = {
+                    fg = colors.surface0,
                 },
             }
         end,
