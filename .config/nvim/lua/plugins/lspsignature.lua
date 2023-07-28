@@ -6,6 +6,7 @@ local M = {
 function M.config()
     require("lsp_signature").setup({
         noice = false,
+        hint_enable = false,
         hint_prefix = "🔍 ",
         hi_parameter = "LspSignatureActiveParameter", -- how your parameter will be highlight
         handler_opts = {
