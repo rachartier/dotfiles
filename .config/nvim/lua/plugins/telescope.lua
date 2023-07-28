@@ -10,7 +10,13 @@ local M = {
 local function fuzzy_find_under_cursor()
     local builtin = require("telescope.builtin")
     local word_under_cursor = vim.fn.expand("<cword>")
-    builtin.current_buffer_fuzzy_find({ default_text = word_under_cursor })
+    builtin.current_buffer_fuzzy_find({
+        layout_strategy = "vertical",
+        layout_config = {
+            prompt_position = "bottom",
+        },
+        default_text = word_under_cursor,
+    })
 end
 
 function M.config()
@@ -58,7 +64,7 @@ function M.config()
             multi_icon = "",
             entry_prefix = "   ",
             prompt_prefix = "   ",
-            selection_caret = "   ",
+            selection_caret = "  ",
             hl_result_eol = true,
             results_title = "",
             mappings = {
