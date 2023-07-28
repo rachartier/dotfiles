@@ -51,6 +51,28 @@ function M.config()
         return kind ~= "Text"
     end
 
+    local mapping_selection_down = cmp.mapping(function(fallback)
+        if cmp.visible() then
+            cmp.select_next_item()
+        elseif luasnip.expand_or_jumpable() then
+            luasnip.expand_or_jump()
+        elseif has_words_before() then
+            cmp.complete()
+        else
+            fallback()
+        end
+    end, { "i", "s", "c" })
+
+    local mapping_selection_up = cmp.mapping(function(fallback)
+        if cmp.visible() then
+            cmp.select_prev_item()
+        elseif luasnip.jumpable(-1) then
+            luasnip.jump(-1)
+        else
+            fallback()
+        end
+    end, { "i", "s", "c" })
+
     cmp.setup({
         snippet = {
             expand = function(args)
@@ -72,26 +94,11 @@ function M.config()
             ["<C-Space>"] = cmp.mapping.complete(),
             ["<C-e>"] = cmp.mapping.abort(),
             ["<CR>"] = cmp.mapping.confirm({ select = true }),
-            ["<Tab>"] = cmp.mapping(function(fallback)
-                if cmp.visible() then
-                    cmp.select_next_item()
-                elseif luasnip.expand_or_jumpable() then
-                    luasnip.expand_or_jump()
-                elseif has_words_before() then
-                    cmp.complete()
-                else
-                    fallback()
-                end
-            end, { "i", "s" }),
-            ["<S-Tab>"] = cmp.mapping(function(fallback)
-                if cmp.visible() then
-                    cmp.select_prev_item()
-                elseif luasnip.jumpable(-1) then
-                    luasnip.jump(-1)
-                else
-                    fallback()
-                end
-            end, { "i", "s" }),
+            ["<Tab>"] = mapping_selection_down,
+            ["<S-Tab>"] = mapping_selection_up,
+
+            ["<Up>"] = mapping_selection_up,
+            ["<Down>"] = mapping_selection_down,
         }),
 
         formatting = {
