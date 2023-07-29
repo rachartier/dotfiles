@@ -5,6 +5,12 @@ local M = {
         "nvim-lua/plenary.nvim",
         "nvim-telescope/telescope-dap.nvim",
     },
+    keys = {
+        "<leader>ff",
+        "<leader>fg",
+        "<Tab>",
+        "<S-Tab>",
+    },
 }
 
 local function fuzzy_find_under_cursor()
