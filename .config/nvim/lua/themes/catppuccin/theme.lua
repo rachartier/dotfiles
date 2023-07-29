@@ -164,7 +164,7 @@ local TelescopeColor = {
     -- TelescopePromptBorder = { bg = colors.surface0, fg = colors.surface0 },
     TelescopePromptTitle = { bg = colors.pink, fg = colors.base },
 
-    TelescopeResultsNormal = { bg = colors.base, fg = colors.overlay1 },
+    TelescopeResultsNormal = { bg = colors.base, fg = colors.overlay2 },
     -- TelescopeResultsBorder = { bg = colors.mantle, fg = colors.mantle },
     TelescopeResultsTitle = { bg = colors.blue, fg = colors.base },
 

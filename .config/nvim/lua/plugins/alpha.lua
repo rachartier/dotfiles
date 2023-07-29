@@ -1,11 +1,10 @@
 local M = {
-     "goolord/alpha-nvim",
+    "goolord/alpha-nvim",
 }
 
 function M.config()
-    local alpha = require'alpha'
-    local dashboard = require'alpha.themes.dashboard'
-
+    local alpha = require("alpha")
+    local dashboard = require("alpha.themes.dashboard")
 
     vim.api.nvim_create_autocmd("User", {
         pattern = "LazyVimStarted",
@@ -14,19 +13,19 @@ function M.config()
         callback = function()
             local stats = require("lazy").stats()
             local ms = math.floor(stats.startuptime * 100 + 0.5) / 100
+
             dashboard.section.footer.val = {
                 " ",
                 " ",
                 "Loaded " .. stats.count .. " plugins  in " .. ms .. "ms",
             }
             dashboard.section.footer.opts.hl = "DashboardFooter"
-            vim.cmd "highlight DashboardFooter guifg=#D29B68"
+            vim.cmd("highlight DashboardFooter guifg=#D29B68")
             pcall(vim.cmd.AlphaRedraw)
         end,
     })
 
     dashboard.section.header.val = {
-
         [[         ,--.              ,----..                                 ____  ]],
         [[       ,--.'|    ,---,.   /   /   \                 ,---,        ,'  , `.]],
         [[   ,--,:  : |  ,'  .' |  /   .     :        ,---.,`--.' |     ,-+-,.' _ |]],
@@ -40,8 +39,9 @@ function M.config()
         [[|   | '`--'  |   |    \  ;   :    /      \   `  ;'   :  ||   : '  |/     ]],
         [['   : |      |   :   .'   \   \ .'        :   \ |;   |.' ;   | |`-'      ]],
         [[;   |.'      |   | ,'      `---`           '---" '---'   |   ;/          ]],
-        [['---'        `----'                                      '---'           ]]
+        [['---'        `----'                                      '---'           ]],
     }
+
     dashboard.section.buttons.val = {
         dashboard.button("e", "  New file", "<cmd>ene<CR>"),
         dashboard.button("SPC f f", "  Find file"),
@@ -53,10 +53,9 @@ function M.config()
 
     dashboard.config.opts.noautocmd = true
 
-    vim.cmd[[autocmd User AlphaReady echo 'ready']]
+    vim.cmd([[autocmd User AlphaReady echo 'ready']])
 
     alpha.setup(dashboard.config)
-
 end
 
 return M

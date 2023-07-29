@@ -8,6 +8,7 @@ local M = {
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-nvim-lua",
     },
+    event = "InsertEnter",
 }
 
 function M.config()
