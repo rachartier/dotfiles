@@ -38,6 +38,7 @@ sudo cp -r usr/* /usr
 
 # WSLTTY
 ## Emojis
+sudo apt install subversion
 svn export https://github.com/googlefonts/noto-emoji/trunk/png/128 /tmp/noto
 cd /mnt/c && cmd.exe /c echo %appdata% > /tmp/appdata_tmp && cd - >& /dev/null
 appdata=$(wslpath -u $(cat /tmp/appdata_tmp) | tr -d "\r")
