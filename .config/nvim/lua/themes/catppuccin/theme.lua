@@ -44,6 +44,7 @@ require("catppuccin").setup({
                 },
                 NormalFloat = {
                     bg = colors.base,
+                    fg = colors.surface0,
                 },
                 NoiceCmdlinePopupBorder = {
                     link = "NormalFloat",
@@ -54,7 +55,7 @@ require("catppuccin").setup({
                 },
                 FloatBorder = {
                     bg = colors.base,
-                    fg = colors.text,
+                    fg = colors.surface0,
                 },
                 FloatTitle = {
                     fg = colors.text,

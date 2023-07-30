@@ -1,6 +1,6 @@
 local M = {
     "nvim-lualine/lualine.nvim",
-    enabled = true,
+    enabled = false,
 }
 
 function M.config()
