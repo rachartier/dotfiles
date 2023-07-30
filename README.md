@@ -57,3 +57,27 @@ Font=CaskaydiaCove NF
 FontHeight=13
 ThemeFile=macchiato.minttyrc
 ```
+
+# WSLTTY theme
+macchiato.minttyrc
+```
+ForegroundColour=202,201,245
+BackgroundColour=22,22,29
+CursorColour=202,201,245
+Black=24,25,38
+BoldBlack=98,104,128
+Red=237,135,150
+BoldRed=237,135,150
+Green=166,218,149
+BoldGreen=166,218,149
+Yellow=238,212,159
+BoldYellow=238,212,159
+Blue=138,173,244
+BoldBlue=138,173,244
+Magenta=198,160,246
+BoldMagenta=198,160,246
+Cyan=139,213,202
+BoldCyan=139,213,202
+White=202,211,245
+BoldWhite=202,211,245
+```
