@@ -45,6 +45,7 @@ cp -r /tmp/noto $appdata/wsltty/emojis/noto
 ```
 
 # WSLTTY config
+```
 Term=xterm-256color
 Charwidth=unicode
 EmojiPlacement=full
@@ -55,4 +56,4 @@ ClicksPlaceCursor=no
 Font=CaskaydiaCove NF
 FontHeight=13
 ThemeFile=macchiato.minttyrc
-
+```
