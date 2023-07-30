@@ -28,4 +28,10 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 # TMUX
 git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
 sudo apt install xsel
+
+cd /tmp
+git clone https://github.com/facebook/PathPicker.git
+cd PathPicker/debian
+./package.sh
+sudo cp -r usr/* /usr****
 ```
