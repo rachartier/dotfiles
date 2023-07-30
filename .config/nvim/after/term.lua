@@ -10,14 +10,14 @@ local M = {}
 local config = {
     ui = {
         border = u.border_chars_outer_thin,
-        winblend = 10
-    }
+        -- winblend = 10
+    },
 }
 
 function M:get_shadow_config()
     local opts = {
-        relative = 'editor',
-        style = 'minimal',
+        relative = "editor",
+        style = "minimal",
         width = vim.o.columns,
         height = vim.o.lines,
         row = 0,
@@ -28,16 +28,16 @@ end
 
 function M:make_floating_popup_options(width, height, opts)
     vim.validate({
-        opts = { opts, 't', true },
+        opts = { opts, "t", true },
     })
     opts = opts or {}
     vim.validate({
-        ['opts.offset_x'] = { opts.offset_x, 'n', true },
-        ['opts.offset_y'] = { opts.offset_y, 'n', true },
+        ["opts.offset_x"] = { opts.offset_x, "n", true },
+        ["opts.offset_y"] = { opts.offset_y, "n", true },
     })
     local new_option = {}
 
-    new_option.style = opts.style or 'minimal'
+    new_option.style = opts.style or "minimal"
     new_option.width = width
     new_option.height = height
 
@@ -47,16 +47,16 @@ function M:make_floating_popup_options(width, height, opts)
 
     new_option.noautocmd = opts.noautocmd or true
 
-    new_option.relative = opts.relative and opts.relative or 'cursor'
+    new_option.relative = opts.relative and opts.relative or "cursor"
     new_option.anchor = opts.anchor or nil
-    if new_option.relative == 'win' then
+    if new_option.relative == "win" then
         new_option.bufpos = opts.bufpos or nil
         new_option.win = opts.win or nil
     end
 
     if opts.title then
         new_option.title = opts.title
-        new_option.title_pos = opts.title_pos or 'center'
+        new_option.title_pos = opts.title_pos or "center"
     end
 
     new_option.zindex = opts.zindex or nil
@@ -64,23 +64,23 @@ function M:make_floating_popup_options(width, height, opts)
     if not opts.row and not opts.col and not opts.bufpos then
         local lines_above = vim.fn.winline() - 1
         local lines_below = vim.fn.winheight(0) - lines_above
-        new_option.anchor = ''
+        new_option.anchor = ""
 
         local pum_pos = vim.fn.pum_getpos()
         local pum_vis = not vim.tbl_isempty(pum_pos) -- pumvisible() can be true and pum_pos() returns {}
-        if pum_vis and vim.fn.line('.') >= pum_pos.row or not pum_vis and lines_above < lines_below then
-            new_option.anchor = 'N'
+        if pum_vis and vim.fn.line(".") >= pum_pos.row or not pum_vis and lines_above < lines_below then
+            new_option.anchor = "N"
             new_option.row = 1
         else
-            new_option.anchor = 'S'
+            new_option.anchor = "S"
             new_option.row = 0
         end
 
         if vim.fn.wincol() + width <= vim.o.columns then
-            new_option.anchor = new_option.anchor .. 'W'
+            new_option.anchor = new_option.anchor .. "W"
             new_option.col = 0
         else
-            new_option.anchor = new_option.anchor .. 'E'
+            new_option.anchor = new_option.anchor .. "E"
             new_option.col = 1
         end
     else
@@ -112,9 +112,9 @@ end
 
 function M:create_win_with_border(content_opts, opts)
     vim.validate({
-        content_opts = { content_opts, 't' },
-        contents = { content_opts.content, 't', true },
-        opts = { opts, 't', true },
+        content_opts = { content_opts, "t" },
+        contents = { content_opts.content, "t", true },
+        opts = { opts, "t", true },
     })
 
     local contents, filetype = content_opts.contents, content_opts.filetype
@@ -124,15 +124,15 @@ function M:create_win_with_border(content_opts, opts)
 
     local highlight = content_opts.highlight or {}
 
-    local normal = highlight.normal or 'LspNormal'
-    local border_hl = highlight.border or 'LspBorder'
+    local normal = highlight.normal or "LspNormal"
+    local border_hl = highlight.border or "LspBorder"
 
     if content_opts.noborder then
-        opts.border = 'none'
+        opts.border = "none"
     else
         opts.border = content_opts.border_side
-        and M.combine_border(config.ui.border, content_opts.border_side, border_hl)
-        or config.ui.border
+            and M.combine_border(config.ui.border, content_opts.border_side, border_hl)
+            or config.ui.border
     end
 
     -- create contents buffer
@@ -143,12 +143,12 @@ function M:create_win_with_border(content_opts, opts)
     local content = lsp.util._trim(contents)
 
     if filetype then
-        api.nvim_buf_set_option(bufnr, 'filetype', filetype)
+        api.nvim_buf_set_option(bufnr, "filetype", filetype)
     end
 
     content = vim.tbl_flatten(vim.tbl_map(function(line)
-        if string.find(line, '\n') then
-            return vim.split(line, '\n')
+        if string.find(line, "\n") then
+            return vim.split(line, "\n")
         end
         return line
     end, content))
@@ -158,37 +158,33 @@ function M:create_win_with_border(content_opts, opts)
     end
 
     if not content_opts.bufnr then
-        api.nvim_set_option_value('modifiable', false, { buf = bufnr })
-        api.nvim_set_option_value('bufhidden', content_opts.bufhidden or 'wipe', { buf = bufnr })
-        api.nvim_set_option_value('buftype', content_opts.buftype or 'nofile', { buf = bufnr })
+        api.nvim_set_option_value("modifiable", false, { buf = bufnr })
+        api.nvim_set_option_value("bufhidden", content_opts.bufhidden or "wipe", { buf = bufnr })
+        api.nvim_set_option_value("buftype", content_opts.buftype or "nofile", { buf = bufnr })
     end
 
     local winid = api.nvim_open_win(bufnr, enter, opts)
-    api.nvim_set_option_value(
-    'winblend',
-    content_opts.winblend or config.ui.winblend,
-    { scope = 'local', win = winid }
-    )
-    api.nvim_set_option_value('wrap', content_opts.wrap or false, { scope = 'local', win = winid })
+    api.nvim_set_option_value("winblend", content_opts.winblend or config.ui.winblend, { scope = "local", win = winid })
+    api.nvim_set_option_value("wrap", content_opts.wrap or false, { scope = "local", win = winid })
 
     api.nvim_set_option_value(
-    'winhl',
-    'Normal:' .. normal .. ',FloatBorder:' .. border_hl,
-    { scope = 'local', win = winid }
+        "winhl",
+        "Normal:" .. normal .. ",FloatBorder:" .. border_hl,
+        { scope = "local", win = winid }
     )
 
-    api.nvim_set_option_value('winbar', '', { scope = 'local', win = winid })
+    api.nvim_set_option_value("winbar", "", { scope = "local", win = winid })
     return bufnr, winid
 end
 
 function M:open_shadow_win()
     local opts = M.get_shadow_config(self)
-    local shadow_winhl = 'Normal:FloatShadow'
+    local shadow_winhl = "Normal:FloatShadow"
     local shadow_bufnr = api.nvim_create_buf(false, false)
     local shadow_winid = api.nvim_open_win(shadow_bufnr, true, opts)
-    api.nvim_set_option_value('winhl', shadow_winhl, { scope = 'local', win = shadow_winid })
-    api.nvim_set_option_value('winblend', 70, { scope = 'local', win = shadow_winid })
-    api.nvim_set_option_value('bufhidden', 'wipe', { buf = shadow_bufnr })
+    api.nvim_set_option_value("winhl", shadow_winhl, { scope = "local", win = shadow_winid })
+    api.nvim_set_option_value("winblend", 70, { scope = "local", win = shadow_winid })
+    api.nvim_set_option_value("bufhidden", "wipe", { buf = shadow_bufnr })
     return shadow_bufnr, shadow_winid
 end
 
@@ -210,7 +206,7 @@ function M:open_float_terminal(command)
         return
     end
 
-    local cmd = command and command or os.getenv('SHELL')
+    local cmd = command and command or os.getenv("SHELL")
     -- calculate our floating window size
     local win_height = math.ceil(vim.o.lines * 0.7)
     local win_width = math.ceil(vim.o.columns * 0.7)
@@ -221,8 +217,8 @@ function M:open_float_terminal(command)
 
     -- set some options
     local opts = {
-        style = 'minimal',
-        relative = 'editor',
+        style = "minimal",
+        relative = "editor",
         width = win_width,
         height = win_height,
         row = row,
@@ -232,23 +228,23 @@ function M:open_float_terminal(command)
     local content_opts = {
         contents = {},
         enter = true,
-        bufhidden = 'hide',
+        bufhidden = "hide",
         highlight = {
-            normal = 'TerminalNormal',
-            border = 'TerminalBorder',
+            normal = "TerminalNormal",
+            border = "TerminalBorder",
         },
     }
     local spawn_new = vim.tbl_isempty(ctx) and true or false
 
     if not spawn_new then
         content_opts.bufnr = ctx.term_bufnr
-        api.nvim_buf_set_option(ctx.term_bufnr, 'modified', false)
+        api.nvim_buf_set_option(ctx.term_bufnr, "modified", false)
     end
     ctx.cur_win = api.nvim_get_current_win()
     ctx.pos = api.nvim_win_get_cursor(0)
 
     ctx.term_bufnr, ctx.term_winid, ctx.shadow_bufnr, ctx.shadow_winid =
-    M.open_shadow_float_win(self, content_opts, opts)
+        M.open_shadow_float_win(self, content_opts, opts)
 
     if spawn_new then
         vim.fn.termopen(cmd, {
@@ -264,9 +260,9 @@ function M:open_float_terminal(command)
         })
     end
 
-    vim.cmd('startinsert!')
+    vim.cmd("startinsert!")
 
-    api.nvim_create_autocmd('WinClosed', {
+    api.nvim_create_autocmd("WinClosed", {
         buffer = ctx.term_bufnr,
         callback = function()
             if ctx.shadow_winid and api.nvim_win_is_valid(ctx.shadow_winid) then
@@ -283,5 +279,5 @@ function M:close_float_terminal()
     end
 end
 
-vim.keymap.set('n', '<leader>tg', M.open_float_terminal)
-vim.keymap.set('t', '<leader>tg', M.close_float_terminal)
+vim.keymap.set("n", "<leader>tg", M.open_float_terminal)
+vim.keymap.set("t", "<leader>tg", M.close_float_terminal)
