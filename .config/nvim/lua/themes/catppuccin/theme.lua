@@ -6,7 +6,7 @@ require("catppuccin").setup({
     show_end_of_buffer = false, -- show the '~' characters after the end of buffers
     term_colors = false,
     dim_inactive = {
-        enabled = true,
+        enabled = false,
         shade = "dark",
         percentage = 0.65,
     },
@@ -44,9 +44,20 @@ require("catppuccin").setup({
                 },
                 NormalFloat = {
                     bg = colors.base,
+                    fg = colors.text,
+                },
+                NoiceCmdlinePopupBorder = {
+                    link = "NormalFloat",
+                },
+
+                NoiceFormatLevelOff = {
+                    bg = colors.yellow,
                 },
                 FloatBorder = {
                     bg = colors.base,
+                    fg = colors.surface0,
+                },
+                FloatTitle = {
                     fg = colors.text,
                 },
                 PopupBorder = {
@@ -62,7 +73,6 @@ require("catppuccin").setup({
                 PmenuSel = {
                     -- link = "Visual",
                     bg = colors.surface0,
-                    fg = colors.text,
                 },
                 PmenuBorder = {
                     link = "PopupBorder",
@@ -87,10 +97,10 @@ require("catppuccin").setup({
                     bg = colors.surface0,
                 },
                 CmpItemAbbrMatch = {
-                    fg = colors.mauve,
+                    fg = colors.blue,
                 },
                 CmpItemAbbrMatchFuzzy = {
-                    link = "CmpItemAbbrMatch",
+                    fg = colors.sapphire,
                 },
                 TelescopeSelection = {
                     link = "PmenuSel",
@@ -150,20 +160,20 @@ local colors = require("catppuccin.palettes").get_palette("mocha")
 local TelescopeColor = {
     TelescopeMatching = { link = "CmpItemAbbrMatch" },
 
-    TelescopePromptPrefix = { bg = colors.surface0 },
-    TelescopePromptNormal = { bg = colors.surface0 },
-    TelescopePromptBorder = { bg = colors.surface0, fg = colors.surface0 },
+    -- TelescopePromptPrefix = { bg = colors.surface0 },
+    -- TelescopePromptNormal = { bg = colors.surface0 },
+    -- TelescopePromptBorder = { bg = colors.surface0, fg = colors.surface0 },
     TelescopePromptTitle = { bg = colors.pink, fg = colors.base },
 
-    TelescopeResultsNormal = { bg = colors.mantle, fg = colors.overlay1 },
-    TelescopeResultsBorder = { bg = colors.mantle, fg = colors.mantle },
+    TelescopeResultsNormal = { bg = colors.base, fg = colors.overlay2 },
+    -- TelescopeResultsBorder = { bg = colors.mantle, fg = colors.mantle },
     TelescopeResultsTitle = { bg = colors.blue, fg = colors.base },
 
-    TelescopePreviewBorder = { bg = colors.base, fg = colors.base },
+    -- TelescopePreviewBorder = { bg = colors.base, fg = colors.base },
     TelescopePreviewNormal = { bg = colors.base },
     TelescopePreviewTitle = { bg = colors.green, fg = colors.base },
 
-    TelescopeBorder = { fg = colors.base },
+    -- TelescopeBorder = { fg = colors.base },
 }
 
 for hl, col in pairs(TelescopeColor) do

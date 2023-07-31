@@ -10,6 +10,8 @@ local M = {
         "L3MON4D3/LuaSnip",
         "rafamadriz/friendly-snippets",
     },
+    event = { "BufReadPost", "BufNewFile" },
+    cmd = { "LspInfo", "LspInstall", "LspUninstall" },
 }
 
 function M.config()

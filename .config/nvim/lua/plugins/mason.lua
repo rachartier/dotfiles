@@ -4,12 +4,15 @@ local M = {
         "williamboman/mason-lspconfig.nvim",
         "jay-babu/mason-null-ls.nvim",
     },
+
+    event = { "BufReadPost", "BufNewFile" },
+    cmd = { "Mason", "MasonInstall", "MasonUninsllAll", "MasonUninsll" },
 }
 
 function M.config()
     require("mason").setup()
     require("mason-lspconfig").setup({
-        ensure_installed = { "dockerls", "jsonls", "bashls", "pyright", "csharp_ls" },
+        ensure_installed = { "dockerls", "jsonls", "bashls", "pyright" },
     })
     require("mason-null-ls").setup({
         ensure_installed = {

@@ -35,6 +35,9 @@ vim.opt.isfname:append("@-@")
 
 vim.opt.updatetime = 50
 vim.opt.fillchars = "eob: "
+-- vim.opt.pumblend = 20
+
+vim.opt.laststatus = 0
 
 vim.cmd([[
     set shellcmdflag=-c
