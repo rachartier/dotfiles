@@ -123,9 +123,23 @@ function M.config()
         },
     })
 
-    require("lspconfig")["csharp_ls"].setup({
+    -- require("lspconfig")["csharp_ls"].setup({
+    --     capabilities = capabilities,
+    --     on_attach = on_attach,
+    -- })
+    local pid = vim.fn.getpid()
+    -- local omnisharp_bin = os.getenv("HOME") .. "/.local/omnisharp/run"
+    local omnisharp_bin = "/home/rachartier/.local/omnisharp/run/OmniSharp.dll"
+    require("lspconfig")["omnisharp"].setup({
         capabilities = capabilities,
         on_attach = on_attach,
+        cmd = {
+            "dotnet",
+            omnisharp_bin,
+        },
+        enable_roslyn_analyzers = false,
+        enable_import_completion = true,
+        organize_imports_on_format = false,
     })
 
     vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
