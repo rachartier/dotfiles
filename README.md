@@ -13,9 +13,13 @@ chmod u+x nvim.appimage
 sudo mv squashfs-root /
 sudo ln -s /squashfs-root/AppRun /usr/bin/nvim
 
-sudo apt install python3.10-venv
-sudo apt install nodejs npm
-sudo apt install unzip
+sudo apt install -y python3.10-venv
+sudo apt install -y nodejs npm
+sudo apt install -y unzip
+
+curl -L https://github.com/OmniSharp/omnisharp-roslyn/releases/download/v1.39.8/omnisharp-linux-x64.zip -o /tmp/omnisharp.zip
+mkdir -p ~/.local/omnisharp/run
+unzip /tmp/omnisharp.zip -d ~/.local/omnisharp/run
 
 # ZSH
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -27,7 +31,7 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 
 # TMUX
 git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
-sudo apt install xsel
+sudo apt install -y xsel
 
 cd /tmp
 git clone https://github.com/facebook/PathPicker.git
@@ -38,7 +42,7 @@ sudo cp -r usr/* /usr
 
 # WSLTTY
 ## Emojis
-sudo apt install subversion
+sudo apt install -y subversion
 svn export https://github.com/googlefonts/noto-emoji/trunk/png/128 /tmp/noto
 cd /mnt/c && cmd.exe /c echo %appdata% > /tmp/appdata_tmp && cd - >& /dev/null
 appdata=$(wslpath -u $(cat /tmp/appdata_tmp) | tr -d "\r")
