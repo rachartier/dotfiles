@@ -77,6 +77,19 @@ vim.api.nvim_create_autocmd({ "BufRead" }, {
     end,
 })
 
+vim.api.nvim_create_autocmd({ "ModeChanged" }, {
+    pattern = { "*" },
+    callback = function()
+        local vim_mode = vim.fn.mode()
+
+        if vim_mode == "" then
+            vim_mode = "cv"
+        end
+
+        local job = vim.fn.jobstart("echo " .. vim_mode .. " > /tmp/__vim_mode_tmux_socket")
+    end,
+})
+
 vim.keymap.set("n", "<Leader>db", function()
     local curbufnr = vim.api.nvim_get_current_buf()
     local buflist = vim.api.nvim_list_bufs()

@@ -27,4 +27,58 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 
 # TMUX
 git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
+sudo apt install xsel
+
+cd /tmp
+git clone https://github.com/facebook/PathPicker.git
+
+cd PathPicker/debian
+./package.sh
+sudo cp -r usr/* /usr
+
+# WSLTTY
+## Emojis
+sudo apt install subversion
+svn export https://github.com/googlefonts/noto-emoji/trunk/png/128 /tmp/noto
+cd /mnt/c && cmd.exe /c echo %appdata% > /tmp/appdata_tmp && cd - >& /dev/null
+appdata=$(wslpath -u $(cat /tmp/appdata_tmp) | tr -d "\r")
+cp -r /tmp/noto $appdata/wsltty/emojis/noto
+```
+
+# WSLTTY config
+```
+Term=xterm-256color
+Charwidth=unicode
+EmojiPlacement=full
+Emojis=noto
+Scrollbar=none
+CtrlShiftShortcuts=yes
+ClicksPlaceCursor=no
+Font=CaskaydiaCove NF
+FontHeight=13
+ThemeFile=macchiato.minttyrc
+```
+
+# WSLTTY theme
+macchiato.minttyrc
+```
+ForegroundColour=202,201,245
+BackgroundColour=22,22,29
+CursorColour=205,214,244
+Black=24,25,38
+BoldBlack=98,104,128
+Red=243,139,168
+BoldRed=243,139,168
+Green=166,227,161
+BoldGreen=166,227,161
+Yellow=249,226,175
+BoldYellow=249,226,175
+Blue=137,180,250
+BoldBlue=137,180,250
+Magenta=203,166,247
+BoldMagenta=203,166,247
+Cyan=116,199,236
+BoldCyan=116,199,236
+White=205,214,244
+BoldWhite=205,214,244
 ```
