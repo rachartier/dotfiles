@@ -302,7 +302,7 @@ function M.config()
             end
             return msg
         end,
-        icon = " LSP:",
+        icon = "  LSP:",
         color = { fg = colors.text, gui = "bold" },
     })
 
