@@ -43,7 +43,9 @@ function M.config()
         vim.keymap.set("n", "<leader>gp", vim.diagnostic.goto_prev, bufopts, { desc = "Go to previous diagnostic" })
         -- vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action,bufopts)
         vim.keymap.set("n", "<leader>rr", vim.lsp.buf.references, bufopts, { desc = "Find references" })
-        vim.keymap.set("n", "<leader>ca", "<cmd>CodeActionMenu<cr>", bufopts, { desc = "Open code action menu" })
+        -- vim.keymap.set("n", "<leader>ca", "<cmd>CodeActionMenu<cr>", bufopts, { desc = "Open code action menu" })
+        vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, bufopts, { desc = "Open code action menu" })
+
         vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, bufopts, { desc = "Rename" })
         vim.keymap.set(
             "n",
