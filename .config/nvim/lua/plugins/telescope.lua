@@ -77,6 +77,7 @@ function M.config()
                 n = { s = flash },
                 i = { ["<c-s>"] = flash },
             },
+            file_ignore_patterns = { "node_modules", "__pycache__", "bin", "obj" },
         },
         pickers = {
             find_files = {},
