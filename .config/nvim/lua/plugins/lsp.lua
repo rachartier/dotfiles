@@ -43,7 +43,9 @@ function M.config()
         vim.keymap.set("n", "<leader>gp", vim.diagnostic.goto_prev, bufopts, { desc = "Go to previous diagnostic" })
         -- vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action,bufopts)
         vim.keymap.set("n", "<leader>rr", vim.lsp.buf.references, bufopts, { desc = "Find references" })
-        vim.keymap.set("n", "<leader>ca", "<cmd>CodeActionMenu<cr>", bufopts, { desc = "Open code action menu" })
+        -- vim.keymap.set("n", "<leader>ca", "<cmd>CodeActionMenu<cr>", bufopts, { desc = "Open code action menu" })
+        vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, bufopts, { desc = "Open code action menu" })
+
         vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, bufopts, { desc = "Rename" })
         vim.keymap.set(
             "n",
@@ -123,9 +125,22 @@ function M.config()
         },
     })
 
-    require("lspconfig")["csharp_ls"].setup({
+    -- require("lspconfig")["csharp_ls"].setup({
+    --     capabilities = capabilities,
+    --     on_attach = on_attach,
+    -- })
+
+    require("lspconfig").omnisharp.setup({
         capabilities = capabilities,
         on_attach = on_attach,
+        cmd = { "dotnet", os.getenv("HOME") .. "/.local/omnisharp/run/OmniSharp.dll" },
+        enable_editorconfig_support = true,
+        enable_ms_build_load_projects_on_demand = false,
+        enable_roslyn_analyzers = false,
+        organize_imports_on_format = true,
+        enable_import_completion = true,
+        sdk_include_prereleases = true,
+        analyze_open_documents_only = false,
     })
 
     vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
