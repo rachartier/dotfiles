@@ -1,6 +1,6 @@
 local M = {
     "ray-x/lsp_signature.nvim",
-    enabled = false,
+    enabled = true,
 }
 
 function M.config()
