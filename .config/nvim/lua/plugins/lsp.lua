@@ -142,10 +142,6 @@ function M.config()
         sdk_include_prereleases = true,
         analyze_open_documents_only = false,
     })
-
-    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-        border = u.border_chars_outer_thin,
-    })
 end
 
 return M
