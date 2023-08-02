@@ -55,7 +55,7 @@ require("catppuccin").setup({
                 },
                 FloatBorder = {
                     bg = colors.base,
-                    fg = colors.surface0,
+                    fg = colors.surface1,
                 },
                 FloatTitle = {
                     fg = colors.text,
@@ -65,21 +65,20 @@ require("catppuccin").setup({
                 },
                 PopupNormal = {
                     bg = colors.base,
-                    fg = colors.overlay1,
+                    fg = colors.text,
                 },
                 Pmenu = {
-                    link = "PopupNormal",
+                    link = "FloatBorder",
+                },
+                PmenuBorder = {
+                    link = "FloatBorder",
+                },
+                PmenuDocBorder = {
+                    link = "FloatBorder",
                 },
                 PmenuSel = {
                     -- link = "Visual",
                     bg = colors.surface0,
-                },
-                PmenuBorder = {
-                    link = "PopupBorder",
-                },
-                PmenuDocBorder = {
-                    bg = colors.base,
-                    fg = colors.text,
                 },
                 NeoTreeNormal = {
                     bg = colors.base,
@@ -112,6 +111,12 @@ require("catppuccin").setup({
                 },
                 NeoTreeIndentMarker = {
                     fg = colors.surface0,
+                },
+                NoicePopupmenu = {
+                    link = "PopupNormal",
+                },
+                NoicePopupmenuBorder = {
+                    link = "FloatBorder",
                 },
             }
         end,

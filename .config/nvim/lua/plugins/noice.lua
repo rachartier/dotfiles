@@ -12,9 +12,18 @@ function M.config()
     require("noice").setup({
         cmdline = {
             format = {
-                cmdline = { title = "", icon = "  " },
-                lua = { title = "", icon = " 󰢱 " },
-                help = { title = "", icon = " 󰋖 " },
+                cmdline = { title = "", pattern = "^:", icon = "", lang = "vim" },
+                search_down = { title = "", kind = "search", pattern = "^/", icon = " ", lang = "regex" },
+                search_up = { title = "", kind = "search", pattern = "^%?", icon = " ", lang = "regex" },
+                filter = { title = "", pattern = "^:%s*!", icon = "$", lang = "bash" },
+                lua = {
+                    title = "",
+                    pattern = { "^:%s*lua%s+", "^:%s*lua%s*=%s*", "^:%s*=%s*" },
+                    icon = "",
+                    lang = "lua",
+                },
+                help = { title = "", pattern = "^:%s*he?l?p?%s+", icon = "" },
+                input = {},
             },
         },
         messages = {
@@ -32,9 +41,6 @@ function M.config()
                 border = {
                     style = u.border_chars_outer_thin,
                 },
-                win_options = {
-                    winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder",
-                },
             },
         },
         lsp = {
@@ -44,11 +50,41 @@ function M.config()
                 ["vim.lsp.util.stylize_markdown"] = true,
                 ["cmp.entry.get_documentation"] = true,
             },
-            signature = {
-                enabled = false,
-            },
             hover = {
-                enabled = false,
+                enabled = true,
+                silent = false, -- set to true to not show a message if hover is not available
+                ---@type NoiceViewOptions
+                opts = {}, -- merged with defaults from documentation
+            },
+            signature = {
+                enabled = true,
+                auto_open = {
+                    enabled = true,
+                    trigger = true, -- Automatically show signature help when typing a trigger character from the LSP
+                    luasnip = true, -- Will open signature help when jumping to Luasnip insert nodes
+                    throttle = 50, -- Debounce lsp signature help request by 50ms
+                },
+                view = nil, -- when nil, use defaults from documentation
+                ---@type NoiceViewOptions
+                opts = {}, -- merged with defaults from documentation
+            },
+            message = {
+                -- Messages shown by lsp servers
+                enabled = true,
+                view = "notify",
+                opts = {},
+            },
+            -- defaults for hover and signature help
+            documentation = {
+                view = "hover",
+                ---@type NoiceViewOptions
+                opts = {
+                    lang = "markdown",
+                    replace = true,
+                    render = "plain",
+                    format = { "{message}" },
+                    win_options = { concealcursor = "n", conceallevel = 3 },
+                },
             },
         },
         -- you can enable a preset for easier configuration
