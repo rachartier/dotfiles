@@ -1,5 +1,6 @@
 local M = {
     "dgagn/diagflow.nvim",
+    enabled = false,
 }
 
 function M.config()

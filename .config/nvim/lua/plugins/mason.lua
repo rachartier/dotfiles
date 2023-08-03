@@ -12,7 +12,7 @@ local M = {
 function M.config()
     require("mason").setup()
     require("mason-lspconfig").setup({
-        ensure_installed = { "dockerls", "jsonls", "bashls", "pyright" },
+        ensure_installed = { "dockerls", "jsonls", "bashls", "pyright", "omnisharp" },
     })
     require("mason-null-ls").setup({
         ensure_installed = {
