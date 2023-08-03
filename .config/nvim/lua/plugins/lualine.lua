@@ -239,7 +239,7 @@ function M.config()
             error = " ",
             warn = " ",
             info = " ",
-            hint = "",
+            hint = " ",
             other = "󰠠 ",
         },
         diagnostics_color = {
