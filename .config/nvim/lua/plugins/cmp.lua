@@ -72,6 +72,7 @@ function M.config()
         end
     end, { "i", "s", "c" })
 
+    ---@diagnostic disable-next-line: redundant-parameter
     cmp.setup({
         snippet = {
             expand = function(args)
@@ -114,7 +115,7 @@ function M.config()
                 side_padding = 0,
             }),
             documentation = cmp.config.window.bordered({
-                winhighlight = "Normal:Pmenu,FloatBorder:PmenuDocBorder,CursorLine:PmenuSel,Search:None",
+                winhighlight = "NormalFloat:NormalFloat,FloatBorder:PmenuBorder",
                 scrollbar = true,
                 border = "rounded",
                 side_padding = 1, -- Not working?

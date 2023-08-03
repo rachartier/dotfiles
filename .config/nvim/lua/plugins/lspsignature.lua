@@ -5,14 +5,15 @@ local M = {
 
 function M.config()
     require("lsp_signature").setup({
-        noice = false,
+        noice = true,
         hint_enable = false,
         hint_prefix = "🔍 ",
         hi_parameter = "LspSignatureActiveParameter", -- how your parameter will be highlight
+        floating_window = false,
         handler_opts = {
-            border = "rounded",                 -- double, rounded, single, shadow, none, or a table of borders
+            border = "rounded", -- double, rounded, single, shadow, none, or a table of borders
         },
-        bind = true,                            -- This is mandatory, otherwise border config won't get registered.
+        bind = false,  -- This is mandatory, otherwise border config won't get registered.
         -- If you want to hook lspsaga or other signature handler, pls set to false
     })
 end

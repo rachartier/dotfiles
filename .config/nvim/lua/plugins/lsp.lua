@@ -31,6 +31,7 @@ function M.config()
         vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
         vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
         vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
+        vim.keymap.set({ "n", "i" }, "<C-k>", vim.lsp.buf.signature_help, bufopts)
         vim.keymap.set("n", "<leader>vws", vim.lsp.buf.workspace_symbol, bufopts)
         vim.keymap.set(
             "n",
@@ -130,10 +131,13 @@ function M.config()
     --     on_attach = on_attach,
     -- })
 
-    require("lspconfig").omnisharp.setup({
+    require("lspconfig")["omnisharp"].setup({
+        handlers = {
+            ["textDocument/definition"] = require("omnisharp_extended").handler,
+        },
         capabilities = capabilities,
         on_attach = on_attach,
-        cmd = { "dotnet", os.getenv("HOME") .. "/.local/omnisharp/run/OmniSharp.dll" },
+        --cmd = { "dotnet", os.getenv("HOME") .. "/.local/omnisharp/run/OmniSharp.dll" },
         enable_editorconfig_support = true,
         enable_ms_build_load_projects_on_demand = false,
         enable_roslyn_analyzers = false,
@@ -141,10 +145,6 @@ function M.config()
         enable_import_completion = true,
         sdk_include_prereleases = true,
         analyze_open_documents_only = false,
-    })
-
-    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-        border = u.border_chars_outer_thin,
     })
 end
 
