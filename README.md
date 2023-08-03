@@ -17,10 +17,6 @@ sudo apt install -y python3.10-venv
 sudo apt install -y nodejs npm
 sudo apt install -y unzip
 
-curl -L https://github.com/OmniSharp/omnisharp-roslyn/releases/download/v1.39.8/omnisharp-linux-x64.zip -o /tmp/omnisharp.zip
-mkdir -p ~/.local/omnisharp/run
-unzip /tmp/omnisharp.zip -d ~/.local/omnisharp/run
-
 # ZSH
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
