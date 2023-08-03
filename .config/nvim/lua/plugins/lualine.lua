@@ -237,9 +237,9 @@ function M.config()
         sources = { "nvim_lsp" },
         symbols = {
             error = " ",
-            warn = " ",
+            warn = " ",
             info = " ",
-            hint = "󱤅 ",
+            hint = "",
             other = "󰠠 ",
         },
         diagnostics_color = {
