@@ -11,4 +11,8 @@ return {
         "RRethy/nvim-base16",
         priority = 1000,
     },
+    {
+        "folke/tokyonight.nvim",
+        priority = 1000,
+    },
 }

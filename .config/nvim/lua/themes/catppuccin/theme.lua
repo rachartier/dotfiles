@@ -35,7 +35,7 @@ require("catppuccin").setup({
         all = function(colors)
             return {
                 Visual = { bg = "#234370" },
-                --Visual = { bg = colors.blue, fg = colors.crust },
+                -- Visual = { bg = colors.blue, fg = colors.crust },
                 LineNr = {
                     fg = colors.surface2,
                 },
@@ -55,7 +55,7 @@ require("catppuccin").setup({
                 },
                 FloatBorder = {
                     bg = colors.base,
-                    fg = colors.surface1,
+                    fg = colors.subtext0,
                 },
                 FloatTitle = {
                     fg = colors.text,
@@ -170,12 +170,12 @@ local TelescopeColor = {
     -- TelescopePromptBorder = { bg = colors.surface0, fg = colors.surface0 },
     TelescopePromptTitle = { bg = colors.pink, fg = colors.base },
 
-    TelescopeResultsNormal = { bg = colors.base, fg = colors.overlay2 },
+    TelescopeResultsNormal = { fg = colors.subtext0 },
     -- TelescopeResultsBorder = { bg = colors.mantle, fg = colors.mantle },
     TelescopeResultsTitle = { bg = colors.blue, fg = colors.base },
 
     -- TelescopePreviewBorder = { bg = colors.base, fg = colors.base },
-    TelescopePreviewNormal = { bg = colors.base },
+    TelescopePreviewNormal = {},
     TelescopePreviewTitle = { bg = colors.green, fg = colors.base },
 
     -- TelescopeBorder = { fg = colors.base },
