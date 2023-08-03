@@ -7,6 +7,7 @@ function M.config()
     -- Disable virtual_text since it's redundant due to lsp_lines.
     vim.diagnostic.config({
         virtual_text = false,
+        virtual_lines = { highlight_whole_line = false },
     })
 end
 

@@ -55,7 +55,7 @@ require("catppuccin").setup({
                 },
                 FloatBorder = {
                     bg = colors.base,
-                    fg = colors.subtext0,
+                    fg = colors.surface1,
                 },
                 FloatTitle = {
                     fg = colors.text,
