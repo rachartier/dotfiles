@@ -61,8 +61,8 @@ function M.config()
     }
 
     dashboard.section.buttons.val = {
-        dashboard.button("e", "  New file", "<cmd>ene<CR>"),
-        dashboard.button("SPC f f", "  Find file"),
+        dashboard.button("e", "󰈔  New file", "<cmd>ene<CR>"),
+        dashboard.button("SPC f f", "󰈞  Find file"),
         dashboard.button("SPC f g", "  Live grep"),
         dashboard.button("c", "  Configuration", "<cmd>cd ~/.config/nvim/ | e init.lua<CR>"),
         dashboard.button("l", "  Open Lazy", "<cmd>Lazy<CR>"),
