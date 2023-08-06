@@ -113,8 +113,10 @@ fi
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+export DISABLE_AUTO_TITLE='true'
 
 alias config='/usr/bin/git --git-dir=/home/rachartier/.cfg/ --work-tree=/home/rachartier'
+alias tl='tmuxp load'
 
 fpath+=($HOME/.zsh/pure)
 autoload -U promptinit; promptinit
