@@ -55,7 +55,7 @@ function M.config()
         icon, icon_highlight_group = devicons.get_icon(f_name, f_extension)
 
         if icon == nil and icon_highlight_group == nil then
-            icon = ""
+            icon = "󰈔"
             icon_highlight_group = "DevIconDefault"
         end
 
