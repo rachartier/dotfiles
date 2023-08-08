@@ -28,7 +28,7 @@ require("catppuccin").setup({
     },
     color_overrides = {
         all = {
-            base = "#16161D",
+            -- base = "#16161D",
         },
     },
     highlight_overrides = {
