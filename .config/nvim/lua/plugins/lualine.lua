@@ -4,7 +4,7 @@ local M = {
 }
 
 function M.config()
-    local c = require("catppuccin.palettes").get_palette("mocha")
+    local c = require("catppuccin.palettes").get_palette("macchiato")
     local colors = {
         bg = c.base,
         fg = c.text,
