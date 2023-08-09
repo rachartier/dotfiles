@@ -49,13 +49,12 @@ require("catppuccin").setup({
                 NoiceCmdlinePopupBorder = {
                     link = "NormalFloat",
                 },
-
                 NoiceFormatLevelOff = {
                     bg = colors.yellow,
                 },
                 FloatBorder = {
                     bg = colors.base,
-                    fg = colors.surface1,
+                    fg = colors.surface0,
                 },
                 FloatTitle = {
                     fg = colors.text,
@@ -160,7 +159,7 @@ require("catppuccin").setup({
 
 --require('catppuccin').load()
 vim.cmd.colorscheme("catppuccin")
-local colors = require("catppuccin.palettes").get_palette("mocha")
+local colors = require("catppuccin.palettes").get_palette(flavour)
 
 local TelescopeColor = {
     TelescopeMatching = { link = "CmpItemAbbrMatch" },

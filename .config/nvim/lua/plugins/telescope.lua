@@ -29,6 +29,7 @@ function M.config()
     require("telescope").load_extension("dap")
     require("telescope").load_extension("harpoon")
 
+    local U = require("utils")
     local ts = require("telescope")
     local actions = require("telescope.actions")
     local action_state = require("telescope.actions.state")
@@ -62,6 +63,13 @@ function M.config()
 
     ts.setup({
         defaults = {
+            borderchars = {
+                --        { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
+
+                prompt = { "─", "│", " ", "│", "╭", "╮", "│", "│" },
+                results = { "─", "│", "─", "│", "├", "┤", "╯", "╰" },
+                preview = { "─", "│", "─", " ", "─", "╮", "╯", "─" },
+            },
             sort_mru = true,
             sorting_strategy = "ascending",
             layout_config = {
@@ -85,6 +93,11 @@ function M.config()
             live_grep = search_layout,
             lsp_references = search_layout,
             buffers = {
+                borderchars = {
+                    prompt = { "─", "│", " ", "│", "╭", "╮", "│", "│" },
+                    results = { "─", "│", "─", "│", "├", "┤", "╯", "╰" },
+                    preview = { "─", "│", "─", " ", "─", "╮", "╯", "─" },
+                },
                 show_all_buffers = true,
                 sort_lastused = true,
                 theme = "dropdown",

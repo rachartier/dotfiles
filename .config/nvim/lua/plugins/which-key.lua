@@ -3,9 +3,10 @@ local M = {
 }
 
 function M.config()
+    local U = require("utils")
     require("which-key").setup({
         window = {
-            border = "rounded", -- none, single, double, shadow
+            border = U.default_border,
             position = "bottom", -- bottom, top
             margin = { 1, 4, 1, 2 }, -- extra window margin [top, right, bottom, left]
             padding = { 1, 2, 1, 2 }, -- extra window padding [top, right, bottom, left]

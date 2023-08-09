@@ -13,7 +13,7 @@ local M = {
 
 function M.config()
     local cmp = require("cmp")
-    local u = require("utils")
+    local U = require("utils")
     local luasnip = require("luasnip")
 
     require("luasnip.loaders.from_vscode").lazy_load()
@@ -41,7 +41,7 @@ function M.config()
             item.abbr = content .. whitespace(MAX_LABEL_WIDTH, #content)
         end
 
-        item.kind = " " .. (u.kind_icons[item.kind] or u.kind_icons.Unknown) .. "│"
+        item.kind = " " .. (U.kind_icons[item.kind] or U.kind_icons.Unknown) .. "│"
         item.menu = nil
 
         return item
@@ -110,14 +110,14 @@ function M.config()
             completion = cmp.config.window.bordered({
                 winhighlight = "Normal:Pmenu,FloatBorder:PmenuBorder,CursorLine:PmenuSel,Search:None",
                 scrollbar = true,
-                border = "rounded",
+                border = U.default_border,
                 col_offset = -1,
                 side_padding = 0,
             }),
             documentation = cmp.config.window.bordered({
                 winhighlight = "NormalFloat:NormalFloat,FloatBorder:PmenuBorder",
                 scrollbar = true,
-                border = "rounded",
+                border = U.default_border,
                 side_padding = 1, -- Not working?
             }),
         },
