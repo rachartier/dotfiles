@@ -45,6 +45,13 @@ appdata=$(wslpath -u $(cat /tmp/appdata_tmp) | tr -d "\r")
 cp -r /tmp/noto $appdata/wsltty/emojis/noto
 ```
 
+# WEZTERM
+
+Symbolic Link WSL2 <-> Windows (Powershell Admin)
+```
+New-Item -ItemType SymbolicLink -Path "C:\Program Files\WezTerm\wezterm.lua" -Target "\\wsl.localhost\Ubuntu\home\rachartier\.config\wezterm\wezterm.lua"
+```
+
 # WSLTTY config
 ```
 Term=xterm-256color
