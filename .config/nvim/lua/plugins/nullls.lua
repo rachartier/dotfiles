@@ -17,11 +17,12 @@ local with_root_file = function(builtin, file)
 end
 
 function M.config()
+    local U = require("utils")
     local null_ls = require("null-ls")
     local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
     null_ls.setup({
-        border = "rounded",
+        border = U.default_border,
         on_attach = function(client, bufnr)
             if client.supports_method("textDocument/formatting") then
                 vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })

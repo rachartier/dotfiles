@@ -7,7 +7,7 @@ local M = {
 }
 
 function M.config()
-    local u = require("utils")
+    local U = require("utils")
 
     require("noice").setup({
         cmdline = {
@@ -39,7 +39,7 @@ function M.config()
         views = {
             cmdline_popup = {
                 border = {
-                    style = u.border_chars_outer_thin,
+                    style = U.default_border,
                 },
             },
         },

@@ -20,8 +20,6 @@ function M.config()
                 " ",
                 "Loaded " .. stats.count .. " plugins  in " .. ms .. "ms",
             }
-            dashboard.section.footer.opts.hl = "DashboardFooter"
-            vim.cmd("highlight DashboardFooter guifg=#D29B68")
             pcall(vim.cmd.AlphaRedraw)
         end,
     })

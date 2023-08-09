@@ -16,12 +16,12 @@ local M = {
 
 function M.config()
     local lsp = require("lsp-zero")
-    local u = require("utils")
+    local U = require("utils")
 
     lsp.preset("recommended")
 
     vim.diagnostic.config({
-        float = { border = "rounded" },
+        float = { border = U.default_border },
     })
 
     local on_attach = function(client, bufnr)
