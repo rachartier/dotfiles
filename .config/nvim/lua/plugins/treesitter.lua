@@ -2,10 +2,14 @@ local M = {
     "nvim-treesitter/nvim-treesitter",
     dependencies = {
         "nvim-treesitter/playground",
+        "filNaj/tree-setter",
     },
 }
 function M.config()
     require("nvim-treesitter.configs").setup({
+        tree_setter = {
+            enable = true,
+        },
         ensure_installed = {
             "markdown_inline",
         },
