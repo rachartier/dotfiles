@@ -117,7 +117,7 @@ export DISABLE_AUTO_TITLE='true'
 
 alias config='/usr/bin/git --git-dir=/home/rachartier/.cfg/ --work-tree=/home/rachartier'
 alias tl='tmuxp load'
-for s in $(tmuxp ls); do alias "$s"="echo a | tmuxp load $s"; done
+for s in $(tmuxp ls); do alias "$s"="tmuxp load -y $s"; done
 
 fpath+=($HOME/.zsh/pure)
 autoload -U promptinit; promptinit
