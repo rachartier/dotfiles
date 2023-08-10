@@ -175,26 +175,26 @@ function M.config()
             vim.api.nvim_command("hi! LualineMode guifg=" .. mode_color[vim.fn.mode()] .. " guibg=" .. colors.bg)
             local kirby_default = "(>*-*)>"
             local mode_kirby = {
-                n = "<(•∪•)>",
+                n = "<(•ᴗ•)>",
                 i = "<(•o•)>",
                 v = "(v•-•)v",
                 [""] = "(v•-•)>",
                 V = "(>•-•)>",
                 c = kirby_default,
-                no = "<(•∪•)>",
+                no = "<(•ᴗ•)>",
                 s = kirby_default,
                 S = kirby_default,
                 [""] = kirby_default,
                 ic = kirby_default,
                 R = kirby_default,
                 Rv = kirby_default,
-                cv = "<(•∪•)>",
-                ce = "<(•∪•)>",
+                cv = "<(•ᴗ•)>",
+                ce = "<(•ᴗ•)>",
                 r = kirby_default,
                 rm = kirby_default,
                 ["r?"] = kirby_default,
-                ["!"] = "<(•∪•)>",
-                t = "<(•∪•)>",
+                ["!"] = "<(•ᴗ•)>",
+                t = "<(•ᴗ•)>",
             }
             return mode_kirby[vim.fn.mode()]
         end,
