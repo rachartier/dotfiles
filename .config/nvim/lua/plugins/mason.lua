@@ -4,9 +4,6 @@ local M = {
         "williamboman/mason-lspconfig.nvim",
         "jay-babu/mason-null-ls.nvim",
     },
-
-    event = { "BufReadPost", "BufNewFile" },
-    cmd = { "Mason", "MasonInstall", "MasonUninsllAll", "MasonUninsll" },
 }
 
 function M.config()

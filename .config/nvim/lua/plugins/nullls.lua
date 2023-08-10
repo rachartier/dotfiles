@@ -40,7 +40,6 @@ function M.config()
             null_ls.builtins.diagnostics.eslint,
             null_ls.builtins.completion.spell,
             null_ls.builtins.formatting.prettierd,
-            null_ls.builtins.formatting.shfmt,
             -- null_ls.builtins.formatting.fixjson,
             null_ls.builtins.formatting.black.with({ extra_args = { "--line-length=120" } }),
             null_ls.builtins.formatting.ruff,

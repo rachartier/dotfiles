@@ -59,6 +59,7 @@ function M.config()
         layout_config = {
             prompt_position = "bottom",
         },
+        borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
     }
 
     ts.setup({
