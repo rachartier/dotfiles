@@ -147,10 +147,10 @@ require("catppuccin").setup({
                 information = { "italic" },
             },
             underlines = {
-                errors = { "underline" },
-                hints = { "underline" },
-                warnings = { "underline" },
-                information = { "underline" },
+                errors = { "undercurl" },
+                hints = { "undercurl" },
+                warnings = { "undercurl" },
+                information = { "undercurl" },
             },
         },
         -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
