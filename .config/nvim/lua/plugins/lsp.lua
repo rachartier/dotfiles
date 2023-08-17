@@ -112,9 +112,7 @@ function M.config()
     end
 
     local util = require("lspconfig/util")
-
     local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
     local path = util.path
 
     local function get_python_path(workspace)
@@ -163,6 +161,15 @@ function M.config()
     require("lspconfig")["vimls"].setup({
         capabilities = capabilities,
         on_attach = on_attach,
+    })
+
+    require("lspconfig")["clangd"].setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
+        cmd = {
+            "clangd",
+            "--offset-encoding=utf-16",
+        },
     })
 
     require("lspconfig")["lua_ls"].setup({
