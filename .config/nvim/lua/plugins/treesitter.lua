@@ -8,7 +8,7 @@ local M = {
 function M.config()
     require("nvim-treesitter.configs").setup({
         tree_setter = {
-            enable = true,
+            enable = false,
         },
         ensure_installed = {
             "markdown_inline",
