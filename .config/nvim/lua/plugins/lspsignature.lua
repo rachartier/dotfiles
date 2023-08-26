@@ -3,13 +3,15 @@ local M = {
     enabled = true,
 }
 
+function test(a, b, c) end
+
 function M.config()
     local U = require("utils")
 
     require("lsp_signature").setup({
         noice = true,
         hint_enable = false,
-        hint_prefix = "🔍 ",
+        hint_prefix = "󱙇 ",
         hi_parameter = "LspSignatureActiveParameter", -- how your parameter will be highlight
         floating_window = false,
         handler_opts = {
