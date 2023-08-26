@@ -62,6 +62,7 @@ function M.config()
     })
 
     vim.api.nvim_set_hl(0, "@string.documentation.python", { link = "Comment" })
+    vim.treesitter.language.register("lua", "pico8")
 end
 
 return M
