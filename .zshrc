@@ -114,6 +114,7 @@ fi
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 export DISABLE_AUTO_TITLE='true'
+export FZF_DEFAULT_OPTS="--bind 'ctrl-v:execute(nvim {})'"
 
 alias config='/usr/bin/git --git-dir=/home/rachartier/.cfg/ --work-tree=/home/rachartier'
 alias tl='tmuxp load'

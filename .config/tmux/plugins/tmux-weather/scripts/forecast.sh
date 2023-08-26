@@ -5,10 +5,22 @@ CURRENT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$CURRENT_DIR/helpers.sh"
 
 get_forecast() {
-	local format=$(get_tmux_option @forecast-format "%C,+%t,+%w")
 	local language=$(get_tmux_option @forecast-language "en")
-	local location=$(get_tmux_option @forecast-location "") # Let wttr.in figure out the location
-	curl -H "Accept-Language: $language" -s "http://wttr.in/$location?format=$format"
+	local location=$(get_tmux_option @forecast-location "")
+
+    local color_sunny=$(get_tmux_option @forecast-color-sunny "#ffff00")
+    local color_cloudy=$(get_tmux_option @forecast-color-cloudy "#aaaaaa")
+    local color_snowy=$(get_tmux_option @forecast-color-snowy "#ffffff")
+    local color_rainny=$(get_tmux_option @forecast-color-rainny "#00aaff")
+    local color_stormy=$(get_tmux_option @forecast-color-stormy "#ffaa00")
+    local color_default=$(get_tmux_option @forecast-color-default "#ff0000")
+
+    local weather_string=$(curl -s -H "Accepted-Language: $language" "v2d.wttr.in/$location" | grep "Weather:" | cut -d "," -f 1,2 | tr ' ' '\n' | awk 'NR == 2 {print $1} END {print $1}' | awk '{ printf "%s  ", $0 }')
+    local weather_unicode=$(echo $weather_string | awk '{print $1" "}')
+    local temperature_string=$(echo $weather_string | awk '{print $2}')
+
+    declare -A dict_weather_color=( [""]="#[fg=$color_default]" [" "]="#[fg=$color_cloudy]" [" "]="#[fg=$color_cloudy]" [" "]="#[fg=$color_rainny]" [" "]="#[fg=$color_rainny]" [" "]="#[fg=$color_snowy]" [" "]="#[fg=$color_snowy]" [" "]="#[fg=$color_rainny]" [" "]="#[fg=$color_snowy]" [" "]="#[fg=$color_snowy]" [" "]="#[fg=$color_default]" [" "]="#[fg=$color_snowy]" [" "]="#[fg=$color_snowy]" [" "]="#[fg=$color_sunny]" [" "]="#[fg=$color_sunny]" [" "]="#[fg=$color_stormy]" [" "]="#[fg=$color_stormy]" [" "]="#[fg=$color_stormy]" [" "]="#[fg=$color_cloudy]" )
+    echo "${dict_weather_color[$weather_unicode]}$weather_unicode #[fg=$color_default] $temperature_string"
 }
 
 get_cached_forecast() {

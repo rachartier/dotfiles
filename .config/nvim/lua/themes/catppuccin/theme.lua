@@ -34,13 +34,14 @@ require("catppuccin").setup({
     highlight_overrides = {
         all = function(colors)
             return {
-                Visual = { bg = "#234370" },
+                -- Visual = { bg = "#234370" },
+                Visual = { bg = "#5B6076" },
                 -- Visual = { bg = colors.blue, fg = colors.crust },
                 LineNr = {
-                    fg = colors.surface2,
+                    fg = colors.overlay1,
                 },
                 CursorLineNr = {
-                    fg = colors.peach,
+                    fg = colors.mauve,
                 },
                 NormalFloat = {
                     bg = colors.base,
@@ -54,7 +55,7 @@ require("catppuccin").setup({
                 },
                 FloatBorder = {
                     bg = colors.base,
-                    fg = colors.surface0,
+                    fg = colors.surface1,
                 },
                 FloatTitle = {
                     fg = colors.text,

@@ -4,8 +4,9 @@ return {
     automatically_reload_config = true,
     color_scheme = "Catppuccin Macchiato", -- or Macchiato, Frappe, Latte
     default_domain = "WSL:Ubuntu",
-    font = wezterm.font("CaskaydiaCove NF"),
+    font = wezterm.font("CaskaydiaCove NF", { weight = "DemiBold", stretch = "UltraCondensed" }),
     font_size = 13,
+    line_height = 0.9,
     enable_kitty_graphics = true,
     allow_square_glyphs_to_overflow_width = "Always",
 
