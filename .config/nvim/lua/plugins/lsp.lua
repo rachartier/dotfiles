@@ -10,8 +10,6 @@ local M = {
         "L3MON4D3/LuaSnip",
         "rafamadriz/friendly-snippets",
     },
-    event = { "BufReadPost", "BufNewFile" },
-    cmd = { "LspInfo", "LspInstall", "LspUninstall" },
 }
 
 function M.config()
@@ -133,6 +131,10 @@ function M.config()
         return exepath("python3") or exepath("python") or "python"
     end
 
+    require("lspconfig.ui.windows").default_options = {
+        border = U.default_border,
+    }
+
     -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
     require("lspconfig")["pyright"].setup({
         before_init = function(_, config)
@@ -206,6 +208,24 @@ function M.config()
         enable_import_completion = true,
         sdk_include_prereleases = true,
         analyze_open_documents_only = false,
+    })
+
+    local lsp_configurations = require("lspconfig.configs")
+
+    if not lsp_configurations.pico8lsp then
+        lsp_configurations.pico8lsp = {
+            default_config = {
+                cmd = { "pico8-ls", "--stdio" },
+                name = "pico8-ls",
+                filetypes = { "pico8" },
+                root_dir = util.root_pattern("*.p8"),
+            },
+        }
+    end
+
+    require("lspconfig").pico8lsp.setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
     })
 end
 

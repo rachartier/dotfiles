@@ -7,7 +7,9 @@ local M = {
 }
 
 function M.config()
-    require("mason").setup()
+    local U = require("utils")
+
+    require("mason").setup({ ui = { border = U.default_border } })
     require("mason-lspconfig").setup({
         ensure_installed = { "dockerls", "jsonls", "bashls", "pyright", "omnisharp" },
     })
