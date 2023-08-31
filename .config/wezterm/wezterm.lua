@@ -4,8 +4,26 @@ return {
     automatically_reload_config = true,
     color_scheme = "Catppuccin Macchiato", -- or Macchiato, Frappe, Latte
     default_domain = "WSL:Ubuntu",
-    font = wezterm.font("CaskaydiaCove NF", { weight = "DemiBold", stretch = "UltraCondensed" }),
-    font_size = 13,
+    font = wezterm.font("CaskaydiaCove NF", { stretch = "UltraCondensed" }),
+    font_size = 14,
+    font_rules = {
+        {
+            intensity = "Bold",
+            italic = false,
+            font = wezterm.font("CaskaydiaCove NF", { weight = "ExtraBlack", stretch = "UltraCondensed" }),
+        },
+        --
+        -- {
+        --     italic = true,
+        --     font = wezterm.font("Operator Mono Book", { weight = "Bold", italic = true }),
+        -- },
+        -- {
+        --     intensity = "Bold",
+        --     italic = true,
+        --     font = wezterm.font("Operator Mono Medium Italic", { weight = "ExtraBlack", italic = true }),
+        -- },
+    },
+    harfbuzz_features = { "calt=1", "ss01=1" },
     line_height = 0.9,
     enable_kitty_graphics = true,
     allow_square_glyphs_to_overflow_width = "Always",
