@@ -2,6 +2,13 @@ vim.loader.enable()
 
 vim.g.mapleader = " "
 
+vim.cmd([[
+    augroup _astro
+        autocmd!
+        autocmd BufRead,BufEnter *.p8 set filetype=pico8
+    augroup end
+]])
+
 local U = require("utils")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
