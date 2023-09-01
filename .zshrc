@@ -81,6 +81,8 @@ plugins=(
     ripgrep
     git
     tmux
+    autojump
+    command-not-found
     zsh-autosuggestions
     zsh-syntax-highlighting
 )
@@ -114,13 +116,18 @@ fi
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 export DISABLE_AUTO_TITLE='true'
-export FZF_DEFAULT_OPTS="--bind 'ctrl-v:execute(nvim {})'"
+export FZF_DEFAULT_OPTS="--bind 'ctrl-v:execute(nvim {})' --preview 'bat --color=always --style=numbers --line-range=:500 {}'"
 
 alias config='/usr/bin/git --git-dir=/home/rachartier/.cfg/ --work-tree=/home/rachartier'
+
 alias tl='tmuxp load'
 for s in $(tmuxp ls); do alias "$s"="tmuxp load -y $s"; done
 
 fpath+=($HOME/.zsh/pure)
 autoload -U promptinit; promptinit
 prompt pure
+
+eval $(thefuck --alias)
+
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
