@@ -118,6 +118,9 @@ require("catppuccin").setup({
                 NoicePopupmenuBorder = {
                     link = "FloatBorder",
                 },
+                MiniIndentscopeSymbol = {
+                    link = "Comment",
+                },
             }
         end,
     },
