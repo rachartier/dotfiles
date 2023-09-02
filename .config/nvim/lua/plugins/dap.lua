@@ -7,6 +7,8 @@ local M = {
         "mfussenegger/nvim-jdtls",
     },
     priority = 100,
+    event = { "BufReadPost", "BufNewFile" },
+    cmd = { "LspInfo", "LspInstall", "LspUninstall" },
 }
 
 function M.config()
