@@ -1,6 +1,8 @@
 local M = {
     "echasnovski/mini.splitjoin",
-    dependencies = {},
+    dependencies = {
+        "echasnovski/mini.surround",
+    },
     version = false,
 }
 
@@ -41,6 +43,8 @@ function M.config()
             hooks_post = {},
         },
     })
+
+    require("mini.surround").setup({})
 end
 
 return M
