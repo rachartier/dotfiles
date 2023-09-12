@@ -1,5 +1,6 @@
 local M = {
     "rachartier/mirror_lsp_lines.nvim",
+    enabled = false,
 }
 
 function M.config()
