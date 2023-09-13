@@ -2,7 +2,7 @@ local flavour = "macchiato"
 
 require("catppuccin").setup({
 	flavour = flavour, -- latte, frappe, macchiato, mocha
-	transparent_background = false,
+	transparent_background = true,
 	show_end_of_buffer = false, -- show the '~' characters after the end of buffers
 	term_colors = false,
 	dim_inactive = {
@@ -44,7 +44,7 @@ require("catppuccin").setup({
 					fg = colors.mauve,
 				},
 				NormalFloat = {
-					bg = colors.base,
+					bg = "None",
 					fg = colors.text,
 				},
 				NoiceCmdlinePopupBorder = {
@@ -54,8 +54,8 @@ require("catppuccin").setup({
 					bg = colors.yellow,
 				},
 				FloatBorder = {
-					bg = colors.base,
-					fg = colors.surface1,
+					bg = "None",
+					fg = colors.text,
 				},
 				FloatTitle = {
 					fg = colors.text,
@@ -64,7 +64,7 @@ require("catppuccin").setup({
 					link = "FloatBorder",
 				},
 				PopupNormal = {
-					bg = colors.base,
+					bg = "None",
 					fg = colors.text,
 				},
 				Pmenu = {
@@ -78,25 +78,24 @@ require("catppuccin").setup({
 				},
 				PmenuSel = {
 					-- link = "Visual",
-					bg = colors.surface0,
+					bg = colors.blue,
+					fg = colors.crust,
 				},
 				NeoTreeNormal = {
-					bg = colors.base,
+					bg = "None",
 				},
 				IlluminatedWordRead = {
 					bold = true,
-					bg = colors.surface0,
+					bg = colors.surface1,
 				},
 				IlluminatedWordWrite = {
-					bold = true,
-					bg = colors.surface0,
+					link = "IlluminatedWordRead",
 				},
 				IluminatedReferenceText = {
-					bold = true,
-					bg = colors.surface0,
+					link = "IlluminatedWordRead",
 				},
 				CmpItemAbbrMatch = {
-					fg = colors.blue,
+					fg = colors.text,
 				},
 				CmpItemAbbrMatchFuzzy = {
 					fg = colors.sapphire,
@@ -112,6 +111,9 @@ require("catppuccin").setup({
 				NeoTreeIndentMarker = {
 					fg = colors.surface0,
 				},
+				NeoTreeCursorLine = {
+					link = "PmenuSel",
+				},
 				NoicePopupmenu = {
 					link = "PopupNormal",
 				},
@@ -125,23 +127,26 @@ require("catppuccin").setup({
 		end,
 	},
 	integrations = {
+		alpha = true,
+		barbar = true,
 		cmp = true,
-		bufferline = false,
-		gitsigns = true,
-		nvimtree = true,
-		telescope = true,
-		notify = true,
-		mini = false,
-		harpoon = true,
 		dap = true,
+		gitsigns = true,
+		harpoon = true,
+		illuminate = true,
+		leap = true,
+		lsp_saga = false,
 		lsp_trouble = true,
 		mason = true,
-		barbar = true,
-		telekasten = true,
-		leap = true,
+		mini = true,
+		neotree = true,
 		noice = true,
-		lsp_saga = false,
-		illuminate = true,
+		notify = true,
+		telekasten = true,
+		telescope = true,
+		treesitter = true,
+		treesitter_context = true,
+		which_key = true,
 		native_lsp = {
 			enabled = true,
 			virtual_text = {
@@ -173,7 +178,7 @@ local TelescopeColor = {
 	-- TelescopePromptBorder = { bg = colors.surface0, fg = colors.surface0 },
 	TelescopePromptTitle = { bg = colors.pink, fg = colors.base },
 
-	TelescopeResultsNormal = { fg = colors.subtext0 },
+	TelescopeResultsNormal = { fg = colors.overlay1 },
 	-- TelescopeResultsBorder = { bg = colors.mantle, fg = colors.mantle },
 	TelescopeResultsTitle = { bg = colors.blue, fg = colors.base },
 
