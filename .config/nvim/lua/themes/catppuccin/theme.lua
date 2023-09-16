@@ -122,6 +122,10 @@ require("catppuccin").setup({
                 MiniIndentscopeSymbol = {
                     link = "Comment",
                 },
+                LspSignatureActiveParameter = {
+                    bg = colors.peach,
+                    fg = colors.crust,
+                },
             }
         end,
     },
