@@ -28,7 +28,7 @@ function M.config()
 
     vim.diagnostic.config({
         virtual_lines = { highlight_whole_line = false, only_current_line = true },
-        virtual_text = false,
+        virtual_text = true,
     })
 end
 
