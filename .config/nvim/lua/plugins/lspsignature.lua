@@ -3,8 +3,6 @@ local M = {
     enabled = true,
 }
 
-function test(a, b, c) end
-
 function M.config()
     local U = require("utils")
 
@@ -19,6 +17,7 @@ function M.config()
         },
         bind = false,         -- This is mandatory, otherwise border config won't get registered.
         -- If you want to hook lspsaga or other signature handler, pls set to false
+        noice = true,
     })
 end
 

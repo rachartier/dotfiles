@@ -94,7 +94,7 @@ require("catppuccin").setup({
 					link = "IlluminatedWordRead",
 				},
 				CmpItemAbbrMatch = {
-					fg = colors.red,
+					fg = colors.blue,
 				},
 				CmpItemAbbrMatchFuzzy = {
 					fg = colors.sapphire,
@@ -121,6 +121,10 @@ require("catppuccin").setup({
 				},
 				MiniIndentscopeSymbol = {
 					link = "Comment",
+				},
+				LspSignatureActiveParameter = {
+					bg = colors.peach,
+					fg = colors.crust,
 				},
 			}
 		end,
