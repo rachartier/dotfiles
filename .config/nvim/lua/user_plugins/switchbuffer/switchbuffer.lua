@@ -5,7 +5,7 @@ local conf = require("telescope.config").values
 local actions = require("telescope.actions")
 local action_state = require("telescope.actions.state")
 
-function M._get_filename(fullpath, path_to_remove)
+function M._get_filename_relative_path(fullpath, path_to_remove)
     fullpath = fullpath:gsub("\\", "/")
     path_to_remove = path_to_remove:gsub("\\", "/")
 
@@ -32,6 +32,10 @@ function M._get_filename(fullpath, path_to_remove)
     end
 end
 
+function M._get_filename(fullpath)
+    return fullpath:match("([a-zA-Z0-9_.-]+)$")
+end
+
 M.get_list_buffers = function()
     local buffer_list = ""
     buffer_list = vim.fn.execute("ls t")
@@ -54,12 +58,12 @@ M.get_list_buffers = function()
     for _, line in ipairs(buf_names) do
         local name = line:match('"([^"]+)"')
         if name then
-            local home = name:gsub("%~", vim.fn.expand("$HOME")):gsub("\\", "/")
-            local remainingPath = M._get_filename(home, path1)
-            local extension = remainingPath:match("^.+%.(.+)$")
-            local icon, color = require("nvim-web-devicons").get_icon(remainingPath, extension)
+            local path = name:gsub("%~", vim.fn.expand("$HOME")):gsub("\\", "/")
+            local remaining_path = M._get_filename(path)
+            local extension = remaining_path:match("^.+%.(.+)$")
+            local icon, color = require("nvim-web-devicons").get_icon(remaining_path, extension)
 
-            table.insert(buffer_names, { icon = icon, color = color, path = remainingPath })
+            table.insert(buffer_names, { icon = icon, color = color, path = remaining_path })
         end
     end
 
