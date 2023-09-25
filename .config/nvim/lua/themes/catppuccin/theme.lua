@@ -120,7 +120,7 @@ require("catppuccin").setup({
                     link = "FloatBorder",
                 },
                 MiniIndentscopeSymbol = {
-                    link = "Comment",
+                    fg = colors.surface0,
                 },
                 LspSignatureActiveParameter = {
                     bg = colors.peach,
