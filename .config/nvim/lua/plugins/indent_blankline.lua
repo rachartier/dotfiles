@@ -9,10 +9,10 @@ local M = {
 
 function M.config()
     require("indent_blankline").setup({
-        -- char = "|",
+        char = "",
         show_current_context = false,
         show_current_context_start = false,
-        show_trailing_blankline_indent = true,
+        show_trailing_blankline_indent = false,
         -- space_char_blankline = " ",
         max_indent_increase = 1,
     })
