@@ -45,6 +45,9 @@ else
     vim.keymap.set("n", "<M-down>", "<C-W>j", { silent = true })
 end
 
+vim.keymap.set("n", "<Tab>", '<cmd>lua require("user_plugins.switchbuffer").select_buffers()<cr>')
+vim.keymap.set("n", "<S-Tab>", '<cmd>lua require("user_plugins.switchbuffer").select_buffers()<cr>')
+
 vim.keymap.set("n", "<leader>g", '<cmd>lua require("user_plugins.websearch").websearch_input("google")<cr>')
 vim.keymap.set("n", "<leader>G", "<cmd>WebSearchInput<cr>")
 
