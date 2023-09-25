@@ -101,6 +101,7 @@ BoldWhite=205,214,244
 {
     "$help": "https://aka.ms/terminal-documentation",
     "$schema": "https://aka.ms/terminal-profiles-schema",
+    "actions": [],
     "copyFormatting": "none",
     "copyOnSelect": false,
     "defaultProfile": "{2c4de342-38b7-51cf-b940-2309a097f518}",
@@ -113,19 +114,22 @@ BoldWhite=205,214,244
     ],
     "profiles": {
         "defaults": {
+            "adjustIndistinguishableColors": "indexed",
+            "antialiasingMode": "cleartype",
             "colorScheme": "Catppuccin Macchiato",
             "experimental.retroTerminalEffect": false,
             "font": {
-                "face": "CaskaydiaCove Nerd Font Mono",
+                "face": "CaskaydiaCove NF",
                 "features": {
                     "calt": 1,
-                    "ss01": 1
+                    "ss01": 0,
+                    "liga": 0
                 },
-                "size": 14.0,
+                "size": 12.0,
                 "weight": "normal"
             },
             "intenseTextStyle": "all",
-            "opacity": 75,
+            "opacity": 100,
             "padding": "8",
             "startingDirectory": ".",
             "useAcrylic": true,
@@ -134,18 +138,11 @@ BoldWhite=205,214,244
         "list": [
             {
                 "adjustIndistinguishableColors": "indexed",
-                "colorScheme": {
-                    "light": "Catppuccin Macchiato"
-                },
-                "font": {
-                    "face": "CaskaydiaCove NF"
-                },
                 "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
                 "hidden": false,
                 "intenseTextStyle": "all",
                 "name": "Ubuntu",
-                "source": "Windows.Terminal.Wsl",
-                "useAtlasEngine": true
+                "source": "Windows.Terminal.Wsl"
             },
             {
                 "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
@@ -164,30 +161,6 @@ BoldWhite=205,214,244
                 "hidden": false,
                 "name": "Azure Cloud Shell",
                 "source": "Windows.Terminal.Azure"
-            },
-            {
-                "guid": "{063e12bf-d3ca-5f0d-9b2e-1d22b2e46868}",
-                "hidden": false,
-                "name": "Developer Command Prompt for VS 2022 (2)",
-                "source": "Windows.Terminal.VisualStudio"
-            },
-            {
-                "guid": "{1aeefd18-7c9f-5710-8d80-b21ffb1219bf}",
-                "hidden": false,
-                "name": "Developer PowerShell for VS 2022 (2)",
-                "source": "Windows.Terminal.VisualStudio"
-            },
-            {
-                "guid": "{776106da-e56f-54e5-9d05-be50ddc8fd32}",
-                "hidden": true,
-                "name": "Developer Command Prompt for VS 2022",
-                "source": "Windows.Terminal.VisualStudio"
-            },
-            {
-                "guid": "{7ddf5028-a435-52ad-b6fe-8fc816ad46ad}",
-                "hidden": true,
-                "name": "Developer PowerShell for VS 2022",
-                "source": "Windows.Terminal.VisualStudio"
             }
         ]
     },
