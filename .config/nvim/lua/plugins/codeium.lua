@@ -1,6 +1,7 @@
 local M = {
     "Exafunction/codeium.vim",
     event = "BufEnter",
+    enabled = false,
 }
 
 function M.config()
