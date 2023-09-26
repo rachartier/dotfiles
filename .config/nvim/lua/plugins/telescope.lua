@@ -21,6 +21,8 @@ local function fuzzy_find_under_cursor()
         layout_config = {
             prompt_position = "bottom",
         },
+
+        borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
         default_text = word_under_cursor,
     })
 end
