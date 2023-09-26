@@ -88,7 +88,7 @@ function M.config()
                 },
                 entry_filter = filter_text,
             },
-            { name = "codeium" },
+            -- { name = "codeium" },
             { name = "luasnip",      entry_filter = filter_text },
             { name = "latex_symbols" },
             { name = "path" },
