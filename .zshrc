@@ -119,6 +119,7 @@ export DISABLE_AUTO_TITLE='true'
 # export FZF_DEFAULT_OPTS="--bind 'ctrl-v:execute(nvim {})' --preview 'bat --color=always --style=numbers --line-range=:500 {}'"
 alias config='/usr/bin/git --git-dir=/home/rachartier/.cfg/ --work-tree=/home/rachartier'
 alias f="fzf"
+alias l="eza --tree --level 1 --group-directories-first --color always --icons"
 
 alias tl='tmuxp load'
 for s in $(tmuxp ls); do alias "$s"="tmuxp load -y $s"; done
