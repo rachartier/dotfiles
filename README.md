@@ -78,19 +78,24 @@ BoldWhite=205,214,244
     "defaultProfile": "{2c4de342-38b7-51cf-b940-2309a097f518}",
     "experimental.rendering.forceFullRepaint": false,
     "experimental.rendering.software": false,
-    "newTabMenu": [
+    "newTabMenu": 
+    [
         {
             "type": "remainingProfiles"
         }
     ],
-    "profiles": {
-        "defaults": {
+    "profiles": 
+    {
+        "defaults": 
+        {
             "adjustIndistinguishableColors": "indexed",
             "colorScheme": "Catppuccin Macchiato",
             "experimental.retroTerminalEffect": false,
-            "font": {
+            "font": 
+            {
                 "face": "CaskaydiaCove NF",
-                "features": {
+                "features": 
+                {
                     "calt": 1,
                     "liga": 0,
                     "ss01": 0
@@ -101,9 +106,11 @@ BoldWhite=205,214,244
             "intenseTextStyle": "all",
             "opacity": 100,
             "padding": "8",
-            "startingDirectory": "."
+            "startingDirectory": ".",
+            "useAtlasEngine": true
         },
-        "list": [
+        "list": 
+        [
             {
                 "adjustIndistinguishableColors": "indexed",
                 "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
@@ -132,7 +139,8 @@ BoldWhite=205,214,244
             }
         ]
     },
-    "schemes": [
+    "schemes": 
+    [
         {
             "background": "#0C0C0C",
             "black": "#0C0C0C",
@@ -411,35 +419,42 @@ BoldWhite=205,214,244
         }
     ],
     "theme": "Catppuccin Macchiato",
-    "themes": [
+    "themes": 
+    [
         {
             "name": "Catppuccin Frappe",
-            "tab": {
+            "tab": 
+            {
                 "background": "#414559FF",
                 "showCloseButton": "always",
                 "unfocusedBackground": null
             },
-            "tabRow": {
+            "tabRow": 
+            {
                 "background": "#303446FF",
                 "unfocusedBackground": "#292C3CFF"
             },
-            "window": {
+            "window": 
+            {
                 "applicationTheme": "dark",
                 "useMica": true
             }
         },
         {
             "name": "Catppuccin Macchiato",
-            "tab": {
+            "tab": 
+            {
                 "background": "#24273AFF",
                 "showCloseButton": "always",
                 "unfocusedBackground": null
             },
-            "tabRow": {
+            "tabRow": 
+            {
                 "background": "#1E2030FF",
                 "unfocusedBackground": "#181926FF"
             },
-            "window": {
+            "window": 
+            {
                 "applicationTheme": "dark",
                 "useMica": true
             }
