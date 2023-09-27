@@ -213,7 +213,7 @@ zinit wait"1" lucid from"gh-r" as"null" for \
      sbin"fzf"          junegunn/fzf \
      sbin"**/fd"        @sharkdp/fd \
      sbin"**/bat"       @sharkdp/bat \
-     sbin"exa* -> exa"  ogham/exa \
+     sbin"exa"  ogham/exa \
      sbin"rg"           BurntSushi/ripgrep \
      sbin"lazygit"      jesseduffield/lazygit
 
