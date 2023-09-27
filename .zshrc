@@ -161,7 +161,9 @@ zinit light sindresorhus/pure
 
 zinit ice wait="0b" lucid
 zinit light b4b4r07/enhancd
-export ENHANCD_FILTER="fzf --preview 'exa -al --tree --level 1 --group-directories-first \
+export ENHANCD_FILTER="fzf --preview 'eza -al --tree --level 1 --group-directories-first \
+        --color always --icons \
+        --git --git-repos \
         --header --no-user --no-time --no-filesize --no-permissions {}' \
         --preview-window right,50% --height 50% --reverse --ansi \
         :fzy \
@@ -213,7 +215,7 @@ zinit wait"1" lucid from"gh-r" as"null" for \
      sbin"fzf"          junegunn/fzf \
      sbin"**/fd"        @sharkdp/fd \
      sbin"**/bat"       @sharkdp/bat \
-     sbin"exa"  ogham/exa \
+     sbin"eza"          eza-community/eza \
      sbin"rg"           BurntSushi/ripgrep \
      sbin"lazygit"      jesseduffield/lazygit
 
