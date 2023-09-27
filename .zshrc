@@ -75,17 +75,17 @@ ZSH_TMUX_CONFIG="$HOME/.config/tmux/tmux.conf"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(
-    sudo
-    web-search
-    ripgrep
-    git
-    tmux
-    autojump
-    command-not-found
-    zsh-autosuggestions
-    zsh-syntax-highlighting
-)
+#plugins=(
+#     sudo
+#     web-search
+#     ripgrep
+#     git
+#     tmux
+#     autojump
+#     command-not-found
+#     zsh-autosuggestions
+#     zsh-syntax-highlighting
+#)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -123,11 +123,81 @@ alias config='/usr/bin/git --git-dir=/home/rachartier/.cfg/ --work-tree=/home/ra
 alias tl='tmuxp load'
 for s in $(tmuxp ls); do alias "$s"="tmuxp load -y $s"; done
 
-fpath+=($HOME/.zsh/pure)
-autoload -U promptinit; promptinit
-prompt pure
-
-eval $(thefuck --alias)
-
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
+### Added by Zinit's installer
+if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
+    print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
+    command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
+    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git" && \
+        print -P "%F{33} %F{34}Installation successful.%f%b" || \
+        print -P "%F{160} The clone has failed.%f%b"
+fi
+
+source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
+
+# Load a few important annexes, without Turbo
+# (this is currently required for annexes)
+zinit light-mode for \
+    zdharma-continuum/zinit-annex-as-monitor \
+    zdharma-continuum/zinit-annex-bin-gem-node \
+    zdharma-continuum/zinit-annex-patch-dl \
+    zdharma-continuum/zinit-annex-rust
+
+### End of Zinit's installer chunk
+
+# zinit snippet OMZP::autojump
+
+# zinit ice depth=1
+# zinit light jeffreytse/zsh-vi-mode
+
+zinit light zsh-users/zsh-syntax-highlighting
+zinit light zsh-users/zsh-autosuggestions
+# zinit light marlonrichert/zsh-autocomplete
+
+zinit ice pick"async.zsh" src"pure.zsh" # with zsh-async library that's bundled with it.
+zinit light sindresorhus/pure
+
+zinit ice wait="0b" lucid
+zinit light b4b4r07/enhancd
+export ENHANCD_FILTER="fzf --height 40%:fzy"
+
+zinit ice wait="0b" lucid atload'bindkey "$terminfo[kcuu1]" history-substring-search-up; bindkey "$terminfo[kcud1]" history-substring-search-down'
+zinit light zsh-users/zsh-history-substring-search
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+
+zinit ice wait="0b" lucid blockf
+zinit light zsh-users/zsh-completions
+zstyle ':completion:*' completer _expand _complete _ignored _approximate
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+zstyle ':completion:*' menu select=2
+zstyle ':completion:*' select-prompt '%SScrolling active: current selection at %p%s'
+zstyle ':completion:*:descriptions' format '-- %d --'
+zstyle ':completion:*:processes' command 'ps -au$USER'
+zstyle ':completion:complete:*:options' sort false
+zstyle ':fzf-tab:complete:_zlua:*' query-string input
+zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm,cmd -w -w"
+zstyle ':fzf-tab:complete:kill:argument-rest' extra-opts --preview=$extract'ps --pid=$in[(w)1] -o cmd --no-headers -w -w' --preview-window=down:3:wrap
+zstyle ":completion:*:git-checkout:*" sort false
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+
+zi ice from"gh-r" as"program"
+zi light junegunn/fzf
+zinit ice lucid wait'0c' as="command" id-as="junegunn/fzf-tmux" pick="bin/fzf-tmux"
+zinit light junegunn/fzf
+
+zi ice from"gh-r" as"program"
+zi light sharkdp/bat
+
+zinit ice from="gh-r" as="program" bpick="*amd64.deb" pick="usr/bin/rg"
+zinit light BurntSushi/ripgrep
+
+zinit ice from="gh-r" as="program" bpick="*linux64.tar.gz" ver="nightly" pick="nvim-linux64/bin/nvim"
+zinit light neovim/neovim
+
+zinit ice lucid wait="0" as="program" from="gh-r" bpick="*Linux_x86_64*" pick="lazygit" atload="alias lg='lazygit'"
+zinit light jesseduffield/lazygit
 
