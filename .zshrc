@@ -148,39 +148,22 @@ zinit light-mode for \
 
 zinit snippet OMZP::tmux
 
-# zinit ice depth=1
-# zinit light jeffreytse/zsh-vi-mode
+zinit wait lucid light-mode for \
+  atinit"zicompinit; zicdreplay" \
+      zdharma-continuum/fast-syntax-highlighting \
+  atload"_zsh_autosuggest_start" \
+      zsh-users/zsh-autosuggestions \
+  blockf atpull'zinit creinstall -q .' \
+      zsh-users/zsh-completions
 
-zinit light zsh-users/zsh-syntax-highlighting
-zinit light zsh-users/zsh-autosuggestions
-# zinit light marlonrichert/zsh-autocomplete
-
-zinit ice pick"async.zsh" src"pure.zsh" # with zsh-async library that's bundled with it.
-zinit light sindresorhus/pure
-
-zinit ice wait="0b" lucid
-zinit light b4b4r07/enhancd
-export ENHANCD_FILTER="fzf --preview 'eza -al --tree --level 1 --group-directories-first \
-        --color always --icons \
-        --git --git-repos \
-        --header --no-user --no-time --no-filesize --no-permissions {}' \
-        --preview-window right,50% --height 50% --reverse --ansi \
-        :fzy \
-        :peco"
-export ENHANCD_ENABLE_DOUBLE_DOT=false
-
-zinit ice wait="0b" lucid atload'bindkey "$terminfo[kcuu1]" history-substring-search-up; bindkey "$terminfo[kcud1]" history-substring-search-down'
-zinit light zsh-users/zsh-history-substring-search
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
-
-zinit ice wait="0b" lucid blockf
-zinit light zsh-users/zsh-completions
-zstyle ':completion:*' completer _expand _complete _ignored _approximate
+zstyle ':completion:*' completer _extensions _expand _complete _ignored _approximate
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 zstyle ':completion:*' menu select=2
 zstyle ':completion:*' select-prompt '%SScrolling active: current selection at %p%s'
-zstyle ':completion:*:descriptions' format '-- %d --'
+zstyle ':completion:*:descriptions' format '%F{blue}-- %d --%f'
+zstyle ':completion:*:corrections' format '%F{yellow}!- %d (errors: %e)%f'
+zstyle ':completion:*:messages' format ' %F{purple} -- %d --%f'
+zstyle ':completion:*:warnings' format ' %F{red}-- no matches found --%f'
 zstyle ':completion:*:processes' command 'ps -au$USER'
 zstyle ':completion:complete:*:options' sort false
 zstyle ':fzf-tab:complete:_zlua:*' query-string input
@@ -189,16 +172,28 @@ zstyle ':fzf-tab:complete:kill:argument-rest' extra-opts --preview=$extract'ps -
 zstyle ":completion:*:git-checkout:*" sort false
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
+zinit ice pick"async.zsh" src"pure.zsh" # with zsh-async library that's bundled with it.
+zinit light sindresorhus/pure
+
+zinit ice wait="0b" lucid
+zinit light b4b4r07/enhancd
+
+zinit ice wait="0b" lucid atload'bindkey "$terminfo[kcuu1]" history-substring-search-up; bindkey "$terminfo[kcud1]" history-substring-search-down'
+zinit light zsh-users/zsh-history-substring-search
+# bindkey '^[[A' history-substring-search-up
+# bindkey '^[[B' history-substring-search-down
+
 zinit ice from="gh-r" as="program" bpick="*linux64.tar.gz" ver="nightly" pick="nvim-linux64/bin/nvim"
 zinit light neovim/neovim
 
 zinit wait"1" lucid from"gh-r" as"null" for \
-     sbin"fzf"          junegunn/fzf \
-     sbin"**/fd"        @sharkdp/fd \
-     sbin"**/bat"       @sharkdp/bat \
-     sbin"eza"          eza-community/eza \
-     sbin"rg"           BurntSushi/ripgrep \
-     sbin"lazygit"      jesseduffield/lazygit
+     sbin"fzf"              junegunn/fzf \
+     sbin"**/fd"            @sharkdp/fd \
+     sbin"**/bat"           @sharkdp/bat \
+     sbin"eza"              eza-community/eza \
+     sbin"**/rg"            BurntSushi/ripgrep \
+     sbin"lazygit"          jesseduffield/lazygit \
+     sbin"glow"             charmbracelet/glow
 
 setopt extended_history       # record timestamp of command in HISTFILE
 setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE
