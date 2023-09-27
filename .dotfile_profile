@@ -1,0 +1,22 @@
+export PATH="$PATH:$HOME/.local/share/zinit/polaris/bin/"
+
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
+export FZF_DEFAULT_COMMAND="fd --type f"
+export FZF_DEFAULT_OPTS='--height 75% --multi --reverse --margin=0,1
+--multi
+--preview-window=right:50%
+--preview-window=rounded
+--preview-window=cycle
+--preview "[[ -f {} ]] && (file --mime {} | grep \"binary$\" > /dev/null 2>&1 && echo BINARY FILE || (bat --style=numbers --color=always --line-range :500 {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -200"
+--marker="✚" --pointer="" --prompt="  > "
+--no-separator --scrollbar="█"
+--color bg+:#24273a,fg:#a5adcb,fg+:#cad3f5,hl:#ed8796,hl+:#ed8796
+--color border:#6c7086,info:#8aadf4,header:#80a0ff,spinner:#a6da95
+--color prompt:#87afff,pointer:#c6a0f6,marker:#f09479
+--bind "ctrl-e:execute(nvim {} < /dev/tty > /dev/tty 2>&1)" > selected
+'
+
+export FZF_CTRL_T_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
+export FZF_ALT_C_COMMAND='fd --type d'
+export FZF_ALT_C_OPTS='--preview "tree -C {} | head -100"'
