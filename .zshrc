@@ -118,11 +118,10 @@ fi
 export DISABLE_AUTO_TITLE='true'
 # export FZF_DEFAULT_OPTS="--bind 'ctrl-v:execute(nvim {})' --preview 'bat --color=always --style=numbers --line-range=:500 {}'"
 alias config='/usr/bin/git --git-dir=/home/rachartier/.cfg/ --work-tree=/home/rachartier'
+alias f="fzf"
 
 alias tl='tmuxp load'
 for s in $(tmuxp ls); do alias "$s"="tmuxp load -y $s"; done
-
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
@@ -168,6 +167,7 @@ export ENHANCD_FILTER="fzf --preview 'eza -al --tree --level 1 --group-directori
         --preview-window right,50% --height 50% --reverse --ansi \
         :fzy \
         :peco"
+export ENHANCD_ENABLE_DOUBLE_DOT=false
 
 zinit ice wait="0b" lucid atload'bindkey "$terminfo[kcuu1]" history-substring-search-up; bindkey "$terminfo[kcud1]" history-substring-search-down'
 zinit light zsh-users/zsh-history-substring-search
@@ -188,25 +188,6 @@ zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm,cmd
 zstyle ':fzf-tab:complete:kill:argument-rest' extra-opts --preview=$extract'ps --pid=$in[(w)1] -o cmd --no-headers -w -w' --preview-window=down:3:wrap
 zstyle ":completion:*:git-checkout:*" sort false
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-
-export FZF_DEFAULT_COMMAND="fd --type f"
-export FZF_DEFAULT_OPTS='--height 75% --multi --reverse --margin=0,1
---multi
---preview-window=right:50%
---preview-window=rounded
---preview-window=cycle
---preview "(file --mime {} | grep \"binary$\" &>/dev/null && echo BINARY FILE || (bat --style=numbers --color=always --line-range :500 {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -200"
---marker="✚" --pointer="" --prompt="  > "
---no-separator --scrollbar="█"
---color bg+:#24273a,fg:#a5adcb,fg+:#cad3f5,hl:#ed8796,hl+:#ed8796
---color border:#6c7086,info:#8aadf4,header:#80a0ff,spinner:#a6da95
---color prompt:#87afff,pointer:#c6a0f6,marker:#f09479
---bind "ctrl-e:execute(nvim {} < /dev/tty > /dev/tty 2>&1)" > selected
-'
-
-export FZF_CTRL_T_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
-export FZF_ALT_C_COMMAND='fd --type d'
-export FZF_ALT_C_OPTS='--preview "tree -C {} | head -100"'
 
 zinit ice from="gh-r" as="program" bpick="*linux64.tar.gz" ver="nightly" pick="nvim-linux64/bin/nvim"
 zinit light neovim/neovim
@@ -236,3 +217,4 @@ setopt nolisttypes
 setopt listpacked
 setopt automenu
 unsetopt BEEP
+
