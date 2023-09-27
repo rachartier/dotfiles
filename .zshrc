@@ -75,17 +75,17 @@ ZSH_TMUX_CONFIG="$HOME/.config/tmux/tmux.conf"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-#plugins=(
+plugins=(
 #     sudo
 #     web-search
 #     ripgrep
 #     git
-#     tmux
+     tmux
 #     autojump
 #     command-not-found
 #     zsh-autosuggestions
 #     zsh-syntax-highlighting
-#)
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -116,8 +116,7 @@ fi
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 export DISABLE_AUTO_TITLE='true'
-export FZF_DEFAULT_OPTS="--bind 'ctrl-v:execute(nvim {})' --preview 'bat --color=always --style=numbers --line-range=:500 {}'"
-
+# export FZF_DEFAULT_OPTS="--bind 'ctrl-v:execute(nvim {})' --preview 'bat --color=always --style=numbers --line-range=:500 {}'"
 alias config='/usr/bin/git --git-dir=/home/rachartier/.cfg/ --work-tree=/home/rachartier'
 
 alias tl='tmuxp load'
@@ -148,7 +147,7 @@ zinit light-mode for \
 
 ### End of Zinit's installer chunk
 
-# zinit snippet OMZP::autojump
+zinit snippet OMZP::tmux
 
 # zinit ice depth=1
 # zinit light jeffreytse/zsh-vi-mode
@@ -162,7 +161,11 @@ zinit light sindresorhus/pure
 
 zinit ice wait="0b" lucid
 zinit light b4b4r07/enhancd
-export ENHANCD_FILTER="fzf --height 40%:fzy"
+export ENHANCD_FILTER="fzf --preview 'exa -al --tree --level 1 --group-directories-first \
+        --header --no-user --no-time --no-filesize --no-permissions {}' \
+        --preview-window right,50% --height 50% --reverse --ansi \
+        :fzy \
+        :peco"
 
 zinit ice wait="0b" lucid atload'bindkey "$terminfo[kcuu1]" history-substring-search-up; bindkey "$terminfo[kcud1]" history-substring-search-down'
 zinit light zsh-users/zsh-history-substring-search
@@ -184,20 +187,50 @@ zstyle ':fzf-tab:complete:kill:argument-rest' extra-opts --preview=$extract'ps -
 zstyle ":completion:*:git-checkout:*" sort false
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
-zi ice from"gh-r" as"program"
-zi light junegunn/fzf
-zinit ice lucid wait'0c' as="command" id-as="junegunn/fzf-tmux" pick="bin/fzf-tmux"
-zinit light junegunn/fzf
+export FZF_DEFAULT_COMMAND="fd --type f"
+export FZF_DEFAULT_OPTS='--height 75% --multi --reverse --margin=0,1
+--multi
+--preview-window=right:50%
+--preview-window=rounded
+--preview-window=cycle
+--preview "(file --mime {} | grep \"binary$\" &>/dev/null && echo BINARY FILE || (bat --style=numbers --color=always --line-range :500 {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -200"
+--marker="✚" --pointer="" --prompt="  > "
+--no-separator --scrollbar="█"
+--color bg+:#24273a,fg:#a5adcb,fg+:#cad3f5,hl:#ed8796,hl+:#ed8796
+--color border:#6c7086,info:#8aadf4,header:#80a0ff,spinner:#a6da95
+--color prompt:#87afff,pointer:#c6a0f6,marker:#f09479
+--bind "ctrl-e:execute(nvim {} < /dev/tty > /dev/tty 2>&1)" > selected
+'
 
-zi ice from"gh-r" as"program"
-zi light sharkdp/bat
-
-zinit ice from="gh-r" as="program" bpick="*amd64.deb" pick="usr/bin/rg"
-zinit light BurntSushi/ripgrep
+export FZF_CTRL_T_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
+export FZF_ALT_C_COMMAND='fd --type d'
+export FZF_ALT_C_OPTS='--preview "tree -C {} | head -100"'
 
 zinit ice from="gh-r" as="program" bpick="*linux64.tar.gz" ver="nightly" pick="nvim-linux64/bin/nvim"
 zinit light neovim/neovim
 
-zinit ice lucid wait="0" as="program" from="gh-r" bpick="*Linux_x86_64*" pick="lazygit" atload="alias lg='lazygit'"
-zinit light jesseduffield/lazygit
+zinit wait"1" lucid from"gh-r" as"null" for \
+     sbin"fzf"          junegunn/fzf \
+     sbin"**/fd"        @sharkdp/fd \
+     sbin"**/bat"       @sharkdp/bat \
+     sbin"exa* -> exa"  ogham/exa \
+     sbin"rg"           BurntSushi/ripgrep \
+     sbin"lazygit"      jesseduffield/lazygit
 
+setopt extended_history       # record timestamp of command in HISTFILE
+setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE
+setopt hist_ignore_all_dups   # ignore duplicated commands history list
+setopt hist_ignore_space      # ignore commands that start with space
+setopt hist_verify            # show command with history expansion to user before running it
+setopt inc_append_history     # add commands to HISTFILE in order of execution
+setopt share_history          # share command history data
+setopt always_to_end          # cursor moved to the end in full completion
+setopt hash_list_all          # hash everything before completion
+setopt always_to_end          # when completing from the middle of a word, move the cursor to the end of the word
+setopt complete_in_word       # allow completion from within a word/phrase
+setopt nocorrect              # spelling correction for commands
+setopt list_ambiguous         # complete as much of a completion until it gets ambiguous.
+setopt nolisttypes
+setopt listpacked
+setopt automenu
+unsetopt BEEP
