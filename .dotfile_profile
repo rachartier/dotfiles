@@ -20,3 +20,12 @@ export FZF_DEFAULT_OPTS='--height 75% --multi --reverse --margin=0,1
 export FZF_CTRL_T_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
 export FZF_ALT_C_COMMAND='fd --type d'
 export FZF_ALT_C_OPTS='--preview "tree -C {} | head -100"'
+
+export ENHANCD_FILTER="fzf --preview 'eza -al --tree --level 1 --group-directories-first \
+                       --color always --icons \
+                       --git --git-repos \
+                       --header --no-user --no-time --no-filesize --no-permissions {}' \
+                       --preview-window right,50% --height 50% --reverse --ansi \
+                       :fzy \
+                       :peco"
+export ENHANCD_ENABLE_DOUBLE_DOT=false
