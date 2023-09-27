@@ -74,7 +74,7 @@ BoldWhite=205,214,244
     "$schema": "https://aka.ms/terminal-profiles-schema",
     "actions": [],
     "copyFormatting": "none",
-    "copyOnSelect": false,
+    "copyOnSelect": true,
     "defaultProfile": "{2c4de342-38b7-51cf-b940-2309a097f518}",
     "experimental.rendering.forceFullRepaint": false,
     "experimental.rendering.software": false,
@@ -86,15 +86,14 @@ BoldWhite=205,214,244
     "profiles": {
         "defaults": {
             "adjustIndistinguishableColors": "indexed",
-            "antialiasingMode": "cleartype",
             "colorScheme": "Catppuccin Macchiato",
             "experimental.retroTerminalEffect": false,
             "font": {
                 "face": "CaskaydiaCove NF",
                 "features": {
                     "calt": 1,
-                    "ss01": 0,
-                    "liga": 0
+                    "liga": 0,
+                    "ss01": 0
                 },
                 "size": 12.0,
                 "weight": "normal"
@@ -102,9 +101,7 @@ BoldWhite=205,214,244
             "intenseTextStyle": "all",
             "opacity": 100,
             "padding": "8",
-            "startingDirectory": ".",
-            "useAcrylic": true,
-            "useAtlasEngine": true
+            "startingDirectory": "."
         },
         "list": [
             {
@@ -413,7 +410,7 @@ BoldWhite=205,214,244
             "yellow": "#808000"
         }
     ],
-    "theme": "Mica",
+    "theme": "Catppuccin Macchiato",
     "themes": [
         {
             "name": "Catppuccin Frappe",
@@ -428,19 +425,19 @@ BoldWhite=205,214,244
             },
             "window": {
                 "applicationTheme": "dark",
-                "useMica": false
+                "useMica": true
             }
         },
         {
-            "name": "Mica",
+            "name": "Catppuccin Macchiato",
             "tab": {
-                "background": "#FFFFFF09",
+                "background": "#24273AFF",
                 "showCloseButton": "always",
-                "unfocusedBackground": "#00000000"
+                "unfocusedBackground": null
             },
             "tabRow": {
-                "background": "#00000043",
-                "unfocusedBackground": "#00000043"
+                "background": "#1E2030FF",
+                "unfocusedBackground": "#181926FF"
             },
             "window": {
                 "applicationTheme": "dark",
@@ -448,6 +445,6 @@ BoldWhite=205,214,244
             }
         }
     ],
-    "useAcrylicInTabRow": true
+    "useAcrylicInTabRow": false
 }
 ```
