@@ -88,6 +88,13 @@ install_fzf() {
     ~/.fzf/install
 }
 
+install_viu() {
+    cd /tmp
+    wget -q "https://github.com/atanunq/viu/releases/download/v1.4.0/viu"
+    chmod +x viu
+    mv viu $HOME/.local/bin && __echo_success "viu installed."
+}
+
 install_eza() {
     mkdir -p /etc/apt/keyrings
     wget -qO- https://raw.githubusercontent.com/eza-community/eza/main/deb.asc | sudo gpg --batch --yes --dearmor -o /etc/apt/keyrings/gierens.gpg
@@ -122,6 +129,7 @@ install_essentials() {
 
     install_eza
     install_fzf
+    install_viu
 }
 
 install_essentials
