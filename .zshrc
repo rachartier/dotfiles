@@ -1,8 +1,11 @@
 source $HOME/.profile
-source $HOME/.dotfile_profile
 setopt promptsubst
 
-# Preferred editor for local and remote sessions
+export ZSH="$HOME/.oh-my-zsh"
+
+ZSH_TMUX_AUTOSTART=true
+ZSH_TMUX_CONFIG="$HOME/.config/tmux/tmux.conf"
+
 if [[ -n $SSH_CONNECTION ]]; then
     export EDITOR='vim'
 else
@@ -11,67 +14,25 @@ fi
 
 export DISABLE_AUTO_TITLE='true'
 
-### Added by Zinit's installer
-if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
-    print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
-    command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
-    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git" && \
-        print -P "%F{33} %F{34}Installation successful.%f%b" || \
-        print -P "%F{160} The clone has failed.%f%b"
-fi
+plugins=(
+    sudo
+    web-search
+    ripgrep
+    git
+    tmux
+    autojump
+    command-not-found
+    zsh-autosuggestions
+    zsh-syntax-highlighting
+    zsh-history-substring-search
+)
 
-source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
-autoload -Uz _zinit
-(( ${+_comps} )) && _comps[zinit]=_zinit
+source $ZSH/oh-my-zsh.sh
 
-# Load a few important annexes, without Turbo
-# (this is currently required for annexes)
-zinit light-mode for \
-    zdharma-continuum/zinit-annex-as-monitor \
-    zdharma-continuum/zinit-annex-bin-gem-node \
-    zdharma-continuum/zinit-annex-patch-dl \
-    zdharma-continuum/zinit-annex-rust
-
-### End of Zinit's installer chunk
 
 # ZSH_TMUX_AUTOSTART=true
 # ZSH_TMUX_AUTOCONNECT=true
 # ZSH_TMUX_CONFIG=$HOME/.config/tmux/tmux.conf
-
-if [ "$TMUX" = "" ]; then tmux; fi
-
-
-# zinit snippet OMZP::tmux
-
-
-zinit wait lucid for \
-	OMZL::clipboard.zsh \
-	OMZL::compfix.zsh \
-	OMZL::completion.zsh \
-	OMZL::correction.zsh \
-    atload"
-        alias ..='cd ..'
-        alias ...='cd ../..'
-        alias ....='cd ../../..'
-        alias .....='cd ../../../..'
-    " \
-	OMZL::directories.zsh \
-    atload"unalias grv" \
-    OMZP::git \
-    OMZL::git.zsh \
-	OMZL::grep.zsh \
-	OMZL::history.zsh \
-	OMZL::key-bindings.zsh \
-    OMZP::git
-
-zinit wait lucid for \
-    light-mode atinit"ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20" atload"!_zsh_autosuggest_start" \
-        zsh-users/zsh-autosuggestions \
-    light-mode atinit"typeset -gA FAST_HIGHLIGHT; FAST_HIGHLIGHT[git-cmsg-len]=100; zpcompinit; zpcdreplay" \
-        zdharma/fast-syntax-highlighting \
-    light-mode blockf atpull'zinit creinstall -q .' \
-        zsh-users/zsh-completions
-
 
 zstyle ':completion:*:git-checkout:*'               sort false
 zstyle ':completion:*'                              completer _extensions _expand _complete _ignored _approximate
@@ -109,43 +70,6 @@ zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=
 #      zstyle ':fzf-tab:complete:-command-:*' fzf-preview \
 #         '(out=$(MANWIDTH=$FZF_PREVIEW_COLUMNS man "$word") 2>/dev/null && echo $out) || (out=$(which "$word") && echo $out) || echo "${(P)word}"'
 
-
-
-zinit ice pick"async.zsh" src"pure.zsh" # with zsh-async library that's bundled with it.
-zinit light sindresorhus/pure
-
-zinit ice wait="0b" lucid
-zinit light b4b4r07/enhancd
-
-zinit ice wait="0b" lucid atload"bindkey '^[[A' history-substring-search-up; bindkey '^[[B' history-substring-search-down"
-zinit light zsh-users/zsh-history-substring-search
-
-zinit ice from="gh-r" as="program" bpick="*linux64.tar.gz" ver="nightly" pick="nvim-linux64/bin/nvim"
-zinit light neovim/neovim
-
-zinit ice depth=1
-zinit light jeffreytse/zsh-vi-mode
-export ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
-
-zinit wait"1" lucid from"gh-r" as"null" for \
-     sbin"fzf"              junegunn/fzf \
-     sbin"**/fd"            @sharkdp/fd \
-     sbin"**/bat"           @sharkdp/bat \
-     sbin"eza"              eza-community/eza \
-     sbin"**/rg"            BurntSushi/ripgrep \
-     sbin"lazygit"          jesseduffield/lazygit \
-     sbin"glow"             charmbracelet/glow
-
-zinit ice as"completion"
-zinit snippet https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker
-
-# zinit light Aloxaf/fzf-tab
-# zinit light Freed-Wu/fzf-tab-source
-
-[ -z "$HISTFILE" ] && HISTFILE="$HOME/.zsh_history"
-HISTSIZE=50000
-SAVEHIST=$HISTSIZE
-
 setopt extended_history       # record timestamp of command in HISTFILE
 setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE
 setopt hist_ignore_all_dups   # ignore duplicated commands history list
@@ -163,16 +87,8 @@ setopt nolisttypes
 setopt listpacked
 setopt automenu
 setopt autocd
-setopt correct_all
+unsetopt correct_all
 unsetopt BEEP
-
-# bindkey '^[[A' up-line-or-history
-# bindkey '^[[B' down-line-or-history
-#
-# bindkey "^[^[OA" up-line-or-beginning-search
-# bindkey "^[^[OB" down-line-or-beginning-search
-# bindkey "^[^[OC" forward-char
-# bindkey "^[^[OD" backward-char
 
 alias config='/usr/bin/git --git-dir=/home/rachartier/.cfg/ --work-tree=/home/rachartier'
 alias f="fzf"
@@ -181,3 +97,10 @@ alias ls='ls --color=auto'
 
 alias tl='tmuxp load'
 for s in $(tmuxp ls); do alias "$s"="tmuxp load -y $s"; done
+
+fpath+=($HOME/.zsh/pure)
+autoload -U promptinit; promptinit
+prompt pure
+
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
