@@ -1,8 +1,6 @@
 source $HOME/.profile
+source $HOME/.dotfile_profile
 setopt promptsubst
-
-ZSH_TMUX_AUTOSTART=true
-ZSH_TMUX_CONFIG="$HOME/.config/tmux/tmux.conf"
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
@@ -12,13 +10,6 @@ else
 fi
 
 export DISABLE_AUTO_TITLE='true'
-alias config='/usr/bin/git --git-dir=/home/rachartier/.cfg/ --work-tree=/home/rachartier'
-alias f="fzf"
-alias l="eza --tree --level 1 --group-directories-first --color always --icons"
-alias ls='ls --color=auto'
-
-alias tl='tmuxp load'
-for s in $(tmuxp ls); do alias "$s"="tmuxp load -y $s"; done
 
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
@@ -43,58 +34,82 @@ zinit light-mode for \
 
 ### End of Zinit's installer chunk
 
-zinit snippet OMZP::tmux
+# ZSH_TMUX_AUTOSTART=true
+# ZSH_TMUX_AUTOCONNECT=true
+# ZSH_TMUX_CONFIG=$HOME/.config/tmux/tmux.conf
+
+if [ "$TMUX" = "" ]; then tmux; fi
+
+
+# zinit snippet OMZP::tmux
+
+
 zinit wait lucid for \
-        OMZL::git.zsh \
-  atload"unalias grv" \
-        OMZP::git
+	OMZL::clipboard.zsh \
+	OMZL::compfix.zsh \
+	OMZL::completion.zsh \
+	OMZL::correction.zsh \
+    atload"
+        alias ..='cd ..'
+        alias ...='cd ../..'
+        alias ....='cd ../../..'
+        alias .....='cd ../../../..'
+    " \
+	OMZL::directories.zsh \
+    atload"unalias grv" \
+    OMZP::git \
+    OMZL::git.zsh \
+	OMZL::grep.zsh \
+	OMZL::history.zsh \
+	OMZL::key-bindings.zsh \
+    OMZP::git
 
-zinit wait lucid light-mode for \
-  atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
-      zdharma-continuum/fast-syntax-highlighting \
-  atload"_zsh_autosuggest_start" \
-      zsh-users/zsh-autosuggestions \
-  blockf atpull'zinit creinstall -q .' \
-      zsh-users/zsh-completions
+zinit wait lucid for \
+    light-mode atinit"ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20" atload"!_zsh_autosuggest_start" \
+        zsh-users/zsh-autosuggestions \
+    light-mode atinit"typeset -gA FAST_HIGHLIGHT; FAST_HIGHLIGHT[git-cmsg-len]=100; zpcompinit; zpcdreplay" \
+        zdharma/fast-syntax-highlighting \
+    light-mode blockf atpull'zinit creinstall -q .' \
+        zsh-users/zsh-completions
 
-zstyle ":completion:*:git-checkout:*"               sort false
+
+zstyle ':completion:*:git-checkout:*'               sort false
 zstyle ':completion:*'                              completer _extensions _expand _complete _ignored _approximate
 zstyle ':completion:*'                              list-colors ${(s.:.)LS_COLORS}
-zstyle ':completion:*'                              matcher-list 'm:{a-z}={A-Z}'
 zstyle ':completion:*'                              menu select=2
 zstyle ':completion:*'                              select-prompt '%SScrolling active: current selection at %p%s'
-zstyle ':completion:*:*:*:*:processes'              command "ps -u $USER -o pid,user,comm,cmd -w -w"
+zstyle ':completion:*:*:*:*:processes'              command 'ps -u $USER -o pid,user,comm,cmd -w -w'
 zstyle ':completion:*:correct:*'                    insert-unambiguous true             # start menu completion only if it could find no unambiguous initial string
 zstyle ':completion:*:correct:*'                    original true                       #
-zstyle ':completion:*:corrections'                  format $'%{\e[0;31m%}%d (errors: %e)%{\e[0m%}' #
+zstyle ':completion:*:corrections'                  format $'%F{red}%d (errors: %e)%f' #
 zstyle ':completion:*:default'                      list-colors ${(s.:.)LS_COLORS}      # activate color-completion(!)
-zstyle ':completion:*:descriptions'                 format $'%{\e[0;31m%}Completing %B%d%b%{\e[0m%}'  # format on completion
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*:descriptions'                 format $'%F{blue}Completing %B%d%b%%f'  # format on completion
 zstyle ':completion:*:expand:*'                     tag-order all-expansions            # insert all expansions for expand completer
 zstyle ':completion:*:man:*'                        menu yes select
 zstyle ':completion:*:manuals'                      separate-sections true
 zstyle ':completion:*:manuals.*'                    insert-sections   true
-zstyle ':completion:*:messages'                     format ' %F{purple} -- %d --%f'
+zstyle ':completion:*:messages'                     format ' %F{purple} %d %f'
 zstyle ':completion:*:urls'                         local 'www' '/var/www/' 'public_html'
 zstyle ':completion:*:warnings'                     format $'%{\e[0;31m%}No matches for:%{\e[0m%} %d' # set format for warnings
 zstyle ':completion::(^approximate*):*:functions'   ignored-patterns '_*'    # Ignore completion functions for commands you don't have:
 zstyle ':completion:complete:*:options'             sort false
-zstyle ':fzf-tab:complete:_zlua:*'                  query-string input
-zstyle ':fzf-tab:complete:kill:argument-rest'       extra-opts --preview=$extract'ps --pid=$in[(w)1] -o cmd --no-headers -w -w' --preview-window=down:3:wrap
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
-zstyle ':fzf-tab:*' switch-group ',' '.'
-zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
-zstyle ':fzf-tab:*' fzf-flags  "--height 100%"
-zstyle ':fzf-tab:complete:systemctl-*:*' fzf-preview 'SYSTEMD_COLORS=1 systemctl status $word'
-zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm -w -w"
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
 
-zstyle ':fzf-tab:complete:(-command-|-parameter-|-brace-parameter-|export|unset|expand):*' \
-	fzf-preview 'echo ${(P)word}'
+# zstyle ':completion:*:descriptions' format '[%d]'
+# zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
+# zstyle ':fzf-tab:complete:_zlua:*'                  query-string input
+# zstyle ':fzf-tab:complete:kill:argument-rest'       extra-opts --preview=$extract'ps --pid=$in[(w)1] -o cmd --no-headers -w -w' --preview-window=down:3:wrap
+# zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath' # remember to use single quote here!!!
+# zstyle ':fzf-tab:*' switch-group ',' '.'
+#
+#     zstyle ':fzf-tab:complete:-parameter-:*' fzf-preview 'echo ${(P)word}'
+#     zstyle ':fzf-tab:complete:((-parameter-|unset):|(export|typeset|declare|local):argument-rest)' fzf-preview 'echo ${(P)word}'
+#     #
+#      zstyle ':fzf-tab:complete:-command-:*' fzf-preview \
+#         '(out=$(MANWIDTH=$FZF_PREVIEW_COLUMNS man "$word") 2>/dev/null && echo $out) || (out=$(which "$word") && echo $out) || echo "${(P)word}"'
 
- zstyle ':fzf-tab:complete:-command-:*' fzf-preview \
-  ¦ '(out=$(tldr --color always "$word") 2>/dev/null && echo $out) || (out=$(MANWIDTH=$FZF_PREVIEW_COLUMNS man "$word") 2>/dev/null && echo $out) || (out=$(which "$word") && echo $out) || echo "${(P)word}"'
 
-zstyle ':fzf-tab:complete:*:options' fzf-preview
-zstyle ':fzf-tab:complete:*:argument-1' fzf-preview
 
 zinit ice pick"async.zsh" src"pure.zsh" # with zsh-async library that's bundled with it.
 zinit light sindresorhus/pure
@@ -123,6 +138,9 @@ zinit wait"1" lucid from"gh-r" as"null" for \
 
 zinit ice as"completion"
 zinit snippet https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker
+
+# zinit light Aloxaf/fzf-tab
+# zinit light Freed-Wu/fzf-tab-source
 
 [ -z "$HISTFILE" ] && HISTFILE="$HOME/.zsh_history"
 HISTSIZE=50000
@@ -155,3 +173,11 @@ unsetopt BEEP
 # bindkey "^[^[OB" down-line-or-beginning-search
 # bindkey "^[^[OC" forward-char
 # bindkey "^[^[OD" backward-char
+
+alias config='/usr/bin/git --git-dir=/home/rachartier/.cfg/ --work-tree=/home/rachartier'
+alias f="fzf"
+alias l="eza --tree --level 1 --group-directories-first --color always --icons"
+alias ls='ls --color=auto'
+
+alias tl='tmuxp load'
+for s in $(tmuxp ls); do alias "$s"="tmuxp load -y $s"; done
