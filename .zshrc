@@ -3,7 +3,7 @@ setopt promptsubst
 
 export ZSH="$HOME/.oh-my-zsh"
 
-ZSH_TMUX_AUTOSTART=true
+ZSH_TMUX_AUTOSTART=false
 ZSH_TMUX_CONFIG="$HOME/.config/tmux/tmux.conf"
 
 if [[ -n $SSH_CONNECTION ]]; then
@@ -15,9 +15,9 @@ fi
 export DISABLE_AUTO_TITLE='true'
 
 plugins=(
-    sudo
-    web-search
+    enhancd
     ripgrep
+    fd
     git
     tmux
     autojump
@@ -104,3 +104,5 @@ prompt pure
 
 bindkey "$terminfo[kcuu1]" history-substring-search-up
 bindkey "$terminfo[kcud1]" history-substring-search-down
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
