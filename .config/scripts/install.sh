@@ -20,6 +20,12 @@ __echo_failure() {
     tput sgr 0
 }
 
+__is_pkg_installed() {
+    local name="$1"
+
+    dpkg-query -W --showformat='${Status}\n' $name  2> /dev/null | grep "install ok installed" > /dev/null
+}
+
 __install_appimage() {
     local url=$1
     local name=$2
@@ -58,7 +64,8 @@ __install_zsh_plugin() {
 __install_package_apt() {
     local pkg="$1"
 
-    apt install -qq $pkg && __echo_success "$pkg installed."
+
+    __is_pkg_installed $pkg && __echo_info "$pkg already installed." || (apt install -qq $pkg && __echo_success "$pkg installed.")
 }
 
 __make_symlink() {
@@ -69,37 +76,52 @@ __make_symlink() {
     ln -s $(which "$oldname") "$path"
 }
 
-install_essentials() {
-    __install_appimage "https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage" nvim
+install_fzf() {
+    if [ -d "$HOME/.fzf/" ]; then
+        cd ~/.fzf
+        git pull
+        yes | ./install && __echo_success "fzf updated." || __echo_error "fzf not updated."
+        return 0
+    fi
 
-    __install_zsh_plugin "https://github.com/sindresorhus/pure.git"
-    __install_zsh_plugin "https://github.com/zsh-users/zsh-autosuggestions.git"
-    __install_zsh_plugin "https://github.com/zsh-users/zsh-syntax-highlighting.git"
-    __install_zsh_plugin "https://github.com/b4b4r07/enhancd.git"
+    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+    ~/.fzf/install
+}
 
-    __install_package_apt tmux
-
-    __install_package_apt python3.10-venv
-    __install_package_apt nodejs
-    __install_package_apt npm
-    __install_package_apt unzip
-
-    __install_package_apt fzf
-    __install_package_apt ripgrep
-    __install_package_apt fd-find
-    __install_package_apt xsel
-    __install_package_apt bat
-
-    __make_symlink "/usr/bin/fd" fdfind
-    __make_symlink "/usr/bin/bat" batcat
-
-    # EZA
+install_eza() {
     mkdir -p /etc/apt/keyrings
     wget -qO- https://raw.githubusercontent.com/eza-community/eza/main/deb.asc | sudo gpg --batch --yes --dearmor -o /etc/apt/keyrings/gierens.gpg
     echo "deb [signed-by=/etc/apt/keyrings/gierens.gpg] http://deb.gierens.de stable main" | sudo tee /etc/apt/sources.list.d/gierens.list
     chmod 644 /etc/apt/keyrings/gierens.gpg /etc/apt/sources.list.d/gierens.list
     apt update -qq
     apt install -qq -y eza
+}
+
+install_essentials() {
+     __install_appimage "https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage" nvim
+
+     __install_zsh_plugin "https://github.com/sindresorhus/pure.git"
+     __install_zsh_plugin "https://github.com/zsh-users/zsh-autosuggestions.git"
+     __install_zsh_plugin "https://github.com/zsh-users/zsh-syntax-highlighting.git"
+     __install_zsh_plugin "https://github.com/b4b4r07/enhancd.git"
+
+     __install_package_apt tmux
+
+     __install_package_apt python3.10-venv
+     __install_package_apt nodejs
+     __install_package_apt npm
+     __install_package_apt unzip
+
+     __install_package_apt ripgrep
+     __install_package_apt fd-find
+     __install_package_apt xsel
+     __install_package_apt bat
+
+     __make_symlink "/usr/bin/fd" fdfind
+     __make_symlink "/usr/bin/bat" batcat
+
+    install_eza
+    install_fzf
 }
 
 install_essentials
