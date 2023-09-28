@@ -1,6 +1,5 @@
 # dotfiles
 ```
-
 echo 'source "$HOME/.dotfile_profile"' >> $HOME/.profile
 
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
@@ -8,17 +7,12 @@ alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME' >> $HOME/.zs
 echo ".cfg" >> .gitignore
 git clone --bare git@github.com:rachartier/dotfiles.git $HOME/.cfg
 
-# NVIM
-sudo apt install -y python3.10-venv
-sudo apt install -y nodejs npm
-sudo apt install -y unzip
-
 # ZSH
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+sudo -E ~/.config/scripts/install.sh
 
 # TMUX
 git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
-sudo apt install -y xsel
 ```
 
 # WEZTERM
@@ -78,23 +72,23 @@ BoldWhite=205,214,244
     "defaultProfile": "{2c4de342-38b7-51cf-b940-2309a097f518}",
     "experimental.rendering.forceFullRepaint": false,
     "experimental.rendering.software": false,
-    "newTabMenu": 
+    "newTabMenu":
     [
         {
             "type": "remainingProfiles"
         }
     ],
-    "profiles": 
+    "profiles":
     {
-        "defaults": 
+        "defaults":
         {
             "adjustIndistinguishableColors": "indexed",
             "colorScheme": "Catppuccin Macchiato",
             "experimental.retroTerminalEffect": false,
-            "font": 
+            "font":
             {
                 "face": "CaskaydiaCove NF",
-                "features": 
+                "features":
                 {
                     "calt": 1,
                     "liga": 0,
@@ -109,7 +103,7 @@ BoldWhite=205,214,244
             "startingDirectory": ".",
             "useAtlasEngine": true
         },
-        "list": 
+        "list":
         [
             {
                 "adjustIndistinguishableColors": "indexed",
@@ -139,7 +133,7 @@ BoldWhite=205,214,244
             }
         ]
     },
-    "schemes": 
+    "schemes":
     [
         {
             "background": "#0C0C0C",
@@ -419,22 +413,22 @@ BoldWhite=205,214,244
         }
     ],
     "theme": "Catppuccin Macchiato",
-    "themes": 
+    "themes":
     [
         {
             "name": "Catppuccin Frappe",
-            "tab": 
+            "tab":
             {
                 "background": "#414559FF",
                 "showCloseButton": "always",
                 "unfocusedBackground": null
             },
-            "tabRow": 
+            "tabRow":
             {
                 "background": "#303446FF",
                 "unfocusedBackground": "#292C3CFF"
             },
-            "window": 
+            "window":
             {
                 "applicationTheme": "dark",
                 "useMica": true
@@ -442,18 +436,18 @@ BoldWhite=205,214,244
         },
         {
             "name": "Catppuccin Macchiato",
-            "tab": 
+            "tab":
             {
                 "background": "#24273AFF",
                 "showCloseButton": "always",
                 "unfocusedBackground": null
             },
-            "tabRow": 
+            "tabRow":
             {
                 "background": "#1E2030FF",
                 "unfocusedBackground": "#181926FF"
             },
-            "window": 
+            "window":
             {
                 "applicationTheme": "dark",
                 "useMica": true
