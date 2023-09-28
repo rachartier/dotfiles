@@ -28,4 +28,5 @@ export ENHANCD_FILTER="fzf --preview 'eza -al --tree --level 1 --group-directori
                        --preview-window right,50% --height 50% --reverse --ansi \
                        :fzy \
                        :peco"
+
 export ENHANCD_ENABLE_DOUBLE_DOT=false
