@@ -5,7 +5,7 @@ filename=$(basename -- "$filepath")
 extension="${filename##*.}"
 
 if  [ -f $filepath ]; then
-    if $(file --mime $filepath | grep "image" > /dev/null 2>&1); then
+    if $(file --mime $filepath | grep ": image/" > /dev/null 2>&1); then
         $HOME/.local/bin/viu $filepath
     elif $(file --mime $filepath | grep "binary$" > /dev/null 2>&1); then
         echo BINARY FILE
