@@ -64,7 +64,6 @@ __install_zsh_plugin() {
 __install_package_apt() {
     local pkg="$1"
 
-
     __is_pkg_installed $pkg && __echo_info "$pkg already installed." || (apt install -qq $pkg && __echo_success "$pkg installed.")
 }
 
@@ -105,27 +104,30 @@ install_eza() {
 }
 
 install_essentials() {
-     __install_appimage "https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage" nvim
+    __install_package_apt git
+    __install_package_apt wget
 
-     __install_zsh_plugin "https://github.com/sindresorhus/pure.git"
-     __install_zsh_plugin "https://github.com/zsh-users/zsh-autosuggestions.git"
-     __install_zsh_plugin "https://github.com/zsh-users/zsh-syntax-highlighting.git"
-     __install_zsh_plugin "https://github.com/b4b4r07/enhancd.git"
+    __install_appimage "https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage" nvim
 
-     __install_package_apt tmux
+    __install_zsh_plugin "https://github.com/sindresorhus/pure.git"
+    __install_zsh_plugin "https://github.com/zsh-users/zsh-autosuggestions.git"
+    __install_zsh_plugin "https://github.com/zsh-users/zsh-syntax-highlighting.git"
+    __install_zsh_plugin "https://github.com/b4b4r07/enhancd.git"
 
-     __install_package_apt python3.10-venv
-     __install_package_apt nodejs
-     __install_package_apt npm
-     __install_package_apt unzip
+    __install_package_apt tmux
 
-     __install_package_apt ripgrep
-     __install_package_apt fd-find
-     __install_package_apt xsel
-     __install_package_apt bat
+    __install_package_apt python3.10-venv
+    __install_package_apt nodejs
+    __install_package_apt npm
+    __install_package_apt unzip
 
-     __make_symlink "/usr/bin/fd" fdfind
-     __make_symlink "/usr/bin/bat" batcat
+    __install_package_apt ripgrep
+    __install_package_apt fd-find
+    __install_package_apt xsel
+    __install_package_apt bat
+
+    __make_symlink "/usr/bin/fd" fdfind
+    __make_symlink "/usr/bin/bat" batcat
 
     install_eza
     install_fzf

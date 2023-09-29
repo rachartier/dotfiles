@@ -102,7 +102,7 @@ fpath+=($HOME/.zsh/pure)
 autoload -U promptinit; promptinit
 prompt pure
 
-bindkey "$terminfo[kcuu1]" history-substring-search-up
-bindkey "$terminfo[kcud1]" history-substring-search-down
+bindkey "^[[1;5A" history-substring-search-up
+bindkey "^[[1;5B" history-substring-search-down
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
