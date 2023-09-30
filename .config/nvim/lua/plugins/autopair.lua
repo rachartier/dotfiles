@@ -1,9 +1,10 @@
 local M = {
-    "windwp/nvim-autopairs"
+    "altermo/ultimate-autopair.nvim",
+    event = { "InsertEnter", "CmdlineEnter" },
 }
 
 function M.config()
-    require("nvim-autopairs").setup {}
+    require("ultimate-autopair").setup({})
 end
 
 return M
