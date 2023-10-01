@@ -67,47 +67,59 @@ BoldWhite=205,214,244
     "$help": "https://aka.ms/terminal-documentation",
     "$schema": "https://aka.ms/terminal-profiles-schema",
     "actions": [],
-    "copyformatting": "none",
     "copyOnSelect": true,
     "defaultProfile": "{2c4de342-38b7-51cf-b940-2309a097f518}",
     "experimental.rendering.forceFullRepaint": false,
     "experimental.rendering.software": false,
-    "newTabMenu": [
+    "newTabMenu": 
+    [
         {
             "type": "remainingProfiles"
         }
     ],
-    "profiles": {
-        "defaults": {
+    "profiles": 
+    {
+        "defaults": 
+        {
             "adjustIndistinguishableColors": "indexed",
-            "antialiasingMode": "cleartype",
+            "antialiasingMode": "grayscale",
             "bellStyle": "taskbar",
             "colorScheme": "Catppuccin Macchiato",
             "cursorShape": "filledBox",
             "experimental.retroTerminalEffect": false,
-            "font": {
+            "font": 
+            {
                 "face": "CaskaydiaCove Nerd Font",
-                "features": {
+                "features": 
+                {
                     "calt": 1,
                     "liga": 0,
-                    "ss01": 0
+                    "ss01": 1
                 },
-                "size": 12.0,
+                "size": 18.0,
                 "weight": "normal"
             },
             "intenseTextStyle": "all",
             "opacity": 80,
             "padding": "8",
             "startingDirectory": ".",
-            "useAcrylic": true
+            "useAcrylic": true,
+            "useAtlasEngine": true
         },
-        "list": [
+        "list": 
+        [
             {
                 "adjustIndistinguishableColors": "indexed",
+                "font": 
+                {
+                    "size": 14.0,
+                    "weight": "normal"
+                },
                 "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
                 "hidden": false,
                 "intenseTextStyle": "all",
                 "name": "Ubuntu",
+                "padding": "0",
                 "source": "Windows.Terminal.Wsl"
             },
             {
@@ -130,7 +142,8 @@ BoldWhite=205,214,244
             }
         ]
     },
-    "schemes": [
+    "schemes": 
+    [
         {
             "background": "#0C0C0C",
             "black": "#0C0C0C",
@@ -409,51 +422,61 @@ BoldWhite=205,214,244
         }
     ],
     "theme": "Catppuccin Macchiato",
-    "themes": [
+    "themes": 
+    [
         {
             "name": "Catppuccin Frappe",
-            "tab": {
+            "tab": 
+            {
                 "background": "#414559FF",
                 "showCloseButton": "always",
                 "unfocusedBackground": null
             },
-            "tabRow": {
+            "tabRow": 
+            {
                 "background": "#303446FF",
                 "unfocusedBackground": "#292C3CFF"
             },
-            "window": {
+            "window": 
+            {
                 "applicationTheme": "dark",
                 "useMica": true
             }
         },
         {
             "name": "Catppuccin Macchiato",
-            "tab": {
+            "tab": 
+            {
                 "background": null,
                 "showCloseButton": "always",
                 "unfocusedBackground": null
             },
-            "tabRow": {
+            "tabRow": 
+            {
                 "background": "#1E2030FF",
                 "unfocusedBackground": "#181926FF"
             },
-            "window": {
+            "window": 
+            {
                 "applicationTheme": "dark",
                 "useMica": true
             }
         },
         {
             "name": "Mica",
-            "tab": {
+            "tab": 
+            {
                 "background": null,
                 "showCloseButton": "always",
                 "unfocusedBackground": null
             },
-            "tabRow": {
+            "tabRow": 
+            {
                 "background": "#00000000",
                 "unfocusedBackground": null
             },
-            "window": {
+            "window": 
+            {
                 "applicationTheme": "system",
                 "useMica": true
             }
