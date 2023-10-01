@@ -8,7 +8,7 @@ function M.config()
     local colors = {
         -- bg = "#202233",
         bg = "None",
-        fg = c.text,
+        fg = c.subtext0,
         yellow = c.yellow,
         cyan = c.cyan,
         darkblue = c.mantle,
@@ -109,8 +109,8 @@ function M.config()
             component_separators = "",
             section_separators = "",
             theme = {
-                normal = { c = { fg = colors.fg, bg = colors.bg } },
-                inactive = { c = { fg = colors.fg, bg = colors.bg } },
+                normal = { c = { fg = colors.surface0, bg = colors.bg } },
+                inactive = { c = { fg = colors.surface0, bg = colors.bg } },
             },
         },
         sections = {
@@ -226,6 +226,7 @@ function M.config()
             return format_file_size(file)
         end,
         condition = conditions.buffer_not_empty,
+        color = { fg = colors.fg },
     })
 
     ins_left({
@@ -281,50 +282,50 @@ function M.config()
         end,
     })
 
-    ins_left({
-        -- Lsp server name .
-        function()
-            local msg = "No Active Lsp"
-            local text_clients = ""
-            local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
-            local clients = vim.lsp.get_active_clients()
-
-            if next(clients) == nil then
-                return msg
-            end
-            for _, client in ipairs(clients) do
-                local filetypes = client.config.filetypes
-                if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-                    text_clients = text_clients .. client.name .. ", "
-                end
-            end
-            if text_clients ~= "" then
-                return text_clients:sub(1, -3)
-            end
-            return msg
-        end,
-        icon = "  LSP:",
-        color = { fg = colors.text, gui = "bold" },
-    })
+    -- ins_left({
+    --     -- Lsp server name .
+    --     function()
+    --         local msg = "No Active Lsp"
+    --         local text_clients = ""
+    --         local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
+    --         local clients = vim.lsp.get_active_clients()
+    --
+    --         if next(clients) == nil then
+    --             return msg
+    --         end
+    --         for _, client in ipairs(clients) do
+    --             local filetypes = client.config.filetypes
+    --             if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
+    --                 text_clients = text_clients .. client.name .. ", "
+    --             end
+    --         end
+    --         if text_clients ~= "" then
+    --             return text_clients:sub(1, -3) .. "           "
+    --         end
+    --         return msg
+    --     end,
+    --     icon = "  LSP:",
+    --     color = { fg = colors.text, gui = "bold" },
+    -- })
 
     -- Add components to right sections
     ins_right({
         "o:encoding", -- option component same as &encoding in viml
         upper = true, -- I'm not sure why it's upper case either ;)
         condition = conditions.hide_in_width,
-        color = { fg = colors.green, gui = "bold" },
+        color = { fg = colors.green },
     })
 
     ins_right({
         "fileformat",
         upper = true,
         icons_enabled = false, -- I think icons are cool but Eviline doesn't have them. sigh
-        color = { fg = colors.green, gui = "bold" },
+        color = { fg = colors.green },
     })
 
-    ins_right({ "location" })
+    ins_right({ "location", color = { fg = colors.fg } })
 
-    ins_right({ "progress", color = { fg = colors.fg, gui = "bold" } })
+    ins_right({ "progress", color = { fg = colors.fg } })
 
     require("lualine").setup(config)
 end
