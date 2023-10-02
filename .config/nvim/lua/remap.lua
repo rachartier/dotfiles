@@ -45,6 +45,11 @@ else
     vim.keymap.set("n", "<M-down>", "<C-W>j", { silent = true })
 end
 
+require("user_plugins.switchbuffer").setup({
+    hl_modified = { ctermbg = 232 },
+    hl_normal = { ctermbg = 232 },
+})
+
 vim.keymap.set("n", "<Tab>", '<cmd>lua require("user_plugins.switchbuffer").select_buffers()<cr>')
 vim.keymap.set("n", "<S-Tab>", '<cmd>lua require("user_plugins.switchbuffer").select_buffers()<cr>')
 
