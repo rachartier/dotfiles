@@ -77,7 +77,7 @@ __make_symlink() {
 
 install_fzf() {
     if [ -d "$HOME/.fzf/" ]; then
-        cd ~/.fzf
+        cd ~/.fzf || return 0
         git pull
         yes | ./install && __echo_success "fzf updated." || __echo_error "fzf not updated."
         return 0
@@ -106,6 +106,7 @@ install_eza() {
 install_essentials() {
     __install_package_apt git
     __install_package_apt wget
+    __install_package_apt libfuse2
 
     __install_appimage "https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage" nvim
 
@@ -113,6 +114,7 @@ install_essentials() {
     __install_zsh_plugin "https://github.com/zsh-users/zsh-autosuggestions.git"
     __install_zsh_plugin "https://github.com/zsh-users/zsh-syntax-highlighting.git"
     __install_zsh_plugin "https://github.com/b4b4r07/enhancd.git"
+    __install_zsh_plugin "https://github.com/zsh-users/zsh-history-substring-search"
 
     __install_package_apt tmux
 
@@ -129,7 +131,9 @@ install_essentials() {
     __make_symlink "/usr/bin/fd" fdfind
     __make_symlink "/usr/bin/bat" batcat
 
-    install_eza
+    # install_eza
+    __install_package_release "https://github.com/eza-community/eza/releases/download/v0.13.1/eza_x86_64-unknown-linux-gnu.tar.gz" eza
+    __install_package_release "https://github.com/charmbracelet/glow/releases/download/v1.5.1/glow_Linux_x86_64.tar.gz" glow
     install_fzf
     install_viu
 }

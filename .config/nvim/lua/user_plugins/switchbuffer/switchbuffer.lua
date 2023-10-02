@@ -5,6 +5,13 @@ local conf = require("telescope.config").values
 local actions = require("telescope.actions")
 local action_state = require("telescope.actions.state")
 
+M.setup = function(options)
+    M.opts = options
+
+    -- vim.api.nvim_set_hl(0, "SwitchBufferModified", options.hl_modified or { link = "NeoTreeModified" })
+    -- vim.api.nvim_set_hl(0, "SwitchBufferNormal", options.hl_normal or { link = "Normal" })
+end
+
 function M._get_filename_relative_path(fullpath, path_to_remove)
     fullpath = fullpath:gsub("\\", "/")
     path_to_remove = path_to_remove:gsub("\\", "/")
@@ -33,7 +40,8 @@ function M._get_filename_relative_path(fullpath, path_to_remove)
 end
 
 function M._get_filename(fullpath)
-    return fullpath:match("([a-zA-Z0-9_.-]+)$")
+    -- return fullpath:match("(.*[a-zA-Z0-9_.-]+)$")
+    return fullpath
 end
 
 M.get_list_buffers = function()
@@ -57,13 +65,30 @@ M.get_list_buffers = function()
     local buffer_names = {}
     for _, line in ipairs(buf_names) do
         local name = line:match('"([^"]+)"')
+        local id = tonumber(line:match("([0-9]+) "))
         if name then
+            local buf_modified = vim.api.nvim_buf_get_option(id, "modified")
+
             local path = name:gsub("%~", vim.fn.expand("$HOME")):gsub("\\", "/")
             local remaining_path = M._get_filename(path)
             local extension = remaining_path:match("^.+%.(.+)$")
-            local icon, color = require("nvim-web-devicons").get_icon(remaining_path, extension)
+            local icon, icon_color = require("nvim-web-devicons").get_icon(remaining_path, extension)
+            local path_color = "Normal"
 
-            table.insert(buffer_names, { icon = icon, color = color, path = remaining_path })
+            if buf_modified then
+                path_color = "NeoTreeModified"
+            end
+
+            if vim.fn.getbufvar(id, "bufpersist") ~= 1 then
+                path_color = "Comment"
+            end
+
+            table.insert(buffer_names, {
+                icon = icon,
+                path = remaining_path,
+                icon_color = icon_color,
+                path_color = path_color,
+            })
         end
     end
 
@@ -83,8 +108,8 @@ function M.select_buffers(opts)
 
     local make_display = function(entry)
         return displayer({
-            { entry.icon, entry.color },
-            entry.path,
+            { entry.icon, entry.icon_color },
+            { entry.path, entry.path_color },
         })
     end
 
@@ -97,7 +122,8 @@ function M.select_buffers(opts)
                     return {
                         value = entry,
                         ordinal = entry.path,
-                        color = entry.color,
+                        path_color = entry.path_color,
+                        icon_color = entry.icon_color,
                         path = entry.path,
                         icon = entry.icon,
                         display = make_display,
@@ -119,6 +145,16 @@ function M.select_buffers(opts)
                 map("i", "<Tab>", actions.move_selection_next)
                 map("i", "<S-Tab>", actions.move_selection_previous)
                 map("i", "<Esc>", actions.close)
+                map("i", "<Esc>", actions.close)
+                -- map("i", "<C-d>", function()
+                --     local selection = action_state.get_selected_entry()
+                --     local selected = selection.value.path
+                --
+                --     if selected ~= "" and selected ~= nil and selected ~= "[No Name]" then
+                --         vim.cmd("bdelete " .. selected)
+                --         current_picker:refresh()
+                --     end
+                -- end)
 
                 return true
             end,

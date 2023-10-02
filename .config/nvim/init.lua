@@ -29,8 +29,8 @@ require("lazy").setup("plugins", {
     },
 })
 
-require("remap")
 require("set")
+require("remap")
 
 local augroup = vim.api.nvim_create_augroup
 local Group = augroup("Group", {})
