@@ -149,7 +149,6 @@ function M.select_buffers(opts)
 				map("i", "<Tab>", actions.move_selection_next)
 				map("i", "<S-Tab>", actions.move_selection_previous)
 				map("i", "<Esc>", actions.close)
-				map("i", "<Esc>", actions.close)
 				map("i", "<C-d>", function()
 					local selection = action_state.get_selected_entry()
 					local selected = selection.value.path
