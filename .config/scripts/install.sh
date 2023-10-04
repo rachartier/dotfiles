@@ -103,6 +103,13 @@ install_eza() {
     apt install -qq -y eza
 }
 
+install_lazygit() {
+    LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
+    curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
+    tar xf lazygit.tar.gz lazygit
+    sudo install lazygit /usr/local/bin && __echo_success "lazygit installed."
+}
+
 install_essentials() {
     __install_package_apt git
     __install_package_apt wget
@@ -136,6 +143,7 @@ install_essentials() {
     __install_package_release "https://github.com/charmbracelet/glow/releases/download/v1.5.1/glow_Linux_x86_64.tar.gz" glow
     install_fzf
     install_viu
+    install_lazygit
 }
 
 install_essentials
