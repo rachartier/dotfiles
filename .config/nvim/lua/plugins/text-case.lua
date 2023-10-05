@@ -1,6 +1,6 @@
 local M = {
     "johmsalas/text-case.nvim",
-    key = {
+    keys = {
         "ga",
     },
 }
