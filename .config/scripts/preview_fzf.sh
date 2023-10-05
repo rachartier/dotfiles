@@ -15,7 +15,7 @@ if  [ -f "$filepath" ]; then
         bat --style=numbers --color=always --line-range :500 "$filepath"
     fi
 elif [ -d "$filepath" ]; then
-    tree -C {} | less
+    eza --tree --level 1 --group-directories-first --color always --icons "$filepath"
 else
     echo "$filepath" 2> /dev/null | head -200
 fi
