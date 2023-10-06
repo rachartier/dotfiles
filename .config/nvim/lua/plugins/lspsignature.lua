@@ -1,6 +1,7 @@
 local M = {
 	"ray-x/lsp_signature.nvim",
 	enabled = true,
+	event = "VeryLazy",
 }
 
 function M.config()

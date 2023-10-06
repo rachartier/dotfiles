@@ -64,7 +64,7 @@ __install_zsh_plugin() {
 __install_package_apt() {
     local pkg="$1"
 
-    __is_pkg_installed $pkg && __echo_info "$pkg already installed." || (apt install -qq $pkg && __echo_success "$pkg installed.")
+    __is_pkg_installed $pkg && __echo_info "$pkg already installed." || (apt install -y -qq $pkg && __echo_success "$pkg installed.")
 }
 
 __make_symlink() {
@@ -121,7 +121,7 @@ install_essentials() {
     __install_zsh_plugin "https://github.com/zsh-users/zsh-autosuggestions.git"
     __install_zsh_plugin "https://github.com/zsh-users/zsh-syntax-highlighting.git"
     __install_zsh_plugin "https://github.com/b4b4r07/enhancd.git"
-    __install_zsh_plugin "https://github.com/zsh-users/zsh-history-substring-search"
+    __install_zsh_plugin "https://github.com/zsh-users/zsh-history-substring-search.git"
 
     __install_package_apt tmux
 
