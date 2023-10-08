@@ -13,12 +13,12 @@ function M.config()
 		once = true,
 		callback = function()
 			local stats = require("lazy").stats()
-			local ms = math.floor(stats.startuptime * 100 + 0.5) / 100
+			local ms = math.floor(stats.startuptime * 100) / 100
 
 			dashboard.section.footer.val = {
 				" ",
 				" ",
-				"Loaded " .. stats.count .. " plugins  in " .. ms .. "ms",
+				"Loaded " .. stats.count .. " plugins   in " .. ms .. "ms",
 			}
 			pcall(vim.cmd.AlphaRedraw)
 		end,
