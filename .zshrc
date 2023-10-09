@@ -93,7 +93,7 @@ unsetopt BEEP
 alias config='/usr/bin/git --git-dir=/home/rachartier/.cfg/ --work-tree=/home/rachartier'
 alias f="fzf"
 alias l="eza --tree --level 1 --group-directories-first --color always --icons"
-alias ls='ls --color=auto'
+alias ls='eza -G --group-directories-first --color always --icons'
 
 alias tl='tmuxp load'
 for s in $(tmuxp ls); do alias "$s"="tmuxp load -y $s"; done
