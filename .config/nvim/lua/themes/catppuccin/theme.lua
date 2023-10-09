@@ -128,6 +128,13 @@ require("catppuccin").setup({
                     bg = colors.peach,
                     fg = colors.crust,
                 },
+                StatusLine = {
+                    bg = colors.mantle,
+                },
+
+                StatusLineNC = {
+                    link = "StatusLine",
+                },
             }
         end,
     },
