@@ -6,7 +6,7 @@ config.automatically_reload_config = true
 config.color_scheme = "Catppuccin Macchiato" -- or Macchiato, Frappe, Latte
 config.default_domain = "WSL:Ubuntu"
 config.font = wezterm.font("CaskaydiaCove NF", { stretch = "UltraCondensed" })
-config.font_size = 14
+config.font_size = 16
 config.font_rules = {
 	{
 		intensity = "Bold",

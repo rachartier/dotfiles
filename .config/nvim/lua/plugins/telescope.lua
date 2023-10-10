@@ -144,7 +144,7 @@ function M.config()
 	vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Show documentations" })
 	vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "Grep string under cursor" })
 	vim.keymap.set("n", "<leader>fm", "<cmd>Telescope harpoon marks<cr>", { desc = "Open Harpoon Marks" })
-	vim.keymap.set("n", "*", fuzzy_find_under_cursor, { desc = "Fuzzy find in file under cursor" })
+	-- vim.keymap.set("n", "*", fuzzy_find_under_cursor, { desc = "Fuzzy find in file under cursor" })
 
 	vim.keymap.set("n", "<leader>fl", builtin.resume)
 end
