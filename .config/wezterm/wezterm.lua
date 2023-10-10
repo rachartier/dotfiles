@@ -25,8 +25,8 @@ config.font_rules = {
 	-- },
 }
 config.harfbuzz_features = { "calt=1", "ss01=1" }
-config.line_height = 0.9
-config.underline_thickness = "0.14cell"
+config.line_height = 1
+config.underline_thickness = "0.125cell"
 -- config.underline_position = "-0.25cell"
 config.enable_kitty_graphics = true
 config.allow_square_glyphs_to_overflow_width = "Always"
