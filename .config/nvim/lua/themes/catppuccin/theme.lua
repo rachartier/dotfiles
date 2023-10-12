@@ -1,6 +1,7 @@
 local flavour = "macchiato"
 
 require("catppuccin").setup({
+    lazy = true,
     flavour = flavour, -- latte, frappe, macchiato, mocha
     transparent_background = true,
     show_end_of_buffer = false,
@@ -134,6 +135,7 @@ require("catppuccin").setup({
                 GitSignsAdd = {
                     fg = colors.green,
                 },
+                CmpGhostText = { link = "Comment", default = true },
                 -- StatusLine = {
                 --     bg = colors.mantle,
                 -- },

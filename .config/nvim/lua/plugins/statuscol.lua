@@ -20,7 +20,7 @@ function M.config()
         segments = {
             { text = { "%C" }, click = "v:lua.ScFa" },
             {
-                sign = { name = { "Dap", "Diagnostic" } },
+                sign = { name = { ".*" } },
                 click = "v:lua.ScSa",
             },
             {
@@ -28,10 +28,8 @@ function M.config()
                 condition = { true, builtin.not_empty },
                 click = "v:lua.ScLa",
             },
-
             {
                 sign = {
-                    name = { ".*" },
                     namespace = { "gitsigns" },
                     fillchar = "│",
                     maxwidth = 1,

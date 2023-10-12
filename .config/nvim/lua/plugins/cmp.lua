@@ -16,8 +16,6 @@ function M.config()
     local U = require("utils")
     local luasnip = require("luasnip")
 
-    require("luasnip.loaders.from_vscode").lazy_load()
-
     local has_words_before = function()
         if not table.unpack then
             table.unpack = unpack
@@ -199,7 +197,9 @@ function M.config()
             }),
         },
         experimental = {
-            ghost_text = true,
+            ghost_text = {
+                hl_group = "CmpGhostText",
+            },
         },
     })
 

@@ -20,6 +20,8 @@ function M.config()
 
     local on_attach = require("plugins.lsp.attach").on_attach
 
+    require("luasnip.loaders.from_vscode").lazy_load()
+
     lsp.preset("recommended")
 
     vim.diagnostic.config({
