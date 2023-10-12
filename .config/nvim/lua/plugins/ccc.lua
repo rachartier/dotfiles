@@ -1,5 +1,6 @@
 local M = {
     "uga-rosa/ccc.nvim",
+    event = { "BufEnter", "BufNewFile" },
 }
 
 function M.config()
