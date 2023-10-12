@@ -16,6 +16,8 @@ function M.config()
             border = U.default_border,
         },
         signs = {
+            add = { text = "│" },
+            change = { text = "│" },
             untracked = { text = "┆" },
         },
         trouble = true,
