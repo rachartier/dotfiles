@@ -1,48 +1,48 @@
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+local map = vim.keymap.set
 
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Lower the selection" })
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Raise the selection" })
+map("n", "<leader>pv", vim.cmd.Ex)
 
-vim.keymap.set("n", "J", "mzJ`z", { desc = "Join line" })
-vim.keymap.set("n", "<C-d>", "<C-d>zz")
-vim.keymap.set("n", "<C-u>", "<C-u>zz")
-vim.keymap.set("n", "n", "nzzzv")
-vim.keymap.set("n", "N", "Nzzzv")
+map("v", "J", ":m '>+1<CR>gv=gv", { desc = "Lower the selection" })
+map("v", "K", ":m '<-2<CR>gv=gv", { desc = "Raise the selection" })
 
--- greatest remap ever
-vim.keymap.set("x", "<leader>p", [["_dP]])
+map("n", "J", "mzJ`z", { desc = "Join line" })
+map("n", "<C-d>", "<C-d>zz")
+map("n", "<C-u>", "<C-u>zz")
+map("n", "n", "nzzzv")
+map("n", "N", "Nzzzv")
 
-vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
-vim.keymap.set("n", "<leader>Y", [["+Y]])
+map("x", "<leader>p", [["_dP]])
 
-vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
+map({ "n", "v" }, "<leader>y", [["+y]])
+map("n", "<leader>Y", [["+Y]])
 
-vim.keymap.set("i", "<C-c>", "<Esc>")
+map({ "n", "v" }, "<leader>d", [["_d]])
 
-vim.keymap.set("n", "Q", "<nop>")
-vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
-vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
+map("i", "<C-c>", "<Esc>")
 
-vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
-vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
-vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
-vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
+map("n", "Q", "<nop>")
+map("n", "<leader>f", vim.lsp.buf.format)
 
-vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
-vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
+map("n", "<C-k>", "<cmd>cnext<CR>zz")
+map("n", "<C-j>", "<cmd>cprev<CR>zz")
+map("n", "<leader>k", "<cmd>lnext<CR>zz")
+map("n", "<leader>j", "<cmd>lprev<CR>zz")
 
-vim.keymap.set("n", "<leader>o", "<cmd>!feh <cfile> &<CR>", { silent = true })
+map("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+map("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
+
+map("n", "<leader>o", "<cmd>!feh <cfile> &<CR>", { silent = true })
 
 if os.getenv("TMUX") then
-    vim.keymap.set("n", "<M-left>", "<cmd>lua require('tmux').move_left()<cr>", { silent = true })
-    vim.keymap.set("n", "<M-right>", "<cmd>lua require('tmux').move_right()<cr>", { silent = true })
-    vim.keymap.set("n", "<M-up>", "<cmd>lua require('tmux').move_top()<cr>", { silent = true })
-    vim.keymap.set("n", "<M-down>", "<cmd>lua require('tmux').move_bottom()<cr>", { silent = true })
+    map("n", "<M-left>", "<cmd>lua require('tmux').move_left()<cr>", { silent = true })
+    map("n", "<M-right>", "<cmd>lua require('tmux').move_right()<cr>", { silent = true })
+    map("n", "<M-up>", "<cmd>lua require('tmux').move_top()<cr>", { silent = true })
+    map("n", "<M-down>", "<cmd>lua require('tmux').move_bottom()<cr>", { silent = true })
 else
-    vim.keymap.set("n", "<M-left>", "<C-W>h", { silent = true })
-    vim.keymap.set("n", "<M-right>", "<C-W>l", { silent = true })
-    vim.keymap.set("n", "<M-up>", "<C-W>k", { silent = true })
-    vim.keymap.set("n", "<M-down>", "<C-W>j", { silent = true })
+    map("n", "<M-left>", "<C-W>h", { silent = true })
+    map("n", "<M-right>", "<C-W>l", { silent = true })
+    map("n", "<M-up>", "<C-W>k", { silent = true })
+    map("n", "<M-down>", "<C-W>j", { silent = true })
 end
 
 require("user_plugins.switchbuffer").setup({
@@ -50,17 +50,24 @@ require("user_plugins.switchbuffer").setup({
     hl_normal = { ctermbg = 232 },
 })
 
-vim.keymap.set("n", "<Tab>", '<cmd>lua require("user_plugins.switchbuffer").select_buffers()<cr>')
-vim.keymap.set("n", "<S-Tab>", '<cmd>lua require("user_plugins.switchbuffer").select_buffers()<cr>')
+map("n", "<Tab>", '<cmd>lua require("user_plugins.switchbuffer").select_buffers()<cr>')
+map("n", "<S-Tab>", '<cmd>lua require("user_plugins.switchbuffer").select_buffers()<cr>')
 
-vim.keymap.set("n", "<leader>g", '<cmd>lua require("user_plugins.websearch").websearch_input("google")<cr>')
-vim.keymap.set("n", "<leader>G", "<cmd>WebSearchInput<cr>")
+map("n", "<leader>g", '<cmd>lua require("user_plugins.websearch").websearch_input("google")<cr>')
+map("n", "<leader>G", "<cmd>WebSearchInput<cr>")
 
 -- from https://www.reddit.com/r/neovim/comments/13y3thq/whats_a_very_simple_config_change_that_you_cant/
-vim.keymap.set("i", "<C-BS>", "<Esc>cvb", {})
-vim.keymap.set("v", "y", "ygv<esc>")
-vim.keymap.set("n", "p", "p=`]", { silent = true })
+map("i", "<C-BS>", "<Esc>cvb", {})
+map("v", "y", "ygv<esc>")
+map("n", "p", "p=`]", { silent = true })
 
 -- Don't leave visual mode when changing indent
 vim.api.nvim_set_keymap("x", ">", ">gv", { noremap = true })
 vim.api.nvim_set_keymap("x", "<", "<gv", { noremap = true })
+
+map("n", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
+map("x", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
+map("o", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
+map("n", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
+map("x", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
+map("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
