@@ -134,6 +134,7 @@ install_essentials() {
     __install_package_apt fd-find
     __install_package_apt xsel
     __install_package_apt bat
+    __install_package_apt chafa
 
     __make_symlink "/usr/bin/fd" fdfind
     __make_symlink "/usr/bin/bat" batcat
