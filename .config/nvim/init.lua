@@ -24,6 +24,7 @@ require("lazy").setup("plugins", {
 
 require("set")
 require("remap")
+require("autocmds")
 
 function R(name)
     require("plenary.reload").reload_module(name)
