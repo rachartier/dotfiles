@@ -56,10 +56,10 @@ M.on_attach = function(client, bufnr)
 
     local bufopts = { buffer = bufnr, remap = false }
 
-    local inlay_hint = vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint
-    if client.supports_method("textDocument/inlayHint") then
-        inlay_hint(bufnr, true)
-    end
+    -- local inlay_hint = vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint
+    -- if client.supports_method("textDocument/inlayHint") then
+    --     inlay_hint(bufnr, true)
+    -- end
 
     vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
     vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
