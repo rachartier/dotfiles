@@ -44,6 +44,7 @@ require("catppuccin").setup({
                 CursorLineNr = {
                     fg = colors.mauve,
                 },
+                CursorLine = { bg = "None" },
                 NormalFloat = {
                     bg = "None",
                     fg = colors.text,

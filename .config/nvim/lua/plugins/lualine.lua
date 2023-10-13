@@ -110,7 +110,7 @@ function M.config()
             component_separators = "",
             section_separators = "",
             theme = {
-                normal = { c = { fg = colors.surface0, bg = colors.bg } },
+                normal = { c = { fg = colors.surface0, bg = colors.bg, blend = 100 } },
                 inactive = { c = { fg = colors.surface0, bg = colors.bg } },
             },
         },
