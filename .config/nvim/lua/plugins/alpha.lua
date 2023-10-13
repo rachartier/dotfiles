@@ -13,9 +13,9 @@ function M.config()
 
     local header = {
         type = "terminal",
-        command = "chafa $HOME/.config/nvim/dashboard/gif/kirby-walk.gif",
-        width = 30,
-        height = 15,
+        command = "chafa $HOME/.config/nvim/dashboard/gif/kirby-dancing.gif",
+        width = 24,
+        height = 18,
         opts = {
             redraw = true,
             window_config = {},
