@@ -3,7 +3,7 @@ setopt promptsubst
 
 export ZSH="$HOME/.oh-my-zsh"
 
-ZSH_TMUX_AUTOSTART=true
+ZSH_TMUX_AUTOSTART=false
 ZSH_TMUX_CONFIG="$HOME/.config/tmux/tmux.conf"
 
 if [[ -n $SSH_CONNECTION ]]; then
@@ -94,6 +94,7 @@ alias config='/usr/bin/git --git-dir=/home/rachartier/.cfg/ --work-tree=/home/ra
 alias f="fzf"
 alias l="eza --tree --level 1 --group-directories-first --color always --icons"
 alias ls='eza -G --group-directories-first --color always --icons'
+alias dot="sudo -E $HOME/.config/scripts/install.sh"
 
 alias tl='tmuxp load'
 for s in $(tmuxp ls); do alias "$s"="tmuxp load -y $s"; done
