@@ -16,9 +16,9 @@ return {
         build = "cd app && npm install",
     },
     {
-        "richardbizik/nvim-toc",
-        config = function()
-            require("nvim-toc").setup({})
-        end,
+        -- "richardbizik/nvim-toc",
+        -- config = function()
+        --     require("nvim-toc").setup({})
+        -- end,
     },
 }

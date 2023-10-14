@@ -31,7 +31,7 @@ function M.config()
 
     local lspconfig = require("lspconfig")
     local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
-    local on_attach = require("plugins.lsp.attach").on_attach
+    local on_attach = require("config.lsp.attach").on_attach
 
     require("mason-lspconfig").setup_handlers({
         function(server_name)
