@@ -18,7 +18,7 @@ function M.config()
     local lsp = require("lsp-zero")
     local U = require("utils")
 
-    local on_attach = require("plugins.lsp.attach").on_attach
+    local on_attach = require("config.lsp.attach").on_attach
 
     require("luasnip.loaders.from_vscode").lazy_load()
 

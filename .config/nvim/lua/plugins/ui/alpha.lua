@@ -1,8 +1,5 @@
 local M = {
     "goolord/alpha-nvim",
-    dependencies = {
-        "m00qek/baleia.nvim",
-    },
     event = "VimEnter",
 }
 
@@ -15,7 +12,7 @@ function M.config()
         type = "terminal",
         command = "chafa $HOME/.config/nvim/dashboard/gif/kirby-dancing.gif",
         width = 24,
-        height = 18,
+        height = 14,
         opts = {
             redraw = true,
             window_config = {},
@@ -41,7 +38,6 @@ function M.config()
     })
 
     -- dashboard.section.header.val = {
-
     -- [[         ,--.              ,----..                                 ____  ]],
     -- [[       ,--.'|    ,---,.   /   /   \                 ,---,        ,'  , `.]],
     -- [[   ,--,:  : |  ,'  .' |  /   .     :        ,---.,`--.' |     ,-+-,.' _ |]],
