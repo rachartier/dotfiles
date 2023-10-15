@@ -39,9 +39,51 @@ function M._get_filename_relative_path(fullpath, path_to_remove)
     end
 end
 
-function M._get_filename(fullpath)
-    return fullpath:match("([a-zA-Z0-9_.-]+)$")
+function M.get_symbol(filename)
+    local devicons = pcall(require, "nvim-web-devicons")
+    if not devicons then
+        return "", nil
+    end
+
+    local ext = string.match(filename, "%.([^%.]*)$"):gsub("%s+", "")
+
+    local symbol, hl = require("nvim-web-devicons").get_icon(filename, ext, { default = false })
+
+    if symbol == nil then
+        if filename:match("^term://") then
+            symbol = " "
+        else
+            symbol = " "
+        end
+    end
+
+    return symbol, hl
 end
+
+function M.format_filename(filename, filename_max_length)
+    local function trunc_filename(fn, fn_max)
+        if string.len(fn) <= fn_max then
+            return fn
+        end
+
+        local substr_length = fn_max - string.len("...")
+        if substr_length <= 0 then
+            return string.rep(".", fn_max)
+        end
+
+        return "..." .. string.sub(fn, -substr_length)
+    end
+
+    filename = string.gsub(filename, "term://", "Terminal: ", 1)
+    filename = trunc_filename(filename, filename_max_length)
+
+    return string.format("%-" .. filename_max_length .. "s", filename)
+    -- return filename
+end
+
+-- function M._get_filename(fullpath)
+--     return fullpath:match("([a-zA-Z0-9_.-]+)$")
+-- end
 
 M.get_list_buffers = function()
     local buffer_list = ""
@@ -57,10 +99,6 @@ M.get_list_buffers = function()
         buf_names[2] = temp
     end
 
-    local cwdpath = vim.fn.getcwd():gsub("%~", vim.fn.expand("$HOME")):gsub("\\", "/")
-
-    local path1 = cwdpath
-
     local buffer_names = {}
     for _, line in ipairs(buf_names) do
         local name = line:match('"([^"]+)"')
@@ -68,10 +106,9 @@ M.get_list_buffers = function()
         if name then
             local buf_modified = vim.api.nvim_buf_get_option(id, "modified")
 
-            local path = name:gsub("%~", vim.fn.expand("$HOME")):gsub("\\", "/")
-            local remaining_path = M._get_filename(path)
-            local extension = remaining_path:match("^.+%.(.+)$")
-            local icon, icon_color = require("nvim-web-devicons").get_icon(remaining_path, extension)
+            local path = name
+            local formated_filename = M.format_filename(path, 60)
+            local icon, icon_color = M.get_symbol(path)
             local path_color = "Normal"
 
             if buf_modified then
@@ -84,7 +121,8 @@ M.get_list_buffers = function()
 
             table.insert(buffer_names, {
                 icon = icon,
-                path = remaining_path,
+                formated_path = formated_filename,
+                path = path,
                 icon_color = icon_color,
                 path_color = path_color,
             })
@@ -100,15 +138,15 @@ function M.select_buffers(opts)
     local displayer = require("telescope.pickers.entry_display").create({
         separator = " ",
         items = {
-            { width = 1 },
+            { width = 2 },
             { remaining = true },
         },
     })
 
     local make_display = function(entry)
         return displayer({
-            { entry.icon, entry.icon_color },
-            { entry.path, entry.path_color },
+            { entry.icon,          entry.icon_color },
+            { entry.formated_path, entry.path_color },
         })
     end
 
@@ -121,6 +159,7 @@ function M.select_buffers(opts)
                     ordinal = entry.path,
                     path_color = entry.path_color,
                     icon_color = entry.icon_color,
+                    formated_path = entry.formated_path,
                     path = entry.path,
                     icon = entry.icon,
                     display = make_display,
