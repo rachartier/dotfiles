@@ -20,9 +20,9 @@ function M.config()
 
     local on_attach = require("config.lsp.attach").on_attach
 
-    require("luasnip.loaders.from_vscode").lazy_load()
-
     lsp.preset("recommended")
+
+    require("luasnip.loaders.from_vscode").lazy_load()
 
     vim.diagnostic.config({
         float = { border = U.default_border },
