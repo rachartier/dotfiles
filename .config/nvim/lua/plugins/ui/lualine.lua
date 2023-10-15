@@ -5,6 +5,7 @@ local M = {
 }
 
 function M.config()
+    local U = require("utils")
     local c = require("catppuccin.palettes").get_palette("macchiato")
     local colors = {
         -- bg = "#202233",
@@ -144,14 +145,12 @@ function M.config()
         function()
             return "▊"
         end,
-        color = { fg = colors.blue }, -- Sets highlighting of component
-        left_padding = 0,       -- We don't need space before this
+        color = { fg = colors.blue },
+        left_padding = 0,
     })
 
     ins_left({
-        -- mode component
         function()
-            -- auto change color according to neovims mode
             local mode_color = {
                 n = colors.red,
                 i = colors.green,
@@ -205,35 +204,9 @@ function M.config()
     })
 
     ins_left({
-        -- filesize component
-        function()
-            local function format_file_size(file)
-                local size = vim.fn.getfsize(file)
-                if size <= 0 then
-                    return ""
-                end
-                local sufixes = { "b", "k", "m", "g" }
-                local i = 1
-                while size > 1024 do
-                    size = size / 1024
-                    i = i + 1
-                end
-                return string.format("%.1f%s", size, sufixes[i])
-            end
-            local file = vim.fn.expand("%:p")
-            if string.len(file) == 0 then
-                return ""
-            end
-            return format_file_size(file)
-        end,
-        condition = conditions.buffer_not_empty,
-        color = { fg = colors.fg },
-    })
-
-    ins_left({
         M.get_current_filename_with_icon,
         condition = conditions.buffer_not_empty,
-        color = { fg = colors.magenta, gui = "bold" },
+        color = { fg = colors.magenta },
     })
     ins_left({
         "diagnostics",
@@ -246,10 +219,10 @@ function M.config()
             other = "󰠠 ",
         },
         diagnostics_color = {
-            error = { fg = c.error, gui = "bold" },
-            warn = { fg = c.warn, gui = "bold" },
-            info = { fg = c.info, gui = "bold" },
-            hint = { fg = c.hint, gui = "bold" },
+            error = { fg = c.error },
+            warn = { fg = c.warn },
+            info = { fg = c.info },
+            hint = { fg = c.hint },
         },
         colored = true,
     })
@@ -257,21 +230,21 @@ function M.config()
     ins_left({
         "branch",
         icon = "",
-        color = { fg = colors.violet, gui = "bold" },
+        color = { fg = colors.violet },
     })
     ins_left({
         "diff",
         colored = true,
         source = diff_source,
         symbols = {
-            added = " ",
-            modified = " ",
-            removed = " ",
+            added = U.git_signs.added,
+            modified = U.git_signs.modified,
+            removed = U.git_signs.removed,
         },
         diff_color = {
-            added = { gui = "bold" },
-            modified = { gui = "bold" },
-            removed = { gui = "bold" },
+            -- added = { gui = "bold" },
+            -- modified = { gui = "bold" },
+            -- removed = { gui = "bold" },
         },
     })
 
@@ -310,23 +283,66 @@ function M.config()
     -- })
 
     -- Add components to right sections
+    -- ins_right({
+    --     "o:encoding", -- option component same as &encoding in viml
+    --     upper = true, -- I'm not sure why it's upper case either ;)
+    --     condition = conditions.hide_in_width,
+    --     color = { fg = colors.green },
+    -- })
+    -- ins_right({
+    --     "fileformat",
+    --     upper = true,
+    --     icons_enabled = false, -- I think icons are cool but Eviline doesn't have them. sigh
+    --     color = { fg = colors.green },
+    -- })
     ins_right({
-        "o:encoding", -- option component same as &encoding in viml
-        upper = true, -- I'm not sure why it's upper case either ;)
-        condition = conditions.hide_in_width,
+        require("lazy.status").updates,
+        cond = require("lazy.status").has_updates,
         color = { fg = colors.green },
     })
 
+    ins_right({ "progress", color = { fg = colors.magenta } })
+    ins_right({ "location", color = { fg = colors.cyan } })
     ins_right({
-        "fileformat",
-        upper = true,
-        icons_enabled = false, -- I think icons are cool but Eviline doesn't have them. sigh
-        color = { fg = colors.green },
+        function()
+            if vim.fn.mode():find("[vV]") then
+                local ln_beg = vim.fn.line("v")
+                local ln_end = vim.fn.line(".")
+
+                local lines = ln_beg <= ln_end and ln_end - ln_beg + 1 or ln_beg - ln_end + 1
+
+                return "sel: " .. tostring(vim.fn.wordcount().visual_chars) .. " | " .. tostring(lines)
+            else
+                return ""
+            end
+        end,
     })
 
-    ins_right({ "location", color = { fg = colors.fg } })
-
-    ins_right({ "progress", color = { fg = colors.fg } })
+    ins_right({
+        -- filesize component
+        function()
+            local function format_file_size(file)
+                local size = vim.fn.getfsize(file)
+                if size <= 0 then
+                    return ""
+                end
+                local sufixes = { "b", "k", "m", "g" }
+                local i = 1
+                while size > 1024 do
+                    size = size / 1024
+                    i = i + 1
+                end
+                return string.format("%.1f%s", size, sufixes[i])
+            end
+            local file = vim.fn.expand("%:p")
+            if string.len(file) == 0 then
+                return ""
+            end
+            return " " .. format_file_size(file)
+        end,
+        condition = conditions.buffer_not_empty,
+        color = { fg = colors.fg },
+    })
 
     require("lualine").setup(config)
 end

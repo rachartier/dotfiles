@@ -62,10 +62,10 @@ function M.config()
                     renamed = "", -- this can only be used in the git_status source
                     untracked = "",
                     conflict = "",
-                    unstaged = "",
-                    staged = "",
+                    unstaged = U.git_signs.modified,
+                    staged = U.git_signs.added,
                     unmerged = "",
-                    deleted = "",
+                    deleted = U.git_signs.removed,
                     ignored = "◌",
                 },
             },

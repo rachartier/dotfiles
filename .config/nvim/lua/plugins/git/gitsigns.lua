@@ -18,6 +18,7 @@ function M.config()
         },
         signs = {
             add = { text = "│" },
+            delete = { text = "│" },
             change = { text = "│" },
             untracked = { text = "┆" },
         },

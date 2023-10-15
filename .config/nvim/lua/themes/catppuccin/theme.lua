@@ -39,10 +39,10 @@ require("catppuccin").setup({
                 Visual = { bg = "#5B6076" },
                 -- Visual = { bg = colors.blue, fg = colors.crust },
                 LineNr = {
-                    fg = colors.overlay1,
+                    fg = colors.surface1,
                 },
                 CursorLineNr = {
-                    fg = colors.mauve,
+                    fg = colors.overlay1,
                 },
                 CursorLine = { bg = "None" },
                 NormalFloat = {
@@ -152,7 +152,7 @@ require("catppuccin").setup({
         cmp = true,
         dap = true,
         gitsigns = true,
-        harpoon = true,
+        -- harpoon = true,
         -- illuminate = true,
         lsp_trouble = true,
         mason = true,
