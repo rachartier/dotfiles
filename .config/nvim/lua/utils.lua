@@ -25,8 +25,22 @@ M.default_border = M.border_chars_round
 --M.top_right_corner_thin = "🭾"
 --M.top_left_corner_thin = "🭽"
 
+M.git_signs = {
+    added = " ",
+    modified = " ",
+    removed = " ",
+}
+
+-- M.diagnostic_signs = {
+--     error = " ",
+--     warning = " ",
+--     info = " ",
+--     hint = "󱤅 ",
+--     other = "󰠠 ",
+-- }
+
 M.diagnostic_signs = {
-    error = " ",
+    error = " ",
     warning = " ",
     info = " ",
     hint = "󱤅 ",
