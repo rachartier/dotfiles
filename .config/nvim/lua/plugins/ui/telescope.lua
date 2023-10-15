@@ -29,7 +29,6 @@ end
 
 function M.config()
     require("telescope").load_extension("dap")
-    require("telescope").load_extension("harpoon")
 
     local U = require("utils")
     local ts = require("telescope")
