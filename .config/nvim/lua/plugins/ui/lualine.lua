@@ -8,8 +8,8 @@ function M.config()
     local U = require("utils")
     local c = require("catppuccin.palettes").get_palette("macchiato")
     local colors = {
-        -- bg = "#202233",
-        bg = c.mantle,
+        -- bg = c.mantle,
+        bg = "None",
         fg = c.subtext0,
         yellow = c.yellow,
         cyan = c.cyan,
