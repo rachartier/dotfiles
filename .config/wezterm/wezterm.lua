@@ -34,13 +34,14 @@ config.hide_tab_bar_if_only_one_tab = true
 config.adjust_window_size_when_changing_font_size = false
 config.selection_word_boundary = " \t\n{}[]()\"'`,;:│=&!%"
 config.window_padding = {
-  left = '1cell',
-  right = '1cell',
-  top = '0.5cell',
-  bottom = '0cell',
+	left = "1cell",
+	right = "1cell",
+	top = "0.5cell",
+	bottom = "0cell",
 }
--- config.window_background_opacity = 0
--- config.win32_system_backdrop = "Acrylic"
+config.window_background_opacity = 0.8
+config.win32_system_backdrop = "Acrylic"
+config.win32_acrylic_accent_color = "#222222"
 
 config.window_close_confirmation = "NeverPrompt"
 
