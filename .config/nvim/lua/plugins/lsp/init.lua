@@ -10,12 +10,13 @@ local M = {
         "L3MON4D3/LuaSnip",
         "rafamadriz/friendly-snippets",
     },
-    event = { "BufReadPost", "BufNewFile" },
-    cmd = { "LspInfo", "LspInstall", "LspUninstall" },
+    -- event = { "BufReadPost", "BufNewFile" },
+    -- cmd = { "LspInfo", "LspInstall", "LspUninstall" },
 }
 
 function M.config()
     local lsp = require("lsp-zero")
+
     local U = require("utils")
 
     local on_attach = require("config.lsp.attach").on_attach
@@ -51,7 +52,7 @@ function M.config()
         end
 
         -- Fallback to system Python.
-        return exepath("python3") or exepath("python") or "python"
+        return vim.fn.executable("python3") == 1 or vim.fn.executable("python") == 1 or "python"
     end
 
     require("lspconfig.ui.windows").default_options = {
