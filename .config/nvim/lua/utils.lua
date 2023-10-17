@@ -29,6 +29,9 @@ M.git_signs = {
     added = " ",
     modified = " ",
     removed = " ",
+    -- added = " ",
+    -- modified = " ",
+    -- removed = " ",
 }
 
 -- M.diagnostic_signs = {
