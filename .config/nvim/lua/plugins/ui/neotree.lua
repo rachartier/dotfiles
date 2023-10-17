@@ -47,7 +47,7 @@ function M.config()
                 highlight = "NeoTreeFileIcon",
             },
             modified = {
-                symbol = "[+]",
+                symbol = "󱞁 ",
                 highlight = "NeoTreeModified",
             },
             name = {
@@ -57,16 +57,16 @@ function M.config()
             },
             git_status = {
                 symbols = {
+                    untracked = "",
+                    ignored = " ",
+                    unstaged = "󰄱 ",
+                    staged = " ",
                     added = "", -- or "✚", but this is redundant info if you use git_status_colors on the name
                     modified = "", -- or "", but this is redundant info if you use git_status_colors on the name
                     renamed = "", -- this can only be used in the git_status source
-                    untracked = "",
                     conflict = "",
-                    unstaged = U.git_signs.modified,
-                    staged = U.git_signs.added,
                     unmerged = "",
                     deleted = U.git_signs.removed,
-                    ignored = "◌",
                 },
             },
             file_size = {

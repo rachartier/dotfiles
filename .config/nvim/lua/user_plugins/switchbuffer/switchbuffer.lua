@@ -51,7 +51,7 @@ function M.get_symbol(filename)
 
     if symbol == nil then
         if filename:match("^term://") then
-            symbol = " "
+            symbol = " "
         else
             symbol = " "
         end
@@ -107,7 +107,7 @@ M.get_list_buffers = function()
             local buf_modified = vim.api.nvim_buf_get_option(id, "modified")
 
             local path = name
-            local formated_filename = M.format_filename(path, 60)
+            local formated_filename = M.format_filename(path, 45)
             local icon, icon_color = M.get_symbol(path)
             local path_color = "Normal"
 
