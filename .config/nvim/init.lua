@@ -25,6 +25,7 @@ require("lazy").setup("plugins", {
         enabled = true,
         concurrency = nil, ---@type number? set to 1 to check for updates very slowly
         frequency = 3600, -- check for updates every hour
+        notify = false,
     },
 })
 
