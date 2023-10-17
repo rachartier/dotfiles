@@ -77,7 +77,7 @@ function M.format_filename(filename, filename_max_length)
     filename = string.gsub(filename, "term://", "Terminal: ", 1)
     filename = trunc_filename(filename, filename_max_length)
 
-    return string.format("%-" .. filename_max_length .. "s", filename)
+    return filename
     -- return filename
 end
 
@@ -110,9 +110,13 @@ M.get_list_buffers = function()
             local formated_filename = M.format_filename(path, 45)
             local icon, icon_color = M.get_symbol(path)
             local path_color = "Normal"
+            local status_color = "Normal"
+            local status = ""
 
             if buf_modified then
-                path_color = "NeoTreeModified"
+                -- path_color = "NeoTreeModified"
+                status = require("utils").signs.file.not_saved
+                status_color = "SwitchBufferStatusColor"
             end
 
             if vim.fn.getbufvar(id, "bufpersist") ~= 1 then
@@ -125,6 +129,8 @@ M.get_list_buffers = function()
                 path = path,
                 icon_color = icon_color,
                 path_color = path_color,
+                status = status,
+                status_color = status_color,
             })
         end
     end
@@ -139,6 +145,7 @@ function M.select_buffers(opts)
         separator = " ",
         items = {
             { width = 2 },
+            { width = 2 },
             { remaining = true },
         },
     })
@@ -146,11 +153,12 @@ function M.select_buffers(opts)
     local make_display = function(entry)
         return displayer({
             { entry.icon,          entry.icon_color },
+            { entry.status,        entry.status_color },
             { entry.formated_path, entry.path_color },
         })
     end
 
-    function create_finders_table()
+    local function create_finders_table()
         return finders.new_table({
             results = M.get_list_buffers(),
             entry_maker = function(entry)
@@ -162,6 +170,8 @@ function M.select_buffers(opts)
                     formated_path = entry.formated_path,
                     path = entry.path,
                     icon = entry.icon,
+                    status = entry.status,
+                    status_color = entry.status_color,
                     display = make_display,
                 }
             end,

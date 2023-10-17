@@ -34,6 +34,13 @@ M.git_signs = {
     -- removed = " ",
 }
 
+M.signs = {
+    file = {
+        modified = "󱞁 ",
+        not_saved = "󰉉 ",
+    },
+}
+
 -- M.diagnostic_signs = {
 --     error = " ",
 --     warning = " ",

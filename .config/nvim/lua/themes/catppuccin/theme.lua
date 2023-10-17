@@ -136,6 +136,9 @@ require("catppuccin").setup({
                 GitSignsAdd = {
                     fg = colors.green,
                 },
+                SwitchBufferStatusColor = {
+                    fg = colors.red,
+                },
                 CmpGhostText = { link = "Comment", default = true },
                 -- StatusLine = {
                 --     bg = colors.mantle,

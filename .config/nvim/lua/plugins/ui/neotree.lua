@@ -47,7 +47,7 @@ function M.config()
                 highlight = "NeoTreeFileIcon",
             },
             modified = {
-                symbol = "󱞁 ",
+                symbol = U.signs.file.modified,
                 highlight = "NeoTreeModified",
             },
             name = {
