@@ -89,6 +89,14 @@ __make_symlink() {
     ln -s "$oldname_path" "$path"
 }
 
+install_starship() {
+    if curl -sS https://starship.rs/install.sh | sh -s -- -y &> /dev/null; then
+        __echo_success "starship installed."
+    else
+        __echo_failure "starship not installed."
+    fi
+}
+
 install_fzf() {
     if [ -d "$HOME/.fzf/" ]; then
         cd ~/.fzf || return 0
@@ -173,6 +181,7 @@ install_essentials() {
     install_fzf
     install_viu
     install_lazygit
+    install_starship
 }
 
 do_updates() {
@@ -185,6 +194,7 @@ do_updates() {
         "eza") install_eza;;
         "glow") install_glow;;
         "lazygit") install_lazygit;;
+        "starship") install_starship;;
         "all") install_essentials;;
         *) install_essentials;;
     esac

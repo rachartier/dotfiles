@@ -19,6 +19,30 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup("plugins", {
     ui = {
         border = U.default_border,
+        icons = {
+            cmd = " ",
+            config = "",
+            event = " ",
+            ft = " ",
+            init = " ",
+            import = " ",
+            keys = " ",
+            lazy = "󰒲 ",
+            loaded = "●",
+            not_loaded = "○",
+            plugin = "󰏗 ",
+            runtime = " ",
+            require = "󰢱 ",
+            source = " ",
+            start = " ",
+            task = "✔ ",
+            list = {
+                "●",
+                "➜",
+                "★",
+                "‒",
+            },
+        },
     },
     checker = {
         -- automatically check for plugin updates
