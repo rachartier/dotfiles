@@ -46,7 +46,7 @@ __install_appimage() {
     cd /tmp || exit 1
     wget -q "$url" && __echo_success "'$filename' downloaded." || return 1
     chmod +x "$filename"
-    mv "$filename" /usr/bin/"$name" && __echo_success "'$name' moved in /usr/bin." || return 1
+    mv "$filename" "$HOME/.local/bin/$name" && __echo_success "'$name' moved in $HOME/.local/bin/" || return 1
 }
 
 
@@ -61,7 +61,7 @@ __install_package_release() {
     wget -q "$url" && __echo_success "'$filename' downloaded." || return 1
     tar -xf "$filename" && __echo_success "$filename extracted." || return 1
     chmod +x "$name"
-    mv "$name" /usr/bin/"$name" && __echo_success "'$name' moved in /usr/bin." || return 1
+    mv "$name" "$HOME/.local/bin/$name" && __echo_success "'$name' moved in $HOME/local/bin/" || return 1
 }
 
 __install_zsh_plugin() {
@@ -100,7 +100,7 @@ __make_symlink() {
 }
 
 __git_dot() {
-    /usr/bin/git --git-dir="$HOME/.cfg/" --work-tree="$HOME" $@
+    /usr/bin/git --git-dir="$HOME/.cfg/" --work-tree="$HOME" "$@"
 }
 
 install_starship() {
@@ -159,8 +159,8 @@ install_packages() {
     __install_package_apt bat
     __install_package_apt chafa
 
-    __make_symlink "/usr/bin/fd" fdfind
-    __make_symlink "/usr/bin/bat" batcat
+    __make_symlink "$HOME/.local/bin/fd" fdfind
+    __make_symlink "$HOME/.local/bin/bat" batcat
 }
 
 install_zsh_plugins() {
@@ -226,7 +226,7 @@ case "$1" in
 }
 
 if [ $# -eq 0 ]; then
-    sudo -E install_essentials
+    install_essentials
 else
     do_command "$@"
 fi
