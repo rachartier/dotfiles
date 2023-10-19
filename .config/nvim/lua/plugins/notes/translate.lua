@@ -1,8 +1,5 @@
 local M = {
 	"potamides/pantran.nvim",
-	keys = {
-		{ mode = { "n", "x" }, "<leader>tr", "<cmd>Pantran<cr>", desc = "Translate" },
-	},
 }
 
 function M.config()
@@ -12,6 +9,20 @@ function M.config()
 			default_mode = "replace",
 		},
 	})
+
+	vim.keymap.set("x", "<leader>tr", require("pantran").motion_translate, {
+		noremap = true,
+		silent = true,
+		expr = true,
+	})
+
+	local pantran = require("pantran")
+	local opts = { noremap = true, silent = true, expr = true, desc = "Translate text" }
+	vim.keymap.set("n", "<leader>tr", pantran.motion_translate, opts)
+	vim.keymap.set("n", "<leader>trr", function()
+		return pantran.motion_translate() .. "_"
+	end, opts)
+	vim.keymap.set("x", "<leader>tr", pantran.motion_translate, opts)
 end
 
 return M
