@@ -106,8 +106,10 @@ if [ ! -L "$dot_script_link" ] || [ ! -e "$dot_script_link" ]; then
     ln -s "$dot_script_path" "$dot_script_link"
 fi
 
-alias tl='tmuxp load'
-for s in $(tmuxp ls); do alias "$s"="tmuxp load -y $s"; done
+if [ command tmuxp &> /dev/null ]; then
+    alias tl='tmuxp load'
+    for s in $(tmuxp ls); do alias "$s"="tmuxp load -y $s"; done
+fi
 
 # fpath+=($HOME/.zsh/pure)
 # autoload -U promptinit; promptinit
