@@ -2,12 +2,14 @@
 ```
 echo 'source "$HOME/.dotfile_profile"' >> $HOME/.profile
 
-echo ".cfg" >> .gitignore
-git clone --bare git@github.com:rachartier/dotfiles.git $HOME/.cfg
-
-# ZSH
+sudo apt install zsh --yes
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-sudo -E ~/.config/scripts/install.sh
+
+echo ".cfg" >> $HOME/.gitignore
+git clone --bare git@github.com:rachartier/dotfiles.git $HOME/.cfg
+/usr/bin/git --git-dir="$HOME/.cfg/" --work-tree="$HOME" checkout
+
+sudo -E ~/.config/scripts/dot.sh
 
 # TMUX
 git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
