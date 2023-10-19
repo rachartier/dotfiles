@@ -164,7 +164,6 @@ install_packages() {
 }
 
 install_zsh_plugins() {
-    __install_zsh_plugin "https://github.com/sindresorhus/pure.git"
     __install_zsh_plugin "https://github.com/zsh-users/zsh-autosuggestions.git"
     __install_zsh_plugin "https://github.com/zsh-users/zsh-syntax-highlighting.git"
     __install_zsh_plugin "https://github.com/b4b4r07/enhancd.git"
