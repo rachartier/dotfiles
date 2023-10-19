@@ -98,7 +98,13 @@ alias config='/usr/bin/git --git-dir=/home/rachartier/.cfg/ --work-tree=/home/ra
 alias f="fzf"
 alias l="eza --tree --level 1 --group-directories-first --color always --icons"
 alias ls='eza -G --group-directories-first --color always --icons'
-alias dot="sudo -E $HOME/.config/scripts/install.sh"
+
+local dot_script_path="$HOME/.config/scripts/dot.sh"
+local dot_script_link="$HOME/.local/bin/dot"
+
+if [ ! -L "$dot_script_link" ] || [ ! -e "$dot_script_link" ]; then
+    ln -s "$dot_script_path" "$dot_script_link"
+fi
 
 alias tl='tmuxp load'
 for s in $(tmuxp ls); do alias "$s"="tmuxp load -y $s"; done
