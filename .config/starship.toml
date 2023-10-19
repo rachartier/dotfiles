@@ -1,4 +1,7 @@
 
+[username]
+disabled = true
+
 [docker_context]
 format = 'via [󰡨 $context](blue bold)'
 disabled = false

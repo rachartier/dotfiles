@@ -90,7 +90,7 @@ __make_symlink() {
 }
 
 install_starship() {
-    if curl -sS https://starship.rs/install.sh | sh -s -- -y &> /dev/null; then
+    if curl -sS https://starship.rs/install.sh | sh -s -- -y; then
         __echo_success "starship installed."
     else
         __echo_failure "starship not installed."
