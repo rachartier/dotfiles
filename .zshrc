@@ -20,7 +20,6 @@ plugins=(
     fd
     git
     tmux
-    autojump
     command-not-found
     zsh-autosuggestions
     zsh-syntax-highlighting
