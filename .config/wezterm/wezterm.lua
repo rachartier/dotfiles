@@ -39,6 +39,7 @@ config.window_padding = {
     bottom = "0cell",
 }
 config.window_background_opacity = 0.8
+-- config.text_background_opacity = 0.8
 config.win32_system_backdrop = "Acrylic"
 
 config.window_close_confirmation = "NeverPrompt"
