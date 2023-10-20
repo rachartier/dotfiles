@@ -218,8 +218,6 @@ do_command() {
 case "$1" in
     "init") install_essentials;;
     "reinstall") do_reinstall "$2";;
-    "update") __git_dot "pull";;
-    "push") __git_dot "push";;
     *) __git_dot "$@";;
     esac
 }
