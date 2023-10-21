@@ -3,14 +3,14 @@ local config = {}
 
 config.automatically_reload_config = true
 config.default_domain = "WSL:Ubuntu"
-config.font = wezterm.font("CaskaydiaCove NF", { stretch = "UltraCondensed" })
+config.font = wezterm.font("CaskaydiaCove NF", { weight = "Regular" })
 config.font_size = 14
 config.font_rules = {
-    {
-        intensity = "Bold",
-        italic = false,
-        font = wezterm.font("CaskaydiaCove NF", { weight = "Bold", stretch = "UltraCondensed" }),
-    },
+    -- {
+    --     intensity = "Bold",
+    --     italic = false,
+    --     font = wezterm.font("CaskaydiaCove NF", { weight = "Bold", stretch = "UltraCondensed" }),
+    -- },
     --
     -- {
     --     italic = true,
@@ -22,7 +22,7 @@ config.font_rules = {
     --     font = wezterm.font("Operator Mono Medium Italic", { weight = "ExtraBlack", italic = true }),
     -- },
 }
-config.harfbuzz_features = { "calt=1", "ss01=1", "liga=0" }
+config.harfbuzz_features = { "calt=1", "ss01=1", "liga=0", "clig=0" }
 config.line_height = 1
 config.underline_thickness = "2pt"
 -- config.underline_position = "-0.25cell"

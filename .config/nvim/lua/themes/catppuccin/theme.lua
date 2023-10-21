@@ -96,12 +96,14 @@ require("catppuccin").setup({
                     link = "IlluminatedWordRead",
                 },
                 CmpItemAbbrMatch = {
-                    fg = colors.red,
+                    fg = colors.blue,
+                    bold = true,
                     -- underline = true,
                 },
                 CmpItemAbbrMatchFuzzy = {
-                    fg = colors.red,
+                    -- fg = colors.blue,
                     -- underline = true,
+                    link = "CmpItemAbbrMatch",
                 },
                 TelescopeSelection = {
                     link = "PmenuSel",
