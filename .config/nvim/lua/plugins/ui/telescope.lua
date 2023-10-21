@@ -138,7 +138,7 @@ function M.config()
         "<cmd>Telescope lsp_references show_line=false<cr>",
         { desc = "Find all LSP references" }
     )
-    vim.keymap.set("n", "<C-p>", builtin.git_files, { desc = "Find git files" })
+    -- vim.keymap.set("n", "<C-p>", builtin.git_files, { desc = "Find git files" })
     vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Grep words inside files" })
     vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Show documentations" })
     vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "Grep string under cursor" })
