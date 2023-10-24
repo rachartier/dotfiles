@@ -9,7 +9,7 @@ echo ".cfg" >> $HOME/.gitignore
 git clone --bare git@github.com:rachartier/dotfiles.git $HOME/.cfg
 /usr/bin/git --git-dir="$HOME/.cfg/" --work-tree="$HOME" checkout
 
-sudo -E ~/.config/scripts/dot.sh
+sudo -E ~/.config/scripts/dot.sh init
 
 # TMUX
 git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
