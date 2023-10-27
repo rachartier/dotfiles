@@ -67,6 +67,18 @@ function M.config()
         capabilities = capabilities,
         on_attach = on_attach,
         root_dir = util.root_pattern("pyrightconfig.json"),
+        settings = {
+            pyright = {
+                autoImportCompletion = true,
+            },
+            python = {
+                analysis = {
+                    autoSearchPaths = true,
+                    diagnosticMode = "workspace",
+                    useLibraryCodeForTypes = true,
+                },
+            },
+        },
     })
 
     require("lspconfig")["clangd"].setup({
