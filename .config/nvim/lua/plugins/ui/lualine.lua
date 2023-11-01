@@ -106,6 +106,8 @@ function M.config()
         end,
     }
 
+    local function devcontainer_status() end
+
     local config = {
         options = {
             component_separators = "",
