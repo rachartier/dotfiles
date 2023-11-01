@@ -45,7 +45,11 @@ function M.get_symbol(filename)
         return "", nil
     end
 
-    local ext = string.match(filename, "%.([^%.]*)$"):gsub("%s+", "")
+    local ext = string.match(filename, "%.([^%.]*)$")
+
+    if ext then
+        ext = ext:gsub("%s+", "")
+    end
 
     local symbol, hl = require("nvim-web-devicons").get_icon(filename, ext, { default = false })
 
