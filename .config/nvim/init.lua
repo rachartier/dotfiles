@@ -71,4 +71,5 @@ vim.keymap.set("n", "<Leader>db", function()
     end
 end, { silent = true, desc = "Close unused buffers" })
 
-require("theme")
+theme = require("theme")
+theme.setup()

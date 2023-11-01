@@ -111,4 +111,13 @@ function M.dump(o)
     end
 end
 
+function M.add_missing(dst, src)
+    for k, v in pairs(src) do
+        if dst[k] == nil then
+            dst[k] = v
+        end
+    end
+    return dst
+end
+
 return M
