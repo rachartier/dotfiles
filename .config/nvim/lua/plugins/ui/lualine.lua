@@ -6,21 +6,8 @@ local M = {
 
 function M.config()
     local U = require("utils")
-    local c = require("theme").get_colors()
 
-    local colors = {
-        bg = c.mantle,
-        fg = c.subtext0,
-        yellow = c.yellow,
-        cyan = c.cyan,
-        darkblue = c.mantle,
-        green = c.green,
-        orange = c.peach,
-        violet = c.lavender,
-        magenta = c.mauve,
-        blue = c.blue,
-        red = c.red,
-    }
+    local colors = require("theme").get_lualine_colors()
 
     local function diff_source()
         local gitsigns = vim.b.gitsigns_status_dict
@@ -105,8 +92,6 @@ function M.config()
             return gitdir and #gitdir > 0 and #gitdir < #filepath
         end,
     }
-
-    local function devcontainer_status() end
 
     local config = {
         options = {
@@ -220,12 +205,12 @@ function M.config()
             hint = " ",
             other = "󰠠 ",
         },
-        diagnostics_color = {
-            error = { fg = c.error },
-            warn = { fg = c.warn },
-            info = { fg = c.info },
-            hint = { fg = c.hint },
-        },
+        -- diagnostics_color = {
+        --     error = { fg = c.error },
+        --     warn = { fg = c.warn },
+        --     info = { fg = c.info },
+        --     hint = { fg = c.hint },
+        -- },
         colored = true,
     })
 

@@ -5,6 +5,24 @@ function M.get_colors()
     return require("catppuccin.palettes").get_palette(flavour)
 end
 
+function M.get_lualine_colors()
+    local c = M.get_colors()
+
+    return {
+        bg = "#232639", --c.mantle,
+        fg = c.subtext0,
+        yellow = c.yellow,
+        cyan = c.cyan,
+        darkblue = c.mantle,
+        green = c.green,
+        orange = c.peach,
+        violet = c.lavender,
+        magenta = c.mauve,
+        blue = c.blue,
+        red = c.red,
+    }
+end
+
 function M.setup()
     require("catppuccin").setup({
         lazy = true,

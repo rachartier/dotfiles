@@ -1,5 +1,23 @@
 local M = {}
 
+function M.get_lualine_colors()
+    local c = M.get_colors()
+
+    return {
+        bg = c.mantle, --c.overlay0,
+        fg = c.text,
+        yellow = c.text,
+        cyan = c.text,
+        darkblue = c.text,
+        green = c.text,
+        orange = c.text,
+        violet = c.text,
+        magenta = c.text,
+        blue = c.text,
+        red = c.text,
+    }
+end
+
 function M.get_colors()
     local colors = require("nano-theme.colors").get()
 
@@ -46,7 +64,7 @@ function M.get_colors()
         maroon = colors.red,
         peach = colors.nano_highlight_color,
         yellow = colors.yellow,
-        base = colors.nano_background_color,
+        base = "#232639",
         mantle = colors.base1,
         crust = colors.base0,
         surface0 = colors.nano_highlight_color,
@@ -57,7 +75,7 @@ function M.get_colors()
         overlay2 = colors.nano_subtle_color,
         subtext0 = colors.nano_faded_color,
         subtext1 = colors.nano_faded_color,
-        text = colors.nano_foreground_color,
+        text = "#cad3f5",
     }
 
     return converted_color_name
@@ -66,10 +84,24 @@ end
 function M.setup()
     require("nano-theme").load()
 
-    local converted_color_name = M.get_colors()
+    local colors = M.get_colors()
 
-    require("themes.groups").override_hl(converted_color_name)
-    require("themes.groups").override_lsp_hl(converted_color_name)
+    require("themes.groups").override_hl(colors)
+    require("themes.groups").override_lsp_hl(colors)
+
+    local diag = {
+        DiagnosticError = { fg = colors.red },
+        DiagnosticWarn = { fg = colors.yellow },
+        DiagnosticInfo = { fg = colors.blue },
+        DiagnosticHint = { fg = colors.blue },
+        DiagnosticOk = { fg = colors.green },
+
+        Normal = { bg = "None" },
+    }
+
+    for hl, col in pairs(diag) do
+        vim.api.nvim_set_hl(0, hl, col)
+    end
 end
 
 return M
