@@ -4,7 +4,7 @@ return {
         priority = 1000,
     },
     {
-        "NTBBloodbath/sweetie.nvim",
+        "ronisbr/nano-theme.nvim",
         priority = 1000,
     },
     {
