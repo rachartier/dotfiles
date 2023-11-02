@@ -143,7 +143,7 @@ function M.override_hl(colors_table)
 end
 
 function M.override_lsp_hl(colors_table)
-    local colors = M.get(colors_table)
+    local colors = colors_table
 
     vim.api.nvim_set_hl(0, "@parameter", { fg = colors.red, italic = true })
     vim.api.nvim_set_hl(0, "@variable", { fg = colors.text, italic = false })
