@@ -6,6 +6,7 @@ vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
     group = augroup("checktime"),
     command = "checktime",
 })
+
 vim.api.nvim_create_autocmd({ "TextYankPost" }, {
     group = augroup("yank_group"),
     pattern = "*",
