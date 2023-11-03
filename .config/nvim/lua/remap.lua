@@ -71,3 +71,17 @@ map("o", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result
 map("n", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
 map("x", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
 map("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
+
+local function indent_empty_line()
+    if #vim.fn.getline(".") == 0 then
+        return [["_cc]]
+    end
+end
+
+map("n", "i", function()
+    return indent_empty_line() or "i"
+end, { expr = true, desc = "Indent on empty line one insert" })
+
+map("n", "a", function()
+    return indent_empty_line() or "a"
+end, { expr = true, desc = "Indent on empty line one append" })
