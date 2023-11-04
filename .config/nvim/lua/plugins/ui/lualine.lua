@@ -144,7 +144,7 @@ function M.config()
                 v = colors.blue,
                 [""] = colors.blue,
                 V = colors.blue,
-                c = colors.magenta,
+                c = colors.mauve,
                 no = colors.red,
                 s = colors.orange,
                 S = colors.orange,
@@ -193,7 +193,7 @@ function M.config()
     ins_left({
         M.get_current_filename_with_icon,
         condition = conditions.buffer_not_empty,
-        color = { fg = colors.magenta },
+        color = { fg = colors.mauve },
     })
     ins_left({
         "diagnostics",
@@ -288,7 +288,7 @@ function M.config()
         color = { fg = colors.green },
     })
 
-    ins_right({ "progress", color = { fg = colors.magenta } })
+    ins_right({ "progress", color = { fg = colors.mauve } })
     ins_right({ "location", color = { fg = colors.cyan } })
     ins_right({
         function()
