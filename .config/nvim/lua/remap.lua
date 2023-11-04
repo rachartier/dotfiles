@@ -38,11 +38,21 @@ if os.getenv("TMUX") then
     map("n", "<M-right>", "<cmd>lua require('tmux').move_right()<cr>", { silent = true })
     map("n", "<M-up>", "<cmd>lua require('tmux').move_top()<cr>", { silent = true })
     map("n", "<M-down>", "<cmd>lua require('tmux').move_bottom()<cr>", { silent = true })
+
+    map("n", "<M-h>", "<cmd>lua require('tmux').move_left()<cr>", { silent = true })
+    map("n", "<M-l>", "<cmd>lua require('tmux').move_right()<cr>", { silent = true })
+    map("n", "<M-k>", "<cmd>lua require('tmux').move_top()<cr>", { silent = true })
+    map("n", "<M-j>", "<cmd>lua require('tmux').move_bottom()<cr>", { silent = true })
 else
     map("n", "<M-left>", "<C-W>h", { silent = true })
     map("n", "<M-right>", "<C-W>l", { silent = true })
     map("n", "<M-up>", "<C-W>k", { silent = true })
     map("n", "<M-down>", "<C-W>j", { silent = true })
+
+    map("n", "<M-h>", "<C-W>h", { silent = true })
+    map("n", "<M-l>", "<C-W>l", { silent = true })
+    map("n", "<M-k>", "<C-W>k", { silent = true })
+    map("n", "<M-j>", "<C-W>j", { silent = true })
 end
 
 require("user_plugins.switchbuffer").setup({
