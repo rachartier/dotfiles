@@ -17,7 +17,7 @@ function M.get_lualine_colors()
         green = c.green,
         orange = c.peach,
         violet = c.lavender,
-        magenta = c.mauve,
+        mauve = c.mauve,
         blue = c.blue,
         red = c.red,
     }
@@ -103,6 +103,7 @@ function M.setup()
 
     vim.cmd.colorscheme("catppuccin")
 
+    require("themes.groups").override_hl(M.get_colors())
     require("themes.groups").override_lsp_hl(M.get_colors())
 end
 

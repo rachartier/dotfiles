@@ -63,8 +63,8 @@ function M.get(colors)
             link = "IlluminatedWordRead",
         },
         CmpItemAbbrMatch = {
-            fg = colors.blue,
-            bold = true,
+            fg = colors.mauve,
+            -- bold = true,
             -- underline = true,
         },
         CmpItemAbbrMatchFuzzy = {
