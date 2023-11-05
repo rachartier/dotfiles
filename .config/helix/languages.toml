@@ -1,0 +1,21 @@
+
+[language-server.pyright]
+command = "pyright-langserver"
+args = ["--stdio"]
+# will get "Async jobs timed out" errors if this empty config is not added
+config = {}
+
+# tie python files to pyright
+# this is simply replacing pylsp with pyright in master's languages.toml
+[[language]]
+name = "python"
+scope = "source.python"
+injection-regex = "python"
+file-types = ["py","pyi","py3","pyw","ptl",".pythonstartup",".pythonrc","SConstruct"]
+shebangs = ["python"]
+roots = ["setup.py", "setup.cfg", "pyproject.toml"]
+comment-token = "#"
+language-servers = [ "pyright" ]
+formatter = { command = "black", args = ["-"] }
+indent = { tab-width = 4, unit = "    " }
+auto-format = true
