@@ -56,7 +56,7 @@ function M.get_colors()
         cyan = colors.nano_highlight_color,
         teal = colors.nano_highlight_color,
         green = colors.green,
-        mauve = colors.nano_highlight_color,
+        mauve = colors.nano_foreground_color,
         pink = colors.nano_foreground_color,
         flamingo = colors.mauve,
         rosewater = colors.mauve,
