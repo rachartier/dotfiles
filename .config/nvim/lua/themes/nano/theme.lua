@@ -87,7 +87,7 @@ function M.setup()
     local colors = M.get_colors()
 
     require("themes.groups").override_hl(colors)
-    require("themes.groups").override_lsp_hl(colors)
+    -- require("themes.groups").override_lsp_hl(colors)
 
     local diag = {
         DiagnosticError = { fg = colors.red },
