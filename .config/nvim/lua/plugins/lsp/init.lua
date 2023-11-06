@@ -31,6 +31,7 @@ function M.config()
         virtual_text = {
             prefix = "●",
         },
+        severity_sort = true,
     })
 
     local util = require("lspconfig/util")

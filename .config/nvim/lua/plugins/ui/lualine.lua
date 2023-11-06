@@ -198,13 +198,7 @@ function M.config()
     ins_left({
         "diagnostics",
         sources = { "nvim_lsp" },
-        symbols = {
-            error = " ",
-            warn = " ",
-            info = " ",
-            hint = " ",
-            other = "󰠠 ",
-        },
+        symbols = U.diagnostic_signs,
         -- diagnostics_color = {
         --     error = { fg = c.error },
         --     warn = { fg = c.warn },

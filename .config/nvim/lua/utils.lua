@@ -41,12 +41,20 @@ M.signs = {
     },
 }
 
+-- M.diagnostic_signs = {
+--     error = " ",
+--     warning = " ",
+--     info = " ",
+--     hint = "󱤅 ",
+--     other = "󰠠 ",
+-- }
+
 M.diagnostic_signs = {
-    error = " ",
-    warning = " ",
-    info = " ",
-    hint = "󱤅 ",
-    other = "󰠠 ",
+    error = "●",
+    warning = "●",
+    info = "●",
+    hint = "●",
+    other = "●",
 }
 
 -- M.diagnostic_signs = {
@@ -56,6 +64,8 @@ M.diagnostic_signs = {
 --     hint = "󱤅 ",
 --     other = "󰠠 ",
 -- }
+
+M.diagnostic_signs.warn = M.diagnostic_signs.warning
 
 M.kind_icons = {
     Text = " ",
