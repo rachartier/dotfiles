@@ -6,6 +6,7 @@ sudo apt install zsh --yes
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 echo ".cfg" >> $HOME/.gitignore
+mkdir $HOME/.cfg
 git clone --bare git@github.com:rachartier/dotfiles.git $HOME/.cfg
 /usr/bin/git --git-dir="$HOME/.cfg/" --work-tree="$HOME" checkout
 
