@@ -34,30 +34,30 @@ map("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 map("n", "<leader>o", "<cmd>!feh <cfile> &<CR>", { silent = true })
 
 if os.getenv("TMUX") then
-    map("n", "<M-left>", "<cmd>lua require('tmux').move_left()<cr>", { silent = true })
-    map("n", "<M-right>", "<cmd>lua require('tmux').move_right()<cr>", { silent = true })
-    map("n", "<M-up>", "<cmd>lua require('tmux').move_top()<cr>", { silent = true })
-    map("n", "<M-down>", "<cmd>lua require('tmux').move_bottom()<cr>", { silent = true })
+	map("n", "<M-left>", "<cmd>lua require('tmux').move_left()<cr>", { silent = true })
+	map("n", "<M-right>", "<cmd>lua require('tmux').move_right()<cr>", { silent = true })
+	map("n", "<M-up>", "<cmd>lua require('tmux').move_top()<cr>", { silent = true })
+	map("n", "<M-down>", "<cmd>lua require('tmux').move_bottom()<cr>", { silent = true })
 
-    map("n", "<M-h>", "<cmd>lua require('tmux').move_left()<cr>", { silent = true })
-    map("n", "<M-l>", "<cmd>lua require('tmux').move_right()<cr>", { silent = true })
-    map("n", "<M-k>", "<cmd>lua require('tmux').move_top()<cr>", { silent = true })
-    map("n", "<M-j>", "<cmd>lua require('tmux').move_bottom()<cr>", { silent = true })
-else
-    map("n", "<M-left>", "<C-W>h", { silent = true })
-    map("n", "<M-right>", "<C-W>l", { silent = true })
-    map("n", "<M-up>", "<C-W>k", { silent = true })
-    map("n", "<M-down>", "<C-W>j", { silent = true })
-
-    map("n", "<M-h>", "<C-W>h", { silent = true })
-    map("n", "<M-l>", "<C-W>l", { silent = true })
-    map("n", "<M-k>", "<C-W>k", { silent = true })
-    map("n", "<M-j>", "<C-W>j", { silent = true })
+	map("n", "<M-h>", "<cmd>lua require('tmux').move_left()<cr>", { silent = true })
+	map("n", "<M-l>", "<cmd>lua require('tmux').move_right()<cr>", { silent = true })
+	map("n", "<M-k>", "<cmd>lua require('tmux').move_top()<cr>", { silent = true })
+	map("n", "<M-j>", "<cmd>lua require('tmux').move_bottom()<cr>", { silent = true })
+	-- else
+	--     map("n", "<M-left>", "<C-W>h", { silent = true })
+	--     map("n", "<M-right>", "<C-W>l", { silent = true })
+	--     map("n", "<M-up>", "<C-W>k", { silent = true })
+	--     map("n", "<M-down>", "<C-W>j", { silent = true })
+	--
+	--     map("n", "<M-h>", "<C-W>h", { silent = true })
+	--     map("n", "<M-l>", "<C-W>l", { silent = true })
+	--     map("n", "<M-k>", "<C-W>k", { silent = true })
+	--     map("n", "<M-j>", "<C-W>j", { silent = true })
 end
 
 require("user_plugins.switchbuffer").setup({
-    hl_modified = { ctermbg = 232 },
-    hl_normal = { ctermbg = 232 },
+	hl_modified = { ctermbg = 232 },
+	hl_normal = { ctermbg = 232 },
 })
 
 map("n", "<Tab>", '<cmd>lua require("user_plugins.switchbuffer").select_buffers()<cr>')
@@ -83,15 +83,15 @@ map("x", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result
 map("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
 
 local function indent_empty_line()
-    if #vim.fn.getline(".") == 0 then
-        return [["_cc]]
-    end
+	if #vim.fn.getline(".") == 0 then
+		return [["_cc]]
+	end
 end
 
 map("n", "i", function()
-    return indent_empty_line() or "i"
+	return indent_empty_line() or "i"
 end, { expr = true, desc = "Indent on empty line one insert" })
 
 map("n", "a", function()
-    return indent_empty_line() or "a"
+	return indent_empty_line() or "a"
 end, { expr = true, desc = "Indent on empty line one append" })
