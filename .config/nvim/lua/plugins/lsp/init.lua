@@ -24,6 +24,7 @@ function M.config()
     lsp.preset("recommended")
 
     require("luasnip.loaders.from_vscode").lazy_load()
+    -- require("clangd_extensions.inlay_hints").setup_autocmd()
 
     vim.diagnostic.config({
         float = { border = U.default_border },

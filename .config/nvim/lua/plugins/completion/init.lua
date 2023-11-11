@@ -144,6 +144,7 @@ function M.config()
                 cmp.config.compare.offset,
                 cmp.config.compare.exact,
                 cmp.config.compare.score,
+                require("clangd_extensions.cmp_scores"),
 
                 lspkind_comparator({
                     kind_priority = {
