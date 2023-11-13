@@ -19,6 +19,11 @@ function M.config()
             augend.constant.alias.alpha,
             augend.constant.alias.Alpha,
             augend.semver.alias.semver,
+            augend.constant.new({
+                elements = { "False", "True" },
+                word = true,
+                cyclic = true,
+            }),
         },
     })
 
