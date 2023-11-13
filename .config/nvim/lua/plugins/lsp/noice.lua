@@ -3,6 +3,7 @@ local M = {
     dependencies = {
         "MunifTanjim/nui.nvim",
         "rcarriga/nvim-notify",
+        "j-hui/fidget.nvim",
     },
     event = "VeryLazy",
 }
@@ -12,8 +13,23 @@ function M.config()
 
     vim.opt.termguicolors = true
     require("notify").setup({
-        background_colour = "#000000",
-        render = "compact",
+        background_colour = require("theme").get_colors().base,
+        -- render = "compact",
+    })
+
+    require("fidget").setup({
+        progress = {
+            display = {
+                done_icon = " ",
+            },
+        },
+        notification = {
+            window = {
+                normal_hl = "Comment", -- Base highlight group in the notification window
+                winblend = 0, -- Background color opacity in the notification window
+                border = "none", -- Border around the notification window
+            },
+        },
     })
 
     vim.keymap.set("n", "<leader>un", function()
@@ -55,6 +71,9 @@ function M.config()
             },
         },
         lsp = {
+            progress = {
+                enabled = false,
+            },
             -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
             override = {
                 ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
