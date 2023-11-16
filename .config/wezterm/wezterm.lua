@@ -4,6 +4,7 @@ local config = {}
 config.automatically_reload_config = true
 config.default_domain = "WSL:Ubuntu"
 config.font = wezterm.font("CaskaydiaCove NF", { weight = "Regular" })
+-- config.font = wezterm.font("Monaspace Argon")
 config.font_size = 14
 config.font_rules = {
     -- {
@@ -14,7 +15,7 @@ config.font_rules = {
     --
     -- {
     --     italic = true,
-    --     font = wezterm.font("Operator Mono Book", { weight = "Bold", italic = true }),
+    --     font = wezterm.font("CaskaydiaCove NF", { weight = "Regular", italic = true }),
     -- },
     -- {
     --     intensity = "Bold",
@@ -22,7 +23,7 @@ config.font_rules = {
     --     font = wezterm.font("Operator Mono Medium Italic", { weight = "ExtraBlack", italic = true }),
     -- },
 }
-config.harfbuzz_features = { "calt=1", "ss01=1", "liga=0", "clig=0" }
+config.harfbuzz_features = { "calt=1", "ss01=1", "liga=1", "clig=1" }
 config.line_height = 1
 config.underline_thickness = "2pt"
 -- config.underline_position = "-0.25cell"
@@ -36,9 +37,9 @@ config.window_padding = {
     left = "4cell",
     right = "4cell",
     top = "0.5cell",
-    bottom = "0cell",
+    bottom = "1cell",
 }
-config.window_background_opacity = 0.8
+config.window_background_opacity = 0.4
 -- config.text_background_opacity = 0.8
 config.win32_system_backdrop = "Acrylic"
 
