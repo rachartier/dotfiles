@@ -1,5 +1,10 @@
 local opt = vim.opt
 
+vim.cmd([[
+    let &t_TI = "\<Esc>[>4;2m"
+    let &t_TE = "\<Esc>[>4;m"
+]])
+
 opt.autowrite = true           -- Enable auto write
 opt.clipboard = "unnamedplus"  -- Sync with system clipboard
 opt.completeopt = "menu,menuone,noselect"
