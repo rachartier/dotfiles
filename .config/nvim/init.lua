@@ -53,6 +53,8 @@ require("lazy").setup("plugins", {
     },
 })
 
+require("neovide")
+
 require("set")
 require("remap")
 require("autocmds")

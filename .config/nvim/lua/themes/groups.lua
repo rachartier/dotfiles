@@ -1,6 +1,12 @@
 local M = {}
 
 function M.get(colors)
+    local bg = "None"
+
+    if vim.g.neovide then
+        bg = colors.base
+    end
+
     return {
         -- Visual = { bg = "#234370" },
         Visual = { bg = "#5B6076" },
@@ -11,9 +17,9 @@ function M.get(colors)
         CursorLineNr = {
             fg = colors.overlay1,
         },
-        CursorLine = { bg = "None" },
+        -- CursorLine = { bg = "None" },
         NormalFloat = {
-            bg = "None",
+            bg = bg,
             fg = colors.text,
         },
         NoiceCmdlinePopupBorder = {
@@ -23,7 +29,8 @@ function M.get(colors)
             bg = colors.yellow,
         },
         FloatBorder = {
-            bg = "None",
+            -- bg = "None",
+            bg = bg,
             fg = colors.text,
         },
         FloatTitle = {
@@ -33,7 +40,8 @@ function M.get(colors)
             link = "FloatBorder",
         },
         PopupNormal = {
-            bg = "None",
+            -- bg = "None",
+            bg = bg,
             fg = colors.text,
         },
         Pmenu = {
@@ -50,7 +58,8 @@ function M.get(colors)
             bg = colors.surface0,
         },
         NeoTreeNormal = {
-            bg = "None",
+            -- bg = "None",
+            bg = bg,
         },
         IlluminatedWordRead = {
             bold = true,

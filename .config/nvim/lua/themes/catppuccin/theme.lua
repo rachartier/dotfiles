@@ -10,7 +10,7 @@ function M.get_lualine_colors()
 
     return {
         -- bg = "#232639", --c.mantle,
-        bg = "None",
+        -- bg = "None",
         fg = c.subtext0,
         yellow = c.yellow,
         cyan = c.cyan,
@@ -28,7 +28,7 @@ function M.setup()
     require("catppuccin").setup({
         lazy = true,
         flavour = flavour, -- latte, frappe, macchiato, mocha
-        transparent_background = true,
+        transparent_background = not vim.g.neovide,
         show_end_of_buffer = false,
         term_colors = true,
         dim_inactive = {
@@ -89,10 +89,10 @@ function M.setup()
                     information = { "italic" },
                 },
                 underlines = {
-                    errors = { "underline" },
-                    hints = { "underline" },
-                    warnings = { "underline" },
-                    information = { "underline" },
+                    errors = { "undercurl" },
+                    hints = { "undercurl" },
+                    warnings = { "undercurl" },
+                    information = { "undercurl" },
                 },
                 inlay_hints = {
                     background = true,
