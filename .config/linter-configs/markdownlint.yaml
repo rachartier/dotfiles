@@ -1,0 +1,15 @@
+blanks-around-headings: { lines_below: 0 }
+
+# lists
+blanks-around-lists: false
+ul-style: { style: sublist }
+
+# taken care of by editorconfig
+line-length: false
+no-hard-tabs: false
+ul-indent: false
+
+# disabled
+first-line-heading: false
+no-inline-html: false
+no-emphasis-as-heading: false

@@ -19,11 +19,8 @@ function M.config()
 		-- Builtin 'statuscolumn' options
 		setopt = true, -- whether to set the 'statuscolumn', providing builtin click actions
 		segments = {
-			{ text = { "%C" }, click = "v:lua.ScFa" },
-			{
-				sign = { name = { ".*" } },
-				click = "v:lua.ScSa",
-			},
+
+			{ text = { "%s" }, click = "v:lua.ScFa" },
 			{
 				text = { builtin.lnumfunc, " " },
 				condition = { true, builtin.not_empty },
