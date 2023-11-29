@@ -109,9 +109,8 @@ return {
 	{ -- Formatter integration
 		"stevearc/conform.nvim",
 		config = function()
-			require("conform").setup({ formatters_by_ft = formatters })
-
 			require("conform").setup({
+				formatters_by_ft = formatters,
 				format_on_save = function(bufnr)
 					-- Disable with a global or buffer-local variable
 					if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
@@ -120,9 +119,6 @@ return {
 
 					return { timeout_ms = 500, lsp_fallback = true }
 				end,
-			})
-
-			require("conform").setup({
 				format_after_save = function(bufnr)
 					if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
 						return
@@ -136,11 +132,11 @@ return {
 				"--config=" .. linter_config .. "/markdownlint.yaml",
 				"$FILENAME",
 			}
-			require("conform.formatters.codespell").args = {
-				"$FILENAME",
-				"--write-changes",
-				"--check-hidden", -- conform.nvim's temp file is hidden
-				"--toml=" .. linter_config .. "/codespell.toml",
+			require("conform").formatters.autoflake = {
+				prepend_args = {
+					"--remove-all-unused-imports",
+					"--remove-unused-variables",
+				},
 			}
 		end,
 		event = { "BufWritePre" },

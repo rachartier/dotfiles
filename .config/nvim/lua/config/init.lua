@@ -15,17 +15,20 @@ M.linters = {
 	sh = { "shellcheck" },
 	markdown = { "markdownlint", "vale" },
 	yaml = { "yamllint" },
-	python = { "pylint" },
+	python = {
+		"pylint",
+		-- "ruff",
+	},
 	gitcommit = {},
 	json = {},
 	toml = {},
 }
 
 M.formatters = {
-	json = { "biome" },
-	jsonc = { "biome" },
+	json = { "fixjson" },
+	jsonc = { "fixjson" },
 	lua = { "stylua", "ast-grep" },
-	python = { "black" },
+	python = { "black", "autoflake", "isort" },
 	yaml = { "prettier" },
 	html = { "prettier" },
 	markdown = {
@@ -33,6 +36,7 @@ M.formatters = {
 		"markdownlint",
 		"injected",
 	},
+	cs = { "csharpier" },
 	css = { "stylelint", "prettier" },
 	sh = { "shellcheck", "shfmt" },
 	["_"] = { "trim_whitespace", "trim_newlines", "squeeze_blanks" },
