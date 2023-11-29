@@ -1,4 +1,3 @@
-local u = require("utils")
 local linter_config = require("utils").linter_config_folder
 
 local linters = require("config").linters
@@ -39,27 +38,8 @@ local function to_autoinstall(myLinters, myFormatters, extras, ignoreTools)
 	return tools
 end
 
-local function linterConfigs()
-	local lint = require("lint")
-	lint.linters_by_ft = linters
-
-	lint.linters.codespell.args = { "--toml=" .. linter_config .. "/codespell.toml" }
-	lint.linters.shellcheck.args = { "--shell=bash", "--format=json", "-" }
-	lint.linters.yamllint.args = { "--config-file=" .. linter_config .. "/yamllint.yaml", "--format=parsable", "-" }
-	lint.linters.markdownlint.args = {
-		"--disable=no-trailing-spaces", -- not disabled in config, so it's enabled for formatting
-		"--disable=no-multiple-blanks",
-		"--config=" .. linter_config .. "/markdownlint.yaml",
-	}
-	lint.linters["editorconfig-checker"].args = {
-		"-no-color",
-		"-disable-max-line-length", -- only rule of thumb
-		"-disable-trim-trailing-whitespace", -- will be formatted anyway
-	}
-end
-
-local function lintTriggers()
-	local function doLint()
+local function lint_triggers()
+	local function do_lint()
 		vim.defer_fn(function()
 			if vim.bo.buftype ~= "" then
 				return
@@ -84,17 +64,17 @@ local function lintTriggers()
 	end
 
 	vim.api.nvim_create_autocmd({ "BufReadPost", "InsertLeave", "TextChanged", "FocusGained" }, {
-		callback = doLint,
+		callback = do_lint,
 	})
 
 	-- due to auto-save.nvim, we need the custom event "AutoSaveWritePost"
 	-- instead of "BufWritePost" to trigger linting to prevent race conditions
 	vim.api.nvim_create_autocmd("User", {
 		pattern = "AutoSaveWritePost",
-		callback = doLint,
+		callback = do_lint,
 	})
 
-	doLint() -- run once on initialization
+	do_lint() -- run once on initialization
 end
 
 return {
@@ -102,8 +82,13 @@ return {
 		"mfussenegger/nvim-lint",
 		event = "VeryLazy",
 		config = function()
-			linterConfigs()
-			lintTriggers()
+			local lint = require("lint")
+			lint.linters_by_ft = linters
+			for name, value in pairs(require("config").linters_by_ft_options) do
+				lint.linters[name].args = value
+			end
+
+			lint_triggers()
 		end,
 	},
 	{ -- Formatter integration
@@ -127,18 +112,9 @@ return {
 				end,
 			})
 
-			require("conform.formatters.markdownlint").args = {
-				"--fix",
-				"--config=" .. linter_config .. "/markdownlint.yaml",
-				"$FILENAME",
-			}
-			require("conform").formatters.autoflake = {
-				prepend_args = {
-					"--remove-all-unused-imports",
-					"--remove-unused-variables",
-				},
-			}
+			require("conform").formatters = require("config").formatters_by_ft_options
 		end,
+
 		event = { "BufWritePre" },
 		cmd = { "ConformInfo" },
 		keys = {
