@@ -85,7 +85,7 @@ return {
 			local lint = require("lint")
 			lint.linters_by_ft = linters
 			for name, value in pairs(require("config").linters_by_ft_options) do
-				lint.linters[name].args = value
+				lint.linters[name].args = value.args
 			end
 
 			lint_triggers()
