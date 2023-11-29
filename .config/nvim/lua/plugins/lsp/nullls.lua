@@ -1,6 +1,7 @@
 local M = {
     "nvimtools/none-ls.nvim",
     event = { "BufReadPre", "BufNewFile" },
+    enabled = false,
 }
 
 local with_diagnostics_code = function(builtin)
