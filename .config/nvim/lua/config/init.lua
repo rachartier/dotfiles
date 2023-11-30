@@ -16,7 +16,7 @@ M.linters = {
 	markdown = { "markdownlint", "vale" },
 	yaml = { "yamllint" },
 	python = {
-		"pylint",
+		-- "pylint",
 		-- "ruff",
 	},
 	gitcommit = {},
