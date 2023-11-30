@@ -1,7 +1,6 @@
 local M = {
 	"luukvbaal/statuscol.nvim",
 	event = { "BufReadPre", "BufNewFile" },
-	branch = "0.10",
 }
 
 function M.config()
@@ -19,7 +18,11 @@ function M.config()
 		-- Builtin 'statuscolumn' options
 		setopt = true, -- whether to set the 'statuscolumn', providing builtin click actions
 		segments = {
-			{ text = { "%s" }, click = "v:lua.ScFa" },
+			{ text = { "%C" }, click = "v:lua.ScFa" },
+			{
+				sign = { name = { ".*" } },
+				click = "v:lua.ScSa",
+			},
 			{
 				text = { builtin.lnumfunc, " " },
 				condition = { true, builtin.not_empty },
