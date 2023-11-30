@@ -1,5 +1,3 @@
-local linter_config = require("utils").linter_config_folder
-
 local linters = require("config").linters
 local formatters = require("config").formatters
 local extras = require("config").extras
