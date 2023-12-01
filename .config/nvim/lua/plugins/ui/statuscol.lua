@@ -1,6 +1,7 @@
 local M = {
 	"luukvbaal/statuscol.nvim",
 	event = { "BufReadPre", "BufNewFile" },
+	branch = "0.10",
 }
 
 function M.config()
@@ -20,7 +21,7 @@ function M.config()
 		segments = {
 			{ text = { "%C" }, click = "v:lua.ScFa" },
 			{
-				sign = { name = { ".*" } },
+				sign = { namespace = { ".*" } },
 				click = "v:lua.ScSa",
 			},
 			{
