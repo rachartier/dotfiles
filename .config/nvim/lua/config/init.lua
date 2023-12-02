@@ -1,5 +1,7 @@
 local M = {}
 
+M.gif_alpha_enabled = false
+
 M.lsps = {
 	"lua_ls",
 	"dockerls",
