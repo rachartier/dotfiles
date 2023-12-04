@@ -89,10 +89,10 @@ function M.setup()
 					information = { "italic" },
 				},
 				underlines = {
-					errors = { "underline" },
-					hints = { "underline" },
-					warnings = { "underline" },
-					information = { "underline" },
+					errors = { "undercurl" },
+					hints = { "undercurl" },
+					warnings = { "undercurl" },
+					information = { "undercurl" },
 				},
 				inlay_hints = {
 					background = true,
