@@ -27,22 +27,21 @@ M.linters = {
 }
 
 M.formatters = {
-	json = { "fixjson" },
-	jsonc = { "fixjson" },
-	lua = { "stylua", "ast-grep" },
-	python = { "black", "autoflake", "isort" },
-	yaml = { "prettier" },
-	html = { "prettier" },
+	json = { "fixjson", "typos" },
+	jsonc = { "fixjson", "typos" },
+	lua = { "stylua", "ast-grep", "typos" },
+	python = { "black", "autoflake", "isort", "typos" },
+	yaml = { "prettier", "typos" },
+	html = { "prettier", "typos" },
 	markdown = {
 		"markdown-toc",
 		"markdownlint",
 		"injected",
 	},
-	cs = { "csharpier" },
-	css = { "stylelint", "prettier" },
-	sh = { "shellcheck", "shfmt" },
+	cs = { "csharpier", "typos" },
+	css = { "stylelint", "prettier", "typos" },
+	sh = { "shellcheck", "shfmt", "typos" },
 	["_"] = { "trim_whitespace", "trim_newlines", "squeeze_blanks" },
-	["*"] = { "typos" },
 }
 
 M.extras = {
