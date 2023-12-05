@@ -9,8 +9,11 @@ function M.get(colors)
 
 	return {
 		-- Visual = { bg = "#234370" },
-		Visual = { bg = "#5B6076" },
+		Visual = { bg = colors.surface1 },
 		-- Visual = { bg = colors.blue, fg = colors.crust },
+		Cursor = {
+			bg = colors.text,
+		},
 		LineNr = {
 			fg = colors.surface1,
 		},
@@ -70,7 +73,7 @@ function M.get(colors)
 		IlluminatedWordWrite = {
 			link = "IlluminatedWordRead",
 		},
-		IluminatedReferenceText = {
+		IlluminatedReferenceText = {
 			link = "IlluminatedWordRead",
 		},
 		CmpItemAbbrMatch = {
@@ -120,6 +123,7 @@ function M.get(colors)
 			fg = colors.red,
 		},
 		CmpGhostText = { link = "Comment", default = true },
+		LspLens = { italic = true, fg = colors.surface1 },
 		-- StatusLine = {
 		--     bg = colors.mantle,
 		-- },

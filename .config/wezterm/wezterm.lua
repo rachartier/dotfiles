@@ -30,6 +30,7 @@ config.underline_thickness = "2pt"
 -- config.underline_position = "-0.25cell"
 config.enable_kitty_graphics = true
 config.allow_square_glyphs_to_overflow_width = "Always"
+config.bold_brightens_ansi_colors = "BrightAndBold"
 
 config.hide_tab_bar_if_only_one_tab = true
 config.adjust_window_size_when_changing_font_size = false
@@ -67,6 +68,12 @@ config.color_schemes = {
 	["CustomCatppuccin"] = custom,
 }
 config.color_scheme = "CustomCatppuccin"
+
+config.colors = {
+	cursor_border = "#f4dbd6",
+	cursor_bg = "#f4dbd6",
+}
+
 -- config.color_scheme = "Catppuccin Macchiato" -- or Macchiato, Frappe, Latte
 
 return config
