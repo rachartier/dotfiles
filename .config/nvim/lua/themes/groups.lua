@@ -11,9 +11,6 @@ function M.get(colors)
 		-- Visual = { bg = "#234370" },
 		Visual = { bg = colors.surface1 },
 		-- Visual = { bg = colors.blue, fg = colors.crust },
-		Cursor = {
-			bg = colors.text,
-		},
 		LineNr = {
 			fg = colors.surface1,
 		},
@@ -90,8 +87,8 @@ function M.get(colors)
 			link = "PmenuSel",
 		},
 		FlashLabel = {
-			fg = "#000000",
-			bg = "#FFFF00",
+			fg = colors.crust,
+			bg = colors.yellow,
 			bold = true,
 		},
 		NeoTreeIndentMarker = {
