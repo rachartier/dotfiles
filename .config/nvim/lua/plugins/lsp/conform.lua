@@ -102,12 +102,6 @@ return {
 
 					return { timeout_ms = 500, lsp_fallback = true }
 				end,
-				format_after_save = function(bufnr)
-					if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
-						return
-					end
-					return { lsp_fallback = true }
-				end,
 			})
 
 			require("conform").formatters = require("config").formatters_by_ft_options
