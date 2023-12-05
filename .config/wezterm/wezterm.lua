@@ -3,9 +3,10 @@ local config = {}
 
 config.automatically_reload_config = true
 config.default_domain = "WSL:Ubuntu"
-config.font = wezterm.font("CaskaydiaCove NF", { weight = "Regular" })
+-- config.font = wezterm.font("CaskaydiaCove NF", { weight = "Regular" })
+config.font = wezterm.font("Agave Nerd Font")
 -- config.font = wezterm.font("Monaspace Argon")
-config.font_size = 14
+config.font_size = 15
 config.font_rules = {
 	-- {
 	--     intensity = "Bold",
@@ -14,8 +15,8 @@ config.font_rules = {
 	-- },
 	--
 	-- {
-	--     italic = true,
-	--     font = wezterm.font("CaskaydiaCove NF", { weight = "Regular", italic = true }),
+	-- 	italic = true,
+	-- 	font = wezterm.font("CaskaydiaCove NF", { italic = true }),
 	-- },
 	-- {
 	--     intensity = "Bold",
@@ -39,7 +40,7 @@ config.window_padding = {
 	top = "0.5cell",
 	bottom = "0.4cell",
 }
-config.window_background_opacity = 0.4
+config.window_background_opacity = 0.7
 -- config.text_background_opacity = 0.8
 config.win32_system_backdrop = "Acrylic"
 
