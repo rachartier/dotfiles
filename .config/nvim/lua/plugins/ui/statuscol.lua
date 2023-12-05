@@ -21,7 +21,7 @@ function M.config()
 		segments = {
 			{ text = { "%C" }, click = "v:lua.ScFa" },
 			{
-				sign = { namespace = { ".*" } },
+				sign = { name = { ".*" } },
 				click = "v:lua.ScSa",
 			},
 			{
