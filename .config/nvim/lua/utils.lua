@@ -1,6 +1,6 @@
 local M = {}
 
-M.linter_config_folder = os.getenv("HOME") .. ".config/linter-configs"
+M.linter_config_folder = os.getenv("HOME") .. "/.config/linter-configs"
 
 function M.length(table)
 	local count = 0

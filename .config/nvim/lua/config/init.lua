@@ -9,7 +9,7 @@ M.lsps = {
 	"bashls",
 	"pyright",
 	"omnisharp",
-	-- "clangd",
+	"clangd",
 }
 
 M.linters = {
@@ -38,6 +38,7 @@ M.formatters = {
 		"markdownlint",
 		"injected",
 	},
+	c = { "clang-format", "typos" },
 	cs = { "csharpier", "typos" },
 	css = { "stylelint", "prettier", "typos" },
 	sh = { "shellcheck", "shfmt", "typos" },
@@ -61,6 +62,20 @@ M.formatters_by_ft_options = {
 			"--remove-all-unused-imports",
 			"--remove-unused-variables",
 		},
+	},
+	black = {
+		prepend_args = {
+			-- "--line-length 300",
+		},
+	},
+}
+
+M.formatters_by_ft_options["clang-format"] = {
+	command = os.getenv("HOME") .. "/.local/share/nvim/mason/bin/clang-format",
+	inherit = false,
+	args = {
+		"--style=file:" .. linter_config .. "/clang-format",
+		"$FILENAME",
 	},
 }
 
