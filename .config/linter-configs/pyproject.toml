@@ -54,3 +54,6 @@ disable = [
 	"unused-argument",
 	"unused-import",
 ]
+
+[tool.autoflake]
+check = true
