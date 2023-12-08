@@ -15,7 +15,7 @@ M.lsps = {
 M.linters = {
 	lua = { "selene" },
 	sh = { "shellcheck" },
-	markdown = { "markdownlint", "vale" },
+	markdown = { "markdownlint" },
 	yaml = { "yamllint" },
 	python = {
 		-- "pylint",
