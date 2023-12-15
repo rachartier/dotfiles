@@ -9,7 +9,7 @@ function M.config()
 		sections = {
 			definition = function(count)
 				if count > 1 then
-					return "Def: " .. count .. " | "
+					return "Def: " .. count
 				end
 				return ""
 			end,
@@ -20,7 +20,7 @@ function M.config()
 				return "Imp: " .. count .. " | "
 			end,
 			git_authors = function(latest_author, count)
-				return "  " .. latest_author .. (count - 1 == 0 and "" or (" + " .. count - 1))
+				return " |   " .. latest_author .. (count - 1 == 0 and "" or (" + " .. count - 1))
 			end,
 		},
 	})
