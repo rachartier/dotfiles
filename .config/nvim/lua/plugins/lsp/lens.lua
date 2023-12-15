@@ -9,12 +9,12 @@ function M.config()
 		sections = {
 			definition = function(count)
 				if count > 1 then
-					return "Def: " .. count
+					return " | Def: " .. count
 				end
 				return ""
 			end,
 			references = function(count)
-				return "Ref: " .. count .. " | "
+				return "Ref: " .. count
 			end,
 			implements = function(count)
 				return "Imp: " .. count .. " | "
