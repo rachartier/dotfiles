@@ -22,7 +22,7 @@ local function fuzzy_find_under_cursor()
 			prompt_position = "bottom",
 		},
 
-		borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+		-- borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
 		default_text = word_under_cursor,
 	})
 end

@@ -12,10 +12,18 @@ function M.config()
 	local U = require("utils")
 
 	vim.opt.termguicolors = true
-	require("notify").setup({
-		background_colour = require("theme").get_colors().base,
-		-- render = "compact",
-	})
+
+	if require("theme").get_colors().base ~= nil then
+		require("notify").setup({
+			background_colour = require("theme").get_colors().base,
+			-- render = "compact",
+		})
+	else
+		require("notify").setup({
+			background_colour = "#000000",
+			-- render = "compact",
+		})
+	end
 
 	require("fidget").setup({
 		progress = {

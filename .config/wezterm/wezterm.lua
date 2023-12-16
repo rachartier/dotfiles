@@ -47,7 +47,7 @@ config.window_padding = {
 	top = "0.5cell",
 	bottom = "0.4cell",
 }
-config.window_background_opacity = 0.7
+-- config.window_background_opacity = 0.7
 -- config.text_background_opacity = 0.8
 config.win32_system_backdrop = "Acrylic"
 
@@ -76,6 +76,7 @@ config.color_schemes = {
 config.color_scheme = "CustomCatppuccin"
 
 config.colors = {
+	background = "#2e3440",
 	cursor_border = "#f4dbd6",
 	cursor_bg = "#f4dbd6",
 }
