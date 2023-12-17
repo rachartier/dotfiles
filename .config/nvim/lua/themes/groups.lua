@@ -3,7 +3,7 @@ local M = {}
 function M.get(colors)
 	local bg = "None"
 
-	if vim.g.neovide then
+	if vim.g.neovide or colors.base ~= "None" then
 		bg = colors.base
 	end
 

@@ -167,7 +167,7 @@ function M.setup()
 		Question = { fg = c_foreground },
 		QuickFixLine = { link = "Visual" },
 		Search = { bg = c_subtle },
-		SignColumn = { fg = c_faded },
+		SignColumn = { fg = c_shaded },
 		SpecialKey = { fg = c_salient },
 		SpellBad = { underdashed = true },
 		SpellCap = { link = "SpellBad" },
@@ -189,7 +189,7 @@ function M.setup()
 		Whitespace = { link = "NonText" },
 		WildMenu = { link = "PmenuSel" },
 		WinBar = { fg = c_foreground },
-		WinBarNC = { fg = c_faded },
+		WinBarNC = { fg = c_lavender },
 		WinSeparator = { link = "VertSplit" },
 		lCursor = { link = "Cursor" },
 		-- }}}2
@@ -364,9 +364,9 @@ function M.setup()
 		-- }}}2
 
 		-- Diagnostic {{{2
-		DiagnosticOk = { fg = c_pine },
-		DiagnosticError = { fg = c_critical },
-		DiagnosticWarn = { fg = c_popout },
+		DiagnosticOk = { fg = macchiato.green },
+		DiagnosticError = { fg = macchiato.red },
+		DiagnosticWarn = { fg = macchiato.yellow },
 		DiagnosticInfo = { fg = c_salient },
 		DiagnosticHint = { fg = c_foreground },
 		DiagnosticVirtualTextOk = { fg = c_faded, bg = c_highlight },
@@ -489,19 +489,19 @@ function M.setup()
 		CmpVirtualText = { fg = c_faint, italic = true },
 
 		-- gitsigns
-		GitSignsAdd = { fg = c_pine },
-		GitSignsAddInline = { fg = c_pine },
-		GitSignsAddLnInline = { fg = c_pine },
-		GitSignsAddPreview = { fg = c_pine },
-		GitSignsChange = { fg = c_violet },
-		GitSignsChangeInline = { fg = c_violet },
-		GitSignsChangeLnInline = { fg = c_violet },
-		GitSignsCurrentLineBlame = { fg = c_violet },
-		GitSignsDelete = { fg = c_vermillion },
-		GitSignsDeleteInline = { fg = c_popout },
-		GitSignsDeleteLnInline = { fg = c_popout },
-		GitSignsDeletePreview = { fg = c_popout },
-		GitSignsDeleteVirtLnInLine = { fg = c_popout },
+		GitSignsAdd = { fg = macchiato.green },
+		GitSignsAddInline = { fg = macchiato.green },
+		GitSignsAddLnInline = { fg = macchiato.green },
+		GitSignsAddPreview = { fg = macchiato.green },
+		GitSignsChange = { fg = macchiato.blue },
+		GitSignsChangeInline = { fg = macchiato.blue },
+		GitSignsChangeLnInline = { fg = macchiato.blue },
+		GitSignsCurrentLineBlame = { fg = macchiato.blue },
+		GitSignsDelete = { fg = macchiato.red },
+		GitSignsDeleteInline = { fg = macchiato.red },
+		GitSignsDeleteLnInline = { fg = macchiato.red },
+		GitSignsDeletePreview = { fg = macchiato.red },
+		GitSignsDeleteVirtLnInLine = {},
 		GitSignsUntracked = { fg = c_subtle },
 		GitSignsUntrackedLn = { fg = c_subtle },
 		GitSignsUntrackedNr = { fg = c_subtle },
@@ -711,14 +711,18 @@ function M.setup()
 		-- }}}2
 
 		IlluminatedWordRead = {
-			bold = true,
-			bg = c_faded,
+			-- bold = true,
+			underline = false,
+			bg = c_subtle,
 		},
 		IlluminatedWordWrite = {
 			link = "IlluminatedWordRead",
 		},
 		IlluminatedReferenceText = {
 			link = "IlluminatedWordRead",
+		},
+		MiniIndentscopeSymbol = {
+			fg = c_subtle,
 		},
 	}
 	-- }}}1
