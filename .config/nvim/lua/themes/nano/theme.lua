@@ -529,7 +529,7 @@ function M.setup()
 		TelescopeMatching = { fg = c_salient, bold = true },
 		TelescopePromptCounter = { link = "Comment" },
 		TelescopePromptPrefix = { fg = c_critical },
-		TelescopeSelection = { fg = c_foreground },
+		TelescopeSelection = { bg = c_highlight, fg = c_foreground },
 		TelescopeMultiIcon = { fg = c_salient, bold = true },
 		TelescopeMultiSelection = { bg = c_shaded, bold = true },
 		TelescopeSelectionCaret = { fg = c_critical },

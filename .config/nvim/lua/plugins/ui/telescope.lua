@@ -13,6 +13,8 @@ local M = {
 	},
 }
 
+local setup_called = false
+
 local function fuzzy_find_under_cursor()
 	local builtin = require("telescope.builtin")
 	local word_under_cursor = vim.fn.expand("<cword>")
