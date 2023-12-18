@@ -725,6 +725,7 @@ function M.setup()
 		MiniIndentscopeSymbol = {
 			fg = c_subtle,
 		},
+		LspLens = { italic = true, fg = c_subtle },
 	}
 	-- }}}1
 
