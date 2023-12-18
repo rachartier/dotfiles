@@ -44,7 +44,8 @@ function M.setup()
 
     if vim.go.bg == 'dark' then
         c_foreground = '#cbced2'
-        c_background = '#2e3440'
+        -- c_background = '#2e3440'
+        c_background = 'None'
         c_highlight  = '#3b4252'
         c_critical   = '#ebcb8b'
         c_salient    = '#81a1c0'
