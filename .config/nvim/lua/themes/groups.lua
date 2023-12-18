@@ -131,16 +131,16 @@ function M.get(colors)
 
 		TelescopeMatching = { link = "CmpItemAbbrMatch" },
 
-		-- TelescopePromptPrefix = { bg = colors.surface0 },
-		-- TelescopePromptNormal = { bg = colors.surface0 },
-		-- TelescopePromptBorder = { bg = colors.surface0, fg = colors.surface0 },
+		TelescopePromptPrefix = { bg = colors.bg },
+		TelescopePromptNormal = { bg = colors.bg },
+		TelescopePromptBorder = { bg = colors.bg },
 		TelescopePromptTitle = { bg = colors.pink, fg = colors.base },
 
 		TelescopeResultsNormal = { fg = colors.subtext1 },
-		-- TelescopeResultsBorder = { bg = colors.mantle, fg = colors.mantle },
+		TelescopeResultsBorder = { bg = colors.bg },
 		TelescopeResultsTitle = { bg = colors.blue, fg = colors.base },
 
-		-- TelescopePreviewBorder = { bg = colors.base, fg = colors.base },
+		TelescopePreviewBorder = { bg = colors.bg },
 		TelescopePreviewNormal = {},
 		TelescopePreviewTitle = { bg = colors.green, fg = colors.base },
 	}

@@ -10,7 +10,7 @@ function M.get_lualine_colors()
 
 	return {
 		-- bg = "#232639", --c.mantle,
-		-- bg = "None",
+		bg = "None",
 		fg = c.subtext0,
 		yellow = c.yellow,
 		cyan = c.cyan,
