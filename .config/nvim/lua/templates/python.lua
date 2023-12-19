@@ -1,7 +1,7 @@
 local utils = require("new-file-template.utils")
 
 local function main_template(relative_path, filename)
-    return [[
+	return [[
 
 def main():
     |cursor|
@@ -12,9 +12,9 @@ if __name__ == "__main__":
 end
 
 local function class_template(relative_path, filename)
-    local name = vim.split(filename, "%.")[1]
+	local name = vim.split(filename, "%.")[1]
 
-    return [[
+	return [[
 class ]] .. utils.snake_to_class_camel(name) .. [[:
     def __init__(self) -> None:
         |cursor|
@@ -27,10 +27,10 @@ end
 ---   - `relative_path` (string): The relative path of the new file, e.g., "lua/new-file-template/templates/init.lua".
 ---   - `filename` (string): The filename of the new file, e.g., "init.lua".
 return function(opts)
-    local template = {
-        { pattern = "main.py", content = main_template },
-        { pattern = ".*",      content = class_template },
-    }
+	local template = {
+		{ pattern = "main.py", content = main_template },
+		{ pattern = ".*", content = class_template },
+	}
 
-    return utils.find_entry(template, opts)
+	return utils.find_entry(template, opts)
 end

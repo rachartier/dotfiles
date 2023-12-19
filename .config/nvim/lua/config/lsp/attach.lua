@@ -89,6 +89,17 @@ M.on_attach = function(client, bufnr)
 		{ desc = "Show line diagnostics" }
 	)
 	vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, bufopts, { desc = "Help" })
+
+	vim.keymap.set("n", "<leader>d", function()
+		vim.diagnostic.goto_prev({ float = true })
+	end)
+
+	vim.keymap.set("n", "<leader>dn", function()
+		vim.diagnostic.goto_prev({ float = false })
+	end)
+	vim.keymap.set("n", "<leader>dp", function()
+		vim.diagnostic.goto_next({ float = false })
+	end)
 end
 
 return M
