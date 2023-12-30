@@ -74,13 +74,13 @@ config.color_schemes = {
 	["CustomCatppuccin"] = custom,
 }
 config.color_scheme = "CustomCatppuccin"
-
-config.colors = {
-	-- background = "#2e3440",
-	cursor_border = "#f4dbd6",
-	cursor_bg = "#f4dbd6",
-}
-
+--
+-- config.colors = {
+-- 	-- background = "#2e3440",
+-- 	cursor_border = "#f4dbd6",
+-- 	cursor_bg = "#f4dbd6",
+-- }
+--
 -- config.color_scheme = "Catppuccin Macchiato" -- or Macchiato, Frappe, Latte
 
 return config
