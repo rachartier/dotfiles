@@ -1,14 +1,8 @@
 local M = {
 	"VonHeikemen/lsp-zero.nvim",
 	dependencies = {
-
 		"onsails/lspkind.nvim",
-
 		"neovim/nvim-lspconfig",
-
-		-- Snippets
-		"L3MON4D3/LuaSnip",
-		"rafamadriz/friendly-snippets",
 	},
 	-- event = { "BufReadPost", "BufNewFile" },
 	-- cmd = { "LspInfo", "LspInstall", "LspUninstall" },
@@ -23,7 +17,6 @@ function M.config()
 
 	lsp.preset("recommended")
 
-	require("luasnip.loaders.from_vscode").lazy_load()
 	-- require("clangd_extensions.inlay_hints").setup_autocmd()
 
 	vim.diagnostic.config({
