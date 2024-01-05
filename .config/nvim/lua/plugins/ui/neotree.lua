@@ -5,9 +5,6 @@ local M = {
 		"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
 		"MunifTanjim/nui.nvim",
 	},
-	keys = {
-		{ "<leader>te", "<cmd>Neotree float %:p<CR>" },
-	},
 	priority = 55,
 }
 
@@ -28,7 +25,7 @@ function M.config()
 			},
 			indent = {
 				indent_size = 2,
-				padding = 1, -- extra padding on left hand side
+				-- padding = 1, -- extra padding on left hand side
 				-- indent guides
 				with_markers = true,
 				indent_marker = "│",
@@ -41,9 +38,9 @@ function M.config()
 				expander_highlight = "NeoTreeExpander",
 			},
 			icon = {
-				folder_closed = "",
-				folder_open = "",
-				folder_empty = "ﰊ",
+				folder_closed = "󰉋",
+				folder_open = "󰝰",
+				folder_empty = "󰉖",
 				-- The next two settings are only a fallback, if you use nvim-web-devicons and configure default icons there
 				-- then these will never be used.
 				default = "*",
@@ -97,6 +94,8 @@ function M.config()
 			},
 		},
 	})
+
+	vim.keymap.set("n", "<leader>te", "<cmd>Neotree float %:p<CR>")
 end
 
 return {
