@@ -32,9 +32,6 @@ if vim.g.neovide then
 	vim.g.neovide_light_angle_degrees = 45
 	vim.g.neovide_light_radius = 5
 
-	vim.opt.pumblend = 25 -- Popup blend
-	vim.opt.winblend = 45 -- Window blend
-
 	-- -- Helper function for transparency formatting
 	-- local alpha = function()
 	-- 	return string.format("%x", math.floor(255 * (vim.g.transparency or 0.8)))

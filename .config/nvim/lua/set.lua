@@ -20,6 +20,10 @@ if vim.fn.has("wsl") == 1 then
 	})
 end
 
+local conf = require("config")
+vim.opt.pumblend = conf.pumblend -- Popup blend
+vim.opt.winblend = conf.winblend -- Window blend
+
 opt.completeopt = "menu,menuone,noselect"
 opt.conceallevel = 0 -- Hide * markup for bold and italic
 opt.confirm = false -- Confirm to save changes before exiting modified buffer
