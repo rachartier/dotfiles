@@ -6,7 +6,20 @@ vim.cmd([[
 ]])
 
 opt.autowrite = true -- Enable auto write
-opt.clipboard = "unnamedplus" -- Sync with system clipboard
+
+opt.clipboard = "unnamedplus"
+
+if vim.fn.has("wsl") == 1 then
+	vim.api.nvim_create_autocmd("TextYankPost", {
+
+		group = vim.api.nvim_create_augroup("Yank", { clear = true }),
+
+		callback = function()
+			vim.fn.system("clip.exe", vim.fn.getreg('"'))
+		end,
+	})
+end
+
 opt.completeopt = "menu,menuone,noselect"
 opt.conceallevel = 0 -- Hide * markup for bold and italic
 opt.confirm = false -- Confirm to save changes before exiting modified buffer
@@ -17,12 +30,11 @@ opt.grepformat = "%f:%l:%c:%m"
 opt.grepprg = "rg --vimgrep"
 opt.ignorecase = true -- Ignore case
 opt.inccommand = "nosplit" -- preview incremental substitute
-opt.laststatus = 0 -- global statusline
+opt.laststatus = 3 -- global statusline
 opt.cmdheight = 1
 opt.list = false -- Show some invisible characters (tabs...
 opt.mouse = "a" -- Enable mouse mode
 opt.number = true -- Print line number
--- opt.pumblend = 20          -- Popup blend
 opt.pumheight = 20 -- Maximum number of entries in a popup
 opt.relativenumber = true -- Relative line numbers
 opt.scrolloff = 8 -- Lines of context

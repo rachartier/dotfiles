@@ -5,9 +5,6 @@ local M = {
 		"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
 		"MunifTanjim/nui.nvim",
 	},
-	keys = {
-		{ "<leader>te", "<cmd>Neotree float %:p<CR>" },
-	},
 	priority = 55,
 }
 
@@ -20,8 +17,7 @@ function M.config()
 		U.on_rename(data.source, data.destination)
 	end
 
-	opts = {
-
+	local opts = {
 		close_if_last_window = true, -- Close Neo-tree if it is the last window left in the tab
 		popup_border_style = U.default_border,
 		enable_git_status = true,
@@ -33,7 +29,7 @@ function M.config()
 			},
 			indent = {
 				indent_size = 2,
-				padding = 1, -- extra padding on left hand side
+				-- padding = 1, -- extra padding on left hand side
 				-- indent guides
 				with_markers = true,
 				indent_marker = "│",
@@ -46,9 +42,9 @@ function M.config()
 				expander_highlight = "NeoTreeExpander",
 			},
 			icon = {
-				folder_closed = "",
-				folder_open = "",
-				folder_empty = "ﰊ",
+				folder_closed = "󰉋",
+				folder_open = "󰝰",
+				folder_empty = "󰉖",
 				-- The next two settings are only a fallback, if you use nvim-web-devicons and configure default icons there
 				-- then these will never be used.
 				default = "*",
@@ -71,7 +67,7 @@ function M.config()
 					staged = " ",
 					added = "", -- or "✚", but this is redundant info if you use git_status_colors on the name
 					modified = "", -- or "", but this is redundant info if you use git_status_colors on the name
-					renamed = "", -- this can only be used in the git_status source
+					renamed = "󰑕", -- this can only be used in the git_status source
 					conflict = "",
 					unmerged = "",
 					deleted = U.git_signs.removed,
@@ -111,6 +107,8 @@ function M.config()
 	})
 
 	require("neo-tree").setup(opts)
+
+	vim.keymap.set("n", "<leader>te", "<cmd>Neotree float %:p<CR>")
 end
 
 return {
