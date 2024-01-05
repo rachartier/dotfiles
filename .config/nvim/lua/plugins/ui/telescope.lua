@@ -65,7 +65,7 @@ function M.config()
 
 	ts.setup({
 		defaults = {
-			winblend = 45,
+			winblend = require("config").winblend,
 			borderchars = {
 				--        { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
 
