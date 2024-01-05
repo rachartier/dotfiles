@@ -8,7 +8,7 @@ M.lsps = {
 	"jsonls",
 	"bashls",
 	"pyright",
-	"omnisharp",
+	-- "omnisharp",
 	"clangd",
 }
 

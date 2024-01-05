@@ -16,7 +16,12 @@ function M.config()
 
 	require("lsp-file-operations").setup()
 
-	require("neo-tree").setup({
+	local function on_move(data)
+		U.on_rename(data.source, data.destination)
+	end
+
+	opts = {
+
 		close_if_last_window = true, -- Close Neo-tree if it is the last window left in the tab
 		popup_border_style = U.default_border,
 		enable_git_status = true,
@@ -96,7 +101,16 @@ function M.config()
 				leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
 			},
 		},
+	}
+
+	local events = require("neo-tree.events")
+	opts.event_handlers = opts.event_handlers or {}
+	vim.list_extend(opts.event_handlers, {
+		{ event = events.FILE_MOVED, handler = on_move },
+		{ event = events.FILE_RENAMED, handler = on_move },
 	})
+
+	require("neo-tree").setup(opts)
 end
 
 return {
