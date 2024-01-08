@@ -1,5 +1,4 @@
 vim.loader.enable()
-
 vim.g.mapleader = " "
 
 local U = require("utils")

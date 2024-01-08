@@ -137,12 +137,20 @@ install_lazygit() {
 	sudo install lazygit /usr/local/bin && __echo_success "lazygit installed."
 }
 
+install_tmux() {
+	sudo apt install libevent-dev ncurses-base yacc
+	cd /tmp || exit
+	git clone https://github.com/tmux/tmux.git
+	cd tmux || exit
+	sh autogen.sh
+	./configure
+	make && sudo make install
+}
+
 install_packages() {
 	__install_package_apt git
 	__install_package_apt wget
 	__install_package_apt libfuse2
-
-	__install_package_apt tmux
 
 	__install_package_apt python3.10-venv
 	__install_package_apt nodejs
@@ -181,6 +189,7 @@ install_glow() {
 }
 
 install_essentials() {
+	install_tmux
 	install_packages
 	install_zsh_plugins
 	install_nvim
@@ -196,6 +205,7 @@ install_essentials() {
 
 do_reinstall() {
 	case "$1" in
+	"tmux") install_tmux ;;
 	"nvim") install_nvim ;;
 	"packages") install_packages ;;
 	"zsh") install_zsh_plugins ;;
