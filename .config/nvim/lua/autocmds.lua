@@ -121,8 +121,6 @@ vim.api.nvim_create_autocmd("InsertCharPre", {
 
 		-- Return early if string is already a format string
 		local first_char = vim.api.nvim_buf_get_text(opts.buf, row, col, row, col + 1, {})[1]
-		vim.print("row " .. row .. " col " .. col)
-		vim.print("char: '" .. first_char .. "'")
 		if first_char == "f" then
 			return
 		end
@@ -132,12 +130,14 @@ vim.api.nvim_create_autocmd("InsertCharPre", {
 	end,
 })
 
+vim.api.nvim_create_autocmd("User", {
+	pattern = "AlphaReady",
+	command = "set showtabline=0 | set laststatus=0",
+})
+
 vim.cmd([[
     augroup _pico
     autocmd!
     autocmd BufRead,BufEnter *.p8 set filetype=pico8
     augroup end
 ]])
-
-vim.cmd([[let &t_Cs = "\e[4:3m"]]) -- Undercurl
-vim.cmd([[let &t_Ce = "\e[4:0m"]]) -- Undercurl

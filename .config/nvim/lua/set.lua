@@ -131,4 +131,7 @@ vim.fn.sign_define("DiagnosticSignWarn", { text = U.diagnostic_signs.warning, te
 vim.fn.sign_define("DiagnosticSignInfo", { text = U.diagnostic_signs.info, texthl = "DiagnosticSignInfo" })
 vim.fn.sign_define("DiagnosticSignHint", { text = U.diagnostic_signs.hint, texthl = "DiagnosticSignHint" })
 
+vim.cmd([[let &t_Cs = "\e[4:3m"]]) -- Undercurl
+vim.cmd([[let &t_Ce = "\e[4:0m"]]) -- Undercurl
+
 -- vim.g.markdown_recommended_style = 0
