@@ -138,10 +138,9 @@ install_lazygit() {
 }
 
 install_tmux() {
-	sudo apt install libevent-dev ncurses-base yacc
-	cd /tmp || exit
-	git clone https://github.com/tmux/tmux.git
-	cd tmux || exit
+	sudo apt install libevent-dev yacc automake libncurses5-dev
+	git clone https://github.com/tmux/tmux.git /tmp/tmux
+	cd /tmp/tmux || exit
 	sh autogen.sh
 	./configure
 	make && sudo make install
