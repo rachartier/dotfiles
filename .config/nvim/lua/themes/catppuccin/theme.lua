@@ -25,6 +25,20 @@ function M.get_lualine_colors()
 end
 
 function M.setup()
+	underlines = {
+		errors = { "underline" },
+		hints = { "underline" },
+		warnings = { "underline" },
+		information = { "underline" },
+	}
+	if vim.g.neovide then
+		underlines = {
+			errors = { "undercurl" },
+			hints = { "undercurl" },
+			warnings = { "undercurl" },
+			information = { "undercurl" },
+		}
+	end
 	require("catppuccin").setup({
 		lazy = true,
 		flavour = flavour, -- latte, frappe, macchiato, mocha
@@ -88,12 +102,7 @@ function M.setup()
 					warnings = { "italic" },
 					information = { "italic" },
 				},
-				underlines = {
-					errors = { "undercurl" },
-					hints = { "undercurl" },
-					warnings = { "undercurl" },
-					information = { "undercurl" },
-				},
+				underlines = underlines,
 				inlay_hints = {
 					background = true,
 				},
