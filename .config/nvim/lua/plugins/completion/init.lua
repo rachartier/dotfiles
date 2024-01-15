@@ -141,12 +141,6 @@ function M.config()
 			-- 	require("cmp-under-comparator").under,
 			-- 	            -- },
 			comparators = {
-				cmp.config.compare.sort_text,
-				cmp.config.compare.offset,
-				cmp.config.compare.exact,
-				cmp.config.compare.score,
-				require("clangd_extensions.cmp_scores"),
-
 				lspkind_comparator({
 					kind_priority = {
 						Field = 11,
@@ -176,6 +170,12 @@ function M.config()
 						Value = 1,
 					},
 				}),
+				cmp.config.compare.exact,
+				cmp.config.compare.sort_text,
+				cmp.config.compare.offset,
+				cmp.config.compare.score,
+				require("clangd_extensions.cmp_scores"),
+
 				label_comparator,
 
 				cmp.config.compare.recently_used,
