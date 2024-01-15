@@ -1,14 +1,8 @@
 local M = {
 	"aznhe21/actions-preview.nvim",
+	enabled = false,
 }
 
-function M.config()
-	vim.keymap.set(
-		{ "v", "n" },
-		"<leader>ca",
-		require("actions-preview").code_actions,
-		{ desc = "Open code action menu" }
-	)
-end
+function M.config() end
 
 return M
