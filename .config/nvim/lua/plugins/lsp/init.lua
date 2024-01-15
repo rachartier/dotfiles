@@ -34,7 +34,8 @@ function M.config()
 
 	local util = require("lspconfig/util")
 	local capabilities = vim.lsp.protocol.make_client_capabilities()
-	capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+	-- capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+	require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 	local path = util.path
 
@@ -115,16 +116,19 @@ function M.config()
 	local omnisharp_bin = "/home/rachartier/.local/share/nvim/mason/bin/omnisharp"
 
 	require("lspconfig")["omnisharp"].setup({
+		cmd = { omnisharp_bin, "--languageserver", "--hostPID", tostring(pid) },
 		handlers = {
 			["textDocument/definition"] = require("omnisharp_extended").handler,
 		},
-		cmd = { omnisharp_bin, "--languageserver", "--hostPID", tostring(pid) },
+		capabilities = capabilities,
+		on_attach = on_attach,
+		--cmd = { "dotnet", os.getenv("HOME") .. "/.local/omnisharp/run/OmniSharp.dll" },
 		enable_editorconfig_support = true,
 		enable_ms_build_load_projects_on_demand = false,
 		enable_roslyn_analyzers = true,
 		organize_imports_on_format = true,
 		enable_import_completion = true,
-		sdk_include_prereleases = true,
+		sdk_include_prereleases = false,
 		analyze_open_documents_only = false,
 	})
 
