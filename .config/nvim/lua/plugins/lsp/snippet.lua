@@ -1,16 +1,5 @@
 return {
 	{
-		"mireq/luasnip-snippets",
-		--dir = "/tmp/snippets",
-		dependencies = { "L3MON4D3/LuaSnip" },
-		init = function()
-			vim.g.snips_author = "Raphaël CHARTIER"
-			vim.g.snips_email = "raphael.chartier@michelin.com"
-			vim.g.snips_company = "Michelin"
-			require("luasnip_snippets.common.snip_utils").setup()
-		end,
-	},
-	{
 		"L3MON4D3/LuaSnip",
 		version = "2.*",
 		build = "make install_jsregexp",
@@ -21,8 +10,8 @@ return {
 		init = function()
 			local ls = require("luasnip")
 			ls.setup({
-				load_ft_func = require("luasnip_snippets.common.snip_utils").load_ft_func,
-				ft_func = require("luasnip_snippets.common.snip_utils").ft_func,
+				-- load_ft_func = require("luasnip_snippets.common.snip_utils").load_ft_func,
+				-- ft_func = require("luasnip_snippets.common.snip_utils").ft_func,
 				store_selection_keys = "<c-x>",
 				enable_autosnippets = true,
 			})
