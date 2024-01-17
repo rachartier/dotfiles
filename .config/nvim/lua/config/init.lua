@@ -55,6 +55,7 @@ M.formatters = {
 
 M.extras = {
 	"debugpy",
+	"netcoredbg",
 	"ruff",
 }
 
