@@ -57,7 +57,7 @@ function M.config()
 					icon = "",
 					lang = "lua",
 				},
-				help = { title = "", pattern = "^:%s*he?l?p?%s+", icon = "" },
+				help = { title = "", pattern = "^:%s*he?l?p?%s+", icon = "󰋖" },
 				input = {},
 			},
 		},
