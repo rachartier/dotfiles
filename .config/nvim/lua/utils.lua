@@ -96,6 +96,7 @@ M.kind_icons = {
 	Event = " ",
 	Operator = " ",
 	TypeParameter = "󰘦 ",
+	Codeium = " ",
 	Unknown = "  ",
 }
 

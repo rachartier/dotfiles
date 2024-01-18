@@ -8,6 +8,7 @@ return {
 	{ import = "plugins.notes" },
 	{ import = "plugins.ui" },
 	{ import = "plugins.utils" },
+	{ import = "plugins.ia" },
 }
 -- require("plugins.")
 -- require("plugins.")
