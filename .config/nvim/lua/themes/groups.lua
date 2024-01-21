@@ -157,24 +157,19 @@ end
 function M.override_lsp_hl(colors_table)
 	local colors = colors_table
 
-	vim.api.nvim_set_hl(0, "@parameter", { fg = colors.red, italic = true })
-	vim.api.nvim_set_hl(0, "@variable", { fg = colors.text, italic = false })
-	vim.api.nvim_set_hl(0, "@operator", { fg = colors.teal, italic = false })
-	vim.api.nvim_set_hl(0, "@attribute", { fg = colors.lavender, italic = true })
-	vim.api.nvim_set_hl(0, "@keyword.operator", { link = "@repeat" })
-
-	vim.api.nvim_set_hl(0, "@type.builtin", { fg = colors.red })
-	vim.api.nvim_set_hl(0, "@type.qualifier", { fg = colors.red })
-	vim.api.nvim_set_hl(0, "@storageclass", { fg = colors.red })
-	vim.api.nvim_set_hl(0, "@field", { fg = colors.red })
-
-	vim.api.nvim_set_hl(0, "@property", { fg = colors.text })
-	vim.api.nvim_set_hl(0, "@field", { fg = colors.text })
-
-	vim.api.nvim_set_hl(0, "@variable.builtin", { fg = colors.red })
-
 	-- vim.api.nvim_set_hl(0, "@variable", { fg = colors.text })
 	vim.api.nvim_set_hl(0, "@_parent", { fg = colors.peach })
+	vim.api.nvim_set_hl(0, "@attribute", { fg = colors.lavender, italic = true })
+	vim.api.nvim_set_hl(0, "@keyword.operator", { link = "@repeat" })
+	vim.api.nvim_set_hl(0, "@operator", { fg = colors.teal, italic = false })
+	vim.api.nvim_set_hl(0, "@property", { fg = colors.text })
+	vim.api.nvim_set_hl(0, "@storageclass", { fg = colors.red })
+	vim.api.nvim_set_hl(0, "@type.builtin", { fg = colors.red })
+	vim.api.nvim_set_hl(0, "@type.qualifier", { fg = colors.red })
+	vim.api.nvim_set_hl(0, "@variable", { fg = colors.text, italic = false })
+	vim.api.nvim_set_hl(0, "@variable.builtin", { fg = colors.red })
+	vim.api.nvim_set_hl(0, "@variable.member", { fg = colors.text })
+	vim.api.nvim_set_hl(0, "@variable.parameter", { fg = colors.red, italic = true })
 end
 
 return M
