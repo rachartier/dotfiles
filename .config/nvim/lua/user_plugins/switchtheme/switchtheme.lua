@@ -76,8 +76,6 @@ function M.select_themes(opts)
 					local selected = selection.value.name
 
 					if selected ~= "" and selected ~= nil and selected ~= "[No Name]" then
-						print(selected)
-
 						M.actual = require("themes." .. selected .. ".theme")
 					end
 				end)
