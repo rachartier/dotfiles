@@ -75,11 +75,7 @@ function M.config()
 	end
 
 	local mapping_selection_down = cmp.mapping(function(fallback)
-		if vim.fn.exists("b:_codeium_completions") ~= 0 then
-			-- accept codeium completion if visible
-			vim.fn["codeium#Accept"]()
-			fallback()
-		elseif cmp.visible() then
+		if cmp.visible() then
 			cmp.select_next_item()
 		elseif luasnip.expand_or_jumpable() then
 			luasnip.expand_or_jump()
