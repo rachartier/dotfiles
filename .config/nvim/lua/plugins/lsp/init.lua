@@ -120,6 +120,7 @@ function M.config()
 		handlers = {
 			["textDocument/definition"] = require("omnisharp_extended").handler,
 		},
+		root_dir = util.root_pattern("*.sln"),
 		capabilities = capabilities,
 		on_attach = on_attach,
 		--cmd = { "dotnet", os.getenv("HOME") .. "/.local/omnisharp/run/OmniSharp.dll" },

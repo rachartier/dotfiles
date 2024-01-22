@@ -4,6 +4,7 @@ local M = {
 		"nvim-lua/plenary.nvim",
 		"hrsh7th/nvim-cmp",
 	},
+	enabled = false,
 }
 
 function M.config()
