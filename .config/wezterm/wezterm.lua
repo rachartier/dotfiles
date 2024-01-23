@@ -4,7 +4,8 @@ local config = {}
 config.automatically_reload_config = true
 config.default_domain = "WSL:Ubuntu"
 
-config.font = wezterm.font_with_fallback({ "Agave", "Symbols Nerd Font" })
+-- config.font = wezterm.font_with_fallback({ "Agave", "Symbols Nerd Font" })
+config.font = wezterm.font_with_fallback({ "Cascadia Code", "Symbols Nerd Font" })
 
 -- config.font = wezterm.font("Agave")
 -- config.font = wezterm.font("CaskaydiaCove NF", { weight = "Regular" })
@@ -47,7 +48,7 @@ config.window_padding = {
 	top = "0.5cell",
 	bottom = "0.4cell",
 }
-config.window_background_opacity = 0.7
+-- config.window_background_opacity = 0.7
 -- config.text_background_opacity = 0.8
 config.win32_system_backdrop = "Acrylic"
 

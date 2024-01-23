@@ -102,18 +102,18 @@ function M.config()
 			end,
 		},
 		sources = {
-			{ name = "nvim_lsp", entry_filter = filter_text },
-			{
-				name = "buffer",
-				option = {
-					keyword_length = 4,
-				},
-				entry_filter = filter_text,
-			},
-			{ name = "dotenv" },
+			{ name = "nvim_lsp", entry_filter = filter_text, keyword_length = 2 },
+			-- {
+			-- 	name = "buffer",
+			-- 	option = {
+			-- 		keyword_length = 4,
+			-- 	},
+			-- 	entry_filter = filter_text,
+			-- },
 			{ name = "codeium" },
-			{ name = "luasnip", entry_filter = filter_text },
-			{ name = "latex_symbols" },
+			{ name = "dotenv" },
+			{ name = "luasnip", entry_filter = filter_text, keyword_length = 2 },
+			-- { name = "latex_symbols" },
 			{ name = "path" },
 		},
 		mapping = cmp.mapping.preset.insert({
@@ -140,48 +140,56 @@ function M.config()
 			-- comparators = {
 			-- 	require("cmp-under-comparator").under,
 			-- 	            -- },
+			-- comparators = {
+			--
+			-- 	cmp.config.compare.offset,
+			-- 	cmp.config.compare.exact,
+			-- 	cmp.config.compare.score,
+			-- 	lspkind_comparator({
+			-- 		kind_priority = {
+			-- 			Field = 11,
+			-- 			Property = 11,
+			-- 			Constant = 10,
+			-- 			Enum = 10,
+			-- 			EnumMember = 10,
+			-- 			Event = 10,
+			-- 			Function = 10,
+			-- 			Method = 10,
+			-- 			Operator = 10,
+			-- 			Reference = 10,
+			-- 			Struct = 10,
+			-- 			Variable = 12,
+			-- 			File = 8,
+			-- 			Folder = 8,
+			-- 			Class = 5,
+			-- 			Color = 5,
+			-- 			Module = 5,
+			-- 			Keyword = 2,
+			-- 			Constructor = 1,
+			-- 			Interface = 1,
+			-- 			Snippet = 0,
+			-- 			Text = 1,
+			-- 			TypeParameter = 1,
+			-- 			Unit = 1,
+			-- 			Value = 1,
+			-- 		},
+			-- 	}),
+			-- 	require("clangd_extensions.cmp_scores"),
+			-- 	label_comparator,
+			-- 	cmp.config.compare.sort_text,
+			--
+			-- 	cmp.config.compare.recently_used,
+			-- 	require("cmp-under-comparator").under,
+			-- 	cmp.config.compare.length,
+			-- 	cmp.config.compare.order,
+			-- },
 			comparators = {
-				lspkind_comparator({
-					kind_priority = {
-						Field = 11,
-						Property = 11,
-						Constant = 10,
-						Enum = 10,
-						EnumMember = 10,
-						Event = 10,
-						Function = 10,
-						Method = 10,
-						Operator = 10,
-						Reference = 10,
-						Struct = 10,
-						Variable = 12,
-						File = 8,
-						Folder = 8,
-						Class = 5,
-						Color = 5,
-						Module = 5,
-						Keyword = 2,
-						Constructor = 1,
-						Interface = 1,
-						Snippet = 0,
-						Text = 1,
-						TypeParameter = 1,
-						Unit = 1,
-						Value = 1,
-					},
-				}),
-				cmp.config.compare.exact,
-				cmp.config.compare.sort_text,
 				cmp.config.compare.offset,
+				cmp.config.compare.exact,
 				cmp.config.compare.score,
-				require("clangd_extensions.cmp_scores"),
-
-				label_comparator,
-
 				cmp.config.compare.recently_used,
 				require("cmp-under-comparator").under,
-				cmp.config.compare.length,
-				cmp.config.compare.order,
+				cmp.config.compare.kind,
 			},
 		},
 
@@ -233,6 +241,12 @@ function M.config()
 		}, {
 			{ name = "cmdline" },
 		}),
+	})
+
+	cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
+		sources = {
+			{ name = "dap" },
+		},
 	})
 end
 

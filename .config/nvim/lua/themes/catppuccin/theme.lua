@@ -1,4 +1,5 @@
 local M = {}
+local U = require("utils")
 local flavour = "macchiato"
 
 function M.get_colors()
@@ -10,7 +11,7 @@ function M.get_lualine_colors()
 
 	return {
 		-- bg = "#232639", --c.mantle,
-		bg = "None",
+		bg = c.mantle,
 		fg = c.subtext0,
 		yellow = c.yellow,
 		cyan = c.cyan,
