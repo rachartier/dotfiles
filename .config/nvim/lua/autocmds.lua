@@ -167,7 +167,7 @@ function ToggleMindWindow()
 	end
 end
 
-vim.api.nvim_create_autocmd("VimResized", {
+vim.api.nvim_create_autocmd({ "VimResized", "VimEnter" }, {
 	group = mind_augroup,
 	callback = ToggleMindWindow,
 })
