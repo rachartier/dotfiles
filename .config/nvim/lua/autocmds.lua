@@ -141,3 +141,33 @@ vim.cmd([[
     autocmd BufRead,BufEnter *.p8 set filetype=pico8
     augroup end
 ]])
+
+local group_name = "MindResizeGroup"
+local mind_augroup = vim.api.nvim_create_augroup(group_name, { clear = true })
+
+function ToggleMindWindow()
+	local mind_win_found = false
+	local windows = vim.api.nvim_list_wins()
+
+	for _, winid in ipairs(windows) do
+		local bufid = vim.api.nvim_win_get_buf(winid)
+		if vim.api.nvim_buf_get_option(bufid, "filetype") == "mind" then
+			mind_win_found = true
+			if vim.o.columns < 120 then
+				vim.api.nvim_win_close(winid, true)
+				require("mind").close()
+			end
+			break
+		end
+	end
+
+	if not mind_win_found and vim.o.columns > 120 then
+		vim.cmd("MindOpenMain")
+		vim.cmd(":wincmd l")
+	end
+end
+
+vim.api.nvim_create_autocmd("VimResized", {
+	group = mind_augroup,
+	callback = ToggleMindWindow,
+})
