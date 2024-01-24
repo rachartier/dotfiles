@@ -13,7 +13,7 @@ config.font = wezterm.font_with_fallback({ "Cascadia Code", "Symbols Nerd Font" 
 -- config.font = wezterm.font("Hurmit Nerd Font")
 -- config.font = wezterm.font("Monaspace Argon")
 
-config.font_size = 15
+config.font_size = 14
 config.font_rules = {
 	-- {
 	--     intensity = "Bold",
