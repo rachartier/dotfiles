@@ -238,4 +238,12 @@ function M.lighten(hex, amount, fg)
 	return M.blend(hex, fg or default_fg, amount)
 end
 
+function M.directory_exists_in_root(directory_name, root)
+	root = root or "."
+
+	local path = root .. "/" .. directory_name
+	local stat = vim.loop.fs_stat(path)
+	return (stat and stat.type == "directory")
+end
+
 return M

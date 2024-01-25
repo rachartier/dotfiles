@@ -162,7 +162,12 @@ function ToggleMindWindow()
 	end
 
 	if not mind_win_found and vim.o.columns > 120 then
-		vim.cmd("MindOpenMain")
+		if require("utils").directory_exists_in_root(".mind") then
+			vim.cmd("MindOpenProject")
+		else
+			vim.cmd("MindOpenMain")
+		end
+
 		vim.cmd(":wincmd l")
 	end
 end
@@ -170,4 +175,14 @@ end
 vim.api.nvim_create_autocmd({ "VimResized", "VimEnter" }, {
 	group = mind_augroup,
 	callback = ToggleMindWindow,
+})
+
+vim.api.nvim_create_augroup("AutocloseMindBuffer", { clear = true })
+vim.api.nvim_create_autocmd("BufEnter", {
+	group = "AutocloseMindBuffer",
+	callback = function()
+		if vim.bo.filetype == "mind" then
+			vim.cmd("q!")
+		end
+	end,
 })
