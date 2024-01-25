@@ -181,8 +181,17 @@ vim.api.nvim_create_augroup("AutocloseMindBuffer", { clear = true })
 vim.api.nvim_create_autocmd("BufEnter", {
 	group = "AutocloseMindBuffer",
 	callback = function()
-		if vim.bo.filetype == "mind" then
-			vim.cmd("q!")
+		local num_visible_windows = 0
+		for _, win in pairs(vim.api.nvim_tabpage_list_wins(0)) do
+			if vim.api.nvim_win_get_config(win).relative == "" then
+				num_visible_windows = num_visible_windows + 1
+			end
+		end
+
+		if num_visible_windows < 2 then
+			if vim.bo.filetype == "mind" then
+				vim.cmd("q!")
+			end
 		end
 	end,
 })
