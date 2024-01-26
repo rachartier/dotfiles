@@ -131,6 +131,19 @@ vim.fn.sign_define("DiagnosticSignWarn", { text = U.diagnostic_signs.warning, te
 vim.fn.sign_define("DiagnosticSignInfo", { text = U.diagnostic_signs.info, texthl = "DiagnosticSignInfo" })
 vim.fn.sign_define("DiagnosticSignHint", { text = U.diagnostic_signs.hint, texthl = "DiagnosticSignHint" })
 
+vim.diagnostic.config({
+	float = { border = U.default_border },
+	virtual_lines = {
+		highlight_whole_line = false,
+		only_current_line = true,
+	},
+	virtual_text = {
+		prefix = "●",
+		-- virt_text_pos = "right_align",
+	},
+	severity_sort = true,
+})
+
 -- vim.cmd([[let &t_Cs = "\e[4:3m"]]) -- Undercurl
 -- vim.cmd([[let &t_Ce = "\e[4:0m"]]) -- Undercurl
 
