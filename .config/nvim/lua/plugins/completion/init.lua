@@ -114,6 +114,7 @@ function M.config()
 			{ name = "dotenv" },
 			{ name = "luasnip", entry_filter = filter_text, keyword_length = 2 },
 			-- { name = "latex_symbols" },
+			{ name = "py-requirements" },
 			{ name = "path" },
 		},
 		mapping = cmp.mapping.preset.insert({

@@ -97,6 +97,7 @@ M.kind_icons = {
 	Operator = " ",
 	TypeParameter = "󰘦 ",
 	Codeium = " ",
+	Version = " ",
 	Unknown = "  ",
 }
 
