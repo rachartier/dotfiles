@@ -19,19 +19,6 @@ function M.config()
 
 	-- require("clangd_extensions.inlay_hints").setup_autocmd()
 
-	vim.diagnostic.config({
-		float = { border = U.default_border },
-		virtual_lines = {
-			highlight_whole_line = false,
-			only_current_line = true,
-		},
-		virtual_text = {
-			prefix = "●",
-			-- virt_text_pos = "right_align",
-		},
-		severity_sort = true,
-	})
-
 	local util = require("lspconfig/util")
 	local capabilities = vim.lsp.protocol.make_client_capabilities()
 	-- capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)

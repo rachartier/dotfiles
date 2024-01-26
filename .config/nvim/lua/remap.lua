@@ -97,3 +97,11 @@ end, { expr = true, desc = "Indent on empty line one insert" })
 map("n", "a", function()
 	return indent_empty_line() or "a"
 end, { expr = true, desc = "Indent on empty line one append" })
+
+map("n", "dd", function()
+	if vim.api.nvim_get_current_line():match("^%s*$") then
+		return '"_dd'
+	else
+		return "dd"
+	end
+end, { expr = true, desc = "Smart dd" })
