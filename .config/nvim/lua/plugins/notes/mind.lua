@@ -39,7 +39,7 @@ function M.config()
 		end
 	end
 
-	vim.api.nvim_create_autocmd({ "VimResized", "VimEnter" }, {
+	vim.api.nvim_create_autocmd({ "VimResized" }, {
 		group = mind_augroup,
 		callback = ToggleMindWindow,
 	})
