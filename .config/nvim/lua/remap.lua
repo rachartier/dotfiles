@@ -55,11 +55,6 @@ if os.getenv("TMUX") then
 	--     map("n", "<M-j>", "<C-W>j", { silent = true })
 end
 
-require("user_plugins.switchbuffer").setup({
-	hl_modified = { ctermbg = 232 },
-	hl_normal = { ctermbg = 232 },
-})
-
 -- map("n", "<leader>ts", '<cmd>lua require("user_plugins.switchtheme").select_themes()<cr>')
 
 map("n", "<Tab>", '<cmd>lua require("user_plugins.switchbuffer").select_buffers()<cr>')
@@ -105,3 +100,13 @@ map("n", "dd", function()
 		return "dd"
 	end
 end, { expr = true, desc = "Smart dd" })
+
+vim.keymap.set("n", "<Leader>db", function()
+	local curbufnr = vim.api.nvim_get_current_buf()
+	local buflist = vim.api.nvim_list_bufs()
+	for _, bufnr in ipairs(buflist) do
+		if vim.bo[bufnr].buflisted and bufnr ~= curbufnr and (vim.fn.getbufvar(bufnr, "bufpersist") ~= 1) then
+			vim.cmd("bd " .. tostring(bufnr))
+		end
+	end
+end, { silent = true, desc = "Close unused buffers" })

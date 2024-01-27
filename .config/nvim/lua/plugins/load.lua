@@ -9,6 +9,7 @@ return {
 	{ import = "plugins.ui" },
 	{ import = "plugins.utils" },
 	{ import = "plugins.ia" },
+	{ import = "plugins.ia" },
 }
 -- require("plugins.")
 -- require("plugins.")
