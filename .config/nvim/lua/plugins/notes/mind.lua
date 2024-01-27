@@ -1,5 +1,6 @@
 local M = {
 	"rachartier/mind.nvim",
+	enabled = false,
 }
 
 function M.config()
