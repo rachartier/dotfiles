@@ -11,7 +11,8 @@ function M.get_lualine_colors()
 
 	return {
 		-- bg = "#232639", --c.mantle,
-		bg = c.mantle,
+		-- bg = U.lighten(c.base, 0.99),
+		bg = c.base,
 		fg = c.subtext0,
 		yellow = c.yellow,
 		cyan = c.cyan,
@@ -26,7 +27,7 @@ function M.get_lualine_colors()
 end
 
 function M.setup()
-	underlines = {
+	local underlines = {
 		errors = { "underline" },
 		hints = { "underline" },
 		warnings = { "underline" },
