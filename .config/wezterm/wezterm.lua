@@ -43,14 +43,14 @@ config.hide_tab_bar_if_only_one_tab = true
 config.adjust_window_size_when_changing_font_size = false
 config.selection_word_boundary = " \t\n{}[]()\"'`,;:│=&!%"
 config.window_padding = {
-	left = "4cell",
-	right = "4cell",
+	left = "2cell",
+	right = "2cell",
 	top = "0.5cell",
-	bottom = "0.4cell",
+	bottom = "0.5cell",
 }
--- config.window_background_opacity = 0.7
 -- config.text_background_opacity = 0.8
-config.win32_system_backdrop = "Acrylic"
+config.win32_system_backdrop = "Mica"
+config.window_background_opacity = 0.0
 
 config.window_close_confirmation = "NeverPrompt"
 
