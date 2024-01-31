@@ -133,6 +133,7 @@ vim.fn.sign_define("DiagnosticSignHint", { text = U.diagnostic_signs.hint, texth
 
 vim.diagnostic.config({
 	float = { border = U.default_border },
+	underline = true,
 	virtual_lines = {
 		highlight_whole_line = false,
 		only_current_line = true,
@@ -144,7 +145,7 @@ vim.diagnostic.config({
 	severity_sort = true,
 })
 
--- vim.cmd([[let &t_Cs = "\e[4:3m"]]) -- Undercurl
--- vim.cmd([[let &t_Ce = "\e[4:0m"]]) -- Undercurl
+vim.api.nvim_set_var("t_Cs", "\\e[4:3m")
+vim.api.nvim_set_var("t_Ce", "\\e[4:0m")
 
 -- vim.g.markdown_recommended_style = 0

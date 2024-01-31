@@ -28,10 +28,11 @@ end
 
 function M.setup()
 	local underlines = {
-		errors = { "underline" },
-		hints = { "underline" },
-		warnings = { "underline" },
-		information = { "underline" },
+
+		errors = { "undercurl" },
+		hints = { "undercurl" },
+		warnings = { "undercurl" },
+		information = { "undercurl" },
 	}
 	if vim.g.neovide then
 		underlines = {
