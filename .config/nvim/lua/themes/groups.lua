@@ -155,6 +155,15 @@ function M.get(colors)
 		TelescopePreviewBorder = { bg = colors.bg },
 		TelescopePreviewNormal = {},
 		TelescopePreviewTitle = { bg = colors.green, fg = colors.base },
+
+		-- DiagnosticUnderlineError = {
+		-- 	underline = true,
+		-- 	sp = colors.red,
+		-- },
+		-- LspDiagnosticsUnderlineError = {
+		-- 	underline = true,
+		-- 	sp = colors.red,
+		-- },
 	}
 end
 

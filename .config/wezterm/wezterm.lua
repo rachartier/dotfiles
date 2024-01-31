@@ -54,17 +54,6 @@ config.window_background_opacity = 0.0
 
 config.window_close_confirmation = "NeverPrompt"
 
-config.ssh_domains = {
-	{
-		name = "local.wsl",
-		-- The hostname or address to connect to. Will be used to match settings
-		-- from your ssh config file
-		remote_address = "172.19.181.196",
-		-- The username to use on the remote host
-		username = "rachartier",
-	},
-}
-
 local custom = wezterm.color.get_builtin_schemes()["Catppuccin Macchiato"]
 custom.ansi[6] = "#c6a0f6"
 custom.ansi[7] = "#7dc4e4"
