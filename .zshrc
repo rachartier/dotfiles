@@ -28,7 +28,6 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
-
 # ZSH_TMUX_AUTOSTART=true
 # ZSH_TMUX_AUTOCONNECT=true
 # ZSH_TMUX_CONFIG=$HOME/.config/tmux/tmux.conf
@@ -69,9 +68,12 @@ zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=
 #      zstyle ':fzf-tab:complete:-command-:*' fzf-preview \
 #         '(out=$(MANWIDTH=$FZF_PREVIEW_COLUMNS man "$word") 2>/dev/null && echo $out) || (out=$(which "$word") && echo $out) || echo "${(P)word}"'
 
-
 # zstyle ':prompt:pure:git:branch' color red
 # zstyle ':prompt:pure:git:stash'  show yes
+
+(( ${+ZSH_HIGHLIGHT_STYLES} )) || typeset -A ZSH_HIGHLIGHT_STYLES
+ZSH_HIGHLIGHT_STYLES[path]=none
+ZSH_HIGHLIGHT_STYLES[path_prefix]=none
 
 setopt extended_history       # record timestamp of command in HISTFILE
 setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE
