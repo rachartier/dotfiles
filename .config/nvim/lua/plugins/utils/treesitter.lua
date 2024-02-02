@@ -55,6 +55,9 @@ function M.config()
 		},
 		indent = {
 			enable = true,
+			disable = {
+				"markdown", -- indentation at bullet points is worse
+			},
 		},
 	})
 
