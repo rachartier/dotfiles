@@ -62,7 +62,6 @@ M.on_attach = function(client, bufnr)
 	-- end
 
 	vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
-	vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
 	vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
 	vim.keymap.set({ "n", "i" }, "<C-k>", vim.lsp.buf.signature_help, bufopts)
 	vim.keymap.set("n", "<leader>vws", vim.lsp.buf.workspace_symbol, bufopts)
@@ -79,6 +78,7 @@ M.on_attach = function(client, bufnr)
 
 	if client.name == "omnisharp" then
 		vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, bufopts, { desc = "Open code action menu" })
+		vim.keymap.set("n", "gd", vim.lsp.buf.code_action, bufopts)
 	else
 		vim.keymap.set(
 			{ "v", "n" },
@@ -86,6 +86,7 @@ M.on_attach = function(client, bufnr)
 			require("actions-preview").code_actions,
 			{ desc = "Open code action menu" }
 		)
+		vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
 	end
 
 	vim.keymap.set("n", "<leader>rn", function()
