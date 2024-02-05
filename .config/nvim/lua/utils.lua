@@ -44,21 +44,21 @@ M.signs = {
 	},
 }
 
--- M.diagnostic_signs = {
---     error = " ",
---     warning = " ",
---     info = " ",
---     hint = "󱤅 ",
---     other = "󰠠 ",
--- }
-
 M.diagnostic_signs = {
-	error = "●",
-	warning = "●",
-	info = "●",
-	hint = "●",
-	other = "●",
+	error = " ",
+	warning = " ",
+	info = " ",
+	hint = " ",
+	other = "󰠠 ",
 }
+
+-- M.diagnostic_signs = {
+-- 	error = "●",
+-- 	warning = "●",
+-- 	info = "●",
+-- 	hint = "●",
+-- 	other = "●",
+-- }
 
 -- M.diagnostic_signs = {
 --     error = " ",
