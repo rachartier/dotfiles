@@ -9,6 +9,15 @@ function M.config()
 
 	local cfg = {
 		separator = " ", -- separator between line number and buffer text ("│" or extra " " padding)
+		ft_ignore = {
+			"dapui_stacks",
+			"dapui_breakpoints",
+			"dapui_scopes",
+			"dapui_watches",
+			"dapui_console",
+			"dap-repl",
+			"Trouble",
+		},
 
 		-- Builtin line number string options for ScLn() segment
 		thousands = false, -- or line number thousands separator string ("." / ",")

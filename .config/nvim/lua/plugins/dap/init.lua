@@ -17,6 +17,14 @@ function M.config()
 		highlight_new_as_changed = true,
 	})
 
+	require("dapui").setup({
+		icons = {
+			collapsed = "▶",
+			current_frame = "▶",
+			expanded = "▼",
+		},
+	})
+
 	local dap = require("dap")
 	require("dap-python")
 	require("dap.ext.vscode").load_launchjs(nil, { netcoredbg = { "cs" } })
@@ -69,9 +77,8 @@ function M.config()
 	sign("DapBreakpointRejected", { text = "", texthl = "DapBreakpoint", linehl = "", numhl = "red" })
 	sign("DapBreakpointCondition", { text = "●", texthl = "DapBreakpointCondition", linehl = "", numhl = "red" })
 	sign("DapLogPoint", { text = "◆", texthl = "DapLogPoint", linehl = "", numhl = "" })
-	sign("DapStopped", { text = "", texthl = "DapStopped", linehl = "", numhl = "" })
+	sign("DapStopped", { text = "󰧂", texthl = "DapStopped", linehl = "", numhl = "" })
 
-	require("dapui").setup()
 	local dap, dapui = require("dap"), require("dapui")
 	dap.listeners.after.event_initialized["dapui_config"] = function()
 		dapui.open()

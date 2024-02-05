@@ -3,7 +3,7 @@ local M = {}
 local U = require("utils")
 
 function M.get(colors)
-	local bg = "None"
+	local bg = colors.bg
 
 	if vim.g.neovide then
 		bg = colors.base
@@ -155,6 +155,18 @@ function M.get(colors)
 		TelescopePreviewBorder = { bg = colors.bg },
 		TelescopePreviewNormal = {},
 		TelescopePreviewTitle = { bg = colors.green, fg = colors.base },
+
+		WinSeparator = { fg = colors.surface0 },
+		WinBar = { fg = colors.rosewater, bg = colors.base },
+
+		DapUIPlayPauseNC = { link = "DapUIPlayPause" },
+		DapUIRestartNC = { link = "DapUIRestart" },
+		DapUIStopNC = { link = "DapUIStop" },
+		DapUIUnavailableNC = { link = "DapUIUnavailable" },
+		DapUIStepOverNC = { link = "DapUIStepOver" },
+		DapUIStepIntoNC = { link = "DapUIStepInto" },
+		DapUIStepBackNC = { link = "DapUIStepBack" },
+		DapUIStepOutNC = { link = "DapUIStepOut" },
 
 		-- DiagnosticUnderlineError = {
 		-- 	underline = true,
