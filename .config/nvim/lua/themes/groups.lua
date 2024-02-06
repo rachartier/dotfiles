@@ -156,7 +156,7 @@ function M.get(colors)
 		TelescopePreviewNormal = {},
 		TelescopePreviewTitle = { bg = colors.green, fg = colors.base },
 
-		WinSeparator = { fg = colors.surface0 },
+		WinSeparator = { fg = colors.surface1 },
 		WinBar = { fg = colors.rosewater, bg = colors.base },
 
 		DapUIPlayPauseNC = { link = "DapUIPlayPause" },
@@ -167,6 +167,9 @@ function M.get(colors)
 		DapUIStepIntoNC = { link = "DapUIStepInto" },
 		DapUIStepBackNC = { link = "DapUIStepBack" },
 		DapUIStepOutNC = { link = "DapUIStepOut" },
+
+		StatusLineNC = { bg = colors.red },
+		StatusLine = { bg = colors.red },
 
 		-- DiagnosticUnderlineError = {
 		-- 	underline = true,

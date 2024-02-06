@@ -130,10 +130,10 @@ function M.config()
 
 	ins_left({
 		function()
-			return "▊"
+			return "▌"
 		end,
 		color = { fg = colors.blue },
-		left_padding = 0,
+		padding = 0,
 	})
 
 	ins_left({
