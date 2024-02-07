@@ -9,6 +9,12 @@ function M.config()
 
 	local colors = require("theme").get_lualine_colors()
 
+	local is_inside_docker = false
+
+	if os.execute("(awk -F/ '$2 == \"docker\"' /proc/self/cgroup | read non_empty_input)") then
+		is_inside_docker = true
+	end
+
 	local function diff_source()
 		local gitsigns = vim.b.gitsigns_status_dict
 		if gitsigns then
@@ -130,6 +136,9 @@ function M.config()
 
 	ins_left({
 		function()
+			if is_inside_docker then
+				return "▌󰡨 "
+			end
 			return "▌"
 		end,
 		color = { fg = colors.blue },
