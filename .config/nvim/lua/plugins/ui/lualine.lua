@@ -17,7 +17,6 @@ function M.config()
 		on_exit = function(_, return_val)
 			if return_val == 1 then
 				is_inside_docker = true
-				require("lualine").refresh()
 			end
 		end,
 	}):start()
