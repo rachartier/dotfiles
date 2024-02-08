@@ -168,8 +168,8 @@ function M.get(colors)
 		DapUIStepBackNC = { link = "DapUIStepBack" },
 		DapUIStepOutNC = { link = "DapUIStepOut" },
 
-		StatusLineNC = { bg = colors.red },
-		StatusLine = { bg = colors.red },
+		-- StatusLineNC = { bg = colors.red },
+		-- StatusLine = { bg = colors.red },
 
 		-- DiagnosticUnderlineError = {
 		-- 	underline = true,

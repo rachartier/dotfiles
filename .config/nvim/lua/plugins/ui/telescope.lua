@@ -3,13 +3,15 @@ local M = {
 	-- TODO: vérifier les nouveaux commits pour éviter le bug de treesitter...
 	dependencies = {
 		"nvim-lua/plenary.nvim",
-		"nvim-telescope/telescope-dap.nvim",
 	},
+	cmd = "Telescope",
 	keys = {
+		"<leader>fl",
 		"<leader>ff",
 		"<leader>fg",
-		"<Tab>",
-		"<S-Tab>",
+		"<leader>fh",
+		{ "<Tab>", '<cmd>lua require("user_plugins.switchbuffer"' },
+		{ "<S-Tab>", '<cmd>lua require("user_plugins.switchbuffer"' },
 	},
 }
 
@@ -28,9 +30,6 @@ local function fuzzy_find_under_cursor()
 end
 
 function M.config()
-	require("telescope").load_extension("dap")
-	require("telescope").load_extension("projects")
-
 	local U = require("utils")
 	local ts = require("telescope")
 	local actions = require("telescope.actions")
@@ -145,7 +144,7 @@ function M.config()
 	vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Show documentations" })
 	vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "Grep string under cursor" })
 	vim.keymap.set("n", "<leader>fm", "<cmd>Telescope harpoon marks<cr>", { desc = "Open Harpoon Marks" })
-	vim.keymap.set("n", "<leader>c", function()
+	vim.keymap.set("n", "<leader>C", function()
 		require("telescope.builtin").spell_suggest(require("telescope.themes").get_cursor({}))
 	end, { desc = "Spelling Suggestions" })
 	-- vim.keymap.set("n", "*", fuzzy_find_under_cursor, { desc = "Fuzzy find in file under cursor" })

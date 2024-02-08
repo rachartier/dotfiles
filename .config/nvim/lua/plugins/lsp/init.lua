@@ -4,6 +4,7 @@ local M = {
 		"onsails/lspkind.nvim",
 		"neovim/nvim-lspconfig",
 	},
+	event = { "BufReadPre", "BufNewFile" },
 	-- event = { "BufReadPost", "BufNewFile" },
 	-- cmd = { "LspInfo", "LspInstall", "LspUninstall" },
 }

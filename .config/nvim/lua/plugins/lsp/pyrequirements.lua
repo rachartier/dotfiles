@@ -2,6 +2,9 @@ local M = {
 
 	"MeanderingProgrammer/py-requirements.nvim",
 	dependencies = { "nvim-lua/plenary.nvim" },
+	cond = function()
+		return vim.fn.expand("%:t") == "requirements.txt"
+	end,
 }
 
 function M.config()

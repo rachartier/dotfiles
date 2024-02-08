@@ -92,10 +92,10 @@ vim.api.nvim_create_autocmd({ "BufRead" }, {
 	end,
 })
 
-vim.api.nvim_create_autocmd("User", {
-	pattern = "AlphaReady",
-	command = "set showtabline=0 | set laststatus=0",
-})
+-- vim.api.nvim_create_autocmd("User", {
+-- 	pattern = "AlphaReady",
+-- 	command = "set showtabline=0 | set laststatus=0",
+-- })
 
 vim.cmd([[
     augroup _pico
