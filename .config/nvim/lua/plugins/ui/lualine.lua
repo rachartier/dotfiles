@@ -11,9 +11,16 @@ function M.config()
 
 	local is_inside_docker = false
 
-	if os.execute("(awk -F/ '$2 == \"docker\"' /proc/self/cgroup | read non_empty_input)") then
-		is_inside_docker = true
-	end
+	local Job = require("plenary.job")
+	Job:new({
+		command = os.getenv("HOME") .. "/.config/scripts/is_inside_docker.sh",
+		on_exit = function(_, return_val)
+			if return_val == 1 then
+				is_inside_docker = true
+				require("lualine").refresh()
+			end
+		end,
+	}):start()
 
 	local function diff_source()
 		local gitsigns = vim.b.gitsigns_status_dict
