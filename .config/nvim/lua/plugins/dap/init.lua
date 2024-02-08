@@ -5,13 +5,32 @@ local M = {
 		"mfussenegger/nvim-dap-python",
 		"theHamsta/nvim-dap-virtual-text",
 		"mfussenegger/nvim-jdtls",
+		"nvim-telescope/telescope-dap.nvim",
 	},
-	priority = 100,
-	event = { "BufReadPost", "BufNewFile" },
-	cmd = { "LspInfo", "LspInstall", "LspUninstall" },
+	-- priority = 100,
+	keys = {
+		"<F9>",
+		"<leader>bc",
+		"<leader>bl",
+		"<leader>br",
+		"<leader>ba",
+		"<leader>dd",
+		"<leader>dt",
+		"<leader>dr",
+		"<leader>dl",
+		"<leader>de",
+		"<leader>di",
+		"<F5>",
+		"<F10>",
+		"<F11>",
+		"<S-F11>",
+		"<leader>ds",
+		"<leader>df",
+	},
 }
 
 function M.config()
+	require("telescope").load_extension("dap")
 	-- require("dap.ext.vscode").load_launchjs()
 	require("nvim-dap-virtual-text").setup({
 		highlight_new_as_changed = true,

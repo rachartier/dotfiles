@@ -1,5 +1,11 @@
 local M = {
 	"ThePrimeagen/refactoring.nvim",
+	keys = {
+		"<leader>rr",
+		"<leader>rp",
+		"<leader>rv",
+		"<leader>rc",
+	},
 }
 
 function M.config()

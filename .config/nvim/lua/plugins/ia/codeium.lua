@@ -5,6 +5,7 @@ local M = {
 		"nvim-lua/plenary.nvim",
 		"hrsh7th/nvim-cmp",
 	},
+	event = "InsertEnter",
 }
 
 function M.config()

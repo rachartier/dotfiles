@@ -57,11 +57,8 @@ end
 
 -- map("n", "<leader>ts", '<cmd>lua require("user_plugins.switchtheme").select_themes()<cr>')
 
-map("n", "<Tab>", '<cmd>lua require("user_plugins.switchbuffer").select_buffers()<cr>')
-map("n", "<S-Tab>", '<cmd>lua require("user_plugins.switchbuffer").select_buffers()<cr>')
-
-map("n", "<leader>g", '<cmd>lua require("user_plugins.websearch").websearch_input("google")<cr>')
-map("n", "<leader>G", "<cmd>WebSearchInput<cr>")
+-- map("n", "<leader>g", '<cmd>lua require("user_plugins.websearch").websearch_input("google")<cr>')
+-- map("n", "<leader>G", "<cmd>WebSearchInput<cr>")
 
 -- from https://www.reddit.com/r/neovim/comments/13y3thq/whats_a_very_simple_config_change_that_you_cant/
 map("i", "<C-BS>", "<Esc>cvb", {})

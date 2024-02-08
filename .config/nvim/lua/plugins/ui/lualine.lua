@@ -1,7 +1,8 @@
 local M = {
 	"nvim-lualine/lualine.nvim",
 	enabled = true,
-	event = { "BufReadPre", "BufNewFile" },
+	event = "VeryLazy",
+	-- event = { "BufReadPre", "BufNewFile" },
 }
 
 function M.config()
@@ -11,15 +12,15 @@ function M.config()
 
 	local is_inside_docker = false
 
-	local Job = require("plenary.job")
-	Job:new({
-		command = os.getenv("HOME") .. "/.config/scripts/is_inside_docker.sh",
-		on_exit = function(_, return_val)
-			if return_val == 1 then
-				is_inside_docker = true
-			end
-		end,
-	}):start()
+	-- local Job = require("plenary.job")
+	-- Job:new({
+	-- 	command = os.getenv("HOME") .. "/.config/scripts/is_inside_docker.sh",
+	-- 	on_exit = function(_, return_val)
+	-- 		if return_val == 1 then
+	-- 			is_inside_docker = true
+	-- 		end
+	-- 	end,
+	-- }):start()
 
 	local function diff_source()
 		local gitsigns = vim.b.gitsigns_status_dict
@@ -107,6 +108,8 @@ function M.config()
 
 	local config = {
 		options = {
+			disabled_filetypes = { "alpha" },
+			globalstatus = true,
 			component_separators = "",
 			section_separators = "",
 			theme = {

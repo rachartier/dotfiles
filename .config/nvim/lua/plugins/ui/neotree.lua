@@ -5,6 +5,10 @@ local M = {
 		"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
 		"MunifTanjim/nui.nvim",
 	},
+	keys = {
+		"<leader>te",
+	},
+	cmd = "Neotree",
 	priority = 55,
 }
 
@@ -92,6 +96,7 @@ function M.config()
 		},
 
 		filesystem = {
+			use_libuv_file_watcher = true,
 			follow_current_file = {
 				enabled = true,
 				leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
@@ -114,6 +119,10 @@ end
 return {
 	{
 		"antosha417/nvim-lsp-file-operations",
+		keys = {
+			"<leader>te",
+		},
+		cmd = "Neotree",
 		priority = 50,
 		config = function()
 			require("lsp-file-operations").setup()

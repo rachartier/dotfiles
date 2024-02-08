@@ -7,7 +7,8 @@ return {
 			"nvim-treesitter/nvim-treesitter",
 			"rafamadriz/friendly-snippets",
 		},
-		init = function()
+		event = "InsertEnter",
+		config = function()
 			local ls = require("luasnip")
 			ls.setup({
 				-- load_ft_func = require("luasnip_snippets.common.snip_utils").load_ft_func,
@@ -30,8 +31,6 @@ return {
 					ls.change_choice(1)
 				end
 			end, { silent = true })
-		end,
-		config = function()
 			require("luasnip.loaders.from_vscode").lazy_load()
 		end,
 	},
