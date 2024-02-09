@@ -1,7 +1,7 @@
 local M = {
 	"stevearc/dressing.nvim",
 	-- event = "BufRead",
-	lazy = true,
+	-- lazy = true,
 }
 
 function M.config()

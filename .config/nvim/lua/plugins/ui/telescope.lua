@@ -10,8 +10,8 @@ local M = {
 		"<leader>ff",
 		"<leader>fg",
 		"<leader>fh",
-		{ "<Tab>", '<cmd>lua require("user_plugins.switchbuffer"' },
-		{ "<S-Tab>", '<cmd>lua require("user_plugins.switchbuffer"' },
+		{ "<Tab>", '<cmd>lua require("user_plugins.switchbuffer").select_buffers()<cr>' },
+		{ "<S-Tab>", '<cmd>lua require("user_plugins.switchbuffer").select_buffers()<cr>' },
 	},
 }
 
