@@ -8,7 +8,7 @@ local M = {
 	keys = {
 		"<leader>te",
 	},
-	cmd = "Neotree",
+	cmd = "NeoTree",
 	priority = 55,
 }
 
