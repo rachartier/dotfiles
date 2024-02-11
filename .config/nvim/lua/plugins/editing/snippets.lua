@@ -1,5 +1,28 @@
 return {
 	{
+		"chrisgrieser/nvim-scissors",
+		config = function()
+			require("scissors").setup({
+				snippetDir = vim.fn.stdpath("config") .. "/snippets",
+				editSnippetPopup = {
+					height = 0.4, -- relative to the window, number between 0 and 1
+					width = 0.6,
+					border = "rounded",
+					keymaps = {
+						cancel = "q",
+						saveChanges = "<CR>", -- alternatively, can also use `:w`
+						goBackToSearch = "<BS>",
+						deleteSnippet = "<C-BS>",
+						duplicateSnippet = "<C-d>",
+						openInFile = "<C-o>",
+						insertNextToken = "<C-t>", -- insert & normal mode
+						jumpBetweenBodyAndPrefix = "<Tab>", -- insert & normal mode
+					},
+				},
+			})
+		end,
+	},
+	{
 		"L3MON4D3/LuaSnip",
 		version = "2.*",
 		build = "make install_jsregexp",
@@ -31,7 +54,7 @@ return {
 					ls.change_choice(1)
 				end
 			end, { silent = true })
-			require("luasnip.loaders.from_vscode").lazy_load()
+			require("luasnip.loaders.from_vscode").lazy_load({ paths = vim.fn.stdpath("config") .. "/snippets" })
 		end,
 	},
 }
