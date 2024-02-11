@@ -108,7 +108,7 @@ function M.config()
 
 	local config = {
 		options = {
-			disabled_filetypes = { "alpha" },
+			disabled_filetypes = { "alpha", "neo-tree" },
 			globalstatus = true,
 			component_separators = "",
 			section_separators = "",
