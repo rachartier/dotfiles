@@ -1,6 +1,6 @@
 local M = {
 	"Hoffs/omnisharp-extended-lsp.nvim",
-	-- enabled = false,
+	enabled = false,
 }
 
 function M.config() end
