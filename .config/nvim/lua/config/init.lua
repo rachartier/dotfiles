@@ -77,6 +77,10 @@ M.formatters_by_ft_options = {
 			-- "--line-length 300",
 		},
 	},
+	csharpier = {
+		command = "dotnet-csharpier",
+		args = { "--write-stdout" },
+	},
 }
 
 M.formatters_by_ft_options["clang-format"] = {
