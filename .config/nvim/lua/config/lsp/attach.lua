@@ -78,8 +78,8 @@ M.on_attach = function(client, bufnr)
 
 	if client.name == "omnisharp" then
 		vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, bufopts, { desc = "Open code action menu" })
-		-- vim.keymap.set("n", "gd", require("omnisharp_extended").lsp_definitions, bufopts)
-		vim.keymap.set("n", "gd", require("csharp").go_to_definition, bufopts)
+		vim.keymap.set("n", "gd", require("omnisharp_extended").lsp_definitions, bufopts)
+		-- vim.keymap.set("n", "gd", require("csharp").go_to_definition, bufopts)
 	else
 		vim.keymap.set(
 			{ "v", "n" },
