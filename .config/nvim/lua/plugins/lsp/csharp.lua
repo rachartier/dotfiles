@@ -4,6 +4,7 @@ local M = {
 		"williamboman/mason.nvim", -- Required, automatically installs omnisharp
 		"Tastyep/structlog.nvim", -- Optional, but highly recommended for debugging
 	},
+	enabled = false,
 }
 
 function M.config()
