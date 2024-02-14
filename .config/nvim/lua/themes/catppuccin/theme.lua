@@ -12,8 +12,10 @@ function M.get_lualine_colors()
 	return {
 		-- bg = "#232639", --c.mantle,
 		-- bg = U.lighten(c.base, 0.99),
-		bg = c.mantle,
+		-- bg = c.mantle,
+		bg = "None",
 		fg = c.subtext0,
+		surface0 = c.surface0,
 		yellow = c.yellow,
 		cyan = c.cyan,
 		darkblue = c.mantle,
@@ -45,7 +47,7 @@ function M.setup()
 	require("catppuccin").setup({
 		lazy = true,
 		flavour = flavour, -- latte, frappe, macchiato, mocha
-		transparent_background = false,
+		transparent_background = true,
 		show_end_of_buffer = false,
 		term_colors = true,
 		dim_inactive = {
