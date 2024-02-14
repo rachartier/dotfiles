@@ -132,6 +132,26 @@ function M.config()
 	}
 
 	alpha.setup(dashboard.config)
+
+	vim.api.nvim_create_autocmd("User", {
+		pattern = "AlphaReady",
+		callback = function()
+			vim.opt.fillchars = vim.tbl_extend("force", vim.opt.fillchars:get(), {
+				stl = " ",
+				stlnc = " ",
+			})
+		end,
+	})
+
+	vim.api.nvim_create_autocmd("User", {
+		pattern = "AlphaClosed",
+		callback = function()
+			vim.opt.fillchars = vim.tbl_extend("force", vim.opt.fillchars:get(), {
+				stl = "─",
+				stlnc = "─",
+			})
+		end,
+	})
 end
 
 return M
