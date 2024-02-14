@@ -7,6 +7,49 @@ vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
 	command = "checktime",
 })
 
+local group_ui = augroup("ui")
+vim.api.nvim_create_autocmd({ "BufLeave" }, {
+	group = group_ui,
+	pattern = "*",
+	callback = function()
+		vim.opt.fillchars = vim.tbl_extend("force", vim.opt.fillchars:get(), {
+			stl = " ",
+			stlnc = " ",
+		})
+		require("lualine").refresh()
+	end,
+})
+
+vim.api.nvim_create_autocmd({ "BufEnter" }, {
+	group = group_ui,
+	pattern = "*",
+	callback = function()
+		vim.opt.fillchars = vim.tbl_extend("force", vim.opt.fillchars:get(), {
+			stl = "-",
+			stlnc = "-",
+		})
+		require("lualine").refresh()
+	end,
+})
+
+local function hide_lualine()
+	if vim.bo.filetype == "TelescopePrompt" or vim.bo.filetype == "neo-tree" then
+		vim.cmd([[setlocal laststatus=0]])
+	end
+end
+
+vim.api.nvim_create_autocmd("FileType", {
+	callback = hide_lualine,
+})
+
+vim.api.nvim_create_autocmd("BufEnter", {
+	callback = function()
+		if vim.bo.filetype ~= "TelescopePrompt" and vim.bo.filetype ~= "neo-tree" then
+			vim.cmd([[set laststatus=3]])
+		end
+	end,
+})
+
 vim.api.nvim_create_autocmd({ "TextYankPost" }, {
 	group = augroup("yank_group"),
 	pattern = "*",

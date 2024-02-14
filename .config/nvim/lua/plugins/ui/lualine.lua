@@ -108,13 +108,19 @@ function M.config()
 
 	local config = {
 		options = {
-			disabled_filetypes = { "alpha", "neo-tree" },
+			disabled_filetypes = { "alpha", "TelescopePrompt" },
 			globalstatus = true,
 			component_separators = "",
 			section_separators = "",
 			theme = {
-				normal = { c = { fg = colors.surface0, bg = colors.bg } },
-				inactive = { c = { fg = colors.surface0, bg = colors.bg } },
+				normal = {
+					c = { fg = colors.surface0, bg = colors.bg },
+					x = { fg = colors.surface0, bg = colors.bg },
+				},
+				inactive = {
+					c = { fg = colors.surface0, bg = colors.bg },
+					x = { fg = colors.surface0, bg = colors.bg },
+				},
 			},
 		},
 		sections = {
