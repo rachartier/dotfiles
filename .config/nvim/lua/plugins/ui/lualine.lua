@@ -106,20 +106,22 @@ function M.config()
 		end,
 	}
 
+	local default_theme = { fg = colors.surface0, bg = colors.bg }
+
 	local config = {
 		options = {
-			disabled_filetypes = { "alpha", "TelescopePrompt" },
+			disabled_filetypes = { "alpha" },
 			globalstatus = true,
 			component_separators = "",
 			section_separators = "",
 			theme = {
 				normal = {
-					c = { fg = colors.surface0, bg = colors.bg },
-					x = { fg = colors.surface0, bg = colors.bg },
+					c = default_theme,
+					x = default_theme,
 				},
 				inactive = {
-					c = { fg = colors.surface0, bg = colors.bg },
-					x = { fg = colors.surface0, bg = colors.bg },
+					c = default_theme,
+					x = default_theme,
 				},
 			},
 		},
