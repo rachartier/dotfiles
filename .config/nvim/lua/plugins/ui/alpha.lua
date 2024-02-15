@@ -136,20 +136,14 @@ function M.config()
 	vim.api.nvim_create_autocmd("User", {
 		pattern = "AlphaReady",
 		callback = function()
-			vim.opt.fillchars = vim.tbl_extend("force", vim.opt.fillchars:get(), {
-				stl = " ",
-				stlnc = " ",
-			})
+			vim.opt.laststatus = 0
 		end,
 	})
 
 	vim.api.nvim_create_autocmd("User", {
 		pattern = "AlphaClosed",
 		callback = function()
-			vim.opt.fillchars = vim.tbl_extend("force", vim.opt.fillchars:get(), {
-				stl = "─",
-				stlnc = "─",
-			})
+			vim.opt.laststatus = 3
 		end,
 	})
 end
