@@ -17,7 +17,7 @@ function M.get_lualine_colors()
 		fg = c.subtext0,
 		surface0 = c.surface0,
 		yellow = c.yellow,
-		cyan = c.cyan,
+		cyan = c.sapphire,
 		darkblue = c.mantle,
 		green = c.green,
 		orange = c.peach,

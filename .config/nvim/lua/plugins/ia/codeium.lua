@@ -5,7 +5,7 @@ local M = {
 		"nvim-lua/plenary.nvim",
 		"hrsh7th/nvim-cmp",
 	},
-	event = "InsertEnter",
+	event = "BufEnter",
 }
 
 function M.config()
@@ -15,11 +15,11 @@ function M.config()
 		return vim.fn["codeium#Accept"]()
 	end, { expr = true, silent = true })
 
-	vim.keymap.set("i", "<C-g>n", function()
+	vim.keymap.set("i", "<C-Down>", function()
 		return vim.fn["codeium#CycleCompletions"](1)
 	end, { expr = true, silent = true })
 
-	vim.keymap.set("i", "<C-g>p", function()
+	vim.keymap.set("i", "<C-Up>", function()
 		return vim.fn["codeium#CycleCompletions"](-1)
 	end, { expr = true, silent = true })
 

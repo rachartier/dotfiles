@@ -68,8 +68,8 @@ function M.config()
 					added = "", -- or "✚", but this is redundant info if you use git_status_colors on the name
 					modified = "", -- or "", but this is redundant info if you use git_status_colors on the name
 					renamed = "󰑕", -- this can only be used in the git_status source
-					conflict = "",
-					unmerged = "",
+					conflict = "",
+					unmerged = "",
 					deleted = U.git_signs.removed,
 				},
 			},

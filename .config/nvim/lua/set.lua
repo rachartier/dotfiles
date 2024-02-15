@@ -89,17 +89,6 @@ vim.o.timeoutlen = 300
 vim.api.nvim_command("filetype plugin on")
 --
 opt.termguicolors = true
--- opt.nu = true
--- opt.relativenumber = true
---
--- opt.tabstop = 4
--- opt.softtabstop = 4
--- opt.shiftwidth = 4
--- opt.expandtab = true
---
--- opt.smartindent = true
---
--- opt.wrap = false
 
 opt.swapfile = false
 opt.backup = true
@@ -142,8 +131,14 @@ vim.diagnostic.config({
 		only_current_line = true,
 	},
 	virtual_text = {
-		prefix = "●",
+		prefix = "",
 		-- virt_text_pos = "right_align",
+	},
+	signs = {
+		["WARN"] = U.diagnostic_signs.warning,
+		["ERROR"] = U.diagnostic_signs.error,
+		["INFO"] = U.diagnostic_signs.info,
+		["HINT"] = U.diagnostic_signs.hint,
 	},
 	severity_sort = true,
 })
