@@ -311,7 +311,7 @@ function M.config()
 	})
 
 	ins_right({ "progress", color = { fg = colors.mauve } })
-	ins_right({ "location", color = { fg = colors.cyan } })
+	ins_right({ "location", color = { fg = colors.fg } })
 	ins_right({
 		function()
 			if vim.fn.mode():find("[vV]") then
@@ -325,6 +325,7 @@ function M.config()
 				return ""
 			end
 		end,
+		color = { fg = colors.fg },
 	})
 
 	ins_right({
