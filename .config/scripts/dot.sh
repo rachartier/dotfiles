@@ -137,6 +137,10 @@ install_lazygit() {
 	sudo install lazygit /usr/local/bin && __echo_success "lazygit installed."
 }
 
+install_lazydocker() {
+	curl https://raw.githubusercontent.com/jesseduffield/lazydocker/master/scripts/install_update_linux.sh | bash
+}
+
 install_tmux() {
 	sudo apt install libevent-dev yacc automake libncurses5-dev
 	git clone https://github.com/tmux/tmux.git /tmp/tmux
@@ -199,6 +203,7 @@ install_essentials() {
 	install_fzf
 	install_viu
 	install_lazygit
+	install_lazydocker
 	install_starship
 }
 
@@ -213,6 +218,7 @@ do_reinstall() {
 	"eza") install_eza ;;
 	"glow") install_glow ;;
 	"lazygit") install_lazygit ;;
+	"lazydocker") install_lazydocker ;;
 	"starship") install_starship ;;
 	"all") install_essentials ;;
 	*) install_essentials ;;
