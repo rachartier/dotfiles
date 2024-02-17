@@ -60,6 +60,53 @@ function M.config()
 				"markdown", -- indentation at bullet points is worse
 			},
 		},
+		textobjects = {
+			select = {
+				enable = true,
+				lookahead = true,
+
+				keymaps = {
+					["af"] = "@function.outer",
+					["if"] = "@function.inner",
+					["ac"] = "@class.outer",
+					["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
+					["as"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },
+				},
+				selection_modes = {
+					["@parameter.outer"] = "v", -- charwise
+					["@function.outer"] = "V", -- linewise
+					["@class.outer"] = "<c-v>", -- blockwise
+				},
+				include_surrounding_whitespace = true,
+			},
+			move = {
+				enable = true,
+				set_jumps = true, -- whether to set jumps in the jumplist
+				goto_next_start = {
+					["<C-down>"] = "@function.outer",
+					["<C-j>"] = "@function.outer",
+				},
+				goto_next_end = {
+					["<C-J"] = "@function.outer",
+				},
+				goto_previous_start = {
+					["<C-up>"] = "@function.outer",
+					["<C-k>"] = "@function.outer",
+				},
+				goto_previous_end = {
+					["<C-K>"] = "@function.outer",
+				},
+				-- Below will go to either the start or the end, whichever is closer.
+				-- Use if you want more granular movements
+				-- Make it even more gradual by adding multiple queries and regex.
+				-- goto_next = {
+				-- 	["]d"] = "@conditional.outer",
+				-- },
+				-- goto_previous = {
+				-- 	["[d"] = "@conditional.outer",
+				-- },
+			},
+		},
 	})
 
 	vim.api.nvim_set_hl(0, "@string.documentation.python", { link = "Comment" })
