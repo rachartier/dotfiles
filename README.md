@@ -117,6 +117,7 @@ BoldWhite=205,214,244
                 "intenseTextStyle": "all",
                 "name": "Ubuntu",
                 "source": "Windows.Terminal.Wsl"
+                "startingDirectory": "\\\\wsl.localhost\\Ubuntu\\home\\rachartier"
             },
             {
                 "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
