@@ -13,7 +13,7 @@ local M = {
 		command = "curl --silent --no-buffer -X POST http://localhost:11434/api/generate -d $body",
 		debug = false, -- Prints errors and the command which is run.
 	},
-	enabled = true,
+	enabled = false,
 }
 
 function M.config()

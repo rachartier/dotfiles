@@ -17,6 +17,7 @@ local M = {
 		"nvim-lua/plenary.nvim",
 		"nvim-telescope/telescope.nvim",
 	},
+	enabled = false,
 }
 
 return M
