@@ -157,4 +157,5 @@ vim.diagnostic.config({
 
 vim.api.nvim_set_var("t_Cs", "\\e[4:3m")
 vim.api.nvim_set_var("t_Ce", "\\e[4:0m")
+
 -- vim.g.markdown_recommended_style = 0
