@@ -76,27 +76,22 @@ BoldWhite=205,214,244
     "defaultProfile": "{2c4de342-38b7-51cf-b940-2309a097f518}",
     "experimental.rendering.forceFullRepaint": false,
     "experimental.rendering.software": false,
-    "newTabMenu": 
-    [
+    "newTabMenu": [
         {
             "type": "remainingProfiles"
         }
     ],
-    "profiles": 
-    {
-        "defaults": 
-        {
+    "profiles": {
+        "defaults": {
             "adjustIndistinguishableColors": "never",
             "antialiasingMode": "cleartype",
             "bellStyle": "taskbar",
             "colorScheme": "Catppuccin Macchiato",
             "cursorShape": "filledBox",
             "experimental.retroTerminalEffect": false,
-            "font": 
-            {
+            "font": {
                 "face": "CaskaydiaCove Nerd Font",
-                "features": 
-                {
+                "features": {
                     "calt": 1,
                     "liga": 1,
                     "ss01": 1
@@ -109,14 +104,13 @@ BoldWhite=205,214,244
             "startingDirectory": ".",
             "useAcrylic": true
         },
-        "list": 
-        [
+        "list": [
             {
                 "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
                 "hidden": false,
                 "intenseTextStyle": "all",
                 "name": "Ubuntu",
-                "source": "Windows.Terminal.Wsl"
+                "source": "Windows.Terminal.Wsl",
                 "startingDirectory": "\\\\wsl.localhost\\Ubuntu\\home\\rachartier"
             },
             {
@@ -157,8 +151,7 @@ BoldWhite=205,214,244
             }
         ]
     },
-    "schemes": 
-    [
+    "schemes": [
         {
             "background": "#0C0C0C",
             "black": "#0C0C0C",
@@ -417,24 +410,20 @@ BoldWhite=205,214,244
     "snapToGridOnResize": false,
     "tabWidthMode": "equal",
     "theme": "Catppuccin Macchiato",
-    "themes": 
-    [
+    "themes": [
         {
             "name": "Catppuccin Frappe",
-            "tab": 
-            {
+            "tab": {
                 "background": "#414559FF",
                 "iconStyle": "default",
                 "showCloseButton": "always",
                 "unfocusedBackground": null
             },
-            "tabRow": 
-            {
+            "tabRow": {
                 "background": "#002FFF00",
                 "unfocusedBackground": "#292C3CFF"
             },
-            "window": 
-            {
+            "window": {
                 "applicationTheme": "dark",
                 "experimental.rainbowFrame": false,
                 "frame": null,
@@ -444,43 +433,32 @@ BoldWhite=205,214,244
         },
         {
             "name": "Catppuccin Macchiato",
-            "tab": 
-            {
-                "background": null,
-                "iconStyle": "default",
-                "showCloseButton": "always",
-                "unfocusedBackground": null
+            "tab": {
+                "background": "#1e2030aa",
+                "unfocusedBackground": "#363a4f00",
+                "showCloseButton": "hover"
             },
-            "tabRow": 
-            {
-                "background": "#1E2030FF",
-                "unfocusedBackground": "#0E1EFFFF"
-            },
-            "window": 
-            {
+            "window": {
                 "applicationTheme": "dark",
                 "experimental.rainbowFrame": false,
-                "frame": null,
+                "frame": "terminalBackground",
                 "unfocusedFrame": null,
                 "useMica": true
             }
         },
         {
             "name": "Mica",
-            "tab": 
-            {
+            "tab": {
                 "background": null,
                 "iconStyle": "default",
                 "showCloseButton": "always",
                 "unfocusedBackground": null
             },
-            "tabRow": 
-            {
+            "tabRow": {
                 "background": "#00000000",
                 "unfocusedBackground": null
             },
-            "window": 
-            {
+            "window": {
                 "applicationTheme": "system",
                 "experimental.rainbowFrame": false,
                 "frame": null,
