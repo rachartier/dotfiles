@@ -66,8 +66,12 @@ BoldWhite=205,214,244
 ```
 {
     "$help": "https://aka.ms/terminal-documentation",
-    "$schema": "https://aka.ms/terminal-profiles-schema",
+    "$schema": "https://aka.ms/terminal-profiles-schema-preview",
     "actions": [],
+    "alwaysShowTabs": true,
+    "centerOnLaunch": true,
+    "confirmCloseAllTabs": false,
+    "copyFormatting": "none",
     "copyOnSelect": true,
     "defaultProfile": "{2c4de342-38b7-51cf-b940-2309a097f518}",
     "experimental.rendering.forceFullRepaint": false,
@@ -82,8 +86,8 @@ BoldWhite=205,214,244
     {
         "defaults": 
         {
-            "adjustIndistinguishableColors": "indexed",
-            "antialiasingMode": "grayscale",
+            "adjustIndistinguishableColors": "never",
+            "antialiasingMode": "cleartype",
             "bellStyle": "taskbar",
             "colorScheme": "Catppuccin Macchiato",
             "cursorShape": "filledBox",
@@ -94,33 +98,24 @@ BoldWhite=205,214,244
                 "features": 
                 {
                     "calt": 1,
-                    "liga": 0,
+                    "liga": 1,
                     "ss01": 1
                 },
-                "size": 18.0,
-                "weight": "normal"
+                "size": 13.0
             },
             "intenseTextStyle": "all",
-            "opacity": 80,
-            "padding": "8",
+            "opacity": 75,
+            "padding": "13",
             "startingDirectory": ".",
-            "useAcrylic": true,
-            "useAtlasEngine": true
+            "useAcrylic": true
         },
         "list": 
         [
             {
-                "adjustIndistinguishableColors": "indexed",
-                "font": 
-                {
-                    "size": 14.0,
-                    "weight": "normal"
-                },
                 "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
                 "hidden": false,
                 "intenseTextStyle": "all",
                 "name": "Ubuntu",
-                "padding": "0",
                 "source": "Windows.Terminal.Wsl"
             },
             {
@@ -140,6 +135,24 @@ BoldWhite=205,214,244
                 "hidden": false,
                 "name": "Azure Cloud Shell",
                 "source": "Windows.Terminal.Azure"
+            },
+            {
+                "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
+                "hidden": false,
+                "name": "PowerShell",
+                "source": "Windows.Terminal.PowershellCore"
+            },
+            {
+                "guid": "{62b7e789-a3ee-500b-b754-a14ed3d5ccd0}",
+                "hidden": false,
+                "name": "Developer Command Prompt for VS 2022",
+                "source": "Windows.Terminal.VisualStudio"
+            },
+            {
+                "guid": "{80d1ecca-f96f-57f5-895b-d81cb0c21c06}",
+                "hidden": false,
+                "name": "Developer PowerShell for VS 2022",
+                "source": "Windows.Terminal.VisualStudio"
             }
         ]
     },
@@ -238,29 +251,6 @@ BoldWhite=205,214,244
             "yellow": "#EED49F"
         },
         {
-            "background": "#000000",
-            "black": "#0C0C0C",
-            "blue": "#0037DA",
-            "brightBlack": "#767676",
-            "brightBlue": "#3B78FF",
-            "brightCyan": "#61D6D6",
-            "brightGreen": "#16C60C",
-            "brightPurple": "#B4009E",
-            "brightRed": "#E74856",
-            "brightWhite": "#F2F2F2",
-            "brightYellow": "#F9F1A5",
-            "cursorColor": "#FFFFFF",
-            "cyan": "#3A96DD",
-            "foreground": "#FFFFFF",
-            "green": "#13A10E",
-            "name": "Color Scheme 11",
-            "purple": "#881798",
-            "red": "#C50F1F",
-            "selectionBackground": "#FFFFFF",
-            "white": "#CCCCCC",
-            "yellow": "#C19C00"
-        },
-        {
             "background": "#282C34",
             "black": "#282C34",
             "blue": "#61AFEF",
@@ -302,7 +292,7 @@ BoldWhite=205,214,244
             "name": "One Half Light",
             "purple": "#A626A4",
             "red": "#E45649",
-            "selectionBackground": "#FFFFFF",
+            "selectionBackground": "#4F525D",
             "white": "#FAFAFA",
             "yellow": "#C18301"
         },
@@ -348,7 +338,7 @@ BoldWhite=205,214,244
             "name": "Solarized Light",
             "purple": "#D33682",
             "red": "#DC322F",
-            "selectionBackground": "#FFFFFF",
+            "selectionBackground": "#073642",
             "white": "#EEE8D5",
             "yellow": "#B58900"
         },
@@ -394,7 +384,7 @@ BoldWhite=205,214,244
             "name": "Tango Light",
             "purple": "#75507B",
             "red": "#CC0000",
-            "selectionBackground": "#FFFFFF",
+            "selectionBackground": "#555753",
             "white": "#D3D7CF",
             "yellow": "#C4A000"
         },
@@ -422,6 +412,9 @@ BoldWhite=205,214,244
             "yellow": "#808000"
         }
     ],
+    "showTabsInTitlebar": true,
+    "snapToGridOnResize": false,
+    "tabWidthMode": "equal",
     "theme": "Catppuccin Macchiato",
     "themes": 
     [
@@ -430,17 +423,21 @@ BoldWhite=205,214,244
             "tab": 
             {
                 "background": "#414559FF",
+                "iconStyle": "default",
                 "showCloseButton": "always",
                 "unfocusedBackground": null
             },
             "tabRow": 
             {
-                "background": "#303446FF",
+                "background": "#002FFF00",
                 "unfocusedBackground": "#292C3CFF"
             },
             "window": 
             {
                 "applicationTheme": "dark",
+                "experimental.rainbowFrame": false,
+                "frame": null,
+                "unfocusedFrame": null,
                 "useMica": true
             }
         },
@@ -449,17 +446,21 @@ BoldWhite=205,214,244
             "tab": 
             {
                 "background": null,
+                "iconStyle": "default",
                 "showCloseButton": "always",
                 "unfocusedBackground": null
             },
             "tabRow": 
             {
                 "background": "#1E2030FF",
-                "unfocusedBackground": "#181926FF"
+                "unfocusedBackground": "#0E1EFFFF"
             },
             "window": 
             {
                 "applicationTheme": "dark",
+                "experimental.rainbowFrame": false,
+                "frame": null,
+                "unfocusedFrame": null,
                 "useMica": true
             }
         },
@@ -468,6 +469,7 @@ BoldWhite=205,214,244
             "tab": 
             {
                 "background": null,
+                "iconStyle": "default",
                 "showCloseButton": "always",
                 "unfocusedBackground": null
             },
@@ -479,6 +481,9 @@ BoldWhite=205,214,244
             "window": 
             {
                 "applicationTheme": "system",
+                "experimental.rainbowFrame": false,
+                "frame": null,
+                "unfocusedFrame": null,
                 "useMica": true
             }
         }
