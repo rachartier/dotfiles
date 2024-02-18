@@ -3,8 +3,6 @@ vim.g.mapleader = " "
 
 local U = require("utils")
 
-require("set")
-
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
 	vim.fn.system({
@@ -54,6 +52,7 @@ require("lazy").setup("plugins", {
 	},
 })
 
+require("set")
 require("neovide")
 
 require("remap")

@@ -132,8 +132,20 @@ vim.diagnostic.config({
 	},
 	virtual_text = {
 		prefix = "",
-		-- virt_text_pos = "right_align",
 	},
+	-- virtual_text = {
+	-- 	prefix = function(diagnostic)
+	-- 		if diagnostic.severity == vim.diagnostic.severity.ERROR then
+	-- 			return U.diagnostic_signs.error
+	-- 		elseif diagnostic.severity == vim.diagnostic.severity.WARN then
+	-- 			return U.diagnostic_signs.warning
+	-- 		elseif diagnostic.severity == vim.diagnostic.severity.INFO then
+	-- 			return U.diagnostic_signs.info
+	-- 		else
+	-- 			return U.diagnostic_signs.hint
+	-- 		end
+	-- 	end,
+	-- },
 	signs = {
 		["WARN"] = U.diagnostic_signs.warning,
 		["ERROR"] = U.diagnostic_signs.error,
