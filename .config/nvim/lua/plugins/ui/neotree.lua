@@ -118,6 +118,7 @@ return {
 		config = function()
 			require("lsp-file-operations").setup()
 		end,
+		keys = { "<leader>te" },
 	},
 	M,
 }

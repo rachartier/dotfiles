@@ -1,6 +1,6 @@
 local M = {
 	"robitx/gp.nvim",
-	enabled = true,
+	enabled = false,
 }
 
 function M.config()
