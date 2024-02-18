@@ -28,10 +28,9 @@ map("n", "<C-j>", "<cmd>cprev<CR>zz")
 map("n", "<leader>k", "<cmd>lnext<CR>zz")
 map("n", "<leader>j", "<cmd>lprev<CR>zz")
 
-map("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
-map("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
-
 map("n", "<leader>o", "<cmd>!feh <cfile> &<CR>", { silent = true })
+
+map("n", "<c-l>", "<c-i>")
 
 if os.getenv("TMUX") then
 	map("n", "<M-left>", "<cmd>lua require('tmux').move_left()<cr>", { silent = true })
