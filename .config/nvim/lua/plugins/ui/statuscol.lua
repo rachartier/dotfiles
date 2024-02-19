@@ -16,6 +16,7 @@ function M.config()
 			"dapui_watches",
 			"dapui_console",
 			"dap-repl",
+			"oil",
 			"Trouble",
 		},
 
