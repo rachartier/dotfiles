@@ -150,6 +150,20 @@ install_tmux() {
 	make && sudo make install
 }
 
+install_bat() {
+	__install_package_apt bat
+
+	mkdir -p "$(bat --config-dir)/themes"
+
+	cd /tmp || exit
+	git clone https://github.com/catppuccin/bat
+	cd bat || exit
+	cp *.tmTheme "$(bat --config-dir)/themes"
+	bat cache --build
+
+	__make_symlink "$HOME/.local/bin/bat" batcat
+}
+
 install_packages() {
 	__install_package_apt git
 	__install_package_apt wget
@@ -163,11 +177,11 @@ install_packages() {
 	__install_package_apt ripgrep
 	__install_package_apt fd-find
 	__install_package_apt xsel
-	__install_package_apt bat
 	__install_package_apt chafa
 
+	install_bat
+
 	__make_symlink "$HOME/.local/bin/fd" fdfind
-	__make_symlink "$HOME/.local/bin/bat" batcat
 }
 
 install_zsh_plugins() {
