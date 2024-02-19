@@ -434,7 +434,7 @@ BoldWhite=205,214,244
         {
             "name": "Catppuccin Macchiato",
             "tab": {
-                "background": "#1e2030aa",
+                "background": "#363a4faa",
                 "unfocusedBackground": "#363a4f00",
                 "showCloseButton": "hover"
             },
