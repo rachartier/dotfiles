@@ -1,7 +1,7 @@
 local M = {
 	"luukvbaal/statuscol.nvim",
 	event = { "BufReadPre", "BufNewFile" },
-	enabled = false,
+	enabled = true,
 	-- branch = "0.10",
 }
 
