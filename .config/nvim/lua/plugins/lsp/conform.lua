@@ -135,7 +135,7 @@ return {
 
 			-- clean unused & install missing
 			vim.defer_fn(vim.cmd.MasonToolsInstall, 500)
-			vim.defer_fn(vim.cmd.MasonToolsClean, 1000) -- delayed, so noice.nvim is loaded before
+			-- vim.defer_fn(vim.cmd.MasonToolsClean, 1000) -- delayed, so noice.nvim is loaded before
 		end,
 	},
 	{ -- add ignore-comments & lookup rules
