@@ -8,7 +8,7 @@ else
 	M.winblend = 0
 end
 
-M.gif_alpha_enabled = false
+M.gif_alpha_enabled = true
 
 M.lsps = {
 	"lua_ls",
