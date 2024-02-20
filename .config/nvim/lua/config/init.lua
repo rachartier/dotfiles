@@ -39,7 +39,7 @@ M.formatters = {
 	jsonc = { "fixjson", "typos" },
 	lua = { "stylua", "ast-grep", "typos" },
 	python = { "black", "autoflake", "isort", "typos" },
-	yaml = { "prettier", "typos" },
+	yaml = { "typos" },
 	html = { "prettier", "typos" },
 	markdown = {
 		"markdown-toc",
@@ -99,9 +99,9 @@ M.linters_by_ft_options = {
 	shellcheck = {
 		args = { "--shell=bash", "--format=json", "-" },
 	},
-	yamllint = {
-		args = { "--config-file=" .. linter_config .. "/yamllint.yaml", "--format=parsable", "-" },
-	},
+	-- yamllint = {
+	-- 	args = { "--config-file=" .. linter_config .. "/yamllint.yaml", "--format=parsable", "-" },
+	-- },
 	markdownlint = {
 		args = {
 			"--disable=no-trailing-spaces", -- not disabled in config, so it's enabled for formatting
