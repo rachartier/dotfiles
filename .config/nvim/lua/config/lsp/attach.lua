@@ -76,19 +76,13 @@ M.on_attach = function(client, bufnr)
 	vim.keymap.set("n", "<leader>gp", vim.diagnostic.goto_prev, bufopts, { desc = "Go to previous diagnostic" })
 	vim.keymap.set("n", "<leader>rr", vim.lsp.buf.references, bufopts, { desc = "Find references" })
 
-	if client.name == "omnisharp" then
-		vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, bufopts, { desc = "Open code action menu" })
-		-- vim.keymap.set("n", "gd", require("omnisharp_extended").lsp_definitions, bufopts)
-		vim.keymap.set("n", "gd", require("csharp").go_to_definition, bufopts)
-	else
-		vim.keymap.set(
-			{ "v", "n" },
-			"<leader>ca",
-			require("actions-preview").code_actions,
-			{ desc = "Open code action menu" }
-		)
-		vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
-	end
+	vim.keymap.set(
+		{ "v", "n" },
+		"<leader>ca",
+		require("actions-preview").code_actions,
+		{ desc = "Open code action menu" }
+	)
+	vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
 
 	vim.keymap.set("n", "<leader>rn", function()
 		M.lsp_rename()

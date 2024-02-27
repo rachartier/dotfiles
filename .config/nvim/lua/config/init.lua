@@ -74,7 +74,7 @@ M.formatters_by_ft_options = {
 	},
 	black = {
 		prepend_args = {
-			-- "--line-length 300",
+			"--line-length 400",
 		},
 	},
 	csharpier = {
