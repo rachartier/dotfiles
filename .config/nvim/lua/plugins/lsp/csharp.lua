@@ -4,6 +4,7 @@ local M = {
 		"williamboman/mason.nvim", -- Required, automatically installs omnisharp
 		"Tastyep/structlog.nvim", -- Optional, but highly recommended for debugging
 	},
+	event = { "BufReadPre", "BufNewFile" },
 	priority = 50,
 	enabled = true,
 }
@@ -30,6 +31,28 @@ function M.config()
 					end
 				end,
 			})
+		end,
+	})
+
+	vim.api.nvim_create_autocmd("LspAttach", {
+		callback = function(args)
+			local bufnr = args.buf
+			local client = vim.lsp.get_client_by_id(args.data.client_id)
+
+			if client.name ~= "omnisharp" then
+				return
+			end
+
+			require("config.lsp.attach").on_attach()
+
+			vim.keymap.set(
+				"n",
+				"gd",
+				require("csharp").go_to_definition,
+				{ silent = true, nowait = true, noremap = true, desc = "Go to Definition", buffer = bufnr }
+			)
+
+			vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Open code action menu" })
 		end,
 	})
 end
