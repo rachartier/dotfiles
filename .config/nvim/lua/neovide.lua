@@ -1,6 +1,6 @@
 if vim.g.neovide then
 	-- vim.o.guifont = "CaskaydiaCove NF, Symbols Nerd Font"
-	vim.o.guifont = "CaskaydiaCove NF"
+	vim.o.guifont = "CaskaydiaCove Nerd Font"
 
 	vim.g.neovide_padding_top = 10
 	vim.g.neovide_padding_bottom = 10
