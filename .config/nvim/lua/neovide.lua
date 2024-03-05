@@ -1,9 +1,9 @@
 if vim.g.neovide then
 	-- vim.o.guifont = "CaskaydiaCove NF, Symbols Nerd Font"
-	vim.o.guifont = "CaskaydiaCove Nerd Font"
+	vim.o.guifont = "Cascadia Code,Symbols Nerd Font"
 
-	vim.g.neovide_padding_top = 10
-	vim.g.neovide_padding_bottom = 10
+	vim.g.neovide_padding_top = 0
+	vim.g.neovide_padding_bottom = 5
 	vim.g.neovide_padding_right = 10
 	vim.g.neovide_padding_left = 10
 
@@ -12,7 +12,7 @@ if vim.g.neovide then
 	vim.g.neovide_scroll_animation_length = 0.1
 
 	vim.g.neovide_theme = "auto"
-	-- vim.g.neovide_refresh_rate = 144
+	vim.g.neovide_refresh_rate = 165
 	vim.g.neovide_confirm_quit = false
 	vim.g.neovide_cursor_animation_length = 0.05
 	vim.g.neovide_cursor_trail_length = 0.01
