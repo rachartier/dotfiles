@@ -10,7 +10,7 @@ function M.config()
 
 	local header = {}
 
-	if vim.fn.executable("chafa") == 1 and require("config").gif_alpha_enabled then
+	if vim.fn.executable("chafa") == 1 and require("config").gif_alpha_enabled and vim.g.neovide == 0 then
 		header = {
 			type = "terminal",
 			command = "chafa $HOME/.config/nvim/dashboard/gif/kirby-dancing.gif",
