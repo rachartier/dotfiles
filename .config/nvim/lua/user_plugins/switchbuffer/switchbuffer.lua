@@ -1,6 +1,7 @@
 local M = {}
 local pickers = require("telescope.pickers")
 local finders = require("telescope.finders")
+local previewer = require("telescope.previewers")
 local conf = require("telescope.config").values
 local actions = require("telescope.actions")
 local action_state = require("telescope.actions.state")
@@ -64,6 +65,33 @@ function M.get_symbol(filename)
 	return symbol, hl
 end
 
+local function get_folders_in_path(path)
+	local folders = {}
+
+	for folder in path:gmatch("([^/]+)") do
+		table.insert(folders, folder)
+	end
+
+	return folders
+end
+
+local function get_n_last_folders_in_path(path, n)
+	local paths = get_folders_in_path(path)
+	local nFolders = #paths
+
+	if nFolders > n then
+		local last = ""
+
+		for i = n, 0, -1 do
+			last = table.concat({ last, paths[nFolders - i] }, "/")
+		end
+
+		return string.sub(last, 2)
+	else
+		return path
+	end
+end
+
 function M.format_filename(filename, filename_max_length)
 	local function trunc_filename(fn, fn_max)
 		if string.len(fn) <= fn_max then
@@ -79,6 +107,7 @@ function M.format_filename(filename, filename_max_length)
 	end
 
 	filename = string.gsub(filename, "term://", "Terminal: ", 1)
+	filename = get_n_last_folders_in_path(filename, 1)
 	filename = trunc_filename(filename, filename_max_length)
 
 	return filename
@@ -187,6 +216,7 @@ function M.select_buffers(opts)
 			prompt_title = "Navigate to a Buffer",
 			finder = create_finders_table(),
 			sorter = conf.generic_sorter(opts),
+			previewer = previewer.vim_buffer_cat.new(opts),
 			attach_mappings = function(prompt_bufnr, map)
 				actions.select_default:replace(function()
 					actions.close(prompt_bufnr)
