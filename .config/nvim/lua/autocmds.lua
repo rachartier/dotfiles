@@ -2,13 +2,15 @@ local function augroup(name)
 	return vim.api.nvim_create_augroup("custom_" .. name, { clear = true })
 end
 
-vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
+local autocmd = vim.api.nvim_create_autocmd
+
+autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
 	group = augroup("checktime"),
 	command = "checktime",
 })
 
 local group_ui = augroup("ui")
-vim.api.nvim_create_autocmd({ "BufLeave" }, {
+autocmd({ "BufLeave" }, {
 	group = group_ui,
 	pattern = "*",
 	callback = function()
@@ -16,7 +18,7 @@ vim.api.nvim_create_autocmd({ "BufLeave" }, {
 	end,
 })
 
-vim.api.nvim_create_autocmd({ "BufEnter" }, {
+autocmd({ "BufEnter" }, {
 	group = group_ui,
 	pattern = "*",
 	callback = function()
@@ -30,11 +32,11 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
 -- 	end
 -- end
 --
--- vim.api.nvim_create_autocmd("FileType", {
+-- autocmd("FileType", {
 -- 	callback = hide_lualine,
 -- })
 --
--- vim.api.nvim_create_autocmd("BufEnter", {
+-- autocmd("BufEnter", {
 -- 	callback = function()
 -- 		if vim.bo.filetype ~= "TelescopePrompt" and vim.bo.filetype ~= "neo-tree" then
 -- 			require("lualine").hide({ unhide = true })
@@ -42,7 +44,7 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
 -- 	end,
 -- })
 
-vim.api.nvim_create_autocmd({ "TextYankPost" }, {
+autocmd({ "TextYankPost" }, {
 	group = augroup("yank_group"),
 	pattern = "*",
 	callback = function()
@@ -54,7 +56,7 @@ vim.api.nvim_create_autocmd({ "TextYankPost" }, {
 	end,
 })
 
-vim.api.nvim_create_autocmd("FileType", {
+autocmd("FileType", {
 	group = augroup("close_with_q"),
 	pattern = {
 		"PlenaryTestPopup",
@@ -78,7 +80,7 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
-vim.api.nvim_create_autocmd("FileType", {
+autocmd("FileType", {
 	group = augroup("wrap_spell"),
 	pattern = { "gitcommit", "markdown", "text" },
 	callback = function()
@@ -87,7 +89,7 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
-vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+autocmd({ "BufWritePre" }, {
 	group = augroup("auto_create_dir"),
 	callback = function(event)
 		if event.match:match("^%w%w+://") then
@@ -98,7 +100,7 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 	end,
 })
 
-vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+autocmd({ "BufWritePre" }, {
 	group = augroup("auto_delete_trailing_white_space"),
 	pattern = { "*" },
 	command = [[%s/\s\+$//e]],
@@ -113,11 +115,11 @@ local persistbuffer = function(bufnr)
 	vim.fn.setbufvar(bufnr, "bufpersist", 1)
 end
 
-vim.api.nvim_create_autocmd({ "BufRead" }, {
+autocmd({ "BufRead" }, {
 	group = id,
 	pattern = { "*" },
 	callback = function()
-		vim.api.nvim_create_autocmd({ "InsertEnter", "BufModifiedSet" }, {
+		autocmd({ "InsertEnter", "BufModifiedSet" }, {
 			buffer = 0,
 			once = true,
 			callback = function()
@@ -127,7 +129,7 @@ vim.api.nvim_create_autocmd({ "BufRead" }, {
 	end,
 })
 
--- vim.api.nvim_create_autocmd("User", {
+-- autocmd("User", {
 -- 	pattern = "AlphaReady",
 -- 	command = "set showtabline=0 | set laststatus=0",
 -- })
@@ -139,9 +141,17 @@ vim.cmd([[
     augroup end
 ]])
 
-vim.api.nvim_create_autocmd("BufReadPost", {
+autocmd("BufReadPost", {
 	desc = "Open file at the last position it was edited earlier",
 	group = augroup("misc"),
 	pattern = "*",
 	command = 'silent! normal! g`"zv',
+})
+
+-- dont list quickfix buffers
+autocmd("FileType", {
+	pattern = "qf",
+	callback = function()
+		vim.opt_local.buflisted = false
+	end,
 })
