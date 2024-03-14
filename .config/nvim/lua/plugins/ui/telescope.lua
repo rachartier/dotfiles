@@ -75,9 +75,6 @@ function M.config()
 			},
 			sort_mru = true,
 			sorting_strategy = "ascending",
-			layout_config = {
-				prompt_position = "top",
-			},
 			multi_icon = "",
 			entry_prefix = "   ",
 			prompt_prefix = "   ",
@@ -89,6 +86,30 @@ function M.config()
 				i = { ["<c-s>"] = flash },
 			},
 			file_ignore_patterns = { "node_modules", "__pycache__", "bin", "obj" },
+			path_display = { "truncate" },
+			vimgrep_arguments = {
+				"rg",
+				"-L",
+				"--color=never",
+				"--no-heading",
+				"--with-filename",
+				"--line-number",
+				"--column",
+				"--smart-case",
+			},
+			layout_config = {
+				horizontal = {
+					prompt_position = "top",
+					preview_width = 0.55,
+					results_width = 0.8,
+				},
+				vertical = {
+					mirror = false,
+				},
+				width = 0.87,
+				height = 0.80,
+				preview_cutoff = 120,
+			},
 		},
 		pickers = {
 			grep_string = search_layout,

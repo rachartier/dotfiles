@@ -34,7 +34,7 @@ require("lazy").setup("plugins", {
 			require = "󰢱 ",
 			source = " ",
 			start = " ",
-			task = "✔ ",
+			task = " ",
 			list = {
 				"●",
 				"➜",
@@ -49,6 +49,37 @@ require("lazy").setup("plugins", {
 		concurrency = nil, ---@type number? set to 1 to check for updates very slowly
 		frequency = 3600, -- check for updates every hour
 		notify = false,
+	},
+	rtp = {
+		disabled_plugins = {
+			"2html_plugin",
+			"tohtml",
+			"getscript",
+			"getscriptPlugin",
+			"gzip",
+			"logipat",
+			"netrw",
+			"netrwPlugin",
+			"netrwSettings",
+			"netrwFileHandlers",
+			"matchit",
+			"tar",
+			"tarPlugin",
+			"rrhelper",
+			"spellfile_plugin",
+			"vimball",
+			"vimballPlugin",
+			"zip",
+			"zipPlugin",
+			"tutor",
+			"rplugin",
+			"syntax",
+			"synmenu",
+			"optwin",
+			"compiler",
+			"bugreport",
+			"ftplugin",
+		},
 	},
 })
 
