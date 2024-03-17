@@ -3,6 +3,8 @@ local M = {
 	-- TODO: vérifier les nouveaux commits pour éviter le bug de treesitter...
 	dependencies = {
 		"nvim-lua/plenary.nvim",
+		"isak102/telescope-git-file-history.nvim",
+		"tpope/vim-fugitive",
 	},
 	cmd = "Telescope",
 	keys = {
@@ -34,6 +36,7 @@ function M.config()
 	local ts = require("telescope")
 	local actions = require("telescope.actions")
 	local action_state = require("telescope.actions.state")
+	local gfh_actions = require("telescope").extensions.git_file_history.actions
 
 	local function flash(prompt_bufnr)
 		require("flash").jump({
@@ -144,10 +147,21 @@ function M.config()
 				case_mode = "smart_case", -- or "ignore_case" or "respect_case"
 				-- the default case_mode is "smart_case"
 			},
+			git_file_history = {
+				mappings = {
+					i = {
+						["<C-g>"] = gfh_actions.open_in_browser,
+					},
+					n = {
+						["<C-g>"] = gfh_actions.open_in_browser,
+					},
+				},
+			},
 		},
 	})
 
 	require("telescope").load_extension("fzf")
+	require("telescope").load_extension("git_file_history")
 
 	local builtin = require("telescope.builtin")
 	vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Find files" })
@@ -162,7 +176,12 @@ function M.config()
 	)
 	-- vim.keymap.set("n", "<C-p>", builtin.git_files, { desc = "Find git files" })
 	vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Grep words inside files" })
-	vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Show documentations" })
+	vim.keymap.set(
+		"n",
+		"<leader>fh",
+		require("telescope").extensions.git_file_history.git_file_history,
+		{ desc = "Open Git File History" }
+	)
 	vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "Grep string under cursor" })
 	vim.keymap.set("n", "<leader>fm", "<cmd>Telescope harpoon marks<cr>", { desc = "Open Harpoon Marks" })
 	vim.keymap.set("n", "<leader>C", function()
