@@ -50,7 +50,7 @@ function M.config()
 	}
 
 	-- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
-	require("lspconfig")["pyright"].setup({
+	require("lspconfig")["basedpyright"].setup({
 		before_init = function(_, config)
 			config.settings.python.pythonPath = get_python_path(config.root_dir)
 		end,
