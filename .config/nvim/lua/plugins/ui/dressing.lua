@@ -1,5 +1,8 @@
 local M = {
 	"stevearc/dressing.nvim",
+	dependencies = {
+		"nvim-neotest/nvim-nio",
+	},
 	-- event = "BufRead",
 	-- lazy = true,
 }
