@@ -62,6 +62,12 @@ function M.config()
 		layout_strategy = "vertical",
 		layout_config = {
 			prompt_position = "bottom",
+			vertical = {
+				width = 0.9,
+				height = 0.9,
+				preview_height = 0.6,
+				preview_cutoff = 0,
+			},
 		},
 		borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
 	}
@@ -89,7 +95,7 @@ function M.config()
 				i = { ["<c-s>"] = flash },
 			},
 			file_ignore_patterns = { "node_modules", "__pycache__", "bin", "obj" },
-			path_display = { "truncate" },
+			path_display = { "smart", shorten = { len = 3 } },
 			vimgrep_arguments = {
 				"rg",
 				"-L",
