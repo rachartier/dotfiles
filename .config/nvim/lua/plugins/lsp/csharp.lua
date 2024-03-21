@@ -4,19 +4,18 @@ local M = {
 		"williamboman/mason.nvim", -- Required, automatically installs omnisharp
 		"Tastyep/structlog.nvim", -- Optional, but highly recommended for debugging
 	},
-	event = { "BufReadPre", "BufNewFile" },
+	ft = { "cs", "xaml" },
 	priority = 50,
-	enabled = true,
+	enabled = false,
 }
 
 function M.config()
 	require("csharp").setup({
-		on_attach = require("config.lsp.attach").on_attach,
-		capabilities = require("cmp_nvim_lsp").default_capabilities(),
+		lsp = {
+			on_attach = require("config.lsp.attach").on_attach,
+			capabilities = require("cmp_nvim_lsp").default_capabilities(),
+		},
 	})
-
-	vim.keymap.set("n", "<leader>cr", require("csharp").run_project, { desc = "Run csharp project" })
-	vim.keymap.set("n", "<leader>cd", require("csharp").debug_project, { desc = "Debug csharp project" })
 
 	vim.api.nvim_create_autocmd("LspAttach", {
 		callback = function(args)
@@ -51,6 +50,9 @@ function M.config()
 				require("csharp").go_to_definition,
 				{ silent = true, nowait = true, noremap = true, desc = "Go to Definition", buffer = bufnr }
 			)
+
+			vim.keymap.set("n", "<leader>cr", require("csharp").run_project, { desc = "Run csharp project" })
+			vim.keymap.set("n", "<leader>cd", require("csharp").debug_project, { desc = "Debug csharp project" })
 
 			vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Open code action menu" })
 		end,
