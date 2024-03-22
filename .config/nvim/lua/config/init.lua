@@ -17,6 +17,7 @@ M.lsps = {
 	"bashls",
 	"pyright",
 	"omnisharp",
+	"marksman",
 	"clangd",
 }
 

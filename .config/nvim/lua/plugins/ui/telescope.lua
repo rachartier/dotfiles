@@ -5,6 +5,7 @@ local M = {
 		"nvim-lua/plenary.nvim",
 		"isak102/telescope-git-file-history.nvim",
 		"tpope/vim-fugitive",
+		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 	},
 	cmd = "Telescope",
 	keys = {
@@ -15,6 +16,7 @@ local M = {
 		{ "<Tab>", '<cmd>lua require("user_plugins.switchbuffer").select_buffers()<cr>' },
 		{ "<S-Tab>", '<cmd>lua require("user_plugins.switchbuffer").select_buffers()<cr>' },
 	},
+	enabled = true,
 }
 
 local function fuzzy_find_under_cursor()
@@ -67,6 +69,13 @@ function M.config()
 				height = 0.9,
 				preview_height = 0.6,
 				preview_cutoff = 0,
+			},
+		},
+		set_style = {
+			result = {
+				spacing = 0,
+				indentation = 2,
+				dynamic_width = true,
 			},
 		},
 		borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
@@ -198,7 +207,4 @@ function M.config()
 	vim.keymap.set("n", "<leader>fl", builtin.resume)
 end
 
-return {
-	M,
-	{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-}
+return M
