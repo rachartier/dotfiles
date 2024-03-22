@@ -33,18 +33,18 @@ function M.config()
 	-- 	automatic_setup = true,
 	-- })
 	--
-	-- local lspconfig = require("lspconfig")
-	-- local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
-	-- local on_attach = require("config.lsp.attach").on_attach
+	local lspconfig = require("lspconfig")
+	local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
+	local on_attach = require("config.lsp.attach").on_attach
 
-	-- require("mason-lspconfig").setup_handlers({
-	-- 	function(server_name)
-	-- 		lspconfig[server_name].setup({
-	-- 			capabilities = lsp_capabilities,
-	-- 			on_attach = on_attach,
-	-- 		})
-	-- 	end,
-	-- })
+	require("mason-lspconfig").setup_handlers({
+		function(server_name)
+			lspconfig[server_name].setup({
+				capabilities = lsp_capabilities,
+				on_attach = on_attach,
+			})
+		end,
+	})
 end
 
 return M
