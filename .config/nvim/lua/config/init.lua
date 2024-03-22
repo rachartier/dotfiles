@@ -40,7 +40,8 @@ M.formatters = {
 	lua = { "stylua", "ast-grep", "typos" },
 	python = { "black", "autoflake", "isort", "typos" },
 	yaml = { "typos" },
-	html = { "prettier", "typos" },
+	html = { { "prettier" }, "typos" },
+	htmldjango = { { "prettier" }, "typos" },
 	markdown = {
 		"markdown-toc",
 		"markdownlint",
