@@ -91,13 +91,27 @@ return {
 	},
 	{ -- Formatter integration
 		"stevearc/conform.nvim",
+		enabled = true,
 		init = function()
 			vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 		end,
 		config = function()
 			require("conform").setup({
 				formatters_by_ft = formatters,
-				format_on_save = { timeout_ms = 500, lsp_fallback = true },
+				format_on_save = function(bufnr)
+					local bufnr = vim.api.nvim_get_current_buf()
+					local errors = vim.diagnostic.get(0, { severity = { min = vim.diagnostic.severity.ERROR } })
+
+					if #errors > 0 then
+						return
+					end
+
+					return {
+						quiet = true,
+						timeout_ms = 500,
+						lsp_fallback = true,
+					}
+				end,
 			})
 
 			require("conform").formatters = require("config").formatters_by_ft_options
