@@ -116,45 +116,6 @@ vim.g.netrw_browse_split = 0
 vim.g.netrw_banner = 0
 vim.g.netrw_winsize = 25
 
-local U = require("utils")
-
-vim.fn.sign_define("DiagnosticSignError", { text = U.diagnostic_signs.error, texthl = "DiagnosticSignError" })
-vim.fn.sign_define("DiagnosticSignWarn", { text = U.diagnostic_signs.warning, texthl = "DiagnosticSignWarn" })
-vim.fn.sign_define("DiagnosticSignInfo", { text = U.diagnostic_signs.info, texthl = "DiagnosticSignInfo" })
-vim.fn.sign_define("DiagnosticSignHint", { text = U.diagnostic_signs.hint, texthl = "DiagnosticSignHint" })
-
-vim.diagnostic.config({
-	float = { border = U.default_border },
-	underline = true,
-	virtual_lines = {
-		highlight_whole_line = false,
-		only_current_line = true,
-	},
-	virtual_text = {
-		prefix = "",
-	},
-	-- virtual_text = {
-	-- 	prefix = function(diagnostic)
-	-- 		if diagnostic.severity == vim.diagnostic.severity.ERROR then
-	-- 			return U.diagnostic_signs.error
-	-- 		elseif diagnostic.severity == vim.diagnostic.severity.WARN then
-	-- 			return U.diagnostic_signs.warning
-	-- 		elseif diagnostic.severity == vim.diagnostic.severity.INFO then
-	-- 			return U.diagnostic_signs.info
-	-- 		else
-	-- 			return U.diagnostic_signs.hint
-	-- 		end
-	-- 	end,
-	-- },
-	signs = {
-		["WARN"] = U.diagnostic_signs.warning,
-		["ERROR"] = U.diagnostic_signs.error,
-		["INFO"] = U.diagnostic_signs.info,
-		["HINT"] = U.diagnostic_signs.hint,
-	},
-	severity_sort = true,
-})
-
 vim.api.nvim_set_var("t_Cs", "\\e[4:3m")
 vim.api.nvim_set_var("t_Ce", "\\e[4:0m")
 

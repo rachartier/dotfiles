@@ -26,16 +26,16 @@ function M.get(colors)
 			bg = bg,
 			fg = colors.text,
 		},
-		NoiceCmdlinePopupBorder = {
-			link = "NormalFloat",
-		},
-		NoiceFormatLevelOff = {
-			bg = colors.yellow,
-		},
 		FloatBorder = {
 			-- bg = "None",
 			bg = bg,
-			fg = colors.text,
+			fg = colors.surface0,
+		},
+		NoiceCmdlinePopupBorder = {
+			link = "FloatBorder",
+		},
+		NoiceFormatLevelOff = {
+			bg = colors.yellow,
 		},
 		FloatTitle = {
 			fg = colors.text,
@@ -76,7 +76,7 @@ function M.get(colors)
 			link = "IlluminatedWordRead",
 		},
 		CmpItemAbbrMatch = {
-			fg = colors.mauve,
+			fg = colors.yellow,
 			-- bold = true,
 			-- underline = true,
 		},
@@ -145,16 +145,16 @@ function M.get(colors)
 
 		TelescopePromptPrefix = { bg = colors.bg },
 		TelescopePromptNormal = { bg = colors.bg },
-		TelescopePromptBorder = { bg = colors.bg },
-		TelescopePromptTitle = { bg = colors.pink, fg = colors.base },
+		TelescopePromptBorder = { link = "FloatBorder" },
+		TelescopePromptTitle = { bg = colors.bg, fg = colors.pink },
 
 		TelescopeResultsNormal = { fg = colors.subtext1 },
-		TelescopeResultsBorder = { bg = colors.bg },
-		TelescopeResultsTitle = { bg = colors.blue, fg = colors.base },
+		TelescopeResultsBorder = { link = "TelescopePromptBorder" },
+		TelescopeResultsTitle = { bg = colors.bg, fg = colors.blue },
 
-		TelescopePreviewBorder = { bg = colors.bg },
+		TelescopePreviewBorder = { link = "TelescopePromptBorder" },
 		TelescopePreviewNormal = {},
-		TelescopePreviewTitle = { bg = colors.green, fg = colors.base },
+		TelescopePreviewTitle = { bg = colors.bg, fg = colors.green },
 
 		WinSeparator = { fg = colors.surface0 },
 		WinBar = { fg = colors.rosewater, bg = colors.base },

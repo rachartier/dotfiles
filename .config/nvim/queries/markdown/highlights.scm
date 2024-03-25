@@ -19,10 +19,10 @@
 ((task_list_marker_checked) @markdown_check_done (#set! conceal "󰄲"))
 
 ; box drawing characters for tables
-(pipe_table_header ("|") @punctuation.special @conceal (#set! conceal "│"))
-(pipe_table_delimiter_row ("|") @punctuation.special @conceal (#set! conceal "│"))
-(pipe_table_delimiter_cell ("-") @punctuation.special @conceal (#set! conceal "─"))
-(pipe_table_row ("|") @punctuation.special @conceal (#set! conceal "│"))
+; (pipe_table_header ("|") @punctuation.special @conceal (#set! conceal "│"))
+; (pipe_table_delimiter_row ("|") @punctuation.special @conceal (#set! conceal "│"))
+; (pipe_table_delimiter_cell ("-") @punctuation.special @conceal (#set! conceal "─"))
+; (pipe_table_row ("|") @punctuation.special @conceal (#set! conceal "│"))
 
 ; block quotes
 ((block_quote_marker) @markdown_quote_marker (#set! conceal "▍"))
@@ -35,8 +35,8 @@
 ; (fenced_code_block
 ;   (info_string) @devicon
 ;   (#as_devicon! @devicon))
-
-(
-  fenced_code_block (fenced_code_block_delimiter) @markdown_code_block_marker
-  (#set! conceal " ")
-)
+;
+; (
+;   fenced_code_block (fenced_code_block_delimiter) @markdown_code_block_marker
+;   (#set! conceal " ")
+; )

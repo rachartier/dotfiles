@@ -74,11 +74,11 @@ local function fix_usings()
 end
 
 function M.config()
-	vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Open code action menu" })
-
 	vim.api.nvim_create_autocmd("LspAttach", {
 		pattern = { "*.cs", "*.xaml" },
 		callback = function(args)
+			vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Open code action menu" })
+
 			local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 			vim.api.nvim_create_autocmd("BufWritePre", {
 				group = augroup,
