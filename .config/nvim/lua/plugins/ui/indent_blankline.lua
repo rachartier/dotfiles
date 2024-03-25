@@ -15,11 +15,14 @@ function M.init()
 			"dashboard",
 			"neo-tree",
 			"Trouble",
+			"trouble",
 			"lazy",
 			"mason",
 			"notify",
 			"toggleterm",
 			"dapui_stacks",
+			"toggleterm",
+			"lazyterm",
 		},
 		callback = function()
 			vim.b.miniindentscope_disable = true
