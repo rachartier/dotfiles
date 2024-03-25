@@ -87,6 +87,15 @@ function M.config()
 		capabilities = capabilities,
 		settings = {
 			Lua = {
+				workspace = {
+					checkThirdParty = false,
+				},
+				codeLens = {
+					enable = true,
+				},
+				completion = {
+					callSnippet = "Replace",
+				},
 				hint = {
 					enabled = true,
 				},
@@ -107,9 +116,6 @@ function M.config()
 
 	require("lspconfig")["omnisharp"].setup({
 		cmd = { omnisharp_bin, "--languageserver", "--hostPID", tostring(pid) },
-		-- handlers = {
-		-- 	["textDocument/definition"] = require("omnisharp_extended").handler,
-		-- },
 		root_dir = util.root_pattern("*.sln"),
 		capabilities = capabilities,
 		--cmd = { "dotnet", os.getenv("HOME") .. "/.local/omnisharp/run/OmniSharp.dll" },
