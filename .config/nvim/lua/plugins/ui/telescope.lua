@@ -59,6 +59,9 @@ function M.config()
 	end
 
 	local search_layout = {
+		word_match = "-w",
+		only_sort_text = true,
+		search = "",
 		layout_strategy = "vertical",
 		layout_config = {
 			prompt_position = "bottom",
