@@ -39,6 +39,9 @@ function M.config()
 
 	require("mason-lspconfig").setup_handlers({
 		function(server_name)
+			if server_name == "omnisharp" then
+				return
+			end
 			lspconfig[server_name].setup({
 				capabilities = lsp_capabilities,
 				on_attach = on_attach,
