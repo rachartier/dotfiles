@@ -12,7 +12,14 @@ function M.config()
 	vim.g.codeium_enabled = true
 
 	vim.keymap.set("i", "<C-g>", function()
-		return vim.fn["codeium#Accept"]()
+		local ret = vim.fn["codeium#Accept"]()
+
+		if vim.bo.filetype == "python" then
+			local shift_len = vim.opt.shiftwidth:get()
+			ret = string.gsub(ret, "\t", string.rep(" ", shift_len))
+		end
+
+		return ret
 	end, { expr = true, silent = true })
 
 	vim.keymap.set("i", "<C-Down>", function()
