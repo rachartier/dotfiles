@@ -1,0 +1,14 @@
+alias config='/usr/bin/git --git-dir=/home/rachartier/.cfg/ --work-tree=/home/rachartier'
+alias f="fzf"
+alias l="eza --tree --level 1 --group-directories-first --color always --icons"
+alias ls='eza -G --group-directories-first --color always --icons'
+
+alias neo='neovide.exe --wsl --neovim-bin "$HOME/.local/bin/nvim"'
+alias cneo='neovide.exe --wsl --neovim-bin "$HOME/.local/bin/nvim --server="'
+
+alias snvim='nvim --cmd "let g:neovide=true" --headless --listen 0.0.0.0:7301'
+
+if command tmuxp &> /dev/null; then
+    alias tl='tmuxp load'
+    for s in $(tmuxp ls); do alias "$s"="tmuxp load -y $s"; done
+fi
