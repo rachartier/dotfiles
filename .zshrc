@@ -95,11 +95,6 @@ setopt autocd
 unsetopt correct_all
 unsetopt BEEP
 
-alias config='/usr/bin/git --git-dir=/home/rachartier/.cfg/ --work-tree=/home/rachartier'
-alias f="fzf"
-alias l="eza --tree --level 1 --group-directories-first --color always --icons"
-alias ls='eza -G --group-directories-first --color always --icons'
-
 local dot_script_path="$HOME/.config/scripts/dot.sh"
 local dot_script_link="$HOME/.local/bin/dot"
 
@@ -107,10 +102,7 @@ if [ ! -L "$dot_script_link" ] || [ ! -e "$dot_script_link" ]; then
     ln -s "$dot_script_path" "$dot_script_link"
 fi
 
-if command tmuxp &> /dev/null; then
-    alias tl='tmuxp load'
-    for s in $(tmuxp ls); do alias "$s"="tmuxp load -y $s"; done
-fi
+source $HOME/.aliases
 
 # fpath+=($HOME/.zsh/pure)
 # autoload -U promptinit; promptinit
