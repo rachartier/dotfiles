@@ -83,7 +83,12 @@ M.on_attach = function(client, bufnr)
 			require("actions-preview").code_actions,
 			{ desc = "Open code action menu" }
 		)
+
+		vim.keymap.set({ "n" }, "<leader>gd", require("omnisharp_extended").lsp_definition)
+		vim.keymap.set({ "n" }, "<leader>gr", require("omnisharp_extended").lsp_references)
+		vim.keymap.set({ "n" }, "<leader>gi", require("omnisharp_extended").lsp_implementation)
 	end
+
 	vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
 
 	vim.keymap.set("n", "<leader>rn", function()
