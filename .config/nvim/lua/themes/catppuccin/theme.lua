@@ -14,7 +14,7 @@ function M.get_lualine_colors()
 		-- bg = U.lighten(c.base, 0.99),
 		-- bg = c.mantle,
 		bg = "None",
-		fg = c.subtext0,
+		fg = c.surface2,
 		surface0 = c.surface0,
 		yellow = c.yellow,
 		cyan = c.sapphire,
