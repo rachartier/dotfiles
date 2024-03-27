@@ -36,7 +36,7 @@ function M.get(colors)
 		FloatBorder = {
 			-- bg = "None",
 			bg = bg,
-			fg = colors.surface0,
+			fg = colors.overlay0,
 		},
 		NoiceCmdlinePopupBorder = {
 			link = "FloatBorder",

@@ -106,7 +106,13 @@ function M.config()
 		end,
 	}
 
-	local default_theme = { fg = colors.surface0, bg = colors.bg }
+	local default_theme
+
+	if vim.g.neovide then
+		default_theme = { fg = colors.surface0, bg = colors.mantle }
+	else
+		default_theme = { fg = colors.surface0, bg = colors.bg }
+	end
 
 	local config = {
 		options = {
@@ -187,7 +193,13 @@ function M.config()
 					["!"] = colors.red,
 					t = colors.red,
 				}
-				vim.api.nvim_command("hi! LualineMode guifg=" .. mode_color[vim.fn.mode()] .. " guibg=" .. colors.bg)
+				local bg = colors.bg
+
+				if vim.g.neovide then
+					bg = colors.mantle
+				end
+
+				vim.api.nvim_command("hi! LualineMode guifg=" .. mode_color[vim.fn.mode()] .. " guibg=" .. bg)
 			end
 			local kirby_default = "(>*-*)>"
 			local mode_kirby = {
@@ -241,21 +253,21 @@ function M.config()
 		icon = "",
 		color = { fg = colors.violet },
 	})
-	ins_left({
-		"diff",
-		colored = true,
-		source = diff_source,
-		symbols = {
-			added = U.git_signs.added,
-			modified = U.git_signs.modified,
-			removed = U.git_signs.removed,
-		},
-		diff_color = {
-			-- added = { gui = "bold" },
-			-- modified = { gui = "bold" },
-			-- removed = { gui = "bold" },
-		},
-	})
+	-- ins_left({
+	-- 	"diff",
+	-- 	colored = true,
+	-- 	source = diff_source,
+	-- 	symbols = {
+	-- 		added = U.git_signs.added,
+	-- 		modified = U.git_signs.modified,
+	-- 		removed = U.git_signs.removed,
+	-- 	},
+	-- 	diff_color = {
+	-- 		-- added = { gui = "bold" },
+	-- 		-- modified = { gui = "bold" },
+	-- 		-- removed = { gui = "bold" },
+	-- 	},
+	-- })
 
 	-- Insert mid section. You can make any number of sections in neovim :)
 	-- for lualine it's any number greater then 2
