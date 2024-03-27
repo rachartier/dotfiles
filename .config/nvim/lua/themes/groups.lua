@@ -19,6 +19,13 @@ function M.get(colors)
 		CursorLineNr = {
 			fg = colors.overlay1,
 		},
+		CursorLineSign = {
+			fg = colors.surface0,
+		},
+
+		SignColumn = {
+			fg = colors.surface0,
+		},
 		CursorLine = {
 			bg = "None",
 		},

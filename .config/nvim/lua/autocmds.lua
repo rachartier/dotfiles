@@ -184,3 +184,10 @@ autocmd("FileType", {
 		vim.opt_local.buflisted = false
 	end,
 })
+
+-- https://github.com/luukvbaal/statuscol.nvim/issues/65
+vim.api.nvim_create_autocmd({ "CursorHold" }, {
+	callback = function()
+		vim.wo.numberwidth = vim.wo.numberwidth
+	end,
+})

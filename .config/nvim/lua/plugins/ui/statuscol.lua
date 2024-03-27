@@ -7,6 +7,14 @@ local M = {
 
 function M.config()
 	local builtin = require("statuscol.builtin")
+	local inside_git_repo
+
+	-- local Job = require("plenary.job")
+	-- inside_git_repo = Job:new({
+	-- 	command = "git",
+	-- 	args = { "rev-parse", "--is-inside-work-tree" },
+	-- })
+	-- 	:sync()[1]
 
 	local cfg = {
 		separator = " ", -- separator between line number and buffer text ("│" or extra " " padding)
@@ -30,23 +38,36 @@ function M.config()
 		-- Builtin 'statuscolumn' options
 		setopt = true, -- whether to set the 'statuscolumn', providing builtin click actions
 		segments = {
-			{ text = { "%C" }, click = "v:lua.ScFa" },
+			-- { text = { "%C" }, click = "v:lua.ScFa" },
 			{
 				sign = {
-					namespace = { "diagnostic" },
+					-- namespace = { "diagnostic" },
 					name = { ".*" },
+					auto = false,
 				},
 				click = "v:lua.ScSa",
 			},
 			{
 				text = { builtin.lnumfunc, " " },
-				condition = { true, builtin.not_empty },
+				condition = {
+					true,
+					true,
+					-- function()
+					-- 	return vim.wo.number == true or vim.wo.relativenumber == true
+					-- end,
+				},
 				click = "v:lua.ScLa",
 			},
 			{
+				-- condition = {
+				-- 	function()
+				-- 		return inside_git_repo
+				-- 	end,
+				-- },
 				sign = {
 					namespace = { "gitsigns" },
-					fillchar = "│",
+
+					fillchar = "▏",
 					maxwidth = 1,
 					colwidth = 1,
 				},

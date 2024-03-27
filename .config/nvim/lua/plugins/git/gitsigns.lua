@@ -18,9 +18,9 @@ function M.config()
 			border = U.default_border,
 		},
 		signs = {
-			add = { text = "│" },
-			delete = { text = "│" },
-			change = { text = "│" },
+			add = { text = "▏" },
+			delete = { text = "▏" },
+			change = { text = "▏" },
 			untracked = { text = "┆" },
 		},
 		trouble = true,
