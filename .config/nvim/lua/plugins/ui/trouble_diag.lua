@@ -1,12 +1,13 @@
 local M = {
 	"folke/trouble.nvim",
+	branch = "dev",
 	dependencies = {
 		"nvim-tree/nvim-web-devicons",
 	},
-	cmd = { "TroubleToggle", "Trouble" },
+	cmd = { "Trouble" },
 	keys = {
 
-		{ "<leader>tt", "<cmd>TroubleToggle<cr>" },
+		{ "<leader>tt", "<cmd>Trouble diagnostics toggle<cr>" },
 		{
 			"<leader>tn",
 			function()
