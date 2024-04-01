@@ -55,7 +55,7 @@ function M.setup()
 		dim_inactive = {
 			enabled = false,
 			shade = "dark",
-			percentage = 0.65,
+			percentage = 0.35,
 		},
 		no_italic = false, -- Force no italic
 		no_bold = false, -- Force no bold

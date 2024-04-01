@@ -21,6 +21,13 @@ local M = {
 
 function M.config()
 	require("dressing").setup({
+		input = {
+			border = require("utils").default_border,
+			relative = "editor",
+			min_width = { 20, 0.4 },
+			title_pos = "center",
+			enabled = true,
+		},
 		win_options = {
 			winblend = require("config").winblend,
 		},

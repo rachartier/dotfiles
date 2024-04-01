@@ -24,6 +24,15 @@ local M = {
 
 function M.config()
 	local ollama_default = require("codecompanion.adapters").use("ollama", {
+		callbacks = {
+			---Set the parameters
+			---@param params table
+			---@param messages table
+			---@return table
+			form_parameters = function(params, messages)
+				return params
+			end,
+		},
 		schema = {
 			model = {
 				order = 1,
@@ -36,6 +45,7 @@ function M.config()
 					"deepseek-coder:6.7b",
 					"deepseek-coder:33b",
 					"mixtral:8x7b",
+					"mixtral:8x7b-instruct-v0.1-q2_K",
 				},
 			},
 			temperature = {

@@ -40,7 +40,8 @@ function M.get(colors)
 		},
 
 		FloatTitle = {
-			fg = colors.text,
+			bg = colors.yellow,
+			fg = colors.crust,
 		},
 		PopupBorder = {
 			link = "FloatBorder",
@@ -68,6 +69,9 @@ function M.get(colors)
 		NeoTreeNormal = {
 			-- bg = "None",
 			bg = bg,
+		},
+		NeoTreePreview = {
+			link = "NeoTreeNormal",
 		},
 		NeoTreeFloatTitle = {
 			link = "NeoTreeTitlebar",

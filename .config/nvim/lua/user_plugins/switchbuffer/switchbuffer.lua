@@ -33,7 +33,6 @@ function M._get_filename_relative_path(fullpath, path_to_remove)
 	end
 
 	if i > path_to_remove_len then
-		-- Remove pathToRemove and any leading slash
 		return fullpath:sub(i + 1)
 	else
 		return fullpath
@@ -142,8 +141,8 @@ M.get_list_buffers = function()
 			local path = name
 			local formatted_filename = M.format_filename(path, 45)
 			local icon, icon_color = M.get_symbol(path)
-			local path_color = "Normal"
-			local status_color = "Normal"
+			local path_color = nil
+			local status_color = nil
 			local status = ""
 
 			if buf_modified then
