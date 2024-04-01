@@ -9,7 +9,7 @@ local M = {
 		"hrsh7th/cmp-nvim-lua",
 		"lukas-reineke/cmp-under-comparator",
 	},
-	event = "InsertEnter",
+	-- event = "InsertEnter",
 }
 
 function M.config()
@@ -209,6 +209,11 @@ function M.config()
 				border = U.default_border,
 				side_padding = 1, -- Not working?
 			}),
+		},
+		view = {
+			entries = {
+				follow_cursor = false,
+			},
 		},
 		experimental = {
 			-- ghost_text = {

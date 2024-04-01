@@ -81,19 +81,20 @@ function M.config()
 				dynamic_width = true,
 			},
 		},
-		borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+		-- borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+
+		borderchars = U.border_chars_outer_thin_telescope,
 	}
 
 	ts.setup({
 		defaults = {
 			winblend = require("config").winblend,
-			borderchars = {
-				--        { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
+			borderchars = U.border_chars_outer_thin_telescope,
+			--        { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
 
-				prompt = { "─", "│", " ", "│", "╭", "╮", "│", "│" },
-				results = { "─", "│", "─", "│", "├", "┤", "╯", "╰" },
-				preview = { "─", "│", "─", " ", "─", "╮", "╯", "─" },
-			},
+			-- prompt = { "─", "│", " ", "│", "╭", "╮", "│", "│" },
+			-- results = { "─", "│", "─", "│", "├", "┤", "╯", "╰" },
+			-- preview = { "─", "│", "─", " ", "─", "╮", "╯", "─" },
 			sort_mru = true,
 			sorting_strategy = "ascending",
 			multi_icon = "",

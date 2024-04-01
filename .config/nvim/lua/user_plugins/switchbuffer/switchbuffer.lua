@@ -172,7 +172,26 @@ M.get_list_buffers = function()
 end
 
 function M.select_buffers(opts)
-	opts = opts or require("telescope.themes").get_dropdown({})
+	opts = opts
+		or require("telescope.themes").get_dropdown({
+			layout_strategy = "horizontal",
+			layout_config = {
+				prompt_position = "top",
+				horizontal = {
+					width = 0.6,
+					height = 0.6,
+					preview_height = 0.6,
+					preview_cutoff = 0,
+				},
+			},
+			set_style = {
+				result = {
+					spacing = 0,
+					indentation = 2,
+					dynamic_width = true,
+				},
+			},
+		})
 
 	local displayer = require("telescope.pickers.entry_display").create({
 		separator = " ",
@@ -216,7 +235,7 @@ function M.select_buffers(opts)
 			prompt_title = "Navigate to a Buffer",
 			finder = create_finders_table(),
 			sorter = conf.generic_sorter(opts),
-			previewer = previewer.vim_buffer_cat.new(opts),
+			previewer = require("telescope.config").values.file_previewer({}),
 			attach_mappings = function(prompt_bufnr, map)
 				actions.select_default:replace(function()
 					actions.close(prompt_bufnr)

@@ -22,7 +22,8 @@ M.border_chars_inner_thin = { " ", "▁", " ", "▏", " ", "▔", " ", "▕" }
 M.border_chars_outer_thin_telescope = { "▔", "▕", "▁", "▏", "🭽", "🭾", "🭿", "🭼" }
 M.border_chars_outer_thick_telescope = { "▀", "▐", "▄", "▌", "▛", "▜", "▟", "▙" }
 
-M.default_border = M.border_chars_round
+-- M.default_border = M.border_chars_round
+M.default_border = M.border_chars_outer_thin
 -- M.default_border = M.border_chars_none
 
 --M.top_right_corner_thin = "🭾"

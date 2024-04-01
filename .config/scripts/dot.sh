@@ -70,7 +70,7 @@ __install_zsh_plugin() {
 
 	[ -d "$installation_folder" ] && rm -rf "$installation_folder"
 
-	git clone "$url" "$installation_folder" &>/dev/null && __echo_success "$folder installed." || return 1
+	git clone "$url" "$installation_folder" && __echo_success "$folder installed." || return 1
 }
 
 __install_package_apt() {
@@ -189,6 +189,7 @@ install_zsh_plugins() {
 	__install_zsh_plugin "https://github.com/zsh-users/zsh-syntax-highlighting.git"
 	__install_zsh_plugin "https://github.com/b4b4r07/enhancd.git"
 	__install_zsh_plugin "https://github.com/zsh-users/zsh-history-substring-search.git"
+    __install_zsh_plugin "https://github.com/wfxr/forgit.git"
 
 }
 
