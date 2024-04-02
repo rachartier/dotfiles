@@ -24,26 +24,18 @@ local M = {
 
 function M.config()
 	local ollama_default = require("codecompanion.adapters").use("ollama", {
-		callbacks = {
-			---Set the parameters
-			---@param params table
-			---@param messages table
-			---@return table
-			form_parameters = function(params, messages)
-				return params
-			end,
-		},
+
 		schema = {
 			model = {
 				order = 1,
 				mapping = "parameters",
 				type = "enum",
 				desc = "ID of the model to use.",
-				default = "deepseek-coder:6.7b",
+				default = "pxlksr/opencodeinterpreter-ds:6.7b-Q4_K",
 				choices = {
-					"dolphin-mixtral:8x7b",
+					"pxlksr/opencodeinterpreter-ds:6.7b-Q4_K",
+					"magicoder:7b",
 					"deepseek-coder:6.7b",
-					"deepseek-coder:33b",
 					"mixtral:8x7b",
 					"mixtral:8x7b-instruct-v0.1-q2_K",
 				},
@@ -53,7 +45,7 @@ function M.config()
 				mapping = "parameters.options",
 				type = "number",
 				optional = true,
-				default = 0.7,
+				default = 0.0,
 				desc = "What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic. We generally recommend altering this or top_p but not both.",
 				validate = function(n)
 					return n >= 0 and n <= 2, "Must be between 0 and 2"
@@ -74,45 +66,9 @@ function M.config()
 			chat = { -- Options for the chat strategy
 				type = "buffer", -- float|buffer
 				show_settings = true, -- Show the model settings in the chat buffer?
-				show_token_count = true, -- Show the token count for the current chat in the buffer?
+				show_token_count = false, -- Show the token count for the current chat in the buffer?
 				buf_options = { -- Buffer options for the chat buffer
 					buflisted = false,
-				},
-			},
-		},
-		actions = {
-			{
-				name = "Special advisor",
-				strategy = "chat",
-				description = "Get some special GenAI advice",
-				opts = {
-					modes = { "v" },
-					auto_submit = true,
-					user_prompt = true,
-				},
-				prompts = {
-					{
-						role = "system",
-						content = function(context)
-							return "I want you to act as a senior "
-								.. context.filetype
-								.. " developer. I will ask you specific questions and I want you to return concise explanations and codeblock examples."
-						end,
-					},
-					{
-						role = "user",
-						contains_code = true,
-						content = function(context)
-							local text =
-								require("codecompanion.helpers.code").get_code(context.start_line, context.end_line)
-
-							return "I have the following code:\n\n```"
-								.. context.filetype
-								.. "\n"
-								.. text
-								.. "\n```\n\n"
-						end,
-					},
 				},
 			},
 		},
