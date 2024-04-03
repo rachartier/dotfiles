@@ -2,7 +2,7 @@ local model = "deepseek-coder:6.7b"
 
 return {
 	"David-Kunz/gen.nvim",
-	enabled = true,
+	enabled = false,
 	opts = {
 		display_mode = "split",
 		model = model, -- The default model to use.
