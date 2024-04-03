@@ -1,7 +1,11 @@
-local M = {
-	"github/copilot.vim",
+return {
+	"CopilotC-Nvim/CopilotChat.nvim",
+	branch = "canary",
+	dependencies = {
+		{ "github/copilot.vim" },
+		{ "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
+	},
+	opts = {
+		-- See Configuration section for rest
+	},
 }
-
-function M.config() end
-
-return M
