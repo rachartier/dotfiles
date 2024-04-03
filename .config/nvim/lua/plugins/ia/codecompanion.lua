@@ -24,14 +24,14 @@ local M = {
 
 function M.config()
 	local ollama_default = require("codecompanion.adapters").use("ollama", {
-
+		url = "http://192.168.1.160:11434/api/chat",
 		schema = {
 			model = {
 				order = 1,
 				mapping = "parameters",
 				type = "enum",
 				desc = "ID of the model to use.",
-				default = "pxlksr/opencodeinterpreter-ds:6.7b-Q4_K",
+				default = "deepseek-coder:6.7b",
 				choices = {
 					"pxlksr/opencodeinterpreter-ds:6.7b-Q4_K",
 					"magicoder:7b",
@@ -45,7 +45,7 @@ function M.config()
 				mapping = "parameters.options",
 				type = "number",
 				optional = true,
-				default = 0.0,
+				default = 0.1,
 				desc = "What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic. We generally recommend altering this or top_p but not both.",
 				validate = function(n)
 					return n >= 0 and n <= 2, "Must be between 0 and 2"
@@ -57,6 +57,10 @@ function M.config()
 		adapters = {
 			chat = ollama_default,
 			inline = ollama_default,
+		},
+		strategies = {
+			chat = "ollama",
+			inline = "ollama",
 		},
 		display = {
 			action_palette = {
