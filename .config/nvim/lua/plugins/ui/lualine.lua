@@ -111,7 +111,7 @@ function M.config()
 	if vim.g.neovide then
 		default_theme = { fg = colors.surface0, bg = colors.mantle }
 	else
-		default_theme = { fg = colors.surface0, bg = colors.bg }
+		default_theme = { fg = colors.surface0, bg = colors.mantle }
 	end
 
 	local config = {
@@ -199,7 +199,9 @@ function M.config()
 					bg = colors.mantle
 				end
 
-				vim.api.nvim_command("hi! LualineMode guifg=" .. mode_color[vim.fn.mode()] .. " guibg=" .. bg)
+				vim.api.nvim_command(
+					"hi! LualineMode guifg=" .. mode_color[vim.fn.mode()] .. " guibg=" .. default_theme.bg
+				)
 			end
 			local kirby_default = "(>*-*)>"
 			local mode_kirby = {
