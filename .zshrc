@@ -20,6 +20,7 @@ plugins=(
     fd
     git
     tmux
+    zsh-poetry
     command-not-found
     zsh-autosuggestions
     zsh-syntax-highlighting
@@ -114,5 +115,3 @@ bindkey "^[[1;5A" history-substring-search-up
 bindkey "^[[1;5B" history-substring-search-down
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-        export PATH="/home/rachartier/.miniconda3/bin:$PATH"

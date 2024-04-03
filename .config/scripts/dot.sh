@@ -190,7 +190,7 @@ install_zsh_plugins() {
 	__install_zsh_plugin "https://github.com/b4b4r07/enhancd.git"
 	__install_zsh_plugin "https://github.com/zsh-users/zsh-history-substring-search.git"
     __install_zsh_plugin "https://github.com/wfxr/forgit.git"
-
+    __install_zsh_plugin "https://github.com/darvid/zsh-poetry.git"
 }
 
 install_nvim() {
