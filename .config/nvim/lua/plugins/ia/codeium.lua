@@ -6,10 +6,11 @@ local M = {
 		"hrsh7th/nvim-cmp",
 	},
 	event = "BufEnter",
+	enabled = false,
 }
 
 function M.config()
-	vim.g.codeium_enabled = true
+	vim.g.codeium_enabled = false
 
 	vim.keymap.set("i", "<C-g>", function()
 		local ret = vim.fn["codeium#Accept"]()
