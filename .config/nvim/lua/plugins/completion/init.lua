@@ -111,7 +111,7 @@ function M.config()
 			-- 	},
 			-- 	entry_filter = filter_text,
 			-- },
-			{ name = "codeium" },
+			-- { name = "codeium" },
 			{ name = "dotenv" },
 			{ name = "luasnip", entry_filter = filter_text, keyword_length = 2 },
 			-- { name = "latex_symbols" },

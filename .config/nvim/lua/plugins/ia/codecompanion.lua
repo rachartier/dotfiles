@@ -15,10 +15,6 @@ local M = {
 		"CodeCompanionToggle",
 		"CodeCompanionChat",
 	},
-	keys = {
-		{ "<Leader>cca", "<cmd>CodeCompanionActions<cr>", mode = { "n", "v" }, desc = "Code Companion Actions" },
-		{ "<Leader>cc", "<cmd>CodeCompanionToggle<cr>", mode = { "n", "v" }, desc = "Code Companion Toggle" },
-	},
 	enabled = false,
 }
 
