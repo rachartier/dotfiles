@@ -12,7 +12,6 @@ return {
 	{
 
 		"zbirenbaum/copilot.lua",
-
 		config = function()
 			require("copilot").setup({
 				panel = {
@@ -56,6 +55,12 @@ return {
 		},
 		keys = {
 			{
+				"<leader>cc",
+				mode = { "n", "v" },
+				"<cmd>CopilotChat<CR>",
+				desc = "CopilotChat - Help actions",
+			},
+			{
 				"<leader>ch",
 				mode = { "n", "v" },
 				function()
@@ -86,12 +91,49 @@ return {
 			},
 		},
 		opts = {
-			-- See Configuration section for rest
+			question_header = "# User ",
+			answer_header = "## Copilot ",
+			show_folds = false,
+
 			prompts = {
+				BetterNamings = "Please provide better names for the following variables and functions.",
 				TestsxUnit = {
 					prompt = "/COPILOT_TESTS Write a set of detailed unit test functions for the code above with the xUnit framework.",
 				},
 			},
 		},
+		config = function(_, opts)
+			local chat = require("CopilotChat")
+			local select = require("CopilotChat.select")
+
+			opts.selection = select.unnamed
+
+			opts.prompts.Commit = {
+				prompt = "Write commit message for the change with commitizen convention",
+				selection = select.gitdiff,
+			}
+			opts.prompts.CommitStaged = {
+				prompt = "Write commit message for the change with commitizen convention",
+				selection = function(source)
+					return select.gitdiff(source, true)
+				end,
+			}
+
+			chat.setup(opts)
+
+			-- Custom buffer for CopilotChat
+			-- vim.api.nvim_create_autocmd("BufEnter", {
+			-- 	pattern = "copilot-*",
+			-- 	callback = function()
+			-- 		vim.opt_local.relativenumber = false
+			-- 		vim.opt_local.number = false
+			--
+			-- 		local ft = vim.bo.filetype
+			-- 		if ft == "copilot-chat" then
+			-- 			vim.bo.filetype = "markdown"
+			-- 		end
+			-- 	end,
+			-- })
+		end,
 	},
 }
