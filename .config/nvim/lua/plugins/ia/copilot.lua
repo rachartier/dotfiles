@@ -13,6 +13,8 @@ return {
 
 		"zbirenbaum/copilot.lua",
 		config = function()
+			vim.g.copilot_proxy_strict_ssl = false
+
 			require("copilot").setup({
 				panel = {
 					enabled = true,
