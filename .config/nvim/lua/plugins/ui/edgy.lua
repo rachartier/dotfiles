@@ -5,9 +5,28 @@ return {
 		vim.opt.splitkeep = "screen"
 	end,
 	opts = {
+		animate = {
+			enabled = false,
+			cps = 250,
+		},
 		right = {
-			{ ft = "codecompanion", title = "Code Companion Chat", size = { width = 0.45 } },
+			{ ft = "copilot-chat", title = "Copilot Chat", size = { width = 0.30 } },
+		},
+		left = {
+			{ ft = "spectre_panel", size = { width = 0.3 } },
+		},
+		bottom = {
+			"trouble",
+			{ ft = "qf", title = "QuickFix" },
+			{
+				ft = "help",
+				size = { height = 20 },
+				-- only show help buffers
+				filter = function(buf)
+					return vim.bo[buf].buftype == "help"
+				end,
+			},
 		},
 	},
-	enabled = false,
+	enabled = true,
 }

@@ -1,3 +1,4 @@
+local username = vim.fn.expand("$USER")
 return {
 	-- {
 	-- 	"github/copilot.vim",
@@ -91,8 +92,10 @@ return {
 			},
 		},
 		opts = {
-			question_header = "# User ",
-			answer_header = "## Copilot ",
+			question_header = string.rep("-", #username + 2) .. "\n " .. username,
+			answer_header = "󰚩  **Copilot**",
+			error_header = "󱚡 **Error**",
+			separator = " ",
 			show_folds = false,
 
 			prompts = {

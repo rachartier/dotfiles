@@ -193,11 +193,6 @@ function M.config()
 					["!"] = colors.red,
 					t = colors.red,
 				}
-				local bg = colors.bg
-
-				if vim.g.neovide then
-					bg = colors.mantle
-				end
 
 				vim.api.nvim_command(
 					"hi! LualineMode guifg=" .. mode_color[vim.fn.mode()] .. " guibg=" .. default_theme.bg

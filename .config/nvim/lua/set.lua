@@ -119,11 +119,11 @@ vim.g.netrw_winsize = 25
 vim.api.nvim_set_var("t_Cs", "\\e[4:3m")
 vim.api.nvim_set_var("t_Ce", "\\e[4:0m")
 
-vim.cmd([[
-augroup copilot_chat_markdown
-    autocmd!
-    autocmd FileType copilot-chat set filetype=markdown
-augroup END
-]])
+-- vim.cmd([[
+-- augroup copilot_chat_markdown
+--     autocmd!
+--     autocmd FileType copilot-chat set filetype=markdown
+-- augroup END
+-- ]])
 
 -- vim.g.markdown_recommended_style = 0

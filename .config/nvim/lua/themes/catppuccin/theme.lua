@@ -19,6 +19,7 @@ function M.get_lualine_colors()
 		fg = c.surface2,
 		surface0 = c.surface0,
 		yellow = c.yellow,
+		flamingo = c.flamingo,
 		cyan = c.sapphire,
 		darkblue = c.mantle,
 		green = c.green,

@@ -192,6 +192,11 @@ function M.get(colors)
 		StatusLineNC = { fg = colors.surface0 },
 		StatusLine = { fg = colors.surface0 },
 
+		EdgyNormal = { bg = colors.mantle },
+		EdgyWinBar = { bg = colors.surface0 },
+		EdgyTitle = { bg = colors.surface0, fg = colors.blue },
+		EdgyIconActive = { bg = colors.surface0, fg = colors.peach },
+
 		-- DiagnosticUnderlineError = {
 		-- 	underline = true,
 		-- 	sp = colors.red,

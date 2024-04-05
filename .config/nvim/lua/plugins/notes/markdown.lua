@@ -19,6 +19,7 @@ return {
 			require("render-markdown").setup({
 				render_modes = { "n", "c" },
 				bullet = "•",
+				file_types = { "markdown" },
 			})
 
 			local function toggle_checkbox(char)
