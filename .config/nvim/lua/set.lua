@@ -1,17 +1,11 @@
 local opt = vim.opt
 
--- vim.cmd([[
---     let &t_TI = "\<Esc>[>4;2m"
---     let &t_TE = "\<Esc>[>4;m"
--- ]])
---
 opt.autowrite = true -- Enable auto write
 
 opt.clipboard = "unnamedplus"
 
 if vim.fn.has("wsl") == 1 then
 	vim.api.nvim_create_autocmd("TextYankPost", {
-
 		group = vim.api.nvim_create_augroup("Yank", { clear = true }),
 
 		callback = function()
@@ -87,7 +81,7 @@ vim.o.timeout = true
 vim.o.timeoutlen = 300
 
 vim.api.nvim_command("filetype plugin on")
---
+
 opt.termguicolors = true
 
 opt.swapfile = false
@@ -99,31 +93,9 @@ opt.undofile = true
 opt.hlsearch = false
 opt.incsearch = true
 
--- opt.scrolloff = 8
--- opt.signcolumn = "yes"
--- opt.isfname:append("@-@")
---
--- opt.updatetime = 50
--- opt.fillchars = "eob: "
--- -- opt.pumblend = 20
---
--- opt.laststatus = 0
---
--- vim.g.loaded_netrw = 1
--- vim.g.loaded_netrwPlugin = 1
-
 vim.g.netrw_browse_split = 0
 vim.g.netrw_banner = 0
 vim.g.netrw_winsize = 25
 
 vim.api.nvim_set_var("t_Cs", "\\e[4:3m")
 vim.api.nvim_set_var("t_Ce", "\\e[4:0m")
-
--- vim.cmd([[
--- augroup copilot_chat_markdown
---     autocmd!
---     autocmd FileType copilot-chat set filetype=markdown
--- augroup END
--- ]])
-
--- vim.g.markdown_recommended_style = 0

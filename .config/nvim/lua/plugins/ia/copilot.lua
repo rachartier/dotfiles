@@ -102,6 +102,12 @@ return {
 
 			prompts = {
 				BetterNamings = "Please provide better names for the following variables and functions.",
+				Documentation = [[
+Generate a succinct documentation of the specified function or method according to the standards of the language, without providing a detailed description of its functionality.
+The documentation text should encapsulate the essence of what the function/method accomplishes, providing developers with a high-level understanding of its intended use.
+Ensure that the documentation includes the parameters (if any), the return type (if applicable), and any exceptions thrown.
+Avoid diving into implementation details and focus solely on conveying the overarching goal or outcome of the function/method.
+]],
 				TestsxUnit = {
 					prompt = "/COPILOT_TESTS Write a set of detailed unit test functions for the code above with the xUnit framework.",
 				},
@@ -111,7 +117,7 @@ return {
 			local chat = require("CopilotChat")
 			local select = require("CopilotChat.select")
 
-			opts.selection = select.unnamed
+			-- opts.selection = select.unnamed
 
 			opts.prompts.Commit = {
 				prompt = "Write commit message for the change with commitizen convention",
