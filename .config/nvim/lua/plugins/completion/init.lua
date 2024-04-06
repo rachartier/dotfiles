@@ -9,7 +9,7 @@ local M = {
 		"hrsh7th/cmp-nvim-lua",
 		"lukas-reineke/cmp-under-comparator",
 	},
-	-- event = "InsertEnter",
+	event = { "BufReadPre", "BufNewFile" },
 }
 
 function M.config()

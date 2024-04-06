@@ -1,6 +1,7 @@
 local M = {
 	"numToStr/Comment.nvim",
 	event = { "BufReadPost", "BufNewFile" },
+	enabled = false,
 }
 
 function M.config()
