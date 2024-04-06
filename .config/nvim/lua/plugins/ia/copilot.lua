@@ -102,7 +102,7 @@ return {
 
 			prompts = {
 				BetterNamings = "Please provide better names for the following variables and functions.",
-				Documentation = [[
+				Docs = [[
 Generate a succinct documentation of the specified function or method according to the standards of the language, without providing a detailed description of its functionality.
 The documentation text should encapsulate the essence of what the function/method accomplishes, providing developers with a high-level understanding of its intended use.
 Ensure that the documentation includes the parameters (if any), the return type (if applicable), and any exceptions thrown.

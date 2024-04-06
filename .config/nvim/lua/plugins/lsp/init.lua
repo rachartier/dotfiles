@@ -36,7 +36,7 @@ function M.config()
 
 	local config = require("config")
 
-	for server_name, defined_lsp in pairs(config.lsps) do
+	for server_name, defined_lsp in pairs(config.lsp) do
 		if type(defined_lsp) == "table" then
 			defined_lsp.capabilities = capabilities
 
