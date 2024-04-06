@@ -46,7 +46,7 @@ config.window_padding = {
 	left = "2cell",
 	right = "2cell",
 	top = "0.2cell",
-	bottom = "3pt",
+	bottom = "0.1pt",
 }
 -- config.text_background_opacity = 0.8
 config.win32_system_backdrop = "Acrylic"
