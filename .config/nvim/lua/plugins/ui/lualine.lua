@@ -9,6 +9,51 @@ function M.config()
 	local U = require("utils")
 
 	local colors = require("theme").get_lualine_colors()
+	local kirby_colors = {
+		n = colors.red,
+		i = colors.green,
+		v = colors.blue,
+		[""] = colors.blue,
+		V = colors.blue,
+		c = colors.mauve,
+		no = colors.red,
+		s = colors.orange,
+		S = colors.orange,
+		[""] = colors.orange,
+		ic = colors.yellow,
+		R = colors.violet,
+		Rv = colors.violet,
+		cv = colors.red,
+		ce = colors.red,
+		r = colors.cyan,
+		rm = colors.cyan,
+		["r?"] = colors.cyan,
+		["!"] = colors.red,
+		t = colors.red,
+	}
+	local kirby_default = "(>*-*)>"
+	local mode_kirby = {
+		n = "<(•ᴗ•)>",
+		i = "<(•o•)>",
+		v = "(v•-•)v",
+		[""] = "(v•-•)>",
+		V = "(>•-•)>",
+		c = kirby_default,
+		no = "<(•ᴗ•)>",
+		s = kirby_default,
+		S = kirby_default,
+		[""] = kirby_default,
+		ic = kirby_default,
+		R = kirby_default,
+		Rv = kirby_default,
+		cv = "<(•ᴗ•)>",
+		ce = "<(•ᴗ•)>",
+		r = kirby_default,
+		rm = kirby_default,
+		["r?"] = kirby_default,
+		["!"] = "<(•ᴗ•)>",
+		t = "<(•ᴗ•)>",
+	}
 
 	local is_inside_docker = false
 
@@ -164,63 +209,15 @@ function M.config()
 			end
 			return "▌"
 		end,
-		color = { fg = colors.blue },
+		color = { fg = colors.red },
 		padding = 0,
 	})
 
 	ins_left({
 		function()
-			if next(colors) ~= nil then
-				local mode_color = {
-					n = colors.red,
-					i = colors.green,
-					v = colors.blue,
-					[""] = colors.blue,
-					V = colors.blue,
-					c = colors.mauve,
-					no = colors.red,
-					s = colors.orange,
-					S = colors.orange,
-					[""] = colors.orange,
-					ic = colors.yellow,
-					R = colors.violet,
-					Rv = colors.violet,
-					cv = colors.red,
-					ce = colors.red,
-					r = colors.cyan,
-					rm = colors.cyan,
-					["r?"] = colors.cyan,
-					["!"] = colors.red,
-					t = colors.red,
-				}
-
-				vim.api.nvim_command(
-					"hi! LualineMode guifg=" .. mode_color[vim.fn.mode()] .. " guibg=" .. default_theme.bg
-				)
-			end
-			local kirby_default = "(>*-*)>"
-			local mode_kirby = {
-				n = "<(•ᴗ•)>",
-				i = "<(•o•)>",
-				v = "(v•-•)v",
-				[""] = "(v•-•)>",
-				V = "(>•-•)>",
-				c = kirby_default,
-				no = "<(•ᴗ•)>",
-				s = kirby_default,
-				S = kirby_default,
-				[""] = kirby_default,
-				ic = kirby_default,
-				R = kirby_default,
-				Rv = kirby_default,
-				cv = "<(•ᴗ•)>",
-				ce = "<(•ᴗ•)>",
-				r = kirby_default,
-				rm = kirby_default,
-				["r?"] = kirby_default,
-				["!"] = "<(•ᴗ•)>",
-				t = "<(•ᴗ•)>",
-			}
+			vim.api.nvim_command(
+				"hi! LualineMode guifg=" .. kirby_colors[vim.fn.mode()] .. " guibg=" .. default_theme.bg
+			)
 			return mode_kirby[vim.fn.mode()]
 		end,
 		color = "LualineMode",

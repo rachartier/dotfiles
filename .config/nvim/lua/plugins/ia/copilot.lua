@@ -94,8 +94,8 @@ return {
 			},
 		},
 		opts = {
-			question_header = string.rep("-", #username + 2) .. "\n " .. username,
-			answer_header = "󰚩  **Copilot**",
+			question_header = string.rep("-", #username + 2) .. "\n󰙃 " .. username,
+			answer_header = "󰚩 **Copilot**",
 			error_header = "󱚡 **Error**",
 			separator = " ",
 			show_folds = false,
