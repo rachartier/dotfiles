@@ -47,18 +47,37 @@ vim.api.nvim_create_autocmd("LspAttach", {
             callback = function()
                 pcall(vim.api.nvim_buf_clear_namespace, args.buf, ns, 0, -1)
                 local diag_type = { "Error", "Warn", "Info", "Hint" }
-                local curline = vim.api.nvim_win_get_cursor(0)[1]
-                local diagnostics = vim.diagnostic.get(args.buf, { lnum = curline - 1 })
+
+                local cursor_pos = vim.api.nvim_win_get_cursor(0)
+                local curline = cursor_pos[1] - 1 -- Subtract 1 to convert to 0-based indexing
+                local curcol = cursor_pos[2]
+
+                local diagnostics = vim.diagnostic.get(args.buf, { lnum = curline })
+
 
                 if #diagnostics == 0 then
                     return
                 end
 
+                local current_pos_diags = {}
+                local index_diag = 1
+
+                for i, diag in ipairs(diagnostics) do
+                    if diag.lnum == curline and curcol >= diag.col and curcol <= diag.end_col then
+                        index_diag = i
+                        table.insert(current_pos_diags, diag)
+                    end
+                end
+
+                if next(current_pos_diags) == nil then
+                    table.insert(current_pos_diags, diagnostics[1])
+                end
+
                 -- local virt_texts = { { (" "):rep(4) } }
                 local virt_texts = { { "     ", "LineNr" } }
-                -- local separator = " "
+                local separator = " "
 
-                local diag = diagnostics[1]
+                local diag = current_pos_diags[1]
                 local hi = diag_type[diag.severity]
                 -- local hl_bg_diag = vim.api.nvim_get_hl_by_name(hi, true).background
 
@@ -79,7 +98,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
                 table.insert(virt_texts,
                     { " " .. diag.message, "DiagnosticVirtualText" .. hi }
                 )
+
                 table.insert(virt_texts,
+
                     { "", "InvDiagnosticVirtualText" .. hi }
                 )
 
@@ -91,8 +112,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
                 -- for i, diag in ipairs(diagnostics) do
                 -- end
                 if #diagnostics >= 1 then
-                    vim.api.nvim_buf_set_extmark(args.buf, ns, curline - 1, 0, {
+                    vim.api.nvim_buf_set_extmark(args.buf, ns, curline, 0, {
                         virt_text = virt_texts,
+                        virt_lines_above = true,
+                        -- line_hl_group = "DiagnosticVirtualTextError",
                     })
                 end
             end,

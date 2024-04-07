@@ -250,7 +250,7 @@ function M.directory_exists_in_root(directory_name, root)
 end
 
 function M.get_python_path(workspace)
-    local util = require("lspconfig/util")
+    local util = require("lspconfig.util")
     local path = util.path
 
     if vim.env.VIRTUAL_ENV then
