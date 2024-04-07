@@ -28,7 +28,6 @@ function M.config()
 		-- or leave it empty to use the default settings
 		-- refer to the configuration section below
 		mode = "workspace_diagnostics",
-		use_diagnostic_signs = true,
 		auto_jump = { "lsp_definitions" }, -- for the given modes, automatically jump if there is only a single result
 		position = "bottom",
 	})

@@ -41,7 +41,7 @@ function M.config()
 			-- { text = { "%C" }, click = "v:lua.ScFa" },
 			{
 				sign = {
-					-- namespace = { "diagnostic" },
+					namespace = { "diagnostic" },
 					name = { ".*" },
 					auto = false,
 				},

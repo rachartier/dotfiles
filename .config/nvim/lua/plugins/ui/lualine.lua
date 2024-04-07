@@ -232,7 +232,7 @@ function M.config()
 	ins_left({
 		"diagnostics",
 		sources = { "nvim_lsp" },
-		symbols = U.diagnostic_signs,
+		symbols = U.signs.diagnostic,
 		-- diagnostics_color = {
 		--     error = { fg = c.error },
 		--     warn = { fg = c.warn },
@@ -252,9 +252,9 @@ function M.config()
 	-- 	colored = true,
 	-- 	source = diff_source,
 	-- 	symbols = {
-	-- 		added = U.git_signs.added,
-	-- 		modified = U.git_signs.modified,
-	-- 		removed = U.git_signs.removed,
+	-- 		added = U.signs.git.added,
+	-- 		modified = U.signs.git.modified,
+	-- 		removed = U.signs.git.removed,
 	-- 	},
 	-- 	diff_color = {
 	-- 		-- added = { gui = "bold" },

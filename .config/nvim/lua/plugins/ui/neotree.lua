@@ -70,7 +70,7 @@ function M.config()
 					renamed = "󰑕", -- this can only be used in the git_status source
 					conflict = "",
 					unmerged = "",
-					deleted = U.git_signs.removed,
+					deleted = U.signs.git.removed,
 				},
 			},
 			file_size = {

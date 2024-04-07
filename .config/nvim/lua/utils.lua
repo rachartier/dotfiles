@@ -10,47 +10,49 @@ function M.length(table)
 	return count
 end
 
-M.border_chars_round = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" }
-M.border_chars_none = { "", "", "", "", "", "", "", "" }
-M.border_chars_empty = { " ", " ", " ", " ", " ", " ", " ", " " }
-M.border_chars_inner_thick = { " ", "▄", " ", "▌", " ", "▀", " ", "▐" }
-M.border_chars_outer_thick = { "▛", "▀", "▜", "▐", "▟", "▄", "▙", "▌" }
-M.border_chars_cmp_items = { "▛", "▀", "▀", " ", "▄", "▄", "▙", "▌" }
-M.border_chars_cmp_doc = { "▀", "▀", "▀", " ", "▄", "▄", "▄", "▏" }
-M.border_chars_outer_thin = { "🭽", "▔", "🭾", "▕", "🭿", "▁", "🭼", "▏" }
-M.border_chars_inner_thin = { " ", "▁", " ", "▏", " ", "▔", " ", "▕" }
-M.border_chars_outer_thin_telescope = { "▔", "▕", "▁", "▏", "🭽", "🭾", "🭿", "🭼" }
-M.border_chars_outer_thick_telescope = { "▀", "▐", "▄", "▌", "▛", "▜", "▟", "▙" }
-
--- M.default_border = M.border_chars_round
-M.default_border = M.border_chars_outer_thin
--- M.default_border = M.border_chars_none
-
---M.top_right_corner_thin = "🭾"
---M.top_left_corner_thin = "🭽"
-
-M.git_signs = {
-	added = " ",
-	modified = " ",
-	removed = " ",
-	-- added = " ",
-	-- modified = " ",
-	-- removed = " ",
+M.border = {
+	round = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+	none = { "", "", "", "", "", "", "", "" },
+	empty = { " ", " ", " ", " ", " ", " ", " ", " " },
+	inner_thick = { " ", "▄", " ", "▌", " ", "▀", " ", "▐" },
+	outer_thick = { "▛", "▀", "▜", "▐", "▟", "▄", "▙", "▌" },
+	cmp_items = { "▛", "▀", "▀", " ", "▄", "▄", "▙", "▌" },
+	cmp_doc = { "▀", "▀", "▀", " ", "▄", "▄", "▄", "▏" },
+	outer_thin = { "🭽", "▔", "🭾", "▕", "🭿", "▁", "🭼", "▏" },
+	inner_thin = { " ", "▁", " ", "▏", " ", "▔", " ", "▕" },
+	outer_thin_telescope = { "▔", "▕", "▁", "▏", "🭽", "🭾", "🭿", "🭼" },
+	outer_thick_telescope = { "▀", "▐", "▄", "▌", "▛", "▜", "▟", "▙" },
 }
+
+M.default_border = M.border.empty
 
 M.signs = {
 	file = {
 		modified = "󱞁 ",
 		not_saved = "󰉉 ",
 	},
-}
-
-M.diagnostic_signs = {
-	error = " ",
-	warning = " ",
-	info = " ",
-	hint = " ",
-	other = "󰠠 ",
+	git = {
+		added = " ",
+		modified = " ",
+		removed = " ",
+		-- added = " ",
+		-- modified = " ",
+		-- removed = " ",
+	},
+	diagnostic = {
+		error = "●",
+		warning = "●",
+		warn = "●",
+		info = "●",
+		hint = "●",
+		other = "●",
+		-- error = " ",
+		-- warning = " ",
+		-- warn = " ",
+		-- info = " ",
+		-- hint = " ",
+		-- other = "󰠠 ",
+	},
 }
 
 -- M.diagnostic_signs = {
@@ -68,8 +70,6 @@ M.diagnostic_signs = {
 --     hint = "󱤅 ",
 --     other = "󰠠 ",
 -- }
-
-M.diagnostic_signs.warn = M.diagnostic_signs.warning
 
 M.kind_icons = {
 	Text = " ",
