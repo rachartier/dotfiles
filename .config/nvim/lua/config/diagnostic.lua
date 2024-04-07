@@ -73,25 +73,18 @@ vim.api.nvim_create_autocmd("LspAttach", {
                     table.insert(current_pos_diags, diagnostics[1])
                 end
 
-                -- local virt_texts = { { (" "):rep(4) } }
                 local virt_texts = { { "     ", "LineNr" } }
-                local separator = " "
 
                 local diag = current_pos_diags[1]
                 local hi = diag_type[diag.severity]
-                -- local hl_bg_diag = vim.api.nvim_get_hl_by_name(hi, true).background
-
-                -- if i == #diagnostics then
-                --     separator = ""
-                -- end
 
                 table.insert(virt_texts,
                     { "", "InvDiagnosticVirtualText" .. hi })
 
                 for _, other_diag in ipairs(diagnostics) do
-                    hi = diag_type[other_diag.severity]
+                    local other_hi = diag_type[other_diag.severity]
                     table.insert(virt_texts,
-                        { "●", "DiagnosticVirtualText" .. hi }
+                        { "●", "DiagnosticVirtualText" .. other_hi }
                     )
                 end
 
@@ -104,13 +97,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
                     { "", "InvDiagnosticVirtualText" .. hi }
                 )
 
-                -- if i < #diagnostics then
-                --     virt_texts[#virt_texts + 1] = { separator }
-                -- end
-
-
-                -- for i, diag in ipairs(diagnostics) do
-                -- end
                 if #diagnostics >= 1 then
                     vim.api.nvim_buf_set_extmark(args.buf, ns, curline, 0, {
                         virt_text = virt_texts,
