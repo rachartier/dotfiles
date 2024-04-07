@@ -39,71 +39,70 @@ vim.diagnostic.config({
 })
 
 local ns = vim.api.nvim_create_namespace("CurlineDiag")
-vim.opt.updatetime = 100
+
+local function get_current_pos_diags(diagnostics, curline, curcol)
+    local current_pos_diags = {}
+
+
+    for _, diag in ipairs(diagnostics) do
+        if diag.lnum == curline and curcol >= diag.col and curcol <= diag.end_col then
+            table.insert(current_pos_diags, diag)
+        end
+    end
+
+    if next(current_pos_diags) == nil then
+        if #diagnostics == 0 then
+            return current_pos_diags
+        end
+        table.insert(current_pos_diags, diagnostics[1])
+    end
+
+    return current_pos_diags
+end
+
+local function get_virt_texts_from_diag(diag)
+    local diag_type = { "Error", "Warn", "Info", "Hint" }
+
+    local hi = diag_type[diag.severity]
+    local virt_texts = { { "    ", "DiagnosticVirtualTextNone" } }
+
+    local diag_hi = "DiagnosticVirtualText" .. hi
+    local diag_inv_hi = "InvDiagnosticVirtualText" .. hi
+
+    vim.list_extend(virt_texts, {
+        { "", diag_inv_hi },
+        { "●", diag_hi },
+        { " " .. diag.message, diag_hi },
+        { "", diag_inv_hi }
+    })
+
+    return virt_texts
+end
+
 vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(args)
-        vim.api.nvim_create_autocmd("CursorHold", {
+        vim.api.nvim_create_autocmd("CursorMoved", {
             buffer = args.buf,
             callback = function()
                 pcall(vim.api.nvim_buf_clear_namespace, args.buf, ns, 0, -1)
-                local diag_type = { "Error", "Warn", "Info", "Hint" }
 
                 local cursor_pos = vim.api.nvim_win_get_cursor(0)
-                local curline = cursor_pos[1] - 1 -- Subtract 1 to convert to 0-based indexing
+                local curline = cursor_pos[1] - 1
                 local curcol = cursor_pos[2]
 
                 local diagnostics = vim.diagnostic.get(args.buf, { lnum = curline })
-
 
                 if #diagnostics == 0 then
                     return
                 end
 
-                local current_pos_diags = {}
-                local index_diag = 1
+                local current_pos_diags = get_current_pos_diags(diagnostics, curline, curcol)
+                local virt_texts = get_virt_texts_from_diag(current_pos_diags[1])
 
-                for i, diag in ipairs(diagnostics) do
-                    if diag.lnum == curline and curcol >= diag.col and curcol <= diag.end_col then
-                        index_diag = i
-                        table.insert(current_pos_diags, diag)
-                    end
-                end
-
-                if next(current_pos_diags) == nil then
-                    table.insert(current_pos_diags, diagnostics[1])
-                end
-
-                local virt_texts = { { "     ", "LineNr" } }
-
-                local diag = current_pos_diags[1]
-                local hi = diag_type[diag.severity]
-
-                table.insert(virt_texts,
-                    { "", "InvDiagnosticVirtualText" .. hi })
-
-                for _, other_diag in ipairs(diagnostics) do
-                    local other_hi = diag_type[other_diag.severity]
-                    table.insert(virt_texts,
-                        { "●", "DiagnosticVirtualText" .. other_hi }
-                    )
-                end
-
-                table.insert(virt_texts,
-                    { " " .. diag.message, "DiagnosticVirtualText" .. hi }
-                )
-
-                table.insert(virt_texts,
-
-                    { "", "InvDiagnosticVirtualText" .. hi }
-                )
-
-                if #diagnostics >= 1 then
-                    vim.api.nvim_buf_set_extmark(args.buf, ns, curline, 0, {
-                        virt_text = virt_texts,
-                        virt_lines_above = true,
-                        -- line_hl_group = "DiagnosticVirtualTextError",
-                    })
-                end
+                vim.api.nvim_buf_set_extmark(args.buf, ns, curline, 0, {
+                    virt_text = virt_texts,
+                    virt_lines_above = true,
+                })
             end,
         })
     end,

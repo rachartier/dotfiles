@@ -5,6 +5,10 @@ local U = require("utils")
 function M.get(colors)
     local bg = colors.mantle
 
+    -- local cursor_line_bg = U.darken(colors.surface0, 0.5)
+    local cursor_line_bg = "None"
+    local darken_diag = 0.15
+
     return {
         -- Visual = { bg = "#234370" },
         Visual = { bg = colors.surface1 },
@@ -23,7 +27,7 @@ function M.get(colors)
             fg = colors.surface0,
         },
         CursorLine = {
-            bg = "None",
+            bg = cursor_line_bg,
         },
         NormalFloat = {
             bg = bg,
@@ -153,20 +157,21 @@ function M.get(colors)
         --     link = "StatusLine",
         -- },
 
-        DiagnosticError = { fg = colors.red },                                                 -- Used as the base highlight group. Other Diagnostic highlights link to this by default
-        DiagnosticWarn = { fg = colors.yellow },                                               -- Used as the base highlight group. Other Diagnostic highlights link to this by default
-        DiagnosticInfo = { fg = colors.blue },                                                 -- Used as the base highlight group. Other Diagnostic highlights link to this by default
-        DiagnosticHint = { fg = colors.teal },                                                 -- Used as the base highlight group. Other Diagnostic highlights link to this by default
+        DiagnosticError = { fg = colors.red },                                                             -- Used as the base highlight group. Other Diagnostic highlights link to this by default
+        DiagnosticWarn = { fg = colors.yellow },                                                           -- Used as the base highlight group. Other Diagnostic highlights link to this by default
+        DiagnosticInfo = { fg = colors.blue },                                                             -- Used as the base highlight group. Other Diagnostic highlights link to this by default
+        DiagnosticHint = { fg = colors.teal },                                                             -- Used as the base highlight group. Other Diagnostic highlights link to this by default
 
-        DiagnosticVirtualTextError = { bg = U.darken(colors.red, 0.1), fg = colors.red },      -- Used for "Error" diagnostic virtual text
-        DiagnosticVirtualTextWarn = { bg = U.darken(colors.yellow, 0.1), fg = colors.yellow }, -- Used for "Warning" diagnostic virtual text
-        DiagnosticVirtualTextInfo = { bg = U.darken(colors.blue, 0.1), fg = colors.blue },     -- Used for "Information" diagnostic virtual text
-        DiagnosticVirtualTextHint = { bg = U.darken(colors.teal, 0.1), fg = colors.teal },     -- Used for "Hint" diagnostic virtual text
+        DiagnosticVirtualTextError = { bg = U.darken(colors.red, darken_diag), fg = colors.red },          -- Used for "Error" diagnostic virtual text
+        DiagnosticVirtualTextWarn = { bg = U.darken(colors.yellow, darken_diag), fg = colors.yellow },     -- Used for "Warning" diagnostic virtual text
+        DiagnosticVirtualTextInfo = { bg = U.darken(colors.blue, darken_diag), fg = colors.blue },         -- Used for "Information" diagnostic virtual text
+        DiagnosticVirtualTextHint = { bg = U.darken(colors.teal, darken_diag), fg = colors.teal },         -- Used for "Hint" diagnostic virtual text
+        DiagnosticVirtualTextNone = { bg = cursor_line_bg, fg = colors.surface1 },                         -- Used for "Hint" diagnostic virtual text
 
-        InvDiagnosticVirtualTextError = { fg = U.darken(colors.red, 0.1) },                    -- Used for "Error" diagnostic virtual text
-        InvDiagnosticVirtualTextWarn = { fg = U.darken(colors.yellow, 0.1) },                  -- Used for "Warning" diagnostic virtual text
-        InvDiagnosticVirtualTextInfo = { fg = U.darken(colors.blue, 0.1) },                    -- Used for "Information" diagnostic virtual text
-        InvDiagnosticVirtualTextHint = { fg = U.darken(colors.teal, 0.1) },                    -- Used for "Hint" diagnostic virtual text
+        InvDiagnosticVirtualTextError = { fg = U.darken(colors.red, darken_diag), bg = cursor_line_bg },   -- Used for "Error" diagnostic virtual text
+        InvDiagnosticVirtualTextWarn = { fg = U.darken(colors.yellow, darken_diag), bg = cursor_line_bg }, -- Used for "Warning" diagnostic virtual text
+        InvDiagnosticVirtualTextInfo = { fg = U.darken(colors.blue, darken_diag), bg = cursor_line_bg },   -- Used for "Information" diagnostic virtual text
+        InvDiagnosticVirtualTextHint = { fg = U.darken(colors.teal, darken_diag), bg = cursor_line_bg },   -- Used for "Hint" diagnostic virtual text
 
         TelescopeMatching = { link = "CmpItemAbbrMatch" },
 
