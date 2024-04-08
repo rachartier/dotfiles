@@ -81,7 +81,7 @@ end
 
 vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(args)
-        vim.api.nvim_create_autocmd("CursorMoved", {
+        vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
             buffer = args.buf,
             callback = function()
                 pcall(vim.api.nvim_buf_clear_namespace, args.buf, ns, 0, -1)

@@ -2,17 +2,34 @@ local opt = vim.opt
 
 opt.autowrite = true -- Enable auto write
 
-opt.clipboard = "unnamedplus"
+opt.clipboard = ""
 
-if vim.fn.has("wsl") == 1 then
-    vim.api.nvim_create_autocmd("TextYankPost", {
-        group = vim.api.nvim_create_augroup("Yank", { clear = true }),
+if vim.fn.has('wsl') == 1 then
+    -- vim.g.clipboard = {
+    --     name = 'WslClipboard',
+    --     copy = {
+    --         ['+'] = 'clip.exe',
+    --         ['*'] = 'clip.exe',
+    --     },
+    --     paste = {
+    --         ['+'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+    --         ['*'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+    --     },
+    --     cache_enabled = 0,
+    -- }
+    vim.api.nvim_create_autocmd({ "FocusGained" }, {
+        pattern = { "*" },
+        command = [[call setreg("@", getreg("+"))]],
+    })
 
-        callback = function()
-            vim.fn.system("clip.exe", vim.fn.getreg('"'))
-        end,
+
+    -- sync with system clipboard on focus
+    vim.api.nvim_create_autocmd({ "FocusLost" }, {
+        pattern = { "*" },
+        command = [[call setreg("+", getreg("@"))]],
     })
 end
+
 
 local conf = require("config")
 vim.opt.pumblend = conf.pumblend -- Popup blend
@@ -54,7 +71,7 @@ opt.tabstop = 4          -- Number of spaces tabs count for
 opt.termguicolors = true -- True color support
 opt.undofile = true
 opt.undolevels = 10000
-opt.updatetime = 200               -- Save swap file and trigger CursorHold
+opt.updatetime = 100               -- Save swap file and trigger CursorHold
 opt.virtualedit = "block"          -- Allow cursor to move where there is no text in visual block mode
 opt.wildmode = "longest:full,full" -- Command-line completion mode
 opt.winminwidth = 5                -- Minimum window width
