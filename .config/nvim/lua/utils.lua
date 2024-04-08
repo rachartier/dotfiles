@@ -267,4 +267,12 @@ function M.get_python_path(workspace)
     return vim.fn.executable("python3") == 1 or vim.fn.executable("python") == 1 or "python"
 end
 
+function M.copy_visual_selection()
+    vim.cmd.normal { '"zy', bang = true }
+    local visual_selection = vim.fn.getreg("z")
+
+    vim.fn.setreg("*", visual_selection)
+    vim.fn.setreg("+", visual_selection)
+end
+
 return M
