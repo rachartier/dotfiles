@@ -1,59 +1,58 @@
 local username = vim.fn.expand("$USER")
 return {
-    -- {
-    -- 	"github/copilot.vim",
-    -- 	config = function()
-    -- 		vim.g.copilot_no_tab_map = true
-    -- 		--             vim.g.copilot_no_tab_map = true;
-    -- 		-- vim.g.copilot_assume_mapped = true;
-    -- 		-- vim.g.copilot_tab_fallback = "";
-    -- 		vim.api.nvim_set_keymap("i", "<C-g>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
-    -- 	end,
-    -- },
-
+    {
+        "github/copilot.vim",
+        config = function()
+            vim.keymap.set('i', '<C-g>', 'copilot#Accept("\\<CR>")', {
+                expr = true,
+                replace_keycodes = false
+            })
+            vim.g.copilot_no_tab_map = true
+        end
+    },
     {
         "CopilotC-Nvim/CopilotChat.nvim",
         branch = "canary",
         dependencies = {
-            -- "github/copilot.vim",
-            {
-                "zbirenbaum/copilot.lua",
-
-                config = function()
-                    vim.g.copilot_proxy_strict_ssl = false
-
-                    require("copilot").setup({
-                        panel = {
-                            enabled = true,
-                            auto_refresh = true,
-                        },
-                        suggestion = {
-                            enabled = true,
-                            -- use the built-in keymapping for "accept" (<M-l>)
-                            auto_trigger = true,
-                            keymap = {
-                                accept = "<C-g>",
-                                accept_word = false,
-                                accept_line = false,
-                                next = "<M-]>",
-                                prev = "<M-[>",
-                                dismiss = "<C-]>",
-                            },
-                        },
-                    })
-
-                    -- local cmp_status_ok, cmp = pcall(require, "cmp")
-                    -- if cmp_status_ok then
-                    -- 	cmp.event:on("menu_opened", function()
-                    -- 		vim.b.copilot_suggestion_hidden = true
-                    -- 	end)
-                    --
-                    -- 	cmp.event:on("menu_closed", function()
-                    -- 		vim.b.copilot_suggestion_hidden = false
-                    -- 	end)
-                    -- end
-                end,
-            },
+            "github/copilot.vim",
+            -- {
+            --     "zbirenbaum/copilot.lua",
+            --
+            --     config = function()
+            --         vim.g.copilot_proxy_strict_ssl = false
+            --
+            --         require("copilot").setup({
+            --             panel = {
+            --                 enabled = true,
+            --                 auto_refresh = true,
+            --             },
+            --             suggestion = {
+            --                 enabled = true,
+            --                 -- use the built-in keymapping for "accept" (<M-l>)
+            --                 auto_trigger = true,
+            --                 keymap = {
+            --                     accept = "<C-g>",
+            --                     accept_word = false,
+            --                     accept_line = false,
+            --                     next = "<M-]>",
+            --                     prev = "<M-[>",
+            --                     dismiss = "<C-]>",
+            --                 },
+            --             },
+            --         })
+            --
+            --         -- local cmp_status_ok, cmp = pcall(require, "cmp")
+            --         -- if cmp_status_ok then
+            --         -- 	cmp.event:on("menu_opened", function()
+            --         -- 		vim.b.copilot_suggestion_hidden = true
+            --         -- 	end)
+            --         --
+            --         -- 	cmp.event:on("menu_closed", function()
+            --         -- 		vim.b.copilot_suggestion_hidden = false
+            --         -- 	end)
+            --         -- end
+            --     end,
+            -- },
             "nvim-lua/plenary.nvim", -- for curl, log wrapper
         },
         keys = {
@@ -94,7 +93,7 @@ return {
             },
         },
         opts = {
-            question_header = string.rep("-", #username + 2) .. "\n󰙃  " .. username,
+            question_header = string.rep("-", #username + 3) .. "\n󰙃  " .. username,
             answer_header = "  **Copilot**",
             error_header = " **Error**",
             separator = " ",
