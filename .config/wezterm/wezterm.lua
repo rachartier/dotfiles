@@ -5,7 +5,8 @@ config.automatically_reload_config = true
 config.default_domain = "WSL:Ubuntu"
 
 -- config.font = wezterm.font_with_fallback({ "Agave", "Symbols Nerd Font" })
-config.font = wezterm.font_with_fallback({ "Cascadia Code", "Symbols Nerd Font" })
+-- config.font = wezterm.font_with_fallback({ "Cascadia Code", "Symbols Nerd Font" })
+config.font = wezterm.font_with_fallback({ "JetBrains Mono", "Symbols Nerd Font" })
 
 -- config.font = wezterm.font("Agave")
 -- config.font = wezterm.font("CaskaydiaCove NF", { weight = "Regular" })
@@ -13,7 +14,7 @@ config.font = wezterm.font_with_fallback({ "Cascadia Code", "Symbols Nerd Font" 
 -- config.font = wezterm.font("Hurmit Nerd Font")
 -- config.font = wezterm.font("Monaspace Argon")
 
-config.font_size = 14
+config.font_size = 12
 config.font_rules = {
     -- {
     --     intensity = "Bold",
