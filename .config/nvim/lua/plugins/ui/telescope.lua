@@ -138,11 +138,12 @@ function M.config()
             live_grep = search_layout,
             lsp_references = search_layout,
             buffers = {
-                borderchars = {
-                    prompt = { "─", "│", " ", "│", "╭", "╮", "│", "│" },
-                    results = { "─", "│", "─", "│", "├", "┤", "╯", "╰" },
-                    preview = { "─", "│", "─", " ", "─", "╮", "╯", "─" },
-                },
+                borderchars = icons.default_border,
+                -- borderchars = {
+                --     prompt = { "─", "│", " ", "│", "╭", "╮", "│", "│" },
+                --     results = { "─", "│", "─", "│", "├", "┤", "╯", "╰" },
+                --     preview = { "─", "│", "─", " ", "─", "╮", "╯", "─" },
+                -- },
                 show_all_buffers = true,
                 sort_lastused = true,
                 theme = "dropdown",

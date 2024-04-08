@@ -208,6 +208,7 @@ function M.get(colors)
         EdgyTitle = { bg = colors.surface0, fg = colors.blue },
         EdgyIconActive = { bg = colors.surface0, fg = colors.peach },
 
+
         -- DiagnosticUnderlineError = {
         -- 	underline = true,
         -- 	sp = colors.red,
