@@ -35,7 +35,13 @@ export GIT_CLONE_METHOD=https
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/rachartier/dotfiles/main/.config/scripts/first_install.sh)"
 ```
 
-Finally, when all is finished, type `zsh`, and next:
+Finally, when all is finished, type:
+
+```
+zsh
+```
+
+and next:
 ```
 cd && export LANG=en_US.UTF-8 && export APPIMAGE_EXTRACT_AND_RUN=1
 ```
