@@ -1,19 +1,20 @@
 # dotfiles
+
+Full installation
+--------------------
+
 ```
-echo 'source "$HOME/.dotfile_profile"' >> $HOME/.profile
+export GIT_CLONE_METHOD=ssh
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/rachartier/dotfiles/main/.config/scripts/first_install.sh)"
+```
 
-sudo apt install zsh --yes
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+Inside a docker installation
+--------------------
 
-echo ".cfg" >> $HOME/.gitignore
-mkdir $HOME/.cfg
-git clone --bare git@github.com:rachartier/dotfiles.git $HOME/.cfg
-/usr/bin/git --git-dir="$HOME/.cfg/" --work-tree="$HOME" checkout
-
-sudo -E ~/.config/scripts/dot.sh init
-
-# TMUX
-git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
+```
+export DOTFILES_MINIMAL=1 
+export GIT_CLONE_METHOD=https
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/rachartier/dotfiles/main/.config/scripts/first_install.sh)"
 ```
 
 # WEZTERM
