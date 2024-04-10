@@ -24,12 +24,12 @@ Launch a docker container:
 docker run --privileged  -ti ubuntu:22.04 /bin/bash
 ```
 
-When inside, create a user:
+When inside, create a user (password is set to "test"):
 ```
 apt update && apt install -y curl sudo && yes | useradd -m -p $(perl -e 'print crypt($ARGV[0], "password")' 'test') dotfilesuser && usermod -aG sudo dotfilesuser && su dotfilesuser
 ```
 
-Finally, install the dotfiles:
+Finally, install the dotfiles, and when the password is asked, type "test":
 ```
 export DOTFILES_MINIMAL=1 
 export GIT_CLONE_METHOD=https
