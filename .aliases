@@ -8,6 +8,8 @@ alias cneo='neovide.exe --wsl --neovim-bin "$HOME/.local/bin/nvim --server="'
 
 alias snvim='nvim --cmd "let g:neovide=true" --headless --listen 0.0.0.0:7301'
 
+alias c="gh copilot suggest"
+
 if command tmuxp &> /dev/null; then
     alias tl='tmuxp load'
     for s in $(tmuxp ls); do alias "$s"="tmuxp load -y $s"; done
