@@ -3,10 +3,10 @@ local formatters = require("config").formatters
 local extras = require("config").extras
 
 -- PENDING https://github.com/mfussenegger/nvim-lint/issues/355
-for _, list in pairs(linters.enabled) do
-    table.insert(list, "typos")
-    table.insert(list, "editorconfig-checker")
-end
+-- for _, list in pairs(linters.enabled) do
+--     table.insert(list, "typos")
+--     table.insert(list, "editorconfig-checker")
+-- end
 
 local dont_install = {
     -- installed externally due to its plugins: https://github.com/williamboman/mason.nvim/issues/695
