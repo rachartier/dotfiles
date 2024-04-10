@@ -150,7 +150,7 @@ install_lazydocker() {
 install_tmux() {
     __echo_info "Installing tmux"
 
-	sudo apt install -qq libevent-dev yacc automake libncurses5-dev
+	sudo apt install -qq -y libevent-dev yacc automake libncurses5-dev
 	git clone https://github.com/tmux/tmux.git /tmp/tmux
 	cd /tmp/tmux || exit
 	sh autogen.sh
@@ -289,13 +289,6 @@ do_command() {
 	*) __git_dot "$@" ;;
 	esac
 }
-
-
-if [ -v "$DOTFILES_MINIMAL" ]; then
-    __echo_info "Installing minimal setup"
-    install_minimal
-    exit
-fi
 
 if [ $# -eq 0 ]; then
 	__git_dot "$@"

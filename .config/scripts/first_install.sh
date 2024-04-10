@@ -4,7 +4,7 @@ sudo apt install -y -qq git wget
 
 echo 'source "$HOME/.dotfile_profile"' >> "$HOME/.profile"
 
-sudo apt install zsh --yes
+sudo apt install zsh -y -qq
 
 cd /tmp || exit
 wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
@@ -30,5 +30,5 @@ if [ -v "$DOTFILES_MINIMAL" ]; then
     sudo -E ~/.config/scripts/dot.sh minimal
 else
     sudo -E ~/.config/scripts/dot.sh init
-end
+fi
 
