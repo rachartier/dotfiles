@@ -28,6 +28,10 @@ __need_sudo() {
 	eval $@
 }
 
+__get_latest_release() {
+	curl -s "https://api.github.com/repos/$1/releases/latest" | grep -Po '"tag_name": "v\K[^"]*'
+}
+
 __is_pkg_installed() {
 	local name="$1"
 
@@ -54,7 +58,9 @@ __install_package_release() {
 
 	filename=$(basename "$url")
 
+    __echo_info "Downloading $filename"
 	cd /tmp || exit 1
+    echo $url
 	wget -q "$url" && __echo_success "'$filename' downloaded." || return 1
 	tar -xf "$filename" && __echo_success "$filename extracted." || return 1
 	chmod +x "$name"
@@ -120,7 +126,7 @@ install_fzf() {
 	fi
 
 	git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf &>/dev/null
-	~/.fzf/install
+	yes | ~/.fzf/install
 }
 
 install_viu() {
@@ -131,7 +137,7 @@ install_viu() {
 }
 
 install_lazygit() {
-	LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
+    LAZYGIT_VERSION=$(__get_latest_release "jesseduffield/lazygit")
 	curl -sLo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
 	tar xf lazygit.tar.gz lazygit
 	sudo install lazygit /usr/local/bin && __echo_success "lazygit installed."
@@ -148,6 +154,9 @@ install_tmux() {
 	sh autogen.sh
 	./configure
 	make && sudo make install
+
+    # Install tmux plugin manager
+    git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
 }
 
 install_bat() {
@@ -199,11 +208,19 @@ install_nvim() {
 }
 
 install_eza() {
-	__install_package_release "https://github.com/eza-community/eza/releases/download/v0.13.1/eza_x86_64-unknown-linux-gnu.tar.gz" eza
+	__install_package_release "https://github.com/eza-community/eza/releases/latest/download/eza_x86_64-unknown-linux-gnu.tar.gz" eza
 }
 
 install_glow() {
 	__install_package_release "https://github.com/charmbracelet/glow/releases/download/v1.5.1/glow_Linux_x86_64.tar.gz" glow
+}
+
+
+prepare_install() {
+    echo 'source "$HOME/.dotfile_profile"' >> $HOME/.profile
+
+    sudo apt install zsh --yes
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 }
 
 install_essentials() {
@@ -222,6 +239,17 @@ install_essentials() {
 	install_starship
 }
 
+install_minimal() {
+    install_packages
+    install_zsh_plugins
+    install_nvim
+
+    install_eza
+    install_fzf
+    install_viu
+    install_starship
+}
+
 do_reinstall() {
 	case "$1" in
 	"tmux") install_tmux ;;
@@ -236,6 +264,7 @@ do_reinstall() {
 	"lazydocker") install_lazydocker ;;
 	"starship") install_starship ;;
 	"all") install_essentials ;;
+    "minimal") install_minimal ;;
 	*) install_essentials ;;
 	esac
 }
