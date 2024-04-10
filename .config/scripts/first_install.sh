@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo apt install -y -qq git
+sudo apt install -y -qq git wget
 
 echo 'source "$HOME/.dotfile_profile"' >> "$HOME/.profile"
 
@@ -13,7 +13,14 @@ yes | sh install.sh
 echo ".cfg" >> "$HOME"/.gitignore
 mkdir "$HOME"/.cfg
 
-git clone --bare git@github.com:rachartier/dotfiles.git "$HOME"/.cfg
+if [ "$GIT_CLONE_METHOD" = "ssh" ]; then
+    echo "Using SSH to clone dotfiles"
+	git clone --bare git@github.com:rachartier/dotfiles.git "$HOME"/.cfg
+else
+    echo "Using HTTPS to clone dotfiles"
+	git clone --bare https://github.com/rachartier/dotfiles.git "$HOME"/.cfg
+fi
+
 
 /usr/bin/git --git-dir="$HOME/.cfg/" --work-tree="$HOME" checkout
 /usr/bin/git --git-dir="$HOME/.cfg/" --work-tree="$HOME" reset --hard HEAD
