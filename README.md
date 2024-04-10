@@ -1,4 +1,4 @@
-# dotfiles
+# Dotfiles
 
 Full installation
 --------------------
@@ -16,6 +16,28 @@ export DOTFILES_MINIMAL=1
 export GIT_CLONE_METHOD=https
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/rachartier/dotfiles/main/.config/scripts/first_install.sh)"
 ```
+
+# Testing inside a docker:
+
+Launch a docker container: 
+```
+docker run --privileged  -ti ubuntu:22.04 /bin/bash
+```
+
+When inside, create a user:
+```
+apt update && apt install -y curl sudo && yes | useradd -m -p $(perl -e 'print crypt($ARGV[0], "password")' 'test') dotfilesuser && usermod -aG sudo dotfilesuser && su dotfilesuser
+```
+
+Finally, install the dotfiles:
+```
+export DOTFILES_MINIMAL=1 
+export GIT_CLONE_METHOD=https
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/rachartier/dotfiles/main/.config/scripts/first_install.sh)"
+```
+
+And type `zsh` when all is finished.
+
 
 # Images
 
