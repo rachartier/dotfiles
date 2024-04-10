@@ -281,6 +281,7 @@ do_command() {
 
 
 if [ -v "$MINIMAL" ]; then
+    __echo_info "Installing minimal setup"
     install_minimal
     exit
 fi
