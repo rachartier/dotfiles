@@ -228,6 +228,7 @@ prepare_install() {
     fi
 
     if [ -v "$DOTFILES_MINIMAL" ]; then
+        echo "Exporting DOTFILES_MINIMAL=1 to $HOME/.profile"
         echo "export DOTFILES_MINIMAL=1" >> "$HOME/.profile"
     fi
 }
