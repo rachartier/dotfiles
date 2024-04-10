@@ -228,6 +228,8 @@ prepare_install() {
 }
 
 install_essentials() {
+    prepare_install
+
 	install_tmux
 	install_packages
 	install_zsh_plugins
@@ -244,6 +246,8 @@ install_essentials() {
 }
 
 install_minimal() {
+    prepare_install
+
     install_packages
     install_zsh_plugins
     install_nvim
