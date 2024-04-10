@@ -17,7 +17,7 @@ export GIT_CLONE_METHOD=https
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/rachartier/dotfiles/main/.config/scripts/first_install.sh)"
 ```
 
-# Testing inside a docker:
+## Testing inside a docker:
 
 Launch a docker container: 
 ```
