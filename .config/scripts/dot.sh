@@ -182,7 +182,8 @@ install_packages() {
 	__install_package_apt wget
 	__install_package_apt libfuse2
 
-	__install_package_apt python3.10-venv
+	__install_package_apt python3-venv
+    __install_package_apt python3-pip
 	__install_package_apt nodejs
 	__install_package_apt npm
 	__install_package_apt unzip
