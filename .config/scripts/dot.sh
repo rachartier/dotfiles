@@ -150,7 +150,7 @@ install_lazydocker() {
 install_tmux() {
     __echo_info "Installing tmux"
 
-	sudo apt install -qq -y libevent-dev yacc automake libncurses5-dev
+	sudo apt install -qq -y libevent-dev yacc automake libncurses5-dev pkg-config
 	git clone https://github.com/tmux/tmux.git /tmp/tmux
 	cd /tmp/tmux || exit
 	sh autogen.sh
