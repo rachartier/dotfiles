@@ -189,7 +189,9 @@ install_packages() {
 	__install_package_apt xsel
 	__install_package_apt chafa
 
-	install_bat
+    if [ ! -v "$MINIMAL" ]; then
+        install_bat
+    fi
 
 	__make_symlink "$HOME/.local/bin/fd" fdfind
 }
@@ -199,8 +201,10 @@ install_zsh_plugins() {
 	__install_zsh_plugin "https://github.com/zsh-users/zsh-syntax-highlighting.git"
 	__install_zsh_plugin "https://github.com/b4b4r07/enhancd.git"
 	__install_zsh_plugin "https://github.com/zsh-users/zsh-history-substring-search.git"
-    __install_zsh_plugin "https://github.com/wfxr/forgit.git"
-    __install_zsh_plugin "https://github.com/darvid/zsh-poetry.git"
+
+    if [ ! -v "$MINIMAL" ]; then
+        __install_zsh_plugin "https://github.com/darvid/zsh-poetry.git"
+    fi
 }
 
 install_nvim() {
@@ -218,10 +222,9 @@ install_glow() {
 
 
 prepare_install() {
-    echo 'source "$HOME/.dotfile_profile"' >> $HOME/.profile
-
-    sudo apt install zsh -qq
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    if [ -d "$HOME/.local/bin" ]; then
+        mkdir -p "$HOME/.local/bin"
+    fi
 }
 
 install_essentials() {
