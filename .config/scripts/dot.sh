@@ -189,7 +189,8 @@ install_packages() {
 	__install_package_apt xsel
 	__install_package_apt chafa
 
-    if [ ! -v "$DOTFILES_MINIMAL" ]; then
+    # Installs  if not in minimal mode
+    if [ -z "$DOTFILES_MINIMAL" ]; then
         install_bat
     fi
 
@@ -202,7 +203,7 @@ install_zsh_plugins() {
 	__install_zsh_plugin "https://github.com/b4b4r07/enhancd.git"
 	__install_zsh_plugin "https://github.com/zsh-users/zsh-history-substring-search.git"
 
-    if [ ! -v "$DOTFILES_MINIMAL" ]; then
+    if [ -n "$DOTFILES_MINIMAL" ]; then
         __install_zsh_plugin "https://github.com/darvid/zsh-poetry.git"
     fi
 }
