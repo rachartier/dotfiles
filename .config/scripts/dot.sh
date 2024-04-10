@@ -174,7 +174,6 @@ install_bat() {
 }
 
 install_packages() {
-	__install_package_apt git
 	__install_package_apt wget
 	__install_package_apt libfuse2
 

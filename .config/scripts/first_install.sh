@@ -1,5 +1,7 @@
 #!/bin/bash
 
+sudo apt install -y -qq git
+
 echo 'source "$HOME/.dotfile_profile"' >> "$HOME/.profile"
 
 sudo apt install zsh --yes
