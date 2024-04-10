@@ -226,11 +226,6 @@ prepare_install() {
         __echo_info "Creating $HOME/.local/bin"
         mkdir -p "$HOME/.local/bin"
     fi
-
-    if [ -v "$DOTFILES_MINIMAL" ]; then
-        echo "Exporting DOTFILES_MINIMAL=1 to $HOME/.profile"
-        echo "export DOTFILES_MINIMAL=1" >> "$HOME/.profile"
-    fi
 }
 
 install_essentials() {
@@ -253,6 +248,9 @@ install_essentials() {
 
 install_minimal() {
     prepare_install
+
+    __echo_info "Exporting DOTFILES_MINIMAL=1 to $HOME/.profile"
+    echo "export DOTFILES_MINIMAL=1" >> "$HOME/.profile"
 
     install_packages
     install_zsh_plugins

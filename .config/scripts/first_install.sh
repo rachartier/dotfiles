@@ -26,4 +26,9 @@ fi
 /usr/bin/git --git-dir="$HOME/.cfg/" --work-tree="$HOME" reset --hard HEAD
 /usr/bin/git --git-dir="$HOME/.cfg/" --work-tree="$HOME" config --local status.showUntrackedFiles no
 
-sudo -E ~/.config/scripts/dot.sh init
+if [ -v "$DOTFILES_MINIMAL" ]; then
+    sudo -E ~/.config/scripts/dot.sh minimal
+else
+    sudo -E ~/.config/scripts/dot.sh init
+end
+
