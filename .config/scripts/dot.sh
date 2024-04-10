@@ -85,7 +85,7 @@ __install_package_apt() {
 	if __is_pkg_installed "$pkg"; then
 		__echo_info "$pkg already installed."
 	else
-		apt install -y -qq "$pkg" && __echo_success "$pkg installed."
+		sudo apt install -y -qq "$pkg" && __echo_success "$pkg installed."
 	fi
 }
 
