@@ -221,14 +221,6 @@ install_glow() {
 	__install_package_release "https://github.com/charmbracelet/glow/releases/download/v1.5.1/glow_Linux_x86_64.tar.gz" glow
 }
 
-
-prepare_install() {
-    if [ ! -d "$HOME/.local/bin" ]; then
-        __echo_info "Creating $HOME/.local/bin"
-        mkdir -p "$HOME/.local/bin"
-    fi
-}
-
 install_essentials() {
     prepare_install
 
