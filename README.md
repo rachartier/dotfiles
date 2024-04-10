@@ -29,15 +29,18 @@ When inside, create a user (password is set to "test"):
 apt update && apt install -y curl sudo && yes | useradd -m -p $(perl -e 'print crypt($ARGV[0], "password")' 'test') dotfilesuser && usermod -aG sudo dotfilesuser && su dotfilesuser
 ```
 
-Finally, install the dotfiles, and when the password is asked, type "test":
+Next, install the dotfiles, and when the password is asked, type "test":
 ```
-export DOTFILES_MINIMAL=1 
 export GIT_CLONE_METHOD=https
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/rachartier/dotfiles/main/.config/scripts/first_install.sh)"
 ```
 
-And type `zsh` when all is finished.
+Finally, when all is finished, type `zsh`, and next:
+```
+cd && export LANG=en_US.UTF-8 && export APPIMAGE_EXTRACT_AND_RUN=1
+```
 
+You should be able to try the config!
 
 # Images
 
