@@ -123,13 +123,14 @@ return {
                 -- Output with no introduction, no explaintation, only the generated documentation.
                 -- DONT MAKE ANY MISTAKES, check if you did any.
                 -- ]],
-                Docs = [[
+                Docs = [[/COPILOT_REFACTOR
 Please provide documentation for the following code, and follow these instructions to help you:
 - It should only focus on what the code does, not what the code is for.
 - It should be clear and concise and precise.
 - The documentation must be helpful to someone who has never seen the code before.
 - It should start by a brief description of what the code does, then the inputs, then the outputs, and then the exceptions.
 - Output with no introduction, no explaintation, only the documentation.
+- If the code in in csharp, output the markdown bloc with "```cs" instead of "```csharp".
 - DONT MAKE ANY MISTAKES, check if you did any.
 ]],
                 TestsxUnit = {
