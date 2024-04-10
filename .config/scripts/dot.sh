@@ -164,10 +164,10 @@ install_tmux() {
 install_bat() {
 	__install_package_apt bat
 
+    cd /tmp || exit
+    git clone https://github.com/catppuccin/bat
 	mkdir -p "$(bat --config-dir)/themes"
 
-	cd /tmp || exit
-	git clone https://github.com/catppuccin/bat
 	cd bat || exit
 	cp *.tmTheme "$(bat --config-dir)/themes"
 	bat cache --build
@@ -225,6 +225,10 @@ prepare_install() {
     if [ ! -d "$HOME/.local/bin" ]; then
         __echo_info "Creating $HOME/.local/bin"
         mkdir -p "$HOME/.local/bin"
+    fi
+
+    if [ -v "$MINIMAL" ]; then
+        echo "export MINIMAL=1" >> "$HOME/.dotfile_profile"
     fi
 }
 
