@@ -189,7 +189,7 @@ install_packages() {
 	__install_package_apt xsel
 	__install_package_apt chafa
 
-    if [ ! -v "$MINIMAL" ]; then
+    if [ ! -v "$DOTFILES_MINIMAL" ]; then
         install_bat
     fi
 
@@ -202,7 +202,7 @@ install_zsh_plugins() {
 	__install_zsh_plugin "https://github.com/b4b4r07/enhancd.git"
 	__install_zsh_plugin "https://github.com/zsh-users/zsh-history-substring-search.git"
 
-    if [ ! -v "$MINIMAL" ]; then
+    if [ ! -v "$DOTFILES_MINIMAL" ]; then
         __install_zsh_plugin "https://github.com/darvid/zsh-poetry.git"
     fi
 }
@@ -227,8 +227,8 @@ prepare_install() {
         mkdir -p "$HOME/.local/bin"
     fi
 
-    if [ -v "$MINIMAL" ]; then
-        echo "export MINIMAL=1" >> "$HOME/.dotfile_profile"
+    if [ -v "$DOTFILES_MINIMAL" ]; then
+        echo "export DOTFILES_MINIMAL=1" >> "$HOME/.profile"
     fi
 }
 
@@ -292,7 +292,7 @@ do_command() {
 }
 
 
-if [ -v "$MINIMAL" ]; then
+if [ -v "$DOTFILES_MINIMAL" ]; then
     __echo_info "Installing minimal setup"
     install_minimal
     exit
