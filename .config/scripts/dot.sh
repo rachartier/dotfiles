@@ -148,7 +148,9 @@ install_lazydocker() {
 }
 
 install_tmux() {
-	sudo apt install libevent-dev yacc automake libncurses5-dev
+    __echo_info "Installing tmux"
+
+	sudo apt install -qq libevent-dev yacc automake libncurses5-dev
 	git clone https://github.com/tmux/tmux.git /tmp/tmux
 	cd /tmp/tmux || exit
 	sh autogen.sh
@@ -218,7 +220,7 @@ install_glow() {
 prepare_install() {
     echo 'source "$HOME/.dotfile_profile"' >> $HOME/.profile
 
-    sudo apt install zsh --yes
+    sudo apt install zsh -qq
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 }
 

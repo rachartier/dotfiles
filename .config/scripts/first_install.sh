@@ -24,6 +24,6 @@ fi
 
 /usr/bin/git --git-dir="$HOME/.cfg/" --work-tree="$HOME" checkout
 /usr/bin/git --git-dir="$HOME/.cfg/" --work-tree="$HOME" reset --hard HEAD
-/usr/bin/git --git-dir="$HOME/.cfg/" --work-tree="$HOME" --local status.showUntrackedFiles no
+/usr/bin/git --git-dir="$HOME/.cfg/" --work-tree="$HOME" config --local status.showUntrackedFiles no
 
 sudo -E ~/.config/scripts/dot.sh init
