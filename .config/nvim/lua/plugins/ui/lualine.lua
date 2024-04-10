@@ -210,7 +210,7 @@ function M.config()
             end
             return "▌"
         end,
-        color = { fg = colors.red },
+        color = { fg = colors.blue },
         padding = 0,
     })
 
