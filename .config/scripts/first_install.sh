@@ -6,7 +6,7 @@ __echo_info() {
 }
 
 install_essentials() {
-    sudo apt install -y -qq git \
+    sudo apt install -y -qq -o=Dpkg::Use-Pty=0 git \
         wget \
         zsh
 }

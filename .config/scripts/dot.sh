@@ -80,13 +80,13 @@ __install_zsh_plugin() {
 }
 
 __install_package_apt() {
-	local pkg="$1"
-
-	if __is_pkg_installed "$pkg"; then
-		__echo_info "$pkg already installed."
-	else
-		sudo apt install -y -qq "$pkg" && __echo_success "$pkg installed."
-	fi
+    for pkg in "$@"; do
+        if __is_pkg_installed "$pkg"; then
+            __echo_info "$pkg already installed."
+        else
+            sudo apt install -y -qq -o=Dpkg::Use-Pty=0 "$pkg" && __echo_success "$pkg installed."
+        fi
+    done
 }
 
 __make_symlink() {
@@ -150,7 +150,7 @@ install_lazydocker() {
 install_tmux() {
     __echo_info "Installing tmux"
 
-	sudo apt install -qq -y libevent-dev yacc automake libncurses5-dev
+	__install_package_apt libevent-dev yacc automake libncurses5-dev
     git clone https://github.com/tmux/tmux.git /tmp/tmux
 	cd /tmp/tmux || exit
 	sh autogen.sh
