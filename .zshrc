@@ -2,7 +2,6 @@ source $HOME/.profile
 setopt promptsubst
 
 export ZSH="$HOME/.oh-my-zsh"
-source $HOME/.dotfile_profile
 
 ZSH_TMUX_AUTOSTART=false
 ZSH_TMUX_CONFIG="$HOME/.config/tmux/tmux.conf"
@@ -22,7 +21,6 @@ if [ -n "$DOTFILES_MINIMAL" ]; then
         ripgrep
         fd
         git
-        zsh-poetry
         command-not-found
         zsh-autosuggestions
         zsh-syntax-highlighting
