@@ -273,10 +273,17 @@ do_reinstall() {
 do_command() {
 	case "$1" in
 	"init") install_essentials ;;
+    "minimal") install_minimal ;;
 	"reinstall") do_reinstall "$2" ;;
 	*) __git_dot "$@" ;;
 	esac
 }
+
+
+if [ -v "$MINIMAL" ]; then
+    install_minimal
+    exit
+fi
 
 if [ $# -eq 0 ]; then
 	__git_dot "$@"
