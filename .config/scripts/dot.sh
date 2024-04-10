@@ -222,7 +222,8 @@ install_glow() {
 
 
 prepare_install() {
-    if [ -d "$HOME/.local/bin" ]; then
+    if [ ! -d "$HOME/.local/bin" ]; then
+        __echo_info "Creating $HOME/.local/bin"
         mkdir -p "$HOME/.local/bin"
     fi
 }
