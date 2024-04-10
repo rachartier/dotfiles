@@ -61,8 +61,8 @@ install_dotfiles
 prepare_dotfiles
 
 if [ -n "$DOTFILES_MINIMAL" ]; then
-    sudo -E ~/.config/scripts/dot.sh minimal
+    "$HOME"/.config/scripts/dot.sh minimal
 else
-    sudo -E ~/.config/scripts/dot.sh init
+    "$HOME"/.config/scripts/dot.sh init
 fi
 
