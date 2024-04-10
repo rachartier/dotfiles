@@ -222,8 +222,6 @@ install_glow() {
 }
 
 install_essentials() {
-    prepare_install
-
 	install_tmux
 	install_packages
 	install_zsh_plugins
@@ -240,8 +238,6 @@ install_essentials() {
 }
 
 install_minimal() {
-    prepare_install
-
     __echo_info "Exporting DOTFILES_MINIMAL=1 to $HOME/.profile"
     echo "export DOTFILES_MINIMAL=1" >> "$HOME/.profile"
 

@@ -2,6 +2,7 @@ source $HOME/.profile
 setopt promptsubst
 
 export ZSH="$HOME/.oh-my-zsh"
+source $HOME/.dotfile_profile
 
 ZSH_TMUX_AUTOSTART=false
 ZSH_TMUX_CONFIG="$HOME/.config/tmux/tmux.conf"
@@ -14,18 +15,33 @@ fi
 
 export DISABLE_AUTO_TITLE='true'
 
-plugins=(
-    enhancd
-    ripgrep
-    fd
-    git
-    tmux
-    zsh-poetry
-    command-not-found
-    zsh-autosuggestions
-    zsh-syntax-highlighting
-    zsh-history-substring-search
-)
+# Plugins if minimal is set
+if [ -n "$DOTFILES_MINIMAL" ]; then
+    plugins=(
+        enhancd
+        ripgrep
+        fd
+        git
+        zsh-poetry
+        command-not-found
+        zsh-autosuggestions
+        zsh-syntax-highlighting
+        zsh-history-substring-search
+	)
+else
+    plugins=(
+        enhancd
+        ripgrep
+        fd
+        git
+        tmux
+        zsh-poetry
+        command-not-found
+        zsh-autosuggestions
+        zsh-syntax-highlighting
+        zsh-history-substring-search
+	)
+fi
 
 source $ZSH/oh-my-zsh.sh
 
@@ -95,13 +111,6 @@ setopt automenu
 setopt autocd
 unsetopt correct_all
 unsetopt BEEP
-
-local dot_script_path="$HOME/.config/scripts/dot.sh"
-local dot_script_link="$HOME/.local/bin/dot"
-
-if [ ! -L "$dot_script_link" ] || [ ! -e "$dot_script_link" ]; then
-    ln -s "$dot_script_path" "$dot_script_link"
-fi
 
 source $HOME/.aliases
 
