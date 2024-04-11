@@ -256,6 +256,14 @@ install_minimal() {
     install_starship
 }
 
+do_reinstall_all() {
+    if [ -n "$DOTFILES_MINIMAL" ]; then
+        install_minimal
+    else
+        install_essentials
+    fi
+}
+
 do_reinstall() {
 	case "$1" in
 	"tmux") install_tmux ;;
@@ -269,9 +277,9 @@ do_reinstall() {
 	"lazygit") install_lazygit ;;
 	"lazydocker") install_lazydocker ;;
 	"starship") install_starship ;;
-	"all") install_essentials ;;
+	"all") do_reinstall_all ;;
     "minimal") install_minimal ;;
-	*) install_essentials ;;
+	*) do_reinstall_all ;;
 	esac
 }
 
