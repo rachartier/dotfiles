@@ -76,7 +76,9 @@ return {
                 "<leader>cp",
                 function()
                     local actions = require("CopilotChat.actions")
-                    require("CopilotChat.integrations.telescope").pick(actions.prompt_actions())
+                    require("CopilotChat.integrations.telescope").pick(actions.prompt_actions({
+                        selection = require("CopilotChat.select").visual,
+                    }))
                 end,
                 mode = { "n", "x", "v" },
                 desc = "CopilotChat - Prompt actions",
@@ -110,7 +112,8 @@ return {
             show_folds = false,
 
             prompts = {
-                BetterNamings = "Please provide better names for the following variables and functions.",
+                BetterNamings = {
+                    prompt = "Please provide better names for the following variables and functions." },
                 --                 Docs = [[
                 -- Generate the documentation for the code above.
                 -- The documentation should be in the form of the standard from the language.
@@ -123,7 +126,8 @@ return {
                 -- Output with no introduction, no explaintation, only the generated documentation.
                 -- DONT MAKE ANY MISTAKES, check if you did any.
                 -- ]],
-                Docs = [[/COPILOT_REFACTOR
+                Docs = {
+                    prompt = [[/COPILOT_REFACTOR
 Please provide documentation for the following code, and follow these instructions to help you:
 - It should only focus on what the code does, not what the code is for.
 - It should be clear and concise and precise.
@@ -132,7 +136,8 @@ Please provide documentation for the following code, and follow these instructio
 - Output with no introduction, no explaintation, only the documentation.
 - If the code in in csharp, output the markdown bloc with "```cs" instead of "```csharp".
 - DONT MAKE ANY MISTAKES, check if you did any.
-]],
+]]
+                },
                 TestsxUnit = {
                     prompt =
                     "/COPILOT_TESTS Write a set of detailed unit test functions for the following code with the xUnit framework.",
