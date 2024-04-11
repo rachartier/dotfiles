@@ -1,7 +1,7 @@
 alias config='/usr/bin/git --git-dir=/home/rachartier/.cfg/ --work-tree=/home/rachartier'
 alias f="fzf"
 alias l="eza --tree --level 1 --group-directories-first --color=always --icons"
-alias ls='eza --group-directories-first --color=always'
+alias ls='eza --group-directories-first --color=always --icons=auto'
 
 alias neo='neovide.exe --wsl --neovim-bin "$HOME/.local/bin/nvim"'
 alias cneo='neovide.exe --wsl --neovim-bin "$HOME/.local/bin/nvim --server="'
