@@ -38,7 +38,7 @@ vim.diagnostic.config({
     severity_sort = true,
 })
 
-local ns = vim.api.nvim_create_namespace("CurlineDiag")
+local diagnostic_ns = vim.api.nvim_create_namespace("CursorDiagnostics")
 
 local function get_current_pos_diags(diagnostics, curline, curcol)
     local current_pos_diags = {}
@@ -81,10 +81,16 @@ end
 
 vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(args)
-        vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+        vim.api.nvim_create_autocmd({ "InsertEnter" }, {
             buffer = args.buf,
             callback = function()
-                pcall(vim.api.nvim_buf_clear_namespace, args.buf, ns, 0, -1)
+                pcall(vim.api.nvim_buf_clear_namespace, args.buf, diagnostic_ns, 0, -1)
+            end,
+        })
+        vim.api.nvim_create_autocmd({ "CursorHold" }, {
+            buffer = args.buf,
+            callback = function()
+                pcall(vim.api.nvim_buf_clear_namespace, args.buf, diagnostic_ns, 0, -1)
 
                 local cursor_pos = vim.api.nvim_win_get_cursor(0)
                 local curline = cursor_pos[1] - 1
@@ -99,7 +105,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
                 local current_pos_diags = get_current_pos_diags(diagnostics, curline, curcol)
                 local virt_texts = get_virt_texts_from_diag(current_pos_diags[1])
 
-                vim.api.nvim_buf_set_extmark(args.buf, ns, curline, 0, {
+                vim.api.nvim_buf_set_extmark(args.buf, diagnostic_ns, curline, 0, {
                     virt_text = virt_texts,
                     virt_lines_above = true,
                 })

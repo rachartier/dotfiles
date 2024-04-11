@@ -17,9 +17,8 @@ config.font = wezterm.font_with_fallback({ "JetBrains Mono", "Symbols Nerd Font"
 config.font_size = 12
 config.font_rules = {
     -- {
-    --     intensity = "Bold",
-    --     italic = false,
-    --     font = wezterm.font("CaskaydiaCove NF", { weight = "Bold", stretch = "UltraCondensed" }),
+    --     italic = true,
+    --     font = wezterm.font("Cascadia Code", { weight = "Regular", italic = true }),
     -- },
     --
     -- {
@@ -54,7 +53,7 @@ config.win32_system_backdrop = "Acrylic"
 
 config.win32_acrylic_accent_color = "rgba(36, 39, 58, 0.60)"
 -- config.window_background_opacity = 0.0
-config.window_background_opacity = 1
+config.window_background_opacity = 0.94
 
 config.window_close_confirmation = "NeverPrompt"
 
@@ -68,13 +67,5 @@ config.color_schemes = {
     ["CustomCatppuccin"] = custom,
 }
 config.color_scheme = "CustomCatppuccin"
---
--- config.colors = {
--- 	-- background = "#2e3440",
--- 	cursor_border = "#f4dbd6",
--- 	cursor_bg = "#f4dbd6",
--- }
---
--- config.color_scheme = "Catppuccin Macchiato" -- or Macchiato, Frappe, Latte
 
 return config
