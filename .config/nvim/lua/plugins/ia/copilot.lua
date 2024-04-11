@@ -164,30 +164,40 @@ Please provide documentation for the following code, and follow these instructio
             vim.keymap.set('n', '<leader>cy', function()
                 local buf = vim.api.nvim_get_current_buf()
                 local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
-                local code = {}
-                local is_after_copilot = false
-                local found_code_start = false
 
-                for _, line in ipairs(lines) do
-                    if not is_after_copilot and string.find(line, "Copilot") then
-                        is_after_copilot = true
-                    elseif is_after_copilot and not found_code_start then
-                        if string.find(line, "^```") then
-                            found_code_start = true
-                        end
-                    elseif is_after_copilot and found_code_start then
-                        if string.find(line, "^```") then
-                            break
-                        else
-                            table.insert(code, line)
-                        end
+                local start_line = nil
+                for i = #lines, 1, -1 do
+                    if lines[i]:find("Copilot") then
+                        start_line = i
+                        break
                     end
                 end
 
-                local code_str = table.concat(code, "\n")
+                if not start_line then
+                    print("Copilot header not found")
+                    return
+                end
+
+                local code_block = {}
+                local in_code_block = false
+                for i = start_line, #lines do
+                    local line = lines[i]
+                    if line:find("^```") then
+                        if in_code_block then
+                            break
+                        else
+                            in_code_block = true
+                        end
+                    elseif in_code_block then
+                        table.insert(code_block, line)
+                    end
+                end
+
+                local code_str = table.concat(code_block, "\n")
 
                 if #code_str > 0 then
                     vim.fn.setreg("*", code_str)
+                    vim.fn.setreg("+", code_str)
                     print("Code copied to system clipboard.")
                 else
                     print("No code found.")

@@ -6,15 +6,15 @@ M._theme = require("themes.catppuccin.theme")
 -- M._theme = require("themes.default.theme")
 
 function M.setup()
-	M._theme.setup()
+    M._theme.setup()
 end
 
 function M.get_colors()
-	return M._theme.get_colors()
+    return M._theme.get_colors()
 end
 
 function M.get_lualine_colors()
-	return M._theme.get_lualine_colors()
+    return M._theme.get_lualine_colors()
 end
 
 return M

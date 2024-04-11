@@ -210,6 +210,10 @@ function M.on_rename(from, to)
 end
 
 function M.hexToRgb(c)
+    if c == nil then
+        return { 0, 0, 0 }
+    end
+
     c = string.lower(c)
     return { tonumber(c:sub(2, 3), 16), tonumber(c:sub(4, 5), 16), tonumber(c:sub(6, 7), 16) }
 end
