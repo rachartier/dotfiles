@@ -117,6 +117,7 @@ source $HOME/.aliases
 # prompt pure
 #
 eval "$(starship init zsh)"
+eval "$(gh copilot alias -- zsh)"
 
 bindkey "^[[1;5A" history-substring-search-up
 bindkey "^[[1;5B" history-substring-search-down
