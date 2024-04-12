@@ -156,9 +156,6 @@ install_tmux() {
 	sh autogen.sh
 	./configure
 	make && sudo make install
-
-    # Install tmux plugin manager
-    git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
 }
 
 install_bat() {
