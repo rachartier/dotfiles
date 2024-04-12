@@ -18,9 +18,9 @@ function M.config()
     local lsp = require("lsp-zero")
     lsp.extend_lspconfig()
 
-    -- require("mason-lspconfig").setup({
-    --     ensure_installed = require("config").lsps,
-    -- })
+    require("mason-lspconfig").setup({
+        ensure_installed = require("config").lsps,
+    })
     -- require("mason-null-ls").setup({
     -- 	ensure_installed = {
     -- 		"black",

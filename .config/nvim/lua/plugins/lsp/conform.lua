@@ -152,23 +152,4 @@ return {
             -- vim.defer_fn(vim.cmd.MasonToolsClean, 1000) -- delayed, so noice.nvim is loaded before
         end,
     },
-    { -- add ignore-comments & lookup rules
-        "chrisgrieser/nvim-rulebook",
-        keys = {
-            {
-                "<leader>d",
-                function()
-                    require("rulebook").lookupRule()
-                end,
-                desc = "󰒕 Lookup Rule",
-            },
-            {
-                "<leader>C",
-                function()
-                    require("rulebook").ignoreRule()
-                end,
-                desc = "󰒕 Ignore Rule",
-            },
-        },
-    },
 }

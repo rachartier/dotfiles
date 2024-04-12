@@ -43,7 +43,6 @@ local diagnostic_ns = vim.api.nvim_create_namespace("CursorDiagnostics")
 local function get_current_pos_diags(diagnostics, curline, curcol)
     local current_pos_diags = {}
 
-
     for _, diag in ipairs(diagnostics) do
         if diag.lnum == curline and curcol >= diag.col and curcol <= diag.end_col then
             table.insert(current_pos_diags, diag)
