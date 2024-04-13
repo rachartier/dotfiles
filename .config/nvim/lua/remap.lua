@@ -1,7 +1,5 @@
 local map = vim.keymap.set
 
-map("n", "<leader>pv", vim.cmd.Ex)
-
 map("v", "J", ":m '>+1<CR>gv=gv", { desc = "Lower the selection" })
 map("v", "K", ":m '<-2<CR>gv=gv", { desc = "Raise the selection" })
 
@@ -10,13 +8,6 @@ map("n", "<C-d>", "<C-d>zz")
 map("n", "<C-u>", "<C-u>zz")
 map("n", "n", "nzzzv")
 map("n", "N", "Nzzzv")
-
-map("x", "<leader>p", [["_dP]])
-
-map({ "n", "v" }, "<leader>y", [["+y]])
-map("n", "<leader>Y", [["+Y]])
-
-map({ "n", "v" }, "<leader>d", [["_d]])
 
 map("i", "<C-c>", "<Esc>")
 
@@ -28,7 +19,7 @@ map("n", "<C-j>", "<cmd>cprev<CR>zz")
 map("n", "<leader>k", "<cmd>lnext<CR>zz")
 map("n", "<leader>j", "<cmd>lprev<CR>zz")
 
-map("n", "<leader>o", "<cmd>!feh <cfile> &<CR>", { silent = true })
+-- map("n", "<leader>o", "<cmd>!feh <cfile> &<CR>", { silent = true })
 
 map("n", "<c-l>", "<c-i>")
 

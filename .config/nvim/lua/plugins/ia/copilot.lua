@@ -154,8 +154,6 @@ return {
         config = function(_, opts)
             local chat = require("CopilotChat")
 
-            print(require("utils").dump(opts))
-
             chat.setup(opts)
 
             vim.keymap.set('n', '<leader>cy', function()

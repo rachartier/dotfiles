@@ -9,10 +9,6 @@ local M = {
 }
 
 function M.config()
-    local U = require("utils")
-
-    vim.opt.termguicolors = true
-
     if require("theme").get_colors().base ~= nil then
         require("notify").setup({
             background_colour = require("theme").get_colors().base,
