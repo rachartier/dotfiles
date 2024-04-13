@@ -1,4 +1,5 @@
 local username = vim.fn.expand("$USER")
+
 return {
     {
         "github/copilot.vim",
@@ -111,9 +112,15 @@ return {
             separator = " ",
             show_folds = false,
 
+            selection = function(source)
+                local select = require("CopilotChat.select")
+                return select.visual(source) or select.line(source)
+            end,
+
             prompts = {
                 BetterNamings = {
-                    prompt = "Please provide better names for the following variables and functions." },
+                    prompt = "/COPILOT_GENERATE Please provide better names for the following variables and functions."
+                },
                 --                 Docs = [[
                 -- Generate the documentation for the code above.
                 -- The documentation should be in the form of the standard from the language.
@@ -126,38 +133,28 @@ return {
                 -- Output with no introduction, no explaintation, only the generated documentation.
                 -- DONT MAKE ANY MISTAKES, check if you did any.
                 -- ]],
-                Docs = {
-                    prompt = [[/COPILOT_REFACTOR
-Please provide documentation for the following code, and follow these instructions to help you:
-- It should only focus on what the code does, not what the code is for.
-- It should be clear and concise and precise.
-- The documentation must be helpful to someone who has never seen the code before.
-- It should start by a brief description of what the code does, then the inputs, then the outputs, and then the exceptions.
-- Output with no introduction, no explaintation, only the documentation.
-- If the code in in csharp, output the markdown bloc with "```cs" instead of "```csharp".
-- DONT MAKE ANY MISTAKES, check if you did any.
-]]
-                },
+                --                 Docs = {
+                --                     prompt = [[/COPILOT_REFACTOR
+                -- Please provide documentation for the following code, and follow these instructions to help you:
+                -- - It should only focus on what the code does, not what the code is for.
+                -- - It should be clear and concise and precise.
+                -- - The documentation must be helpful to someone who has never seen the code before.
+                -- - It should start by a brief description of what the code does, then the inputs, then the outputs, and then the exceptions.
+                -- - Output with no introduction, no explaintation, only the documentation.
+                -- - If the code in in csharp, output the markdown bloc with "```cs" instead of "```csharp".
+                -- - DONT MAKE ANY MISTAKES, check if you did any.
+                -- ]]
+                --                 },
                 TestsxUnit = {
                     prompt =
-                    "/COPILOT_TESTS Write a set of detailed unit test functions for the following code with the xUnit framework.",
+                    "/COPILOT_GENERATE Write a set of detailed unit test functions for the following code with the xUnit framework.",
                 },
             },
         },
         config = function(_, opts)
             local chat = require("CopilotChat")
-            local select = require("CopilotChat.select")
 
-            opts.prompts.Commit = {
-                prompt = "Write commit message for the change with commitizen convention",
-                selection = select.gitdiff,
-            }
-            opts.prompts.CommitStaged = {
-                prompt = "Write commit message for the change with commitizen convention",
-                selection = function(source)
-                    return select.gitdiff(source, true)
-                end,
-            }
+            print(require("utils").dump(opts))
 
             chat.setup(opts)
 
