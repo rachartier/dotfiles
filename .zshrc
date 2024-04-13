@@ -116,8 +116,15 @@ source $HOME/.aliases
 # autoload -U promptinit; promptinit
 # prompt pure
 #
-eval "$(starship init zsh)"
-eval "$(gh copilot alias -- zsh)"
+
+
+if  command -v starship > /dev/null ; then
+    eval "$(starship init zsh)"
+fi
+
+if  command -v gh > /dev/null ; then
+    eval "$(gh completion -s zsh)"
+fi
 
 bindkey "^[[1;5A" history-substring-search-up
 bindkey "^[[1;5B" history-substring-search-down
