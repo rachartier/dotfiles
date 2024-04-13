@@ -14,35 +14,39 @@ fi
 
 export DISABLE_AUTO_TITLE='true'
 
-# Plugins if minimal is set
+[ ! -d $HOME/.antidote ] && git clone --depth=1 https://github.com/mattmc3/antidote.git $HOME/.antidote
+source $HOME/.antidote/antidote.zsh
+
+#Plugins if minimal is set
 if [ -n "$DOTFILES_MINIMAL" ]; then
-    plugins=(
-        enhancd
-        ripgrep
-        fd
-        git
-        command-not-found
-        zsh-autosuggestions
-        zsh-syntax-highlighting
-        zsh-history-substring-search
-	)
+    antidote load ${ZDOTDIR:-$HOME}/.zsh_plugins_minimal.txt
 else
-    plugins=(
-        enhancd
-        ripgrep
-        fd
-        git
-        tmux
-        zsh-poetry
-        command-not-found
-        zsh-autosuggestions
-        zsh-syntax-highlighting
-        zsh-history-substring-search
-	)
+    antidote load ${ZDOTDIR:-$HOME}/.zsh_plugins.txt
 fi
 
-source $ZSH/oh-my-zsh.sh
-
+# Plugins if minimal is set
+# if [ -n "$DOTFILES_MINIMAL" ]; then
+#     plugins=(
+#         enhancd
+#         command-not-found
+#         zsh-autosuggestions
+#         zsh-syntax-highlighting
+#         zsh-history-substring-search
+# 	)
+# else
+#     plugins=(
+#         enhancd
+#         tmux
+#         zsh-poetry
+#         command-not-found
+#         zsh-autosuggestions
+#         zsh-syntax-highlighting
+#         zsh-history-substring-search
+# 	)
+# fi
+#
+# source $ZSH/oh-my-zsh.sh
+#
 # ZSH_TMUX_AUTOSTART=true
 # ZSH_TMUX_AUTOCONNECT=true
 # ZSH_TMUX_CONFIG=$HOME/.config/tmux/tmux.conf
@@ -70,45 +74,36 @@ zstyle ':completion::(^approximate*):*:functions'   ignored-patterns '_*'    # I
 zstyle ':completion:complete:*:options'             sort false
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
 
-# zstyle ':completion:*:descriptions' format '[%d]'
-# zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
-# zstyle ':fzf-tab:complete:_zlua:*'                  query-string input
-# zstyle ':fzf-tab:complete:kill:argument-rest'       extra-opts --preview=$extract'ps --pid=$in[(w)1] -o cmd --no-headers -w -w' --preview-window=down:3:wrap
-# zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath' # remember to use single quote here!!!
-# zstyle ':fzf-tab:*' switch-group ',' '.'
-#
-#     zstyle ':fzf-tab:complete:-parameter-:*' fzf-preview 'echo ${(P)word}'
-#     zstyle ':fzf-tab:complete:((-parameter-|unset):|(export|typeset|declare|local):argument-rest)' fzf-preview 'echo ${(P)word}'
-#     #
-#      zstyle ':fzf-tab:complete:-command-:*' fzf-preview \
-#         '(out=$(MANWIDTH=$FZF_PREVIEW_COLUMNS man "$word") 2>/dev/null && echo $out) || (out=$(which "$word") && echo $out) || echo "${(P)word}"'
-
-# zstyle ':prompt:pure:git:branch' color red
-# zstyle ':prompt:pure:git:stash'  show yes
-
 (( ${+ZSH_HIGHLIGHT_STYLES} )) || typeset -A ZSH_HIGHLIGHT_STYLES
 ZSH_HIGHLIGHT_STYLES[path]=none
 ZSH_HIGHLIGHT_STYLES[path_prefix]=none
 
-setopt extended_history       # record timestamp of command in HISTFILE
-setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE
-setopt hist_ignore_all_dups   # ignore duplicated commands history list
-setopt hist_ignore_space      # ignore commands that start with space
-setopt hist_verify            # show command with history expansion to user before running it
-setopt inc_append_history     # add commands to HISTFILE in order of execution
-setopt share_history          # share command history data
 setopt always_to_end          # cursor moved to the end in full completion
-setopt hash_list_all          # hash everything before completion
-setopt always_to_end          # when completing from the middle of a word, move the cursor to the end of the word
-setopt complete_in_word       # allow completion from within a word/phrase
-setopt nocorrect              # spelling correction for commands
-setopt list_ambiguous         # complete as much of a completion until it gets ambiguous.
-setopt nolisttypes
-setopt listpacked
-setopt automenu
 setopt autocd
+setopt automenu
+setopt complete_in_word       # allow completion from within a word/phrase
+setopt hash_list_all          # hash everything before completion
+setopt inc_append_history     # add commands to HISTFILE in order of execution
+setopt list_ambiguous         # complete as much of a completion until it gets ambiguous.
+setopt listpacked
+setopt nocorrect              # spelling correction for commands
+setopt nolisttypes
 unsetopt correct_all
 unsetopt BEEP
+
+
+## History file configuration
+[ -z "$HISTFILE" ] && HISTFILE="$HOME/.zsh_history"
+[ "$HISTSIZE" -lt 50000 ] && HISTSIZE=50000
+[ "$SAVEHIST" -lt 10000 ] && SAVEHIST=10000
+
+## History command configuration
+setopt extended_history       # record timestamp of command in HISTFILE
+setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE
+setopt hist_ignore_dups       # ignore duplicated commands history list
+setopt hist_ignore_space      # ignore commands that start with space
+setopt hist_verify            # show command with history expansion to user before running it
+setopt share_history          # share command history data
 
 source $HOME/.aliases
 
@@ -117,14 +112,14 @@ source $HOME/.aliases
 # prompt pure
 #
 
-
 if  command -v starship > /dev/null ; then
     eval "$(starship init zsh)"
 fi
 
-if  command -v gh > /dev/null ; then
-    eval "$(gh completion -s zsh)"
-fi
+# if  command -v gh > /dev/null ; then
+    # eval "$(gh completion -s zsh)"
+    # eval "$(gh copilot alias -- zsh)"
+# fi
 
 bindkey "^[[1;5A" history-substring-search-up
 bindkey "^[[1;5B" history-substring-search-down
