@@ -61,7 +61,7 @@ function M.config()
     Job:new({
         command = os.getenv("HOME") .. "/.config/scripts/is_inside_docker.sh",
         on_stdout = function(_, data)
-            if data[1] == "1" then
+            if data == "1" then
                 is_inside_docker = true
             end
         end,
