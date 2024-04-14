@@ -84,7 +84,6 @@ return {
 		config = function()
 			local lint = require("lint")
 			lint.linters_by_ft = linters
-			print("linters_by_ft", require("utils").dump(lint.linters_by_ft))
 
 			for name, value in pairs(require("config.linter").by_ft_options) do
 				lint.linters[name].args = value.args
