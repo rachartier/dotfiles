@@ -222,6 +222,8 @@ install_packages() {
 install_nvim() {
 	__install_appimage "https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage" nvim
 	pip install pynvim
+
+    wget https://ftp.nluug.nl/pub/vim/runtime/spell/fr.utf-8.spl -O ~/.local/share/nvim/site/spell/fr.utf-8.spl
 }
 
 install_eza() {
