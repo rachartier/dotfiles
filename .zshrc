@@ -26,7 +26,7 @@ fi
 
 # Plugins if minimal is set
 # if [ -n "$DOTFILES_MINIMAL" ]; then
-#     plugins=(
+#     pluginr=(
 #         enhancd
 #         command-not-found
 #         zsh-autosuggestions
@@ -88,6 +88,8 @@ setopt list_ambiguous         # complete as much of a completion until it gets a
 setopt listpacked
 setopt nocorrect              # spelling correction for commands
 setopt nolisttypes
+setopt interactivecomments    # allow comments in interactive shells
+setopt long_list_jobs
 unsetopt correct_all
 unsetopt BEEP
 

@@ -11,12 +11,12 @@ install_essentials() {
         zsh
 }
 
-install_ohmyzsh() {
-    __echo_info "Installing Oh My Zsh"
-    cd /tmp || exit
-    wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
-    yes | sh install.sh
-}
+# install_ohmyzsh() {
+#     __echo_info "Installing Oh My Zsh"
+#     cd /tmp || exit
+#     wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+#     yes | sh install.sh
+# }
 
 install_dotfiles() {
     __echo_info "Configuring dotfiles"
@@ -56,7 +56,6 @@ prepare_dotfiles() {
 }
 
 install_essentials
-install_ohmyzsh
 install_dotfiles
 prepare_dotfiles
 

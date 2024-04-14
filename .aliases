@@ -14,3 +14,8 @@ if command tmuxp &> /dev/null; then
     alias tl='tmuxp load'
     for s in $(tmuxp ls); do alias "$s"="tmuxp load -y $s"; done
 fi
+
+alias -g ...='../..'
+alias -g ....='../../..'
+alias -g .....='../../../..'
+alias -g ......='../../../../..'

@@ -2,6 +2,8 @@ b4b4r07/enhancd
 
 ohmyzsh/ohmyzsh path:plugins/command-not-found
 
+ohmyzsh/ohmyzsh path:lib/key-bindings.zsh
+
 zsh-users/zsh-autosuggestions kind:defer
 zsh-users/zsh-syntax-highlighting
 zsh-users/zsh-history-substring-search kind:defer
