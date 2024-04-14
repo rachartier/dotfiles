@@ -189,7 +189,6 @@ install_packages() {
 
 	__install_package_apt python3-venv
     __install_package_apt python3-pip
-	__install_package_apt nodejs
 	__install_package_apt npm
 	__install_package_apt unzip
 
@@ -197,6 +196,9 @@ install_packages() {
 	__install_package_apt fd-find
 	__install_package_apt xsel
 	__install_package_apt chafa
+
+    # install nodejs...
+    curl -fsSL https://raw.githubusercontent.com/tj/n/master/bin/n | sudo bash -s lts
 
     # Installs  if not in minimal mode
     if [ -z "$DOTFILES_MINIMAL" ]; then

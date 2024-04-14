@@ -1,5 +1,5 @@
-local linters = require("config").linters
-local formatters = require("config").formatters
+local linters = require("config.linter").enabled
+local formatters = require("config.formatter").enabled
 local extras = require("config").extras
 
 -- PENDING https://github.com/mfussenegger/nvim-lint/issues/355
@@ -81,8 +81,8 @@ return {
         event = "VeryLazy",
         config = function()
             local lint = require("lint")
-            lint.linters_by_ft = linters.enabled
-            for name, value in pairs(linters.by_ft_options) do
+            lint.linters_by_ft = linters
+            for name, value in pairs(require("config.linter").by_ft_options) do
                 lint.linters[name].args = value.args
             end
 
@@ -114,7 +114,7 @@ return {
                 end,
             })
 
-            require("conform").formatters = require("config").formatters.by_ft_options
+            require("conform").formatters = require("config.formatter").by_ft_options
         end,
 
         event = { "BufWritePre" },
@@ -140,7 +140,7 @@ return {
         dependencies = { "williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim" },
         config = function()
             local tools = to_autoinstall(linters, formatters, extras, dont_install)
-            vim.list_extend(tools, require("config").lsp)
+            -- vim.list_extend(tools, require("config").lsp)
 
             require("mason-tool-installer").setup({
                 ensure_installed = tools,

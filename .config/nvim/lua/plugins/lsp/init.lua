@@ -35,9 +35,9 @@ function M.config()
         border = icons.default_border,
     }
 
-    local config = require("config")
+    local config = require("config.lsp").lsps
 
-    for server_name, defined_lsp in pairs(config.lsp) do
+    for server_name, defined_lsp in pairs(config) do
         if type(defined_lsp) == "table" then
             defined_lsp.capabilities = capabilities
 
