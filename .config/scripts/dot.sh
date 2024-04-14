@@ -206,16 +206,16 @@ install_packages() {
 	__make_symlink "$HOME/.local/bin/fd" fdfind
 }
 
-install_zsh_plugins() {
-	__install_zsh_plugin "https://github.com/zsh-users/zsh-autosuggestions.git"
-	__install_zsh_plugin "https://github.com/zsh-users/zsh-syntax-highlighting.git"
-	__install_zsh_plugin "https://github.com/b4b4r07/enhancd.git"
-	__install_zsh_plugin "https://github.com/zsh-users/zsh-history-substring-search.git"
-
-    if [ -z "$DOTFILES_MINIMAL" ]; then
-        __install_zsh_plugin "https://github.com/darvid/zsh-poetry.git"
-    fi
-}
+# install_zsh_plugins() {
+# 	__install_zsh_plugin "https://github.com/zsh-users/zsh-autosuggestions.git"
+# 	__install_zsh_plugin "https://github.com/zsh-users/zsh-syntax-highlighting.git"
+# 	__install_zsh_plugin "https://github.com/b4b4r07/enhancd.git"
+# 	__install_zsh_plugin "https://github.com/zsh-users/zsh-history-substring-search.git"
+#
+#     if [ -z "$DOTFILES_MINIMAL" ]; then
+#         __install_zsh_plugin "https://github.com/darvid/zsh-poetry.git"
+#     fi
+# }
 
 install_nvim() {
 	__install_appimage "https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage" nvim
