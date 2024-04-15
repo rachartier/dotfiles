@@ -18,9 +18,9 @@ function M.config()
 	lsp.preset("recommended")
 	-- require("clangd_extensions.inlay_hints").setup_autocmd()
 
-	local capabilities = vim.lsp.protocol.make_client_capabilities()
+	-- local capabilities = vim.lsp.protocol.make_client_capabilities()
 
-	require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+	local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 	vim.api.nvim_create_autocmd("LspAttach", {
 		callback = function(args)

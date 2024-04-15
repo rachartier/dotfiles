@@ -10,6 +10,7 @@ M.enabled = {
 	yaml = { "typos" },
 	html = { { "prettier" }, "typos" },
 	htmldjango = { { "prettier" }, "typos" },
+	dockerfile = { "hadolint", "typos" },
 	markdown = {
 		"markdown-toc",
 		"markdownlint",

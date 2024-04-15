@@ -18,19 +18,16 @@ function M.config()
 	lsp.extend_lspconfig()
 
 	local lspconfig = require("lspconfig")
-	local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
+	local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 	local on_attach = require("config.lsp.attach").on_attach
 	local config_lsp = require("config.lsp").lsps
 
 	require("mason-lspconfig").setup_handlers({
 		function(server_name)
-			if server_name == "omnisharp" then
-				return
-			end
-
-			if type(config_lsp[server_name]) == "string" then
+			-- If the server settings is not defined, then setup the server with the default settings
+			if config_lsp[server_name] == nil then
 				lspconfig[server_name].setup({
-					capabilities = lsp_capabilities,
+					capabilities = capabilities,
 					on_attach = on_attach,
 				})
 			end

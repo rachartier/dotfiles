@@ -14,6 +14,9 @@ M.enabled = {
 	gitcommit = {},
 	json = {},
 	toml = {},
+	dockerfile = { "hadolint" },
+	bash = { "shellcheck" },
+	zsh = { "shellcheck" },
 
 	typos = {},
 	["editorconfig-checker"] = {},
