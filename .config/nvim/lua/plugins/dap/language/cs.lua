@@ -160,7 +160,6 @@ dap.configurations.cs = {
 		request = "attach",
 		processId = dap_utils.pick_process,
 	},
-
 	{
 		type = "coreclr",
 		name = "Attach (Smart)",

@@ -180,7 +180,7 @@ function M.get(colors)
 		TelescopePromptBorder = { bg = colors.surface0, fg = colors.surface0 },
 		TelescopePromptTitle = { bg = colors.pink, fg = colors.bg },
 
-		TelescopeResultsNormal = { bg = colors.red, fg = colors.subtext1 },
+		TelescopeResultsNormal = { bg = colors.mantle, fg = colors.subtext1 },
 		TelescopeResultsBorder = { link = "FloatBorder" },
 		TelescopeResultsTitle = { bg = colors.blue, fg = colors.bg },
 
@@ -191,9 +191,6 @@ function M.get(colors)
 		WinSeparator = { fg = colors.surface0 },
 		WinBar = { fg = colors.rosewater, bg = "None" },
 
-		DapUICurrentFrameName = { bg = colors.surface0, fg = colors.peach },
-
-		DapUINormalNC = { bg = colors.surface0, fg = colors.text },
 		DapUIPlayPauseNC = { link = "DapUIPlayPause" },
 		DapUIRestartNC = { link = "DapUIRestart" },
 		DapUIStopNC = { link = "DapUIStop" },
