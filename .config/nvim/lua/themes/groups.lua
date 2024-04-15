@@ -3,248 +3,250 @@ local M = {}
 local U = require("utils")
 
 function M.get(colors)
-    local bg = colors.mantle
+	local bg = colors.mantle
 
-    -- local cursor_line_bg = U.darken(colors.surface0, 0.5)
-    local cursor_line_bg = "None"
-    local darken_diag = 0.15
+	-- local cursor_line_bg = U.darken(colors.surface0, 0.5)
+	local cursor_line_bg = "None"
+	local darken_diag = 0.15
 
-    return {
-        -- Visual = { bg = "#234370" },
-        Visual = { bg = colors.surface1 },
-        -- Visual = { bg = colors.blue, fg = colors.crust },
-        LineNr = {
-            fg = colors.surface1,
-        },
-        CursorLineNr = {
-            fg = colors.overlay1,
-        },
-        CursorLineSign = {
-            fg = colors.surface0,
-        },
+	return {
+		-- Visual = { bg = "#234370" },
+		Visual = { bg = colors.surface1 },
+		-- Visual = { bg = colors.blue, fg = colors.crust },
+		LineNr = {
+			fg = colors.surface1,
+		},
+		CursorLineNr = {
+			fg = colors.overlay1,
+		},
+		CursorLineSign = {
+			fg = colors.surface0,
+		},
 
-        SignColumn = {
-            fg = colors.surface0,
-        },
-        CursorLine = {
-            bg = cursor_line_bg,
-        },
-        NormalFloat = {
-            bg = bg,
-            fg = colors.text,
-        },
-        FloatBorder = {
-            -- bg = "None",
-            bg = bg,
-            fg = bg,
-        },
+		SignColumn = {
+			fg = colors.surface0,
+		},
+		CursorLine = {
+			bg = cursor_line_bg,
+		},
+		NormalFloat = {
+			bg = bg,
+			fg = colors.text,
+		},
+		FloatBorder = {
+			-- bg = "None",
+			bg = bg,
+			fg = bg,
+		},
 
-        FloatTitle = {
-            bg = colors.yellow,
-            fg = colors.crust,
-        },
-        PopupBorder = {
-            link = "FloatBorder",
-        },
-        PopupNormal = {
-            -- bg = "None",
-            bg = bg,
-            fg = colors.text,
-        },
-        Pmenu = {
-            link = "FloatBorder",
-        },
-        PmenuBorder = {
-            link = "FloatBorder",
-        },
-        PmenuDocBorder = {
-            link = "FloatBorder",
-        },
-        PmenuSel = {
-            -- link = "Visual",
-            bg = colors.surface0,
-            -- bg = colors.yellow,
-            -- fg = colors.mantle,
-        },
-        NeoTreeNormal = {
-            -- bg = "None",
-            bg = bg,
-        },
-        NeoTreePreview = {
-            link = "NeoTreeNormal",
-        },
-        NeoTreeFloatTitle = {
-            link = "NeoTreeTitlebar",
-        },
-        IlluminatedWordRead = {
-            bold = true,
-            bg = colors.surface1,
-        },
-        IlluminatedWordWrite = {
-            link = "IlluminatedWordRead",
-        },
-        IlluminatedReferenceText = {
-            link = "IlluminatedWordRead",
-        },
-        CmpItemAbbrMatch = {
-            fg = colors.yellow,
-            -- bold = true,
-            -- underline = true,
-        },
-        CmpItemAbbrMatchFuzzy = {
-            -- fg = colors.blue,
-            -- underline = true,
-            link = "CmpItemAbbrMatch",
-        },
-        TelescopeSelection = {
-            link = "PmenuSel",
-        },
-        FlashLabel = {
-            fg = colors.crust,
-            bg = colors.yellow,
-            bold = true,
-        },
-        NeoTreeIndentMarker = {
-            fg = colors.surface0,
-        },
-        NeoTreeCursorLine = {
-            link = "PmenuSel",
-        },
-        NoicePopupmenu = {
-            link = "PopupNormal",
-        },
-        NoicePopupmenuBorder = {
-            link = "FloatBorder",
-        },
-        NoiceCmdlinePopup = {
-            bg = bg,
-            fg = colors.text,
-        },
-        NoiceCmdlineIcon = {
-            fg = colors.yellow,
-            italic = false,
-            bold = true,
-        },
-        NoiceCmdlinePopupBorder = {
-            link = "FloatBorder",
-        },
-        NoiceFormatLevelOff = {
-            bg = colors.yellow,
-        },
-        MiniIndentscopeSymbol = {
-            fg = colors.surface0,
-        },
-        LspSignatureActiveParameter = {
-            bg = colors.peach,
-            fg = colors.crust,
-        },
-        GitSignsChange = {
-            fg = colors.blue,
-        },
-        GitSignsAdd = {
-            fg = colors.green,
-        },
-        SwitchBufferStatusColor = {
-            fg = colors.red,
-        },
-        CmpGhostText = { link = "Comment", default = true },
-        LspLens = { italic = true, fg = colors.surface1 },
-        -- StatusLine = {
-        --     bg = bg,
-        -- },
-        --
-        -- StatusLineNC = {
-        --     link = "StatusLine",
-        -- },
+		FloatTitle = {
+			bg = colors.yellow,
+			fg = colors.crust,
+		},
+		PopupBorder = {
+			link = "FloatBorder",
+		},
+		PopupNormal = {
+			-- bg = "None",
+			bg = bg,
+			fg = colors.text,
+		},
+		Pmenu = {
+			link = "FloatBorder",
+		},
+		PmenuBorder = {
+			link = "FloatBorder",
+		},
+		PmenuDocBorder = {
+			link = "FloatBorder",
+		},
+		PmenuSel = {
+			-- link = "Visual",
+			bg = colors.surface0,
+			-- bg = colors.yellow,
+			-- fg = colors.mantle,
+		},
+		NeoTreeNormal = {
+			-- bg = "None",
+			bg = bg,
+		},
+		NeoTreePreview = {
+			link = "NeoTreeNormal",
+		},
+		NeoTreeFloatTitle = {
+			link = "NeoTreeTitlebar",
+		},
+		IlluminatedWordRead = {
+			bold = true,
+			bg = colors.surface1,
+		},
+		IlluminatedWordWrite = {
+			link = "IlluminatedWordRead",
+		},
+		IlluminatedReferenceText = {
+			link = "IlluminatedWordRead",
+		},
+		CmpItemAbbrMatch = {
+			fg = colors.yellow,
+			-- bold = true,
+			-- underline = true,
+		},
+		CmpItemAbbrMatchFuzzy = {
+			-- fg = colors.blue,
+			-- underline = true,
+			link = "CmpItemAbbrMatch",
+		},
+		TelescopeSelection = {
+			link = "PmenuSel",
+		},
+		FlashLabel = {
+			fg = colors.crust,
+			bg = colors.yellow,
+			bold = true,
+		},
+		NeoTreeIndentMarker = {
+			fg = colors.surface0,
+		},
+		NeoTreeCursorLine = {
+			link = "PmenuSel",
+		},
+		NoicePopupmenu = {
+			link = "PopupNormal",
+		},
+		NoicePopupmenuBorder = {
+			link = "FloatBorder",
+		},
+		NoiceCmdlinePopup = {
+			bg = bg,
+			fg = colors.text,
+		},
+		NoiceCmdlineIcon = {
+			fg = colors.yellow,
+			italic = false,
+			bold = true,
+		},
+		NoiceCmdlinePopupBorder = {
+			link = "FloatBorder",
+		},
+		NoiceFormatLevelOff = {
+			bg = colors.yellow,
+		},
+		MiniIndentscopeSymbol = {
+			fg = colors.surface0,
+		},
+		LspSignatureActiveParameter = {
+			bg = colors.peach,
+			fg = colors.crust,
+		},
+		GitSignsChange = {
+			fg = colors.blue,
+		},
+		GitSignsAdd = {
+			fg = colors.green,
+		},
+		SwitchBufferStatusColor = {
+			fg = colors.red,
+		},
+		CmpGhostText = { link = "Comment", default = true },
+		LspLens = { italic = true, fg = colors.surface1 },
+		-- StatusLine = {
+		--     bg = bg,
+		-- },
+		--
+		-- StatusLineNC = {
+		--     link = "StatusLine",
+		-- },
 
-        DiagnosticError = { fg = colors.red },                                                             -- Used as the base highlight group. Other Diagnostic highlights link to this by default
-        DiagnosticWarn = { fg = colors.yellow },                                                           -- Used as the base highlight group. Other Diagnostic highlights link to this by default
-        DiagnosticInfo = { fg = colors.blue },                                                             -- Used as the base highlight group. Other Diagnostic highlights link to this by default
-        DiagnosticHint = { fg = colors.teal },                                                             -- Used as the base highlight group. Other Diagnostic highlights link to this by default
+		DiagnosticError = { fg = colors.red }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default
+		DiagnosticWarn = { fg = colors.yellow }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default
+		DiagnosticInfo = { fg = colors.blue }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default
+		DiagnosticHint = { fg = colors.teal }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default
 
-        DiagnosticVirtualTextError = { bg = U.darken(colors.red, darken_diag), fg = colors.red },          -- Used for "Error" diagnostic virtual text
-        DiagnosticVirtualTextWarn = { bg = U.darken(colors.yellow, darken_diag), fg = colors.yellow },     -- Used for "Warning" diagnostic virtual text
-        DiagnosticVirtualTextInfo = { bg = U.darken(colors.blue, darken_diag), fg = colors.blue },         -- Used for "Information" diagnostic virtual text
-        DiagnosticVirtualTextHint = { bg = U.darken(colors.teal, darken_diag), fg = colors.teal },         -- Used for "Hint" diagnostic virtual text
-        DiagnosticVirtualTextNone = { bg = cursor_line_bg, fg = colors.surface1 },                         -- Used for "Hint" diagnostic virtual text
+		DiagnosticVirtualTextError = { bg = U.darken(colors.red, darken_diag), fg = colors.red }, -- Used for "Error" diagnostic virtual text
+		DiagnosticVirtualTextWarn = { bg = U.darken(colors.yellow, darken_diag), fg = colors.yellow }, -- Used for "Warning" diagnostic virtual text
+		DiagnosticVirtualTextInfo = { bg = U.darken(colors.blue, darken_diag), fg = colors.blue }, -- Used for "Information" diagnostic virtual text
+		DiagnosticVirtualTextHint = { bg = U.darken(colors.teal, darken_diag), fg = colors.teal }, -- Used for "Hint" diagnostic virtual text
+		DiagnosticVirtualTextNone = { bg = cursor_line_bg, fg = colors.surface1 }, -- Used for "Hint" diagnostic virtual text
 
-        InvDiagnosticVirtualTextError = { fg = U.darken(colors.red, darken_diag), bg = cursor_line_bg },   -- Used for "Error" diagnostic virtual text
-        InvDiagnosticVirtualTextWarn = { fg = U.darken(colors.yellow, darken_diag), bg = cursor_line_bg }, -- Used for "Warning" diagnostic virtual text
-        InvDiagnosticVirtualTextInfo = { fg = U.darken(colors.blue, darken_diag), bg = cursor_line_bg },   -- Used for "Information" diagnostic virtual text
-        InvDiagnosticVirtualTextHint = { fg = U.darken(colors.teal, darken_diag), bg = cursor_line_bg },   -- Used for "Hint" diagnostic virtual text
+		InvDiagnosticVirtualTextError = { fg = U.darken(colors.red, darken_diag), bg = cursor_line_bg }, -- Used for "Error" diagnostic virtual text
+		InvDiagnosticVirtualTextWarn = { fg = U.darken(colors.yellow, darken_diag), bg = cursor_line_bg }, -- Used for "Warning" diagnostic virtual text
+		InvDiagnosticVirtualTextInfo = { fg = U.darken(colors.blue, darken_diag), bg = cursor_line_bg }, -- Used for "Information" diagnostic virtual text
+		InvDiagnosticVirtualTextHint = { fg = U.darken(colors.teal, darken_diag), bg = cursor_line_bg }, -- Used for "Hint" diagnostic virtual text
 
-        TelescopeMatching = { link = "CmpItemAbbrMatch" },
+		TelescopeMatching = { link = "CmpItemAbbrMatch" },
 
-        TelescopePromptPrefix = { fg = colors.blue },
-        TelescopePromptNormal = { bg = colors.surface0, fg = colors.text },
-        TelescopePromptBorder = { bg = colors.surface0, fg = colors.surface0 },
-        TelescopePromptTitle = { bg = colors.pink, fg = colors.bg },
+		TelescopePromptPrefix = { fg = colors.blue },
+		TelescopePromptNormal = { bg = colors.surface0, fg = colors.text },
+		TelescopePromptBorder = { bg = colors.surface0, fg = colors.surface0 },
+		TelescopePromptTitle = { bg = colors.pink, fg = colors.bg },
 
-        TelescopeResultsNormal = { bg = bg, fg = colors.subtext1 },
-        TelescopeResultsBorder = { link = "FloatBorder" },
-        TelescopeResultsTitle = { bg = colors.blue, fg = colors.bg },
+		TelescopeResultsNormal = { bg = colors.red, fg = colors.subtext1 },
+		TelescopeResultsBorder = { link = "FloatBorder" },
+		TelescopeResultsTitle = { bg = colors.blue, fg = colors.bg },
 
-        TelescopePreviewBorder = { link = "FloatBorder" },
-        TelescopePreviewNormal = { bg = bg },
-        TelescopePreviewTitle = { bg = colors.green, fg = colors.bg },
+		TelescopePreviewBorder = { link = "FloatBorder" },
+		TelescopePreviewNormal = { bg = bg },
+		TelescopePreviewTitle = { bg = colors.green, fg = colors.bg },
 
-        WinSeparator = { fg = colors.surface0 },
-        WinBar = { fg = colors.rosewater, bg = colors.base },
+		WinSeparator = { fg = colors.surface0 },
+		WinBar = { fg = colors.rosewater, bg = "None" },
 
-        DapUIPlayPauseNC = { link = "DapUIPlayPause" },
-        DapUIRestartNC = { link = "DapUIRestart" },
-        DapUIStopNC = { link = "DapUIStop" },
-        DapUIUnavailableNC = { link = "DapUIUnavailable" },
-        DapUIStepOverNC = { link = "DapUIStepOver" },
-        DapUIStepIntoNC = { link = "DapUIStepInto" },
-        DapUIStepBackNC = { link = "DapUIStepBack" },
-        DapUIStepOutNC = { link = "DapUIStepOut" },
+		DapUICurrentFrameName = { bg = colors.surface0, fg = colors.peach },
 
-        StatusLineNC = { fg = colors.surface0 },
-        StatusLine = { fg = colors.surface0 },
+		DapUINormalNC = { bg = colors.surface0, fg = colors.text },
+		DapUIPlayPauseNC = { link = "DapUIPlayPause" },
+		DapUIRestartNC = { link = "DapUIRestart" },
+		DapUIStopNC = { link = "DapUIStop" },
+		DapUIUnavailableNC = { link = "DapUIUnavailable" },
+		DapUIStepOverNC = { link = "DapUIStepOver" },
+		DapUIStepIntoNC = { link = "DapUIStepInto" },
+		DapUIStepBackNC = { link = "DapUIStepBack" },
+		DapUIStepOutNC = { link = "DapUIStepOut" },
 
-        EdgyNormal = { bg = colors.mantle },
-        EdgyWinBar = { bg = colors.surface0 },
-        EdgyTitle = { bg = colors.surface0, fg = colors.blue },
-        EdgyIconActive = { bg = colors.surface0, fg = colors.peach },
+		StatusLineNC = { fg = colors.surface0 },
+		StatusLine = { fg = colors.surface0 },
 
+		EdgyNormal = { bg = colors.mantle },
+		EdgyWinBar = { bg = colors.surface0 },
+		EdgyTitle = { bg = colors.surface0, fg = colors.blue },
+		EdgyIconActive = { bg = colors.surface0, fg = colors.peach },
 
-        -- DiagnosticUnderlineError = {
-        -- 	underline = true,
-        -- 	sp = colors.red,
-        -- },
-        -- LspDiagnosticsUnderlineError = {
-        -- 	underline = true,
-        -- 	sp = colors.red,
-        -- },
-    }
+		-- DiagnosticUnderlineError = {
+		-- 	underline = true,
+		-- 	sp = colors.red,
+		-- },
+		-- LspDiagnosticsUnderlineError = {
+		-- 	underline = true,
+		-- 	sp = colors.red,
+		-- },
+	}
 end
 
 function M.override_hl(colors_table)
-    local colors = M.get(colors_table)
+	local colors = M.get(colors_table)
 
-    for hl, col in pairs(colors) do
-        vim.api.nvim_set_hl(0, hl, col)
-    end
+	for hl, col in pairs(colors) do
+		vim.api.nvim_set_hl(0, hl, col)
+	end
 end
 
 function M.override_lsp_hl(colors_table)
-    local colors = colors_table
+	local colors = colors_table
 
-    -- vim.api.nvim_set_hl(0, "@variable", { fg = colors.text })
-    -- vim.api.nvim_set_hl(0, "@_parent", { fg = colors.peach })
-    vim.api.nvim_set_hl(0, "@attribute", { fg = colors.lavender, italic = true })
-    -- vim.api.nvim_set_hl(0, "@keyword.operator", { link = "@repeat" })
-    -- vim.api.nvim_set_hl(0, "@keyword.operator", { link = "@repeat" })
-    -- vim.api.nvim_set_hl(0, "@operator", { fg = colors.teal, italic = false })
-    -- vim.api.nvim_set_hl(0, "@property", { fg = colors.text })
-    -- vim.api.nvim_set_hl(0, "@storageclass", { fg = colors.red })
-    -- vim.api.nvim_set_hl(0, "@type.builtin", { fg = colors.red })
-    -- vim.api.nvim_set_hl(0, "@type.qualifier", { fg = colors.red })
-    -- vim.api.nvim_set_hl(0, "@variable", { fg = colors.text, italic = false })
-    -- vim.api.nvim_set_hl(0, "@variable.builtin", { fg = colors.red })
-    -- vim.api.nvim_set_hl(0, "@variable.member", { fg = colors.text })
-    vim.api.nvim_set_hl(0, "@variable.parameter", { fg = colors.red, italic = true })
+	-- vim.api.nvim_set_hl(0, "@variable", { fg = colors.text })
+	-- vim.api.nvim_set_hl(0, "@_parent", { fg = colors.peach })
+	vim.api.nvim_set_hl(0, "@attribute", { fg = colors.lavender, italic = true })
+	-- vim.api.nvim_set_hl(0, "@keyword.operator", { link = "@repeat" })
+	-- vim.api.nvim_set_hl(0, "@keyword.operator", { link = "@repeat" })
+	-- vim.api.nvim_set_hl(0, "@operator", { fg = colors.teal, italic = false })
+	-- vim.api.nvim_set_hl(0, "@property", { fg = colors.text })
+	-- vim.api.nvim_set_hl(0, "@storageclass", { fg = colors.red })
+	-- vim.api.nvim_set_hl(0, "@type.builtin", { fg = colors.red })
+	-- vim.api.nvim_set_hl(0, "@type.qualifier", { fg = colors.red })
+	-- vim.api.nvim_set_hl(0, "@variable", { fg = colors.text, italic = false })
+	-- vim.api.nvim_set_hl(0, "@variable.builtin", { fg = colors.red })
+	-- vim.api.nvim_set_hl(0, "@variable.member", { fg = colors.text })
+	vim.api.nvim_set_hl(0, "@variable.parameter", { fg = colors.red, italic = true })
 end
 
 return M

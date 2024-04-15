@@ -6,14 +6,13 @@ local util = require("utils")
 local pid = vim.fn.getpid()
 
 M.ensure_installed = {
+	"lua-language-server",
 	"clangd",
 	"omnisharp",
 	"basedpyright",
-	-- "ruff",
-	-- "ruff_lsp",
-	"dockerls",
-	"jsonls",
-	"bashls",
+	"dockerfile-language-server",
+	"json-lsp",
+	"bash-language-server",
 	"clangd",
 	"marksman",
 }

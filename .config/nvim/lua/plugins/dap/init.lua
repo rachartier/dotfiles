@@ -48,27 +48,6 @@ function M.config()
 	require("dap-python")
 	require("dap.ext.vscode").load_launchjs(nil, { netcoredbg = { "cs" } })
 
-	dap.configurations.python = {
-		{
-			type = "python",
-			request = "launch",
-			name = "Launch file",
-			program = "${file}",
-			pythonPath = function()
-				return "/usr/bin/python3"
-			end,
-		},
-		{
-			type = "python",
-			request = "launch",
-			name = "Launch PQC",
-			program = "/workspaces/pie-qui-chante/pqc_workspace/core_ws/src/main.py",
-			pythonPath = function()
-				return "/usr/bin/python3"
-			end,
-		},
-	}
-
 	-- dap.configurations.cs = {
 	-- 	{
 	-- 		type = "coreclr",
@@ -78,17 +57,7 @@ function M.config()
 	-- 	},
 	-- }
 
-	dap.adapters.python = {
-		type = "executable",
-		command = "/usr/bin/python3",
-		args = { "-m", "debugpy.adapter" },
-	}
-
-	dap.adapters.coreclr = {
-		type = "executable",
-		command = os.getenv("HOME") .. "/.local/share/nvim/mason/bin/netcoredbg",
-		args = { "--interpreter=vscode" },
-	}
+	require("plugins.dap.language.cs")
 
 	local sign = vim.fn.sign_define
 

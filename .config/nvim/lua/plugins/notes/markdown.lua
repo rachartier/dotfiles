@@ -3,6 +3,7 @@ return {
 		"MeanderingProgrammer/markdown.nvim",
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
 		name = "render-markdown",
+		ft = { "markdown", "pandoc" },
 		config = function()
 			require("render-markdown").setup({
 				bullets = { "", "", "◆", "◇" },

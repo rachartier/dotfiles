@@ -1,5 +1,6 @@
 return {
-    "folke/neodev.nvim",
-    priority = 500,
-    opts = {}
+	"folke/neodev.nvim",
+	priority = 500,
+	ft = { "lua" },
+	opts = {},
 }

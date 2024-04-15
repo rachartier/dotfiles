@@ -1,42 +1,13 @@
 local linters = require("config.linter").enabled
 local formatters = require("config.formatter").enabled
 local extras = require("config").extras
+local lsps = require("config.lsp").lsps
 
 -- PENDING https://github.com/mfussenegger/nvim-lint/issues/355
 -- for _, list in pairs(linters.enabled) do
 --     table.insert(list, "typos")
 --     table.insert(list, "editorconfig-checker")
 -- end
-
-local dont_install = {
-	-- installed externally due to its plugins: https://github.com/williamboman/mason.nvim/issues/695
-	"stylelint",
-	-- not real formatters, but pseudo-formatters from conform.nvim
-	"trim_whitespace",
-	"trim_newlines",
-	"squeeze_blanks",
-	"injected",
-	"ruff_fix",
-	"ruff_format",
-}
-
-local function to_autoinstall(myLinters, myFormatters, extras, ignoreTools)
-	-- get all linters, formatters, & debuggers and merge them into one list
-	local linterList = vim.tbl_flatten(vim.tbl_values(myLinters))
-	local formatterList = vim.tbl_flatten(vim.tbl_values(myFormatters))
-	local tools = vim.list_extend(linterList, formatterList)
-	vim.list_extend(tools, extras)
-
-	-- only unique tools
-	table.sort(tools)
-	tools = vim.fn.uniq(tools)
-
-	-- remove exceptions not to install
-	tools = vim.tbl_filter(function(tool)
-		return not vim.tbl_contains(ignoreTools, tool)
-	end, tools)
-	return tools
-end
 
 local function lint_triggers()
 	local function do_lint()
@@ -125,27 +96,6 @@ return {
 			})
 
 			require("conform").formatters = require("config.formatter").by_ft_options
-		end,
-	},
-	{ -- auto-install missing linters & formatters
-		"WhoIsSethDaniel/mason-tool-installer.nvim",
-		event = "VeryLazy",
-		keys = {
-			{ "<leader>pM", vim.cmd.MasonToolsUpdate, desc = " Mason Update" },
-		},
-		dependencies = { "williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim" },
-		config = function()
-			local tools = to_autoinstall(linters, formatters, extras, dont_install)
-			-- vim.list_extend(tools, require("config").lsp)
-
-			require("mason-tool-installer").setup({
-				ensure_installed = tools,
-				run_on_start = false, -- triggered manually, since not working with lazy-loading
-			})
-
-			-- clean unused & install missing
-			vim.defer_fn(vim.cmd.MasonToolsInstall, 500)
-			-- vim.defer_fn(vim.cmd.MasonToolsClean, 1000) -- delayed, so noice.nvim is loaded before
 		end,
 	},
 }
