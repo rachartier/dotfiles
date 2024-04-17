@@ -7,7 +7,7 @@ local M = {
 	cmd = { "Trouble" },
 	keys = {
 
-		{ "<leader>tt", "<cmd>Trouble diagnostics toggle<cr>" },
+		-- { "<leader>tt", "<cmd>Trouble diagnostics toggle<cr>" },
 		{
 			"<leader>tn",
 			function()

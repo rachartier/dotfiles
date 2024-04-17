@@ -77,7 +77,9 @@ function M.config()
 	vim.api.nvim_create_autocmd("LspAttach", {
 		pattern = { "*.cs", "*.xaml" },
 		callback = function(args)
-			vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Open code action menu" })
+			vim.keymap.set({ "n" }, "<leader>gd", require("omnisharp_extended").lsp_definition)
+			vim.keymap.set({ "n" }, "<leader>gr", require("omnisharp_extended").lsp_references)
+			vim.keymap.set({ "n" }, "<leader>gi", require("omnisharp_extended").lsp_implementation)
 
 			local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 			vim.api.nvim_create_autocmd("BufWritePre", {
