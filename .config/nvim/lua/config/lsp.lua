@@ -1,8 +1,5 @@
 local M = {}
 
-local lsp_util = require("lspconfig.util")
-local util = require("utils")
-
 local pid = vim.fn.getpid()
 
 M.ensure_installed = {

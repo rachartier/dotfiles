@@ -27,7 +27,11 @@ M.by_ft_options = {
 		args = { "--toml=" .. linter_config .. "/codespell.toml" },
 	},
 	shellcheck = {
-		args = { "--shell=bash", "--format=json", "-" },
+		args = {
+			"--shell=bash",
+			"--format=json",
+			"-",
+		},
 	},
 	-- yamllint = {
 	-- 	args = { "--config-file=" .. linter_config .. "/yamllint.yaml", "--format=parsable", "-" },
