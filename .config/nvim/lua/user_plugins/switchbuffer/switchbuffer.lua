@@ -211,9 +211,10 @@ local function fzf_switch()
 	end, {
 		previewer = buffer_previewer,
 		prompt = "Buffers> ",
+		cwd_prompt_shorten_val = 1,
 		winopts = {
-			width = 0.4,
-			height = 0.4,
+			width = 0.6,
+			height = 0.6,
 			row = 0.5, -- window row position (0=top, 1=bottom)
 			col = 0.5,
 		},
@@ -261,7 +262,7 @@ function M.select_buffers(opts)
 					width = 0.6,
 					height = 0.6,
 					preview_height = 0.6,
-					preview_cutoff = 0,
+					preview_cutoff = 200,
 				},
 			},
 			set_style = {
@@ -285,7 +286,7 @@ function M.select_buffers(opts)
 	local make_display = function(entry)
 		return displayer({
 			{ entry.icon, entry.icon_color },
-			{ entry.status, entry.status_color },
+			{ entry.status_icon, entry.status_color },
 			{ entry.formatted_path, entry.path_color },
 		})
 	end
@@ -302,7 +303,7 @@ function M.select_buffers(opts)
 					formatted_path = entry.formatted_path,
 					path = entry.path,
 					icon = entry.icon,
-					status_icon = entry.status,
+					status_icon = entry.status_icon,
 					status_color = entry.status_color,
 					display = make_display,
 				}

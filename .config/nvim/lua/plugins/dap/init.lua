@@ -5,7 +5,7 @@ local M = {
 		"mfussenegger/nvim-dap-python",
 		"theHamsta/nvim-dap-virtual-text",
 		"mfussenegger/nvim-jdtls",
-		-- "nvim-telescope/telescope-dap.nvim",
+		"nvim-telescope/telescope-dap.nvim",
 	},
 	-- priority = 100,
 	keys = {
@@ -30,8 +30,9 @@ local M = {
 }
 
 function M.config()
-	-- require("telescope").load_extension("dap")
+	require("telescope").load_extension("dap")
 	-- require("dap.ext.vscode").load_launchjs()
+
 	require("nvim-dap-virtual-text").setup({
 		highlight_new_as_changed = true,
 	})

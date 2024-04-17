@@ -16,7 +16,7 @@ local M = {
 		{ "<Tab>", '<cmd>lua require("user_plugins.switchbuffer").select_buffers()<cr>' },
 		{ "<S-Tab>", '<cmd>lua require("user_plugins.switchbuffer").select_buffers()<cr>' },
 	},
-	enabled = false,
+	enabled = true,
 }
 
 local function fuzzy_find_under_cursor()
@@ -121,6 +121,8 @@ function M.config()
 			},
 			layout_config = {
 				horizontal = {
+
+					preview_cutoff = 200,
 					prompt_position = "top",
 					preview_width = 0.55,
 					results_width = 0.8,
@@ -128,9 +130,8 @@ function M.config()
 				vertical = {
 					mirror = false,
 				},
-				width = 0.87,
-				height = 0.80,
-				preview_cutoff = 120,
+				width = 0.60,
+				height = 0.60,
 			},
 		},
 		pickers = {
@@ -202,6 +203,7 @@ function M.config()
 		require("telescope").extensions.git_file_history.git_file_history,
 		{ desc = "Open Git File History" }
 	)
+	vim.keymap.set("n", "<leader>tt", builtin.diagnostics, { desc = "Find all diagnostics" })
 	vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "Grep string under cursor" })
 	vim.keymap.set("n", "<leader>fm", "<cmd>Telescope harpoon marks<cr>", { desc = "Open Harpoon Marks" })
 	vim.keymap.set("n", "<leader>ss", function()

@@ -14,7 +14,7 @@ local M = {
 		{ "<Tab>", '<cmd>lua require("user_plugins.switchbuffer").select_buffers()<cr>' },
 		{ "<S-Tab>", '<cmd>lua require("user_plugins.switchbuffer").select_buffers()<cr>' },
 	},
-	enabled = true,
+	enabled = false,
 }
 
 function M.config()
@@ -33,9 +33,13 @@ function M.config()
 		},
 		keymap = {
 			fzf = {
+				["change"] = "top",
 				["tab"] = "down",
 				["shift-tab"] = "up",
 			},
+		},
+		files = {
+			ignore_patterns = { "*.gif" },
 		},
 		diagnostics = {
 			winopts = {
