@@ -19,7 +19,7 @@ function M.get(colors)
 		Visual = { bg = colors.surface1 },
 
 		CmpGhostText = { link = "Comment", default = true },
-		CmpItemAbbrMatch = { fg = colors.yellow, bold = true, underline = true },
+		CmpItemAbbrMatch = { fg = colors.yellow, bold = true, underline = false },
 		CmpItemAbbrMatchFuzzy = { fg = colors.blue, underline = true, link = "CmpItemAbbrMatch" },
 
 		CursorLine = { bg = cursor_line_bg },
@@ -28,7 +28,7 @@ function M.get(colors)
 
 		FlashLabel = { fg = colors.crust, bg = colors.yellow, bold = true },
 
-		FloatBorder = { bg = "None", bg = bg, fg = bg },
+		FloatBorder = { bg = bg, fg = bg },
 		FloatTitle = { bg = colors.yellow, fg = colors.crust },
 
 		GitSignsAdd = { fg = colors.green },
@@ -46,7 +46,7 @@ function M.get(colors)
 		NeoTreeCursorLine = { link = "PmenuSel" },
 		NeoTreeFloatTitle = { link = "NeoTreeTitlebar" },
 		NeoTreeIndentMarker = { fg = colors.surface0 },
-		NeoTreeNormal = { bg = "None", bg = bg },
+		NeoTreeNormal = { bg = bg },
 		NeoTreePreview = { link = "NeoTreeNormal" },
 
 		NoiceCmdlineIcon = { fg = colors.yellow, italic = false, bold = true },
@@ -59,10 +59,10 @@ function M.get(colors)
 		Pmenu = { link = "FloatBorder" },
 		PmenuBorder = { link = "FloatBorder" },
 		PmenuDocBorder = { link = "FloatBorder" },
-		PmenuSel = { link = "Visual", bg = colors.surface0, bg = colors.yellow, fg = colors.mantle },
+		PmenuSel = { link = "Visual" },
 
 		PopupBorder = { link = "FloatBorder" },
-		PopupNormal = { bg = "None", bg = bg, fg = colors.text },
+		PopupNormal = { bg = bg, fg = colors.text },
 
 		SwitchBufferStatusColor = { fg = colors.red },
 
