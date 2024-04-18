@@ -76,28 +76,21 @@ return {
 			{
 				"<leader>cp",
 				function()
-					require("CopilotChat.code_actions").show_prompt_actions()
+					local actions = require("CopilotChat.actions")
+					require("CopilotChat.integrations.telescope").pick(actions.prompt_actions())
 				end,
 				desc = "CopilotChat - Prompt actions",
 			},
 			{
 				"<leader>cp",
 				function()
-					require("CopilotChat.code_actions").show_prompt_actions(true)
+					require("utils").copy_visual_selection()
+					local actions = require("CopilotChat.actions")
+					require("CopilotChat.integrations.telescope").pick(actions.prompt_actions())
 				end,
-				mode = { "x" },
+				mode = { "x", "v" },
 				desc = "CopilotChat - Prompt actions",
 			},
-			-- {
-			--     "<leader>cp",
-			--     function()
-			--         require("utils").copy_visual_selection()
-			--         local actions = require("CopilotChat.actions")
-			--         require("CopilotChat.integrations.telescope").pick(actions.prompt_actions())
-			--     end,
-			--     mode = { "x", "v" },
-			--     desc = "CopilotChat - Prompt actions",
-			-- },
 			{
 				"<leader>cq",
 				function()
