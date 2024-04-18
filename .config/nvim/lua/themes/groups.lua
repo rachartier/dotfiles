@@ -11,144 +11,61 @@ function M.get(colors)
 
 	return {
 		-- Visual = { bg = "#234370" },
-		Visual = { bg = colors.surface1 },
 		-- Visual = { bg = colors.blue, fg = colors.crust },
-		LineNr = {
-			fg = colors.surface1,
-		},
-		CursorLineNr = {
-			fg = colors.overlay1,
-		},
-		CursorLineSign = {
-			fg = colors.surface0,
-		},
 
-		SignColumn = {
-			fg = colors.surface0,
-		},
-		CursorLine = {
-			bg = cursor_line_bg,
-		},
-		NormalFloat = {
-			bg = bg,
-			fg = colors.text,
-		},
-		FloatBorder = {
-			-- bg = "None",
-			bg = bg,
-			fg = bg,
-		},
+		NormalFloat = { bg = bg, fg = colors.text },
+		LineNr = { fg = colors.surface1 },
+		SignColumn = { fg = colors.surface0 },
+		Visual = { bg = colors.surface1 },
 
-		FloatTitle = {
-			bg = colors.yellow,
-			fg = colors.crust,
-		},
-		PopupBorder = {
-			link = "FloatBorder",
-		},
-		PopupNormal = {
-			-- bg = "None",
-			bg = bg,
-			fg = colors.text,
-		},
-		Pmenu = {
-			link = "FloatBorder",
-		},
-		PmenuBorder = {
-			link = "FloatBorder",
-		},
-		PmenuDocBorder = {
-			link = "FloatBorder",
-		},
-		PmenuSel = {
-			-- link = "Visual",
-			bg = colors.surface0,
-			-- bg = colors.yellow,
-			-- fg = colors.mantle,
-		},
-		NeoTreeNormal = {
-			-- bg = "None",
-			bg = bg,
-		},
-		NeoTreePreview = {
-			link = "NeoTreeNormal",
-		},
-		NeoTreeFloatTitle = {
-			link = "NeoTreeTitlebar",
-		},
-		IlluminatedWordRead = {
-			bold = true,
-			bg = colors.surface1,
-		},
-		IlluminatedWordWrite = {
-			link = "IlluminatedWordRead",
-		},
-		IlluminatedReferenceText = {
-			link = "IlluminatedWordRead",
-		},
-		CmpItemAbbrMatch = {
-			fg = colors.yellow,
-			-- bold = true,
-			-- underline = true,
-		},
-		CmpItemAbbrMatchFuzzy = {
-			-- fg = colors.blue,
-			-- underline = true,
-			link = "CmpItemAbbrMatch",
-		},
-		TelescopeSelection = {
-			link = "PmenuSel",
-		},
-		FlashLabel = {
-			fg = colors.crust,
-			bg = colors.yellow,
-			bold = true,
-		},
-		NeoTreeIndentMarker = {
-			fg = colors.surface0,
-		},
-		NeoTreeCursorLine = {
-			link = "PmenuSel",
-		},
-		NoicePopupmenu = {
-			link = "PopupNormal",
-		},
-		NoicePopupmenuBorder = {
-			link = "FloatBorder",
-		},
-		NoiceCmdlinePopup = {
-			bg = bg,
-			fg = colors.text,
-		},
-		NoiceCmdlineIcon = {
-			fg = colors.yellow,
-			italic = false,
-			bold = true,
-		},
-		NoiceCmdlinePopupBorder = {
-			link = "FloatBorder",
-		},
-		NoiceFormatLevelOff = {
-			bg = colors.yellow,
-		},
-		MiniIndentscopeSymbol = {
-			fg = colors.surface0,
-		},
-		LspSignatureActiveParameter = {
-			bg = colors.peach,
-			fg = colors.crust,
-		},
-		GitSignsChange = {
-			fg = colors.blue,
-		},
-		GitSignsAdd = {
-			fg = colors.green,
-		},
-		SwitchBufferStatusColor = {
-			fg = colors.red,
-		},
 		CmpGhostText = { link = "Comment", default = true },
+		CmpItemAbbrMatch = { fg = colors.yellow, bold = true, underline = true },
+		CmpItemAbbrMatchFuzzy = { fg = colors.blue, underline = true, link = "CmpItemAbbrMatch" },
+
+		CursorLine = { bg = cursor_line_bg },
+		CursorLineNr = { fg = colors.overlay1 },
+		CursorLineSign = { fg = colors.surface0 },
+
+		FlashLabel = { fg = colors.crust, bg = colors.yellow, bold = true },
+
+		FloatBorder = { bg = "None", bg = bg, fg = bg },
+		FloatTitle = { bg = colors.yellow, fg = colors.crust },
+
+		GitSignsAdd = { fg = colors.green },
+		GitSignsChange = { fg = colors.blue },
+
+		IlluminatedReferenceText = { link = "IlluminatedWordRead" },
+		IlluminatedWordRead = { bold = true, bg = colors.surface1 },
+		IlluminatedWordWrite = { link = "IlluminatedWordRead" },
+
 		LspLens = { italic = true, fg = colors.surface1 },
+		LspSignatureActiveParameter = { bg = colors.peach, fg = colors.crust },
+
+		MiniIndentscopeSymbol = { fg = colors.surface0 },
+
+		NeoTreeCursorLine = { link = "PmenuSel" },
+		NeoTreeFloatTitle = { link = "NeoTreeTitlebar" },
+		NeoTreeIndentMarker = { fg = colors.surface0 },
+		NeoTreeNormal = { bg = "None", bg = bg },
+		NeoTreePreview = { link = "NeoTreeNormal" },
+
+		NoiceCmdlineIcon = { fg = colors.yellow, italic = false, bold = true },
+		NoiceCmdlinePopup = { bg = bg, fg = colors.text },
+		NoiceCmdlinePopupBorder = { link = "FloatBorder" },
+		NoiceFormatLevelOff = { bg = colors.yellow },
+		NoicePopupmenu = { link = "PopupNormal" },
+		NoicePopupmenuBorder = { link = "FloatBorder" },
+
+		Pmenu = { link = "FloatBorder" },
+		PmenuBorder = { link = "FloatBorder" },
+		PmenuDocBorder = { link = "FloatBorder" },
+		PmenuSel = { link = "Visual", bg = colors.surface0, bg = colors.yellow, fg = colors.mantle },
+
+		PopupBorder = { link = "FloatBorder" },
+		PopupNormal = { bg = "None", bg = bg, fg = colors.text },
+
+		SwitchBufferStatusColor = { fg = colors.red },
+
 		-- StatusLine = {
 		--     bg = bg,
 		-- },
@@ -174,6 +91,7 @@ function M.get(colors)
 		InvDiagnosticVirtualTextHint = { fg = U.darken(colors.teal, darken_diag), bg = cursor_line_bg }, -- Used for "Hint" diagnostic virtual text
 
 		TelescopeMatching = { link = "CmpItemAbbrMatch" },
+		TelescopeSelection = { link = "PmenuSel" },
 
 		TelescopePromptPrefix = { fg = colors.blue },
 		TelescopePromptNormal = { bg = colors.surface0, fg = colors.text },
