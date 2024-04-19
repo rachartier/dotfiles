@@ -3,7 +3,8 @@ local M = {}
 local U = require("utils")
 
 function M.get(colors)
-	local bg = colors.mantle
+	-- local bg = colors.base
+	local bg = "None"
 
 	-- local cursor_line_bg = U.darken(colors.surface0, 0.5)
 	local cursor_line_bg = "None"
@@ -28,7 +29,7 @@ function M.get(colors)
 
 		FlashLabel = { fg = colors.crust, bg = colors.yellow, bold = true },
 
-		FloatBorder = { bg = bg, fg = bg },
+		FloatBorder = { fg = colors.text },
 		FloatTitle = { bg = colors.yellow, fg = colors.crust },
 
 		GitSignsAdd = { fg = colors.green },
@@ -94,17 +95,18 @@ function M.get(colors)
 		TelescopeSelection = { link = "PmenuSel" },
 
 		TelescopePromptPrefix = { fg = colors.blue },
-		TelescopePromptNormal = { bg = colors.surface0, fg = colors.text },
-		TelescopePromptBorder = { bg = colors.surface0, fg = colors.surface0 },
-		TelescopePromptTitle = { bg = colors.pink, fg = colors.bg },
+		-- TelescopePromptNormal = { bg = colors.surface0, fg = colors.text },
+		-- TelescopePromptBorder = { bg = colors.surface0, fg = colors.surface0 },
+		TelescopePromptBorder = { link = "FloatBorder" },
+		TelescopePromptTitle = { bg = colors.pink, fg = colors.mantle },
 
-		TelescopeResultsNormal = { bg = colors.mantle, fg = colors.subtext1 },
+		-- TelescopeResultsNormal = { bg = colors.mantle, fg = colors.subtext1 },
 		TelescopeResultsBorder = { link = "FloatBorder" },
-		TelescopeResultsTitle = { bg = colors.blue, fg = colors.bg },
+		TelescopeResultsTitle = { bg = colors.blue, fg = colors.mantle },
 
 		TelescopePreviewBorder = { link = "FloatBorder" },
-		TelescopePreviewNormal = { bg = bg },
-		TelescopePreviewTitle = { bg = colors.green, fg = colors.bg },
+		-- TelescopePreviewNormal = { bg = bg },
+		TelescopePreviewTitle = { bg = colors.green, fg = colors.mantle },
 
 		FzfLuaNormal = { bg = colors.mantle, fg = colors.text },
 		FzfPreviewTitle = { bg = colors.blue, fg = colors.text },

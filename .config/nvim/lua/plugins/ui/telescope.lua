@@ -28,7 +28,7 @@ local function fuzzy_find_under_cursor()
 			prompt_position = "bottom",
 		},
 
-		-- borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+		borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
 		default_text = word_under_cursor,
 	})
 end
@@ -82,19 +82,19 @@ function M.config()
 				dynamic_width = true,
 			},
 		},
-		-- borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
-		borderchars = icons.default_border,
+		borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+		-- borderchars = icons.default_border,
 	}
 
 	ts.setup({
 		defaults = {
 			winblend = require("config").winblend,
-			borderchars = icons.default_border,
-			--        { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
+			-- borderchars = icons.default_border,
+			-- { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
 
-			-- prompt = { "─", "│", " ", "│", "╭", "╮", "│", "│" },
-			-- results = { "─", "│", "─", "│", "├", "┤", "╯", "╰" },
-			-- preview = { "─", "│", "─", " ", "─", "╮", "╯", "─" },
+			prompt = { "─", "│", " ", "│", "╭", "╮", "│", "│" },
+			results = { "─", "│", "─", "│", "├", "┤", "╯", "╰" },
+			preview = { "─", "│", "─", " ", "─", "╮", "╯", "─" },
 			sort_mru = true,
 			sorting_strategy = "ascending",
 			multi_icon = "",
