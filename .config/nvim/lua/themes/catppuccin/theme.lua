@@ -133,7 +133,7 @@ function M.setup()
 	})
 
 	vim.cmd.colorscheme("catppuccin")
-	-- vim.cmd([[echo " "]]) -- fix flickering... https://github.com/neovim/neovim/issues/19362
+	vim.cmd([[echo " "]]) -- fix flickering... https://github.com/neovim/neovim/issues/19362
 
 	require("themes.groups").override_hl(M.get_colors())
 	require("themes.groups").override_lsp_hl(M.get_colors())
