@@ -1,5 +1,19 @@
 local M = {}
-local flavour = "macchiato"
+
+local cached_tmux_theme = require("utils").read_file("/tmp/tmux-theme.cache")
+local theme = "macchiato"
+
+if cached_tmux_theme == "catppuccin_macchiato.conf" then
+	theme = "macchiato"
+elseif cached_tmux_theme == "catppuccin_mocha.conf" then
+	theme = "mocha"
+elseif cached_tmux_theme == "catppuccin_frappe.conf" then
+	theme = "frappe"
+elseif cached_tmux_theme == "catppuccin_latte.conf" then
+	theme = "latte"
+end
+
+local flavour = theme
 
 function M.get_colors()
 	return require("catppuccin.palettes").get_palette(flavour)
@@ -119,7 +133,7 @@ function M.setup()
 	})
 
 	vim.cmd.colorscheme("catppuccin")
-	vim.cmd([[echo " "]]) -- fix flickering... https://github.com/neovim/neovim/issues/19362
+	-- vim.cmd([[echo " "]]) -- fix flickering... https://github.com/neovim/neovim/issues/19362
 
 	require("themes.groups").override_hl(M.get_colors())
 	require("themes.groups").override_lsp_hl(M.get_colors())

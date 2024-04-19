@@ -26,6 +26,10 @@ function M.config()
 		function(server_name)
 			-- If the server settings is not defined, then setup the server with the default settings
 			if config_lsp[server_name] == nil then
+				-- auto managed by flutter-tools.nvim
+				if server_name == "dartls" then
+					return
+				end
 				lspconfig[server_name].setup({
 					capabilities = capabilities,
 					on_attach = on_attach,

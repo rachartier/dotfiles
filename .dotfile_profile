@@ -1,22 +1,40 @@
-export PATH="$PATH:$HOME/.local/share/zinit/polaris/bin/"
-
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
+theme="\
+--color=bg+:-1,bg:#24273a,spinner:#f4dbd6,hl:#ed8796 \
+--color=fg:#cad3f5,header:#ed8796,info:#c6a0f6,pointer:#f4dbd6 \
+--color=marker:#f4dbd6,fg+:#cad3f5,prompt:#c6a0f6,hl+:#ed8796"
+
+if [ "$TMUX_THEME" = "catppuccin_macchiato.conf" ]; then
+    theme="\
+--color=bg+:-1,bg:#24273a,spinner:#f4dbd6,hl:#ed8796 \
+--color=fg:#cad3f5,header:#ed8796,info:#c6a0f6,pointer:#f4dbd6 \
+--color=marker:#f4dbd6,fg+:#cad3f5,prompt:#c6a0f6,hl+:#ed8796"
+elif [ "$TMUX_THEME" = "catppuccin_latte.conf" ]; then
+	theme=" \
+--color=bg+:-1,bg:#eff1f5,spinner:#dc8a78,hl:#d20f39 \
+--color=fg:#4c4f69,header:#d20f39,info:#8839ef,pointer:#dc8a78 \
+--color=marker:#dc8a78,fg+:#4c4f69,prompt:#8839ef,hl+:#d20f39"
+elif [ "$TMUX_THEME" = "catppuccin_mocha.conf" ]; then
+    theme=" \
+--color=bg+:-1,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
+--color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
+--color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
+fi
+
 export FZF_DEFAULT_COMMAND="fd --type f"
-export FZF_DEFAULT_OPTS='--height 75% --multi --reverse --margin=0,1
---multi
---preview-window=right:50%
---preview-window=rounded
---preview-window=cycle
---preview "$HOME/.config/scripts/preview_fzf.sh {}"
---marker="✚ " --pointer="" --prompt="  "
---no-separator --scrollbar="█"
---color bg+:-1,fg:#a5adcb,fg+:#cad3f5,hl:#ed8796,hl+:#ed8796
---color border:#6c7086,info:#8aadf4,header:#80a0ff,spinner:#a6da95
---color prompt:#87afff,pointer:#c6a0f6,marker:#f09479
+export FZF_DEFAULT_OPTS="--height 75% --multi --reverse --margin=0,1      \
+--multi \
+--preview-window=right:50% \
+--preview-window=rounded \
+--preview-window=cycle \
+--preview \"$HOME/.config/scripts/preview_fzf.sh {}\" \
+--marker='✚ ' --pointer='' --prompt='  ' \
+--no-separator \
+--scrollbar="█" \
+$theme \
 --color gutter:-1
---bind "ctrl-e:execute(nvim {} < /dev/tty > /dev/tty 2>&1)" > selected
-'
+--bind \"ctrl-e:execute(nvim {} < /dev/tty > /dev/tty 2>&1)\" > selected"
 
 export FZF_CTRL_T_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
 export FZF_ALT_C_COMMAND='fd --type d'

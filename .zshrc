@@ -1,8 +1,6 @@
 source $HOME/.profile
 setopt promptsubst
 
-export ZSH="$HOME/.oh-my-zsh"
-
 ZSH_TMUX_AUTOSTART=false
 ZSH_TMUX_CONFIG="$HOME/.config/tmux/tmux.conf"
 
@@ -93,7 +91,6 @@ setopt long_list_jobs
 unsetopt correct_all
 unsetopt BEEP
 
-
 ## History file configuration
 [ -z "$HISTFILE" ] && HISTFILE="$HOME/.zsh_history"
 [ "$HISTSIZE" -lt 50000 ] && HISTSIZE=50000
@@ -127,3 +124,7 @@ bindkey "^[[1;5A" history-substring-search-up
 bindkey "^[[1;5B" history-substring-search-down
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+if ! [ -f "/tmp/tmux-theme.cache" ]; then
+    echo "catppuccin_macchiato.conf" > /tmp/tmux-theme.cache
+fi
