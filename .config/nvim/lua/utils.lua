@@ -289,4 +289,16 @@ function M.read_file(path)
 	return content
 end
 
+function M.get_table_keys(tbl)
+	local keys = {}
+	for k, v in pairs(tbl) do
+		if type(k) == "number" then
+			table.insert(keys, v)
+		else
+			table.insert(keys, k)
+		end
+	end
+	return keys
+end
+
 return M

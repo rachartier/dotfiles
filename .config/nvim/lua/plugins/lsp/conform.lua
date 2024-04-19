@@ -9,6 +9,37 @@ local lsps = require("config.lsp").lsps
 --     table.insert(list, "editorconfig-checker")
 -- end
 
+local dont_install = {
+	-- installed externally due to its plugins: https://github.com/williamboman/mason.nvim/issues/695
+	"stylelint",
+	-- not real formatters, but pseudo-formatters from conform.nvim
+	"trim_whitespace",
+	"trim_newlines",
+	"squeeze_blanks",
+	"injected",
+	"ruff_fix",
+	"ruff_format",
+}
+
+local function to_autoinstall()
+	-- get all linters, formatters, & debuggers and merge them into one list
+	local linterList = vim.tbl_flatten(vim.tbl_values(linters))
+	local formatterList = vim.tbl_flatten(vim.tbl_values(formatters))
+	local tools = vim.list_extend(linterList, formatterList)
+	vim.list_extend(tools, extras)
+	vim.list_extend(tools, lsps)
+
+	-- only unique tools
+	table.sort(tools)
+	tools = vim.fn.uniq(tools)
+
+	-- remove exceptions not to install
+	tools = vim.tbl_filter(function(tool)
+		return not vim.tbl_contains(dont_install, tool)
+	end, tools)
+	return tools
+end
+
 local function lint_triggers()
 	local function do_lint()
 		vim.defer_fn(function()

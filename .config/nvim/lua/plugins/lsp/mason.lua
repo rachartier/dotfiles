@@ -3,9 +3,10 @@ local M = {
 	dependencies = {
 		"williamboman/mason-lspconfig.nvim",
 		"jay-babu/mason-nvim-dap.nvim",
+		"neovim/nvim-lspconfig",
 	},
+	priority = 1000,
 	-- event = "VeryLazy",
-	priority = 50,
 	build = ":MasonUpdate",
 }
 
@@ -15,29 +16,9 @@ function M.config()
 
 	require("mason").setup({ ui = { border = icons.default_border } })
 
-	local lsp = require("lsp-zero")
-	lsp.extend_lspconfig()
-
-	local lspconfig = require("lspconfig")
 	local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 	local on_attach = require("config.lsp.attach").on_attach
 	local config_lsp = require("config.lsp").lsps
-
-	require("mason-lspconfig").setup_handlers({
-		function(server_name)
-			-- If the server settings is not defined, then setup the server with the default settings
-			if config_lsp[server_name] == nil then
-				-- auto managed by flutter-tools.nvim
-				if server_name == "dartls" then
-					return
-				end
-				lspconfig[server_name].setup({
-					capabilities = capabilities,
-					on_attach = on_attach,
-				})
-			end
-		end,
-	})
 
 	require("mason-nvim-dap").setup({
 		automatic_installation = true,
@@ -46,7 +27,6 @@ function M.config()
 
 	local linters = require("config.linter").enabled
 	local formatters = require("config.formatter").enabled
-	local lsps = require("config.lsp").ensure_installed
 	local daps = require("config.dap").ensure_installed
 	local extras = require("config").extras
 
@@ -68,7 +48,6 @@ function M.config()
 		local formatterList = vim.tbl_flatten(vim.tbl_values(formatters))
 		local tools = vim.list_extend(linterList, formatterList)
 		vim.list_extend(tools, extras)
-		vim.list_extend(tools, lsps)
 		vim.list_extend(tools, daps)
 
 		-- only unique tools
@@ -97,6 +76,26 @@ function M.config()
 			end
 		end
 	end)
+
+	require("mason-lspconfig").setup({
+		ensure_installed = require("utils").get_table_keys(require("config.lsp").lsps),
+		handlers = {
+			function(server_name)
+				-- If the server settings is not defined, then setup the server with the default settings
+				if config_lsp[server_name] == nil then
+					-- auto managed by flutter-tools.nvim
+					if server_name == "dartls" then
+						return
+					end
+
+					require("lspconfig")[server_name].setup({
+						capabilities = capabilities,
+						on_attach = on_attach,
+					})
+				end
+			end,
+		},
+	})
 end
 
 return M

@@ -15,7 +15,7 @@ M.border = {
 }
 
 -- M.default_border = M.border.empty
-M.default_border = M.round
+M.default_border = "rounded"
 
 M.signs = {
 	file = {
