@@ -4,6 +4,7 @@ local M = {
 		"williamboman/mason-lspconfig.nvim",
 		"jay-babu/mason-nvim-dap.nvim",
 	},
+	-- event = "VeryLazy",
 	priority = 50,
 	build = ":MasonUpdate",
 }

@@ -32,6 +32,7 @@ local M = {
 function M.config()
 	require("telescope").load_extension("dap")
 	-- require("dap.ext.vscode").load_launchjs()
+
 	require("nvim-dap-virtual-text").setup({
 		highlight_new_as_changed = true,
 	})

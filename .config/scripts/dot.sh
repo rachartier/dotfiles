@@ -58,9 +58,9 @@ __install_package_release() {
 
 	filename=$(basename "$url")
 
-    __echo_info "Downloading $filename"
+	__echo_info "Downloading $filename"
 	cd /tmp || exit 1
-    echo $url
+	echo "$url"
 	wget -q "$url" && __echo_success "'$filename' downloaded." || return 1
 	tar -xf "$filename" && __echo_success "$filename extracted." || return 1
 	chmod +x "$name"
@@ -80,13 +80,13 @@ __install_zsh_plugin() {
 }
 
 __install_package_apt() {
-    for pkg in "$@"; do
-        if __is_pkg_installed "$pkg"; then
-            __echo_info "$pkg already installed."
-        else
-            sudo apt install -y -qq -o=Dpkg::Use-Pty=0 "$pkg" && __echo_success "$pkg installed."
-        fi
-    done
+	for pkg in "$@"; do
+		if __is_pkg_installed "$pkg"; then
+			__echo_info "$pkg already installed."
+		else
+			sudo apt install -y -qq -o=Dpkg::Use-Pty=0 "$pkg" && __echo_success "$pkg installed."
+		fi
+	done
 }
 
 __make_symlink() {
@@ -137,7 +137,7 @@ install_viu() {
 }
 
 install_lazygit() {
-    LAZYGIT_VERSION=$(__get_latest_release "jesseduffield/lazygit")
+	LAZYGIT_VERSION=$(__get_latest_release "jesseduffield/lazygit")
 	curl -sLo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
 	tar xf lazygit.tar.gz lazygit
 	sudo install lazygit /usr/local/bin && __echo_success "lazygit installed."
@@ -148,29 +148,29 @@ install_lazydocker() {
 }
 
 install_tmux() {
-    __echo_info "Installing tmux"
+	__echo_info "Installing tmux"
 
 	__install_package_apt libevent-dev yacc automake libncurses5-dev
-    git clone https://github.com/tmux/tmux.git /tmp/tmux
+	git clone https://github.com/tmux/tmux.git /tmp/tmux
 	cd /tmp/tmux || exit
 	sh autogen.sh
 	./configure
 	make && sudo make install
 
-    __echo_info "Installing tmux plugins"
+	__echo_info "Installing tmux plugins"
 
-    if ! [ -d "$HOME"/.config/tmux/plugins/tpm ]; then
-        git clone https://github.com/tmux-plugins/tpm "$HOME"/.config/tmux/plugins/tpm
-    fi
+	if ! [ -d "$HOME"/.config/tmux/plugins/tpm ]; then
+		git clone https://github.com/tmux-plugins/tpm "$HOME"/.config/tmux/plugins/tpm
+	fi
 
-    "$HOME"/.config/tmux/plugins/tpm/bin/install_plugins
+	"$HOME"/.config/tmux/plugins/tpm/bin/install_plugins
 }
 
 install_bat() {
 	__install_package_apt bat
 
-    cd /tmp || exit
-    git clone https://github.com/catppuccin/bat
+	cd /tmp || exit
+	git clone https://github.com/catppuccin/bat
 	mkdir -p "$(bat --config-dir)/themes"
 
 	cd bat || exit
@@ -181,14 +181,14 @@ install_bat() {
 }
 
 install_packages() {
-    __install_package_apt pkg-config
-    __install_package_apt build-essential
+	__install_package_apt pkg-config
+	__install_package_apt build-essential
 
 	__install_package_apt wget
 	__install_package_apt libfuse2
 
 	__install_package_apt python3-venv
-    __install_package_apt python3-pip
+	__install_package_apt python3-pip
 	__install_package_apt npm
 	__install_package_apt unzip
 
@@ -197,13 +197,13 @@ install_packages() {
 	__install_package_apt xsel
 	__install_package_apt chafa
 
-    # install nodejs...
-    curl -fsSL https://raw.githubusercontent.com/tj/n/master/bin/n | sudo bash -s lts
+	# install nodejs...
+	curl -fsSL https://raw.githubusercontent.com/tj/n/master/bin/n | sudo bash -s lts
 
-    # Installs  if not in minimal mode
-    if [ -z "$DOTFILES_MINIMAL" ]; then
-        install_bat
-    fi
+	# Installs  if not in minimal mode
+	if [ -z "$DOTFILES_MINIMAL" ]; then
+		install_bat
+	fi
 
 	__make_symlink "$HOME/.local/bin/fd" fdfind
 }
@@ -223,7 +223,7 @@ install_nvim() {
 	__install_appimage "https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage" nvim
 	pip install pynvim
 
-    wget https://ftp.nluug.nl/pub/vim/runtime/spell/fr.utf-8.spl -O ~/.local/share/nvim/site/spell/fr.utf-8.spl
+	wget https://ftp.nluug.nl/pub/vim/runtime/spell/fr.utf-8.spl -O ~/.local/share/nvim/site/spell/fr.utf-8.spl
 }
 
 install_eza() {
@@ -235,7 +235,7 @@ install_glow() {
 }
 
 install_essentials() {
-    install_packages
+	install_packages
 
 	install_tmux
 	install_zsh_plugins
@@ -252,25 +252,25 @@ install_essentials() {
 }
 
 install_minimal() {
-    __echo_info "Exporting DOTFILES_MINIMAL=1 to $HOME/.profile"
-    echo "export DOTFILES_MINIMAL=1" >> "$HOME/.profile"
+	__echo_info "Exporting DOTFILES_MINIMAL=1 to $HOME/.profile"
+	echo "export DOTFILES_MINIMAL=1" >>"$HOME/.profile"
 
-    install_packages
-    install_zsh_plugins
-    install_nvim
+	install_packages
+	install_zsh_plugins
+	install_nvim
 
-    install_eza
-    install_fzf
-    install_viu
-    install_starship
+	install_eza
+	install_fzf
+	install_viu
+	install_starship
 }
 
 do_reinstall_all() {
-    if [ -n "$DOTFILES_MINIMAL" ]; then
-        install_minimal
-    else
-        install_essentials
-    fi
+	if [ -n "$DOTFILES_MINIMAL" ]; then
+		install_minimal
+	else
+		install_essentials
+	fi
 }
 
 do_reinstall() {
@@ -287,7 +287,7 @@ do_reinstall() {
 	"lazydocker") install_lazydocker ;;
 	"starship") install_starship ;;
 	"all") do_reinstall_all ;;
-    "minimal") install_minimal ;;
+	"minimal") install_minimal ;;
 	*) do_reinstall_all ;;
 	esac
 }
@@ -295,7 +295,7 @@ do_reinstall() {
 do_command() {
 	case "$1" in
 	"init") install_essentials ;;
-    "minimal") install_minimal ;;
+	"minimal") install_minimal ;;
 	"reinstall") do_reinstall "$2" ;;
 	*) __git_dot "$@" ;;
 	esac

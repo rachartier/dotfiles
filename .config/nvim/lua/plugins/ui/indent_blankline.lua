@@ -23,6 +23,7 @@ function M.init()
 			"dapui_stacks",
 			"toggleterm",
 			"lazyterm",
+			"fzf",
 		},
 		callback = function()
 			vim.b.miniindentscope_disable = true

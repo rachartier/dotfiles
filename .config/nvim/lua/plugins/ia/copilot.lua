@@ -224,6 +224,21 @@ return {
 			-- 		end
 			-- 	end,
 			-- })
+			-- Custom buffer for CopilotChat
+
+			vim.api.nvim_create_autocmd("BufEnter", {
+				pattern = "copilot-*",
+				callback = function()
+					vim.opt_local.relativenumber = false
+					vim.opt_local.number = false
+					vim.opt_local.statuscolumn = " "
+
+					-- local ft = vim.bo.filetype
+					-- if ft == "copilot-chat" then
+					-- 	vim.bo.filetype = "markdown"
+					-- end
+				end,
+			})
 		end,
 	},
 }
