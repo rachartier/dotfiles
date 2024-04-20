@@ -1,25 +1,27 @@
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 theme="\
---color=bg+:-1,bg:-1,spinner:#f4dbd6,hl:#ed8796 \
---color=fg:#cad3f5,header:#ed8796,info:#c6a0f6,pointer:#f4dbd6 \
---color=marker:#f4dbd6,fg+:#cad3f5,prompt:#c6a0f6,hl+:#ed8796"
+    --color=bg+:#494d64,bg:-1,spinner:#f4dbd6,hl:#eed49f\
+    --color=fg:#cad3f5,header:#ed8796,info:#c6a0f6,pointer:#f4dbd6 \
+    --color=marker:#f4dbd6,fg+:#cad3f5,prompt:#c6a0f6,hl+:#eed49f"
 
-if [ "$TMUX_THEME" = "catppuccin_macchiato.conf" ]; then
-    theme="\
---color=bg+:-1,bg:-1,spinner:#f4dbd6,hl:#ed8796 \
---color=fg:#cad3f5,header:#ed8796,info:#c6a0f6,pointer:#f4dbd6 \
---color=marker:#f4dbd6,fg+:#cad3f5,prompt:#c6a0f6,hl+:#ed8796"
+if [ "$TMUX_THEME" = "catppuccin_frappe.conf" ]; then
+	theme = " \
+        --color=bg+:#51576d,bg:-1,spinner:#f2d5cf,hl:#e5c890\
+        --color=fg:#c6d0f5,header:#e78284,info:#ca9ee6,pointer:#f2d5cf \
+        --color=marker:#f2d5cf,fg+:#c6d0f5,prompt:#ca9ee6,hl+:#e5c890"
+
 elif [ "$TMUX_THEME" = "catppuccin_latte.conf" ]; then
-	theme=" \
---color=bg+:-1,bg:-1,spinner:#dc8a78,hl:#d20f39 \
---color=fg:#4c4f69,header:#d20f39,info:#8839ef,pointer:#dc8a78 \
---color=marker:#dc8a78,fg+:#4c4f69,prompt:#8839ef,hl+:#d20f39"
+    theme=" \
+        --color=bg+:#bcc0cc,bg:-1,spinner:#dc8a78,hl:#df8e1d\
+        --color=fg:#4c4f69,header:#d20f39,info:#8839ef,pointer:#dc8a78 \
+        --color=marker:#dc8a78,fg+:#df8e1d,prompt:#8839ef,hl+:#df8e1d"
+
 elif [ "$TMUX_THEME" = "catppuccin_mocha.conf" ]; then
     theme=" \
---color=bg+:-1,bg:-1,spinner:#f5e0dc,hl:#f38ba8 \
---color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
---color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
+        --color=bg+:#45475a,bg:-1,spinner:#f5e0dc,hl:#f9e2af\
+        --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
+        --color=marker:#f5e0dc,fg+:#f9e2af,prompt:#cba6f7,hl+:#f9e2af"
 fi
 
 export FZF_DEFAULT_COMMAND="fd --type f"
