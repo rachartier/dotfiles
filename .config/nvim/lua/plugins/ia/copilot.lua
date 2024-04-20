@@ -13,10 +13,10 @@ return {
 				vim.fn["copilot#Accept"]("\\<CR>")
 				local ret = vim.fn["copilot#TextQueuedForInsertion"]()
 
-				if vim.bo.filetype == "python" then
-					local shift_len = vim.opt.shiftwidth:get()
-					ret = string.gsub(ret, "\t", string.rep(" ", shift_len))
-				end
+				-- if vim.bo.filetype == "python" then
+				-- 	local shift_len = vim.opt.shiftwidth:get()
+				-- 	ret = string.gsub(ret, "\t", string.rep(" ", shift_len))
+				-- end
 
 				return ret
 			end, { expr = true, silent = true })

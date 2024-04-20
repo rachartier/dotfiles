@@ -5,7 +5,7 @@ local function execute_command(cmd)
 	return output, exit_code
 end
 
-function build()
+local function build()
 	local output = ""
 	local exit_code = 0
 

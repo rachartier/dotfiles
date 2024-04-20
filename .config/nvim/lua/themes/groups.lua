@@ -10,6 +10,12 @@ function M.get(colors)
 	local cursor_line_bg = "None"
 	local darken_diag = 0.15
 
+	modify_func = U.darken
+
+	if vim.o.background == "light" then
+		darken_diag = 0.30
+	end
+
 	return {
 		-- Visual = { bg = "#234370" },
 		-- Visual = { bg = colors.blue, fg = colors.crust },
@@ -80,16 +86,16 @@ function M.get(colors)
 		DiagnosticInfo = { fg = colors.blue }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default
 		DiagnosticHint = { fg = colors.teal }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default
 
-		DiagnosticVirtualTextError = { bg = U.darken(colors.red, darken_diag), fg = colors.red }, -- Used for "Error" diagnostic virtual text
-		DiagnosticVirtualTextWarn = { bg = U.darken(colors.yellow, darken_diag), fg = colors.yellow }, -- Used for "Warning" diagnostic virtual text
-		DiagnosticVirtualTextInfo = { bg = U.darken(colors.blue, darken_diag), fg = colors.blue }, -- Used for "Information" diagnostic virtual text
-		DiagnosticVirtualTextHint = { bg = U.darken(colors.teal, darken_diag), fg = colors.teal }, -- Used for "Hint" diagnostic virtual text
+		DiagnosticVirtualTextError = { bg = modify_func(colors.red, darken_diag), fg = colors.red }, -- Used for "Error" diagnostic virtual text
+		DiagnosticVirtualTextWarn = { bg = modify_func(colors.yellow, darken_diag), fg = colors.yellow }, -- Used for "Warning" diagnostic virtual text
+		DiagnosticVirtualTextInfo = { bg = modify_func(colors.blue, darken_diag), fg = colors.blue }, -- Used for "Information" diagnostic virtual text
+		DiagnosticVirtualTextHint = { bg = modify_func(colors.teal, darken_diag), fg = colors.teal }, -- Used for "Hint" diagnostic virtual text
 		DiagnosticVirtualTextNone = { bg = cursor_line_bg, fg = colors.surface1 }, -- Used for "Hint" diagnostic virtual text
 
-		InvDiagnosticVirtualTextError = { fg = U.darken(colors.red, darken_diag), bg = cursor_line_bg }, -- Used for "Error" diagnostic virtual text
-		InvDiagnosticVirtualTextWarn = { fg = U.darken(colors.yellow, darken_diag), bg = cursor_line_bg }, -- Used for "Warning" diagnostic virtual text
-		InvDiagnosticVirtualTextInfo = { fg = U.darken(colors.blue, darken_diag), bg = cursor_line_bg }, -- Used for "Information" diagnostic virtual text
-		InvDiagnosticVirtualTextHint = { fg = U.darken(colors.teal, darken_diag), bg = cursor_line_bg }, -- Used for "Hint" diagnostic virtual text
+		InvDiagnosticVirtualTextError = { fg = modify_func(colors.red, darken_diag), bg = cursor_line_bg }, -- Used for "Error" diagnostic virtual text
+		InvDiagnosticVirtualTextWarn = { fg = modify_func(colors.yellow, darken_diag), bg = cursor_line_bg }, -- Used for "Warning" diagnostic virtual text
+		InvDiagnosticVirtualTextInfo = { fg = modify_func(colors.blue, darken_diag), bg = cursor_line_bg }, -- Used for "Information" diagnostic virtual text
+		InvDiagnosticVirtualTextHint = { fg = modify_func(colors.teal, darken_diag), bg = cursor_line_bg }, -- Used for "Hint" diagnostic virtual text
 
 		TelescopeMatching = { link = "CmpItemAbbrMatch" },
 		TelescopeSelection = { link = "PmenuSel" },
