@@ -252,10 +252,15 @@ function M.select_buffers(opts)
 	local actions = require("telescope.actions")
 	local action_state = require("telescope.actions.state")
 
+	local default_border = require("config.icons").default_border
+	if default_border == "rounded" then
+		default_border = require("config.icons").border.rounded_telescope
+	end
+
 	opts = opts
 		or require("telescope.themes").get_dropdown({
 			layout_strategy = "horizontal",
-			borderchars = require("config.icons").default_border,
+			borderchars = default_border,
 			layout_config = {
 				prompt_position = "top",
 				horizontal = {

@@ -41,6 +41,11 @@ function M.config()
 	local action_state = require("telescope.actions.state")
 	local gfh_actions = require("telescope").extensions.git_file_history.actions
 
+	local default_border = require("config.icons").default_border
+	if default_border == "rounded" then
+		default_border = require("config.icons").border.rounded_telescope
+	end
+
 	local function flash(prompt_bufnr)
 		require("flash").jump({
 			pattern = "^",
@@ -82,8 +87,7 @@ function M.config()
 				dynamic_width = true,
 			},
 		},
-		borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
-		-- borderchars = icons.default_border,
+		borderchars = default_border,
 	}
 
 	ts.setup({
@@ -139,7 +143,7 @@ function M.config()
 			live_grep = search_layout,
 			lsp_references = search_layout,
 			buffers = {
-				borderchars = icons.default_border,
+				-- borderchars = icons.default_border,
 				-- borderchars = {
 				--     prompt = { "─", "│", " ", "│", "╭", "╮", "│", "│" },
 				--     results = { "─", "│", "─", "│", "├", "┤", "╯", "╰" },
