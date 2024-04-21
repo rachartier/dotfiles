@@ -143,7 +143,7 @@ M.get_list_buffers = function()
 			if buf_modified then
 				-- path_color = "NeoTreeModified"
 				modified = true
-				status_icon = require("utils").signs.file.not_saved
+				status_icon = require("config.icons").signs.file.not_saved
 				status_color = "SwitchBufferStatusColor"
 			end
 
