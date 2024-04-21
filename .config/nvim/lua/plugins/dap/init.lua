@@ -45,7 +45,6 @@ function M.config()
 		},
 	})
 
-	local dap = require("dap")
 	require("dap-python")
 	require("dap.ext.vscode").load_launchjs(nil, { netcoredbg = { "cs" } })
 

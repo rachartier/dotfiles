@@ -10,98 +10,6 @@ function M.length(table)
 	return count
 end
 
-M.border = {
-	round = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-	none = { "", "", "", "", "", "", "", "" },
-	empty = { " ", " ", " ", " ", " ", " ", " ", " " },
-	inner_thick = { " ", "▄", " ", "▌", " ", "▀", " ", "▐" },
-	outer_thick = { "▛", "▀", "▜", "▐", "▟", "▄", "▙", "▌" },
-	cmp_items = { "▛", "▀", "▀", " ", "▄", "▄", "▙", "▌" },
-	cmp_doc = { "▀", "▀", "▀", " ", "▄", "▄", "▄", "▏" },
-	outer_thin = { "🭽", "▔", "🭾", "▕", "🭿", "▁", "🭼", "▏" },
-	inner_thin = { " ", "▁", " ", "▏", " ", "▔", " ", "▕" },
-	outer_thin_telescope = { "▔", "▕", "▁", "▏", "🭽", "🭾", "🭿", "🭼" },
-	outer_thick_telescope = { "▀", "▐", "▄", "▌", "▛", "▜", "▟", "▙" },
-}
-
-M.default_border = M.border.empty
-
-M.signs = {
-	file = {
-		modified = "󱞁 ",
-		not_saved = "󰉉 ",
-	},
-	git = {
-		added = " ",
-		modified = " ",
-		removed = " ",
-		-- added = " ",
-		-- modified = " ",
-		-- removed = " ",
-	},
-	diagnostic = {
-		error = "●",
-		warning = "●",
-		warn = "●",
-		info = "●",
-		hint = "●",
-		other = "●",
-		-- error = " ",
-		-- warning = " ",
-		-- warn = " ",
-		-- info = " ",
-		-- hint = " ",
-		-- other = "󰠠 ",
-	},
-}
-
--- M.diagnostic_signs = {
--- 	error = "●",
--- 	warning = "●",
--- 	info = "●",
--- 	hint = "●",
--- 	other = "●",
--- }
-
--- M.diagnostic_signs = {
---     error = " ",
---     warning = " ",
---     info = " ",
---     hint = "󱤅 ",
---     other = "󰠠 ",
--- }
-
-M.kind_icons = {
-	Text = " ",
-	Method = " ",
-	Function = "󰊕 ",
-	Constructor = " ",
-	Field = " ",
-	Variable = " ",
-	Class = " ",
-	Interface = " ",
-	Module = "󰏓 ",
-	Property = " ",
-	Unit = " ",
-	Value = "󰎠 ",
-	Enum = " ",
-	EnumMember = " ",
-	Keyword = "󰌋 ",
-	Snippet = " ",
-	Color = " ",
-	File = "󰈙 ",
-	Reference = "󰈇 ",
-	Folder = " ",
-	Constant = "󰏿 ",
-	Struct = "󰙅 ",
-	Event = " ",
-	Operator = " ",
-	TypeParameter = "󰘦 ",
-	Codeium = " ",
-	Version = " ",
-	Unknown = "  ",
-}
-
 function M.buffers_clean()
 	local curbufnr = vim.api.nvim_get_current_buf()
 	local buflist = vim.api.nvim_list_bufs()
@@ -134,33 +42,6 @@ function M.add_missing(dst, src)
 		end
 	end
 	return dst
-end
-
----given the linter- and formatter-list of nvim-lint and conform.nvim, extract a
----list of all tools that need to be auto-installed
----@param myLinters object[]
----@param myFormatters object[]
----@param myDebuggers string[]
----@param ignoreTools string[]
----@return string[] tools
----@nodiscard
---- from: https://github.com/chrisgrieser/.config/blob/7dc36c350976010b32ece078edd581687634811a/nvim/lua/plugins/linter-formatter.lua#L27-L82
-function M.tools_to_autoinstall(myLinters, myFormatters, myDebuggers, ignoreTools)
-	-- get all linters, formatters, & debuggers and merge them into one list
-	local linterList = vim.tbl_flatten(vim.tbl_values(myLinters))
-	local formatterList = vim.tbl_flatten(vim.tbl_values(myFormatters))
-	local tools = vim.list_extend(linterList, formatterList)
-	vim.list_extend(tools, myDebuggers)
-
-	-- only unique tools
-	table.sort(tools)
-	tools = vim.fn.uniq(tools)
-
-	-- remove exceptions not to install
-	tools = vim.tbl_filter(function(tool)
-		return not vim.tbl_contains(ignoreTools, tool)
-	end, tools)
-	return tools
 end
 
 function M.to_hex(n)
@@ -209,7 +90,7 @@ function M.on_rename(from, to)
 	end
 end
 
-function M.hexToRgb(c)
+function M.hex_to_rgb(c)
 	if c == nil then
 		return { 0, 0, 0 }
 	end
@@ -223,15 +104,15 @@ end
 ---@param alpha number|string number between 0 and 1. 0 results in bg, 1 results in fg
 function M.blend(foreground, background, alpha)
 	alpha = type(alpha) == "string" and (tonumber(alpha, 16) / 0xff) or alpha
-	local bg = M.hexToRgb(background)
-	local fg = M.hexToRgb(foreground)
+	local bg = M.hex_to_rgb(background)
+	local fg = M.hex_to_rgb(foreground)
 
-	local blendChannel = function(i)
+	local blend_channel = function(i)
 		local ret = (alpha * fg[i] + ((1 - alpha) * bg[i]))
 		return math.floor(math.min(math.max(0, ret), 255) + 0.5)
 	end
 
-	return string.format("#%02x%02x%02x", blendChannel(1), blendChannel(2), blendChannel(3))
+	return string.format("#%02x%02x%02x", blend_channel(1), blend_channel(2), blend_channel(3))
 end
 
 function M.darken(hex, amount, bg)

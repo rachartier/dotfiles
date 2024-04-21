@@ -9,7 +9,7 @@ local M = {
 }
 
 function M.config()
-	theme_colors = require("theme").get_colors()
+	local theme_colors = require("theme").get_colors()
 	if theme_colors ~= nil and theme_colors.base ~= nil then
 		require("notify").setup({
 			background_colour = require("theme").get_colors().base,

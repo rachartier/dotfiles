@@ -1,9 +1,9 @@
-local U = require("utils")
+local icons = require("config.icons")
 
-vim.fn.sign_define("DiagnosticSignError", { text = U.signs.diagnostic.error, texthl = "DiagnosticSignError" })
-vim.fn.sign_define("DiagnosticSignWarn", { text = U.signs.diagnostic.warning, texthl = "DiagnosticSignWarn" })
-vim.fn.sign_define("DiagnosticSignInfo", { text = U.signs.diagnostic.info, texthl = "DiagnosticSignInfo" })
-vim.fn.sign_define("DiagnosticSignHint", { text = U.signs.diagnostic.hint, texthl = "DiagnosticSignHint" })
+vim.fn.sign_define("DiagnosticSignError", { text = icons.signs.diagnostic.error, texthl = "DiagnosticSignError" })
+vim.fn.sign_define("DiagnosticSignWarn", { text = icons.signs.diagnostic.warning, texthl = "DiagnosticSignWarn" })
+vim.fn.sign_define("DiagnosticSignInfo", { text = icons.signs.diagnostic.info, texthl = "DiagnosticSignInfo" })
+vim.fn.sign_define("DiagnosticSignHint", { text = icons.signs.diagnostic.hint, texthl = "DiagnosticSignHint" })
 
 vim.diagnostic.config({
 	float = { border = require("config.icons").default_border },
@@ -30,10 +30,10 @@ vim.diagnostic.config({
 	-- 	end,
 	-- },
 	signs = {
-		["WARN"] = U.signs.diagnostic.warning,
-		["ERROR"] = U.signs.diagnostic.error,
-		["INFO"] = U.signs.diagnostic.info,
-		["HINT"] = U.signs.diagnostic.hint,
+		["WARN"] = icons.signs.diagnostic.warning,
+		["ERROR"] = icons.signs.diagnostic.error,
+		["INFO"] = icons.signs.diagnostic.info,
+		["HINT"] = icons.signs.diagnostic.hint,
 	},
 	severity_sort = true,
 })

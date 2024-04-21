@@ -132,32 +132,8 @@ return {
 
 			prompts = {
 				BetterNamings = {
-					prompt = "/COPILOT_GENERATE Please provide better names for the following variables and functions.",
+					prompt = "/COPILOT_GENERATE Please provide better names for the following variables and/or functions.",
 				},
-				--                 Docs = [[
-				-- Generate the documentation for the code above.
-				-- The documentation should be in the form of the standard from the language.
-				-- The documentation should be in the form of comments.
-				-- It should only focus on what the code does, not what the code is for.
-				-- It should be clear and concise and precise.
-				-- The documentation must be helpful to someone who has never seen the code before.
-				-- The documentation must be in English.
-				-- It should start by a brief description of the code, then the inputs, then the outputs, and then the exceptions.
-				-- Output with no introduction, no explaintation, only the generated documentation.
-				-- DONT MAKE ANY MISTAKES, check if you did any.
-				-- ]],
-				--                 Docs = {
-				--                     prompt = [[/COPILOT_REFACTOR
-				-- Please provide documentation for the following code, and follow these instructions to help you:
-				-- - It should only focus on what the code does, not what the code is for.
-				-- - It should be clear and concise and precise.
-				-- - The documentation must be helpful to someone who has never seen the code before.
-				-- - It should start by a brief description of what the code does, then the inputs, then the outputs, and then the exceptions.
-				-- - Output with no introduction, no explaintation, only the documentation.
-				-- - If the code in in csharp, output the markdown bloc with "```cs" instead of "```csharp".
-				-- - DONT MAKE ANY MISTAKES, check if you did any.
-				-- ]]
-				--                 },
 				TestsxUnit = {
 					prompt = "/COPILOT_GENERATE Write a set of detailed unit test functions for the following code with the xUnit framework.",
 				},

@@ -17,13 +17,15 @@ if vim.fn.has("wsl") == 1 then
 	--     },
 	--     cache_enabled = 0,
 	-- }
-	vim.api.nvim_create_autocmd("TextYankPost", {
-		group = vim.api.nvim_create_augroup("Yank", { clear = true }),
+	if os.getenv("TMUX") then
+		vim.api.nvim_create_autocmd("TextYankPost", {
+			group = vim.api.nvim_create_augroup("Yank", { clear = true }),
 
-		callback = function()
-			vim.fn.system("clip.exe", vim.fn.getreg('"'))
-		end,
-	})
+			callback = function()
+				vim.fn.system("clip.exe", vim.fn.getreg('"'))
+			end,
+		})
+	end
 	-- vim.g.clipboard = {
 	--     name = "win32yank-wsl",
 	--     copy = {
