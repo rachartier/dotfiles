@@ -7,7 +7,6 @@ return {
 		dependencies = {
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
-			"neovim/nvim-lspconfig",
 			"onsails/lspkind.nvim",
 		},
 		config = function()

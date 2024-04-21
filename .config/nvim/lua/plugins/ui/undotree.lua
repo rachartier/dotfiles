@@ -1,10 +1,6 @@
-local M = {
-    'mbbill/undotree'
+return {
+	"mbbill/undotree",
+	keys = {
+		{ "<leader>u", "<cmd>UndotreeToggle<cr>", { desc = "Open UndoTree" } },
+	},
 }
-
-function M.config()
-    vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, {desc = "Open UndoTree"})
-    vim.g.undotree_WindowLayout = 2
-end
-
-return M

@@ -2,7 +2,6 @@ local M = {
 	"nvim-lualine/lualine.nvim",
 	enabled = true,
 	event = "VeryLazy",
-	-- event = { "BufReadPre", "BufNewFile" },
 }
 
 function M.config()

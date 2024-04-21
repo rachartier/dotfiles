@@ -1,12 +1,11 @@
-local M = {
-    "windwp/nvim-autopairs",
-    event = "InsertEnter",
+return {
+	"windwp/nvim-autopairs",
+	event = "InsertEnter",
+	opts = {
+		disable_filetype = {
+			"TelescopePrompt",
+			"spectre_panel",
+			"copilot-chat",
+		},
+	},
 }
-
-function M.config()
-    require("nvim-autopairs").setup({
-        disable_filetype = { "TelescopePrompt", "spectre_panel", "copilot-chat" }
-    })
-end
-
-return M

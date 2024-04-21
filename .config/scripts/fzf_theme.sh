@@ -10,3 +10,4 @@ echo -n "$theme" >"/tmp/tmux-theme.cache"
 
 tmux setenv TMUX_THEME "$theme"
 tmux source-file "$HOME/.config/tmux/tmux.conf"
+source "$HOME"/.dotfile_profile
