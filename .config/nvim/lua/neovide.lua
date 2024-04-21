@@ -4,7 +4,7 @@ if vim.g.neovide then
 	vim.o.guifont = "JetBrains Mono,Symbols Nerd Font"
 
 	vim.g.neovide_underline_automatic_scaling = true
-	vim.g.neovide_scale_factor = 1.0
+	vim.g.neovide_scale_factor = 0.83
 	-- vim.g.neovide_floating_shadow = "v:true"
 	-- vim.g.neovide_floating_z_height = 10
 	vim.g.neovide_transparency = 1

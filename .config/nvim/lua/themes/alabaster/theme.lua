@@ -9,7 +9,7 @@ function M.get_lualine_colors()
 
 	return {
 		bg = "#c9c9c9",
-		mantle = "#666666",
+		mantle = "#c9c9c9",
 		crust = "#222222",
 		fg = "#222222",
 		surface0 = "#666666",

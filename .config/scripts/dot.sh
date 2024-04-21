@@ -170,11 +170,6 @@ install_bat() {
 	__install_package_apt bat
 
 	cd /tmp || exit
-	git clone https://github.com/catppuccin/bat
-	mkdir -p "$(bat --config-dir)/themes"
-
-	cd bat || exit
-	cp *.tmTheme "$(bat --config-dir)/themes"
 	bat cache --build
 
 	__make_symlink "$HOME/.local/bin/bat" batcat
