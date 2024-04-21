@@ -195,10 +195,7 @@ install_packages() {
 	# install nodejs...
 	curl -fsSL https://raw.githubusercontent.com/tj/n/master/bin/n | sudo bash -s lts
 
-	# Installs  if not in minimal mode
-	if [ -z "$DOTFILES_MINIMAL" ]; then
-		install_bat
-	fi
+	install_bat
 
 	__make_symlink "$HOME/.local/bin/fd" fdfind
 }
