@@ -10,6 +10,7 @@ return {
 			"onsails/lspkind.nvim",
 		},
 		config = function()
+			require("config.diagnostic")
 			local on_attach = require("config.lsp.attach").on_attach
 
 			-- require("clangd_extensions.inlay_hints").setup_autocmd()

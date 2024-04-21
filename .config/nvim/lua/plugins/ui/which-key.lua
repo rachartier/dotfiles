@@ -1,6 +1,6 @@
 return {
 	"folke/which-key.nvim",
-	event = "VeryLazy",
+	keys = { "<space>" },
 	config = function()
 		local icons = require("config.icons")
 

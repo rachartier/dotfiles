@@ -51,7 +51,7 @@ return {
 						highlight = "NeoTreeFileIcon",
 					},
 					modified = {
-						symbol = U.signs.file.modified,
+						symbol = icons.signs.file.modified,
 						highlight = "NeoTreeModified",
 					},
 					name = {
@@ -70,7 +70,7 @@ return {
 							renamed = "󰑕", -- this can only be used in the git_status source
 							conflict = "",
 							unmerged = "",
-							deleted = U.signs.git.removed,
+							deleted = icons.signs.git.removed,
 						},
 					},
 					file_size = {

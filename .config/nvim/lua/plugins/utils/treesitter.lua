@@ -5,7 +5,7 @@ return {
 		"nvim-treesitter/playground",
 		"nvim-treesitter/nvim-treesitter-textobjects",
 	},
-	-- event = { "LazyFile" },
+	event = { "BufRead" },
 	config = function()
 		require("nvim-treesitter.configs").setup({
 			ignore_install = {},

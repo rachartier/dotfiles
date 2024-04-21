@@ -1,13 +1,9 @@
-local icons = require("config.icons")
-
 return {
 	"nvim-lualine/lualine.nvim",
 	dependency = { "nvim-tree/nvim-web-devicons" },
-	enabled = true,
-	event = "VeryLazy",
-
+	event = "LazyFile",
 	config = function()
-		local U = require("utils")
+		local icons = require("config.icons")
 
 		local colors = require("theme").get_lualine_colors()
 		local kirby_colors = {
