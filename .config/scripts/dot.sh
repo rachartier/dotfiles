@@ -281,7 +281,7 @@ do_reinstall() {
 	"starship") install_starship ;;
 	"all") do_reinstall_all ;;
 	"minimal") install_minimal ;;
-	*) do_reinstall_all ;;
+	*) __echo_error "'$1' unknown." ;;
 	esac
 }
 
