@@ -52,3 +52,7 @@ export ENHANCD_FILTER="fzf --preview 'eza -al --tree --level 1 --group-directori
 
 export ENHANCD_ENABLE_DOUBLE_DOT=false
 export ENHANCD_ENABLE_HOME=false
+
+if [ -n "$DOTFILES_DOCKER" ]; then
+    export TERM="wezterm"
+fi

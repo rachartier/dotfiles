@@ -230,7 +230,6 @@ install_essentials() {
 	install_packages
 
 	install_tmux
-	install_zsh_plugins
 	install_nvim
 
 	install_eza
@@ -248,7 +247,6 @@ install_minimal() {
 	echo "export DOTFILES_MINIMAL=1" >>"$HOME/.profile"
 
 	install_packages
-	install_zsh_plugins
 	install_nvim
 
 	install_eza
@@ -287,7 +285,6 @@ do_reinstall() {
 	"bat") install_bat ;;
 	"nvim") install_nvim ;;
 	"packages") install_packages ;;
-	"zsh") install_zsh_plugins ;;
 	"fzf") install_fzf ;;
 	"viu") install_viu ;;
 	"eza") install_eza ;;
