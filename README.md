@@ -8,11 +8,20 @@ export GIT_CLONE_METHOD=ssh
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/rachartier/dotfiles/main/.config/scripts/first_install.sh)"
 ```
 
-Inside a docker installation
+Minimal installation
 --------------------
 
 ```
-export DOTFILES_MINIMAL=1 
+export DOTFILES_MINIMAL=1
+export GIT_CLONE_METHOD=ssh
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/rachartier/dotfiles/main/.config/scripts/first_install.sh)"
+```
+
+Docker installation
+--------------------
+
+```
+export DOTFILES_DOCKER=1
 export GIT_CLONE_METHOD=https
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/rachartier/dotfiles/main/.config/scripts/first_install.sh)"
 ```
@@ -31,6 +40,7 @@ apt update && apt install -y curl sudo && yes | useradd -m -p $(perl -e 'print c
 
 Next, install the dotfiles, and when the password is asked, type "test":
 ```
+export DOTFILES_DOCKER=1 
 export GIT_CLONE_METHOD=https
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/rachartier/dotfiles/main/.config/scripts/first_install.sh)"
 ```
