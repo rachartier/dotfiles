@@ -264,7 +264,7 @@ install_docker() {
 	__echo_info "Installing wezterm terminfo..."
 	tempfile=$(mktemp) &&
 		curl -o "$tempfile" https://raw.githubusercontent.com/wez/wezterm/master/termwiz/data/wezterm.terminfo &&
-		tic -x -o ~/.terminfo "$tempfile" &&
+		tic -x -o /usr/lib/terminfo "$tempfile" &&
 		rm "$tempfile"
 	__echo_success "wezterm terminfo installed."
 }
