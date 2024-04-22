@@ -61,3 +61,7 @@ if [ -n "$DOTFILES_DOCKER" ]; then
             rm "$tempfile"
     fi
 fi
+
+cneo() {
+    neovide.exe --wsl --neovim-bin "$HOME/.local/bin/nvim" --server="$1:7301"
+}
