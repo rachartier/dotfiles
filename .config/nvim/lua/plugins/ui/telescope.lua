@@ -19,6 +19,7 @@ return {
 	cmd = "Telescope",
 	keys = {
 		"<leader>fl",
+		"<leader>tt",
 		"<leader>ff",
 		"<leader>fg",
 		"<leader>fh",
@@ -80,6 +81,7 @@ return {
 			only_sort_text = true,
 			search = "",
 			layout_strategy = "vertical",
+			line_width = "full",
 			layout_config = {
 				prompt_position = "bottom",
 				vertical = {
@@ -151,6 +153,7 @@ return {
 				grep_string = search_layout,
 				live_grep = search_layout,
 				lsp_references = search_layout,
+				diagnostics = search_layout,
 				buffers = {
 					-- borderchars = icons.default_border,
 					-- borderchars = {
