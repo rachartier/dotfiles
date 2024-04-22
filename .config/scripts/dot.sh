@@ -268,6 +268,7 @@ do_reinstall_all() {
 do_reinstall() {
 	case "$1" in
 	"tmux") install_tmux ;;
+	"bat") install_bat ;;
 	"nvim") install_nvim ;;
 	"packages") install_packages ;;
 	"zsh") install_zsh_plugins ;;
