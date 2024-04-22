@@ -15,6 +15,10 @@ if command tmuxp &> /dev/null; then
     for s in $(tmuxp ls); do alias "$s"="tmuxp load -y $s"; done
 fi
 
+if [ -n "$DOTFILES_DOCKER" ]; then
+    alias nvim="env TERM=wezterm nvim"
+fi
+
 alias -g ...='../..'
 alias -g ....='../../..'
 alias -g .....='../../../..'
