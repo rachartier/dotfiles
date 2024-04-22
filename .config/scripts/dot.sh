@@ -257,9 +257,25 @@ install_minimal() {
 	install_starship
 }
 
+install_docker() {
+	__echo_info "Exporting DOTFILES_DOCKER=1 to $HOME/.profile"
+	echo "export DOTFILES_DOCKER=1" >>"$HOME/.profile"
+
+	install_minimal
+
+	__echo_info "Installing wezterm terminfo..."
+	tempfile=$(mktemp) &&
+		curl -o "$tempfile" https://raw.githubusercontent.com/wez/wezterm/master/termwiz/data/wezterm.terminfo &&
+		tic -x -o ~/.terminfo "$tempfile" &&
+		rm "$tempfile"
+	__echo_success "wezterm terminfo installed."
+}
+
 do_reinstall_all() {
 	if [ -n "$DOTFILES_MINIMAL" ]; then
 		install_minimal
+	elif [ -n "$DOTFILES_DOCKER" ]; then
+		install_docker
 	else
 		install_essentials
 	fi
@@ -281,6 +297,7 @@ do_reinstall() {
 	"starship") install_starship ;;
 	"all") do_reinstall_all ;;
 	"minimal") install_minimal ;;
+	"docker") install_docker ;;
 	*) __echo_failure "'$1' unknown." ;;
 	esac
 }
@@ -289,6 +306,7 @@ do_command() {
 	case "$1" in
 	"init") install_essentials ;;
 	"minimal") install_minimal ;;
+	"docker") install_docker ;;
 	"reinstall") do_reinstall "$2" ;;
 	*) __git_dot "$@" ;;
 	esac
