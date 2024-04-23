@@ -59,6 +59,8 @@ install_essentials
 install_dotfiles
 prepare_dotfiles
 
+chsh -s "$(which zsh)"
+
 if [ -n "$DOTFILES_MINIMAL" ]; then
 	"$HOME"/.config/scripts/dot.sh minimal
 elif [ -n "$DOTFILES_DOCKER" ]; then
