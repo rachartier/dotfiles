@@ -38,6 +38,18 @@ M.lsps = {
 	},
 
 	["basedpyright"] = {
+		root_dir = function(fname)
+			return require("lspconfig.util").root_pattern(unpack({
+				"main.py",
+				"pyproject.toml",
+				"setup.py",
+				"setup.cfg",
+				"requirements.txt",
+				"Pipfile",
+				"pyrightconfig.json",
+				".git",
+			}))(fname)
+		end,
 		settings = {
 			basedpyright = {
 				analysis = {
