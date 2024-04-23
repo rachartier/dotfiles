@@ -106,11 +106,20 @@ __git_dot() {
 }
 
 install_starship() {
-	if curl -sS https://starship.rs/install.sh | sh -s -- -y; then
-		__echo_success "starship installed."
+	if [ -n "$DOTFILES_DOCKER" ]; then
+		if curl -sS https://starship.rs/install.sh | sh -s -- -b ~/.local/bin -y; then
+			__echo_success "starship installed."
+		else
+			__echo_failure "starship not installed."
+		fi
 	else
-		__echo_failure "starship not installed."
+		if curl -sS https://starship.rs/install.sh | sh -s -- -y; then
+			__echo_success "starship installed."
+		else
+			__echo_failure "starship not installed."
+		fi
 	fi
+
 }
 
 install_fzf() {
