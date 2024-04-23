@@ -179,9 +179,9 @@ install_bat() {
 	__install_package_apt bat
 
 	cd /tmp || exit
-	bat cache --build
 
 	__make_symlink "$HOME/.local/bin/bat" batcat
+	bat cache --build
 }
 
 install_packages() {
