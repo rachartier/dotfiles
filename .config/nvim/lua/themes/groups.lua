@@ -114,7 +114,7 @@ function M.get(colors)
 		-- TelescopePreviewNormal = { bg = bg },
 		TelescopePreviewTitle = { bg = colors.green, fg = colors.mantle },
 
-		FzfLuaNormal = { bg = colors.mantle, fg = colors.text },
+		FzfLuaNormal = { bg = colors.bg, fg = colors.text },
 		FzfPreviewTitle = { bg = colors.blue, fg = colors.text },
 		FzfLuaPreviewTitle = { bg = colors.green, fg = colors.mantle },
 		FzfLuaBorder = { link = "FloatBorder" },
