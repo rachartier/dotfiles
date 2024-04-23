@@ -44,11 +44,8 @@ return {
 			})
 		end
 
-		local U = require("utils")
-		local icons = require("config.icons")
 		local ts = require("telescope")
 		local actions = require("telescope.actions")
-		local action_state = require("telescope.actions.state")
 		local gfh_actions = require("telescope").extensions.git_file_history.actions
 
 		local default_border = require("config.icons").default_border
