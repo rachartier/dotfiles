@@ -28,7 +28,7 @@ M.by_ft_options = {
 	},
 	shellcheck = {
 		args = {
-			"--shell=bash",
+			"--sherl=bash",
 			"--format=json",
 			"-",
 		},

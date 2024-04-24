@@ -12,6 +12,7 @@ M.ensure_installed = {
 	"bash-language-server",
 	"clangd",
 	"marksman",
+	"ruff_lsp",
 }
 
 M.lsps = {
@@ -56,6 +57,7 @@ M.lsps = {
 					autoSearchPaths = true,
 					diagnosticMode = "workspace",
 					useLibraryCodeForTypes = true,
+					-- ignore = { "*" },
 				},
 			},
 		},
@@ -128,6 +130,7 @@ M.lsps = {
 	"dockerls",
 	"jsonls",
 	"bashls",
+	"ruff_lsp",
 }
 
 return M
