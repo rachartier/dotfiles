@@ -9,22 +9,22 @@ autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
 	command = "checktime",
 })
 
-local group_ui = augroup("ui")
-autocmd({ "BufLeave" }, {
-	group = group_ui,
-	pattern = "*",
-	callback = function()
-		require("lualine").refresh()
-	end,
-})
-
-autocmd({ "BufEnter" }, {
-	group = group_ui,
-	pattern = "*",
-	callback = function()
-		require("lualine").refresh()
-	end,
-})
+-- local group_ui = augroup("ui")
+-- autocmd({ "BufLeave" }, {
+-- 	group = group_ui,
+-- 	pattern = "*",
+-- 	callback = function()
+-- 		require("lualine").refresh()
+-- 	end,
+-- })
+--
+-- autocmd({ "BufEnter" }, {
+-- 	group = group_ui,
+-- 	pattern = "*",
+-- 	callback = function()
+-- 		require("lualine").refresh()
+-- 	end,
+-- })
 --
 -- local function hide_lualine()
 -- 	if vim.bo.filetype == "TelescopePrompt" or vim.bo.filetype == "neo-tree" then

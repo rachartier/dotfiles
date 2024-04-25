@@ -1,5 +1,8 @@
 return {
 	"aserowy/tmux.nvim",
+	cond = function()
+		return vim.fn.executable("tmux")
+	end,
 	opts = {
 		navigation = {
 			copy_sync = {
