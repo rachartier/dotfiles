@@ -1,7 +1,7 @@
 return {
 	"aserowy/tmux.nvim",
 	cond = function()
-		return vim.fn.executable("tmux")
+		return os.getenv("TMUX") ~= nil
 	end,
 	opts = {
 		navigation = {
