@@ -69,13 +69,6 @@ local function lint_triggers()
 		callback = do_lint,
 	})
 
-	-- due to auto-save.nvim, we need the custom event "AutoSaveWritePost"
-	-- instead of "BufWritePost" to trigger linting to prevent race conditions
-	vim.api.nvim_create_autocmd("User", {
-		pattern = "AutoSaveWritePost",
-		callback = do_lint,
-	})
-
 	do_lint() -- run once on initialization
 end
 
@@ -107,7 +100,7 @@ return {
 					local bufnr = vim.api.nvim_get_current_buf()
 					local errors = vim.diagnostic.get(0, { severity = { min = vim.diagnostic.severity.ERROR } })
 
-					local clients = vim.lsp.get_clients()
+					local clients = vim.lsp.buf_get_clients()
 
 					-- fix for omnisharp
 					for _, client in pairs(clients) do
@@ -119,7 +112,6 @@ return {
 					end
 
 					return {
-						quiet = true,
 						timeout_ms = 500,
 						lsp_fallback = true,
 					}
