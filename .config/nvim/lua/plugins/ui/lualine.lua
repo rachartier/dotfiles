@@ -134,7 +134,7 @@ return {
 		ins_left({
 			function()
 				if is_inside_docker then
-					return "▌󰡨 "
+					return "▌  "
 				end
 				return "▌"
 			end,

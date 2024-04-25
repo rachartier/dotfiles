@@ -6,8 +6,8 @@ function M.get(colors)
 	-- local bg = colors.base
 	local bg = "None"
 
-	-- local cursor_line_bg = U.darken(colors.surface0, 0.5)
-	local cursor_line_bg = "None"
+	local cursor_line_bg = U.lighten(colors.base, 0.955)
+	-- local cursor_line_bg = "None"
 	local darken_diag = 0.15
 
 	modify_func = U.darken
@@ -21,9 +21,9 @@ function M.get(colors)
 		-- Visual = { bg = colors.blue, fg = colors.crust },
 
 		NormalFloat = { bg = bg, fg = colors.text },
-		LineNr = { fg = colors.surface1 },
+		LineNr = { fg = colors.surface0 },
 		SignColumn = { fg = colors.surface0 },
-		Visual = { bg = colors.surface1 },
+		Visual = { bg = colors.surface0 },
 
 		CmpGhostText = { link = "Comment", default = true },
 		CmpItemAbbrMatch = { fg = colors.yellow, bold = true, underline = false },
