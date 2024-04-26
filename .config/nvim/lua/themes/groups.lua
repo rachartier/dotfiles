@@ -134,10 +134,13 @@ function M.get(colors)
 		StatusLineNC = { fg = colors.surface0 },
 		StatusLine = { fg = colors.surface0 },
 
-		EdgyNormal = { bg = colors.mantle },
-		EdgyWinBar = { bg = colors.surface0 },
-		EdgyTitle = { bg = colors.surface0, fg = colors.blue },
-		EdgyIconActive = { bg = colors.surface0, fg = colors.peach },
+		EdgyNormal = { bg = bg },
+		-- EdgyWinBar = { bg = colors.surface0 },
+		-- EdgyTitle = { bg = colors.surface0, fg = colors.blue },
+		-- EdgyIconActive = { bg = colors.surface0, fg = colors.peach },
+		EdgyWinBar = { bg = "None" },
+		EdgyTitle = { bg = "None", fg = colors.blue },
+		EdgyIconActive = { bg = "None", fg = colors.peach },
 
 		-- DiagnosticUnderlineError = {
 		-- 	underline = true,
