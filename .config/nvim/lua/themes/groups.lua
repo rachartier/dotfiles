@@ -6,8 +6,8 @@ function M.get(colors)
 	-- local bg = colors.base
 	local bg = "None"
 
-	local cursor_line_bg = U.lighten(colors.base, 0.955)
-	-- local cursor_line_bg = "None"
+	-- local cursor_line_bg = U.lighten(colors.base, 0.955)
+	local cursor_line_bg = "None"
 	local darken_diag = 0.15
 
 	modify_func = U.darken
@@ -21,17 +21,22 @@ function M.get(colors)
 		-- Visual = { bg = colors.blue, fg = colors.crust },
 
 		NormalFloat = { bg = bg, fg = colors.text },
-		LineNr = { fg = colors.surface0 },
-		SignColumn = { fg = colors.surface0 },
-		Visual = { bg = colors.surface0 },
+		LineNr = { fg = colors.surface1 },
+		SignColumn = { fg = colors.surface1 },
+		Visual = { bg = colors.surface1 },
 
 		CmpGhostText = { link = "Comment", default = true },
 		CmpItemAbbrMatch = { fg = colors.yellow, bold = true, underline = false },
 		CmpItemAbbrMatchFuzzy = { fg = colors.blue, underline = true, link = "CmpItemAbbrMatch" },
 
+		Pmenu = { link = "FloatBorder" },
+		PmenuBorder = { link = "FloatBorder" },
+		PmenuDocBorder = { link = "FloatBorder" },
+		PmenuSel = { link = "Visual" },
+
 		CursorLine = { bg = cursor_line_bg },
 		CursorLineNr = { fg = colors.overlay1 },
-		CursorLineSign = { fg = colors.surface0 },
+		CursorLineSign = { link = "SignColumn" },
 
 		FlashLabel = { fg = colors.crust, bg = colors.yellow, bold = true },
 
@@ -62,11 +67,6 @@ function M.get(colors)
 		NoiceFormatLevelOff = { bg = colors.yellow },
 		NoicePopupmenu = { link = "PopupNormal" },
 		NoicePopupmenuBorder = { link = "FloatBorder" },
-
-		Pmenu = { link = "FloatBorder" },
-		PmenuBorder = { link = "FloatBorder" },
-		PmenuDocBorder = { link = "FloatBorder" },
-		PmenuSel = { link = "Visual" },
 
 		PopupBorder = { link = "FloatBorder" },
 		PopupNormal = { bg = bg, fg = colors.text },
