@@ -59,12 +59,11 @@ config.window_padding = {
 	top = "0.2cell",
 	bottom = "0.1pt",
 }
--- config.text_background_opacity = 0.8
 config.win32_system_backdrop = "Acrylic"
 
 config.win32_acrylic_accent_color = "rgba(36, 39, 58, 0.60)"
 -- config.window_background_opacity = 0.0
-config.window_background_opacity = 0.94
+config.window_background_opacity = 0.85
 
 config.window_close_confirmation = "NeverPrompt"
 

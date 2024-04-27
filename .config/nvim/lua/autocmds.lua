@@ -184,3 +184,25 @@ autocmd("FileType", {
 		vim.opt_local.buflisted = false
 	end,
 })
+
+-- Corrige le problème d'indentation en python lorsque
+-- l'on sort du mode insertion si on a mit plusieurs tabulations
+autocmd("InsertLeave", {
+	group = augroup("auto_format_line_python"),
+	pattern = "*.py",
+	callback = function()
+		-- vim.cmd("retab")
+		vim.cmd("normal! ==")
+	end,
+})
+
+-- autocmd("User", {
+-- 	pattern = "CustomFormatCopilot",
+-- 	callback = function(args)
+-- 		local str_lines_count = tostring(args.data.lines_count)
+--
+-- 		vim.cmd("normal! " .. str_lines_count .. "k")
+-- 		vim.cmd("normal! " .. str_lines_count .. "==")
+-- 	end,
+-- 	group = augroup("custom_copilot"),
+-- })
