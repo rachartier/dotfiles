@@ -7,6 +7,7 @@ return {
 		config = function()
 			require("render-markdown").setup({
 				bullets = { "", "", "◆", "◇" },
+				headings = { "󰲡 ", "󰲣 ", "󰲥 ", "󰲧 ", "󰲩 ", "󰲫 " },
 				checkbox = {
 					unchecked = "󰄱 ",
 					checked = "󰄲 ",

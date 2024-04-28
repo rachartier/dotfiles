@@ -66,16 +66,6 @@ autocmd({ "VimResized" }, {
 	end,
 })
 
--- wrap and check for spell in text filetypes
-autocmd("FileType", {
-	group = augroup("wrap_spell"),
-	pattern = { "gitcommit", "markdown" },
-	callback = function()
-		vim.opt_local.wrap = true
-		vim.opt_local.spell = true
-	end,
-})
-
 -- Fix conceallevel for json files
 vim.api.nvim_create_autocmd({ "FileType" }, {
 	group = augroup("json_conceal"),

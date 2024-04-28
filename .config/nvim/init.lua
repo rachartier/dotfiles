@@ -70,5 +70,3 @@ require("autocmds")
 require("user_plugins.auto_interpo_string").setup()
 
 require("theme").setup()
-
-require("config.diagnostic")
