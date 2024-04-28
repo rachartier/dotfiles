@@ -133,10 +133,15 @@ return {
 
 		ins_left({
 			function()
+				-- if is_inside_docker then
+				-- 	return "▌  "
+				-- end
+				-- return "▌"
+
 				if is_inside_docker then
-					return "▌  "
+					return "   "
 				end
-				return "▌"
+				return ""
 			end,
 			color = { fg = colors.blue },
 			padding = 0,
@@ -153,21 +158,6 @@ return {
 			left_padding = 0,
 		})
 
-		ins_left({
-			"filetype",
-			icon_only = true,
-			separator = "",
-			padding = { right = 0, left = 1 },
-			condition = conditions.buffer_not_empty,
-		})
-		ins_left({
-			-- get_current_filename_with_icon,
-			"filename",
-			condition = conditions.buffer_not_empty,
-			color = { fg = colors.mauve },
-			separator = "",
-			padding = { left = 0 },
-		})
 		ins_left({
 			"diagnostics",
 			sources = { "nvim_lsp" },
@@ -204,11 +194,27 @@ return {
 
 		-- Insert mid section. You can make any number of sections in neovim :)
 		-- for lualine it's any number greater then 2
-		-- ins_left({
-		-- 	function()
-		-- 		return "%="
-		-- 	end,
-		-- })
+		ins_left({
+			function()
+				return "%="
+			end,
+		})
+
+		ins_left({
+			"filetype",
+			icon_only = true,
+			separator = "",
+			padding = { right = 0, left = 1 },
+			condition = conditions.buffer_not_empty,
+		})
+		ins_left({
+			-- get_current_filename_with_icon,
+			"filename",
+			condition = conditions.buffer_not_empty,
+			color = { fg = colors.fg },
+			separator = "",
+			padding = { left = 0 },
+		})
 
 		-- ins_left({
 		-- 	-- Lsp server name .
@@ -249,13 +255,36 @@ return {
 		--     icons_enabled = false, -- I think icons are cool but Eviline doesn't have them. sigh
 		--     color = { fg = colors.green },
 		-- })
+
 		ins_right({
 			require("lazy.status").updates,
 			cond = require("lazy.status").has_updates,
 			color = { fg = colors.green },
 		})
 
-		ins_right({ "progress", color = { fg = colors.mauve } })
+		ins_right({
+			function()
+				return " "
+			end,
+			cond = function()
+				local ok, clients = pcall(vim.lsp.get_active_clients)
+
+				if not ok then
+					return true
+				end
+
+				for _, client in ipairs(clients) do
+					if client.name == "GitHub Copilot" then
+						return true
+					end
+				end
+
+				return false
+			end,
+			color = { fg = colors.fg },
+		})
+
+		ins_right({ "progress", color = { fg = colors.fg } })
 		ins_right({ "location", color = { fg = colors.fg } })
 		ins_right({
 			function()

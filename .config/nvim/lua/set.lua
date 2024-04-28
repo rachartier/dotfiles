@@ -114,8 +114,8 @@ opt.winminwidth = 5 -- Minimum window width
 opt.wrap = false -- Disable line wrap
 
 opt.fillchars = {
-	stl = "─",
-	stlnc = "─",
+	-- stl = "─",
+	-- stlnc = "─",
 	foldopen = "",
 	foldclose = "",
 	-- fold = "⸱",

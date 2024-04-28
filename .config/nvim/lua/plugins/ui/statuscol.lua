@@ -67,6 +67,7 @@ return {
 						fillchar = "▏",
 						maxwidth = 1,
 						colwidth = 1,
+						-- fillcharhl = "GitSignsAdd",
 					},
 					click = "v:lua.ScSa",
 				},

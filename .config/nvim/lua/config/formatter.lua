@@ -11,11 +11,7 @@ M.enabled = {
 	html = { { "prettier" }, "typos" },
 	htmldjango = { { "prettier" }, "typos" },
 	dockerfile = { "hadolint", "typos" },
-	markdown = {
-		"markdown-toc",
-		"markdownlint",
-		"injected",
-	},
+	markdown = { "markdown-toc", "markdownlint", "injected" },
 	c = { "clang-format", "typos" },
 	cs = { "csharpier", "typos" },
 	css = { "stylelint", "prettier", "typos" },
@@ -29,23 +25,10 @@ M.by_ft_options = {
 			"--config=" .. linter_config .. "/markdownlint.yaml",
 		},
 	},
-	autoflake = {
-		prepend_args = {
-			"--remove-all-unused-imports",
-			"--remove-unused-variables",
-		},
-	},
-	black = {
-		prepend_args = {
-			"--line-length",
-			"400",
-		},
-	},
 	csharpier = {
 		command = "dotnet-csharpier",
 		args = { "--write-stdout" },
 	},
-
 	["clang-format"] = {
 		command = os.getenv("HOME") .. "/.local/share/nvim/mason/bin/clang-format",
 		inherit = false,
