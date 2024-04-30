@@ -214,6 +214,12 @@ return {
 			color = { fg = colors.fg },
 			separator = "",
 			padding = { left = 0 },
+			symbols = {
+				modified = icons.signs.file.modified, -- Text to show when the file is modified.
+				readonly = icons.signs.file.readonly, -- Text to show when the file is non-modifiable or readonly.
+				unnamed = icons.signs.file.unnamed, -- Text to show for unnamed buffers.
+				newfile = icons.signs.file.created, -- Text to show for newly created file before first write
+			},
 		})
 
 		-- ins_left({
@@ -274,7 +280,6 @@ return {
 				end
 
 				for _, client in ipairs(clients) do
-					print(require("utils").dump(client))
 					if client.name == "GitHub Copilot" then
 						return true
 					end

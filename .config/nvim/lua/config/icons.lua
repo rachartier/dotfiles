@@ -20,8 +20,11 @@ M.default_border = "rounded"
 
 M.signs = {
 	file = {
-		modified = "󱞁 ",
+		modified = "",
 		not_saved = "󰉉 ",
+		readonly = "󰌾",
+		created = "",
+		unnamed = "",
 	},
 	git = {
 		added = " ",
