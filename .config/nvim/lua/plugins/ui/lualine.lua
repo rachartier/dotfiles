@@ -173,7 +173,7 @@ return {
 
 		ins_left({
 			"branch",
-			icon = "",
+			icon = icons.signs.git.branch,
 			color = { fg = colors.violet },
 		})
 		-- ins_left({
@@ -270,7 +270,7 @@ return {
 
 		ins_right({
 			function()
-				return " "
+				return icons.signs.others.copilot
 			end,
 			cond = function()
 				local ok, clients = pcall(vim.lsp.get_active_clients)

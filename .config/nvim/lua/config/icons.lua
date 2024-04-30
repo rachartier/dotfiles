@@ -30,6 +30,7 @@ M.signs = {
 		added = " ",
 		modified = " ",
 		removed = " ",
+		branch = "",
 		-- added = " ",
 		-- modified = " ",
 		-- removed = " ",
@@ -47,6 +48,9 @@ M.signs = {
 		-- info = " ",
 		-- hint = " ",
 		-- other = "󰠠 ",
+	},
+	others = {
+		copilot = " ",
 	},
 }
 
