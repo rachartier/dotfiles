@@ -108,6 +108,14 @@ autocmd("FileType", {
 	end,
 })
 
+autocmd("FileType", {
+	group = augroup("zen_mode_auto"),
+	pattern = { "markdown", "text" },
+	callback = function()
+		require("zen-mode").open()
+	end,
+})
+
 autocmd({ "BufWritePre" }, {
 	group = augroup("auto_create_dir"),
 	callback = function(event)

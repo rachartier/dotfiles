@@ -139,7 +139,7 @@ return {
 				-- return "▌"
 
 				if is_inside_docker then
-					return "   "
+					return "  "
 				end
 				return ""
 			end,
@@ -274,6 +274,7 @@ return {
 				end
 
 				for _, client in ipairs(clients) do
+					print(require("utils").dump(client))
 					if client.name == "GitHub Copilot" then
 						return true
 					end
