@@ -15,7 +15,6 @@ local function build()
 		args = { "build" },
 		on_stdout = function(_, data)
 			output = data
-			print(output)
 		end,
 		on_exit = function(_, code)
 			exit_code = code

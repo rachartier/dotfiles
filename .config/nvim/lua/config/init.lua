@@ -10,9 +10,6 @@ end
 
 M.gif_alpha_enabled = true
 
-M.lsp = require("config.lsp").lsps
-M.linters = require("config.linter")
-M.formatters = require("config.formatter")
 M.others = require("config.icons")
 
 M.extras = {}

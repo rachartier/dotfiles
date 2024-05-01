@@ -7,6 +7,7 @@ return {
 		dependencies = {
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
+			"jay-babu/mason-nvim-dap.nvim",
 			"onsails/lspkind.nvim",
 		},
 		config = function()
@@ -20,15 +21,40 @@ return {
 
 			require("mason").setup({ ui = { border = icons.default_border } })
 
-			local config_lsp = require("config.lsp").lsps
+			local languages = require("config.languages")
+
+			local ensure_installed = {}
+
+			for _, server_config in ipairs(languages) do
+				if server_config.mason then
+					for _, tool in ipairs(server_config.mason) do
+						table.insert(ensure_installed, tool)
+					end
+				end
+			end
+
 			require("mason-lspconfig").setup({
-				ensure_installed = require("utils").get_table_keys(require("config.lsp").lsps),
+				ensure_installed = ensure_installed,
 				handlers = {
 					function(server_name)
-						local defined_lsp = config_lsp[server_name]
+						local settings
+						local ignore
 
-						-- If the server settings is not defined, then setup the server with the default settings
-						if defined_lsp == nil then
+						for _, server_config in ipairs(languages) do
+							if server_config.mason and vim.tbl_contains(server_config.mason, server_name) then
+								settings = server_config.lsp_settings
+								ignore = server_config.lsp_ignore or false
+							end
+						end
+
+						if ignore then
+							return
+						end
+
+						if settings then
+							settings.capabilities = capabilities
+							require("lspconfig")[server_name].setup(settings)
+						else
 							-- auto managed by flutter-tools.nvim
 							if server_name == "dartls" then
 								return
@@ -37,11 +63,6 @@ return {
 							require("lspconfig")[server_name].setup({
 								capabilities = capabilities,
 							})
-						else
-							if type(config_lsp[server_name]) == "table" then
-								defined_lsp.capabilities = capabilities
-								require("lspconfig")[server_name].setup(defined_lsp)
-							end
 						end
 					end,
 				},
@@ -77,11 +98,6 @@ return {
 		},
 		---@param opts MasonSettings | {ensure_installed: string[]}
 		config = function(_, opts)
-			local linters = require("config.linter").enabled
-			local formatters = require("config.formatter").enabled
-			local daps = require("config.dap").ensure_installed
-			local extras = require("config").extras
-
 			local dont_install = {
 				-- installed externally due to its plugins: https://github.com/williamboman/mason.nvim/issues/695
 				"stylelint",
@@ -94,13 +110,24 @@ return {
 				"ruff_format",
 			}
 
-			local function to_autoinstall()
+			local server_settings = require("config.languages")
+
+			local function to_autoinstall_formatter_linter()
+				local tools = {}
+
+				for _, server_config in ipairs(server_settings) do
+					for _, tool in ipairs(server_config.linter or {}) do
+						table.insert(tools, tool)
+						print(tool)
+					end
+
+					for _, tool in ipairs(server_config.formatter or {}) do
+						table.insert(tools, tool)
+						print(tool)
+					end
+				end
+
 				-- get all linters, formatters, & debuggers and merge them into one list
-				local linterList = vim.tbl_flatten(vim.tbl_values(linters))
-				local formatterList = vim.tbl_flatten(vim.tbl_values(formatters))
-				local tools = vim.list_extend(linterList, formatterList)
-				vim.list_extend(tools, extras)
-				vim.list_extend(tools, daps)
 
 				-- only unique tools
 				table.sort(tools)
@@ -113,9 +140,35 @@ return {
 				return tools
 			end
 
-			local list_to_install = to_autoinstall()
+			local list_to_install = to_autoinstall_formatter_linter()
 
 			require("mason").setup(opts)
+
+			local to_install_dap = {}
+			local to_install_lsp = {}
+
+			for _, server_config in ipairs(server_settings) do
+				if server_config.dap then
+					for _, tool in ipairs(server_config.dap) do
+						table.insert(to_install_dap, tool)
+					end
+				end
+				if server_config.mason then
+					for _, tool in ipairs(server_config.mason) do
+						table.insert(to_install_lsp, tool)
+					end
+				end
+			end
+			require("mason-nvim-dap").setup({
+				ensure_installed = to_install_dap,
+				automatic_installation = true,
+			})
+
+			require("mason-lspconfig").setup({
+				ensure_installed = to_install_lsp,
+				automatic_installation = true,
+			})
+
 			local mr = require("mason-registry")
 			mr:on("package:install:success", function()
 				vim.defer_fn(function()

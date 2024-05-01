@@ -1,44 +1,4 @@
-local linters = require("config.linter").enabled
-local formatters = require("config.formatter").enabled
 local extras = require("config").extras
-local lsps = require("config.lsp").lsps
-
--- PENDING https://github.com/mfussenegger/nvim-lint/issues/355
--- for _, list in pairs(linters.enabled) do
---     table.insert(list, "typos")
---     table.insert(list, "editorconfig-checker")
--- end
-
-local dont_install = {
-	-- installed externally due to its plugins: https://github.com/williamboman/mason.nvim/issues/695
-	"stylelint",
-	-- not real formatters, but pseudo-formatters from conform.nvim
-	"trim_whitespace",
-	"trim_newlines",
-	"squeeze_blanks",
-	"injected",
-	"ruff_fix",
-	"ruff_format",
-}
-
-local function to_autoinstall()
-	-- get all linters, formatters, & debuggers and merge them into one list
-	local linterList = vim.tbl_flatten(vim.tbl_values(linters))
-	local formatterList = vim.tbl_flatten(vim.tbl_values(formatters))
-	local tools = vim.list_extend(linterList, formatterList)
-	vim.list_extend(tools, extras)
-	vim.list_extend(tools, lsps)
-
-	-- only unique tools
-	table.sort(tools)
-	tools = vim.fn.uniq(tools)
-
-	-- remove exceptions not to install
-	tools = vim.tbl_filter(function(tool)
-		return not vim.tbl_contains(dont_install, tool)
-	end, tools)
-	return tools
-end
 
 local function lint_triggers()
 	local function do_lint()
@@ -78,10 +38,10 @@ return {
 		event = "VeryLazy",
 		config = function()
 			local lint = require("lint")
-			lint.linters_by_ft = linters
+			local linter_by_ft = require("config.languages")
 
-			for name, value in pairs(require("config.linter").by_ft_options) do
-				lint.linters[name].args = value.args
+			for _, server_config in pairs(linter_by_ft) do
+				lint.linters_by_ft[server_config.language] = server_config.linter or {}
 			end
 
 			lint_triggers()
@@ -116,8 +76,21 @@ return {
 					}
 				end,
 			})
+			local languages = require("config.languages")
+			local formatters_by_ft = {}
 
-			require("conform").formatters = require("config.formatter").by_ft_options
+			for name, server_config in ipairs(languages) do
+				if name ~= "default" then
+					local language = server_config.language
+					if server_config.formatter then
+						formatters_by_ft[language] = server_config.formatter
+					end
+				end
+			end
+
+			formatters_by_ft["_"] = languages.default
+
+			require("conform").formatters = formatters_by_ft
 		end,
 	},
 }

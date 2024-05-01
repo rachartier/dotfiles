@@ -9,21 +9,28 @@ return {
 				replace_keycodes = false,
 			})
 
-			vim.keymap.set("i", "<C-g>", function()
-				vim.fn["copilot#Accept"]("")
-				local ret = vim.fn["copilot#TextQueuedForInsertion"]()
+			-- vim.keymap.set("i", "<C-g>", function()
+			-- 	vim.fn["copilot#Accept"]("")
+			-- 	local ret = vim.fn["copilot#TextQueuedForInsertion"]()
+			--
+			-- 	-- vim.defer_fn(function()
+			-- 	-- 	vim.api.nvim_exec_autocmds("User", {
+			-- 	-- 		pattern = "CustomFormatCopilot",
+			-- 	-- 		modeline = false,
+			-- 	-- 		data = {
+			-- 	-- 			lines_count = lines_count,
+			-- 	-- 		},
+			-- 	-- 	})
+			-- 	-- end, 500)
+			-- 	return ret
+			-- end, { expr = true, silent = true, replace_keycodes = false })
 
-				-- vim.defer_fn(function()
-				-- 	vim.api.nvim_exec_autocmds("User", {
-				-- 		pattern = "CustomFormatCopilot",
-				-- 		modeline = false,
-				-- 		data = {
-				-- 			lines_count = lines_count,
-				-- 		},
-				-- 	})
-				-- end, 500)
-				return ret
-			end, { expr = true, silent = true, replace_keycodes = false })
+			vim.keymap.set(
+				"i",
+				"<C-g>",
+				'copilot#Accept("\\<CR>")',
+				{ expr = true, silent = true, replace_keycodes = false }
+			)
 
 			vim.g.copilot_no_tab_map = true
 
