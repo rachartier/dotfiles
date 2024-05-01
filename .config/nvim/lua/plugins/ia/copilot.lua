@@ -160,6 +160,12 @@ return {
 					prompt = "/COPILOT_GENERATE Write a set of detailed unit test functions for the following code with the xUnit framework.",
 				},
 			},
+			mappings = {
+
+				show_diff = {
+					normal = "cd",
+				},
+			},
 		},
 		config = function(_, opts)
 			local chat = require("CopilotChat")
