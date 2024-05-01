@@ -230,6 +230,7 @@ return {
 					vim.opt_local.relativenumber = false
 					vim.opt_local.number = false
 					vim.opt_local.statuscolumn = " "
+					require("cmp").setup.buffer({ enabled = false })
 
 					-- local ft = vim.bo.filetype
 					-- if ft == "copilot-chat" then

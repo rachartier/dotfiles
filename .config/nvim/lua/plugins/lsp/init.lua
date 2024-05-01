@@ -125,8 +125,6 @@ return {
 					end
 				end
 
-				-- get all linters, formatters, & debuggers and merge them into one list
-
 				-- only unique tools
 				table.sort(tools)
 				tools = vim.fn.uniq(tools)

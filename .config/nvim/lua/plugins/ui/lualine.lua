@@ -1,3 +1,46 @@
+local conditions = {
+	buffer_not_empty = function()
+		return vim.fn.empty(vim.fn.expand("%:t")) ~= 1
+	end,
+	hide_in_width = function()
+		return vim.fn.winwidth(0) > 80
+	end,
+	check_git_workspace = function()
+		local filepath = vim.fn.expand("%:p:h")
+		local gitdir = vim.fn.finddir(".git", filepath .. ";")
+		return gitdir and #gitdir > 0 and #gitdir < #filepath
+	end,
+}
+
+local function cond_disable_by_ft()
+	local not_empty = conditions.buffer_not_empty()
+	local filetype = vim.api.nvim_buf_get_option(0, "filetype")
+
+	local filetype_to_ignore = {
+		"terminal",
+		"help",
+		"alpha",
+		"dashboard",
+		"neo-tree",
+		"Trouble",
+		"trouble",
+		"lazy",
+		"mason",
+		"notify",
+		"toggleterm",
+		"dapui_stacks",
+		"toggleterm",
+		"lazyterm",
+		"fzf",
+	}
+
+	if vim.tbl_contains(filetype_to_ignore, filetype) then
+		return false
+	end
+
+	return not_empty
+end
+
 return {
 	"nvim-lualine/lualine.nvim",
 	dependency = { "nvim-tree/nvim-web-devicons" },
@@ -63,20 +106,6 @@ return {
 				end
 			end,
 		}):start()
-
-		local conditions = {
-			buffer_not_empty = function()
-				return vim.fn.empty(vim.fn.expand("%:t")) ~= 1
-			end,
-			hide_in_width = function()
-				return vim.fn.winwidth(0) > 80
-			end,
-			check_git_workspace = function()
-				local filepath = vim.fn.expand("%:p:h")
-				local gitdir = vim.fn.finddir(".git", filepath .. ";")
-				return gitdir and #gitdir > 0 and #gitdir < #filepath
-			end,
-		}
 
 		local default_theme
 
@@ -202,6 +231,7 @@ return {
 
 		ins_left({
 			"filetype",
+			cond = cond_disable_by_ft,
 			icon_only = true,
 			separator = "",
 			padding = { right = 0, left = 1 },
@@ -210,7 +240,7 @@ return {
 		ins_left({
 			-- get_current_filename_with_icon,
 			"filename",
-			condition = conditions.buffer_not_empty,
+			cond = cond_disable_by_ft,
 			color = { fg = colors.fg },
 			separator = "",
 			padding = { left = 0 },
@@ -278,6 +308,7 @@ return {
 
 				return icons.signs.others.copilot_disabled
 			end,
+			cond = cond_disable_by_ft,
 			color = { fg = colors.fg },
 		})
 
@@ -321,7 +352,7 @@ return {
 				end
 				return " " .. format_file_size(file)
 			end,
-			condition = conditions.buffer_not_empty,
+			cond = conditions.buffer_not_empty,
 			color = { fg = colors.fg },
 		})
 
