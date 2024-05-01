@@ -118,12 +118,10 @@ return {
 				for _, server_config in ipairs(server_settings) do
 					for _, tool in ipairs(server_config.linter or {}) do
 						table.insert(tools, tool)
-						print(tool)
 					end
 
 					for _, tool in ipairs(server_config.formatter or {}) do
 						table.insert(tools, tool)
-						print(tool)
 					end
 				end
 

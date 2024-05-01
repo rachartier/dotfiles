@@ -7,19 +7,19 @@ local function lint_triggers()
 				return
 			end
 
-			-- GUARD only when in lua, only lint when selene file available
-			-- https://github.com/mfussenegger/nvim-lint/issues/370#issuecomment-1729671151
-			if vim.bo.ft == "lua" then
-				local noSeleneConfig = vim.loop.fs_stat((vim.loop.cwd() or "") .. "/selene.toml") == nil
-				if noSeleneConfig then
-					local luaLinters = require("lint").linters_by_ft.lua
-					local noSelene = vim.tbl_filter(function(linter)
-						return linter ~= "selene"
-					end, luaLinters)
-					require("lint").try_lint(noSelene)
-					return
-				end
-			end
+			-- -- GUARD only when in lua, only lint when selene file available
+			-- -- https://github.com/mfussenegger/nvim-lint/issues/370#issuecomment-1729671151
+			-- if vim.bo.ft == "lua" then
+			-- 	local noSeleneConfig = vim.loop.fs_stat((vim.loop.cwd() or "") .. "/selene.toml") == nil
+			-- 	if noSeleneConfig then
+			-- 		local luaLinters = require("lint").linters_by_ft.lua
+			-- 		local noSelene = vim.tbl_filter(function(linter)
+			-- 			return linter ~= "selene"
+			-- 		end, luaLinters)
+			-- 		require("lint").try_lint(noSelene)
+			-- 		return
+			-- 	end
+			-- end
 
 			require("lint").try_lint()
 		end, 1)
@@ -41,7 +41,9 @@ return {
 			local linter_by_ft = require("config.languages")
 
 			for _, server_config in pairs(linter_by_ft) do
-				lint.linters_by_ft[server_config.language] = server_config.linter or {}
+				for _, language_name in pairs(server_config.languages) do
+					lint.linters_by_ft[language_name] = server_config.linter or {}
+				end
 			end
 
 			lint_triggers()
@@ -54,8 +56,30 @@ return {
 			vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 		end,
 		config = function()
+			local languages = require("config.languages")
+			local formatters_by_ft = {}
+			local formatters_settings = {}
+
+			for _, server_config in pairs(languages) do
+				for _, language_name in pairs(server_config.languages) do
+					local formatters = {}
+					for _, tool in pairs(server_config.formatter) do
+						if type(tool) == "table" then
+							local formatter = require("utils").get_table_keys(tool)[1]
+							formatters[#formatters + 1] = formatter
+							formatters_settings[formatter] = tool
+						else
+							formatters[#formatters + 1] = server_config.formatter
+						end
+					end
+
+					formatters_by_ft[language_name] = formatters
+				end
+			end
+			formatters_by_ft["_"] = languages.default
+
 			require("conform").setup({
-				formatters_by_ft = formatters,
+				formatters_by_ft = formatters_by_ft,
 				format_on_save = function(bufnr)
 					local errors = vim.diagnostic.get(bufnr, { severity = { min = vim.diagnostic.severity.ERROR } })
 
@@ -75,22 +99,8 @@ return {
 						lsp_fallback = true,
 					}
 				end,
+				formatters = formatters_settings,
 			})
-			local languages = require("config.languages")
-			local formatters_by_ft = {}
-
-			for name, server_config in ipairs(languages) do
-				if name ~= "default" then
-					local language = server_config.language
-					if server_config.formatter then
-						formatters_by_ft[language] = server_config.formatter
-					end
-				end
-			end
-
-			formatters_by_ft["_"] = languages.default
-
-			require("conform").formatters = formatters_by_ft
 		end,
 	},
 }

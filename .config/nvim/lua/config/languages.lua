@@ -3,7 +3,7 @@ local linter_config = require("utils").linter_config_folder
 
 return {
 	{
-		language = { "python" },
+		languages = { "python" },
 		mason = { "basedpyright" },
 		dap = { "debugpy" },
 		formatter = { "ruff", "ruff_format", "ruff_fix", "typos" },
@@ -33,7 +33,7 @@ return {
 		},
 	},
 	{
-		language = "cs",
+		languages = { "cs" },
 		mason = { "omnisharp" },
 		dap = { "netcoredbg" },
 		formatter = {
@@ -46,7 +46,7 @@ return {
 		lsp_settings = {
 			cmd = {
 				"/home/rachartier/.local/share/nvim/mason/bin/omnisharp",
-				"--languageserver",
+				"--languagesserver",
 				"--hostPID",
 				tostring(pid),
 			},
@@ -70,7 +70,7 @@ return {
 		},
 	},
 	{
-		language = { "lua" },
+		languages = { "lua" },
 		mason = { "lua_ls" },
 		formatter = { "stylua", "typos" },
 		linter = { "selene" },
@@ -97,7 +97,7 @@ return {
 		},
 	},
 	{
-		language = { "c", "cpp" },
+		languages = { "c", "cpp" },
 		mason = { "clangd" },
 		formatter = {
 			["clang-format"] = {
@@ -118,28 +118,28 @@ return {
 		},
 	},
 	{
-		language = { "docker" },
+		languages = { "docker" },
 		mason = { "dockerls" },
 		formatter = { "hadolint", "typos" },
 	},
 	{
-		language = { "sh" },
+		languages = { "sh" },
 		mason = { "bashls" },
-		formatter = { "shfmt" },
+		formatter = { "shfmt", "typos" },
 		linter = { "shellcheck" },
 	},
 	{
-		language = { "json" },
+		languages = { "json" },
 		mason = { "jsonls" },
 		formatter = { "jq", "fixjson", "typos" },
 	},
 	{
-		language = { "yaml" },
+		languages = { "yaml" },
 		mason = { "yamlls" },
 		formatter = { "typos" },
 	},
 	{
-		language = { "markdown" },
+		languages = { "markdown" },
 		mason = { "marksman" },
 		formatter = { "markdown-toc", "injected", "typos" },
 		linter = {
