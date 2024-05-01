@@ -270,22 +270,13 @@ return {
 
 		ins_right({
 			function()
-				return icons.signs.others.copilot
-			end,
-			cond = function()
-				local ok, clients = pcall(vim.lsp.get_active_clients)
+				local ok, copilot_enabled = pcall(vim.api.nvim_buf_get_var, 0, "copilot_enabled")
 
-				if not ok then
-					return true
+				if copilot_enabled then
+					return icons.signs.others.copilot
 				end
 
-				for _, client in ipairs(clients) do
-					if client.name == "GitHub Copilot" then
-						return true
-					end
-				end
-
-				return false
+				return icons.signs.others.copilot_disabled
 			end,
 			color = { fg = colors.fg },
 		})

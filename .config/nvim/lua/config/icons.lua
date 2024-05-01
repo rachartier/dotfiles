@@ -50,7 +50,8 @@ M.signs = {
 		-- other = "󰠠 ",
 	},
 	others = {
-		copilot = " ",
+		copilot = " ",
+		copilot_disabled = " ",
 	},
 }
 

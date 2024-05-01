@@ -26,6 +26,17 @@ return {
 			end, { expr = true, silent = true, replace_keycodes = false })
 
 			vim.g.copilot_no_tab_map = true
+
+			vim.api.nvim_create_autocmd({ "BufEnter" }, {
+				group = vim.api.nvim_create_augroup("custom_copilot_disable", { clear = true }),
+				pattern = {
+					".env",
+					".secret",
+				},
+				callback = function()
+					vim.b.copilot_enabled = false
+				end,
+			})
 		end,
 	},
 	{
