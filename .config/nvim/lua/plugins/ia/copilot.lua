@@ -109,7 +109,7 @@ return {
 			error_header = "  **Error**",
 			separator = " ",
 			show_folds = false,
-			enable_tiktoken = true,
+			context = "buffer",
 
 			selection = function(source)
 				local select = require("CopilotChat.select")
