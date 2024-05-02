@@ -2,6 +2,7 @@ return {
 	{
 		"echasnovski/mini.splitjoin",
 		version = false,
+		event = { "InsertEnter" },
 		config = function()
 			require("mini.splitjoin").setup({
 				-- Module mappings. Use `''` (empty string) to disable one.
@@ -13,16 +14,17 @@ return {
 				},
 			})
 		end,
-		event = { "InsertEnter" },
 	},
 	{
 		"echasnovski/mini.surround",
+		event = "LazyFile",
 		config = function()
 			require("mini.surround").setup({})
 		end,
 	},
 	{
 		"echasnovski/mini.hipatterns",
+		event = { "LazyFile" },
 		config = function()
 			local hipatterns = require("mini.hipatterns")
 

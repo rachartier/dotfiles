@@ -1,9 +1,9 @@
-local M = {
+return {
 	"akinsho/git-conflict.nvim",
-}
-
-function M.config()
-	require("git-conflict").setup({
+	keys = {
+		{ "n", "<leader>gc", ":GitConflictListQf<CR>", { noremap = true, silent = true, desc = "List git conflicts" } },
+	},
+	opts = {
 		default_mappings = {
 			ours = "o",
 			theirs = "t",
@@ -12,9 +12,5 @@ function M.config()
 			next = "n",
 			prev = "p",
 		},
-	})
-
-	vim.keymap.set("n", "<leader>gc", ":GitConflictListQf<CR>", { desc = "List git conflicts" })
-end
-
-return M
+	},
+}

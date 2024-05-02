@@ -1,6 +1,7 @@
 return {
 	{
 		"chrisgrieser/nvim-scissors",
+		event = "InsertEnter",
 		config = function()
 			require("scissors").setup({
 				snippetDir = vim.fn.stdpath("config") .. "/snippets",

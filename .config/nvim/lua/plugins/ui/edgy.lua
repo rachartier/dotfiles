@@ -29,5 +29,5 @@ return {
 		},
 	},
 	enabled = true,
-	event = "VeryLazy",
+	event = "LazyFile",
 }
