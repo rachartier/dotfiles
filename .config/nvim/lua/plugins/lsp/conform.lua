@@ -1,5 +1,3 @@
-local extras = require("config").extras
-
 local function lint_triggers()
 	local function do_lint()
 		vim.defer_fn(function()

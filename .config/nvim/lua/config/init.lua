@@ -10,8 +10,4 @@ end
 
 M.gif_alpha_enabled = true
 
-M.others = require("config.icons")
-
-M.extras = {}
-
 return M

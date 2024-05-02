@@ -38,7 +38,8 @@ return {
 				group = vim.api.nvim_create_augroup("custom_copilot_disable", { clear = true }),
 				pattern = {
 					".env",
-					".secret",
+					"*secret",
+					"*id_rsa",
 				},
 				callback = function()
 					vim.b.copilot_enabled = false
@@ -51,44 +52,6 @@ return {
 		branch = "canary",
 		dependencies = {
 			"github/copilot.vim",
-			-- {
-			--     "zbirenbaum/copilot.lua",
-			--
-			--     config = function()
-			--         vim.g.copilot_proxy_strict_ssl = false
-			--
-			--         require("copilot").setup({
-			--             panel = {
-			--                 enabled = true,
-			--                 auto_refresh = true,
-			--             },
-			--             suggestion = {
-			--                 enabled = true,
-			--                 -- use the built-in keymapping for "accept" (<M-l>)
-			--                 auto_trigger = true,
-			--                 keymap = {
-			--                     accept = "<C-g>",
-			--                     accept_word = false,
-			--                     accept_line = false,
-			--                     next = "<M-]>",
-			--                     prev = "<M-[>",
-			--                     dismiss = "<C-]>",
-			--                 },
-			--             },
-			--         })
-			--
-			--         -- local cmp_status_ok, cmp = pcall(require, "cmp")
-			--         -- if cmp_status_ok then
-			--         -- 	cmp.event:on("menu_opened", function()
-			--         -- 		vim.b.copilot_suggestion_hidden = true
-			--         -- 	end)
-			--         --
-			--         -- 	cmp.event:on("menu_closed", function()
-			--         -- 		vim.b.copilot_suggestion_hidden = false
-			--         -- 	end)
-			--         -- end
-			--     end,
-			-- },
 			"nvim-lua/plenary.nvim", -- for curl, log wrapper
 		},
 		keys = {
@@ -161,7 +124,6 @@ return {
 				},
 			},
 			mappings = {
-
 				show_diff = {
 					normal = "cd",
 				},
