@@ -106,9 +106,10 @@ return {
 		opts = {
 			question_header = string.rep("-", #username + 3) .. "\n󰙃  " .. username,
 			answer_header = "  **Copilot**",
-			error_header = " **Error**",
+			error_header = "  **Error**",
 			separator = " ",
 			show_folds = false,
+			enable_tiktoken = true,
 
 			selection = function(source)
 				local select = require("CopilotChat.select")

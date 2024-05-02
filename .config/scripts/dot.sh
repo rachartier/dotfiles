@@ -225,6 +225,9 @@ install_nvim() {
 	pip install pynvim
 
 	wget https://ftp.nluug.nl/pub/vim/runtime/spell/fr.utf-8.spl -O ~/.local/share/nvim/site/spell/fr.utf-8.spl
+
+	sudo mkdir -p /usr/local/lib/lua/5.1
+	sudo wget https://github.com/gptlang/lua-tiktoken/releases/download/0.2.1/tiktoken_core-linux-lua51.so -O /usr/local/lib/lua/5.1/tiktoken_core.so
 }
 
 install_eza() {
