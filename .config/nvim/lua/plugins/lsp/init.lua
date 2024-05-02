@@ -9,9 +9,18 @@ return {
 			"williamboman/mason-lspconfig.nvim",
 			"jay-babu/mason-nvim-dap.nvim",
 			"onsails/lspkind.nvim",
+			{
+				"folke/neodev.nvim",
+				ft = "lua",
+			},
 		},
 		config = function()
 			require("config.diagnostic")
+
+			require("neodev").setup({
+				setup_jsonls = false,
+			})
+
 			local on_attach = require("config.lsp.attach").on_attach
 
 			-- require("clangd_extensions.inlay_hints").setup_autocmd()

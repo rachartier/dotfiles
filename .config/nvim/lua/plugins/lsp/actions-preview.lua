@@ -1,7 +1,6 @@
-local M = {
+return {
 	"aznhe21/actions-preview.nvim",
+	keys = {
+		"<leader>ca",
+	},
 }
-
-function M.config() end
-
-return M

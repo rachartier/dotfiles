@@ -11,7 +11,6 @@ map("n", "N", "Nzzzv")
 
 map("i", "<C-c>", "<Esc>")
 
-map("n", "Q", "<nop>")
 map("n", "<leader>f", vim.lsp.buf.format)
 
 map("n", "<C-k>", "<cmd>cnext<CR>zz")
@@ -19,8 +18,8 @@ map("n", "<C-j>", "<cmd>cprev<CR>zz")
 map("n", "<leader>k", "<cmd>lnext<CR>zz")
 map("n", "<leader>j", "<cmd>lprev<CR>zz")
 
-vim.keymap.set("n", "<leader>ne", vim.diagnostic.goto_next)
-vim.keymap.set("n", "<leader>pe", vim.diagnostic.goto_prev)
+map("n", "<leader>ne", vim.diagnostic.goto_next)
+map("n", "<leader>pe", vim.diagnostic.goto_prev)
 
 -- map("n", "<leader>o", "<cmd>!feh <cfile> &<CR>", { silent = true })
 
@@ -59,15 +58,11 @@ map("v", "y", "ygv<esc>")
 map("n", "p", "p=`]", { silent = true })
 
 -- Don't leave visual mode when changing indent
-vim.api.nvim_set_keymap("x", ">", ">gv", { noremap = true })
-vim.api.nvim_set_keymap("x", "<", "<gv", { noremap = true })
+map("x", ">", ">gv", { noremap = true })
+map("x", "<", "<gv", { noremap = true })
 
-map("n", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
-map("x", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
-map("o", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
-map("n", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
-map("x", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
-map("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
+map({ "n", "x", "o" }, "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
+map({ "n", "x", "o" }, "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
 
 local function indent_empty_line()
 	if #vim.fn.getline(".") == 0 then
@@ -91,7 +86,7 @@ map("n", "dd", function()
 	end
 end, { expr = true, desc = "Smart dd" })
 
-vim.keymap.set("n", "<Leader>db", function()
+map("n", "<Leader>db", function()
 	local curbufnr = vim.api.nvim_get_current_buf()
 	local buflist = vim.api.nvim_list_bufs()
 	for _, bufnr in ipairs(buflist) do

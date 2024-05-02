@@ -1,9 +1,4 @@
-local M = {
-    "tzachar/highlight-undo.nvim",
+return {
+	"tzachar/highlight-undo.nvim",
+	event = "BufEnter",
 }
-
-function M.config()
-    require("highlight-undo").setup({})
-end
-
-return M

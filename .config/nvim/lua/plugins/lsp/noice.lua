@@ -5,7 +5,7 @@ return {
 		"rcarriga/nvim-notify",
 		"j-hui/fidget.nvim",
 	},
-	event = "LazyFile",
+	event = "VeryLazy",
 	config = function()
 		local theme_colors = require("theme").get_colors()
 		if theme_colors ~= nil and theme_colors.base ~= nil then
