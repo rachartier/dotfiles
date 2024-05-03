@@ -304,12 +304,45 @@ do_reinstall() {
 	esac
 }
 
+use_tool_dotnet() {
+	if [ ! -f "$HOME/.dotnet" ]; then
+		__echo_info "Creating $HOME/.dotnet directory."
+		mkdir -p "$HOME/.dotnet"
+	fi
+
+	local script_path="$HOME/.config/scripts/dotnet-install.sh"
+	if [ ! -f "$script_path" ]; then
+		__echo_info "Downloading dotnet-install.sh script."
+		wget -q "https://dot.net/v1/dotnet-install.sh" -O "$script_path"
+		chmod +x "$script_path"
+	fi
+
+	__echo_info "Running dotnet-install.sh script."
+	bash "$script_path" "$@"
+}
+
+do_tool() {
+	local tool_name="$1"
+
+	case "$tool_name" in
+	"dotnet")
+		shift
+		use_tool_dotnet "$@"
+		;;
+	*) __echo_failure "'$tool_name' unknown." ;;
+	esac
+}
+
 do_command() {
 	case "$1" in
 	"init") install_essentials ;;
 	"minimal") install_minimal ;;
 	"docker") install_docker ;;
 	"reinstall") do_reinstall "$2" ;;
+	"tool")
+		shift
+		do_tool "$@"
+		;;
 	*) __git_dot "$@" ;;
 	esac
 }

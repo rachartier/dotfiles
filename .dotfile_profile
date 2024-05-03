@@ -65,3 +65,6 @@ fi
 cneo() {
     neovide.exe --wsl --neovim-bin "$HOME/.local/bin/nvim" --server="$1:7301"
 }
+
+export DOTNET_ROOT="$HOME/.dotnet"
+export PATH="$HOME/.dotnet:$PATH"
