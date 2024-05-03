@@ -44,12 +44,18 @@ return {
 			"typos",
 		},
 		lsp_settings = {
-			cmd = {
-				"/home/rachartier/.local/share/nvim/mason/bin/omnisharp",
-				"--languagesserver",
-				"--hostPID",
-				tostring(pid),
-			},
+			root_dir = function(fname)
+				return require("lspconfig.util").root_pattern(unpack({
+					"*.sln",
+					"*.csproj",
+				}))(fname)
+			end,
+			-- cmd = {
+			-- 	os.getenv("HOME") .. "/.local/share/nvim/mason/bin/omnisharp",
+			-- 	"--languagesserver",
+			-- 	"--hostPID",
+			-- 	tostring(pid),
+			-- },
 			settings = {
 				FormattingOptions = {
 					EnableEditorConfigSupport = true,
@@ -96,27 +102,27 @@ return {
 			},
 		},
 	},
-	{
-		languages = { "c", "cpp" },
-		mason = { "clangd" },
-		formatter = {
-			["clang-format"] = {
-				command = os.getenv("HOME") .. "/.local/share/nvim/mason/bin/clang-format",
-				inherit = false,
-				args = {
-					"--style=file:" .. linter_config .. "/clang-format",
-					"$FILENAME",
-				},
-			},
-			"typos",
-		},
-		lsp_settings = {
-			cmd = {
-				"clangd",
-				"--offset-encoding=utf-16",
-			},
-		},
-	},
+	-- {
+	-- 	languages = { "c", "cpp" },
+	-- 	mason = { "clangd" },
+	-- 	formatter = {
+	-- 		-- ["clang-format"] = {
+	-- 		-- 	command = os.getenv("HOME") .. "/.local/share/nvim/mason/bin/clang-format",
+	-- 		-- 	inherit = false,
+	-- 		-- 	args = {
+	-- 		-- 		"--style=file:" .. linter_config .. "/clang-format",
+	-- 		-- 		"$FILENAME",
+	-- 		-- 	},
+	-- 		-- },
+	-- 		"typos",
+	-- 	},
+	-- 	lsp_settings = {
+	-- 		cmd = {
+	-- 			"clangd",
+	-- 			"--offset-encoding=utf-16",
+	-- 		},
+	-- 	},
+	-- },
 	{
 		languages = { "docker" },
 		mason = { "dockerls" },

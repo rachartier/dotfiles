@@ -62,13 +62,12 @@ return {
 			for _, server_config in pairs(languages) do
 				for _, language_name in pairs(server_config.languages) do
 					local formatters = {}
-					for _, tool in pairs(server_config.formatter) do
+					for tool_name, tool in pairs(server_config.formatter or {}) do
 						if type(tool) == "table" then
-							local formatter = require("utils").get_table_keys(tool)[1]
-							formatters[#formatters + 1] = formatter
-							formatters_settings[formatter] = tool
+							table.insert(formatters, tool_name)
+							formatters_settings[tool_name] = tool
 						else
-							formatters[#formatters + 1] = server_config.formatter
+							table.insert(formatters, server_config.formatter)
 						end
 					end
 
@@ -81,7 +80,6 @@ return {
 				formatters_by_ft = formatters_by_ft,
 				format_on_save = function(bufnr)
 					local errors = vim.diagnostic.get(bufnr, { severity = { min = vim.diagnostic.severity.ERROR } })
-
 					local clients = vim.lsp.buf_get_clients()
 
 					-- fix for omnisharp
