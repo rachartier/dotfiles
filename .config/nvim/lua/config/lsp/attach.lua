@@ -55,6 +55,7 @@ M.on_attach = function(client, bufnr)
 	-- client.server_capabilities.semanticTokensProvider = nil
 
 	local bufopts = { buffer = bufnr, remap = false }
+	local add_missing = require("utils").add_missing
 
 	-- local inlay_hint = vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint
 	-- if client.supports_method("textDocument/inlayHint") then
@@ -69,24 +70,37 @@ M.on_attach = function(client, bufnr)
 		"n",
 		"<leader>vd",
 		vim.diagnostic.open_float,
-		bufopts,
-		{ desc = "Open diagnostic inside a floating window." }
+		add_missing(bufopts, { desc = "Open diagnostic inside a floating window." })
 	)
-	vim.keymap.set("n", "<leader>gn", vim.diagnostic.goto_next, bufopts, { desc = "Go to next diagnostic" })
-	vim.keymap.set("n", "<leader>gp", vim.diagnostic.goto_prev, bufopts, { desc = "Go to previous diagnostic" })
-	vim.keymap.set("n", "<leader>rr", vim.lsp.buf.references, bufopts, { desc = "Find references" })
+	vim.keymap.set(
+		"n",
+		"<leader>gn",
+		vim.diagnostic.goto_next,
+		add_missing(bufopts, { desc = "Go to next diagnostic" })
+	)
+	vim.keymap.set(
+		"n",
+		"<leader>gp",
+		vim.diagnostic.goto_prev,
+		add_missing(bufopts, { desc = "Go to previous diagnostic" })
+	)
+	vim.keymap.set("n", "<leader>rr", vim.lsp.buf.references, add_missing(bufopts, { desc = "Find references" }))
 
 	-- vim.keymap.set({ "v", "n" }, "<leader>ca", require("fzf-lua").lsp_code_actions, { desc = "Open code action menu" })
-	vim.keymap.set(
-		{ "v", "n" },
-		"<leader>ca",
-		require("actions-preview").code_actions,
-		{ desc = "Open code action menu" }
-	)
+
+	if client.name ~= "omnisharp" then
+		vim.keymap.set(
+			{ "v", "n" },
+			"<leader>ca",
+			require("actions-preview").code_actions,
+			{ desc = "Open code action menu" }
+		)
+	end
+
 	vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
 	vim.keymap.set("n", "<leader>rn", function()
 		M.lsp_rename()
-	end, bufopts, { desc = "Rename current symbol" })
+	end, add_missing(bufopts, { desc = "Rename current symbol" }))
 
 	vim.keymap.set(
 		"n",
@@ -94,7 +108,7 @@ M.on_attach = function(client, bufnr)
 		"<cmd>lua vim.lsp.util.show_line_diagnostics()<CR>",
 		{ desc = "Show line diagnostics" }
 	)
-	vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, bufopts, { desc = "Help" })
+	vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, add_missing(bufopts, { desc = "Help" }))
 end
 
 return M
