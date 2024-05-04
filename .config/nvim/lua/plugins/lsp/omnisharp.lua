@@ -28,7 +28,7 @@ local function omnisharp_text_changes_to_text_edits(changes)
 end
 
 local function get_omnisharp_client(buffer)
-	local clients = vim.lsp.get_active_clients({ buffer = buffer })
+	local clients = vim.lsp.get_clients({ buffer = buffer })
 	for _, client in ipairs(clients) do
 		if client.name == "omnisharp" then
 			return client
