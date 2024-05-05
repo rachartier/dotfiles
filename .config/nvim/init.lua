@@ -62,10 +62,11 @@ require("lazy").setup("plugins", {
 require("set")
 require("neovide")
 
-require("remap")
-require("autocmds")
+vim.defer_fn(function()
+	require("remap")
+	require("autocmds")
+	require("user_plugins.auto_interpo_string").setup()
+end, 0)
+require("theme").setup()
 
 -- require("user_plugins.switchbuffer").setup({})
-require("user_plugins.auto_interpo_string").setup()
-
-require("theme").setup()
