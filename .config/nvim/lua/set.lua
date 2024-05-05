@@ -1,3 +1,4 @@
+local utils = require("utils")
 local opt = vim.opt
 
 opt.autowrite = true -- Enable auto write
@@ -18,13 +19,9 @@ if vim.fn.has("wsl") == 1 then
 	--     cache_enabled = 0,
 	-- }
 	if os.getenv("TMUX") then
-		vim.api.nvim_create_autocmd("TextYankPost", {
-			group = vim.api.nvim_create_augroup("Yank", { clear = true }),
-
-			callback = function()
-				vim.fn.system("clip.exe", vim.fn.getreg('"'))
-			end,
-		})
+		utils.on_event({ "TextYankPost" }, function()
+			vim.fn.system("clip.exe", vim.fn.getreg('"'))
+		end, { target = "*", desc = "Copy yanked text to clipboard" })
 	end
 	-- vim.g.clipboard = {
 	--     name = "win32yank-wsl",

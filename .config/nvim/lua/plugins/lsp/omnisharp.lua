@@ -1,3 +1,5 @@
+local utils = require("utils")
+
 local M = {
 	"Hoffs/omnisharp-extended-lsp.nvim",
 	enabled = true,
@@ -82,16 +84,11 @@ function M.config()
 			vim.keymap.set({ "n" }, "<leader>gi", require("omnisharp_extended").lsp_implementation)
 			vim.keymap.set({ "v", "n" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Open code action menu" })
 
-			local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-			vim.api.nvim_create_autocmd("BufWritePre", {
-				group = augroup,
-				buffer = args.buf,
-				callback = function()
-					if vim.bo[0].filetype == "cs" then
-						fix_usings()
-					end
-				end,
-			})
+			utils.on_event("BufWritePre", function()
+				if vim.bo[0].filetype == "cs" then
+					fix_usings()
+				end
+			end, { desc = "Fix usings on save" })
 		end,
 	})
 end

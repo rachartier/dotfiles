@@ -1,4 +1,5 @@
 local icons = require("config.icons")
+local utils = require("utils")
 
 return {
 	{
@@ -21,13 +22,13 @@ return {
 			local on_attach = require("config.lsp.attach").on_attach
 			-- require("clangd_extensions.inlay_hints").setup_autocmd()
 
-			vim.api.nvim_create_autocmd("LspAttach", {
-				callback = function(args)
-					local client = vim.lsp.get_client_by_id(args.data.client_id)
-					local bufnr = args.buf
+			utils.on_event("LspAttach", function(args)
+				local client = vim.lsp.get_client_by_id(args.data.client_id)
+				local bufnr = args.buf
 
-					on_attach(client, bufnr)
-				end,
+				on_attach(client, bufnr)
+			end, {
+				desc = "LSP Attach",
 			})
 
 			require("lspconfig.ui.windows").default_options = {

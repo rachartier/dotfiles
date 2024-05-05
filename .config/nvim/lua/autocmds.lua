@@ -1,83 +1,46 @@
-local function augroup(name)
-	return vim.api.nvim_create_augroup("custom_" .. name, { clear = true })
-end
+local utils = require("utils")
 
-local autocmd = vim.api.nvim_create_autocmd
-
-autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
-	group = augroup("checktime"),
-	command = "checktime",
+utils.on_event({ "FocusGained", "TermClose", "TermLeave" }, function()
+	vim.cmd("checktime")
+end, {
+	target = "*",
+	desc = "Check time on focus gained",
 })
 
--- local group_ui = augroup("ui")
--- autocmd({ "BufLeave" }, {
--- 	group = group_ui,
--- 	pattern = "*",
--- 	callback = function()
--- 		require("lualine").refresh()
--- 	end,
--- })
---
--- autocmd({ "BufEnter" }, {
--- 	group = group_ui,
--- 	pattern = "*",
--- 	callback = function()
--- 		require("lualine").refresh()
--- 	end,
--- })
---
--- local function hide_lualine()
--- 	if vim.bo.filetype == "TelescopePrompt" or vim.bo.filetype == "neo-tree" then
--- 		require("lualine").hide()
--- 	end
--- end
---
--- autocmd("FileType", {
--- 	callback = hide_lualine,
--- })
---
--- autocmd("BufEnter", {
--- 	callback = function()
--- 		if vim.bo.filetype ~= "TelescopePrompt" and vim.bo.filetype ~= "neo-tree" then
--- 			require("lualine").hide({ unhide = true })
--- 		end
--- 	end,
--- })
-
-autocmd({ "TextYankPost" }, {
-	group = augroup("yank_group"),
-	pattern = "*",
-	callback = function()
-		vim.highlight.on_yank({
-			higroup = "CurSearch",
-			timeout = 85,
-			priority = 1,
-		})
-	end,
+utils.on_event({ "TextYankPost" }, function()
+	vim.highlight.on_yank({
+		higroup = "CurSearch",
+		timeout = 85,
+		priority = 1,
+	})
+end, {
+	target = "*",
+	desc = "Highlight yanked text",
 })
 
--- resize splits if window got resized
-autocmd({ "VimResized" }, {
-	group = augroup("resize_splits"),
-	callback = function()
-		local current_tab = vim.fn.tabpagenr()
-		vim.cmd("tabdo wincmd =")
-		vim.cmd("tabnext " .. current_tab)
-	end,
+utils.on_event({ "VimResized" }, function()
+	local current_tab = vim.fn.tabpagenr()
+	vim.cmd("tabdo wincmd =")
+	vim.cmd("tabnext " .. current_tab)
+end, {
+	target = "*",
+	desc = "Resize splits if window got resized",
 })
 
--- Fix conceallevel for json files
-vim.api.nvim_create_autocmd({ "FileType" }, {
-	group = augroup("json_conceal"),
-	pattern = { "json", "jsonc", "json5" },
-	callback = function()
+utils.on_event({ "FileType" }, function(event)
+	if event.match:match("^json") then
 		vim.opt_local.conceallevel = 0
-	end,
+	end
+end, {
+	target = { "json", "jsonc", "json5" },
+	desc = "Disable conceallevel for json files",
 })
 
-autocmd("FileType", {
-	group = augroup("close_with_q"),
-	pattern = {
+utils.on_event("FileType", function(event)
+	vim.bo[event.buf].buflisted = false
+	vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
+end, {
+	target = {
 		"PlenaryTestPopup",
 		"help",
 		"lspinfo",
@@ -93,105 +56,65 @@ autocmd("FileType", {
 		"neotest-summary",
 		"neotest-output-panel",
 	},
-	callback = function(event)
-		vim.bo[event.buf].buflisted = false
-		vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
-	end,
+	desc = "Easy quit buffers",
 })
 
-autocmd("FileType", {
-	group = augroup("wrap_spell"),
-	pattern = { "gitcommit", "markdown", "text" },
-	callback = function()
-		vim.opt_local.wrap = true
-		vim.opt_local.spell = true
-	end,
+utils.on_event({ "FileType" }, function()
+	vim.opt_local.wrap = true
+	vim.opt_local.spell = true
+
+	require("zen-mode").open()
+end, {
+	target = { "gitcommit", "markdown", "text" },
+	desc = "Enable zen mode",
 })
 
-autocmd("FileType", {
-	group = augroup("zen_mode_auto"),
-	pattern = { "markdown", "text" },
-	callback = function()
-		require("zen-mode").open()
-	end,
+utils.on_event({ "BufWritePre" }, function(event)
+	if event.match:match("^%w%w+://") then
+		return
+	end
+	local file = vim.loop.fs_realpath(event.match) or event.match
+	vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
+end, {
+	target = "*",
+	desc = "Create directory if it does not exist",
 })
 
-autocmd({ "BufWritePre" }, {
-	group = augroup("auto_create_dir"),
-	callback = function(event)
-		if event.match:match("^%w%w+://") then
-			return
-		end
-		local file = vim.loop.fs_realpath(event.match) or event.match
-		vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
-	end,
+utils.on_event({ "BufWritePre" }, function()
+	vim.cmd([[%s/\s\+$//e]])
+end, {
+	target = "*",
+	desc = "Remove trailing whitespace",
 })
 
-autocmd({ "BufWritePre" }, {
-	group = augroup("auto_delete_trailing_white_space"),
-	pattern = { "*" },
-	command = [[%s/\s\+$//e]],
+utils.on_event({ "BufReadPost" }, function()
+	vim.opt_local.filetype = "pico8"
+end, {
+	target = "*.p8",
+	desc = "Set filetype to pico8",
 })
 
-local id = vim.api.nvim_create_augroup("startup", {
-	clear = false,
+utils.on_event({ "BufReadPost" }, function()
+	vim.cmd('silent! normal! g`"zv')
+end, {
+	target = "*",
+	desc = "Restore cursor position",
 })
 
-local persistbuffer = function(bufnr)
-	bufnr = bufnr or vim.api.nvim_get_current_buf()
-	vim.fn.setbufvar(bufnr, "bufpersist", 1)
-end
-
-autocmd({ "BufRead" }, {
-	group = id,
-	pattern = { "*" },
-	callback = function()
-		autocmd({ "InsertEnter", "BufModifiedSet" }, {
-			buffer = 0,
-			once = true,
-			callback = function()
-				persistbuffer()
-			end,
-		})
-	end,
-})
-
--- autocmd("User", {
--- 	pattern = "AlphaReady",
--- 	command = "set showtabline=0 | set laststatus=0",
--- })
-
-vim.cmd([[
-    augroup _pico
-    autocmd!
-    autocmd BufRead,BufEnter *.p8 set filetype=pico8
-    augroup end
-]])
-
-autocmd("BufReadPost", {
-	desc = "Open file at the last position it was edited earlier",
-	group = augroup("misc"),
-	pattern = "*",
-	command = 'silent! normal! g`"zv',
-})
-
--- dont list quickfix buffers
-autocmd("FileType", {
-	pattern = "qf",
-	callback = function()
-		vim.opt_local.buflisted = false
-	end,
+utils.on_event("FileType", function()
+	vim.opt_local.buflisted = false
+end, {
+	target = "qf",
+	desc = "Do not list quickfix buffers",
 })
 
 -- Corrige le problème d'indentation en python lorsque
 -- l'on sort du mode insertion si on a mit plusieurs tabulations
-autocmd("InsertLeave", {
-	group = augroup("auto_format_line_python"),
-	pattern = "*.py",
-	callback = function()
-		-- vim.cmd("retab")
-		vim.cmd("normal! ==")
-	end,
+utils.on_event("InsertLeave", function()
+	vim.cmd("normal! ==")
+end, {
+	target = "*.py",
+	desc = "Auto format line in python file",
 })
 
 -- autocmd("User", {

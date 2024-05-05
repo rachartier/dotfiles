@@ -182,4 +182,85 @@ function M.get_table_keys(tbl)
 	return keys
 end
 
+--- Converts a value to a list
+---@param value any # any value that will be converted to a list
+---@return any[] # the listified version of the value
+function M.to_list(value)
+	if value == nil then
+		return {}
+	elseif vim.tbl_islist(value) then
+		return value
+	elseif type(value) == "table" then
+		local list = {}
+		for _, item in ipairs(value) do
+			table.insert(list, item)
+		end
+
+		return list
+	else
+		return { value }
+	end
+end
+
+local group_index = 0
+--- Creates an auto command that triggers on a given list of events
+--- Inside user_opts, you can specify the target buffer or pattern like so: { target = 123 } or { target = "pattern" } or { target = { "pattern1", "pattern2" } }...
+---@param events string|string[] # the list of events to trigger on
+---@param callback function # the callback to call when the event is triggered
+---@param user_opts table|nil # opts of the auto command
+---@return number # the group id of the created group
+function M.on_event(events, callback, user_opts)
+	assert(type(callback) == "function")
+
+	local target = nil
+	events = M.to_list(events)
+
+	local group_name = ""
+
+	if user_opts and user_opts.desc then
+		group_name = "custom_" .. user_opts.desc:gsub(" ", "_"):lower() .. "_" .. group_index
+	else
+		group_name = "custom_" .. group_index
+	end
+	group_index = group_index + 1
+
+	local group = vim.api.nvim_create_augroup(group_name, { clear = true })
+
+	local opts = {
+		callback = function(evt)
+			callback(evt, group)
+		end,
+		group = group,
+	}
+
+	if user_opts then
+		local valid_opts = { "target", "desc" }
+
+		for key, _ in pairs(user_opts) do
+			if not vim.tbl_contains(valid_opts, key) then
+				error("Invalid option: " .. key)
+			end
+		end
+
+		if user_opts.target then
+			if type(user_opts.target) == "number" then
+				target = user_opts.target
+			else
+				target = M.to_list(user_opts.target or nil)
+			end
+		end
+		opts.desc = user_opts.desc or "Custom event"
+	end
+
+	if type(target) == "number" then
+		opts.buffer = target
+	elseif target then
+		opts.pattern = target
+	end
+
+	vim.api.nvim_create_autocmd(events, opts)
+
+	return group
+end
+
 return M

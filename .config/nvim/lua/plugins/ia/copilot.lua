@@ -1,4 +1,5 @@
 local username = vim.fn.expand("$USER")
+local utils = require("utils")
 
 return {
 	{
@@ -34,16 +35,16 @@ return {
 
 			vim.g.copilot_no_tab_map = true
 
-			vim.api.nvim_create_autocmd({ "BufEnter" }, {
-				group = vim.api.nvim_create_augroup("custom_copilot_disable", { clear = true }),
-				pattern = {
+			utils.on_event({ "BufEnter" }, function()
+				---@diagnostic disable-next-line: inject-field
+				vim.b.copilot_enabled = false
+			end, {
+				target = {
 					".env",
 					"*secret",
 					"*id_rsa",
 				},
-				callback = function()
-					vim.b.copilot_enabled = false
-				end,
+				desc = "Disable Copilot for sensitive files",
 			})
 		end,
 	},
@@ -193,19 +194,14 @@ return {
 			-- })
 			-- Custom buffer for CopilotChat
 
-			vim.api.nvim_create_autocmd("BufEnter", {
-				pattern = "copilot-*",
-				callback = function()
-					vim.opt_local.relativenumber = false
-					vim.opt_local.number = false
-					vim.opt_local.statuscolumn = " "
-					require("cmp").setup.buffer({ enabled = false })
-
-					-- local ft = vim.bo.filetype
-					-- if ft == "copilot-chat" then
-					-- 	vim.bo.filetype = "markdown"
-					-- end
-				end,
+			utils.on_event("BufEnter", function()
+				vim.opt_local.relativenumber = false
+				vim.opt_local.number = false
+				vim.opt_local.statuscolumn = " "
+				require("cmp").setup.buffer({ enabled = false })
+			end, {
+				target = "copilot-*",
+				desc = "Disable relative number and cmp for CopilotChat",
 			})
 		end,
 	},
