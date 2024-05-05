@@ -44,8 +44,8 @@ config.font_rules = {
 }
 config.harfbuzz_features = { "calt=1", "ss01=1", "liga=1", "clig=1" }
 config.line_height = 1
-config.underline_thickness = "1pt"
-config.underline_position = "-2pt"
+config.underline_thickness = "1.5pt"
+config.underline_position = "-1.5pt"
 config.enable_kitty_graphics = true
 config.allow_square_glyphs_to_overflow_width = "Always"
 config.bold_brightens_ansi_colors = "BrightAndBold"
