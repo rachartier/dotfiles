@@ -9,7 +9,7 @@ local M = {
 		"saadparwaiz1/cmp_luasnip",
 		"lukas-reineke/cmp-under-comparator",
 	},
-	event = { "LazyFile" },
+	event = { "VeryLazy" },
 }
 
 function M.config()

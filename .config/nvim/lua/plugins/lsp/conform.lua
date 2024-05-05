@@ -35,7 +35,7 @@ end
 return {
 	{ -- Linter integration
 		"mfussenegger/nvim-lint",
-		event = "LazyFile",
+		event = "VeryLazy",
 		config = function()
 			local lint = require("lint")
 			local linter_by_ft = require("config.languages")
@@ -51,7 +51,7 @@ return {
 	},
 	{ -- Formatter integration
 		"stevearc/conform.nvim",
-		event = "LazyFile",
+		event = "VeryLazy",
 		enabled = true,
 		init = function()
 			vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
