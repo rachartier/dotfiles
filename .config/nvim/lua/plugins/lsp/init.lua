@@ -26,6 +26,8 @@ return {
 				local client = vim.lsp.get_client_by_id(args.data.client_id)
 				local bufnr = args.buf
 
+				client.server_capabilities.semanticTokensProvider = nil
+
 				on_attach(client, bufnr)
 			end, {
 				desc = "LSP Attach",
