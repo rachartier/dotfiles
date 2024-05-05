@@ -120,7 +120,7 @@ return {
 					i = { ["<c-s>"] = flash },
 				},
 				file_ignore_patterns = { "node_modules", "__pycache__", "bin", "obj" },
-				path_display = { "smart", shorten = { len = 3 } },
+				path_display = { "filename_first" },
 				vimgrep_arguments = {
 					"rg",
 					"-L",
