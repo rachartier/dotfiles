@@ -4,7 +4,7 @@ local utils = require("utils")
 return {
 	{
 		"neovim/nvim-lspconfig",
-		event = "VeryLazy",
+		event = "LazyFile",
 		dependencies = {
 			"williamboman/mason.nvim",
 			"onsails/lspkind.nvim",
@@ -26,7 +26,10 @@ return {
 				local client = vim.lsp.get_client_by_id(args.data.client_id)
 				local bufnr = args.buf
 
-				client.server_capabilities.semanticTokensProvider = nil
+				-- client.server_capabilities.semanticTokensProvider = nil
+				if client.name == "GitHub Copilot" then
+					return
+				end
 
 				on_attach(client, bufnr)
 			end, {
@@ -42,7 +45,7 @@ return {
 	},
 	{
 		"williamboman/mason.nvim",
-		event = "VeryLazy",
+		event = "LazyFile",
 		dependencies = {
 			"williamboman/mason-lspconfig.nvim",
 			"williamboman/mason-nvim-dap.nvim",

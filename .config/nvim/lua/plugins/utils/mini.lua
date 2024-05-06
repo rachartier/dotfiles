@@ -18,14 +18,14 @@ return {
 	},
 	{
 		"echasnovski/mini.surround",
-		event = "VeryLazy",
+		event = "LazyFile",
 		config = function()
 			require("mini.surround").setup({})
 		end,
 	},
 	{
 		"echasnovski/mini.hipatterns",
-		event = { "VeryLazy" },
+		event = { "LazyFile" },
 		config = function()
 			local hipatterns = require("mini.hipatterns")
 
@@ -39,7 +39,7 @@ return {
 	},
 	{
 		"echasnovski/mini.indentscope",
-		event = { "VeryLazy" },
+		event = { "LazyFile" },
 		init = function()
 			utils.on_event("FileType", function()
 				---@diagnostic disable-next-line: inject-field

@@ -88,7 +88,9 @@ M.on_attach = function(client, bufnr)
 
 	-- vim.keymap.set({ "v", "n" }, "<leader>ca", require("fzf-lua").lsp_code_actions, { desc = "Open code action menu" })
 
-	if client.name ~= "omnisharp" then
+	if client.name == "omnisharp" then
+		vim.keymap.set({ "v", "n" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Open code action menu" })
+	else
 		vim.keymap.set(
 			{ "v", "n" },
 			"<leader>ca",

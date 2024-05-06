@@ -82,7 +82,6 @@ function M.config()
 			vim.keymap.set({ "n" }, "<leader>gd", require("omnisharp_extended").lsp_definition)
 			vim.keymap.set({ "n" }, "<leader>gr", require("omnisharp_extended").lsp_references)
 			vim.keymap.set({ "n" }, "<leader>gi", require("omnisharp_extended").lsp_implementation)
-			vim.keymap.set({ "v", "n" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Open code action menu" })
 
 			utils.on_event("BufWritePre", function()
 				if vim.bo[0].filetype == "cs" then
