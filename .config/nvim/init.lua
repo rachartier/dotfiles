@@ -13,8 +13,6 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy_utils").setup()
-
 require("lazy").setup("plugins", {
 	ui = {
 		border = "rounded",
@@ -54,7 +52,7 @@ require("lazy").setup("plugins", {
 			"optwin",
 			"compiler",
 			"bugreport",
-			"ftplugin",
+			-- "ftplugin",
 		},
 	},
 })
@@ -62,10 +60,12 @@ require("lazy").setup("plugins", {
 require("set")
 require("neovide")
 
-require("remap")
-require("autocmds")
-
--- require("user_plugins.switchbuffer").setup({})
-require("user_plugins.auto_interpo_string").setup()
+vim.defer_fn(function()
+	require("remap")
+	require("autocmds")
+	require("user_plugins.auto_interpo_string").setup()
+end, 0)
 
 require("theme").setup()
+
+-- require("user_plugins.switchbuffer").setup({})

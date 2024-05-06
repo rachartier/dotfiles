@@ -1,9 +1,10 @@
 local icons = require("config.icons")
+local utils = require("utils")
 
 return {
 	{
 		"neovim/nvim-lspconfig",
-		event = "LazyFile",
+		event = "VeryLazy",
 		dependencies = {
 			"williamboman/mason.nvim",
 			"onsails/lspkind.nvim",
@@ -21,13 +22,15 @@ return {
 			local on_attach = require("config.lsp.attach").on_attach
 			-- require("clangd_extensions.inlay_hints").setup_autocmd()
 
-			vim.api.nvim_create_autocmd("LspAttach", {
-				callback = function(args)
-					local client = vim.lsp.get_client_by_id(args.data.client_id)
-					local bufnr = args.buf
+			utils.on_event("LspAttach", function(args)
+				local client = vim.lsp.get_client_by_id(args.data.client_id)
+				local bufnr = args.buf
 
-					on_attach(client, bufnr)
-				end,
+				client.server_capabilities.semanticTokensProvider = nil
+
+				on_attach(client, bufnr)
+			end, {
+				desc = "LSP Attach",
 			})
 
 			require("lspconfig.ui.windows").default_options = {
@@ -39,7 +42,7 @@ return {
 	},
 	{
 		"williamboman/mason.nvim",
-		event = "LazyFile",
+		event = "VeryLazy",
 		dependencies = {
 			"williamboman/mason-lspconfig.nvim",
 			"williamboman/mason-nvim-dap.nvim",

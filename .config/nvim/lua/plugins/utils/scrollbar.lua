@@ -1,7 +1,7 @@
 return {
 	"petertriho/nvim-scrollbar",
 	enabled = false,
-	event = "LazyFile",
+	event = "VeryLazy",
 	opts = {
 		throttle_ms = 50,
 		handle = {

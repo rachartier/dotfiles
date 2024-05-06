@@ -1,4 +1,5 @@
 local M = {}
+local utils = require("utils")
 
 local function augroup(name)
 	return vim.api.nvim_create_augroup("custom_" .. name, { clear = true })
@@ -26,18 +27,13 @@ M.setup = function(options)
 		local node_type = v.node_type
 		local name = ftype:sub(2)
 
-		vim.api.nvim_create_autocmd("InsertCharPre", {
-			pattern = ftype,
-			group = augroup("auto-interpo-string-" .. name),
+		utils.on_event("InsertCharPre", function(args)
+			local need_to_replace, row, col = M.need_to_replace_at_start(args.buf, interpo, at_start, node_type)
 
-			callback = function(opts)
-				local need_to_replace, row, col = M.need_to_replace_at_start(opts.buf, interpo, at_start, node_type)
-
-				if need_to_replace then
-					vim.api.nvim_input("<Esc>m'" .. row .. "gg" .. col .. "|i" .. at_start .. "<Esc>`'la}<Esc>ba")
-				end
-			end,
-		})
+			if need_to_replace then
+				vim.api.nvim_input("<Esc>m'" .. row .. "gg" .. col .. "|i" .. at_start .. "<Esc>`'la}<Esc>ba")
+			end
+		end, { desc = "Auto interpo " .. name })
 	end
 end
 

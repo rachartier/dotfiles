@@ -1,4 +1,5 @@
 local icons = require("config.icons")
+local utils = require("utils")
 
 vim.fn.sign_define("DiagnosticSignError", { text = icons.signs.diagnostic.error, texthl = "DiagnosticSignError" })
 vim.fn.sign_define("DiagnosticSignWarn", { text = icons.signs.diagnostic.warning, texthl = "DiagnosticSignWarn" })
@@ -78,37 +79,36 @@ local function get_virt_texts_from_diag(diag)
 	return virt_texts
 end
 
-vim.api.nvim_create_autocmd("LspAttach", {
-	callback = function(args)
-		vim.api.nvim_create_autocmd({ "InsertEnter" }, {
-			buffer = args.buf,
-			callback = function()
-				pcall(vim.api.nvim_buf_clear_namespace, args.buf, diagnostic_ns, 0, -1)
-			end,
+utils.on_event("LspAttach", function(event)
+	utils.on_event("InsertEnter", function()
+		vim.api.nvim_buf_clear_namespace(event.buf, diagnostic_ns, 0, -1)
+	end, {
+		target = event.buf,
+		desc = "Clear diagnostics on insert enter",
+	})
+
+	utils.on_event("CursorHold", function()
+		pcall(vim.api.nvim_buf_clear_namespace, event.buf, diagnostic_ns, 0, -1)
+
+		local cursor_pos = vim.api.nvim_win_get_cursor(0)
+		local curline = cursor_pos[1] - 1
+		local curcol = cursor_pos[2]
+
+		local diagnostics = vim.diagnostic.get(event.buf, { lnum = curline })
+
+		if #diagnostics == 0 then
+			return
+		end
+
+		local current_pos_diags = get_current_pos_diags(diagnostics, curline, curcol)
+		local virt_texts = get_virt_texts_from_diag(current_pos_diags[1])
+
+		vim.api.nvim_buf_set_extmark(event.buf, diagnostic_ns, curline, 0, {
+			virt_text = virt_texts,
+			virt_lines_above = true,
 		})
-		vim.api.nvim_create_autocmd({ "CursorHold" }, {
-			buffer = args.buf,
-			callback = function()
-				pcall(vim.api.nvim_buf_clear_namespace, args.buf, diagnostic_ns, 0, -1)
-
-				local cursor_pos = vim.api.nvim_win_get_cursor(0)
-				local curline = cursor_pos[1] - 1
-				local curcol = cursor_pos[2]
-
-				local diagnostics = vim.diagnostic.get(args.buf, { lnum = curline })
-
-				if #diagnostics == 0 then
-					return
-				end
-
-				local current_pos_diags = get_current_pos_diags(diagnostics, curline, curcol)
-				local virt_texts = get_virt_texts_from_diag(current_pos_diags[1])
-
-				vim.api.nvim_buf_set_extmark(args.buf, diagnostic_ns, curline, 0, {
-					virt_text = virt_texts,
-					virt_lines_above = true,
-				})
-			end,
-		})
-	end,
-})
+	end, {
+		target = event.buf,
+		desc = "Show diagnostics on cursor hold",
+	})
+end)

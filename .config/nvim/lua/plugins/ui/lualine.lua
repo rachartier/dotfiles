@@ -44,7 +44,7 @@ end
 return {
 	"nvim-lualine/lualine.nvim",
 	dependency = { "nvim-tree/nvim-web-devicons" },
-	event = "LazyFile",
+	event = "VeryLazy",
 	config = function()
 		local icons = require("config.icons")
 
