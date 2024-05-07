@@ -1,6 +1,5 @@
 local M = {
 	"goolord/alpha-nvim",
-	-- event = "VimEnter",
 }
 
 function M.config()
@@ -10,12 +9,51 @@ function M.config()
 
 	local header = {}
 
+	-- if true then
+	-- 	header = {
+	-- 		type = "text",
+	-- 		opts = {
+	-- 			position = "center",
+	-- 			hl = "GitSignsChange",
+	-- 			-- wrap = "overflow";
+	-- 		},
+	-- 		val = {
+	--
+	-- 			[[                  ...                  ]],
+	-- 			[[                  ^""`                 ]],
+	-- 			[[          ... ... '``'                 ]],
+	-- 			[[         `"""."""'^""`       .'        ]],
+	-- 			[[         '```.```.'``'       """'      ]],
+	-- 			[[     """``"""."""'^""`'""". .""""```'. ]],
+	-- 			[[     ''''''''.'''.''''.'''. .^""""""". ]],
+	-- 			[[  ^"""""""""""""""""""""""""""""`''.   ]],
+	-- 			[[  ^""""""""""""""""""""""""""""'       ]],
+	-- 			[[  .""""""""""""""""""""""""""".        ]],
+	-- 			[[   '""""""""""""""""""""""""`          ]],
+	-- 			[[    .^"""""""""""""""""""`'            ]],
+	-- 			[[      .'`"""""""""""^`'.               ]],
+	-- 			[[           .......                     ]],
+	-- 			[[                                       ]],
+	-- 		},
+	-- 	}
 	if vim.fn.executable("chafa") == 1 and require("config").gif_alpha_enabled and vim.g.neovide == 0 then
 		header = {
 			type = "terminal",
 			command = "chafa $HOME/.config/nvim/dashboard/gif/kirby-dancing.gif",
 			width = 24,
 			height = 14,
+			opts = {
+				redraw = true,
+				window_config = {},
+				position = "center",
+			},
+		}
+	elseif require("config").tty_clock_alpha_enabled == true then
+		header = {
+			type = "terminal",
+			command = "tty-clock -s -c -b -C 4",
+			width = 60,
+			height = 12,
 			opts = {
 				redraw = true,
 				window_config = {},
@@ -95,7 +133,7 @@ function M.config()
 				"Loaded " .. stats.loaded .. " plugins (" .. stats.count .. " total)   in " .. ms .. "ms",
 			}
 
-			pcall(vim.cmd.AlphaRedraw)
+			-- pcall(vim.cmd.AlphaRedraw)
 		end,
 	})
 

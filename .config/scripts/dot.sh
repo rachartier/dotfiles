@@ -200,6 +200,7 @@ install_packages() {
 	__install_package_apt fd-find
 	__install_package_apt xsel
 	__install_package_apt chafa
+	__install_package_apt tty-clock
 
 	# install nodejs...
 	curl -fsSL https://raw.githubusercontent.com/tj/n/master/bin/n | sudo bash -s lts
