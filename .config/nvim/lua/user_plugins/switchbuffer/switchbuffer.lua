@@ -99,6 +99,10 @@ function M.format_filename(filename, filename_max_length)
 		return "..." .. string.sub(fn, -substr_length)
 	end
 
+	if string.match(filename, "^term://") then
+		return ""
+	end
+
 	filename = string.gsub(filename, "term://", "Terminal: ", 1)
 	filename = get_n_last_folders_in_path(filename, 1)
 	filename = trunc_filename(filename, filename_max_length)
