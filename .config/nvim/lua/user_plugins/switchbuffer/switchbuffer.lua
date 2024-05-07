@@ -107,9 +107,9 @@ function M.format_filename(filename, filename_max_length)
 	-- return filename
 end
 
--- function M._get_filename(fullpath)
---     return fullpath:match("([a-zA-Z0-9_.-]+)$")
--- end
+function M._get_filename(fullpath)
+	return fullpath:match("([^/]+)$")
+end
 
 M.get_list_buffers = function()
 	local buffer_list = ""
@@ -159,6 +159,8 @@ M.get_list_buffers = function()
 				path_color = path_color,
 				status_icon = status_icon,
 				status_color = status_color,
+				filename = M._get_filename(path),
+				filename_color = "Normal",
 				modified = modified,
 			})
 		end
@@ -279,19 +281,23 @@ function M.select_buffers(opts)
 			},
 		})
 
-	local displayer = require("telescope.pickers.entry_display").create({
-		separator = " ",
-		items = {
-			{ width = 2 },
-			{ width = 2 },
-			{ remaining = true },
-		},
-	})
-
+	local function displayer(filename, picker)
+		local display = require("telescope.pickers.entry_display").create({
+			separator = " ",
+			items = {
+				{ width = 2 },
+				{ width = 2 },
+				{ width = #filename },
+				{ remaining = true },
+			},
+		})
+		return display(picker)
+	end
 	local make_display = function(entry)
-		return displayer({
+		return displayer(entry.filename, {
 			{ entry.icon, entry.icon_color },
 			{ entry.status_icon, entry.status_color },
+			{ entry.filename, entry.filename_color },
 			{ entry.formatted_path, entry.path_color },
 		})
 	end
@@ -308,6 +314,8 @@ function M.select_buffers(opts)
 					formatted_path = entry.formatted_path,
 					path = entry.path,
 					icon = entry.icon,
+					filename = entry.filename,
+					filename_color = entry.filename_color,
 					status_icon = entry.status_icon,
 					status_color = entry.status_color,
 					display = make_display,
