@@ -19,6 +19,7 @@ return {
 	cmd = "Telescope",
 	keys = {
 		"<leader>fl",
+		"<leader>fw",
 		"<leader>tt",
 		"<leader>ff",
 		"<leader>fg",

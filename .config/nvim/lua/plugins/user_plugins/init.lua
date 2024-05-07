@@ -1,6 +1,6 @@
 -- local user_plugins = require("user_plugins.user_plugins")
 
-local dev = false
+local dev = true
 
 if dev then
 	return {
@@ -22,6 +22,9 @@ if dev then
 					{ noremap = true, silent = true },
 				},
 			},
+			config = function()
+				require("tiny_buffers_switcher").setup()
+			end,
 		},
 		{
 			dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny_interpo_string.nvim",
@@ -49,6 +52,9 @@ return {
 				{ noremap = true, silent = true },
 			},
 		},
+		config = function()
+			require("tiny_buffers_switcher").setup()
+		end,
 	},
 	{
 		"rachartier/tiny_interpo_string",
