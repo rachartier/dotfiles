@@ -103,7 +103,13 @@ function M.format_filename(filename, filename_max_length)
 	filename = get_n_last_folders_in_path(filename, 1)
 	filename = trunc_filename(filename, filename_max_length)
 
-	return filename
+	filename = string.match(filename, "(.*[/\\])")
+
+	if filename then
+		return filename
+	end
+
+	return ""
 	-- return filename
 end
 
@@ -129,6 +135,7 @@ M.get_list_buffers = function()
 	for _, line in ipairs(buf_names) do
 		local name = line:match('"([^"]+)"')
 		local id = tonumber(line:match("([0-9]+) "))
+
 		if name then
 			local buf_modified = vim.api.nvim_buf_get_option(id, "modified")
 
