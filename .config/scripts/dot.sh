@@ -199,8 +199,11 @@ install_packages() {
 	__install_package_apt ripgrep
 	__install_package_apt fd-find
 	__install_package_apt xsel
-	__install_package_apt chafa
-	__install_package_apt tty-clock
+
+	if [ -z "$DOTFILES_MINIMAL" ]; then
+		__install_package_apt chafa
+		__install_package_apt tty-clock
+	fi
 
 	# install nodejs...
 	curl -fsSL https://raw.githubusercontent.com/tj/n/master/bin/n | sudo bash -s lts
@@ -225,10 +228,18 @@ install_nvim() {
 	__install_appimage "https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage" nvim
 	pip install pynvim
 
-	wget https://ftp.nluug.nl/pub/vim/runtime/spell/fr.utf-8.spl -O ~/.local/share/nvim/site/spell/fr.utf-8.spl
+	if [ ! -f "$HOME/.local/share/nvim/site/spell/fr.utf-8.spl" ]; then
+		mkdir -p ~/.local/share/nvim/site/spell
+		wget https://ftp.nluug.nl/pub/vim/runtime/spell/fr.utf-8.spl -O ~/.local/share/nvim/site/spell/fr.utf-8.spl
+	fi
 
-	sudo mkdir -p /usr/local/lib/lua/5.1
-	sudo wget https://github.com/gptlang/lua-tiktoken/releases/download/0.2.1/tiktoken_core-linux-lua51.so -O /usr/local/lib/lua/5.1/tiktoken_core.so
+	if [ ! -d "/usr/local/lib/lua/5.1" ]; then
+		sudo mkdir -p /usr/local/lib/lua/5.1
+	fi
+
+	if [ ! -f "/usr/local/lib/lua/5.1/tiktoken_core.so" ]; then
+		sudo wget https://github.com/gptlang/lua-tiktoken/releases/download/0.2.1/tiktoken_core-linux-lua51.so -O /usr/local/lib/lua/5.1/tiktoken_core.so
+	fi
 }
 
 install_eza() {
