@@ -25,8 +25,8 @@ return {
 		"<leader>fh",
 		"<leader>fr",
 		"<leader>fb",
-		{ "<Tab>", '<cmd>lua require("user_plugins.switchbuffer").select_buffers()<cr>' },
-		{ "<S-Tab>", '<cmd>lua require("user_plugins.switchbuffer").select_buffers()<cr>' },
+		-- { "<Tab>", '<cmd>lua require("user_plugins.switchbuffer").select_buffers()<cr>' },
+		-- { "<S-Tab>", '<cmd>lua require("user_plugins.switchbuffer").select_buffers()<cr>' },
 	},
 	enabled = true,
 	config = function()

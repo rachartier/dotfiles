@@ -9,4 +9,5 @@ return {
 	{ import = "plugins.notes" },
 	{ import = "plugins.ui" },
 	{ import = "plugins.utils" },
+	{ import = "plugins.user_plugins" },
 }

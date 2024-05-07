@@ -37,6 +37,7 @@ function M.get(colors)
 		CursorLine = { bg = cursor_line_bg },
 		CursorLineNr = { fg = colors.overlay1 },
 		CursorLineSign = { link = "SignColumn" },
+		CursorColumn = { bg = "None" },
 
 		FlashLabel = { fg = colors.crust, bg = colors.yellow, bold = true },
 

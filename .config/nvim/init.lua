@@ -65,8 +65,7 @@ require("neovide")
 vim.defer_fn(function()
 	require("remap")
 	require("autocmds")
-	require("user_plugins.auto_interpo_string").setup()
-end, 0)
+end, 50)
 
 require("theme").setup()
 

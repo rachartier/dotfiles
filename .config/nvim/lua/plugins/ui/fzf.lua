@@ -11,8 +11,8 @@ local M = {
 		"<leader>fw",
 		"<leader>ft",
 		"<leader>tt",
-		{ "<Tab>", '<cmd>lua require("user_plugins.switchbuffer").select_buffers()<cr>' },
-		{ "<S-Tab>", '<cmd>lua require("user_plugins.switchbuffer").select_buffers()<cr>' },
+		-- { "<Tab>", '<cmd>lua require("user_plugins.switchbuffer").select_buffers()<cr>' },
+		-- { "<S-Tab>", '<cmd>lua require("user_plugins.switchbuffer").select_buffers()<cr>' },
 	},
 	enabled = false,
 }
