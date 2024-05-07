@@ -48,7 +48,7 @@ function M.config()
 				position = "center",
 			},
 		}
-	elseif vim.fn.executable("tty-clock") and require("config").tty_clock_alpha_enabled == true then
+	elseif vim.fn.executable("tty-clock") == 1 and require("config").tty_clock_alpha_enabled == true then
 		header = {
 			type = "terminal",
 			command = "tty-clock -s -c -b -C 4",
