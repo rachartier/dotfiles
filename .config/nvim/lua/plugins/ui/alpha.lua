@@ -30,7 +30,7 @@ local function get_heading_padding(margin)
 	local win_height = vim.api.nvim_win_get_height(0)
 	local margin_top_percent = margin or 0.25
 
-	if win_height <= 30 then
+	if win_height <= 32 then
 		margin_top_percent = 0
 	end
 
@@ -92,7 +92,7 @@ return {
 				width = 60,
 				height = 12,
 				opts = {
-					redraw = true,
+					-- redraw = true,
 					window_config = {},
 					position = "center",
 				},
@@ -156,6 +156,7 @@ return {
 				},
 			}
 		end
+
 		vim.api.nvim_create_autocmd("User", {
 			pattern = "LazyVimStarted",
 			desc = "Add Alpha dashboard footer",
@@ -165,18 +166,26 @@ return {
 				local ms = math.floor(stats.startuptime * 100) / 100
 
 				dashboard.section.footer.val = {
-					" ",
-					" ",
-					"Loaded " .. stats.loaded .. " plugins (" .. stats.count .. " total)   in " .. ms .. "ms",
+					"Loaded " .. stats.loaded .. "/" .. stats.count .. " plugins in " .. ms .. "ms",
 				}
-
-				-- pcall(vim.cmd.AlphaRedraw)
 			end,
 		})
 
 		-- dashboard.section.header.val = {
 
 		-- }
+
+		dashboard.section.footer = {
+			type = "text",
+			opts = {
+				position = "center",
+				hl = "@constant.builtin",
+				-- wrap = "overflow";
+			},
+			val = {
+				"",
+			},
+		}
 
 		dashboard.section.buttons.val = {
 			dashboard.button("e", "󰈔  New file", "<cmd>ene<CR>"),
@@ -208,23 +217,7 @@ return {
 					buttons = dashboard.section.buttons,
 					footer = dashboard.section.footer,
 				})
-
-				pcall(vim.cmd.AlphaRedraw)
 			end
 		end, { desc = "Redraw alpha on resize" })
-
-		vim.api.nvim_create_autocmd("User", {
-			pattern = "AlphaReady",
-			callback = function()
-				vim.opt.laststatus = 0
-			end,
-		})
-
-		vim.api.nvim_create_autocmd("User", {
-			pattern = "AlphaClosed",
-			callback = function()
-				vim.opt.laststatus = 3
-			end,
-		})
 	end,
 }
