@@ -102,6 +102,7 @@ function M.setup()
 			cmp = true,
 			dap = true,
 			dap_ui = true,
+			diffview = true,
 			gitsigns = true,
 			-- harpoon = true,
 			-- illuminate = true,

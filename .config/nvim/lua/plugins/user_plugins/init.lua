@@ -1,6 +1,6 @@
 -- local user_plugins = require("user_plugins.user_plugins")
 
-local dev = true
+local dev = false
 
 if dev then
 	return {
@@ -58,7 +58,7 @@ return {
 	},
 	{
 		"rachartier/tiny_interpo_string",
-		event = "LazyFile",
+		ft = { "python", "cs" },
 		config = function()
 			require("tiny_interpo_string").setup()
 		end,

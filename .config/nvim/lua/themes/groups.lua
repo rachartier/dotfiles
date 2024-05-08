@@ -41,6 +41,9 @@ function M.get(colors)
 
 		FlashLabel = { fg = colors.crust, bg = colors.yellow, bold = true },
 
+		AlphaShortcut = { fg = colors.crust, bg = colors.mauve, bold = true },
+		AlphaFooter = { fg = colors.peach, italic = true },
+
 		FloatBorder = { fg = colors.text },
 		FloatTitle = { bg = colors.yellow, fg = colors.crust },
 

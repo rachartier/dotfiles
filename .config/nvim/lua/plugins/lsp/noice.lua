@@ -6,6 +6,7 @@ return {
 		"j-hui/fidget.nvim",
 	},
 	event = "VeryLazy",
+	enabled = true,
 	config = function()
 		local theme_colors = require("theme").get_colors()
 		if theme_colors ~= nil and theme_colors.base ~= nil then

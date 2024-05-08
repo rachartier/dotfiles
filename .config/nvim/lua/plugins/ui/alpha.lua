@@ -39,9 +39,9 @@ end
 
 return {
 	"goolord/alpha-nvim",
-	config = function()
-		local alpha = require("alpha")
-		require("alpha.term")
+	event = "VimEnter",
+	init = false,
+	opts = function()
 		local dashboard = require("alpha.themes.dashboard")
 
 		local header = {}
@@ -81,7 +81,6 @@ return {
 				height = 12,
 				opts = {
 					redraw = true,
-					window_config = {},
 					position = "center",
 				},
 			}
@@ -93,7 +92,6 @@ return {
 				height = 12,
 				opts = {
 					-- redraw = true,
-					window_config = {},
 					position = "center",
 				},
 			}
@@ -156,45 +154,37 @@ return {
 				},
 			}
 		end
-
-		vim.api.nvim_create_autocmd("User", {
-			pattern = "LazyVimStarted",
-			desc = "Add Alpha dashboard footer",
-			once = true,
-			callback = function()
-				local stats = require("lazy").stats()
-				local ms = math.floor(stats.startuptime * 100) / 100
-
-				dashboard.section.footer.val = {
-					"Loaded " .. stats.loaded .. "/" .. stats.count .. " plugins in " .. ms .. "ms",
-				}
-			end,
-		})
-
 		-- dashboard.section.header.val = {
 
 		-- }
 
-		dashboard.section.footer = {
-			type = "text",
-			opts = {
-				position = "center",
-				hl = "@constant.builtin",
-				-- wrap = "overflow";
-			},
-			val = {
-				"",
-			},
-		}
-
+		-- dashboard.section.footer = {
+		-- 	type = "text",
+		-- 	opts = {
+		-- 		position = "center",
+		-- 		hl = "@constant.builtin",
+		-- 		-- wrap = "overflow";
+		-- 	},
+		-- 	val = {
+		-- 		"",
+		-- 	},
+		-- }
+		--
 		dashboard.section.buttons.val = {
-			dashboard.button("e", "󰈔  New file", "<cmd>ene<CR>"),
-			dashboard.button("SPC f f", "󰱼  Find file"),
-			dashboard.button("SPC f g", "󰺮  Live grep"),
-			dashboard.button("c", "  Configuration", "<cmd>cd ~/.config/nvim/ | e init.lua<CR>"),
-			dashboard.button("l", "  Open Lazy", "<cmd>Lazy<CR>"),
-			dashboard.button("q", "󰩈  Quit", "<cmd>qa<CR>"),
+			dashboard.button("    e    ", "󰈔  New file", "<cmd>ene<CR>"),
+			dashboard.button(" SPC f f ", "󰱼  Find file"),
+			dashboard.button(" SPC f g ", "󰺮  Live grep"),
+			dashboard.button("    c    ", "  Configuration", "<cmd>cd ~/.config/nvim/ | e init.lua<CR>"),
+			dashboard.button("    l    ", "  Open Lazy", "<cmd>Lazy<CR>"),
+			dashboard.button("    q    ", "󰩈  Quit", "<cmd>qa<CR>"),
 		}
+		for _, button in ipairs(dashboard.section.buttons.val) do
+			button.opts.hl = "AlphaButtons"
+			button.opts.hl_shortcut = "AlphaShortcut"
+		end
+		dashboard.section.header.opts.hl = "AlphaHeader"
+		dashboard.section.buttons.opts.hl = "AlphaButtons"
+		dashboard.section.footer.opts.hl = "AlphaFooter"
 
 		local header_padding = get_heading_padding()
 
@@ -204,20 +194,47 @@ return {
 			buttons = dashboard.section.buttons,
 			footer = dashboard.section.footer,
 		})
-
-		alpha.setup(dashboard.config)
-
 		utils.on_event("VimResized", function()
 			if vim.bo.filetype == "alpha" then
 				header_padding = get_heading_padding()
 
-				dashboard.config.layout = build_layout({
+				dashboard.opts.layout = build_layout({
 					header_padding = header_padding,
 					header = header,
 					buttons = dashboard.section.buttons,
 					footer = dashboard.section.footer,
 				})
+
+				pcall(vim.cmd.AlphaRedraw)
 			end
 		end, { desc = "Redraw alpha on resize" })
+
+		return dashboard
+	end,
+	config = function(_, dashboard)
+		local alpha = require("alpha")
+		require("alpha.term")
+
+		alpha.setup(dashboard.config)
+
+		vim.api.nvim_create_autocmd("User", {
+			pattern = "LazyVimStarted",
+			desc = "Add Alpha dashboard footer",
+			once = true,
+			callback = function()
+				local stats = require("lazy").stats()
+				local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
+
+				dashboard.section.footer.val = "󰂕 "
+					.. stats.count
+					.. " total"
+					.. "   "
+					.. stats.loaded
+					.. " loaded"
+					.. "   "
+					.. ms
+					.. "ms"
+			end,
+		})
 	end,
 }
