@@ -59,9 +59,12 @@ cd && export LANG=en_US.UTF-8 && export APPIMAGE_EXTRACT_AND_RUN=1
 You should be able to try the config!
 
 # Images
+![image](https://github.com/rachartier/dotfiles/assets/2057541/d70e00d6-8186-461e-af5b-94ea32e0a345)
 
-![image](https://github.com/rachartier/dotfiles/assets/2057541/84147121-17c3-4234-a2b0-a278458c78c7)
+![image](https://github.com/rachartier/dotfiles/assets/2057541/729ad6ea-7b5a-4227-8dbd-cbe11b13e908)
 
-![image](https://github.com/rachartier/dotfiles/assets/2057541/97b1d57f-93ac-4462-9963-89831e9987e9)
+![image](https://github.com/rachartier/dotfiles/assets/2057541/2627c521-3d33-4ee1-aa23-bc5b4fc0b8cb)
 
-![image](https://github.com/rachartier/dotfiles/assets/2057541/4de1e93a-e167-4bd1-8786-d28172e56e6a)
+![image](https://github.com/rachartier/dotfiles/assets/2057541/7abd0180-b034-49ed-b2aa-3b57a53af2aa)
+
+
