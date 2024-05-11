@@ -226,7 +226,7 @@ install_packages() {
 
 install_nvim() {
 	__install_appimage "https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage" nvim
-	pip install pynvim
+	__install_package_apt python3-pynvim
 
 	if [ ! -f "$HOME/.local/share/nvim/site/spell/fr.utf-8.spl" ]; then
 		mkdir -p ~/.local/share/nvim/site/spell
