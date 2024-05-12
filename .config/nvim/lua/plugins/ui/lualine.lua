@@ -303,10 +303,10 @@ return {
 				local ok, copilot_enabled = pcall(vim.api.nvim_buf_get_var, 0, "copilot_enabled")
 
 				if copilot_enabled then
-					return icons.signs.others.copilot
+					return icons.signs.others.copilot .. "  "
 				end
 
-				return icons.signs.others.copilot_disabled
+				return icons.signs.others.copilot_disabled .. "  "
 			end,
 			cond = cond_disable_by_ft,
 			color = { fg = colors.fg },
