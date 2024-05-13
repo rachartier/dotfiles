@@ -124,6 +124,11 @@ return {
 						end
 					end
 				end
+
+				require("mason-nvim-dap").setup({
+					ensure_installed = to_install_dap,
+					automatic_installation = true,
+				})
 			end
 
 			local capabilities =
@@ -162,11 +167,6 @@ return {
 						end
 					end,
 				},
-			})
-
-			require("mason-nvim-dap").setup({
-				ensure_installed = to_install_dap,
-				automatic_installation = true,
 			})
 
 			local mr = require("mason-registry")
