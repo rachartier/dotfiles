@@ -14,7 +14,6 @@ local M = {
 
 function M.config()
 	local cmp = require("cmp")
-	local U = require("utils")
 	local icons = require("config.icons")
 
 	local luasnip = require("luasnip")

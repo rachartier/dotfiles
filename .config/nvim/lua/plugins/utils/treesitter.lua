@@ -1,11 +1,14 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
+
+	-- TODO: vérifier quand le bug de treesitter sur csharp sera corrigé
+	commit = "fa1515b015ab9894aa9866410b1c23e03d2be4af",
 	build = ":TSUpdate",
 	dependencies = {
 		"nvim-treesitter/playground",
 		"nvim-treesitter/nvim-treesitter-textobjects",
 	},
-	event = { "BufRead" },
+	event = { "LazyFile" },
 	config = function()
 		require("nvim-treesitter.configs").setup({
 			ignore_install = {},
@@ -25,6 +28,13 @@ return {
 				-- Using this option may slow down your editor, and you may see some duplicate highlights.
 				-- Instead of true it can also be a list of languages
 				additional_vim_regex_highlighting = false,
+				disable = function(lang, buf)
+					local max_filesize = 1000 * 1024 -- 1 MB
+					local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+					if ok and stats and stats.size > max_filesize then
+						return true
+					end
+				end,
 			},
 			playground = {
 				enable = true,
