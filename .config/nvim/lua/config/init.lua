@@ -13,7 +13,7 @@ M.tty_clock_alpha_enabled = true
 
 M.config_type = "normal"
 
-if os.getenv("MINIMAL") then
+if os.getenv("DOTFILES_MINIMAL") then
 	M.config_type = "minimal"
 end
 
