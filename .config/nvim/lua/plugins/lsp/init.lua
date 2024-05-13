@@ -177,18 +177,22 @@ return {
 					})
 				end, 100)
 			end)
-			local function ensure_installed()
-				for _, tool in ipairs(to_autoinstall_formatter_linter()) do
-					local p = mr.get_package(tool)
-					if not p:is_installed() then
-						p:install()
+
+			if require("config").config_type ~= "minimal" then
+				local function ensure_installed()
+					for _, tool in ipairs(to_autoinstall_formatter_linter()) do
+						local p = mr.get_package(tool)
+						if not p:is_installed() then
+							p:install()
+						end
 					end
 				end
-			end
-			if mr.refresh then
-				mr.refresh(ensure_installed)
-			else
-				ensure_installed()
+
+				if mr.refresh then
+					mr.refresh(ensure_installed)
+				else
+					ensure_installed()
+				end
 			end
 		end,
 	},

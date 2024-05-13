@@ -1,5 +1,6 @@
 local M = {
 	"mfussenegger/nvim-dap",
+	cond = require("config").config_type ~= "minimal",
 	dependencies = {
 		"rcarriga/nvim-dap-ui",
 		"mfussenegger/nvim-dap-python",

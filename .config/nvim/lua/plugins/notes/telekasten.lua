@@ -1,6 +1,6 @@
 local M = {
 	"renerocksai/telekasten.nvim",
-
+	cond = require("config").config_type ~= "minimal",
 	dependencies = {
 		"godlygeek/tabular",
 		"preservim/vim-markdown",

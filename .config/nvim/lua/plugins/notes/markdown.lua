@@ -4,6 +4,7 @@ return {
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
 		name = "render-markdown",
 		ft = { "markdown", "pandoc" },
+		cond = require("config").config_type ~= "minimal",
 		config = function()
 			require("render-markdown").setup({
 				bullets = { "", "", "◆", "◇" },
