@@ -111,15 +111,17 @@ return {
 			local to_install_dap = {}
 			local to_install_lsp = {}
 
-			for _, server_config in ipairs(server_settings) do
-				if server_config.dap then
-					for _, tool in ipairs(server_config.dap) do
-						table.insert(to_install_dap, tool)
+			if require("config").config_type ~= "minimal" then
+				for _, server_config in ipairs(server_settings) do
+					if server_config.dap then
+						for _, tool in ipairs(server_config.dap) do
+							table.insert(to_install_dap, tool)
+						end
 					end
-				end
-				if server_config.mason then
-					for _, tool in ipairs(server_config.mason) do
-						table.insert(to_install_lsp, tool)
+					if server_config.mason then
+						for _, tool in ipairs(server_config.mason) do
+							table.insert(to_install_lsp, tool)
+						end
 					end
 				end
 			end
