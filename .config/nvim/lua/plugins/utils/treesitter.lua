@@ -1,8 +1,5 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
-
-	-- TODO: vérifier quand le bug de treesitter sur csharp sera corrigé
-	commit = "fa1515b015ab9894aa9866410b1c23e03d2be4af",
 	build = ":TSUpdate",
 	dependencies = {
 		"nvim-treesitter/playground",

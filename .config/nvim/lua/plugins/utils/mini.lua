@@ -37,6 +37,14 @@ return {
 			})
 		end,
 	},
+
+	{
+		"echasnovski/mini.align",
+		event = { "LazyFile" },
+		config = function()
+			require("mini.align").setup()
+		end,
+	},
 	{
 		"echasnovski/mini.indentscope",
 		event = { "LazyFile" },
