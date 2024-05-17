@@ -225,7 +225,12 @@ install_packages() {
 # }
 
 install_nvim() {
-	__install_appimage "https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage" nvim
+	if [ "$1" = "stable" ]; then
+		__install_appimage "https://github.com/neovim/neovim/releases/download/stable/nvim.appimage" nvim
+	else
+		__install_appimage "https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage" nvim
+	fi
+
 	__install_package_apt python3-pynvim
 
 	if [ ! -f "$HOME/.local/share/nvim/site/spell/fr.utf-8.spl" ]; then
@@ -300,7 +305,7 @@ do_reinstall() {
 	case "$1" in
 	"tmux") install_tmux ;;
 	"bat") install_bat ;;
-	"nvim") install_nvim ;;
+	"nvim") install_nvim "$2" ;;
 	"packages") install_packages ;;
 	"fzf") install_fzf ;;
 	"viu") install_viu ;;
@@ -350,7 +355,10 @@ do_command() {
 	"init") install_essentials ;;
 	"minimal") install_minimal ;;
 	"docker") install_docker ;;
-	"reinstall") do_reinstall "$2" ;;
+	"reinstall")
+		shift
+		do_reinstall "$@"
+		;;
 	"tool")
 		shift
 		do_tool "$@"

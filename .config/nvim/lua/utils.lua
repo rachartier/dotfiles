@@ -188,7 +188,7 @@ end
 function M.to_list(value)
 	if value == nil then
 		return {}
-	elseif vim.tbl_islist(value) then
+	elseif vim.islist(value) then
 		return value
 	elseif type(value) == "table" then
 		local list = {}
