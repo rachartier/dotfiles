@@ -22,14 +22,22 @@ else
     antidote load ${ZDOTDIR:-$HOME}/.zsh_plugins.txt
 fi
 
+eza_command='$HOME/.config/scripts/preview_fzf.sh $realpath'
 
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
-zstyle ':completion:*:descriptions' format '[%d]'
+# dir_commands=(cd ls)
+#
+# for cmd in $dir_commands; do
+#     zstyle ":fzf-tab:complete:$cmd:*" fzf-preview $eza_command
+#     zstyle ":fzf-tab:complete:$cmd:*" fzf-min-height 80
+# done
+
+zstyle ":fzf-tab:complete:*:*" fzf-preview $eza_command
+zstyle ":fzf-tab:complete:*:*" fzf-min-height 80
 
 zstyle ':completion:*:git-checkout:*'               sort false
 zstyle ':completion:*'                              completer _extensions _expand _complete _ignored _approximate
 # zstyle ':completion:*'                              list-colors ${(s.:.)LS_COLORS}
-zstyle ':completion:*'                              menu no
+zstyle ':completion:*'                              menu yes
 # zstyle ':completion:*'                              select-prompt '%SScrolling active: current selection at %p%s'
 zstyle ':completion:*:*:*:*:processes'              command 'ps -u $USER -o pid,user,comm,cmd -w -w'
 zstyle ':completion:*:correct:*'                    insert-unambiguous true             # start menu completion only if it could find no unambiguous initial string
@@ -76,9 +84,14 @@ unsetopt BEEP
 [ "$SAVEHIST" -lt 10000 ] && SAVEHIST=10000
 
 ## History command configuration
+setopt share_history          # share command history data
+setopt appendhistory
 setopt extended_history       # record timestamp of command in HISTFILE
 setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE
-setopt hist_ignore_dups       # ignore duplicated commands history list
+setopt hist_ignore_all_dups   # ignore duplicated commands history list
+setopt hist_save_no_dups      # do not save duplicated commands history list
+setopt hist_find_no_dups      # do not display duplicated commands history list
+setopt hist_reduce_blanks     # remove superfluous blanks from history list
 setopt hist_ignore_space      # ignore commands that start with space
 setopt hist_verify            # show command with history expansion to user before running it
 setopt share_history          # share command history data
