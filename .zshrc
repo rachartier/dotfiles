@@ -22,50 +22,27 @@ else
     antidote load ${ZDOTDIR:-$HOME}/.zsh_plugins.txt
 fi
 
-# Plugins if minimal is set
-# if [ -n "$DOTFILES_MINIMAL" ]; then
-#     pluginr=(
-#         enhancd
-#         command-not-found
-#         zsh-autosuggestions
-#         zsh-syntax-highlighting
-#         zsh-history-substring-search
-# 	)
-# else
-#     plugins=(
-#         enhancd
-#         tmux
-#         zsh-poetry
-#         command-not-found
-#         zsh-autosuggestions
-#         zsh-syntax-highlighting
-#         zsh-history-substring-search
-# 	)
-# fi
-#
-# source $ZSH/oh-my-zsh.sh
-#
-# ZSH_TMUX_AUTOSTART=true
-# ZSH_TMUX_AUTOCONNECT=true
-# ZSH_TMUX_CONFIG=$HOME/.config/tmux/tmux.conf
+
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
+zstyle ':completion:*:descriptions' format '[%d]'
 
 zstyle ':completion:*:git-checkout:*'               sort false
 zstyle ':completion:*'                              completer _extensions _expand _complete _ignored _approximate
-zstyle ':completion:*'                              list-colors ${(s.:.)LS_COLORS}
-zstyle ':completion:*'                              menu select=2
-zstyle ':completion:*'                              select-prompt '%SScrolling active: current selection at %p%s'
+# zstyle ':completion:*'                              list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*'                              menu no
+# zstyle ':completion:*'                              select-prompt '%SScrolling active: current selection at %p%s'
 zstyle ':completion:*:*:*:*:processes'              command 'ps -u $USER -o pid,user,comm,cmd -w -w'
 zstyle ':completion:*:correct:*'                    insert-unambiguous true             # start menu completion only if it could find no unambiguous initial string
 zstyle ':completion:*:correct:*'                    original true                       #
-zstyle ':completion:*:corrections'                  format $'%F{red}%d (errors: %e)%f' #
+# zstyle ':completion:*:corrections'                  format $'%F{red}%d (errors: %e)%f' #
 zstyle ':completion:*:default'                      list-colors ${(s.:.)LS_COLORS}      # activate color-completion(!)
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
-zstyle ':completion:*:descriptions'                 format $'%F{blue}Completing %B%d%b%%f'  # format on completion
+zstyle ':completion:*' 								list-colors ${(s.:.)LS_COLORS}
+# zstyle ':completion:*:descriptions'                 format $'%F{blue}Completing %B%d%b%%f'  # format on completion
 zstyle ':completion:*:expand:*'                     tag-order all-expansions            # insert all expansions for expand completer
 zstyle ':completion:*:man:*'                        menu yes select
 zstyle ':completion:*:manuals'                      separate-sections true
 zstyle ':completion:*:manuals.*'                    insert-sections   true
-zstyle ':completion:*:messages'                     format ' %F{purple} %d %f'
+# zstyle ':completion:*:messages'                     format ' %F{purple} %d %f'
 zstyle ':completion:*:urls'                         local 'www' '/var/www/' 'public_html'
 zstyle ':completion:*:warnings'                     format $'%{\e[0;31m%}No matches for:%{\e[0m%} %d' # set format for warnings
 zstyle ':completion::(^approximate*):*:functions'   ignored-patterns '_*'    # Ignore completion functions for commands you don't have:
@@ -89,6 +66,7 @@ setopt nocorrect              # spelling correction for commands
 setopt nolisttypes
 setopt interactivecomments    # allow comments in interactive shells
 setopt long_list_jobs
+setopt COMPLETE_ALIASES
 unsetopt correct_all
 unsetopt BEEP
 

@@ -1,6 +1,7 @@
 b4b4r07/enhancd
 
 darvid/zsh-poetry
+Aloxaf/fzf-tab
 
 ohmyzsh/ohmyzsh path:plugins/command-not-found
 ohmyzsh/ohmyzsh path:plugins/tmux

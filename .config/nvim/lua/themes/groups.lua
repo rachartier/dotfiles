@@ -21,6 +21,8 @@ function M.get(colors)
 		-- Visual = { bg = colors.blue, fg = colors.crust },
 
 		NormalFloat = { bg = bg, fg = colors.text },
+		FloatBorder = { fg = colors.text },
+		FloatTitle = { bg = colors.yellow, fg = colors.crust },
 		LineNr = { fg = colors.surface1 },
 		SignColumn = { fg = colors.surface1 },
 		Visual = { bg = colors.surface1 },
@@ -43,9 +45,6 @@ function M.get(colors)
 
 		AlphaShortcut = { fg = colors.crust, bg = colors.mauve, bold = true },
 		AlphaFooter = { fg = colors.peach, italic = true },
-
-		FloatBorder = { fg = colors.text },
-		FloatTitle = { bg = colors.yellow, fg = colors.crust },
 
 		GitSignsAdd = { fg = colors.green },
 		GitSignsChange = { fg = colors.blue },
