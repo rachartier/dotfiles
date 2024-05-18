@@ -29,12 +29,35 @@ if dev then
 		{
 			dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny_interpo_string.nvim",
 		},
+		{
+			dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-devicons-auto-colors.nvim",
+			event = "VeryLazy",
+			config = function()
+				local colors = require("theme").get_colors()
+				require("tiny-devicons-auto-colors").setup({
+					colors = {
+						colors.red,
+						colors.green,
+						colors.yellow,
+						colors.blue,
+						colors.purple,
+						colors.peach,
+						colors.maroon,
+						colors.text,
+						colors.mauve,
+						colors.lavender,
+						colors.sappphire,
+						colors.flamingo,
+					},
+				})
+			end,
+		},
 	}
 end
 
 return {
 	{
-		"rachartier/tiny_buffers_switcher",
+		"rachartier/tiny-buffers-switcher.nvim",
 		event = "LazyFile",
 		keys = {
 			{
@@ -57,10 +80,34 @@ return {
 		end,
 	},
 	{
-		"rachartier/tiny_interpo_string",
+		"rachartier/tiny-interpo-string.nvim",
 		ft = { "python", "cs" },
 		config = function()
 			require("tiny_interpo_string").setup()
+		end,
+	},
+	{
+		"rachartier/tiny-devicons-auto-colors.nvim",
+		event = "VeryLazy",
+		enabled = true,
+		config = function()
+			local colors = require("theme").get_colors()
+			require("tiny-devicons-auto-colors").setup({
+				colors = {
+					colors.red,
+					colors.green,
+					colors.yellow,
+					colors.blue,
+					colors.purple,
+					colors.peach,
+					colors.maroon,
+					colors.text,
+					colors.mauve,
+					colors.lavender,
+					colors.sappphire,
+					colors.flamingo,
+				},
+			})
 		end,
 	},
 }
