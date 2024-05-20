@@ -149,11 +149,7 @@ return {
 		mason = { "marksman" },
 		formatter = { "markdown-toc", "injected", "typos" },
 		linter = {
-			markdownlint = {
-				prepend_args = {
-					"--config=" .. linter_config .. "/markdownlint.yaml",
-				},
-			},
+			"markdownlint",
 		},
 	},
 }
