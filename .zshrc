@@ -38,8 +38,15 @@ eza_command='$HOME/.config/scripts/preview_fzf.sh $realpath'
 #     zstyle ":fzf-tab:complete:$cmd:*" fzf-min-height 80
 # done
 
+# zstyle ':fzf-tab:*' popup-min-size 50 8
+# zstyle ':fzf-tab:*' fzf-flags --preview=''
+# zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 zstyle ":fzf-tab:complete:*:*" fzf-preview $eza_command
-zstyle ":fzf-tab:complete:*:*" fzf-min-height 80
+zstyle ":fzf-tab:complete:*:*" fzf-min-height 20
+
+zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm -w -w"
+zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-preview '[[ $group == "[process ID]" ]] && ps --pid=$word -o cmd --no-headers -w -w'
+zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-flags --preview-window=down:3:wrap
 
 zstyle ':completion:*:git-checkout:*'               sort false
 zstyle ':completion:*'                              completer _extensions _expand _complete _ignored _approximate
@@ -91,7 +98,6 @@ unsetopt BEEP
 [ "$SAVEHIST" -lt 10000 ] && SAVEHIST=10000
 
 ## History command configuration
-setopt share_history          # share command history data
 setopt appendhistory
 setopt extended_history       # record timestamp of command in HISTFILE
 setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE

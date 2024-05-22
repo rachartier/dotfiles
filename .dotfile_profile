@@ -33,6 +33,7 @@ export FZF_DEFAULT_OPTS="--height 75% --multi --reverse --margin=0,1      \
 --preview-window=rounded \
 --preview-window=cycle \
 --preview \"$HOME/.config/scripts/preview_fzf.sh {}\" \
+--preview \"\" \
 --marker='✚ ' --pointer=' ' --prompt='  ' \
 --no-separator \
 --scrollbar="▌"\
