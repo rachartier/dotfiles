@@ -62,8 +62,6 @@ end, {
 utils.on_event({ "FileType" }, function()
 	vim.opt_local.wrap = true
 	vim.opt_local.spell = true
-
-	require("zen-mode").open()
 end, {
 	target = { "gitcommit", "markdown", "text" },
 	desc = "Enable zen mode",

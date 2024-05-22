@@ -268,7 +268,7 @@ install_essentials() {
 	install_viu
 	install_lazygit
 	install_lazydocker
-	install_starship
+	# install_starship
 }
 
 install_minimal() {
@@ -281,7 +281,7 @@ install_minimal() {
 	install_eza
 	install_fzf
 	install_viu
-	install_starship
+	# install_starship
 }
 
 install_docker() {

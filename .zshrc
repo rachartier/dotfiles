@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 source $HOME/.profile
 setopt promptsubst
 
@@ -103,9 +110,9 @@ source $HOME/.aliases
 # prompt pure
 #
 
-if  command -v starship > /dev/null ; then
-    eval "$(starship init zsh)"
-fi
+# if  command -v starship > /dev/null ; then
+#     eval "$(starship init zsh)"
+# fi
 
 # if  command -v gh > /dev/null ; then
     # eval "$(gh completion -s zsh)"
@@ -120,3 +127,6 @@ bindkey "^[[1;5B" history-substring-search-down
 if ! [ -f "/tmp/tmux-theme.cache" ]; then
     echo "catppuccin_macchiato.conf" > /tmp/tmux-theme.cache
 fi
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
