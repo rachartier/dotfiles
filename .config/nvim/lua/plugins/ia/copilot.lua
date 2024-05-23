@@ -4,6 +4,7 @@ local utils = require("utils")
 return {
 	{
 		"github/copilot.vim",
+		event = "VeryLazy",
 		config = function()
 			vim.keymap.set("i", "<C-g>", "", {
 				expr = true,
@@ -50,6 +51,7 @@ return {
 	},
 	{
 		"CopilotC-Nvim/CopilotChat.nvim",
+		event = "VeryLazy",
 		branch = "canary",
 		dependencies = {
 			"github/copilot.vim",

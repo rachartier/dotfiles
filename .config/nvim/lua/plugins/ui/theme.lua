@@ -10,7 +10,7 @@ return {
 		lazy = false,
 		priority = 1000,
 		opts = {},
-		enabled = true,
+		enabled = false,
 	},
 	{
 		"folke/tokyonight.nvim",

@@ -39,7 +39,6 @@ end
 
 return {
 	"goolord/alpha-nvim",
-	event = "VimEnter",
 	init = false,
 	opts = function()
 		local dashboard = require("alpha.themes.dashboard")
