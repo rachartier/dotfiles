@@ -82,7 +82,7 @@ return {
 				formatters_by_ft = formatters_by_ft,
 				format_on_save = function(bufnr)
 					local errors = vim.diagnostic.get(bufnr, { severity = { min = vim.diagnostic.severity.ERROR } })
-					local clients = vim.lsp.buf_get_clients()
+					local clients = vim.lsp.get_clients({ bufnr = bufnr })
 
 					-- fix for omnisharp
 					for _, client in pairs(clients) do

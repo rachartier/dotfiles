@@ -1,11 +1,6 @@
 local icons = require("config.icons")
 local utils = require("utils")
 
-vim.fn.sign_define("DiagnosticSignError", { text = icons.signs.diagnostic.error, texthl = "DiagnosticSignError" })
-vim.fn.sign_define("DiagnosticSignWarn", { text = icons.signs.diagnostic.warning, texthl = "DiagnosticSignWarn" })
-vim.fn.sign_define("DiagnosticSignInfo", { text = icons.signs.diagnostic.info, texthl = "DiagnosticSignInfo" })
-vim.fn.sign_define("DiagnosticSignHint", { text = icons.signs.diagnostic.hint, texthl = "DiagnosticSignHint" })
-
 vim.diagnostic.config({
 	float = { border = require("config.icons").default_border },
 	underline = true,
