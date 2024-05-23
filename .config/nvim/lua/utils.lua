@@ -234,7 +234,7 @@ function M.on_event(events, callback, user_opts)
 	}
 
 	if user_opts then
-		local valid_opts = { "target", "desc" }
+		local valid_opts = { "target", "desc", "buffer", "pattern", "command" }
 
 		for key, _ in pairs(user_opts) do
 			if not vim.tbl_contains(valid_opts, key) then

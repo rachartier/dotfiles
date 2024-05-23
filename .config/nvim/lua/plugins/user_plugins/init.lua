@@ -28,6 +28,7 @@ return {
 		"rachartier/tiny-interpo-string.nvim",
 		ft = { "python", "cs" },
 		config = function()
+			-- print("ok")
 			require("tiny_interpo_string").setup()
 		end,
 	},

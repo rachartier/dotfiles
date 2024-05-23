@@ -193,6 +193,7 @@ return {
 			buttons = dashboard.section.buttons,
 			footer = dashboard.section.footer,
 		})
+
 		utils.on_event("VimResized", function()
 			if vim.bo.filetype == "alpha" then
 				header_padding = get_heading_padding()

@@ -5,8 +5,6 @@ return {
 		require("nvim-highlight-colors").setup({
 			render = "background",
 			virtual_symbol_position = "inline",
-			enable_named_colors = true,
-			enable_tailwind = true,
 		})
 	end,
 }

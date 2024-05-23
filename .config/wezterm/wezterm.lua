@@ -18,6 +18,7 @@ config.default_domain = "WSL:Ubuntu"
 -- config.font = wezterm.font_with_fallback({ "Agave", "Symbols Nerd Font" })
 -- config.font = wezterm.font_with_fallback({ "Cascadia Code", "Symbols Nerd Font" })
 config.font = wezterm.font_with_fallback({ "JetBrains Mono", "Symbols Nerd Font" })
+-- config.font = wezterm.font_with_fallback({ "Monaspace Argon", "Symbols Nerd Font" })
 
 -- config.font = wezterm.font("Agave")
 -- config.font = wezterm.font("CaskaydiaCove NF", { weight = "Regular" })
@@ -28,8 +29,9 @@ config.font = wezterm.font_with_fallback({ "JetBrains Mono", "Symbols Nerd Font"
 config.font_size = 12
 config.font_rules = {
 	-- {
-	--     italic = true,
-	--     font = wezterm.font("Cascadia Code", { weight = "Regular", italic = true }),
+	-- 	italic = true,
+	-- 	-- font = wezterm.font("Cascadia Code", { weight = "Regular", italic = true }),
+	-- 	font = wezterm.font("Monaspace Radon", { weight = "Regular", italic = true }),
 	-- },
 	--
 	-- {
@@ -42,10 +44,24 @@ config.font_rules = {
 	--     font = wezterm.font("Operator Mono Medium Italic", { weight = "ExtraBlack", italic = true }),
 	-- },
 }
-config.harfbuzz_features = { "calt=1", "ss01=1", "liga=1", "clig=1" }
+
+config.harfbuzz_features = {
+	"calt=1",
+	-- "ss01=1",
+	"ss02=1",
+	"ss03=1",
+	"ss04=1",
+	"ss05=1",
+	"ss07=1",
+	"ss08=1",
+	"ss09=1",
+	"liga=1",
+	"clig=1",
+}
+
 config.line_height = 1
 config.underline_thickness = "1.5pt"
-config.underline_position = "-1.5pt"
+config.underline_position = "-0.5pt"
 config.enable_kitty_graphics = true
 config.allow_square_glyphs_to_overflow_width = "Always"
 config.bold_brightens_ansi_colors = "BrightAndBold"
