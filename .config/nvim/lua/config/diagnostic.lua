@@ -1,5 +1,10 @@
 local icons = require("config.icons")
 local utils = require("utils")
+--
+-- vim.fn.sign_define("DiagnosticSignError", { text = icons.signs.diagnostic.error, texthl = "DiagnosticSignError" })
+-- vim.fn.sign_define("DiagnosticSignWarn", { text = icons.signs.diagnostic.warning, texthl = "DiagnosticSignWarn" })
+-- vim.fn.sign_define("DiagnosticSignInfo", { text = icons.signs.diagnostic.info, texthl = "DiagnosticSignInfo" })
+-- vim.fn.sign_define("DiagnosticSignHint", { text = icons.signs.diagnostic.hint, texthl = "DiagnosticSignHint" })
 
 vim.diagnostic.config({
 	float = { border = require("config.icons").default_border },
@@ -26,10 +31,12 @@ vim.diagnostic.config({
 	-- 	end,
 	-- },
 	signs = {
-		["WARN"] = icons.signs.diagnostic.warning,
-		["ERROR"] = icons.signs.diagnostic.error,
-		["INFO"] = icons.signs.diagnostic.info,
-		["HINT"] = icons.signs.diagnostic.hint,
+		text = {
+			[vim.diagnostic.severity.ERROR] = icons.signs.diagnostic.error,
+			[vim.diagnostic.severity.WARN] = icons.signs.diagnostic.warning,
+			[vim.diagnostic.severity.INFO] = icons.signs.diagnostic.info,
+			[vim.diagnostic.severity.HINT] = icons.signs.diagnostic.hint,
+		},
 	},
 	severity_sort = true,
 })
