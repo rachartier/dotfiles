@@ -112,7 +112,7 @@ return {
 			error_header = "  **Error**",
 			separator = " ",
 			show_folds = false,
-			context = "buffer",
+			-- context = "buffer",
 
 			selection = function(source)
 				local select = require("CopilotChat.select")

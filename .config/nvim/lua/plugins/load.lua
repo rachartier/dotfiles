@@ -10,4 +10,5 @@ return {
 	{ import = "plugins.ui" },
 	{ import = "plugins.utils" },
 	{ import = "plugins.user_plugins" },
+	-- { import = "plugins.others" },
 }

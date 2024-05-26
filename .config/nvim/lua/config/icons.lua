@@ -42,6 +42,7 @@ M.signs = {
 		info = "",
 		hint = "",
 		other = "",
+		ok = "",
 		-- error = " ",
 		-- warning = " ",
 		-- warn = " ",

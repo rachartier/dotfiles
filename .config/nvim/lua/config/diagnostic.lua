@@ -36,6 +36,7 @@ vim.diagnostic.config({
 			[vim.diagnostic.severity.WARN] = icons.signs.diagnostic.warning,
 			[vim.diagnostic.severity.INFO] = icons.signs.diagnostic.info,
 			[vim.diagnostic.severity.HINT] = icons.signs.diagnostic.hint,
+			-- [vim.diagnostic.severity.OK] = icons.signs.diagnostic.ok,
 		},
 	},
 	severity_sort = true,

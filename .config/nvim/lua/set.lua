@@ -6,23 +6,43 @@ opt.autowrite = true -- Enable auto write
 opt.clipboard = "unnamedplus"
 
 if vim.fn.has("wsl") == 1 then
+	-- if vim.fn.executable("wl-copy") == 0 then
+	--     print("wl-clipboard not found, clipboard integration won't work")
+	-- else
+	--     vim.g.clipboard = {
+	--         name = "wl-clipboard (wsl)",
+	--         copy = {
+	--             ["+"] = 'wl-copy --foreground --type text/plain',
+	--             ["*"] = 'wl-copy --foreground --primary --type text/plain',
+	--         },
+	--         paste = {
+	--             ["+"] = (function()
+	--                 return vim.fn.systemlist('wl-paste --no-newline|sed -e "s/\r$//"', {''}, 1) -- '1' keeps empty lines
+	--             end),
+	--             ["*"] = (function()
+	--                 return vim.fn.systemlist('wl-paste --primary --no-newline|sed -e "s/\r$//"', {''}, 1)
+	--             end),
+	--         },
+	--         cache_enabled = true
+	--     }
+	-- end
 	-- vim.g.clipboard = {
-	--     name = 'WslClipboard',
-	--     copy = {
-	--         ['+'] = 'clip.exe',
-	--         ['*'] = 'clip.exe',
-	--     },
-	--     paste = {
-	--         ['+'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-	--         ['*'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-	--     },
-	--     cache_enabled = 0,
+	-- 	name = "WslClipboard",
+	-- 	copy = {
+	-- 		["+"] = "clip.exe",
+	-- 		["*"] = "clip.exe",
+	-- 	},
+	-- 	paste = {
+	-- 		["+"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+	-- 		["*"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+	-- 	},
+	-- 	cache_enabled = 0,
 	-- }
-	if os.getenv("TMUX") then
-		utils.on_event({ "TextYankPost" }, function()
-			vim.fn.system("clip.exe", vim.fn.getreg('"'))
-		end, { target = "*", desc = "Copy yanked text to clipboard" })
-	end
+	-- if os.getenv("TMUX") then
+	-- 	utils.on_event({ "TextYankPost" }, function()
+	-- 		vim.fn.system("clip.exe", vim.fn.getreg('"'))
+	-- 	end, { target = "*", desc = "Copy yanked text to clipboard" })
+	-- end
 	-- vim.g.clipboard = {
 	--     name = "win32yank-wsl",
 	--     copy = {
@@ -33,19 +53,18 @@ if vim.fn.has("wsl") == 1 then
 	--         ["+"] = "win32yank.exe -o --lf",
 	--         ["*"] = "win32yank.exe -o --lf",
 	--     },
-	--     cache_enabled = true,
+	--     cache_enabled = 0,
 	-- }
-	-- vim.api.nvim_create_autocmd({ "FocusGained" }, {
-	--     pattern = { "*" },
-	--     command = [[call setreg("@", getreg("+"))]],
-	-- })
-	--
-	--
-	-- -- sync with system clipboard on focus
-	-- vim.api.nvim_create_autocmd({ "FocusLost" }, {
-	--     pattern = { "*" },
-	--     command = [[call setreg("+", getreg("@"))]],
-	-- })
+	vim.api.nvim_create_autocmd({ "FocusGained" }, {
+		pattern = { "*" },
+		command = [[call setreg("@", getreg("+"))]],
+	})
+
+	-- sync with system clipboard on focus
+	vim.api.nvim_create_autocmd({ "FocusLost" }, {
+		pattern = { "*" },
+		command = [[call setreg("+", getreg("@"))]],
+	})
 end
 
 local conf = require("config")
