@@ -107,11 +107,12 @@ return {
 			},
 		},
 		opts = {
-			question_header = string.rep("-", #username + 3) .. "\n󰙃  " .. username,
+			question_header = string.rep("─", #username + 3) .. "\n󰙃  " .. username .. "  ",
 			answer_header = "  **Copilot**",
 			error_header = "  **Error**",
-			separator = " ",
+			separator = " ", -- Separator to use in chat
 			show_folds = false,
+			auto_follow_cursor = false,
 			-- context = "buffer",
 
 			selection = function(source)
