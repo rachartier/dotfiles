@@ -27,8 +27,6 @@ elif [ "$TMUX_THEME" = "catppuccin_mocha.conf" ]; then
         --color=marker:#f5e0dc,fg+:#f9e2af,prompt:#cba6f7,hl+:bold:#f9e2af"
 fi
 
-export FZF_TMUX=1
-export FZF_TMUX_OPTS='-p80%,60%'
 export FZF_DEFAULT_COMMAND="fd --type f"
 export FZF_DEFAULT_OPTS="--multi --reverse --margin=0,1      \
 --preview-window=right:50% \
@@ -84,3 +82,8 @@ export PATH="$HOME/.dotnet:$PATH"
 
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export MANROFFOPT="-c"
+
+if [ -z "$DOTFILES_DOCKER" ]; then
+    export FZF_TMUX=1
+    export FZF_TMUX_OPTS='-p80%,60%'
+end
