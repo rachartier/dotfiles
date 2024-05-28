@@ -28,8 +28,15 @@
 [[ ! -o 'no_brace_expand' ]] || p10k_config_opts+=('no_brace_expand')
 'builtin' 'setopt' 'no_aliases' 'no_sh_glob' 'brace_expand'
 
+function prompt_devcontainer() {
+    inside_docker=$($HOME/.config/scripts/is_inside_docker.sh)
+    if [[ $inside_docker == "1" ]]; then
+        p10k segment -f blue -i ' ' -t "(${HOSTNAME:0:5})"
+    fi
+}
+
 () {
-  emulate -L zsh -o extended_glob
+emulate -L zsh -o extended_glob
 
   # Unset all configuration options.
   unset -m '(POWERLEVEL9K_*|DEFAULT_USER)~POWERLEVEL9K_GITSTATUS_DIR'
@@ -48,29 +55,30 @@
 
   # Left prompt segments.
   typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
-    # =========================[ Line #1 ]=========================
-    context                   # user@host
-    dir                       # current directory
-    pyenv
-    virtualenv                # python virtual environment
-    dotnet_version
-    vcs                       # git status
-    command_execution_time    # previous command duration
-    # =========================[ Line #2 ]=========================
-    newline                   # \n
-    prompt_char               # prompt symbol
-  )
+  # =========================[ Line #1 ]=========================
+  context                   # user@host
+  dir                       # current directory
+  pyenv
+  virtualenv                # python virtual environment
+  dotnet_version
+  vcs                       # git status
+  command_execution_time    # previous command duration
+  # =========================[ Line #2 ]=========================
+  newline                   # \n
+  devcontainer
+  prompt_char               # prompt symbol
+)
 
   # Right prompt segments.
   typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
-    # =========================[ Line #1 ]=========================
-    # command_execution_time  # previous command duration
-    # virtualenv              # python virtual environment
-    # context                 # user@host
-    # time                    # current time
-    # =========================[ Line #2 ]=========================
-    newline                   # \n
-  )
+  # =========================[ Line #1 ]=========================
+  # command_execution_time  # previous command duration
+  # virtualenv              # python virtual environment
+  # context                 # user@host
+  # time                    # current time
+  # =========================[ Line #2 ]=========================
+  newline                   # \n
+)
 
   # Basic style options that define the overall prompt look.
   typeset -g POWERLEVEL9K_BACKGROUND=                            # transparent background
@@ -78,7 +86,7 @@
   typeset -g POWERLEVEL9K_{LEFT,RIGHT}_SUBSEGMENT_SEPARATOR=' '  # separate segments with a space
   typeset -g POWERLEVEL9K_{LEFT,RIGHT}_SEGMENT_SEPARATOR=        # no end-of-line symbol
   # typeset -g POWERLEVEL9K_VISUAL_IDENTIFIER_EXPANSION=           # no segment icons
-    typeset -g POWERLEVEL9K_MODE=nerdfont-complete
+  typeset -g POWERLEVEL9K_MODE=nerdfont-complete
 
   # Add an empty line before each prompt except the first. This doesn't emulate the bug
   # in Pure that makes prompt drift down whenever you use the Alt-C binding from fzf or similar.
