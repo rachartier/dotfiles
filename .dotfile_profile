@@ -63,14 +63,6 @@ export ENHANCD_FILTER="fzf --preview 'eza -al --tree --level 1 --group-directori
 export ENHANCD_ENABLE_DOUBLE_DOT=false
 export ENHANCD_ENABLE_HOME=false
 
-if [ -n "$DOTFILES_DOCKER" ]; then
-	if ! [ -d "/usr/lib/terminfo" ]; then
-        tempfile=$(mktemp) &&
-            curl -o "$tempfile" https://raw.githubusercontent.com/wez/wezterm/master/termwiz/data/wezterm.terminfo &&
-            tic -x -o /usr/lib/terminfo "$tempfile" &&
-            rm "$tempfile"
-    fi
-fi
 
 cneo() {
     neovide.exe --wsl --neovim-bin "$HOME/.local/bin/nvim" --server="$1:7301"
@@ -83,7 +75,21 @@ export PATH="$HOME/.dotnet:$PATH"
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export MANROFFOPT="-c"
 
+# Not inside a devcontainer
 if [ -z "$DOTFILES_DOCKER" ]; then
     export FZF_TMUX=1
     export FZF_TMUX_OPTS='-p80%,60%'
+else
+	if ! [ -d "/usr/lib/terminfo" ]; then
+        tempfile=$(mktemp) &&
+            curl -o "$tempfile" https://raw.githubusercontent.com/wez/wezterm/master/termwiz/data/wezterm.terminfo &&
+            tic -x -o /usr/lib/terminfo "$tempfile" &&
+            rm "$tempfile"
+    fi
+
+    if [ -z "$LC_ALL" ]; then
+        export LC_ALL=C
+    fi
 fi
+
+

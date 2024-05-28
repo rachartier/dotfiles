@@ -5,9 +5,9 @@ filename=$(basename -- "$filepath")
 extension="${filename##*.}"
 
 if [ -f "$filepath" ]; then
-	if $(file --mime "$filepath" | grep ": image/" >/dev/null 2>&1); then
+	if $(mimetype "$filepath" | grep ": image/" >/dev/null 2>&1); then
 		"$HOME"/.local/bin/viu "$filepath"
-	elif $(file --mime "$filepath" | grep "binary$" >/dev/null 2>&1); then
+	elif $(mimetype "$filepath" | grep "binary$" >/dev/null 2>&1); then
 		echo "BINARY FILE"
 	elif [ "$extension" = "md" ]; then
 		glow -p -w 100 -s dark "$filepath"
