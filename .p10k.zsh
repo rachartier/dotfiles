@@ -31,7 +31,7 @@
 function prompt_devcontainer() {
     inside_docker=$($HOME/.config/scripts/is_inside_docker.sh)
     if [[ $inside_docker == "1" ]]; then
-        p10k segment -f blue -i ' ' -t "(${HOSTNAME:0:5})"
+        p10k segment -f red -i ' ' -t "(${HOSTNAME:0:5})"
     fi
 }
 

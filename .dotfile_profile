@@ -27,13 +27,14 @@ elif [ "$TMUX_THEME" = "catppuccin_mocha.conf" ]; then
         --color=marker:#f5e0dc,fg+:#f9e2af,prompt:#cba6f7,hl+:bold:#f9e2af"
 fi
 
+export FZF_TMUX=1
+export FZF_TMUX_OPTS='-p80%,60%'
 export FZF_DEFAULT_COMMAND="fd --type f"
-export FZF_DEFAULT_OPTS="--height 75% --multi --reverse --margin=0,1      \
+export FZF_DEFAULT_OPTS="--multi --reverse --margin=0,1      \
 --preview-window=right:50% \
 --preview-window=rounded \
 --preview-window=cycle \
 --preview \"$HOME/.config/scripts/preview_fzf.sh {}\" \
---preview \"\" \
 --marker='✚ ' --pointer=' ' --prompt='  ' \
 --no-separator \
 --scrollbar="▌"\
@@ -42,8 +43,16 @@ $theme \
 --bind \"ctrl-e:execute(nvim {} < /dev/tty > /dev/tty 2>&1)\" > selected"
 
 export FZF_CTRL_T_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
-export FZF_ALT_C_COMMAND='fd --type d'
-export FZF_ALT_C_OPTS='--preview "tree -C {} | head -100"'
+export FZF_ALT_C_COMMAND='fd --type d --hidden --strip-cwd-prefix --exclude .git'
+export FZF_ALT_C_OPTS='--preview "ls {}"'
+
+_fzf_compgen_path() {
+  fd --hidden --exclude .git . "$1"
+}
+
+_fzf_compgen_dir() {
+  fd --type=d --hidden --exclude .git . "$1"
+}
 
 export ENHANCD_FILTER="fzf --preview 'eza -al --tree --level 1 --group-directories-first \
                        --color always --icons \

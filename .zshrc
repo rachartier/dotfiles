@@ -38,11 +38,10 @@ eza_command='$HOME/.config/scripts/preview_fzf.sh $realpath'
 #     zstyle ":fzf-tab:complete:$cmd:*" fzf-min-height 80
 # done
 
-# zstyle ':fzf-tab:*' popup-min-size 50 8
-# zstyle ':fzf-tab:*' fzf-flags --preview=''
-# zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
+zstyle ':fzf-tab:*' popup-min-size 30 12
+zstyle ':fzf-tab:*' fzf-flags --preview=''
+zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 zstyle ":fzf-tab:complete:*:*" fzf-preview $eza_command
-zstyle ":fzf-tab:complete:*:*" fzf-min-height 20
 
 zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm -w -w"
 zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-preview '[[ $group == "[process ID]" ]] && ps --pid=$word -o cmd --no-headers -w -w'
