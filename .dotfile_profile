@@ -40,7 +40,7 @@ $theme \
 --color gutter:-1
 --bind \"ctrl-e:execute(nvim {} < /dev/tty > /dev/tty 2>&1)\" > selected"
 
-export FZF_CTRL_T_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
+export FZF_CTRL_T_COMMAND='rg --files --hidden --follow --glob ".git/*"'
 export FZF_ALT_C_COMMAND='fd --type d --hidden --strip-cwd-prefix --exclude .git'
 export FZF_ALT_C_OPTS='--preview "ls {}"'
 
