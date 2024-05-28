@@ -182,7 +182,7 @@ install_bat() {
 
 	__make_symlink "$HOME/.local/bin/bat" batcat
 
-	if ! [ -d $(bat --config-dir) ]; then
+	if ! [ -d "$(bat --config-dir)" ]; then
 		mkdir -p "$(bat --config-dir)/themes"
 		wget -P "$(bat --config-dir)/themes" https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Latte.tmTheme
 		wget -P "$(bat --config-dir)/themes" https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Frappe.tmTheme
