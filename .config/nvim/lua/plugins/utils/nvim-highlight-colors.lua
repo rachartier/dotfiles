@@ -6,11 +6,12 @@ return {
 		require("nvim-highlight-colors").setup({
 			render = "background",
 			virtual_symbol_position = "inline",
-			exclude = {
+			exclude_filetypes = {
 				"alpha",
 				"lazy",
 				"notify",
 			},
+			exclude_buftypes = {},
 		})
 	end,
 }
