@@ -38,7 +38,7 @@ eza_command='$HOME/.config/scripts/preview_fzf.sh $realpath'
 #     zstyle ":fzf-tab:complete:$cmd:*" fzf-min-height 80
 # done
 
-zstyle ':fzf-tab:*' popup-min-size 30 12
+zstyle ':fzf-tab:*' popup-min-size 38 0
 zstyle ':fzf-tab:*' fzf-flags --preview=''
 zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 zstyle ":fzf-tab:complete:*:*" fzf-preview $eza_command
