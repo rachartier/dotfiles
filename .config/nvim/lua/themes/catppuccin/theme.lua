@@ -1,17 +1,17 @@
 local M = {}
 
-local cached_tmux_theme = require("utils").read_file("/tmp/tmux-theme.cache")
+-- local cached_tmux_theme = require("utils").read_file("/tmp/tmux-theme.cache")
 local theme = "macchiato"
 
-if cached_tmux_theme == "catppuccin_macchiato.conf" then
-	theme = "macchiato"
-elseif cached_tmux_theme == "catppuccin_mocha.conf" then
-	theme = "mocha"
-elseif cached_tmux_theme == "catppuccin_frappe.conf" then
-	theme = "frappe"
-elseif cached_tmux_theme == "catppuccin_latte.conf" then
-	theme = "latte"
-end
+-- if cached_tmux_theme == "catppuccin_macchiato.conf" then
+-- 	theme = "macchiato"
+-- elseif cached_tmux_theme == "catppuccin_mocha.conf" then
+-- 	theme = "mocha"
+-- elseif cached_tmux_theme == "catppuccin_frappe.conf" then
+-- 	theme = "frappe"
+-- elseif cached_tmux_theme == "catppuccin_latte.conf" then
+-- 	theme = "latte"
+-- end
 
 local flavour = theme
 

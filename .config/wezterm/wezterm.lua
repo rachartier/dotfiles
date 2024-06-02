@@ -18,6 +18,7 @@ config.default_domain = "WSL:Ubuntu"
 -- config.font = wezterm.font_with_fallback({ "Agave", "Symbols Nerd Font" })
 -- config.font = wezterm.font_with_fallback({ "Cascadia Code", "Symbols Nerd Font" })
 config.font = wezterm.font_with_fallback({ "JetBrains Mono", "Symbols Nerd Font" })
+-- config.font = wezterm.font_with_fallback({ "Maple Mono NF", "Symbols Nerd Font" })
 -- config.font = wezterm.font_with_fallback({ "Monaspace Argon", "Symbols Nerd Font" })
 
 -- config.font = wezterm.font("Agave")
@@ -83,33 +84,33 @@ config.window_background_opacity = 0.85
 
 config.window_close_confirmation = "NeverPrompt"
 
-local windows_user = os.getenv("USERNAME")
-local cache_path = "C:/Users/" .. windows_user .. "/AppData/Local/Temp/windows-tmux-theme.cache"
-
-wezterm.add_to_config_reload_watch_list(cache_path)
-local tmux_theme = read_file(cache_path)
-
-if tmux_theme ~= nil then
-	tmux_theme = tmux_theme:gsub("[\r\n]", "")
-end
-
-local theme = "Catppuccin Macchiato"
-
-if tmux_theme == "catppuccin_macchiato.conf" then
-	theme = "Catppuccin Macchiato"
-elseif tmux_theme == "catppuccin_latte.conf" then
-	theme = "Catppuccin Latte"
-end
-
-local custom = wezterm.color.get_builtin_schemes()[theme]
--- custom.ansi[6] = "#c6a0f6"
--- custom.ansi[7] = "#7dc4e4"
--- custom.brights[6] = "#c6a0f6"
--- custom.brights[7] = "#7dc4e4"
-
-config.color_schemes = {
-	["CustomCatppuccin"] = custom,
-}
-config.color_scheme = "CustomCatppuccin"
+-- local windows_user = os.getenv("USERNAME")
+-- local cache_path = "C:/Users/" .. windows_user .. "/AppData/Local/Temp/windows-tmux-theme.cache"
+--
+-- wezterm.add_to_config_reload_watch_list(cache_path)
+-- local tmux_theme = read_file(cache_path)
+--
+-- if tmux_theme ~= nil then
+-- 	tmux_theme = tmux_theme:gsub("[\r\n]", "")
+-- end
+--
+-- local theme = "Catppuccin Macchiato"
+--
+-- if tmux_theme == "catppuccin_macchiato.conf" then
+-- 	theme = "Catppuccin Macchiato"
+-- elseif tmux_theme == "catppuccin_latte.conf" then
+-- 	theme = "Catppuccin Latte"
+-- end
+--
+-- local custom = wezterm.color.get_builtin_schemes()[theme]
+-- -- custom.ansi[6] = "#c6a0f6"
+-- -- custom.ansi[7] = "#7dc4e4"
+-- -- custom.brights[6] = "#c6a0f6"
+-- -- custom.brights[7] = "#7dc4e4"
+--
+-- config.color_schemes = {
+-- 	["CustomCatppuccin"] = custom,
+-- }
+-- config.color_scheme = "CustomCatppuccin"
 
 return config
