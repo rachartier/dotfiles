@@ -75,27 +75,17 @@ function M.setup()
 		no_bold = false, -- Force no bold
 		styles = {
 			comments = { "italic" },
-			conditionals = {},
-			loops = {},
-			functions = {},
-			keywords = {},
-			strings = {},
-			variables = {},
-			numbers = {},
-			booleans = {},
-			properties = {},
-			types = {},
-			operators = {},
-		},
-		color_overrides = {
-			all = {
-				-- base = "#16161D",
-			},
-		},
-		highlight_overrides = {
-			all = function(colors)
-				return require("themes.groups").get(colors)
-			end,
+			-- conditionals = {},
+			-- loops = {},
+			-- functions = {},
+			-- keywords = {},
+			-- strings = {},
+			-- variables = {},
+			-- numbers = {},
+			-- booleans = {},
+			-- properties = {},
+			-- types = {},
+			-- operators = {},
 		},
 		integrations = {
 			alpha = true,
@@ -106,7 +96,7 @@ function M.setup()
 			gitsigns = true,
 			-- harpoon = true,
 			-- illuminate = true,
-			lsp_trouble = true,
+			lsp_trouble = false,
 			mason = true,
 			mini = true,
 			neotree = true,
