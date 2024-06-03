@@ -47,8 +47,8 @@ return {
 	event = "VeryLazy",
 	config = function()
 		local icons = require("config.icons")
-
 		local colors = require("theme").get_lualine_colors()
+
 		local kirby_colors = {
 			n = colors.red,
 			i = colors.green,

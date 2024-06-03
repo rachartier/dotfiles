@@ -33,8 +33,8 @@ return {
 		end,
 	},
 	{
-		-- dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-devicons-auto-colors.nvim",
-		"rachartier/tiny-devicons-auto-colors.nvim",
+		dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-devicons-auto-colors.nvim",
+		-- "rachartier/tiny-devicons-auto-colors.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		event = "VeryLazy",
 		enabled = true,
@@ -44,7 +44,7 @@ return {
 			require("tiny-devicons-auto-colors").setup({
 				colors = colors,
 				-- autoreload = true,
-				-- cache = { enabled = false },
+				-- cache = { enabled = true },
 			})
 		end,
 	},

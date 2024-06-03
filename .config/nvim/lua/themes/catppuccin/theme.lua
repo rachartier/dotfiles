@@ -1,5 +1,9 @@
 local M = {}
 
+function M.get_colors()
+	return require("catppuccin.palettes").get_palette(M.flavour)
+end
+
 function M.get_lualine_colors()
 	local c = M.get_colors()
 
@@ -41,10 +45,6 @@ function M.setup()
 	end
 
 	M.flavour = theme
-
-	function M.get_colors()
-		return require("catppuccin.palettes").get_palette(M.flavour)
-	end
 
 	local underlines = {
 		errors = { "undercurl" },
