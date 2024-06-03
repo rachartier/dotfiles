@@ -1,24 +1,5 @@
 local M = {}
 
-local cached_tmux_theme = require("utils").read_file("/tmp/tmux-theme.cache")
-local theme = "macchiato"
-
-if cached_tmux_theme == "catppuccin_macchiato.conf" then
-	theme = "macchiato"
-elseif cached_tmux_theme == "catppuccin_mocha.conf" then
-	theme = "mocha"
-elseif cached_tmux_theme == "catppuccin_frappe.conf" then
-	theme = "frappe"
-elseif cached_tmux_theme == "catppuccin_latte.conf" then
-	theme = "latte"
-end
-
-local flavour = theme
-
-function M.get_colors()
-	return require("catppuccin.palettes").get_palette(flavour)
-end
-
 function M.get_lualine_colors()
 	local c = M.get_colors()
 
@@ -46,6 +27,25 @@ function M.get_lualine_colors()
 end
 
 function M.setup()
+	local cached_tmux_theme = require("utils").read_file("/tmp/tmux-theme.cache")
+	local theme = "macchiato"
+
+	if cached_tmux_theme == "catppuccin_macchiato.conf" then
+		theme = "macchiato"
+	elseif cached_tmux_theme == "catppuccin_mocha.conf" then
+		theme = "mocha"
+	elseif cached_tmux_theme == "catppuccin_frappe.conf" then
+		theme = "frappe"
+	elseif cached_tmux_theme == "catppuccin_latte.conf" then
+		theme = "latte"
+	end
+
+	M.flavour = theme
+
+	function M.get_colors()
+		return require("catppuccin.palettes").get_palette(M.flavour)
+	end
+
 	local underlines = {
 		errors = { "undercurl" },
 		hints = { "undercurl" },
@@ -62,7 +62,7 @@ function M.setup()
 	end
 	require("catppuccin").setup({
 		lazy = true,
-		flavour = flavour, -- latte, frappe, macchiato, mocha
+		flavour = M.flavour, -- latte, frappe, macchiato, mocha
 		transparent_background = not vim.g.neovide,
 		show_end_of_buffer = false,
 		term_colors = true,

@@ -9,6 +9,17 @@ function M.setup()
 	if M._theme ~= nil then
 		M._theme.setup()
 	end
+
+	require("fwatch").watch("/tmp/tmux-theme.cache", {
+		on_event = function()
+			vim.schedule(function()
+				M._theme.setup()
+				require("tiny-devicons-auto-colors").apply({
+					colors = M.get_colors(),
+				})
+			end)
+		end,
+	})
 end
 
 function M.get_colors()
