@@ -34,7 +34,13 @@ eza_command='$HOME/.config/scripts/preview_fzf.sh $realpath'
 # dir_commands=(cd ls)
 #
 # for cmd in $dir_commands; do
-#     zstyle ":fzf-tab:complete:$cmd:*" fzf-preview $eza_command
+#     zstyle ":fzf-tab:complete:$cmd:*" fzf-p ~/.dotfile_profile
+#     source ~/.dotfile_profile
+#     source ~/.dotfile_profile
+#     source ~/.dotfile_profile
+#     source ~/.dotfile_profile
+#     source ~/.dotfile_profile
+#     source ~/.dotfile_profilesource ~/.dotfile_profile$eza_command
 #     zstyle ":fzf-tab:complete:$cmd:*" fzf-min-height 80
 # done
 

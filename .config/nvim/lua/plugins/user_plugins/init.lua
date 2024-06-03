@@ -43,7 +43,7 @@ return {
 			-- local colors = require("tokyonight.colors").setup()
 			require("tiny-devicons-auto-colors").setup({
 				colors = colors,
-				-- autoreload = true,
+				autoreload = true,
 				-- cache = { enabled = false },
 			})
 		end,

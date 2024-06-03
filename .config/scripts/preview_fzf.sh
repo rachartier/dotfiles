@@ -10,9 +10,27 @@ if [ -f "$filepath" ]; then
 	elif $(mimetype "$filepath" | grep "binary$" >/dev/null 2>&1); then
 		echo "BINARY FILE"
 	elif [ "$extension" = "md" ]; then
-		glow -p -w 100 -s dark "$filepath"
+		shade="dark"
+
+		if [ "$TMUX_THEME" = "catppuccin_latte.conf" ]; then
+			shade="light"
+		fi
+
+		glow -p -w 100 -s light "$filepath"
 	else
-		bat --style=numbers --color=always --line-range :500 "$filepath"
+		theme="Catppuccin-macchiato"
+		declare -A themes
+
+		themes["catppuccin_macchiato.conf"]="Catppuccin-macchiato"
+		themes["catppuccin_latte.conf"]="Catppuccin-latte"
+		themes["catppuccin_mocha.conf"]="Catppuccin-mocha"
+		themes["catppuccin_frappe.conf"]="Catppuccin-frappe"
+
+		if [[ -v themes[$TMUX_THEME] ]]; then
+			theme="${themes[$TMUX_THEME]}"
+		fi
+
+		bat --style=numbers --theme="$theme" --color=always --line-range :100 "$filepath"
 	fi
 elif [ -d "$filepath" ]; then
 	eza --tree --level 1 --group-directories-first --color always --icons "$filepath"

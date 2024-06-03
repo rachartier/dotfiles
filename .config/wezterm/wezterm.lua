@@ -84,23 +84,23 @@ config.window_background_opacity = 0.85
 
 config.window_close_confirmation = "NeverPrompt"
 
--- local windows_user = os.getenv("USERNAME")
--- local cache_path = "C:/Users/" .. windows_user .. "/AppData/Local/Temp/windows-tmux-theme.cache"
---
--- wezterm.add_to_config_reload_watch_list(cache_path)
--- local tmux_theme = read_file(cache_path)
---
--- if tmux_theme ~= nil then
--- 	tmux_theme = tmux_theme:gsub("[\r\n]", "")
--- end
---
--- local theme = "Catppuccin Macchiato"
---
--- if tmux_theme == "catppuccin_macchiato.conf" then
--- 	theme = "Catppuccin Macchiato"
--- elseif tmux_theme == "catppuccin_latte.conf" then
--- 	theme = "Catppuccin Latte"
--- end
+local windows_user = os.getenv("USERNAME")
+local cache_path = "C:/Users/" .. windows_user .. "/AppData/Local/Temp/windows-tmux-theme.cache"
+
+wezterm.add_to_config_reload_watch_list(cache_path)
+local tmux_theme = read_file(cache_path)
+
+if tmux_theme ~= nil then
+	tmux_theme = tmux_theme:gsub("[\r\n]", "")
+end
+
+local theme = "Catppuccin Macchiato"
+
+if tmux_theme == "catppuccin_macchiato.conf" then
+	theme = "Catppuccin Macchiato"
+elseif tmux_theme == "catppuccin_latte.conf" then
+	theme = "Catppuccin Latte"
+end
 --
 -- local custom = wezterm.color.get_builtin_schemes()[theme]
 -- -- custom.ansi[6] = "#c6a0f6"
@@ -111,6 +111,6 @@ config.window_close_confirmation = "NeverPrompt"
 -- config.color_schemes = {
 -- 	["CustomCatppuccin"] = custom,
 -- }
--- config.color_scheme = "CustomCatppuccin"
+config.color_scheme = theme
 
 return config
