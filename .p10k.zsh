@@ -59,13 +59,13 @@ emulate -L zsh -o extended_glob
   context                   # user@host
   dir                       # current directory
   pyenv
-  virtualenv                # python virtual environment
   dotnet_version
   vcs                       # git status
   command_execution_time    # previous command duration
   # =========================[ Line #2 ]=========================
   newline                   # \n
   devcontainer
+  virtualenv                # python virtual environment
   prompt_char               # prompt symbol
 )
 
@@ -105,13 +105,16 @@ emulate -L zsh -o extended_glob
   # Prompt symbol in overwrite vi mode is the same as in command mode.
   typeset -g POWERLEVEL9K_PROMPT_CHAR_OVERWRITE_STATE=false
 
-  # Grey Python Virtual Environment.
-  typeset -g POWERLEVEL9K_VIRTUALENV_FOREGROUND=$grey
-  # Don't show Python version.
-  typeset -g POWERLEVEL9K_VIRTUALENV_SHOW_PYTHON_VERSION=true
-  typeset -g POWERLEVEL9K_VIRTUALENV_{LEFT,RIGHT}_DELIMITER=
-  typeset -g POWERLEVEL9K_VIRTUALENV_FOREGROUND=yellow
-  typeset -g POWERLEVEL9K_VIRTUALENV_VISUAL_IDENTIFIER_EXPANSION=''
+  typeset -g POWERLEVEL9K_VIRTUALENV_GENERIC_NAMES=(virtualenv venv .venv env)
+  typeset -g POWERLEVEL9K_VIRTUALENV_SHOW_PYTHON_VERSION=false
+  typeset -g POWERLEVEL9K_VIRTUALENV_LEFT_DELIMITER='('
+  typeset -g POWERLEVEL9K_VIRTUALENV_RIGHT_DELIMITER=')'
+  typeset -g POWERLEVEL9K_VIRTUALENV_FOREGROUND=$yellow
+  typeset -g POWERLEVEL9K_VIRTUALENV_VISUAL_IDENTIFIER_EXPANSION=
+
+
+  typeset -g POWERLEVEL9K_PYENV_FOREGROUND=$yellow
+  typeset -g POWERLEVEL9K_PYENV_VISUAL_IDENTIFIER_EXPANSION=''
 
   # Blue current directory.
   typeset -g POWERLEVEL9K_DIR_FOREGROUND=$blue
