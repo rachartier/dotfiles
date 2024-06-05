@@ -49,28 +49,6 @@ return {
 		local icons = require("config.icons")
 		local colors = require("theme").get_lualine_colors()
 
-		local kirby_colors = {
-			n = colors.red,
-			i = colors.green,
-			v = colors.blue,
-			[""] = colors.blue,
-			V = colors.blue,
-			c = colors.mauve,
-			no = colors.red,
-			s = colors.orange,
-			S = colors.orange,
-			[""] = colors.orange,
-			ic = colors.yellow,
-			R = colors.violet,
-			Rv = colors.violet,
-			cv = colors.red,
-			ce = colors.red,
-			r = colors.cyan,
-			rm = colors.cyan,
-			["r?"] = colors.cyan,
-			["!"] = colors.red,
-			t = colors.red,
-		}
 		local kirby_default = "(>*-*)>"
 		local mode_kirby = {
 			n = "<(•ᴗ•)>",
@@ -178,6 +156,8 @@ return {
 
 		ins_left({
 			function()
+				local kirby_colors = require("theme").get_kirby_colors()
+
 				vim.api.nvim_command(
 					"hi! LualineMode guifg=" .. kirby_colors[vim.fn.mode()] .. " guibg=" .. default_theme.bg
 				)
