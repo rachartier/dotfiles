@@ -49,5 +49,3 @@ end, 50)
 
 require("autocmds")
 require("theme").setup()
-
--- require("user_plugins.switchbuffer").setup({})
