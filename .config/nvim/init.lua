@@ -45,9 +45,9 @@ require("neovide")
 
 vim.defer_fn(function()
 	require("remap")
-	require("autocmds")
 end, 50)
 
+require("autocmds")
 require("theme").setup()
 
 -- require("user_plugins.switchbuffer").setup({})
