@@ -183,7 +183,7 @@ return {
 		ins_left({
 			"branch",
 			icon = icons.signs.git.branch,
-			color = { fg = colors.violet },
+			color = { fg = require("theme").get_lualine_colors().violet },
 		})
 		-- ins_left({
 		-- 	"diff",
@@ -275,7 +275,7 @@ return {
 		ins_right({
 			require("lazy.status").updates,
 			cond = require("lazy.status").has_updates,
-			color = { fg = colors.green },
+			color = { fg = require("theme").get_lualine_colors().green },
 		})
 
 		ins_right({
