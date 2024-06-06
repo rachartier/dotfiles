@@ -5,6 +5,7 @@ darvid/zsh-poetry
 Aloxaf/fzf-tab
 
 ohmyzsh/ohmyzsh path:plugins/command-not-found
+MichaelAquilina/zsh-autoswitch-virtualenv
 ohmyzsh/ohmyzsh path:plugins/tmux
 
 ohmyzsh/ohmyzsh path:lib/key-bindings.zsh
