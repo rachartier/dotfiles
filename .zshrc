@@ -139,39 +139,7 @@ if ! [ -f "/tmp/tmux-theme.cache" ]; then
     echo "catppuccin_macchiato.conf" > /tmp/tmux-theme.cache
 fi
 
-
-### Custom hooks
-
-# From: https://stackoverflow.com/a/63955939
-autoload -Uz add-zsh-hook
-add-zsh-hook precmd automatically_activate_python_venv
-
-function automatically_activate_python_venv() {
-  if [[ -z $VIRTUAL_ENV ]] ; then
-    activate_venv
-  else
-    parentdir="$(dirname ${VIRTUAL_ENV})"
-    if [[ "$PWD"/ != "$parentdir"/* ]] ; then
-      deactivate
-      activate_venv
-    fi
-  fi
-}
-
-function activate_venv() {
-  local d n
-  d=$PWD
-
-  until false
-  do
-  if [[ -f $d/.venv/bin/activate ]] ; then
-    source $d/.venv/bin/activate
-    break
-  fi
-    d=${d%/*}
-    [[ $d = *\/* ]] || break
-  done
-}
+export AUTOSWITCH_DEFAULT_PYTHON="/usr/bin/python3"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
