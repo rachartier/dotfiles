@@ -6,7 +6,7 @@ return {
 		"mfussenegger/nvim-dap-python",
 		"theHamsta/nvim-dap-virtual-text",
 		"mfussenegger/nvim-jdtls",
-		"nvim-telescope/telescope-dap.nvim",
+		-- "nvim-telescope/telescope-dap.nvim",
 	},
 	-- priority = 100,
 	keys = {
@@ -29,7 +29,7 @@ return {
 		"<leader>df",
 	},
 	config = function()
-		require("telescope").load_extension("dap")
+		-- require("telescope").load_extension("dap")
 		-- require("dap.ext.vscode").load_launchjs()
 
 		require("nvim-dap-virtual-text").setup({
@@ -94,7 +94,7 @@ return {
 			"Set log point"
 		)
 		nnoremap("<leader>br", "<cmd>lua require'dap'.clear_breakpoints()<cr>", "Clear breakpoints")
-		nnoremap("<leader>ba", "<cmd>Telescope dap list_breakpoints<cr>", "List breakpoints")
+		-- nnoremap("<leader>ba", "<cmd>Telescope dap list_breakpoints<cr>", "List breakpoints")
 
 		local continue = function()
 			if vim.fn.filereadable(".vscode/launch.json") then
@@ -119,6 +119,6 @@ return {
 			local widgets = require("dap.ui.widgets")
 			widgets.centered_float(widgets.scopes)
 		end, "Scopes")
-		nnoremap("<leader>df", "<cmd>Telescope dap frames<cr>", "List frames")
+		-- nnoremap("<leader>df", "<cmd>Telescope dap frames<cr>", "List frames")
 	end,
 }

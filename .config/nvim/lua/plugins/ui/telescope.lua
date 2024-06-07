@@ -29,7 +29,7 @@ return {
 		-- { "<Tab>", '<cmd>lua require("user_plugins.switchbuffer").select_buffers()<cr>' },
 		-- { "<S-Tab>", '<cmd>lua require("user_plugins.switchbuffer").select_buffers()<cr>' },
 	},
-	enabled = true,
+	enabled = false,
 	config = function()
 		local function fuzzy_find_under_cursor()
 			local builtin = require("telescope.builtin")

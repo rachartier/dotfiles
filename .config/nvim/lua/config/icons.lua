@@ -30,10 +30,19 @@ M.signs = {
 		added = " ",
 		modified = " ",
 		removed = " ",
+		renamed = "󰑕 ",
 		branch = "",
 		-- added = " ",
 		-- modified = " ",
 		-- removed = " ",
+	},
+	fzf = {
+		git = {
+			added = "",
+			modified = "",
+			removed = "",
+			renamed = "󰑕",
+		},
 	},
 	diagnostic = {
 		error = "",

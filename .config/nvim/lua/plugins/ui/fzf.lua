@@ -14,11 +14,12 @@ local M = {
 		-- { "<Tab>", '<cmd>lua require("user_plugins.switchbuffer").select_buffers()<cr>' },
 		-- { "<S-Tab>", '<cmd>lua require("user_plugins.switchbuffer").select_buffers()<cr>' },
 	},
-	enabled = false,
+	enabled = true,
 }
 
 function M.config()
 	local fzf = require("fzf-lua")
+	local signs = require("config.icons").signs
 
 	fzf.setup({
 		winopts = {
@@ -28,7 +29,8 @@ function M.config()
 			row = 0.5, -- window row position (0=top, 1=bottom)
 			col = 0.5,
 			preview = {
-				flip_columns = 200,
+				flip_columns = 120,
+				wrap = "wrap",
 			},
 		},
 		keymap = {
@@ -39,11 +41,20 @@ function M.config()
 			},
 		},
 		files = {
+			formatter = "path.filename_first",
 			ignore_patterns = { "*.gif" },
 		},
 		diagnostics = {
 			winopts = {
 				preview = { hidden = "hidden" },
+			},
+		},
+		git = {
+			icons = {
+				["M"] = { icon = signs.fzf.git.modified, color = "yellow" },
+				["D"] = { icon = signs.fzf.git.removed, color = "red" },
+				["A"] = { icon = signs.fzf.git.added, color = "green" },
+				["R"] = { icon = signs.fzf.git.renamed, color = "yellow" },
 			},
 		},
 	})

@@ -1,26 +1,28 @@
 return {
 	{
-		-- dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny_buffers_switcher.nvim",
+		-- dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-buffers-switcher.nvim",
 		"rachartier/tiny-buffers-switcher.nvim",
 		event = "LazyFile",
 		keys = {
 			{
 				"<Tab>",
 				function()
-					require("tiny_buffers_switcher").switcher()
+					require("tiny-buffers-switcher").switcher()
 				end,
 				{ noremap = true, silent = true },
 			},
 			{
 				"<S-Tab>",
 				function()
-					require("tiny_buffers_switcher").switcher()
+					require("tiny-buffers-switcher").switcher()
 				end,
 				{ noremap = true, silent = true },
 			},
 		},
 		config = function()
-			require("tiny_buffers_switcher").setup()
+			require("tiny-buffers-switcher").setup({
+				use_fzf_lua = true,
+			})
 		end,
 	},
 	{
