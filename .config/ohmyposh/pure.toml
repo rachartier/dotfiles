@@ -74,11 +74,14 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
   newline = true
 
   [[blocks.segments]]
-    type = "docker"
-    style = "plain"
-    foreground = "blue"
-    background = "transparent"
-    template = "  {{ .Context }} "
+    type = 'command'
+    style = 'plain'
+    foreground = 'blue'
+    background = 'transparent'
+    template = '{{ if eq .Output "1" }}  ({{ substr 0 5 .Env.HOSTNAME }}) {{end}}'
+
+    [blocks.segments.properties]
+        script = "$HOME/.config/scripts/is_inside_docker.sh"
 
   [[blocks.segments]]
     type = "python"
