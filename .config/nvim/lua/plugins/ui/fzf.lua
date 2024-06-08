@@ -29,7 +29,7 @@ function M.config()
 			row = 0.5, -- window row position (0=top, 1=bottom)
 			col = 0.5,
 			preview = {
-				flip_columns = 120,
+				flip_columns = 130,
 				wrap = "wrap",
 			},
 		},

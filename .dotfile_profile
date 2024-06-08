@@ -1,4 +1,3 @@
-
 theme="\
     --color=bg+:#494d64,bg:-1,spinner:#f4dbd6,hl:bold:#eed49f\
     --color=fg:#cad3f5,header:#ed8796,info:#c6a0f6,pointer:#f4dbd6 \
@@ -6,7 +5,7 @@ theme="\
     --color=marker:#f4dbd6,fg+:#cad3f5,prompt:#c6a0f6,hl+:bold:#eed49f"
 
 if [ "$TMUX_THEME" = "catppuccin_frappe.conf" ]; then
-	theme = " \
+	theme="  \
         --color=bg+:#51576d,bg:-1,spinner:#f2d5cf,hl:bold:#e5c890\
         --color=fg:#c6d0f5,header:#e78284,info:#ca9ee6,pointer:#f2d5cf \
         --color=border:#c6d0f5 \
@@ -27,18 +26,23 @@ elif [ "$TMUX_THEME" = "catppuccin_mocha.conf" ]; then
         --color=marker:#f5e0dc,fg+:#f9e2af,prompt:#cba6f7,hl+:bold:#f9e2af"
 fi
 
+# --preview \"$HOME/.config/scripts/preview_fzf.sh {}\" \
 export FZF_DEFAULT_COMMAND="fd --type f"
-export FZF_DEFAULT_OPTS="--multi --reverse --margin=0,1      \
---preview-window=right:50% \
---preview-window=rounded \
---preview-window=cycle \
---preview \"$HOME/.config/scripts/preview_fzf.sh {}\" \
---marker='✚ ' --pointer=' ' --prompt='  ' \
---no-separator \
---scrollbar="▌"\
-$theme \
---color gutter:-1
---bind \"ctrl-e:execute(nvim {} < /dev/tty > /dev/tty 2>&1)\" > selected"
+export FZF_DEFAULT_OPTS="
+    --multi \
+    --reverse \
+    --margin=0,1 \
+    --preview-window=right:50% \
+    --preview-window=rounded \
+    --preview-window=cycle \
+    --scrollbar '▌' \
+    --marker '✚ ' \
+    --pointer ' ' \
+    --prompt ' ' \
+    --no-separator \
+    --color gutter:-1 \
+    $theme \
+"
 
 export FZF_CTRL_T_COMMAND='fd --type f --hidden --strip-cwd-prefix --exclude .git'
 export FZF_ALT_C_COMMAND='fd --type d --hidden --strip-cwd-prefix --exclude .git'

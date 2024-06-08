@@ -1,5 +1,4 @@
 source $HOME/.profile
-setopt promptsubst
 
 ZSH_TMUX_AUTOSTART=false
 ZSH_TMUX_CONFIG="$HOME/.config/tmux/tmux.conf"
@@ -24,19 +23,6 @@ fi
 
 eza_command='$HOME/.config/scripts/preview_fzf.sh $realpath'
 
-# dir_commands=(cd ls)
-#
-# for cmd in $dir_commands; do
-#     zstyle ":fzf-tab:complete:$cmd:*" fzf-p ~/.dotfile_profile
-#     source ~/.dotfile_profile
-#     source ~/.dotfile_profile
-#     source ~/.dotfile_profile
-#     source ~/.dotfile_profile
-#     source ~/.dotfile_profile
-#     source ~/.dotfile_profilesource ~/.dotfile_profile$eza_command
-#     zstyle ":fzf-tab:complete:$cmd:*" fzf-min-height 80
-# done
-
 zstyle ':fzf-tab:*' popup-min-size 38 0
 zstyle ':fzf-tab:*' fzf-flags --preview=''
 zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
@@ -48,8 +34,7 @@ zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-flags --preview-window=do
 
 zstyle ':completion:*:git-checkout:*'               sort false
 zstyle ':completion:*'                              completer _extensions _expand _complete _ignored _approximate
-# zstyle ':completion:*'                              list-colors ${(s.:.)LS_COLORS}
-zstyle ':completion:*'                              menu yes
+zstyle ':completion:*'                              menu no
 # zstyle ':completion:*'                              select-prompt '%SScrolling active: current selection at %p%s'
 zstyle ':completion:*:*:*:*:processes'              command 'ps -u $USER -o pid,user,comm,cmd -w -w'
 zstyle ':completion:*:correct:*'                    insert-unambiguous true             # start menu completion only if it could find no unambiguous initial string
@@ -109,24 +94,8 @@ setopt share_history          # share command history data
 
 source $HOME/.aliases
 
-# fpath+=($HOME/.zsh/pure)
-# autoload -U promptinit; promptinit
-# prompt pure
-#
-
-# if  command -v starship > /dev/null ; then
-#     eval "$(starship init zsh)"
-# fi
-
-# if  command -v gh > /dev/null ; then
-    # eval "$(gh completion -s zsh)"
-    # eval "$(gh copilot alias -- zsh)"
-# fi
-
 bindkey "^[[1;5A" history-substring-search-up
 bindkey "^[[1;5B" history-substring-search-down
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 if ! [ -f "/tmp/tmux-theme.cache" ]; then
     echo "catppuccin_macchiato.conf" > /tmp/tmux-theme.cache
@@ -134,5 +103,7 @@ fi
 
 export AUTOSWITCH_DEFAULT_PYTHON="/usr/bin/python3"
 
+# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/pure.toml)"
+eval "$(fzf --zsh)"
