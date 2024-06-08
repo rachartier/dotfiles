@@ -1,4 +1,3 @@
-romkatv/powerlevel10k
 b4b4r07/enhancd
 
 ohmyzsh/ohmyzsh path:plugins/command-not-found
