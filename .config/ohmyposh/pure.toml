@@ -66,6 +66,7 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     template = ' 󱦟 {{ .FormattedMs }}'
 
     [blocks.segments.properties]
+      style = "round"
       threshold = 5000
 
 [[blocks]]

@@ -151,7 +151,9 @@ return {
 				return ""
 			end,
 			color = { fg = colors.blue },
-			padding = 0,
+			padding = {
+				right = 2,
+			},
 		})
 
 		ins_left({
@@ -164,7 +166,9 @@ return {
 				return mode_kirby[vim.fn.mode()]
 			end,
 			color = "LualineMode",
-			left_padding = 0,
+			padding = {
+				left = 0,
+			},
 		})
 
 		ins_left({
