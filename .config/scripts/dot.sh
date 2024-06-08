@@ -122,11 +122,11 @@ install_starship() {
 }
 
 install_ohmyposh() {
-	if [ -d "$HOME/.local/bin" ]; then
+	if [ ! -d "$HOME/.local/bin" ]; then
 		mkdir -p "$HOME/.local/bin"
 	fi
 
-	curl -s https://ohmyposh.dev/install.sh | bash -s -- -d /home/rachartier/.local/bin
+	curl -s https://ohmyposh.dev/install.sh | bash -s -- -d "$HOME/.local/bin"
 	__echo_success "ohmyposh installed."
 }
 
