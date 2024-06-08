@@ -119,7 +119,15 @@ install_starship() {
 			__echo_failure "starship not installed."
 		fi
 	fi
+}
 
+install_ohmyposh() {
+	if [ -d "$HOME/.local/bin" ]; then
+		mkdir -p "$HOME/.local/bin"
+	fi
+
+	curl -s https://ohmyposh.dev/install.sh | bash -s -- -d /home/rachartier/.local/bin
+	__echo_success "ohmyposh installed."
 }
 
 install_fzf() {
@@ -277,6 +285,7 @@ install_essentials() {
 	install_lazygit
 	install_lazydocker
 	# install_starship
+	install_ohmyposh
 }
 
 install_minimal() {
@@ -290,6 +299,7 @@ install_minimal() {
 	install_fzf
 	install_viu
 	# install_starship
+	install_ohmyposh
 }
 
 install_docker() {
@@ -322,6 +332,7 @@ do_reinstall() {
 	"lazygit") install_lazygit ;;
 	"lazydocker") install_lazydocker ;;
 	"starship") install_starship ;;
+	"ohmyposh") install_ohmyposh ;;
 	"all") do_reinstall_all ;;
 	"minimal") install_minimal ;;
 	"docker") install_docker ;;
