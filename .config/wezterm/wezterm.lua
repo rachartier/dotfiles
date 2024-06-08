@@ -100,6 +100,8 @@ if tmux_theme == "catppuccin_macchiato.conf" then
 	theme = "Catppuccin Macchiato"
 elseif tmux_theme == "catppuccin_latte.conf" then
 	theme = "Catppuccin Latte"
+elseif tmux_theme == "catppuccin_mocha.conf" then
+	theme = "Catppuccin Mocha"
 end
 --
 -- local custom = wezterm.color.get_builtin_schemes()[theme]
