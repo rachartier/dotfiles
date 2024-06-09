@@ -103,7 +103,6 @@ fi
 
 export AUTOSWITCH_DEFAULT_PYTHON="/usr/bin/python3"
 
-# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/pure.toml)"
-eval "$(fzf --zsh)"
