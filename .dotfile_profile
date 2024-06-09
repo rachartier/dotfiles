@@ -5,7 +5,7 @@ theme="\
     --color=marker:#f4dbd6,fg+:#cad3f5,prompt:#c6a0f6,hl+:bold:#eed49f"
 
 if [ "$TMUX_THEME" = "catppuccin_frappe.conf" ]; then
-	theme="  \
+	theme="\
         --color=bg+:#51576d,bg:-1,spinner:#f2d5cf,hl:bold:#e5c890\
         --color=fg:#c6d0f5,header:#e78284,info:#ca9ee6,pointer:#f2d5cf \
         --color=border:#c6d0f5 \

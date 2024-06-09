@@ -90,7 +90,7 @@ return {
 				width = 60,
 				height = 12,
 				opts = {
-					-- redraw = true,
+					redraw = true,
 					position = "center",
 				},
 			}
@@ -205,7 +205,7 @@ return {
 					footer = dashboard.section.footer,
 				})
 
-				pcall(vim.cmd.AlphaRedraw)
+				-- pcall(vim.cmd.AlphaRedraw)
 			end
 		end, { desc = "Redraw alpha on resize" })
 
