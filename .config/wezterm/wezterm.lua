@@ -1,4 +1,5 @@
 local wezterm = require("wezterm")
+local act = wezterm.action
 local config = {}
 
 local function read_file(path)
@@ -114,5 +115,51 @@ end
 -- 	["CustomCatppuccin"] = custom,
 -- }
 config.color_scheme = theme
+
+config.mouse_bindings = {
+
+	-- CTRL-Click open hyperlinks
+	{
+		mouse_reporting = true,
+		event = { Up = { streak = 1, button = "Left" } },
+		mods = "CTRL",
+		action = act.OpenLinkAtMouseCursor,
+	},
+	-- Scrolling up while holding CTRL increases the font size
+	{
+		mouse_reporting = true,
+		event = { Down = { streak = 1, button = { WheelUp = 1 } } },
+		mods = "CTRL",
+		action = act.IncreaseFontSize,
+	},
+
+	-- Scrolling down while holding CTRL decreases the font size
+	{
+		mouse_reporting = true,
+		event = { Down = { streak = 1, button = { WheelDown = 1 } } },
+		mods = "CTRL",
+		action = act.DecreaseFontSize,
+	},
+
+	-- CTRL-Click open hyperlinks
+	{
+		event = { Up = { streak = 1, button = "Left" } },
+		mods = "CTRL",
+		action = act.OpenLinkAtMouseCursor,
+	},
+	-- Scrolling up while holding CTRL increases the font size
+	{
+		event = { Down = { streak = 1, button = { WheelUp = 1 } } },
+		mods = "CTRL",
+		action = act.IncreaseFontSize,
+	},
+
+	-- Scrolling down while holding CTRL decreases the font size
+	{
+		event = { Down = { streak = 1, button = { WheelDown = 1 } } },
+		mods = "CTRL",
+		action = act.DecreaseFontSize,
+	},
+}
 
 return config
