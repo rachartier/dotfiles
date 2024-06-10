@@ -21,7 +21,7 @@ return {
 		},
 		config = function()
 			require("tiny-buffers-switcher").setup({
-				use_fzf_lua = true,
+				--				use_fzf_lua = true,
 			})
 		end,
 	},

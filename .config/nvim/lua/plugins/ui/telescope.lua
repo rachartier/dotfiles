@@ -1,6 +1,6 @@
 return {
 	"nvim-telescope/telescope.nvim",
-	-- TODO: vérifier les nouveaux commits pour éviter le bug de treesitter...
+	-- TODO: vériflier les nouveaux commits pour éviter le bug de treesitter...
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		{
@@ -29,7 +29,7 @@ return {
 		-- { "<Tab>", '<cmd>lua require("user_plugins.switchbuffer").select_buffers()<cr>' },
 		-- { "<S-Tab>", '<cmd>lua require("user_plugins.switchbuffer").select_buffers()<cr>' },
 	},
-	enabled = false,
+	enabled = true,
 	config = function()
 		local function fuzzy_find_under_cursor()
 			local builtin = require("telescope.builtin")
