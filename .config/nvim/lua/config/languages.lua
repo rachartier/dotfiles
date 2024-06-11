@@ -123,6 +123,12 @@ return {
 	-- 		},
 	-- 	},
 	-- },
+
+	{
+		languages = { "typescript" },
+		mason = { "typescript-language-server" },
+		formatter = { "prettierd" },
+	},
 	{
 		languages = { "docker" },
 		mason = { "dockerls" },
