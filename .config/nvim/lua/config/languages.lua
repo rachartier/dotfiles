@@ -126,7 +126,7 @@ return {
 
 	{
 		languages = { "typescript" },
-		mason = { "typescript-language-server" },
+		mason = { "tsserver" },
 		formatter = { "prettierd" },
 	},
 	{
