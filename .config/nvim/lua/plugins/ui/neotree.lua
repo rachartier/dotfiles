@@ -6,6 +6,7 @@ return {
 			"nvim-tree/nvim-web-devicons",
 			"MunifTanjim/nui.nvim",
 		},
+		enabled = false,
 		keys = { "<leader>te" },
 		config = function()
 			local U = require("utils")

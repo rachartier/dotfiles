@@ -20,7 +20,7 @@ return {
 	keys = {
 		"<leader>fl",
 		"<leader>fw",
-		"<leader>tt",
+		"<leader>fd",
 		"<leader>ff",
 		"<leader>fg",
 		"<leader>fh",
@@ -217,7 +217,7 @@ return {
 			require("telescope").extensions.git_file_history.git_file_history,
 			{ desc = "Open Git File History" }
 		)
-		vim.keymap.set("n", "<leader>tt", builtin.diagnostics, { desc = "Find all diagnostics" })
+		vim.keymap.set("n", "<leader>fd", builtin.diagnostics, { desc = "Find all diagnostics" })
 		vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "Grep string under cursor" })
 		vim.keymap.set("n", "<leader>ss", function()
 			require("telescope.builtin").spell_suggest(require("telescope.themes").get_cursor({}))

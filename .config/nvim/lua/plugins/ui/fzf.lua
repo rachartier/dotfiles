@@ -10,7 +10,7 @@ local M = {
 		"<leader>fl",
 		"<leader>fw",
 		"<leader>ft",
-		"<leader>tt",
+		"<leader>ft",
 		-- { "<Tab>", '<cmd>lua require("user_plugins.switchbuffer").select_buffers()<cr>' },
 		-- { "<S-Tab>", '<cmd>lua require("user_plugins.switchbuffer").select_buffers()<cr>' },
 	},
@@ -70,7 +70,7 @@ function M.config()
 		fzf.grep({ search = "TODO|HACK|PERF|NOTE|FIX|WARN", no_esc = true })
 	end, { desc = "Search all todos" })
 
-	vim.keymap.set("n", "<leader>tt", fzf.diagnostics_workspace, { desc = "Toggle fzf diagnostic" })
+	vim.keymap.set("n", "<leader>fd", fzf.diagnostics_workspace, { desc = "Toggle fzf diagnostic" })
 
 	-- vim.keymap.set("n", "<leader>fh", fzf.help_tags, { desc = "show documentations" })
 	-- vim.keymap.set("n", "<leader>fm", "<cmd>telescope harpoon marks<cr>", { desc = "open harpoon marks" })

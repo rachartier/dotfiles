@@ -51,7 +51,6 @@ return {
 	},
 	{
 		"CopilotC-Nvim/CopilotChat.nvim",
-		event = "VeryLazy",
 		branch = "canary",
 		dependencies = {
 			"github/copilot.vim",
@@ -117,6 +116,7 @@ return {
 			separator = " ", -- Separator to use in chat
 			show_folds = false,
 			auto_follow_cursor = false,
+			model = "gpt-4",
 			-- context = "buffer",
 
 			selection = function(source)
@@ -136,11 +136,15 @@ return {
 				show_diff = {
 					normal = "cd",
 				},
+				complete = {
+					insert = "",
+				},
 			},
 		},
 		config = function(_, opts)
 			local chat = require("CopilotChat")
 
+			require("CopilotChat.integrations.cmp").setup()
 			chat.setup(opts)
 
 			vim.keymap.set("n", "<leader>cy", function()
