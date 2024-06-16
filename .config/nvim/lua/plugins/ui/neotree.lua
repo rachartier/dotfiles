@@ -115,6 +115,7 @@ return {
 	},
 	{
 		"antosha417/nvim-lsp-file-operations",
+		enabled = false,
 		config = function()
 			require("lsp-file-operations").setup()
 		end,

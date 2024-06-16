@@ -28,12 +28,12 @@ return {
 			function()
 				require("oil").open_float()
 			end,
+			{ noremap = true, silent = true },
 			desc = "Open Oil",
 		},
 	},
 	config = function()
 		require("oil").setup({
-
 			delete_to_trash = true,
 			keymaps = {
 				["<BS>"] = "actions.parent",
@@ -44,27 +44,27 @@ return {
 				signcolumn = "yes:1",
 			},
 			float = {
-				padding = 2,
-				max_width = 0,
-				max_height = 0,
+				-- padding = 2,
+				max_width = 60,
+				max_height = 20,
 				border = "rounded",
 				win_options = {
 					winblend = 0,
 				},
-				override = function(conf)
-					local win_height = math.ceil(vim.o.lines * 0.3)
-					local win_width = math.ceil(vim.o.columns * 0.4)
-
-					local row = math.ceil((vim.o.lines - win_height) * 0.4)
-					local col = math.ceil((vim.o.columns - win_width) * 0.5)
-
-					conf.width = win_width
-					conf.height = win_height
-					conf.row = row
-					conf.col = col
-
-					return conf
-				end,
+				-- override = function(conf)
+				-- 	local win_height = math.ceil(vim.o.lines * 0.3)
+				-- 	local win_width = math.ceil(vim.o.columns * 0.4)
+				--
+				-- 	local row = math.ceil((vim.o.lines - win_height) * 0.4)
+				-- 	local col = math.ceil((vim.o.columns - win_width) * 0.5)
+				--
+				-- 	conf.width = win_width
+				-- 	conf.height = win_height
+				-- 	conf.row = row
+				-- 	conf.col = col
+				--
+				-- 	return conf
+				-- end,
 			},
 			preview = {
 
