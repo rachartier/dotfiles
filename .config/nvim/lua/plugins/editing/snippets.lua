@@ -2,20 +2,25 @@ return {
 	{
 		"chrisgrieser/nvim-scissors",
 		event = "InsertEnter",
-		config = function()
-			require("scissors").setup({
-				snippetDir = vim.fn.stdpath("config") .. "/snippets",
-				editSnippetPopup = {
-					height = 0.4, -- relative to the window, number between 0 and 1
-					width = 0.6,
-					border = "rounded",
-					keymaps = {
-						cancel = "q",
-						saveChanges = "<CR>", -- alternatively, can also use `:w`
-					},
+		opts = {
+			backdrop = {
+				enabled = false,
+			},
+			snippetDir = vim.fn.stdpath("config") .. "/snippets",
+			editSnippetPopup = {
+				height = 0.4, -- relative to the window, number between 0 and 1
+				width = 0.6,
+				border = "rounded",
+				keymaps = {
+					cancel = "q",
+					saveChanges = "<CR>", -- alternatively, can also use `:w`
 				},
-			})
-		end,
+			},
+			telescope = {
+				alsoSearchSnippetBody = true,
+			},
+			jsonFormatter = "jq", -- "yq"|"jq"|"none"
+		},
 	},
 	{
 		"L3MON4D3/LuaSnip",

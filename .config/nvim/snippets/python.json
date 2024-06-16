@@ -1,0 +1,10 @@
+{
+  "class": {
+    "body": [
+      "class ${1:class_name}:",
+      "    def __init__(self) -> None:",
+      "        pass"
+    ],
+    "prefix": "class"
+  }
+}
