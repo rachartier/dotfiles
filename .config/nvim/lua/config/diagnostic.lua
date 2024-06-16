@@ -30,6 +30,17 @@ vim.diagnostic.config({
 	-- 		end
 	-- 	end,
 	-- },
+	document_highlight = {
+		enabled = true,
+	},
+	capabilities = {
+		workspace = {
+			fileOperations = {
+				didRename = true,
+				willRename = true,
+			},
+		},
+	},
 	signs = {
 		text = {
 			[vim.diagnostic.severity.ERROR] = icons.signs.diagnostic.error,

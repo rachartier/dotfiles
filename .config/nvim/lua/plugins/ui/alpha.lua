@@ -213,6 +213,17 @@ return {
 		return dashboard
 	end,
 	config = function(_, dashboard)
+		if vim.o.filetype == "lazy" then
+			vim.cmd.close()
+			vim.api.nvim_create_autocmd("User", {
+				once = true,
+				pattern = "AlphaReady",
+				callback = function()
+					require("lazy").show()
+				end,
+			})
+		end
+
 		local alpha = require("alpha")
 		require("alpha.term")
 

@@ -58,7 +58,6 @@ return {
 				},
 				border = icons.default_border,
 			},
-
 			keymaps = {
 				toggle_server_expand = "<CR>",
 				install_server = "i",

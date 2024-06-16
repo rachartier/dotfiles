@@ -1,4 +1,3 @@
-local username = vim.fn.expand("$USER")
 local utils = require("utils")
 
 return {
@@ -109,38 +108,42 @@ return {
 				desc = "CopilotChat - Quick chat",
 			},
 		},
-		opts = {
-			question_header = string.rep("─", #username + 3) .. "\n󰙃  " .. username .. "  ",
-			answer_header = "  **Copilot**",
-			error_header = "  **Error**",
-			separator = " ", -- Separator to use in chat
-			show_folds = false,
-			auto_follow_cursor = false,
-			model = "gpt-4",
-			-- context = "buffer",
+		opts = function()
+			local user = vim.env.USER or "User"
 
-			selection = function(source)
-				local select = require("CopilotChat.select")
-				return select.visual(source) or select.line(source)
-			end,
+			return {
+				question_header = string.rep("─", #user + 3) .. "\n󰙃  " .. user .. "  ",
+				answer_header = "  **Copilot**",
+				error_header = "  **Error**",
+				separator = " ", -- Separator to use in chat
+				show_folds = false,
+				auto_follow_cursor = false,
+				model = "gpt-4",
+				-- context = "buffer",
 
-			prompts = {
-				BetterNamings = {
-					prompt = "/COPILOT_GENERATE Please provide better names for the following variables and/or functions.",
+				selection = function(source)
+					local select = require("CopilotChat.select")
+					return select.visual(source) or select.buffer(source)
+				end,
+
+				prompts = {
+					BetterNamings = {
+						prompt = "/COPILOT_GENERATE Please provide better names for the following variables and/or functions.",
+					},
+					TestsxUnit = {
+						prompt = "/COPILOT_GENERATE Write a set of detailed unit test functions for the following code with the xUnit framework.",
+					},
 				},
-				TestsxUnit = {
-					prompt = "/COPILOT_GENERATE Write a set of detailed unit test functions for the following code with the xUnit framework.",
+				mappings = {
+					show_diff = {
+						normal = "cd",
+					},
+					complete = {
+						insert = "",
+					},
 				},
-			},
-			mappings = {
-				show_diff = {
-					normal = "cd",
-				},
-				complete = {
-					insert = "",
-				},
-			},
-		},
+			}
+		end,
 		config = function(_, opts)
 			local chat = require("CopilotChat")
 

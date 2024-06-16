@@ -37,7 +37,7 @@ function M.get(colors)
 		PmenuSel = { link = "Visual" },
 
 		CursorLine = { bg = cursor_line_bg },
-		CursorLineNr = { fg = colors.overlay1 },
+		CursorLineNr = { fg = colors.mauve },
 		CursorLineSign = { link = "SignColumn" },
 		CursorColumn = { bg = "None" },
 
