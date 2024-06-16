@@ -37,7 +37,7 @@ return {
 	{
 		-- dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-devicons-auto-colors.nvim",
 		"rachartier/tiny-devicons-auto-colors.nvim",
-		branch = "8-caching-broken-again",
+		branch = "main",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		event = "VeryLazy",
 		enabled = true,
@@ -49,18 +49,6 @@ return {
 				-- autoreload = true,
 				cache = { enabled = true },
 			})
-
-			vim.keymap.set("", "<leader>gd", function()
-				vim.o.background = "dark"
-				require("nvim-web-devicons").refresh()
-				require("tiny-devicons-auto-colors").apply({ "#0000FF" })
-			end)
-
-			vim.keymap.set("", "<leader>gl", function()
-				vim.o.background = "light"
-				require("nvim-web-devicons").refresh()
-				require("tiny-devicons-auto-colors").apply({ "#FF0000" })
-			end)
 		end,
 	},
 }

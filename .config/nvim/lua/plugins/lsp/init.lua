@@ -50,7 +50,25 @@ return {
 				"shfmt",
 				-- "flake8",
 			},
-			ui = { border = icons.default_border },
+			ui = {
+				icons = {
+					package_pending = " ",
+					package_installed = "󰄳 ",
+					package_uninstalled = " ",
+				},
+				border = icons.default_border,
+			},
+
+			keymaps = {
+				toggle_server_expand = "<CR>",
+				install_server = "i",
+				update_server = "u",
+				check_server_version = "c",
+				update_all_servers = "U",
+				check_outdated_servers = "C",
+				uninstall_server = "X",
+				cancel_installation = "<C-c>",
+			},
 		},
 		config = function(_, opts)
 			require("mason").setup(opts)
@@ -124,8 +142,7 @@ return {
 				})
 			end
 
-			local capabilities =
-				require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+			local capabilities = require("config.lsp.attach").make_capabilities()
 
 			require("mason-lspconfig").setup({
 				ensure_installed = to_install_lsp,

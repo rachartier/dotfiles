@@ -12,12 +12,6 @@ return {
 					keymaps = {
 						cancel = "q",
 						saveChanges = "<CR>", -- alternatively, can also use `:w`
-						goBackToSearch = "<BS>",
-						deleteSnippet = "<C-BS>",
-						duplicateSnippet = "<C-d>",
-						openInFile = "<C-o>",
-						insertNextToken = "<C-t>", -- insert & normal mode
-						jumpBetweenBodyAndPrefix = "<Tab>", -- insert & normal mode
 					},
 				},
 			})

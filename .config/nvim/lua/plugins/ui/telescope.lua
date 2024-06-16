@@ -105,11 +105,13 @@ return {
 				-- borderchars = icons.default_border,
 				-- { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
 
+				set_env = { ["COLORTERM"] = "truecolor" },
 				prompt = { "─", "│", " ", "│", "╭", "╮", "│", "│" },
 				results = { "─", "│", "─", "│", "├", "┤", "╯", "╰" },
 				preview = { "─", "│", "─", " ", "─", "╮", "╯", "─" },
 				sort_mru = true,
 				sorting_strategy = "ascending",
+				selection_strategy = "reset",
 				multi_icon = "",
 				entry_prefix = "   ",
 				prompt_prefix = "   ",
