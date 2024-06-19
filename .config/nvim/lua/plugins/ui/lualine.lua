@@ -297,8 +297,6 @@ return {
 						unknown = colors.red,
 					},
 				},
-				spinners = require("copilot-lualine.spinners").dots,
-				spinner_color = "#6272A4",
 			},
 			show_colors = true,
 			show_loading = false,
