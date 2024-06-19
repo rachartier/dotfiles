@@ -61,6 +61,7 @@ return {
 					},
 				},
 				filetypes = {
+					markdown = true,
 					sh = function()
 						local filename = vim.fs.basename(vim.api.nvim_buf_get_name(0))
 						if
@@ -73,6 +74,7 @@ return {
 
 						return true
 					end,
+					["*"] = true,
 				},
 			})
 		end,

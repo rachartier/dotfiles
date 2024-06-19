@@ -292,7 +292,7 @@ return {
 					hl = {
 						enabled = colors.green,
 						sleep = colors.fg,
-						disabled = colors.orange,
+						disabled = colors.red,
 						warning = colors.yellow,
 						unknown = colors.red,
 					},
