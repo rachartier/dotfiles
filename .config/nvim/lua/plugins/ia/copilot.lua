@@ -1,58 +1,84 @@
 local utils = require("utils")
 
 return {
+	-- {
+	-- 	"github/copilot.vim",
+	-- 	event = "VeryLazy",
+	-- 	config = function()
+	-- 		vim.keymap.set("i", "<C-g>", "", {
+	-- 			expr = true,
+	-- 			replace_keycodes = false,
+	-- 		})
+	--
+	-- 		-- vim.keymap.set("i", "<C-g>", function()
+	-- 		-- 	vim.fn["copilot#Accept"]("")
+	-- 		-- 	local ret = vim.fn["copilot#TextQueuedForInsertion"]()
+	-- 		--
+	-- 		-- 	-- vim.defer_fn(function()
+	-- 		-- 	-- 	vim.api.nvim_exec_autocmds("User", {
+	-- 		-- 	-- 		pattern = "CustomFormatCopilot",
+	-- 		-- 	-- 		modeline = false,
+	-- 		-- 	-- 		data = {
+	-- 		-- 	-- 			lines_count = lines_count,
+	-- 		-- 	-- 		},
+	-- 		-- 	-- 	})
+	-- 		-- 	-- end, 500)
+	-- 		-- 	return ret
+	-- 		-- end, { expr = true, silent = true, replace_keycodes = false })
+	--
+	-- 		vim.keymap.set(
+	-- 			"i",
+	-- 			"<C-g>",
+	-- 			'copilot#Accept("\\<CR>")',
+	-- 			{ expr = true, silent = true, replace_keycodes = false }
+	-- 		)
+	--
+	-- 		vim.g.copilot_no_tab_map = true
+	--
+	-- 		utils.on_event({ "BufEnter" }, function()
+	-- 			---@diagnostic disable-next-line: inject-field
+	-- 			vim.b.copilot_enabled = false
+	-- 		end, {
+	-- 			target = {
+	-- 				".env",
+	-- 				"*secret",
+	-- 				"*id_rsa",
+	-- 			},
+	-- 			desc = "Disable Copilot for sensitive files",
+	-- 		})
+	-- 	end,
+	-- },
 	{
-		"github/copilot.vim",
+		"zbirenbaum/copilot.lua",
 		event = "VeryLazy",
 		config = function()
-			vim.keymap.set("i", "<C-g>", "", {
-				expr = true,
-				replace_keycodes = false,
-			})
-
-			-- vim.keymap.set("i", "<C-g>", function()
-			-- 	vim.fn["copilot#Accept"]("")
-			-- 	local ret = vim.fn["copilot#TextQueuedForInsertion"]()
-			--
-			-- 	-- vim.defer_fn(function()
-			-- 	-- 	vim.api.nvim_exec_autocmds("User", {
-			-- 	-- 		pattern = "CustomFormatCopilot",
-			-- 	-- 		modeline = false,
-			-- 	-- 		data = {
-			-- 	-- 			lines_count = lines_count,
-			-- 	-- 		},
-			-- 	-- 	})
-			-- 	-- end, 500)
-			-- 	return ret
-			-- end, { expr = true, silent = true, replace_keycodes = false })
-
-			vim.keymap.set(
-				"i",
-				"<C-g>",
-				'copilot#Accept("\\<CR>")',
-				{ expr = true, silent = true, replace_keycodes = false }
-			)
-
-			vim.g.copilot_no_tab_map = true
-
-			utils.on_event({ "BufEnter" }, function()
-				---@diagnostic disable-next-line: inject-field
-				vim.b.copilot_enabled = false
-			end, {
-				target = {
-					".env",
-					"*secret",
-					"*id_rsa",
+			require("copilot").setup({
+				suggestion = {
+					enabled = true,
+					auto_trigger = true,
+					keymap = {
+						accept = "<C-g>",
+					},
 				},
-				desc = "Disable Copilot for sensitive files",
+				filetypes = {
+					sh = function()
+						local filename = vim.fs.basename(vim.api.nvim_buf_get_name(0))
+						if string.match(filename, "^%.env.*") or string.match(filename, "^%.secret.*") then
+							return false
+						end
+
+						return true
+					end,
+				},
 			})
 		end,
 	},
 	{
 		"CopilotC-Nvim/CopilotChat.nvim",
 		branch = "canary",
+		event = "VeryLazy",
 		dependencies = {
-			"github/copilot.vim",
+			"zbirenbaum/copilot.lua",
 			"nvim-lua/plenary.nvim", -- for curl, log wrapper
 		},
 		keys = {

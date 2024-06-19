@@ -43,7 +43,10 @@ end
 
 return {
 	"nvim-lualine/lualine.nvim",
-	dependency = { "nvim-tree/nvim-web-devicons" },
+	dependencies = {
+		"AndreM222/copilot-lualine",
+		"nvim-tree/nvim-web-devicons",
+	},
 	event = "VeryLazy",
 	config = function()
 		local icons = require("config.icons")
@@ -283,17 +286,22 @@ return {
 		})
 
 		ins_right({
-			function()
-				local ok, copilot_enabled = pcall(vim.api.nvim_buf_get_var, 0, "copilot_enabled")
-
-				if copilot_enabled then
-					return icons.signs.others.copilot
-				end
-
-				return icons.signs.others.copilot_disabled
-			end,
-			cond = cond_disable_by_ft,
-			color = { fg = colors.fg },
+			"copilot",
+			symbols = {
+				status = {
+					hl = {
+						enabled = colors.green,
+						sleep = colors.fg,
+						disabled = colors.orange,
+						warning = colors.yellow,
+						unknown = colors.red,
+					},
+				},
+				spinners = require("copilot-lualine.spinners").dots,
+				spinner_color = "#6272A4",
+			},
+			show_colors = true,
+			show_loading = false,
 			padding = { left = 1, right = 3 },
 		})
 
