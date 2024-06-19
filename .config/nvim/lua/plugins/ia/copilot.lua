@@ -68,7 +68,7 @@ return {
 				function()
 					local actions = require("CopilotChat.actions")
 					-- require("CopilotChat.integrations.telescope").pick(actions.help_actions())
-					require("CopilotChat.integrations.fzflua").pick(actions.help_actions())
+					require("CopilotChat.integrations.telescope").pick(actions.help_actions())
 				end,
 				desc = "CopilotChat - Help actions",
 			},
@@ -80,7 +80,7 @@ return {
 					-- require("CopilotChat.integrations.telescope").pick(actions.prompt_actions({
 					-- 	selection = require("CopilotChat.select").visual,
 					-- }))
-					require("CopilotChat.integrations.fzflua").pick(actions.prompt_actions({
+					require("CopilotChat.integrations.telescope").pick(actions.prompt_actions({
 						selection = require("CopilotChat.select").visual,
 					}))
 				end,

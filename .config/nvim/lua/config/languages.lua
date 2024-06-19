@@ -158,4 +158,9 @@ return {
 			"markdownlint",
 		},
 	},
+	{
+		languages = { "text" },
+		mason = {},
+		formatter = { "typos" },
+	},
 }
