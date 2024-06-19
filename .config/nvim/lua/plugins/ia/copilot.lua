@@ -63,7 +63,11 @@ return {
 				filetypes = {
 					sh = function()
 						local filename = vim.fs.basename(vim.api.nvim_buf_get_name(0))
-						if string.match(filename, "^%.env.*") or string.match(filename, "^%.secret.*") then
+						if
+							string.match(filename, "^%.env.*")
+							or string.match(filename, "^%.secret.*")
+							or string.match(filename, "^%id_rsa.*")
+						then
 							return false
 						end
 
