@@ -18,8 +18,8 @@ config.default_domain = "WSL:Ubuntu"
 
 -- config.font = wezterm.font_with_fallback({ "Agave", "Symbols Nerd Font" })
 -- config.font = wezterm.font_with_fallback({ "Cascadia Code", "Symbols Nerd Font" })
-config.font = wezterm.font_with_fallback({ "JetBrains Mono", "Symbols Nerd Font" })
--- config.font = wezterm.font_with_fallback({ "Maple Mono NF", "Symbols Nerd Font" })
+-- config.font = wezterm.font_with_fallback({ "JetBrains Mono", "Symbols Nerd Font" })
+config.font = wezterm.font_with_fallback({ "Maple Mono NF", "Symbols Nerd Font" })
 -- config.font = wezterm.font_with_fallback({ "Monaspace Argon", "Symbols Nerd Font" })
 
 -- config.font = wezterm.font("Agave")
@@ -49,7 +49,7 @@ config.font_rules = {
 
 config.harfbuzz_features = {
 	"calt=1",
-	-- "ss01=1",
+	"ss01=1",
 	"ss02=1",
 	"ss03=1",
 	"ss04=1",

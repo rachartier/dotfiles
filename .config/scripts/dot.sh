@@ -28,6 +28,27 @@ __need_sudo() {
 	eval $@
 }
 
+__get_windows_user() {
+	local windows_user
+	windows_user=$(powershell.exe '$env:UserName' | tr -d '\r')
+	echo "$windows_user"
+}
+
+install_fonts_for_windows() {
+	__echo_info "Installing fonts for Windows"
+
+	fonts=$(find "$HOME/.fonts" -type f -name "*.ttf" -o -name "*.otf")
+
+	for font in $fonts; do
+		__echo_info "Installing $font..."
+		font_name=$(basename "$font")
+		# cp "$font" "/mnt/c/Users/$(__get_windows_user)/AppData/Local/Microsoft/Windows/Fonts/$font_name" || __echo_info "Font $font_name already installed."
+		cp "$font" "/mnt/c/Windows/Fonts/$font_name" || __echo_info "Font $font_name already installed."
+	done
+
+	__echo_success "Fonts installed."
+}
+
 __get_latest_release() {
 	curl -s "https://api.github.com/repos/$1/releases/latest" | grep -Po '"tag_name": "v\K[^"]*'
 }
@@ -286,6 +307,8 @@ install_essentials() {
 	install_lazydocker
 	# install_starship
 	install_ohmyposh
+
+	install_fonts_for_windows
 }
 
 install_minimal() {
@@ -321,21 +344,22 @@ do_reinstall_all() {
 
 do_reinstall() {
 	case "$1" in
-	"tmux") install_tmux ;;
-	"bat") install_bat ;;
-	"nvim") install_nvim "$2" ;;
-	"packages") install_packages ;;
-	"fzf") install_fzf ;;
-	"viu") install_viu ;;
-	"eza") install_eza ;;
-	"glow") install_glow ;;
-	"lazygit") install_lazygit ;;
-	"lazydocker") install_lazydocker ;;
-	"starship") install_starship ;;
-	"ohmyposh") install_ohmyposh ;;
 	"all") do_reinstall_all ;;
-	"minimal") install_minimal ;;
+	"bat") install_bat ;;
 	"docker") install_docker ;;
+	"eza") install_eza ;;
+	"fzf") install_fzf ;;
+	"glow") install_glow ;;
+	"lazydocker") install_lazydocker ;;
+	"lazygit") install_lazygit ;;
+	"minimal") install_minimal ;;
+	"nvim") install_nvim "$2" ;;
+	"ohmyposh") install_ohmyposh ;;
+	"packages") install_packages ;;
+	"starship") install_starship ;;
+	"tmux") install_tmux ;;
+	"viu") install_viu ;;
+	"fonts") install_fonts_for_windows ;;
 	*) __echo_failure "'$1' unknown." ;;
 	esac
 }

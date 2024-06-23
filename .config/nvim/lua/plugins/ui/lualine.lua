@@ -94,7 +94,7 @@ return {
 			-- default_theme = { fg = colors.surface0, bg = colors.mantle }
 			default_theme = { fg = colors.surface0, bg = colors.mantle }
 		else
-			default_theme = { fg = colors.surface0, bg = require("utils").darken(colors.mantle, 0.4) }
+			default_theme = { fg = colors.surface0, bg = "None" }
 		end
 
 		local config = {
