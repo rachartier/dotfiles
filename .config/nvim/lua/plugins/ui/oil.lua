@@ -24,7 +24,7 @@ return {
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	keys = {
 		{
-			"<leader>te",
+			"<leader>to",
 			function()
 				require("oil").open_float()
 			end,
@@ -89,12 +89,28 @@ return {
 			},
 		})
 
-		require("utils").on_event("FileType", function()
+		local utils = require("utils")
+
+		utils.on_event("FileType", function()
 			vim.opt_local.relativenumber = false
 			vim.opt_local.number = false
 			vim.opt_local.numberwidth = 5
 		end, {
 			target = "oil",
 		})
+
+		-- utils.on_event(
+		-- 	"User",
+		-- 	vim.schedule_wrap(function(args)
+		-- 		local oil = require("oil")
+		-- 		print("ok")
+		-- 		if vim.api.nvim_get_current_buf() == args.data.buf and oil.get_cursor_entry() then
+		-- 			oil.open_preview()
+		-- 		end
+		-- 	end),
+		-- 	{
+		-- 		target = "OilEnter",
+		-- 	}
+		-- )
 	end,
 }

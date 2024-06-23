@@ -94,7 +94,7 @@ return {
 			-- default_theme = { fg = colors.surface0, bg = colors.mantle }
 			default_theme = { fg = colors.surface0, bg = colors.mantle }
 		else
-			default_theme = { fg = colors.surface0, bg = "None" }
+			default_theme = { fg = colors.surface0, bg = require("utils").darken(colors.mantle, 0.4) }
 		end
 
 		local config = {
@@ -175,6 +175,29 @@ return {
 		})
 
 		ins_left({
+			"filetype",
+			cond = cond_disable_by_ft,
+			icon_only = true,
+			separator = "",
+			padding = { right = 0, left = 2 },
+			condition = conditions.buffer_not_empty,
+		})
+		ins_left({
+			-- get_current_filename_with_icon,
+			"filename",
+			cond = cond_disable_by_ft,
+			color = { fg = colors.fg },
+			separator = "",
+			padding = { left = 0 },
+			symbols = {
+				modified = icons.signs.file.modified, -- Text to show when the file is modified.
+				readonly = icons.signs.file.readonly, -- Text to show when the file is non-modifiable or readonly.
+				unnamed = icons.signs.file.unnamed, -- Text to show for unnamed buffers.
+				newfile = icons.signs.file.created, -- Text to show for newly created file before first write
+			},
+		})
+
+		ins_left({
 			"diagnostics",
 			sources = { "nvim_lsp" },
 			symbols = icons.signs.diagnostic,
@@ -214,29 +237,6 @@ return {
 			function()
 				return "%="
 			end,
-		})
-
-		ins_left({
-			"filetype",
-			cond = cond_disable_by_ft,
-			icon_only = true,
-			separator = "",
-			padding = { right = 0, left = 1 },
-			condition = conditions.buffer_not_empty,
-		})
-		ins_left({
-			-- get_current_filename_with_icon,
-			"filename",
-			cond = cond_disable_by_ft,
-			color = { fg = colors.fg },
-			separator = "",
-			padding = { left = 0 },
-			symbols = {
-				modified = icons.signs.file.modified, -- Text to show when the file is modified.
-				readonly = icons.signs.file.readonly, -- Text to show when the file is non-modifiable or readonly.
-				unnamed = icons.signs.file.unnamed, -- Text to show for unnamed buffers.
-				newfile = icons.signs.file.created, -- Text to show for newly created file before first write
-			},
 		})
 
 		-- ins_left({
@@ -283,6 +283,7 @@ return {
 			require("lazy.status").updates,
 			cond = require("lazy.status").has_updates,
 			color = { fg = colors.green },
+			padding = { left = 1, right = 4 },
 		})
 
 		ins_right({

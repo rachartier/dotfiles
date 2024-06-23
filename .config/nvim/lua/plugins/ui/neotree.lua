@@ -6,7 +6,7 @@ return {
 			"nvim-tree/nvim-web-devicons",
 			"MunifTanjim/nui.nvim",
 		},
-		enabled = false,
+		enabled = true,
 		keys = { "<leader>te" },
 		config = function()
 			local U = require("utils")
@@ -115,7 +115,7 @@ return {
 	},
 	{
 		"antosha417/nvim-lsp-file-operations",
-		enabled = false,
+		enabled = true,
 		config = function()
 			require("lsp-file-operations").setup()
 		end,
