@@ -34,21 +34,6 @@ __get_windows_user() {
 	echo "$windows_user"
 }
 
-install_fonts_for_windows() {
-	__echo_info "Installing fonts for Windows"
-
-	fonts=$(find "$HOME/.fonts" -type f -name "*.ttf" -o -name "*.otf")
-
-	for font in $fonts; do
-		__echo_info "Installing $font..."
-		font_name=$(basename "$font")
-		# cp "$font" "/mnt/c/Users/$(__get_windows_user)/AppData/Local/Microsoft/Windows/Fonts/$font_name" || __echo_info "Font $font_name already installed."
-		cp "$font" "/mnt/c/Windows/Fonts/$font_name" || __echo_info "Font $font_name already installed."
-	done
-
-	__echo_success "Fonts installed."
-}
-
 __get_latest_release() {
 	curl -s "https://api.github.com/repos/$1/releases/latest" | grep -Po '"tag_name": "v\K[^"]*'
 }
@@ -124,6 +109,30 @@ __make_symlink() {
 
 __git_dot() {
 	/usr/bin/git --git-dir="$HOME/.cfg/" --work-tree="$HOME" "$@"
+}
+
+install_luarocks() {
+	__echo_info "Installing luarocks..."
+
+	wget https://luarocks.org/releases/luarocks-3.11.1.tar.gz &&
+		tar zxpf luarocks-3.11.1.tar.gz &&
+		cd luarocks-3.11.1 &&
+		./configure && make && sudo make install
+}
+
+install_fonts_for_windows() {
+	__echo_info "Installing fonts for Windows"
+
+	fonts=$(find "$HOME/.fonts" -type f -name "*.ttf" -o -name "*.otf")
+
+	for font in $fonts; do
+		__echo_info "Installing $font..."
+		font_name=$(basename "$font")
+		# cp "$font" "/mnt/c/Users/$(__get_windows_user)/AppData/Local/Microsoft/Windows/Fonts/$font_name" || __echo_info "Font $font_name already installed."
+		cp "$font" "/mnt/c/Windows/Fonts/$font_name" || __echo_info "Font $font_name already installed."
+	done
+
+	__echo_success "Fonts installed."
 }
 
 install_starship() {
@@ -275,13 +284,15 @@ install_nvim() {
 		wget https://ftp.nluug.nl/pub/vim/runtime/spell/fr.utf-8.spl -O ~/.local/share/nvim/site/spell/fr.utf-8.spl
 	fi
 
-	if [ ! -d "/usr/local/lib/lua/5.1" ]; then
-		sudo mkdir -p /usr/local/lib/lua/5.1
-	fi
+	# if [ ! -d "/usr/local/lib/lua/5.1" ]; then
+	# 	sudo mkdir -p /usr/local/lib/lua/5.1
+	# fi
 
-	if [ ! -f "/usr/local/lib/lua/5.1/tiktoken_core.so" ]; then
-		sudo wget https://github.com/gptlang/lua-tiktoken/releases/download/0.2.1/tiktoken_core-linux-lua51.so -O /usr/local/lib/lua/5.1/tiktoken_core.so
-	fi
+	# if [ ! -f "/usr/local/lib/lua/5.1/tiktoken_core.so" ]; then
+	# 	sudo wget https://github.com/gptlang/lua-tiktoken/releases/download/0.2.1/tiktoken_core-linux-lua51.so -O /usr/local/lib/lua/5.1/tiktoken_core.so
+	# fi
+
+	install_luarocks
 }
 
 install_eza() {
