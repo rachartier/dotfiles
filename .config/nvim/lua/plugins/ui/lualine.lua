@@ -188,7 +188,7 @@ return {
 			cond = cond_disable_by_ft,
 			color = { fg = colors.fg },
 			separator = "",
-			padding = { left = 0 },
+			padding = { left = 0, right = 2 },
 			symbols = {
 				modified = icons.signs.file.modified, -- Text to show when the file is modified.
 				readonly = icons.signs.file.readonly, -- Text to show when the file is non-modifiable or readonly.
