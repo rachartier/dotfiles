@@ -47,7 +47,7 @@ return {
 		"AndreM222/copilot-lualine",
 		"nvim-tree/nvim-web-devicons",
 	},
-	event = "VeryLazy",
+	event = "LazyFile",
 	config = function()
 		local icons = require("config.icons")
 		local colors = require("theme").get_lualine_colors()

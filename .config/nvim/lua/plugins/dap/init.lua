@@ -1,10 +1,11 @@
 return {
 	"mfussenegger/nvim-dap",
-	cond = require("config").config_type ~= "minimal",
+	-- cond = require("config").config_type ~= "minimal",
+	event = "LazyFile",
 	dependencies = {
 		"rcarriga/nvim-dap-ui",
-		"mfussenegger/nvim-dap-python",
 		"theHamsta/nvim-dap-virtual-text",
+		"mfussenegger/nvim-dap-python",
 		"mfussenegger/nvim-jdtls",
 		-- "nvim-telescope/telescope-dap.nvim",
 	},

@@ -30,7 +30,7 @@ return {
 			"nvim-treesitter/nvim-treesitter",
 			"rafamadriz/friendly-snippets",
 		},
-		event = "InsertEnter",
+		event = "LazyFile",
 		config = function()
 			local ls = require("luasnip")
 			ls.setup({
