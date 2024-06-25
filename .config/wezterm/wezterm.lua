@@ -18,16 +18,19 @@ config.automatically_reload_config = true
 config.default_domain = "WSL:Ubuntu"
 
 -- config.font = wezterm.font_with_fallback({ "Agave", "Symbols Nerd Font" })
-config.font = wezterm.font_with_fallback({ "Cascadia Code", "Symbols Nerd Font" })
--- config.font = wezterm.font_with_fallback({ "JetBrains Mono", "Symbols Nerd Font" })
+-- config.font = wezterm.font_with_fallback({ "Cascadia Code", "Symbols Nerd Font" })
+config.font = wezterm.font_with_fallback({ "JetBrains Mono", "Symbols Nerd Font" })
 -- config.font = wezterm.font_with_fallback({ "IBM Plex", "Symbols Nerd Font" })
--- config.font = wezterm.font_with_fallback({ "Maple Mono", "Symbols Nerd Font" })
 -- config.font = wezterm.font_with_fallback({ "Monaspace Neon", "Symbols Nerd Font" })
+-- config.font = wezterm.font_with_fallback({ , "Symbols Nerd Font" })
+-- config.font = wezterm.font_with_fallback({ "MonoLisa Trial", "Symbols Nerd Font" })
+-- config.font = wezterm.font_with_fallback({ "Maple Mono NF", "Symbols Nerd Font" }, { weight = "Light" })
+-- config.font = wezterm.font_with_fallback({ "IBM Plex Mono", "Symbols Nerd Font" })
 
 config.cell_width = 1
 config.line_height = 1
 
-config.font_size = 12
+config.font_size = 13
 config.font_rules = {
 	-- {
 	-- 	italic = true,
@@ -158,6 +161,10 @@ config.mouse_bindings = {
 		mods = "CTRL",
 		action = act.DecreaseFontSize,
 	},
+}
+
+config.colors = {
+	background = "#181926",
 }
 
 return config
