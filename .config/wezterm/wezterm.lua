@@ -13,20 +13,19 @@ local function read_file(path)
 	return content
 end
 
+config.check_for_updates = true
 config.automatically_reload_config = true
 config.default_domain = "WSL:Ubuntu"
 
 -- config.font = wezterm.font_with_fallback({ "Agave", "Symbols Nerd Font" })
--- config.font = wezterm.font_with_fallback({ "Cascadia Code", "Symbols Nerd Font" })
+config.font = wezterm.font_with_fallback({ "Cascadia Code", "Symbols Nerd Font" })
 -- config.font = wezterm.font_with_fallback({ "JetBrains Mono", "Symbols Nerd Font" })
-config.font = wezterm.font_with_fallback({ "Maple Mono NF", "Symbols Nerd Font" })
--- config.font = wezterm.font_with_fallback({ "Monaspace Argon", "Symbols Nerd Font" })
+-- config.font = wezterm.font_with_fallback({ "IBM Plex", "Symbols Nerd Font" })
+-- config.font = wezterm.font_with_fallback({ "Maple Mono", "Symbols Nerd Font" })
+-- config.font = wezterm.font_with_fallback({ "Monaspace Neon", "Symbols Nerd Font" })
 
--- config.font = wezterm.font("Agave")
--- config.font = wezterm.font("CaskaydiaCove NF", { weight = "Regular" })
--- config.font = wezterm.font("Agave Nerd Font")
--- config.font = wezterm.font("Hurmit Nerd Font")
--- config.font = wezterm.font("Monaspace Argon")
+config.cell_width = 1
+config.line_height = 1
 
 config.font_size = 12
 config.font_rules = {
@@ -61,7 +60,6 @@ config.harfbuzz_features = {
 	"clig=1",
 }
 
-config.line_height = 1
 config.underline_thickness = "1.5pt"
 config.underline_position = "-0.5pt"
 config.enable_kitty_graphics = true
