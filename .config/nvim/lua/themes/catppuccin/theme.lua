@@ -75,17 +75,17 @@ function M.setup()
 		no_bold = false, -- Force no bold
 		styles = {
 			comments = { "italic" },
-			-- conditionals = {},
+			conditionals = {},
 			-- loops = {},
 			-- functions = {},
-			-- keywords = {},
+			-- keywords = { "bold" },
 			-- strings = {},
 			-- variables = {},
 			-- numbers = {},
 			-- booleans = {},
 			-- properties = {},
 			-- types = {},
-			-- operators = {},
+			operators = {},
 		},
 		integrations = {
 			alpha = true,
