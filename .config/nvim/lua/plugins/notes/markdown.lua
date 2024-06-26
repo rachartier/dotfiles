@@ -1,5 +1,6 @@
 return {
 	{
+		enabled = true,
 		"MeanderingProgrammer/markdown.nvim",
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
 		name = "render-markdown",
@@ -8,7 +9,7 @@ return {
 		config = function()
 			require("render-markdown").setup({
 				bullets = { "", "", "◆", "◇" },
-				headings = { "󰲡 ", "󰲣 ", "󰲥 ", "󰲧 ", "󰲩 ", "󰲫 " },
+				headings = { "󰼏 ", "󰎨 ", "󰼑 ", "󰎲 ", "󰼓 ", "󰎴 " },
 				checkbox = {
 					unchecked = "󰄱 ",
 					checked = "󰄲 ",
@@ -42,7 +43,6 @@ return {
 				toggle_checkbox("o")
 			end, { noremap = true, silent = true })
 		end,
-		enabled = true,
 	},
 	{
 		"iamcco/markdown-preview.nvim",

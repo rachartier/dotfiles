@@ -71,6 +71,11 @@ function M.setup()
 			shade = "dark",
 			percentage = 0.35,
 		},
+		color_overrides = {
+			all = {
+				base = "#16161d",
+			},
+		},
 		no_italic = false, -- Force no italic
 		no_bold = false, -- Force no bold
 		styles = {
