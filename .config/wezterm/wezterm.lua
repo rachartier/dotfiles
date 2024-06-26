@@ -22,7 +22,7 @@ config.default_domain = "WSL:Ubuntu"
 config.font = wezterm.font_with_fallback({ "JetBrains Mono", "Symbols Nerd Font" })
 -- config.font = wezterm.font_with_fallback({ "IBM Plex", "Symbols Nerd Font" })
 -- config.font = wezterm.font_with_fallback({ "Monaspace Neon", "Symbols Nerd Font" })
--- config.font = wezterm.font_with_fallback({ , "Symbols Nerd Font" })
+-- config.font = wezterm.font_with_fallback({ "Symbols Nerd Font" })
 -- config.font = wezterm.font_with_fallback({ "MonoLisa Trial", "Symbols Nerd Font" })
 -- config.font = wezterm.font_with_fallback({ "Maple Mono NF", "Symbols Nerd Font" }, { weight = "Light" })
 -- config.font = wezterm.font_with_fallback({ "IBM Plex Mono", "Symbols Nerd Font" })
@@ -50,6 +50,7 @@ config.font_rules = {
 }
 
 config.harfbuzz_features = {
+	"zero=1",
 	"calt=1",
 	"ss01=1",
 	"ss02=1",
@@ -60,6 +61,7 @@ config.harfbuzz_features = {
 	"ss08=1",
 	"ss09=1",
 	"liga=1",
+	"calt=1",
 	"clig=1",
 }
 
