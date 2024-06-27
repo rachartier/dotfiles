@@ -1,46 +1,15 @@
 return {
-	"folke/noice.nvim",
-	dependencies = {
-		"MunifTanjim/nui.nvim",
-		"rcarriga/nvim-notify",
-		"j-hui/fidget.nvim",
-	},
-	event = "VeryLazy",
-	enabled = true,
-	config = function()
-		local theme_colors = require("theme").get_colors()
-		if theme_colors ~= nil and theme_colors.base ~= nil then
-			require("notify").setup({
-				background_colour = require("theme").get_colors().base,
-				-- render = "compact",
-			})
-		else
-			require("notify").setup({
-				background_colour = "#000000",
-				-- render = "compact",
-			})
-		end
 
-		require("fidget").setup({
-			progress = {
-				display = {
-					done_icon = " ",
-				},
-			},
-			notification = {
-				window = {
-					normal_hl = "Comment", -- Base highlight group in the notification window
-					winblend = require("config").winblend,
-					border = "none", -- Border around the notification window
-				},
-			},
-		})
-
-		vim.keymap.set("n", "<leader>un", function()
-			require("notify").dismiss({ silent = true, pending = true })
-		end, { desc = "Dismiss all Notifications" })
-
-		require("noice").setup({
+	{
+		"folke/noice.nvim",
+		dependencies = {
+			"MunifTanjim/nui.nvim",
+			"rcarriga/nvim-notify",
+			"j-hui/fidget.nvim",
+		},
+		event = "VeryLazy",
+		enabled = true,
+		opts = {
 			cmdline = {
 				-- view = "cmdline",
 				format = {
@@ -77,7 +46,7 @@ return {
 			},
 			lsp = {
 				progress = {
-					enabled = false,
+					enabled = true,
 				},
 				-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
 				override = {
@@ -113,6 +82,15 @@ return {
 					view = "mini",
 				},
 			},
-		})
-	end,
+		},
+		keys = {
+			{
+				"<leader>un",
+				function()
+					require("notify").dismiss({ silent = true, pending = true })
+				end,
+				{ noremap = true, silent = true, desc = "Dismiss all Notifications" },
+			},
+		},
+	},
 }

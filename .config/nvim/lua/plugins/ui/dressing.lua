@@ -15,8 +15,7 @@ local M = {
 			return vim.ui.input(...)
 		end
 	end,
-	-- event = "BufRead",
-	lazy = true,
+	lazy = "VeryLazy",
 }
 
 function M.config()
