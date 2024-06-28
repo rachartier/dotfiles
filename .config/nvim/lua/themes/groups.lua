@@ -157,9 +157,11 @@ function M.get(colors)
         HighlightUndo = { bg = colors.red, fg = colors.mantle },
         HighlightRedo = { bg = colors.green, fg = colors.mantle },
 
+        AlphaNeovimLogoMauve = { fg = colors.mauve },
         AlphaNeovimLogoBlue = { fg = colors.blue },
         AlphaNeovimLogoGreen = { fg = colors.green },
         AlphaNeovimLogoGreenFBlueB = { fg = colors.green, bg = colors.blue },
+        CopilotChatSeparator = { fg = colors.surface1 },
     }
 end
 

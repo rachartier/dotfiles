@@ -6,7 +6,7 @@ return {
             "rcarriga/nvim-notify",
             "j-hui/fidget.nvim",
         },
-        event = "LazyFile",
+        event = "VeryLazy",
         enabled = true,
         opts = {
             messages = {

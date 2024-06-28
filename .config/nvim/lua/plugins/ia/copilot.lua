@@ -141,23 +141,24 @@ return {
         },
         opts = function()
             local user = vim.env.USER or "User"
+            -- user = user:sub(1, 1):upper() .. user:sub(2)
 
             return {
-                question_header = string.rep("─", #user + 3) .. "\n󰙃  " .. user .. "  ",
-                answer_header = "  **Copilot**",
-                error_header = "  **Error**",
-                separator = " ", -- Separator to use in chat
-                show_folds = false,
+                question_header    = "  " .. user .. " ",
+                answer_header      = "  **Copilot** ",
+                error_header       = "  **Error** ",
+                separator          = "──────",
+                show_folds         = false,
                 auto_follow_cursor = false,
-                model = "gpt-4",
+                model              = "gpt-4",
                 -- context = "buffer",
 
-                selection = function(source)
+                selection          = function(source)
                     local select = require("CopilotChat.select")
                     return select.visual(source) or select.buffer(source)
                 end,
 
-                prompts = {
+                prompts            = {
                     BetterNamings = {
                         prompt =
                         "/COPILOT_GENERATE Please provide better names for the following variables and/or functions.",
@@ -167,7 +168,7 @@ return {
                         "/COPILOT_GENERATE Write a set of detailed unit test functions for the following code with the xUnit framework.",
                     },
                 },
-                mappings = {
+                mappings           = {
                     show_diff = {
                         normal = "cd",
                     },
@@ -245,6 +246,7 @@ return {
                 vim.opt_local.relativenumber = false
                 vim.opt_local.number = false
                 vim.opt_local.statuscolumn = " "
+                -- 			vim.bo.filetype = "markdown"
                 require("cmp").setup.buffer({ enabled = false })
             end, {
                 target = "copilot-*",

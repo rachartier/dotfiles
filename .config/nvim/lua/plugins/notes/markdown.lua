@@ -1,25 +1,26 @@
 return {
-    -- {
-    -- 	"OXY2DEV/markview.nvim",
-    -- 	dependencies = {
-    -- 		"nvim-tree/nvim-web-devicons", -- Used by the code bloxks
-    -- 	},
-    --
-    -- 	config = function()
-    -- 		require("markview").setup({
-    -- 			checkbox = {
-    -- 				checked = {
-    -- 					marker = " 󰄱 ",
-    -- 					marker_hl = "@markup.list.checked",
-    -- 				},
-    -- 				uncheked = {
-    -- 					marker = " 󰄲 ",
-    -- 					marker_hl = "@markup.list.unchecked",
-    -- 				},
-    -- 			},
-    -- 		})
-    -- 	end,
-    -- },
+    {
+        enabled = false,
+        "OXY2DEV/markview.nvim",
+        dependencies = {
+            "nvim-tree/nvim-web-devicons", -- Used by the code bloxks
+        },
+
+        config = function()
+            require("markview").setup({
+                checkbox = {
+                    checked = {
+                        marker = " 󰄲 ",
+                        marker_hl = "@markup.list.checked",
+                    },
+                    uncheked = {
+                        marker = " 󰄱 ",
+                        marker_hl = "@markup.list.unchecked",
+                    },
+                },
+            })
+        end,
+    },
     {
         enabled = true,
         "MeanderingProgrammer/markdown.nvim",
