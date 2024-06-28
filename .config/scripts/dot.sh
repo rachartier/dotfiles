@@ -115,6 +115,7 @@ install_luarocks() {
 	__echo_info "Installing luarocks..."
 
 	__install_package_apt lua5.1
+	__install_package_apt liblua5.1-dev
 
 	wget https://luarocks.org/releases/luarocks-3.11.1.tar.gz &&
 		tar zxpf luarocks-3.11.1.tar.gz &&
