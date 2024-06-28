@@ -38,8 +38,9 @@ return {
 				-- { text = { "%C" }, click = "v:lua.ScFa" },
 				{
 					sign = {
-						namespace = { "diagnostic" },
 						name = { ".*" },
+						text = { ".*" },
+						namespace = { "diagnostic" },
 						auto = false,
 					},
 					click = "v:lua.ScSa",

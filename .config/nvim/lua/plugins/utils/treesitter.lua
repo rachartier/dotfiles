@@ -113,7 +113,7 @@ return {
 			},
 		})
 
-		vim.api.nvim_set_hl(0, "@string.documentation.python", { link = "Comment" })
+		-- vim.api.nvim_set_hl(0, "@string.documentation.python", { link = "Comment" })
 		vim.api.nvim_set_hl(0, "@markdown_check_done", { link = "@text.todo.checked" })
 		vim.treesitter.language.register("lua", "pico8")
 	end,
