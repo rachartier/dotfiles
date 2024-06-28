@@ -12,8 +12,8 @@ local function build_layout(opts)
         {
             type = "text",
             val = {
-                -- "Neovim " .. string.format("%s", vim.version()),
-                string.format("%s", vim.version()),
+                "Neovim " .. string.format("%s", vim.version()),
+                -- string.format("%s", vim.version()),
             },
             opts = {
                 position = "center",
