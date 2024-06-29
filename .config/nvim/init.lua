@@ -75,4 +75,3 @@ vim.defer_fn(function()
 end, 50)
 
 require("autocmds")
-require("theme").setup()

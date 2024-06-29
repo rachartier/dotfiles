@@ -48,6 +48,7 @@ return {
         "nvim-tree/nvim-web-devicons",
     },
     event = "LazyFile",
+    enabled = true,
     config = function()
         local icons = require("config.icons")
         local colors = require("theme").get_lualine_colors()
