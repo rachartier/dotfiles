@@ -39,13 +39,17 @@ return {
         event = "VeryLazy",
         config = function()
             require("tiny-inline-diagnostic").setup({
-                hi    = {
-                    background = require("theme").get_colors().base,
+                hi = {
+                    -- background = "None",
+                    mixing_color = require("theme").get_colors().base,
                 },
                 blend = {
                     factor = 0.15,
                 }
             })
+
+            vim.keymap.set("n", "<leader>dd", "<cmd>lua require('tiny-inline-diagnostic').toggle()<CR>",
+                { noremap = true, silent = true })
         end,
     },
     {

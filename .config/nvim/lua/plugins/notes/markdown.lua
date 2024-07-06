@@ -1,10 +1,13 @@
 return {
     {
-        enabled = false,
+        enabled = true,
+        ft = { "markdown" },
+        event = "BufReadPre",
         "OXY2DEV/markview.nvim",
         dependencies = {
             "nvim-tree/nvim-web-devicons", -- Used by the code bloxks
         },
+        branch = "dev",
 
         config = function()
             require("markview").setup({
@@ -22,7 +25,7 @@ return {
         end,
     },
     {
-        enabled = true,
+        enabled = false,
         "MeanderingProgrammer/markdown.nvim",
         dependencies = { "nvim-treesitter/nvim-treesitter" },
         name = "render-markdown",

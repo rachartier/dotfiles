@@ -4,9 +4,8 @@ return {
         dependencies = {
             "MunifTanjim/nui.nvim",
             "rcarriga/nvim-notify",
-            "j-hui/fidget.nvim",
         },
-        event = "VeryLazy",
+        event = "UiEnter",
         enabled = true,
         opts = {
             messages = {
