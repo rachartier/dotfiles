@@ -47,9 +47,6 @@ return {
                     factor = 0.15,
                 }
             })
-
-            vim.keymap.set("n", "<leader>dd", "<cmd>lua require('tiny-inline-diagnostic').toggle()<CR>",
-                { noremap = true, silent = true })
         end,
     },
     {
