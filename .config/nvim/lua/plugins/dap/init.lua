@@ -45,7 +45,7 @@ return {
             },
         })
 
-        require("dap-python")
+        require("dap-python").setup("python")
         require("dap.ext.vscode").load_launchjs(nil, { netcoredbg = { "cs" } })
 
         -- dap.configurations.cs = {

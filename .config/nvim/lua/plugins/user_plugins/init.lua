@@ -34,9 +34,9 @@ return {
         end,
     },
     {
-        -- dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-inline-diagnostic.nvim",
-        "rachartier/tiny-inline-diagnostic.nvim",
-        event = "VeryLazy",
+        dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-inline-diagnostic.nvim",
+        -- "rachartier/tiny-inline-diagnostic.nvim",
+        event = "LspAttach",
         config = function()
             require("tiny-inline-diagnostic").setup({
                 hi = {
@@ -47,6 +47,9 @@ return {
                     factor = 0.15,
                 }
             })
+
+            vim.keymap.set("n", "<leader>dd", "<cmd>lua require('tiny-inline-diagnostic').toggle()<CR>",
+                { noremap = true, silent = true })
         end,
     },
     {
