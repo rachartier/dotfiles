@@ -7,18 +7,17 @@ return {
         dependencies = {
             "nvim-tree/nvim-web-devicons", -- Used by the code bloxks
         },
-        branch = "dev",
 
         config = function()
             require("markview").setup({
-                checkbox = {
+                checkboxes = {
                     checked = {
-                        marker = " 󰄲 ",
-                        marker_hl = "@markup.list.checked",
+                        text = "󰄲",
+                        hl = "@markup.list.checked",
                     },
-                    uncheked = {
-                        marker = " 󰄱 ",
-                        marker_hl = "@markup.list.unchecked",
+                    unchecked = {
+                        text = "󰄱",
+                        hl = "@markup.list.unchecked",
                     },
                 },
             })
