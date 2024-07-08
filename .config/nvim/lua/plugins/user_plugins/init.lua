@@ -44,7 +44,7 @@ return {
                     mixing_color = require("theme").get_colors().base,
                 },
                 blend = {
-                    factor = 0.15,
+                    factor = 0.22,
                 },
             })
 
