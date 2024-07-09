@@ -178,7 +178,7 @@ function M.override_lsp_hl(colors_table)
 
     -- vim.api.nvim_set_hl(0, "@variable", { fg = colors.text })
     -- vim.api.nvim_set_hl(0, "@_parent", { fg = colors.peach })
-    vim.api.nvim_set_hl(0, "@attribute", { fg = colors.lavender, italic = true })
+    vim.api.nvim_set_hl(0, "@attribute", { fg = colors.lavender, italic = false })
     -- vim.api.nvim_set_hl(0, "@keyword.operator", { link = "@repeat" })
     -- vim.api.nvim_set_hl(0, "@keyword.operator", { link = "@repeat" })
     -- vim.api.nvim_set_hl(0, "@operator", { fg = colors.teal, italic = false })
@@ -189,7 +189,7 @@ function M.override_lsp_hl(colors_table)
     -- vim.api.nvim_set_hl(0, "@variable", { fg = colors.text, italic = false })
     -- vim.api.nvim_set_hl(0, "@variable.builtin", { fg = colors.red })
     -- vim.api.nvim_set_hl(0, "@variable.member", { fg = colors.text })
-    vim.api.nvim_set_hl(0, "@variable.parameter", { fg = colors.red, italic = true })
+    vim.api.nvim_set_hl(0, "@variable.parameter", { fg = colors.red, italic = false })
     vim.api.nvim_set_hl(0, "@keyword.operator.python", { link = "Conditional" })
 end
 
