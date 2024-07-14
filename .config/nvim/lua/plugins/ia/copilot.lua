@@ -147,7 +147,7 @@ return {
                 question_header    = "  " .. user .. " ",
                 answer_header      = "  **Copilot** ",
                 error_header       = "  **Error** ",
-                separator          = "──────",
+                separator          = "───",
                 show_folds         = false,
                 auto_follow_cursor = false,
                 model              = "gpt-4",

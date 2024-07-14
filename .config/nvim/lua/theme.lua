@@ -3,6 +3,7 @@ local M = {}
 -- M._theme = require("themes.base16.theme")
 -- M._theme = require("themes.alabaster.theme")
 M._theme = require("themes.catppuccin.theme")
+M._theme = require("themes.catppuccin.minimal_theme")
 -- M._theme = require("themes.default.theme")
 
 function M.setup()

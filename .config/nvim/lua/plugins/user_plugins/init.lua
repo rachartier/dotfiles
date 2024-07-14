@@ -49,7 +49,20 @@ return {
             })
 
             --
-            -- vim.keymap.set("n", "<leader>dd", "<cmd>lua require('tiny-inline-diagnostic').toggle()<CR>",
+            -- vim.keymap.set("n", "<leader>dd", "<cmd>set background=light<CR>",
+            --     { noremap = true, silent = true })
+            -- vim.keymap.set("n", "<leader>da", function()
+            --         vim.o.background = "dark"
+            --         require("tiny-inline-diagnostic").change({
+            --                 factor = 0.22,
+            --             },
+            --             {
+            --                 mixing_color = "#eaeaea"
+            --             }
+            --         )
+            --     end,
+            --     { noremap = true, silent = true })
+            -- vim.keymap.set("n", "<leader>de", "<cmd>set background=dark<CR>",
             --     { noremap = true, silent = true })
         end,
     },
@@ -59,7 +72,7 @@ return {
         branch = "main",
         dependencies = { "nvim-tree/nvim-web-devicons" },
         event = "VeryLazy",
-        enabled = true,
+        enabled = false,
         config = function()
             local colors = require("theme").get_colors()
             -- local colors = require("tokyonight.colors").setup()
