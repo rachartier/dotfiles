@@ -21,6 +21,9 @@ return {
                     },
                 },
             })
+
+            local colors = require("theme").get_colors()
+            vim.api.nvim_set_hl(0, "MarkviewLayer", { bg = colors.surface1, fg = colors.text })
         end,
     },
     {
