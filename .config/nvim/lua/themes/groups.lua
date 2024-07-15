@@ -1,21 +1,11 @@
 local M = {}
 
-local U = require("utils")
-
 function M.get(colors)
     -- local bg = colors.base
     local bg = "None"
 
     -- local cursor_line_bg = U.lighten(colors.base, 0.955)
     local cursor_line_bg = "None"
-    local darken_diag = 0.15
-
-    modify_func = U.darken
-
-    if vim.o.background == "light" then
-        darken_diag = 0.30
-    end
-
     return {
         -- Visual = { bg = "#234370" },
         -- Visual = { bg = colors.blue, fg = colors.crust },

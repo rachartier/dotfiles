@@ -2,6 +2,11 @@ local utils = require("utils")
 local M = {
     cache = {}
 }
+
+function M.hl_group(name, buf)
+    return vim.api.nvim_buf_get_name(buf):find("kinds") and "LspKind" .. name or name
+end
+
 return {
     {
         "echasnovski/mini.splitjoin",
@@ -38,8 +43,13 @@ return {
                     -- Highlight hex color strings (`#rrggbb`) using that color
                     hex_color = hipatterns.gen_highlighter.hex_color(),
                     hl_group = {
+                        pattern = function(buf)
+                            return vim.api.nvim_buf_get_name(buf):find("lua/" .. M.module) and
+                                '^%s*%[?"?()[%w%.@]+()"?%]?%s*='
+                        end,
                         group = function(buf, match)
                             local group = M.hl_group(match, buf)
+                            print(group)
                             if group then
                                 if M.cache[group] == nil then
                                     M.cache[group] = false
