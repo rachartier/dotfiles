@@ -49,8 +49,8 @@ function M.get(colors)
         GitSignsAdd = { fg = colors.green },
         GitSignsChange = { fg = colors.blue },
 
+        IlluminatedWordRead = { bg = colors.surface1 },
         IlluminatedReferenceText = { link = "IlluminatedWordRead" },
-        IlluminatedWordRead = { bold = true, bg = colors.surface1 },
         IlluminatedWordWrite = { link = "IlluminatedWordRead" },
 
         LspLens = { italic = true, fg = colors.surface1 },
