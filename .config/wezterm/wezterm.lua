@@ -27,10 +27,10 @@ config.font = wezterm.font_with_fallback({ "MonoLisa", "Symbols Nerd Font" })
 -- config.font = wezterm.font_with_fallback({ "Maple Mono NF", "Symbols Nerd Font" })
 -- config.font = wezterm.font_with_fallback({ "IBM Plex Mono", "Symbols Nerd Font" })
 
-config.cell_width = 1
-config.line_height = 1
+-- config.cell_width = 1
+-- config.line_height = 1
 
-config.font_size = 12
+config.font_size = 10.8
 config.font_rules = {
     -- {
     -- 	italic = true,
@@ -78,7 +78,7 @@ config.window_padding = {
     left = "2cell",
     right = "2cell",
     top = "0.2cell",
-    bottom = "0.1pt",
+    bottom = 0
 }
 config.win32_system_backdrop = "Acrylic"
 
