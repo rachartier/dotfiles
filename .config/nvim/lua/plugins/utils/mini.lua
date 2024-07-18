@@ -90,7 +90,6 @@ return {
             })
         end,
     },
-
     {
         "echasnovski/mini.align",
         event = { "LazyFile" },
