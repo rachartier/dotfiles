@@ -1,6 +1,6 @@
 return {
     "tzachar/highlight-undo.nvim",
-    event = "BufRead",
+    event = "VeryLazy",
     opts = {
         duration = 85,
     }

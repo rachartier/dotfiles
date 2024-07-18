@@ -1,4 +1,4 @@
 return {
-	"aznhe21/actions-preview.nvim",
-	lazy = true,
+    "aznhe21/actions-preview.nvim",
+    event = "LspAttach",
 }

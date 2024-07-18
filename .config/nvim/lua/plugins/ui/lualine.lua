@@ -48,6 +48,7 @@ return {
         "nvim-tree/nvim-web-devicons",
     },
     event = "LazyFile",
+    priority = 500,
     enabled = true,
     config = function()
         local icons = require("config.icons")

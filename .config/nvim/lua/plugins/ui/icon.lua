@@ -22,7 +22,7 @@ return {
                 -- bash = { glyph = "󰐣" },
             },
             extension = {
-                conf = { glyph = "󰛸", hl = "MiniIconsBlue" },
+                conf = { glyph = "", hl = "MiniIconsBlue" },
             },
         })
     end,

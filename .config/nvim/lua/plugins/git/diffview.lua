@@ -1,19 +1,14 @@
-local M = {
-	"sindrets/diffview.nvim",
-	cond = require("config").config_type ~= "minimal",
-	cmd = {
-		"DiffviewOpen",
-		"DiffviewClose",
-		"DiffviewRefresh",
-		"DiffviewLog",
-		"DiffviewFileHistory",
-		"DiffviewToggleFiles",
-		"DiffviewFocusFiles",
-	},
+return {
+    "sindrets/diffview.nvim",
+    cond = require("config").config_type ~= "minimal",
+    cmd = {
+        "DiffviewOpen",
+        "DiffviewClose",
+        "DiffviewRefresh",
+        "DiffviewLog",
+        "DiffviewFileHistory",
+        "DiffviewToggleFiles",
+        "DiffviewFocusFiles",
+    },
+    opts = {}
 }
-
-function M.config()
-	require("diffview").setup()
-end
-
-return M

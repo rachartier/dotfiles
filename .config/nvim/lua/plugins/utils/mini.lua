@@ -137,7 +137,7 @@ return {
                     try_as_border = true,
                     border = "top",
                 },
-                symbol = "╎",
+                symbol = "│",
             })
         end,
     },

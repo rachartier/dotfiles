@@ -9,8 +9,7 @@ return {
         "saadparwaiz1/cmp_luasnip",
         "lukas-reineke/cmp-under-comparator",
     },
-    event = { "LazyFile" },
-
+    event = { "VeryLazy" },
     opts = function(_, opts)
         opts.sources = opts.sources or {}
         table.insert(opts.sources, {

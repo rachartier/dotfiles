@@ -1,11 +1,9 @@
-local M = {
+return {
     "lewis6991/gitsigns.nvim",
-    event = { "BufReadPre", "BufNewFile" },
+    event = { "VeryLazy" },
     enabled = true,
-}
+    opts = {
 
-function M.config()
-    require("gitsigns").setup({
         signcolumn = true,
         current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
         current_line_blame_opts = {
@@ -72,7 +70,6 @@ function M.config()
             -- Text object
             map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
         end,
-    })
-end
 
-return M
+    }
+}
