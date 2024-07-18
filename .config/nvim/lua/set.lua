@@ -88,9 +88,9 @@ opt.laststatus = 3                        -- Configure status line display
 opt.cmdheight = 2                         -- Command line height
 opt.list = false                          -- Show some invisible characters (tabs...)
 opt.mouse = "a"                           -- Enable mouse mode
-opt.number = true                         -- Print line number
+opt.number = false                        -- Print line number
 opt.pumheight = 20                        -- Maximum number of entries in a popup
-opt.relativenumber = true                 -- Relative line numbers
+opt.relativenumber = false                -- Relative line numbers
 opt.scrolloff = 8                         -- Lines of context
 opt.sessionoptions = {                    -- Session options
     "buffers",
@@ -131,6 +131,7 @@ opt.virtualedit = "block"          -- Allow cursor to move where there is no tex
 opt.wildmode = "longest:full,full" -- Command-line completion mode
 opt.winminwidth = 5                -- Minimum window width
 opt.wrap = false                   -- Disable line wrap
+
 
 opt.fillchars = {
     -- stl = "─",

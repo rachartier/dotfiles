@@ -1,6 +1,6 @@
 return {
     {
-        enabled = true,
+        enabled = false,
         ft = { "markdown" },
         event = "BufReadPre",
         "OXY2DEV/markview.nvim",
@@ -27,7 +27,7 @@ return {
         end,
     },
     {
-        enabled = false,
+        enabled = true,
         "MeanderingProgrammer/markdown.nvim",
         dependencies = { "nvim-treesitter/nvim-treesitter" },
         name = "render-markdown",

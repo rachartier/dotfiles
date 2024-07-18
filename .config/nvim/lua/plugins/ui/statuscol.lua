@@ -33,38 +33,34 @@ return {
                         sign = {
                             name = { ".*" },
                             text = { ".*" },
-                            namespace = { "diagnostic" },
+                            namespace = { ".*" },
                             auto = false,
                         },
                         click = "v:lua.ScSa",
                     },
-                    {
-                        text = { builtin.lnumfunc, " " },
-                        condition = {
-                            true,
-                            true,
-                            -- function()
-                            -- 	return vim.wo.number == true or vim.wo.relativenumber == true
-                            -- end,
-                        },
-                        click = "v:lua.ScLa",
-                    },
-                    {
-                        -- condition = {
-                        -- 	function()
-                        -- 		return inside_git_repo
-                        -- 	end,
-                        -- },
-                        sign = {
-                            namespace = { "gitsigns" },
-
-                            fillchar = "▏",
-                            maxwidth = 1,
-                            colwidth = 1,
-                            -- fillcharhl = "GitSignsAdd",
-                        },
-                        click = "v:lua.ScSa",
-                    },
+                    -- {
+                    --     text = { builtin.lnumfunc, " " },
+                    --     signs = {
+                    --         auto = true,
+                    --     },
+                    --     click = "v:lua.ScLa",
+                    -- },
+                    -- {
+                    --     -- condition = {
+                    --     -- 	function()
+                    --     -- 		return inside_git_repo
+                    --     -- 	end,
+                    --     -- },
+                    --     sign = {
+                    --         namespace = { "gitsigns" },
+                    --
+                    --         fillchar = "▏",
+                    --         maxwidth = 1,
+                    --         colwidth = 1,
+                    --         -- fillcharhl = "GitSignsAdd",
+                    --     },
+                    --     click = "v:lua.ScSa",
+                    -- },
 
                 },
                 -- Click actions
