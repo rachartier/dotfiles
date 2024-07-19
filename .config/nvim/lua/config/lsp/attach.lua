@@ -26,8 +26,8 @@ M.lsp_rename = function()
 
         if res.documentChanges then
             for _, changed_file in pairs(res.documentChanges) do
-                changed_files_count = changed_files_count + 1
                 changed_instances_count = changed_instances_count + #changed_file.edits
+                changed_files_count = changed_files_count + 1
             end
         elseif res.changes then
             for _, changed_file in pairs(res.changes) do

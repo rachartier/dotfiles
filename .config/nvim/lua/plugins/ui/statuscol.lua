@@ -14,7 +14,7 @@ return {
         -- 	:sync()[1]
 
         local cfg = {
-            separator = " ",     -- separator between line number and buffer text ("│" or extra " " padding)
+            separator = " ", -- separator between line number and buffer text ("│" or extra " " padding)
             ft_ignore = {
                 "dapui_stacks",
                 "dapui_breakpoints",
@@ -37,29 +37,39 @@ return {
                     },
                     click = "v:lua.ScSa",
                 },
-                -- {
-                --     text = { builtin.lnumfunc, " " },
-                --     signs = {
-                --         auto = true,
-                --     },
-                --     click = "v:lua.ScLa",
-                -- },
-                -- {
-                --     -- condition = {
-                --     -- 	function()
-                --     -- 		return inside_git_repo
-                --     -- 	end,
-                --     -- },
-                --     sign = {
-                --         namespace = { "gitsigns" },
-                --
-                --         fillchar = "▏",
-                --         maxwidth = 1,
-                --         colwidth = 1,
-                --         -- fillcharhl = "GitSignsAdd",
-                --     },
-                --     click = "v:lua.ScSa",
-                -- },
+                {
+                    text = { builtin.lnumfunc, " " },
+                    sign = {
+                        auto = true,
+                    },
+                    condition = {
+                        function()
+                            return vim.wo.number
+                        end,
+                        function()
+                            return vim.wo.number
+                        end,
+                    },
+                    click = "v:lua.ScLa",
+                },
+                {
+                    -- condition = {
+                    -- 	function()
+                    -- 		return inside_git_repo
+                    -- 	end,
+                    -- },
+                    sign = {
+                        namespace = { "gitsigns" },
+                        auto = false,
+
+                        -- fillchar = "▏",
+                        fillchar = " ",
+                        maxwidth = 1,
+                        colwidth = 1,
+                        -- fillcharhl = "GitSignsAdd",
+                    },
+                    click = "v:lua.ScSa",
+                },
 
             },
             -- Click actions
