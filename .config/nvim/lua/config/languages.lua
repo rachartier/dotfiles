@@ -75,6 +75,7 @@ return {
     {
         languages = { "lua" },
         mason = { "lua_ls" },
+        formatter = { "stylua", "typos" },
         linter = { "selene" },
         lsp_settings = {
             settings = {
