@@ -51,12 +51,18 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     style = 'plain'
     foreground = 'grey'
     background = 'transparent'
-    template = ' {{ .HEAD }}{{ if or (.Working.Changed) (.Staging.Changed) }}*{{ end }} <cyan>{{ if gt .Behind 0 }}⇣{{ end }}{{ if gt .Ahead 0 }}⇡{{ end }}</>'
+  	template = "  {{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }}<pink>*</>{{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }} "
+
 
     [blocks.segments.properties]
-      branch_icon = ''
       commit_icon = '@'
+      branch_ahead_icon = "<lightcyan>⇡ </>"
+      branch_behind_icon = "<lightcyan>⇣ </>"
+      branch_icon = ""
+      fetch_stash_count = true
       fetch_status = true
+      fetch_upstream_icon = true
+      github_icon = ""
 
   [[blocks.segments]]
     type = 'executiontime'
