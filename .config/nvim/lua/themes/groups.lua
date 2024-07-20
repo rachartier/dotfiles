@@ -26,7 +26,7 @@ function M.get(colors)
         PmenuDocBorder = { link = "FloatBorder" },
         PmenuSel = { link = "Visual" },
 
-        CursorLine = { bg = cursor_line_bg },
+        CursorLine = { bg = "None" },
         CursorLineNr = { fg = colors.mauve },
         CursorLineSign = { link = "SignColumn" },
         CursorColumn = { bg = "None" },
@@ -168,7 +168,7 @@ function M.override_lsp_hl(colors_table)
 
     -- vim.api.nvim_set_hl(0, "@variable", { fg = colors.text })
     -- vim.api.nvim_set_hl(0, "@_parent", { fg = colors.peach })
-    vim.api.nvim_set_hl(0, "@attribute", { fg = colors.lavender, italic = false })
+    -- vim.api.nvim_set_hl(0, "@attribute", { fg = colors.lavender, italic = false })
     -- vim.api.nvim_set_hl(0, "@keyword.operator", { link = "@repeat" })
     -- vim.api.nvim_set_hl(0, "@keyword.operator", { link = "@repeat" })
     -- vim.api.nvim_set_hl(0, "@operator", { fg = colors.teal, italic = false })

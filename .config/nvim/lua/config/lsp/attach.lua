@@ -91,7 +91,6 @@ function M.on_attach(client, bufnr)
             { "K",           function() vim.lsp.buf.hover() end,                  desc = "Show hover" },
             { "<leader>vws", function() vim.lsp.buf.workspace_symbol() end,       desc = "Workspace symbol" },
             { "<leader>vd",  function() vim.diagnostic.open_float() end,          desc = "Open diagnostic inside a floating window" },
-            { "<leader>gn",  function() vim.diagnostic.opean_float() end,         desc = "Open diagnostic inside a floating window" },
             { "<leader>rr",  function() vim.lsp.buf.references() end,             desc = "Find references" },
             { "<leader>vd",  function() vim.lsp.util.show_line_diagnostics() end, desc = "Show line diagnostics" },
             { "<leader>rn",  function() M.lsp_rename() end,                       desc = "Rename current symbol" },

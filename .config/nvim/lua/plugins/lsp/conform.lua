@@ -70,7 +70,7 @@ return {
                             table.insert(formatters, tool_name)
                             formatters_settings[tool_name] = tool
                         else
-                            table.insert(formatters, server_config.formatter)
+                            table.insert(formatters, tool)
                         end
                     end
 
