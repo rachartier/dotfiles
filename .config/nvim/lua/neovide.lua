@@ -1,7 +1,7 @@
 if vim.g.neovide then
 	-- vim.o.guifont = "CaskaydiaCove NF, Symbols Nerd Font"
 	-- vim.o.guifont = "Cascadia Code,Symbols Nerd Font"
-	vim.o.guifont = "JetBrains Mono,Symbols Nerd Font:h14"
+	vim.o.guifont = "MonoLisa,Symbols Nerd Font:h13"
 
 	vim.g.neovide_underline_automatic_scaling = true
 	vim.g.neovide_scale_factor = 0.83

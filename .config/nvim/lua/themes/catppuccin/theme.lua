@@ -73,7 +73,7 @@ function M.setup()
 		},
 		color_overrides = {
 			all = {
-				base = "#16161d",
+				-- base = "#16161d",
 			},
 		},
 		no_italic = false, -- Force no italic
