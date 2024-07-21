@@ -1,118 +1,118 @@
 local utils = require("utils")
 
 utils.on_event({ "FocusGained", "TermClose", "TermLeave" }, function()
-    vim.cmd("checktime")
+	vim.cmd("checktime")
 end, {
-    target = "*",
-    desc = "Check time on focus gained",
+	target = "*",
+	desc = "Check time on focus gained",
 })
 
 utils.on_event({ "TextYankPost" }, function()
-    vim.highlight.on_yank({
-        higroup = "CurSearch",
-        timeout = 85,
-        priority = 1,
-    })
+	vim.highlight.on_yank({
+		higroup = "CurSearch",
+		timeout = 85,
+		priority = 1,
+	})
 end, {
-    target = "*",
-    desc = "Highlight yanked text",
+	target = "*",
+	desc = "Highlight yanked text",
 })
 
 utils.on_event({ "VimResized" }, function()
-    local current_tab = vim.fn.tabpagenr()
-    vim.cmd("tabdo wincmd =")
-    vim.cmd("tabnext " .. current_tab)
+	local current_tab = vim.fn.tabpagenr()
+	vim.cmd("tabdo wincmd =")
+	vim.cmd("tabnext " .. current_tab)
 end, {
-    target = "*",
-    desc = "Resize splits if window got resized",
+	target = "*",
+	desc = "Resize splits if window got resized",
 })
 
 utils.on_event({ "FileType" }, function(event)
-    if event.match:match("^json") then
-        vim.opt_local.conceallevel = 0
-    end
+	if event.match:match("^json") then
+		vim.opt_local.conceallevel = 0
+	end
 end, {
-    target = { "json", "jsonc", "json5" },
-    desc = "Disable conceallevel for json files",
+	target = { "json", "jsonc", "json5" },
+	desc = "Disable conceallevel for json files",
 })
 
 utils.on_event("FileType", function(event)
-    vim.bo[event.buf].buflisted = false
-    vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
+	vim.bo[event.buf].buflisted = false
+	vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
 end, {
-    target = {
-        "PlenaryTestPopup",
-        "help",
-        "lspinfo",
-        "man",
-        "notify",
-        "qf",
-        "query",
-        "spectre_panel",
-        "startuptime",
-        "tsplayground",
-        "neotest-output",
-        "checkhealth",
-        "neotest-summary",
-        "neotest-output-panel",
-    },
-    desc = "Easy quit buffers",
+	target = {
+		"PlenaryTestPopup",
+		"help",
+		"lspinfo",
+		"man",
+		"notify",
+		"qf",
+		"query",
+		"spectre_panel",
+		"startuptime",
+		"tsplayground",
+		"neotest-output",
+		"checkhealth",
+		"neotest-summary",
+		"neotest-output-panel",
+	},
+	desc = "Easy quit buffers",
 })
 
 utils.on_event({ "FileType" }, function()
-    vim.opt_local.wrap = true
-    vim.opt_local.spell = true
+	vim.opt_local.wrap = true
+	vim.opt_local.spell = true
 end, {
-    target = { "gitcommit", "markdown", "text" },
-    desc = "Enable zen mode",
+	target = { "gitcommit", "markdown", "text" },
+	desc = "Enable zen mode",
 })
 
 utils.on_event({ "BufWritePre" }, function(event)
-    if event.match:match("^%w%w+://") then
-        return
-    end
-    local file = vim.loop.fs_realpath(event.match) or event.match
-    vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
+	if event.match:match("^%w%w+://") then
+		return
+	end
+	local file = vim.loop.fs_realpath(event.match) or event.match
+	vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
 end, {
-    target = "*",
-    desc = "Create directory if it does not exist",
+	target = "*",
+	desc = "Create directory if it does not exist",
 })
 
 utils.on_event({ "BufWritePre" }, function()
-    vim.cmd([[%s/\s\+$//e]])
+	vim.cmd([[%s/\s\+$//e]])
 end, {
-    target = "*",
-    desc = "Remove trailing whitespace",
+	target = "*",
+	desc = "Remove trailing whitespace",
 })
 
 utils.on_event({ "BufReadPost" }, function()
-    vim.opt_local.filetype = "pico8"
+	vim.opt_local.filetype = "pico8"
 end, {
-    target = "*.p8",
-    desc = "Set filetype to pico8",
+	target = "*.p8",
+	desc = "Set filetype to pico8",
 })
 
 utils.on_event({ "BufReadPost" }, function()
-    vim.cmd('silent! normal! g`"zv')
+	vim.cmd('silent! normal! g`"zv')
 end, {
-    target = "*",
-    desc = "Restore cursor position",
+	target = "*",
+	desc = "Restore cursor position",
 })
 
 utils.on_event("FileType", function()
-    vim.opt_local.buflisted = false
+	vim.opt_local.buflisted = false
 end, {
-    target = "qf",
-    desc = "Do not list quickfix buffers",
+	target = "qf",
+	desc = "Do not list quickfix buffers",
 })
 
 -- Corrige le problème d'indentation en python lorsque
 -- l'on sort du mode insertion si on a mit plusieurs tabulations
 utils.on_event("InsertLeave", function()
-    vim.cmd("normal! ==")
+	vim.cmd("normal! ==")
 end, {
-    target = "*.py",
-    desc = "Auto format line in python file",
+	target = "*.py",
+	desc = "Auto format line in python file",
 })
 
 -- autocmd("User", {

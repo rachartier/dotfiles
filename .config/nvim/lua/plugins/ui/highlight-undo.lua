@@ -1,7 +1,7 @@
 return {
-    "tzachar/highlight-undo.nvim",
-    event = "VeryLazy",
-    opts = {
-        duration = 85,
-    }
+	"tzachar/highlight-undo.nvim",
+	event = "VeryLazy",
+	opts = {
+		duration = 85,
+	},
 }

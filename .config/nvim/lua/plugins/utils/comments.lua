@@ -1,5 +1,5 @@
 return {
-    "numToStr/Comment.nvim",
-    event = "LazyFile",
-    opts = {}
+	"numToStr/Comment.nvim",
+	event = "LazyFile",
+	opts = {},
 }
