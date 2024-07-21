@@ -67,6 +67,7 @@ export ENHANCD_FILTER="fzf --preview 'eza -al --tree --level 1 --group-directori
 export ENHANCD_ENABLE_DOUBLE_DOT=false
 export ENHANCD_ENABLE_HOME=false
 
+export GIT_PAGER="delta --config ~/.config/delta/delta.config"
 
 cneo() {
     neovide.exe --wsl --neovim-bin "$HOME/.local/bin/nvim" --server="$1:7301"
