@@ -267,11 +267,8 @@ install_git_delta() {
 
     local git_delta_version
     git_delta_version=$(__get_latest_release "dandavison/delta")
-    echo "Latest version: $git_delta_version"
 
-    curl -sLo /tmp/delta.deb "https://github.com/dandavison/delta/releases/latest/download/git-delta_${git_delta_version}_amd64.deb"
-    sudo dpkg -i /tmp/delta.deb
-    rm /tmp/delta.deb
+    __install_package_release "https://github.com/dandavison/delta/releases/latest/download/git-delta_${git_delta_version}_amd64.deb" "delta"
 }
 
 # install_zsh_plugins() {
@@ -319,7 +316,7 @@ install_glow() {
 
     local glow_version
     glow_version=$(__get_latest_release "charmbracelet/glow")
-    echo "Latest version: $glow_version"
+
     __install_package_release "https://github.com/charmbracelet/glow/latest/download/${glow_version}/glow_Linux_x86_64.tar.gz" glow
 }
 
