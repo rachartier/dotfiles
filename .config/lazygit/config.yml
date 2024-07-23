@@ -1,0 +1,4 @@
+git:
+  paging:
+    colorArg: always
+    pager: delta --config ~/.config/delta/delta.config --dark --paging=never
