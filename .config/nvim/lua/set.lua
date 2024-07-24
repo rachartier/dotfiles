@@ -87,9 +87,9 @@ opt.laststatus = 3 -- Configure status line display
 opt.cmdheight = 2 -- Command line height
 opt.list = false -- Show some invisible characters (tabs...)
 opt.mouse = "a" -- Enable mouse mode
-opt.number = false -- Print line number
+opt.number = true -- Print line number
 opt.pumheight = 20 -- Maximum number of entries in a popup
-opt.relativenumber = false -- Relative line numbers
+opt.relativenumber = true -- Relative line numbers
 opt.scrolloff = 8 -- Lines of context
 opt.sessionoptions = { -- Session options
 	"buffers",

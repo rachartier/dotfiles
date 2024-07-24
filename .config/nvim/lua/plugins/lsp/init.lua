@@ -158,10 +158,6 @@ return {
 							end
 						end
 
-						if ignore then
-							return
-						end
-
 						if settings then
 							settings.capabilities = capabilities
 							require("lspconfig")[server_name].setup(settings)

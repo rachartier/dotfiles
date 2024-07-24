@@ -98,6 +98,7 @@ function M.on_attach(client, bufnr)
             { "gd",          function() vim.lsp.buf.definition() end,             desc = "Go to definition" },
             { "<leader>gn",  function() vim.diagnostic.jump({ count = 1 }) end,   desc = "Go to next diagnostic" },
             { "<leader>gp",  function() vim.diagnostic.jump({ count = -1 }) end,  desc = "Go to previous diagnostic" },
+            { "<leader>ca", function() require("tiny-code-action").code_action()  end, desc = "Open code action menu" },
         },
         { "<C-h>", function() vim.lsp.buf.signature_help() end, desc = "Help", mode = { "i" } },
     })
@@ -109,12 +110,6 @@ function M.on_attach(client, bufnr)
             { "<leader>gd", require("omnisharp_extended").lsp_definition, desc = "Omnisharp Go to definition" },
             { "<leader>gr", require("omnisharp_extended").lsp_references, desc = "Omnisharp Find references" },
             { "<leader>gi", require("omnisharp_extended").lsp_implementation, desc = "Omnisharp Go to implementation" },
-            { "<leader>ca", function() vim.lsp.buf.code_action() end, desc = "Open code action menu" },
-        })
-    else
-        wk.add({
-            { "<leader>ca", function()  vim.lsp.buf.code_action() end, desc = "Open code action menu" },
-            mode = { "v", "n" }
         })
     end
 	-- stylua: ignore end

@@ -160,4 +160,9 @@ return {
 		mason = {},
 		formatter = { "typos" },
 	},
+	{
+		languages = { "c", "h" },
+		mason = { "clangd" },
+		formatter = { "clang-format", "typos" },
+	},
 }

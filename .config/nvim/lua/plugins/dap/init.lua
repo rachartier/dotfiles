@@ -7,6 +7,8 @@ return {
 		"theHamsta/nvim-dap-virtual-text",
 		"mfussenegger/nvim-dap-python",
 		"mfussenegger/nvim-jdtls",
+		"nvim-neotest/nvim-nio",
+
 		-- "nvim-telescope/telescope-dap.nvim",
 	},
 	-- priority = 100,

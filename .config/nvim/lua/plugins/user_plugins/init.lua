@@ -34,6 +34,26 @@ return {
 		end,
 	},
 	{
+		-- dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-code-actions.nvim",
+		"rachartier/tiny-code-action.nvim",
+		dependencies = {
+			{ "nvim-lua/plenary.nvim" },
+			{ "nvim-telescope/telescope.nvim" },
+		},
+		event = "LspAttach",
+		config = function()
+			require("tiny-code-action").setup({
+				backend = "delta",
+				backend_opts = {
+					delta = {
+						use_git_config = false,
+						config_path = os.getenv("HOME") .. "/.config/delta/delta.config",
+					},
+				},
+			})
+		end,
+	},
+	{
 		-- dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-inline-diagnostic.nvim",
 		"rachartier/tiny-inline-diagnostic.nvim",
 		event = "LspAttach",
