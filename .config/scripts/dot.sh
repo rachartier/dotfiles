@@ -73,6 +73,20 @@ __install_package_release() {
     mv "$name" "$HOME/.local/bin/$name" && __echo_success "'$name' moved in $HOME/local/bin/" || return 1
 }
 
+__download_install_deb() {
+    local url=$1
+    local name=$2
+    local filename
+
+    filename=$(basename "$url")
+
+    __echo_info "Downloading $filename"
+    cd /tmp || exit 1
+    echo "$url"
+    wget -q "$url" && __echo_success "'$filename' downloaded." || return 1
+    sudo dpkg -i "$filename" && __echo_success "$name installed." || return 1
+}
+
 __install_zsh_plugin() {
     local url=$1
     local folder
@@ -217,11 +231,15 @@ install_tmux() {
 }
 
 install_bat() {
-    __install_package_apt bat
-
+    __echo_info "Installing bat..."
     cd /tmp || exit
 
-    __make_symlink "$HOME/.local/bin/bat" batcat
+    local bat_version
+    bat_version=$(__get_latest_release "sharkdp/bat")
+
+    __download_install_deb "https://github.com/sharkdp/bat/releases/download/$bat_version/bat_${bat_version:1}_amd64.deb" "bat"
+
+    # __make_symlink "$HOME/.local/bin/bat" batcat
 
     if ! [ -d "$(bat --config-dir)" ]; then
         mkdir -p "$(bat --config-dir)/themes"
@@ -268,7 +286,7 @@ install_git_delta() {
     local git_delta_version
     git_delta_version=$(__get_latest_release "dandavison/delta")
 
-    __install_package_release "https://github.com/dandavison/delta/releases/latest/download/git-delta_${git_delta_version}_amd64.deb" "delta"
+    __download_install_deb "https://github.com/dandavison/delta/releases/latest/download/git-delta_${git_delta_version}_amd64.deb" "delta"
 }
 
 # install_zsh_plugins() {
