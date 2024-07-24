@@ -9,7 +9,7 @@ else
 end
 
 M.gif_alpha_enabled = false
-M.tty_clock_alpha_enabled = true
+M.tty_clock_alpha_enabled = false
 
 M.config_type = "normal"
 

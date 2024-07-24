@@ -18,9 +18,6 @@ map("n", "<C-j>", "<cmd>cprev<CR>zz")
 map("n", "<leader>k", "<cmd>lnext<CR>zz")
 map("n", "<leader>j", "<cmd>lprev<CR>zz")
 
-map("n", "<leader>ne", vim.diagnostic.goto_next)
-map("n", "<leader>pe", vim.diagnostic.goto_prev)
-
 -- map("n", "<leader>o", "<cmd>!feh <cfile> &<CR>", { silent = true })
 
 map("n", "<c-l>", "<c-i>")

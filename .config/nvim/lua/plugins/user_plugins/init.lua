@@ -34,8 +34,8 @@ return {
 		end,
 	},
 	{
-		-- dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-code-actions.nvim",
-		"rachartier/tiny-code-action.nvim",
+		dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-code-actions.nvim",
+		-- "rachartier/tiny-code-action.nvim",
 		dependencies = {
 			{ "nvim-lua/plenary.nvim" },
 			{ "nvim-telescope/telescope.nvim" },
