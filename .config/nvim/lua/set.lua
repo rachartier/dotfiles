@@ -43,28 +43,18 @@ vim.schedule(function()
 		-- 		vim.fn.system("clip.exe", vim.fn.getreg('"'))
 		-- 	end, { target = "*", desc = "Copy yanked text to clipboard" })
 		-- end
-		-- vim.g.clipboard = {
-		--     name = "win32yank-wsl",
-		--     copy = {
-		--         ["+"] = "win32yank.exe -i --crlf",
-		--         ["*"] = "win32yank.exe -i --crlf",
-		--     },
-		--     paste = {
-		--         ["+"] = "win32yank.exe -o --lf",
-		--         ["*"] = "win32yank.exe -o --lf",
-		--     },
-		--     cache_enabled = 0,
-		-- }
-		vim.api.nvim_create_autocmd({ "FocusGained" }, {
-			pattern = { "*" },
-			command = [[call setreg("@", getreg("+"))]],
-		})
-
-		-- sync with system clipboard on focus
-		vim.api.nvim_create_autocmd({ "FocusLost" }, {
-			pattern = { "*" },
-			command = [[call setreg("+", getreg("@"))]],
-		})
+		vim.g.clipboard = {
+			name = "win32yank-wsl",
+			copy = {
+				["+"] = "win32yank.exe -i --crlf",
+				["*"] = "win32yank.exe -i --crlf",
+			},
+			paste = {
+				["+"] = "win32yank.exe -o --lf",
+				["*"] = "win32yank.exe -o --lf",
+			},
+			cache_enabled = 0,
+		}
 	end
 end)
 
