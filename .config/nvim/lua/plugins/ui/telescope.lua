@@ -1,6 +1,5 @@
 return {
 	"nvim-telescope/telescope.nvim",
-	-- TODO: vériflier les nouveaux commits pour éviter le bug de treesitter...
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		{
@@ -8,7 +7,6 @@ return {
 			build = "make",
 		},
 		{
-
 			"isak102/telescope-git-file-history.nvim",
 			keys = {
 				"<leader>fh",
@@ -220,7 +218,11 @@ return {
 			{ desc = "Open Git File History" }
 		)
 		vim.keymap.set("n", "<leader>fd", builtin.diagnostics, { desc = "Find all diagnostics" })
-		vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "Grep string under cursor" })
+
+		vim.keymap.set("n", "<leader>fw", function()
+			builtin.grep_string({ search = vim.fn.expand("<cword>") })
+		end, { desc = "Grep string under cursor" })
+
 		vim.keymap.set("n", "<leader>ss", function()
 			require("telescope.builtin").spell_suggest(require("telescope.themes").get_cursor({}))
 		end, { desc = "Spelling Suggestions" })

@@ -109,8 +109,8 @@ function M.setup()
 			notify = true,
 			telekasten = true,
 			telescope = true,
-			treesitter = true,
-			treesitter_context = true,
+			treesitter = false,
+			treesitter_context = false,
 			which_key = true,
 			native_lsp = {
 				enabled = true,
@@ -119,6 +119,7 @@ function M.setup()
 					hints = { "italic" },
 					warnings = { "italic" },
 					information = { "italic" },
+					ok = { "italic" },
 				},
 				underlines = underlines,
 				inlay_hints = {

@@ -28,7 +28,7 @@ config.font = wezterm.font_with_fallback({ "MonoLisa", "Symbols Nerd Font" })
 -- config.font = wezterm.font_with_fallback({ "IBM Plex Mono", "Symbols Nerd Font" })
 
 -- config.cell_width = 1
--- config.line_height = 1
+config.line_height = 1
 
 config.font_size = 12
 config.font_rules = {
@@ -82,10 +82,10 @@ config.window_padding = {
 }
 config.win32_system_backdrop = "Acrylic"
 
--- config.win32_acrylic_accent_color = "rgba(36, 39, 58, 0.60)"
+config.win32_acrylic_accent_color = "rgba(36, 39, 58, 0)"
 -- config.window_background_opacity = 0.0
 -- config.window_background_opacity = 0.80
-config.window_background_opacity = 0.80
+config.window_background_opacity = 0.95
 
 config.window_close_confirmation = "NeverPrompt"
 
@@ -165,9 +165,5 @@ config.mouse_bindings = {
 		action = act.DecreaseFontSize,
 	},
 }
---
--- config.colors = {
---     background = "#181926",
--- }
 
 return config

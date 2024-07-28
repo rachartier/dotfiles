@@ -133,7 +133,7 @@ opt.fillchars = {
 	eob = " ",
 }
 
-opt.statusline = "─"
+opt.statusline = ""
 
 if vim.fn.has("nvim-0.10") == 1 then
 	opt.smoothscroll = true

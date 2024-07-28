@@ -1,7 +1,8 @@
 return {
 	{
 		"chrisgrieser/nvim-scissors",
-		event = "InsertEnter",
+		dependencies = { "hrsh7th/nvim-cmp" },
+		event = { "VeryLazy" },
 		opts = {
 			backdrop = {
 				enabled = false,

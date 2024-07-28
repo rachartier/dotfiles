@@ -62,10 +62,10 @@ return {
 			local signs = {}
 
 			if vim.g.neovide then
-				signs = {
-					left = "",
-					right = "",
-				}
+				-- signs = {
+				-- 	left = "",
+				-- 	right = "",
+				-- }
 			end
 
 			require("tiny-inline-diagnostic").setup({

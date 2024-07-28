@@ -151,13 +151,13 @@ return {
 				-- return "▌"
 
 				if is_inside_docker then
-					return "  "
+					return "▌   "
 				end
-				return ""
+				return "▌"
 			end,
-			color = { fg = colors.blue },
+			color = { fg = colors.mauve },
 			padding = {
-				right = 2,
+				right = 1,
 			},
 		})
 
@@ -349,6 +349,16 @@ return {
 			end,
 			cond = conditions.buffer_not_empty,
 			color = { fg = colors.fg },
+		})
+
+		ins_right({
+			function()
+				return "▌"
+			end,
+			color = { fg = colors.mauve },
+			padding = {
+				left = 2,
+			},
 		})
 
 		require("lualine").setup(config)

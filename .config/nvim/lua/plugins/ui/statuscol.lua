@@ -24,6 +24,7 @@ return {
 				"dap-repl",
 				"oil",
 				"Trouble",
+				"TelescopePrompt",
 			},
 
 			segments = {

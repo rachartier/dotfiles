@@ -35,6 +35,7 @@ require("lazy").setup("plugins", {
 			disabled_plugins = {
 				reset = true,
 				disabled_plugins = {
+					"startify",
 					"gzip",
 					"matchit",
 					"matchparen",
