@@ -69,9 +69,6 @@ export ENHANCD_ENABLE_HOME=false
 
 export GIT_PAGER="delta --config ~/.config/delta/delta.config"
 
-cneo() {
-    neovide.exe --wsl --neovim-bin "$HOME/.local/bin/nvim" --server="$1:7301"
-}
 
 export DOTNET_ROOT="$HOME/.dotnet"
 export PATH="$HOME/.dotnet:$PATH"

@@ -1,15 +1,17 @@
 if vim.g.neovide then
 	-- vim.o.guifont = "CaskaydiaCove NF, Symbols Nerd Font"
 	-- vim.o.guifont = "Cascadia Code,Symbols Nerd Font"
-	vim.o.guifont = "MonoLisa,Symbols Nerd Font:h13"
+	vim.o.guifont = "MonoLisa,Symbols Nerd Font:h14"
 
-	vim.g.neovide_underline_automatic_scaling = true
+	vim.g.neovide_underline_stroke_scale = 1.5
+	-- vim.g.neovide_underline_automatic_scaling = true
+
 	vim.g.neovide_scale_factor = 0.84
 	-- vim.g.neovide_floating_shadow = "v:true"
 	-- vim.g.neovide_floating_z_height = 10
 	-- vim.g.neovide_transparency = 1
-	vim.g.neovide_padding_top = 10
-	vim.g.neovide_padding_left = 10
+
+	vim.g.neovide_cursor_animate_command_line = true
 
 	vim.g.neovide_padding_top = 0
 	vim.g.neovide_padding_bottom = 5
@@ -35,8 +37,8 @@ if vim.g.neovide then
 
 	vim.g.neovide_floating_shadow = true
 
-	vim.g.neovide_floating_blur_amount_x = 0
-	vim.g.neovide_floating_blur_amount_y = 0
+	vim.g.neovide_floating_blur_amount_x = 1.5
+	vim.g.neovide_floating_blur_amount_y = 1.5
 	vim.g.neovide_floating_z_height = 10
 	vim.g.neovide_light_angle_degrees = 45
 	vim.g.neovide_light_radius = 5

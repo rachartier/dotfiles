@@ -2,6 +2,7 @@ return {
 	{
 		-- dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny_buffers_switcher.nvim",
 		"rachartier/tiny-buffers-switcher.nvim",
+		enabled = true,
 		event = "LazyFile",
 		keys = {
 			{
@@ -62,10 +63,10 @@ return {
 			local signs = {}
 
 			if vim.g.neovide then
-				-- signs = {
-				-- 	left = "",
-				-- 	right = "",
-				-- }
+				signs = {
+					left = "",
+					right = "",
+				}
 			end
 
 			require("tiny-inline-diagnostic").setup({
