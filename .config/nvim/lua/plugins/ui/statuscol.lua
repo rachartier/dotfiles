@@ -43,14 +43,6 @@ return {
 					sign = {
 						auto = true,
 					},
-					condition = {
-						function()
-							return vim.wo.number
-						end,
-						function()
-							return vim.wo.number
-						end,
-					},
 					click = "v:lua.ScLa",
 				},
 				{

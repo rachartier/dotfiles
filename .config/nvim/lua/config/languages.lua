@@ -33,6 +33,7 @@ return {
 		languages = { "cs" },
 		mason = { "omnisharp" },
 		dap = { "netcoredbg" },
+		lsp_ignore = true,
 		formatter = {
 			csharpier = {
 				command = "dotnet-csharpier",

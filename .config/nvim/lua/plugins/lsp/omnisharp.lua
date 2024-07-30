@@ -71,7 +71,7 @@ end
 
 return {
 	"Hoffs/omnisharp-extended-lsp.nvim",
-	enabled = true,
+	enabled = false,
 	event = { "LspAttach" },
 	ft = { "cs", "xaml" },
 	config = function()
