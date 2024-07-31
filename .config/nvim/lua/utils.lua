@@ -251,4 +251,30 @@ function M.on_event(events, callback, user_opts)
 	return group
 end
 
+function M.get_function_under_cursor()
+	local cursor_pos = vim.api.nvim_win_get_cursor(0)
+
+	vim.cmd("normal! vaf")
+
+	local start_pos = vim.fn.getpos("'<")
+	local end_pos = vim.fn.getpos("'>")
+
+	print(start_pos)
+	print(end_pos)
+
+	vim.api.nvim_win_set_cursor(0, cursor_pos)
+
+	local lines = vim.api.nvim_buf_get_lines(0, start_pos[2] - 1, end_pos[2], false)
+
+	if #lines > 0 then
+		lines[#lines] = lines[#lines]:sub(1, end_pos[3])
+	end
+
+	if #lines > 0 then
+		lines[1] = lines[1]:sub(start_pos[3])
+	end
+
+	return table.concat(lines, "\n")
+end
+
 return M

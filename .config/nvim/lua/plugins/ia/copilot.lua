@@ -138,6 +138,54 @@ return {
 				end,
 				desc = "CopilotChat - Quick chat",
 			},
+			{
+				"<leader>cdf",
+				function()
+					local ft = vim.bo.filetype
+
+					vim.cmd("normal vaf")
+
+					require("CopilotChat").ask([[
+As an expert ]] .. ft .. [[ developer, generate comprehensive and precise documentation for the following function/method. Adhere strictly to ]] .. ft .. [['s official documentation standards and best practices.
+Do not include implementation details, nor should you describe how the function works.
+Do not include any code snippets or examples.
+Do not include any information that is not directly related to the function's purpose and behavior.
+Do not describe the function's behavior in terms of the implementation.
+Do not assume any prior knowledge of the function's purpose or behavior.
+The length of a good documentation is between 50 and 100 words.
+The length of a line should not exceed 80 characters.
+
+Do include the following:
+
+1. A concise yet informative description of the function's purpose and behavior.
+2. Detailed parameter information:
+   - Name
+   - Type (be specific, e.g., 'List[int]' instead of just 'List')
+   - Description, including any constraints or expected formats
+   - Whether the parameter is optional, and if so, its default value
+3. Return value:
+   - Type (be as specific as possible)
+   - Detailed description of what is returned
+   - Any special cases or conditions that affect the return value
+4. Exceptions or errors:
+   - Specific exceptions that may be raised/thrown
+   - Conditions under which each exception occurs
+
+Use appropriate ]] .. ft .. [[ specific documentation syntax and formatting.
+
+Others conditions:
+ - If the language is lua, use the 3 dashes comment format.
+
+Function signature:
+                    ]], {
+						selection = require("CopilotChat.select").visual,
+						callback = function(response)
+							print("BetterDocs callback")
+							vim.cmd("normal <C-y>")
+						end,
+					})
+				end,
+			},
 		},
 		opts = function()
 			local user = vim.env.USER or "User"
@@ -164,6 +212,11 @@ return {
 					},
 					TestsxUnit = {
 						prompt = "/COPILOT_GENERATE Write a set of detailed unit test functions for the following code with the xUnit framework.",
+					},
+					BetterDocs = {
+						prompt = [[
+
+]],
 					},
 				},
 				mappings = {

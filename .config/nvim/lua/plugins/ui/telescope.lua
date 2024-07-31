@@ -148,6 +148,9 @@ return {
 				},
 			},
 			pickers = {
+				find_files = {
+					find_command = { "rg", "--files", "--sortr=modified" },
+				},
 				grep_string = search_layout,
 				live_grep = search_layout,
 				lsp_references = search_layout,
