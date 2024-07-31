@@ -198,7 +198,6 @@ Function signature:
 				separator = "───",
 				show_folds = false,
 				auto_follow_cursor = false,
-				model = "gpt-4",
 				-- context = "buffer",
 
 				selection = function(source)
