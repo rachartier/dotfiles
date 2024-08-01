@@ -211,6 +211,14 @@ install_lazydocker() {
     curl https://raw.githubusercontent.com/jesseduffield/lazydocker/master/scripts/install_update_linux.sh | bash
 }
 
+install_zoxide() {
+    __echo_info "Installing zoxide..."
+
+    curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
+
+    __echo_success "zoxide installed."
+}
+
 install_tmux() {
     __echo_info "Installing tmux"
 
@@ -353,10 +361,9 @@ install_essentials() {
     install_lazydocker
     # install_starship
     install_ohmyposh
+    install_zoxide
 
     install_git_delta
-
-    install_fonts_for_windows
 }
 
 install_minimal() {
@@ -369,6 +376,7 @@ install_minimal() {
     install_eza
     install_fzf
     install_viu
+    install_zoxide
     # install_starship
     install_ohmyposh
 }
@@ -399,6 +407,7 @@ do_reinstall() {
     "eza") install_eza ;;
     "fzf") install_fzf ;;
     "glow") install_glow ;;
+    "zoxide") install_zoxide ;;
     "lazydocker") install_lazydocker ;;
     "lazygit") install_lazygit ;;
     "minimal") install_minimal ;;
