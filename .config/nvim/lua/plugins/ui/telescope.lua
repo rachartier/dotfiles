@@ -78,6 +78,7 @@ return {
 			search = "",
 			layout_strategy = "vertical",
 			line_width = "full",
+			find_command = { "rg", "--files", "--sortr=modified", "--fixed-string" },
 			layout_config = {
 				prompt_position = "bottom",
 				vertical = {
