@@ -147,6 +147,7 @@ function M.get(colors)
 		HighlightUndo = { bg = colors.red, fg = colors.mantle },
 		HighlightRedo = { bg = colors.green, fg = colors.mantle },
 
+		AlphaHeader = { fg = colors.yellow, bold = true },
 		AlphaNeovimLogoMauve = { fg = colors.mauve },
 		AlphaNeovimLogoBlue = { fg = colors.blue },
 		AlphaNeovimLogoGreen = { fg = colors.green },
