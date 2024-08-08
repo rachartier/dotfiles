@@ -75,6 +75,9 @@ return {
 					-- background = "None",
 					mixing_color = require("theme").get_colors().base,
 				},
+				options = {
+					multilines = true,
+				},
 				blend = {
 					factor = 0.22,
 				},
