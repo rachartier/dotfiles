@@ -92,3 +92,5 @@ map("n", "<Leader>db", function()
 		end
 	end
 end, { silent = true, desc = "Close unused buffers" })
+
+map("n", "<Leader>r", ":%s/<c-r><c-w>//g<left><left>", { desc = "Rename word under cursor" })

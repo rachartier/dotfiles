@@ -77,6 +77,9 @@ return {
 				},
 				options = {
 					multilines = true,
+					overflow = {
+						mode = "oneline",
+					},
 				},
 				blend = {
 					factor = 0.22,

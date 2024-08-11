@@ -26,35 +26,35 @@ vim.schedule(function()
 		--         cache_enabled = true
 		--     }
 		-- end
-		-- vim.g.clipboard = {
-		-- 	name = "WslClipboard",
-		-- 	copy = {
-		-- 		["+"] = "clip.exe",
-		-- 		["*"] = "clip.exe",
-		-- 	},
-		-- 	paste = {
-		-- 		["+"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-		-- 		["*"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-		-- 	},
-		-- 	cache_enabled = 0,
-		-- }
+		vim.g.clipboard = {
+			name = "WslClipboard",
+			copy = {
+				["+"] = "clip.exe",
+				["*"] = "clip.exe",
+			},
+			paste = {
+				["+"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+				["*"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+			},
+			cache_enabled = 0,
+		}
 		-- if os.getenv("TMUX") then
 		-- 	utils.on_event({ "TextYankPost" }, function()
 		-- 		vim.fn.system("clip.exe", vim.fn.getreg('"'))
 		-- 	end, { target = "*", desc = "Copy yanked text to clipboard" })
 		-- end
-		vim.g.clipboard = {
-			name = "win32yank-wsl",
-			copy = {
-				["+"] = "win32yank.exe -i --crlf",
-				["*"] = "win32yank.exe -i --crlf",
-			},
-			paste = {
-				["+"] = "win32yank.exe -o --lf",
-				["*"] = "win32yank.exe -o --lf",
-			},
-			cache_enabled = 0,
-		}
+		-- vim.g.clipboard = {
+		-- 	name = "win32yank-wsl",
+		-- 	copy = {
+		-- 		["+"] = "win32yank.exe -i --crlf",
+		-- 		["*"] = "win32yank.exe -i --crlf",
+		-- 	},
+		-- 	paste = {
+		-- 		["+"] = "win32yank.exe -o --lf",
+		-- 		["*"] = "win32yank.exe -o --lf",
+		-- 	},
+		-- 	cache_enabled = 0,
+		-- }
 	end
 end)
 
