@@ -61,7 +61,6 @@ return {
 					},
 				},
 				filetypes = {
-					markdown = true,
 					sh = function()
 						local filename = vim.fs.basename(vim.api.nvim_buf_get_name(0))
 						if
@@ -236,11 +235,6 @@ Question or request: ]]
 				show_folds = false,
 				auto_follow_cursor = false,
 				-- context = "buffer",
-
-				selection = function(source)
-					local select = require("CopilotChat.select")
-					return select.visual(source) or select.buffer(source)
-				end,
 
 				prompts = {
 					BetterNamings = {
