@@ -330,4 +330,23 @@ Question or request: ]]
 			})
 		end,
 	},
+	{
+		"yetone/avante.nvim",
+		event = "VeryLazy",
+		build = "make",
+		opts = {
+			provider = "copilot",
+		},
+		dependencies = {
+			"nvim-tree/nvim-web-devicons",
+			"stevearc/dressing.nvim",
+			"nvim-lua/plenary.nvim",
+			{
+				"grapp-dev/nui-components.nvim",
+				dependencies = {
+					"MunifTanjim/nui.nvim",
+				},
+			},
+		},
+	},
 }

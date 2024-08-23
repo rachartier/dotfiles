@@ -66,13 +66,14 @@ function M.get(colors)
 
 		SwitchBufferStatusColor = { fg = colors.red },
 
-		-- StatusLine = {
-		--     bg = bg,
-		-- },
-		--
-		-- StatusLineNC = {
-		--     link = "StatusLine",
-		-- },
+		StatusLine = {
+			fg = colors.base,
+			bg = "None",
+		},
+
+		StatusLineNC = {
+			link = "StatusLine",
+		},
 
 		DiagnosticError = { fg = colors.red }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default
 		DiagnosticWarn = { fg = colors.yellow }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default
@@ -124,8 +125,8 @@ function M.get(colors)
 		DapUIStepBackNC = { link = "DapUIStepBack" },
 		DapUIStepOutNC = { link = "DapUIStepOut" },
 
-		StatusLineNC = { fg = colors.surface0 },
-		StatusLine = { fg = colors.surface0 },
+		-- StatusLineNC = { fg = colors.surface0 },
+		-- StatusLine = { fg = colors.surface0 },
 
 		EdgyNormal = { bg = bg },
 		-- EdgyWinBar = { bg = colors.surface0 },

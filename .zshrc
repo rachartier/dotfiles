@@ -107,3 +107,6 @@ eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/pure.toml)"
 eval "$(zoxide init zsh --cmd cd)"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"

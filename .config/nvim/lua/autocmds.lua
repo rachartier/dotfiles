@@ -93,6 +93,13 @@ end, {
 })
 
 utils.on_event({ "BufReadPost" }, function()
+	vim.opt_local.filetype = "css"
+end, {
+	target = "*.tcss",
+	desc = "Set filetype to css",
+})
+
+utils.on_event({ "BufReadPost" }, function()
 	vim.cmd('silent! normal! g`"zv')
 end, {
 	target = "*",

@@ -133,6 +133,7 @@ return {
 				lualine_c = {},
 				lualine_x = {},
 			},
+			disabled_filetypes = { "alpha" },
 		}
 
 		local function ins_left(component)

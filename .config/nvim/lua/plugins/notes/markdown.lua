@@ -31,7 +31,7 @@ return {
 		"MeanderingProgrammer/markdown.nvim",
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
 		name = "render-markdown",
-		ft = { "markdown", "pandoc" },
+		ft = { "markdown", "pandoc", "avante" },
 		cond = require("config").config_type ~= "minimal",
 		config = function()
 			require("render-markdown").setup({
@@ -41,7 +41,7 @@ return {
 					unchecked = "󰄱 ",
 					checked = "󰄲 ",
 				},
-				file_types = { "markdown", "pandoc" },
+				file_types = { "markdown", "pandoc", "Avante" },
 				highlights = {
 					checkbox = {
 						unchecked = "@markup.list.unchecked",
