@@ -2,18 +2,10 @@ return {
 	"luukvbaal/statuscol.nvim",
 	event = { "BufReadPost", "BufNewFile", "BufWritePre" },
 	enabled = true,
-	config = function()
+	opts = function()
 		local builtin = require("statuscol.builtin")
-		-- local inside_git_repo
 
-		-- local Job = require("plenary.job")
-		-- inside_git_repo = Job:new({
-		-- 	command = "git",
-		-- 	args = { "rev-parse", "--is-inside-work-tree" },
-		-- })
-		-- 	:sync()[1]
-
-		local cfg = {
+		return {
 			separator = " ", -- separator between line number and buffer text ("│" or extra " " padding)
 			ft_ignore = {
 				"dapui_stacks",
@@ -82,7 +74,5 @@ return {
 			GitSignsChangedelete = builtin.gitsigns_click,
 			GitSignsDelete = builtin.gitsigns_click,
 		}
-
-		require("statuscol").setup(cfg)
 	end,
 }

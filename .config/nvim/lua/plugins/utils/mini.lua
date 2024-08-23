@@ -12,29 +12,25 @@ return {
 		"echasnovski/mini.splitjoin",
 		version = false,
 		event = { "InsertEnter" },
-		config = function()
-			require("mini.splitjoin").setup({
-				-- Module mappings. Use `''` (empty string) to disable one.
-				-- Created for both Normal and Visual modes.
-				mappings = {
-					toggle = "gS",
-					split = "",
-					join = "",
-				},
-			})
-		end,
+		opts = {
+			-- Module mappings. Use `''` (empty string) to disable one.
+			-- Created for both Normal and Visual modes.
+			mappings = {
+				toggle = "gS",
+				split = "",
+				join = "",
+			},
+		},
 	},
 	{
 		"echasnovski/mini.surround",
-		event = "LazyFile",
-		config = function()
-			require("mini.surround").setup({})
-		end,
+		event = "VeryLazy",
+		opts = {},
 	},
 	{
 		"echasnovski/mini.hipatterns",
 		enabled = false,
-		event = { "LazyFile" },
+		event = { "VeryLazy" },
 		config = function()
 			local hipatterns = require("mini.hipatterns")
 
@@ -92,14 +88,12 @@ return {
 	},
 	{
 		"echasnovski/mini.align",
-		event = { "LazyFile" },
-		config = function()
-			require("mini.align").setup()
-		end,
+		event = { "VeryLazy" },
+		opts = {},
 	},
 	{
 		"echasnovski/mini.indentscope",
-		event = { "LazyFile" },
+		event = { "VeryLazy" },
 		init = function()
 			utils.on_event("FileType", function()
 				---@diagnostic disable-next-line: inject-field

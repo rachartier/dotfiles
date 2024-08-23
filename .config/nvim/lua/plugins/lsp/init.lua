@@ -4,7 +4,7 @@ local utils = require("utils")
 return {
 	{
 		"neovim/nvim-lspconfig",
-		event = "LazyFile",
+		event = "VeryLazy",
 		dependencies = {
 			"williamboman/mason.nvim",
 			"onsails/lspkind.nvim",
@@ -38,7 +38,7 @@ return {
 	},
 	{
 		"williamboman/mason.nvim",
-		event = "LazyFile",
+		event = "VeryLazy",
 		dependencies = {
 			"williamboman/mason-lspconfig.nvim",
 			"williamboman/mason-nvim-dap.nvim",

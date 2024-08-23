@@ -8,23 +8,18 @@ return {
 			"nvim-tree/nvim-web-devicons", -- Used by the code bloxks
 		},
 
-		config = function()
-			require("markview").setup({
-				checkboxes = {
-					checked = {
-						text = "󰄲",
-						hl = "@markup.list.checked",
-					},
-					unchecked = {
-						text = "󰄱",
-						hl = "@markup.list.unchecked",
-					},
+		opts = {
+			checkboxes = {
+				checked = {
+					text = "󰄲",
+					hl = "@markup.list.checked",
 				},
-			})
-
-			local colors = require("theme").get_colors()
-			vim.api.nvim_set_hl(0, "MarkviewLayer", { bg = colors.surface1, fg = colors.text })
-		end,
+				unchecked = {
+					text = "󰄱",
+					hl = "@markup.list.unchecked",
+				},
+			},
+		},
 	},
 	{
 		enabled = true,
@@ -33,22 +28,24 @@ return {
 		name = "render-markdown",
 		ft = { "markdown", "pandoc", "avante" },
 		cond = require("config").config_type ~= "minimal",
-		config = function()
-			require("render-markdown").setup({
-				bullets = { "", "", "◆", "◇" },
-				headings = { "󰼏 ", "󰎨 ", "󰼑 ", "󰎲 ", "󰼓 ", "󰎴 " },
+		opts = {
+
+			bullets = { "", "", "◆", "◇" },
+			headings = { "󰼏 ", "󰎨 ", "󰼑 ", "󰎲 ", "󰼓 ", "󰎴 " },
+			checkbox = {
+				unchecked = "󰄱 ",
+				checked = "󰄲 ",
+			},
+			file_types = { "markdown", "pandoc", "Avante" },
+			highlights = {
 				checkbox = {
-					unchecked = "󰄱 ",
-					checked = "󰄲 ",
+					unchecked = "@markup.list.unchecked",
+					checked = "@markdown_check_done",
 				},
-				file_types = { "markdown", "pandoc", "Avante" },
-				highlights = {
-					checkbox = {
-						unchecked = "@markup.list.unchecked",
-						checked = "@markdown_check_done",
-					},
-				},
-			})
+			},
+		},
+		config = function(_, opts)
+			require("render-markdown").setup(opts)
 
 			local function toggle_checkbox(char)
 				local current_line = vim.api.nvim_get_current_line()

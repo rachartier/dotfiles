@@ -13,7 +13,4 @@ return {
 			["<Right>"] = {},
 		},
 	},
-	config = function(_, opts)
-		require("hardtime").setup(opts)
-	end,
 }

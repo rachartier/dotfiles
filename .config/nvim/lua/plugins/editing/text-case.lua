@@ -1,14 +1,7 @@
-local M = {
+return {
 	"johmsalas/text-case.nvim",
 	keys = {
-		"<leader>tc",
+		{ mode = { "n", "v" }, "<leader>tc", "<cmd>TextCaseOpenTelescope<CR>", { desc = "Change word case" } },
 	},
+	opts = {},
 }
-
-function M.config()
-	require("textcase").setup({})
-	require("telescope").load_extension("textcase")
-	vim.keymap.set({ "n", "v" }, "<leader>tc", "<cmd>TextCaseOpenTelescope<CR>", { desc = "Change word case" })
-end
-
-return M

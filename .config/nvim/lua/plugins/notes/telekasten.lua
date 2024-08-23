@@ -1,10 +1,7 @@
-local M = {
+return {
 	"renerocksai/telekasten.nvim",
 	cond = require("config").config_type ~= "minimal",
-	dependencies = {
-		"godlygeek/tabular",
-		"preservim/vim-markdown",
-	},
+	dependencies = {},
 	keys = {
 		{ mode = "n", "<leader>z", "<cmd>Telekasten panel<CR>", { desc = "Show Telekasten panel" } },
 		{ mode = "n", "<leader>zf", "<cmd>Telekasten find_notes<CR>", { desc = "Find notes" } },
@@ -20,23 +17,21 @@ local M = {
 		{ mode = "n", "<leader>za", "<cmd>Telekasten show_tags()<CR>", { desc = "Show tags" } },
 		{ mode = "n", "<leader>zt", "<cmd>Telekasten toggle_todo({ i=true })<CR>", { desc = "Toggle todo" } },
 	},
-}
-
-function M.config()
-	require("telekasten").setup({
+	opts = {
 		home = vim.fn.expand("~/.config/nvim/notes"),
 		auto_set_filetype = false,
 		auto_set_syntax = false,
-	})
+	},
+	config = function(_, opts)
+		require("telekasten").setup(opts)
 
-	vim.api.nvim_create_autocmd("FileType", {
-		pattern = "markdown",
-		callback = function()
-			vim.keymap.set("i", "[[", "<cmd>Telekasten insert_link<CR>")
-		end,
-	})
+		vim.api.nvim_create_autocmd("FileType", {
+			pattern = "markdown",
+			callback = function()
+				vim.keymap.set("i", "[[", "<cmd>Telekasten insert_link<CR>")
+			end,
+		})
 
-	vim.g.vim_markdown_folding_disabled = 1
-end
-
-return M
+		vim.g.vim_markdown_folding_disabled = 1
+	end,
+}

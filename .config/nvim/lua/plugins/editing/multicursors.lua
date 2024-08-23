@@ -1,4 +1,4 @@
-local M = {
+return {
 	"smoka7/multicursors.nvim",
 	cmd = { "MCstart", "MCvisual", "MCclear", "MCpattern", "MCvisualPattern", "MCunderCursor" },
 	keys = {
@@ -9,12 +9,7 @@ local M = {
 			desc = "Create a selection for selected text or word under the cursor",
 		},
 	},
-}
-
-function M.config()
-	require("multicursors").setup({
+	opts = {
 		hint_config = false,
-	})
-end
-
-return M
+	},
+}

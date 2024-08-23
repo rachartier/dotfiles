@@ -47,7 +47,7 @@ return {
 		"AndreM222/copilot-lualine",
 		"nvim-tree/nvim-web-devicons",
 	},
-	event = "LazyFile",
+	event = "VeryLazy",
 	priority = 500,
 	enabled = true,
 	config = function()

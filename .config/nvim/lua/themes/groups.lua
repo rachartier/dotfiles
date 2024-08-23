@@ -47,6 +47,7 @@ function M.get(colors)
 		LspSignatureActiveParameter = { bg = colors.peach, fg = colors.crust },
 
 		MiniIndentscopeSymbol = { fg = colors.surface0 },
+		MarkviewLayer = { bg = colors.surface1, fg = colors.text },
 
 		NeoTreeCursorLine = { link = "PmenuSel" },
 		NeoTreeFloatTitle = { link = "NeoTreeTitlebar" },

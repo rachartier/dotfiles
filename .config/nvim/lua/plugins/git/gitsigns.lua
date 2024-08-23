@@ -3,7 +3,6 @@ return {
 	event = { "VeryLazy" },
 	enabled = true,
 	opts = {
-
 		signcolumn = true,
 		current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
 		current_line_blame_opts = {

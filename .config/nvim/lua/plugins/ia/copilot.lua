@@ -50,7 +50,7 @@ return {
 	-- },
 	{
 		"zbirenbaum/copilot.lua",
-		event = "LazyFile",
+		event = "VeryLazy",
 		config = function()
 			require("copilot").setup({
 				suggestion = {

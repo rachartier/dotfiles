@@ -3,7 +3,7 @@ return {
 		-- dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny_buffers_switcher.nvim",
 		"rachartier/tiny-buffers-switcher.nvim",
 		enabled = true,
-		event = "LazyFile",
+		event = "VeryLazy",
 		keys = {
 			{
 				"<Tab>",
