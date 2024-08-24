@@ -1,9 +1,10 @@
+local signs = require("config.icons").signs
+
 return {
 	{
 		"nvim-neo-tree/neo-tree.nvim",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
-			"nvim-tree/nvim-web-devicons",
 			"MunifTanjim/nui.nvim",
 		},
 		keys = {
@@ -24,26 +25,14 @@ return {
 					-- padding = 1, -- extra padding on left hand side
 					-- indent guides
 					with_markers = true,
-					indent_marker = "│",
-					last_indent_marker = "└",
-					highlight = "NeoTreeIndentMarker",
-					-- expander config, needed for nesting files
-					with_expanders = true, -- if nil and file nesting is enabled, will enable expanders
-					expander_collapsed = "",
-					expander_expanded = "",
-					expander_highlight = "NeoTreeExpander",
 				},
 				icon = {
 					folder_closed = "󰉋",
 					folder_open = "󰝰",
 					folder_empty = "󰉖",
-					-- The next two settings are only a fallback, if you use nvim-web-devicons and configure default icons there
-					-- then these will never be used.
-					default = "*",
-					highlight = "NeoTreeFileIcon",
 				},
 				modified = {
-					symbol = require("config.icons").signs.file.modified,
+					symbol = signs.file.modified,
 					highlight = "NeoTreeModified",
 				},
 				name = {
@@ -53,16 +42,16 @@ return {
 				},
 				git_status = {
 					symbols = {
-						untracked = "",
-						ignored = " ",
-						unstaged = "󰄱 ",
-						staged = " ",
+						untracked = signs.git.untracked,
+						ignored = signs.git.ignored,
+						unstaged = signs.git.unstaged,
+						staged = signs.git.staged,
 						added = "", -- or "✚", but this is redundant info if you use git_status_colors on the name
 						modified = "", -- or "", but this is redundant info if you use git_status_colors on the name
-						renamed = "󰑕", -- this can only be used in the git_status source
-						conflict = "",
-						unmerged = "",
-						deleted = require("config.icons").signs.git.removed,
+						renamed = signs.git.renamed, -- this can only be used in the git_status source
+						conflict = signs.git.branch,
+						unmerged = signs.git.branch,
+						deleted = signs.git.removed,
 					},
 				},
 				file_size = {
@@ -71,7 +60,6 @@ return {
 				},
 				type = {
 					enabled = false,
-					required_width = 122, -- min width of window required to show this column
 				},
 				last_modified = {
 					enabled = true,
@@ -79,10 +67,8 @@ return {
 				},
 				created = {
 					enabled = false,
-					required_width = 110, -- min width of window required to show this column
 				},
 			},
-
 			filesystem = {
 				use_libuv_file_watcher = true,
 				follow_current_file = {
@@ -91,9 +77,6 @@ return {
 				},
 			},
 		},
-		config = function(_, opts)
-			require("neo-tree").setup(opts)
-		end,
 	},
 	{
 		"antosha417/nvim-lsp-file-operations",
@@ -101,9 +84,7 @@ return {
 			"nvim-lua/plenary.nvim",
 			"nvim-neo-tree/neo-tree.nvim",
 		},
-		config = function()
-			require("lsp-file-operations").setup()
-		end,
+		opts = {},
 		keys = { "<leader>te" },
 	},
 }

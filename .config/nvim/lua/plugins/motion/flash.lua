@@ -20,7 +20,7 @@ return {
 			},
 			{
 				"r",
-				mode = "o",
+				mode = { "o" },
 				function()
 					require("flash").remote()
 				end,

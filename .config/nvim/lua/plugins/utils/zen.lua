@@ -6,11 +6,11 @@ return {
 	opts = {
 		window = {
 			backdrop = 1,
-			options = {
-				number = false,
-				signcolumn = "no",
-				relativenumber = false,
-			},
+			options = {},
+		},
+		plugins = {
+			todo = { enabled = true },
+			gitsigns = { enabled = true },
 		},
 	},
 }

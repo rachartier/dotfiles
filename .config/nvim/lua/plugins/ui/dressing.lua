@@ -15,7 +15,7 @@ return {
 			return vim.ui.input(...)
 		end
 	end,
-	lazy = "VeryLazy",
+	lazy = true,
 	opts = {
 		input = {
 			border = require("utils").default_border,

@@ -1,7 +1,7 @@
 return {
-
 	"m4xshen/hardtime.nvim",
-	event = "BufEnter",
+	event = "VeryLazy",
+	enabled = true,
 	dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
 	opts = {
 		disable_mouse = false,

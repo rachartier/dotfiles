@@ -88,22 +88,22 @@ function M.on_attach(client, bufnr)
     wk.add({
         {
             mode = "n",
-            { "gD",          function() vim.lsp.buf.declaration() end,            desc = "Go to declaration" },
-            { "K",           function() vim.lsp.buf.hover() end,                  desc = "Show hover" },
-            { "<leader>vws", function() vim.lsp.buf.workspace_symbol() end,       desc = "Workspace symbol" },
-            { "<leader>vd",  function() vim.diagnostic.open_float() end,          desc = "Open diagnostic inside a floating window" },
-            { "<leader>rr",  function() vim.lsp.buf.references() end,             desc = "Find references" },
-            { "<leader>vd",  function() vim.lsp.util.show_line_diagnostics() end, desc = "Show line diagnostics" },
-            { "<leader>rn",  function() M.lsp_rename() end,                       desc = "Rename current symbol" },
-            { "gd",          function() vim.lsp.buf.definition() end,             desc = "Go to definition" },
-            { "<leader>gn",  function() vim.diagnostic.jump({ count = 1 }) end,   desc = "Go to next diagnostic" },
-            { "<leader>gp",  function() vim.diagnostic.jump({ count = -1 }) end,  desc = "Go to previous diagnostic" },
-            { "<leader>ca", function() require("tiny-code-action").code_action()  end, desc = "Open code action menu" },
+            { "gD",          function() vim.lsp.buf.declaration() end,                  desc = "Go to declaration" },
+            { "K",           function() vim.lsp.buf.hover() end,                        desc = "Show hover" },
+            { "<leader>vws", function() vim.lsp.buf.workspace_symbol() end,             desc = "Workspace symbol" },
+            { "<leader>vd",  function() vim.diagnostic.open_float() end,                desc = "Open diagnostic inside a floating window" },
+            { "<leader>rr",  function() vim.lsp.buf.references() end,                   desc = "Find references" },
+            { "<leader>rn",  function() M.lsp_rename() end,                             desc = "Rename current symbol" },
+            { "gd",          function() vim.lsp.buf.definition() end,                   desc = "Go to definition" },
+            { "<leader>gn",  function() vim.diagnostic.jump({ count = 1 }) end,         desc = "Go to next diagnostic" },
+            { "<leader>gp",  function() vim.diagnostic.jump({ count = -1 }) end,        desc = "Go to previous diagnostic" },
+            -- { "<leader>ca",  function() require("tiny-code-action").code_action()  end, {noremap = true, silent=true}, desc = "Open code action menu" },
         },
         { "<C-h>", function() vim.lsp.buf.signature_help() end, desc = "Help", mode = { "i" } },
     })
     -- vim.keymap.set({ "v", "n" }, "<leader>ca", require("fzf-lua").lsp_code_actions, { desc = "Open code action menu" })
 
+    vim.keymap.set({"n"},  "<leader>ca",  function() require("tiny-code-action").code_action()  end, {noremap = true, silent=true, desc = "Open code action menu"})
     if client.name == "omnisharp" then
         wk.add({
             mode = "n",

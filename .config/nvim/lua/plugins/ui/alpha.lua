@@ -73,7 +73,7 @@ return {
 		-- 			[[                                       ]],
 		-- 		},
 		-- 	}
-		if vim.fn.executable("chafa") == 1 and require("config").gif_alpha_enabled then
+		if require("config").gif_alpha_enabled and vim.fn.executable("chafa") == 1 then
 			header = {
 				type = "terminal",
 				command = "chafa $HOME/.config/nvim/dashboard/gif/kirby-dancing.gif",
@@ -84,7 +84,7 @@ return {
 					position = "center",
 				},
 			}
-		elseif vim.fn.executable("tty-clock") == 1 and require("config").tty_clock_alpha_enabled == true then
+		elseif require("config").tty_clock_alpha_enabled and vim.fn.executable("tty-clock") == 1 then
 			header = {
 				type = "terminal",
 				command = "tty-clock -s -c -b -C 4",
@@ -254,7 +254,7 @@ return {
 			})
 		end
 
-		require("alpha.term")
+		-- require("alpha.term")
 		local alpha = require("alpha")
 		local version = vim.version()
 
