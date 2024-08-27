@@ -222,11 +222,11 @@ install_zoxide() {
 install_tmux() {
     __echo_info "Installing tmux"
 
-    __install_package_apt libevent-dev yacc automake libncurses5-dev
+    __install_package_apt libevent-dev ncurses-dev build-essential bison pkg-config
     git clone https://github.com/tmux/tmux.git /tmp/tmux
     cd /tmp/tmux || exit
     sh autogen.sh
-    ./configure
+    ./configure --enable-sixel
     make && sudo make install
 
     __echo_info "Installing tmux plugins"

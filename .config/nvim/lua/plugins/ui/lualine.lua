@@ -49,7 +49,7 @@ return {
 	event = "VeryLazy",
 	priority = 500,
 	enabled = true,
-	config = function()
+	opts = function()
 		local icons = require("config.icons")
 		local colors = require("theme").get_lualine_colors()
 
@@ -351,6 +351,9 @@ return {
 			color = { fg = colors.fg },
 		})
 
-		require("lualine").setup(config)
+		return config
+	end,
+	config = function(_, opts)
+		require("lualine").setup(opts)
 	end,
 }

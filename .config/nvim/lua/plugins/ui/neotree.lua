@@ -6,6 +6,13 @@ return {
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"MunifTanjim/nui.nvim",
+
+			"antosha417/nvim-lsp-file-operations",
+			dependencies = {
+				"nvim-lua/plenary.nvim",
+				"nvim-neo-tree/neo-tree.nvim",
+			},
+			opts = {},
 		},
 		keys = {
 			{ "<leader>te", "<cmd>Neotree float %:p<CR>", desc = "Toggle NeoTree" },
@@ -77,14 +84,5 @@ return {
 				},
 			},
 		},
-	},
-	{
-		"antosha417/nvim-lsp-file-operations",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-neo-tree/neo-tree.nvim",
-		},
-		opts = {},
-		keys = { "<leader>te" },
 	},
 }

@@ -6,6 +6,8 @@ return {
 		"hrsh7th/cmp-cmdline",
 		"hrsh7th/cmp-nvim-lsp",
 		"hrsh7th/cmp-nvim-lua",
+		"hrsh7th/cmp-emoji",
+		"chrisgrieser/cmp-nerdfont",
 		"saadparwaiz1/cmp_luasnip",
 		"lukas-reineke/cmp-under-comparator",
 	},
@@ -109,6 +111,8 @@ return {
 				end,
 			},
 			sources = {
+				{ name = "nerdfont" },
+				{ name = "emoji" },
 				{ name = "nvim_lsp", entry_filter = filter_text, keyword_length = 2 },
 				{
 					name = "buffer",

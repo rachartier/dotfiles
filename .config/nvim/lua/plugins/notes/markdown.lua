@@ -1,27 +1,5 @@
 return {
 	{
-		enabled = false,
-		ft = { "markdown" },
-		event = "BufReadPre",
-		"OXY2DEV/markview.nvim",
-		dependencies = {
-			"nvim-tree/nvim-web-devicons", -- Used by the code bloxks
-		},
-
-		opts = {
-			checkboxes = {
-				checked = {
-					text = "󰄲",
-					hl = "@markup.list.checked",
-				},
-				unchecked = {
-					text = "󰄱",
-					hl = "@markup.list.unchecked",
-				},
-			},
-		},
-	},
-	{
 		enabled = true,
 		"MeanderingProgrammer/markdown.nvim",
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
@@ -29,20 +7,27 @@ return {
 		ft = { "markdown", "pandoc", "avante" },
 		cond = require("config").config_type ~= "minimal",
 		opts = {
-
-			bullets = { "", "", "◆", "◇" },
-			headings = { "󰼏 ", "󰎨 ", "󰼑 ", "󰎲 ", "󰼓 ", "󰎴 " },
-			checkbox = {
-				unchecked = "󰄱 ",
-				checked = "󰄲 ",
+			bullet = {
+				icons = { "", "", "◆", "◇" },
 			},
-			file_types = { "markdown", "pandoc", "Avante" },
-			highlights = {
-				checkbox = {
-					unchecked = "@markup.list.unchecked",
-					checked = "@markdown_check_done",
+			heading = {
+				icons = { "󰼏 ", "󰎨 ", "󰼑 ", "󰎲 ", "󰼓 ", "󰎴 " },
+				left_pad = 1,
+			},
+			checkbox = {
+				unchecked = {
+					icon = "󰄱 ",
+					highlight = "RenderMarkdownUnchecked",
+				},
+				checked = {
+					icon = "󰄲 ",
+					highlight = "RenderMarkdownChecked",
+				},
+				custom = {
+					todo = { raw = "[-]", rendered = "󰡖 ", highlight = "RenderMarkdownTodo" },
 				},
 			},
+			file_types = { "markdown", "pandoc", "Avante" },
 		},
 		config = function(_, opts)
 			require("render-markdown").setup(opts)

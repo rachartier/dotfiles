@@ -107,13 +107,14 @@ function M.setup()
 			neotree = true,
 			noice = true,
 			notify = true,
-			render_markdown = true,
+			render_markdown = false,
 			markdown = true,
 			telekasten = true,
 			telescope = true,
 			treesitter = false,
 			treesitter_context = false,
 			which_key = true,
+			symbols_outline = true,
 			native_lsp = {
 				enabled = true,
 				virtual_text = {

@@ -1,4 +1,7 @@
 local M = {}
+local utils = require("utils")
+
+local darken_markdown_heading = 0.23
 
 function M.get(colors)
 	-- local bg = colors.base
@@ -155,6 +158,22 @@ function M.get(colors)
 		AlphaNeovimLogoGreen = { fg = colors.green },
 		AlphaNeovimLogoGreenFBlueB = { fg = colors.green, bg = colors.blue },
 		CopilotChatSeparator = { fg = colors.surface1 },
+
+		RenderMarkdownChecked = { fg = colors.green },
+		RenderMarkdownTodo = { fg = colors.blue },
+
+		RenderMarkdownH1 = { fg = colors.red, bg = utils.darken(colors.red, darken_markdown_heading) },
+		RenderMarkdownH2 = { fg = colors.peach, bg = utils.darken(colors.peach, darken_markdown_heading) },
+		RenderMarkdownH3 = { fg = colors.yellow, bg = utils.darken(colors.yellow, darken_markdown_heading) },
+		RenderMarkdownH4 = { fg = colors.green, bg = utils.darken(colors.green, darken_markdown_heading) },
+		RenderMarkdownH5 = { fg = colors.blue, bg = utils.darken(colors.blue, darken_markdown_heading) },
+		RenderMarkdownH6 = { fg = colors.mauve, bg = utils.darken(colors.mauve, darken_markdown_heading) },
+
+		RenderMarkdownH1Bg = { link = "RenderMarkdownH1" },
+		RenderMarkdownH2Bg = { link = "RenderMarkdownH2" },
+		RenderMarkdownH3Bg = { link = "RenderMarkdownH3" },
+		RenderMarkdownH4Bg = { link = "RenderMarkdownH4" },
+		RenderMarkdownH5Bg = { link = "RenderMarkdownH5" },
 	}
 end
 

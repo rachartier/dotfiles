@@ -95,6 +95,12 @@ return {
 			cyclic = true,
 		})
 
+		local checkboxes = augend.constant.new({
+			elements = { "[ ]", "[-]", "[x]" },
+			word = false,
+			cyclic = true,
+		})
+
 		return {
 			dials_by_ft = {
 				css = "css",
@@ -140,6 +146,7 @@ return {
 				},
 				markdown = {
 					augend.misc.alias.markdown_header,
+					checkboxes,
 				},
 				json = {
 					augend.integer.alias.decimal, -- nonnegative and negative decimal number

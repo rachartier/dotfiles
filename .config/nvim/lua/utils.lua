@@ -2,14 +2,6 @@ local M = {}
 
 M.linter_config_folder = os.getenv("HOME") .. "/.config/linter-configs"
 
-function M.length(table)
-	local count = 0
-	for _, _ in ipairs(table) do
-		count = count + 1
-	end
-	return count
-end
-
 function M.buffers_clean()
 	local curbufnr = vim.api.nvim_get_current_buf()
 	local buflist = vim.api.nvim_list_bufs()
@@ -33,23 +25,6 @@ function M.dump(o)
 	else
 		return tostring(o)
 	end
-end
-
-function M.add_missing(dst, src)
-	for k, v in pairs(src) do
-		if dst[k] == nil then
-			dst[k] = v
-		end
-	end
-	return dst
-end
-
-function M.to_hex(n)
-	return string.format("#%06x", n)
-end
-
-function M.get_hl(name)
-	return vim.api.nvim_get_hl_by_name(name, true)
 end
 
 ---@param opts? lsp.Client.filter
@@ -122,32 +97,6 @@ function M.directory_exists_in_root(directory_name, root)
 	return (stat and stat.type == "directory")
 end
 
-function M.get_python_path(workspace)
-	local util = require("lspconfig.util")
-	local path = util.path
-
-	if vim.env.VIRTUAL_ENV then
-		return path.join(vim.env.VIRTUAL_ENV, "bin", "python")
-	end
-
-	for _, pattern in ipairs({ "*", ".*" }) do
-		local match = vim.fn.glob(path.join(workspace, pattern, "pyvenv.cfg"))
-		if match ~= "" then
-			return path.join(path.dirname(match), "bin", "python")
-		end
-	end
-
-	return vim.fn.executable("python3") == 1 or vim.fn.executable("python") == 1 or "python"
-end
-
-function M.copy_visual_selection()
-	vim.cmd.normal({ '"zy', bang = true })
-	local visual_selection = vim.fn.getreg("z")
-
-	vim.fn.setreg("*", visual_selection)
-	vim.fn.setreg("+", visual_selection)
-end
-
 function M.read_file(path)
 	local file = io.open(path, "r")
 	if not file then
@@ -156,18 +105,6 @@ function M.read_file(path)
 	local content = file:read("*a")
 	file:close()
 	return content
-end
-
-function M.get_table_keys(tbl)
-	local keys = {}
-	for k, v in pairs(tbl) do
-		if type(k) == "number" then
-			table.insert(keys, v)
-		else
-			table.insert(keys, k)
-		end
-	end
-	return keys
 end
 
 --- Converts a value to a list
@@ -249,32 +186,6 @@ function M.on_event(events, callback, user_opts)
 	vim.api.nvim_create_autocmd(events, opts)
 
 	return group
-end
-
-function M.get_function_under_cursor()
-	local cursor_pos = vim.api.nvim_win_get_cursor(0)
-
-	vim.cmd("normal! vaf")
-
-	local start_pos = vim.fn.getpos("'<")
-	local end_pos = vim.fn.getpos("'>")
-
-	print(start_pos)
-	print(end_pos)
-
-	vim.api.nvim_win_set_cursor(0, cursor_pos)
-
-	local lines = vim.api.nvim_buf_get_lines(0, start_pos[2] - 1, end_pos[2], false)
-
-	if #lines > 0 then
-		lines[#lines] = lines[#lines]:sub(1, end_pos[3])
-	end
-
-	if #lines > 0 then
-		lines[1] = lines[1]:sub(start_pos[3])
-	end
-
-	return table.concat(lines, "\n")
 end
 
 return M

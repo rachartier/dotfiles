@@ -338,7 +338,6 @@ Question or request: ]]
 			provider = "copilot",
 		},
 		dependencies = {
-			"nvim-tree/nvim-web-devicons",
 			"stevearc/dressing.nvim",
 			"nvim-lua/plenary.nvim",
 			"MunifTanjim/nui.nvim",

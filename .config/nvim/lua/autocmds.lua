@@ -132,3 +132,9 @@ end, {
 -- 	end,
 -- 	group = augroup("custom_copilot"),
 -- })
+utils.on_event("FileType", function(event)
+	vim.cmd("topleft Outline")
+end, {
+	target = { "markdown" },
+	desc = "Outline for markdown",
+})

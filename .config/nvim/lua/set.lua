@@ -3,7 +3,7 @@ local opt = vim.opt
 opt.autowrite = true -- Enable auto write
 
 vim.schedule(function()
-	vim.opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus" -- Sync with system clipboard
+	-- vim.opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus" -- Sync with system clipboard
 
 	if vim.fn.has("wsl") == 1 then
 		-- if vim.fn.executable("wl-copy") == 0 then
@@ -59,8 +59,8 @@ vim.schedule(function()
 end)
 
 local conf = require("config")
-vim.opt.pumblend = conf.pumblend -- Popup blend
-vim.opt.winblend = conf.winblend -- Window blend
+opt.pumblend = conf.pumblend -- Popup blend
+opt.winblend = conf.winblend -- Window blend
 
 opt.whichwrap:append("<>[]hl")
 opt.completeopt = "menu,menuone,noselect" -- Configure completion behavior
@@ -134,10 +134,7 @@ opt.fillchars = {
 }
 
 opt.statusline = ""
-
-if vim.fn.has("nvim-0.10") == 1 then
-	opt.smoothscroll = true
-end
+opt.smoothscroll = true
 
 vim.o.timeout = true
 vim.o.timeoutlen = 300
@@ -155,9 +152,9 @@ opt.undofile = true
 opt.hlsearch = false
 opt.incsearch = true
 
-vim.g.netrw_browse_split = 0
-vim.g.netrw_banner = 0
-vim.g.netrw_winsize = 25
+-- vim.g.netrw_browse_split = 0
+-- vim.g.netrw_banner = 0
+-- vim.g.netrw_winsize = 25
 
 vim.api.nvim_set_var("t_Cs", "\\e[4:3m")
 vim.api.nvim_set_var("t_Ce", "\\e[4:0m")
