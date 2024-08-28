@@ -9,14 +9,11 @@ end
 function M.get_lualine_colors()
 	local c = M.get_colors()
 
-	return {
+	local lualine_colors = {
 		-- bg = "#232639", --c.mantle,
 		-- bg = U.lighten(c.base, 0.99),
 		-- bg = c.mantle,
-		bg = c.base,
-		mantle = c.mantle,
-		crust = c.crust,
-		-- fg = c.surface2,
+		bg = c.surface0,
 		fg = c.subtext0,
 		surface0 = c.surface0,
 		yellow = c.yellow,
@@ -30,6 +27,8 @@ function M.get_lualine_colors()
 		blue = c.blue,
 		red = c.red,
 	}
+
+	return vim.tbl_extend("force", lualine_colors, c)
 end
 
 function M.setup()

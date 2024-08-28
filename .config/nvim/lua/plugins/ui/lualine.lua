@@ -12,9 +12,20 @@ local conditions = {
 	end,
 }
 
+local function diff_source()
+	local gitsigns = vim.b.gitsigns_status_dict
+	if gitsigns then
+		return {
+			added = gitsigns.added,
+			modified = gitsigns.changed,
+			removed = gitsigns.removed,
+		}
+	end
+end
+
 local function cond_disable_by_ft()
 	local not_empty = conditions.buffer_not_empty()
-	local filetype = vim.api.nvim_buf_get_option(0, "filetype")
+	local filetype = vim.api.nvim_get_option_value("filetype", { buf = 0 })
 
 	local filetype_to_ignore = {
 		"terminal",
@@ -45,6 +56,7 @@ return {
 	"nvim-lualine/lualine.nvim",
 	dependencies = {
 		"AndreM222/copilot-lualine",
+		"catppuccin/nvim",
 	},
 	event = "VeryLazy",
 	priority = 500,
@@ -89,267 +101,186 @@ return {
 			end,
 		}):start()
 
-		local default_theme
+		local sections = {
+			lualine_a = {
+				{
+					"mode",
+					-- icons_enabled = true,
+					fmt = function()
+						return mode_kirby[vim.fn.mode()] or vim.api.nvim_get_mode().mode
+					end,
+					separator = { right = "" },
+					padding = { left = 1, right = 1 },
+				},
+			},
+			lualine_b = {
+				{
+					"progress",
+					separator = { right = "" },
+					color = { fg = colors.fg },
+					padding = { left = 1, right = 0 },
+				},
+				{
+					"location",
+					separator = { right = "" },
+					color = { fg = colors.fg },
+				},
+				{
+					function()
+						if vim.fn.mode():find("[vV]") then
+							local ln_beg = vim.fn.line("v")
+							local ln_end = vim.fn.line(".")
 
-		if vim.g.neovide then
-			-- default_theme = { fg = colors.surface0, bg = colors.mantle }
-			default_theme = { fg = colors.surface0, bg = colors.mantle }
-		else
-			default_theme = { fg = colors.surface0, bg = "None" }
-		end
+							local lines = ln_beg <= ln_end and ln_end - ln_beg + 1 or ln_beg - ln_end + 1
+
+							return "sel: " .. tostring(vim.fn.wordcount().visual_chars) .. " | " .. tostring(lines)
+						else
+							return ""
+						end
+					end,
+					color = { fg = colors.fg },
+				},
+			},
+			lualine_c = {
+				{
+					"diagnostics",
+					sources = { "nvim_lsp" },
+					symbols = icons.signs.lualine_diagnostic,
+					-- diagnostics_color = {
+					-- 	error = { fg = c.error },
+					-- 	warn = { fg = c.warn },
+					-- 	info = { fg = c.info },
+					-- 	hint = { fg = c.hint },
+					-- },
+					colored = true,
+					padding = { left = 3, right = 1 },
+				},
+			},
+			lualine_x = {
+				{
+					require("lazy.status").updates,
+					cond = require("lazy.status").has_updates,
+					padding = { left = 1, right = 1 },
+					color = { fg = colors.green },
+					separator = { right = "" },
+				},
+				{
+					"copilot",
+					symbols = {
+						status = {
+							hl = {
+								enabled = colors.green,
+								sleep = colors.fg,
+								disabled = colors.red,
+								warning = colors.yellow,
+								unknown = colors.red,
+							},
+						},
+					},
+					show_colors = true,
+					show_loading = false,
+					padding = { left = 1, right = is_inside_docker and 1 or 2 },
+					separator = { right = "" },
+				},
+				{
+					function()
+						if is_inside_docker then
+							return " "
+						end
+						return ""
+					end,
+					color = { fg = colors.blue },
+					padding = { left = 1, right = 2 },
+				},
+			},
+			lualine_y = {
+				-- {
+				-- 	-- Lsp server name .
+				-- 	function()
+				-- 		local msg = "No Active Lsp"
+				-- 		local text_clients = ""
+				--
+				-- 		local clients = vim.lsp.get_clients({ bufnr = 0 })
+				-- 		if next(clients) == nil then
+				-- 			return msg
+				-- 		end
+				-- 		for _, client in ipairs(clients) do
+				-- 			if client.name ~= "copilot" then
+				-- 				text_clients = text_clients .. client.name .. ", "
+				-- 			end
+				-- 		end
+				-- 		if text_clients ~= "" then
+				-- 			return text_clients:sub(1, -3)
+				-- 		end
+				-- 		return msg
+				-- 	end,
+				-- 	icon = "󰅡",
+				-- 	color = { fg = colors.text },
+				-- },
+				{
+					"branch",
+					icon = icons.signs.git.branch,
+					color = { fg = colors.violet },
+					separator = { right = "", left = "" },
+				},
+				{
+					"diff",
+					colored = true,
+					source = diff_source,
+					symbols = {
+						added = icons.signs.git.added,
+						modified = icons.signs.git.modified,
+						removed = icons.signs.git.removed,
+					},
+					-- diff_color = {
+					-- 	added = { gui = "bold" },
+					-- 	modified = { gui = "bold" },
+					-- 	removed = { gui = "bold" },
+					-- },
+				},
+			},
+			lualine_z = {
+				{
+					"filetype",
+					color = { bg = colors.flamingo, fg = colors.bg },
+					-- cond = cond_disable_by_ft,
+					icon_only = true,
+					colored = false,
+					padding = { right = 0, left = 1 },
+					condition = conditions.buffer_not_empty,
+				},
+				{
+					"filename",
+
+					padding = { right = 1, left = 0 },
+					color = { bg = colors.flamingo, fg = colors.bg },
+
+					symbols = {
+						modified = icons.signs.file.modified, -- Text to show when the file is modified.
+						readonly = icons.signs.file.readonly, -- Text to show when the file is non-modifiable or readonly.
+						unnamed = icons.signs.file.unnamed, -- Text to show for unnamed buffers.
+						newfile = icons.signs.file.created, -- Text to show for newly created file before first write
+					},
+				},
+			},
+		}
 
 		local config = {
 			options = {
+				theme = "auto",
 				icons_enabled = true,
 				disabled_filetypes = { "alpha" },
 				globalstatus = true,
-				component_separators = "",
-				section_separators = "",
-				theme = {
-					normal = {
-						c = default_theme,
-						x = default_theme,
-					},
-					inactive = {
-						c = default_theme,
-						x = default_theme,
-					},
-				},
+				component_separators = { left = "", right = "" },
+				section_separators = { left = "", right = "" },
+				-- section_separators = "",
 			},
-			sections = {
-				lualine_a = {},
-				lualine_b = {},
-				lualine_y = {},
-				lualine_z = {},
-				lualine_c = {},
-				lualine_x = {},
-			},
-			inactive_sections = {
-				lualine_a = {},
-				lualine_v = {},
-				lualine_y = {},
-				lualine_z = {},
-				lualine_c = {},
-				lualine_x = {},
-			},
+			sections = sections,
+			inactive_sections = sections,
 			disabled_filetypes = { "alpha" },
 		}
 
-		local function ins_left(component)
-			table.insert(config.sections.lualine_c, component)
-		end
-
-		local function ins_right(component)
-			table.insert(config.sections.lualine_x, component)
-		end
-
-		ins_left({
-			function()
-				-- if is_inside_docker then
-				-- 	return "▌  "
-				-- end
-				-- return "▌"
-
-				if is_inside_docker then
-					return "▊   "
-				end
-				return "▊"
-			end,
-			color = { fg = colors.mauve },
-			padding = {
-				right = 1,
-			},
-		})
-
-		ins_left({
-			function()
-				local kirby_colors = require("theme").get_kirby_colors()
-
-				vim.api.nvim_command(
-					"hi! LualineMode guifg=" .. kirby_colors[vim.fn.mode()] .. " guibg=" .. default_theme.bg
-				)
-				return mode_kirby[vim.fn.mode()]
-			end,
-			color = "LualineMode",
-			padding = {
-				left = 0,
-				right = 2,
-			},
-		})
-
-		ins_left({
-			"filetype",
-			cond = cond_disable_by_ft,
-			icon_only = true,
-			separator = "",
-			padding = { right = 0, left = 0 },
-			condition = conditions.buffer_not_empty,
-		})
-		ins_left({
-			-- get_current_filename_with_icon,
-			"filename",
-			cond = cond_disable_by_ft,
-			color = { fg = colors.fg },
-			separator = "",
-			padding = { left = 0, right = 2 },
-			symbols = {
-				modified = icons.signs.file.modified, -- Text to show when the file is modified.
-				readonly = icons.signs.file.readonly, -- Text to show when the file is non-modifiable or readonly.
-				unnamed = icons.signs.file.unnamed, -- Text to show for unnamed buffers.
-				newfile = icons.signs.file.created, -- Text to show for newly created file before first write
-			},
-		})
-
-		ins_left({
-			"diagnostics",
-			sources = { "nvim_lsp" },
-			symbols = icons.signs.diagnostic,
-			-- diagnostics_color = {
-			--     error = { fg = c.error },
-			--     warn = { fg = c.warn },
-			--     info = { fg = c.info },
-			--     hint = { fg = c.hint },
-			-- },
-			colored = true,
-		})
-
-		ins_left({
-			"branch",
-			icon = icons.signs.git.branch,
-			color = { fg = colors.violet },
-		})
-		-- ins_left({
-		-- 	"diff",
-		-- 	colored = true,
-		-- 	source = diff_source,
-		-- 	symbols = {
-		-- 		added = U.signs.git.added,
-		-- 		modified = U.signs.git.modified,
-		-- 		removed = U.signs.git.removed,
-		-- 	},
-		-- 	diff_color = {
-		-- 		-- added = { gui = "bold" },
-		-- 		-- modified = { gui = "bold" },
-		-- 		-- removed = { gui = "bold" },
-		-- 	},
-		-- })
-
-		-- Insert mid section. You can make any number of sections in neovim :)
-		-- for lualine it's any number greater then 2
-		ins_left({
-			function()
-				return "%="
-			end,
-		})
-
-		-- ins_left({
-		-- 	-- Lsp server name .
-		-- 	function()
-		-- 		local msg = "No Active Lsp"
-		-- 		local text_clients = ""
-		-- 		local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
-		-- 		local clients = vim.lsp.get_active_clients()
-		--
-		-- 		if next(clients) == nil then
-		-- 			return msg
-		-- 		end
-		-- 		for _, client in ipairs(clients) do
-		-- 			local filetypes = client.config.filetypes
-		-- 			if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-		-- 				text_clients = text_clients .. client.name .. ", "
-		-- 			end
-		-- 		end
-		-- 		if text_clients ~= "" then
-		-- 			return text_clients:sub(1, -3) .. "           "
-		-- 		end
-		-- 		return msg
-		-- 	end,
-		-- 	icon = "  LSP:",
-		-- 	color = { fg = colors.text, gui = "bold" },
-		-- })
-
-		-- Add components to right sections
-		-- ins_right({
-		--     "o:encoding", -- option component same as &encoding in viml
-		--     upper = true, -- I'm not sure why it's upper case either ;)
-		--     condition = conditions.hide_in_width,
-		--     color = { fg = colors.green },
-		-- })
-		-- ins_right({
-		--     "fileformat",
-		--     upper = true,
-		--     icons_enabled = false, -- I think icons are cool but Eviline doesn't have them. sigh
-		--     color = { fg = colors.green },
-		-- })
-
-		ins_right({
-			require("lazy.status").updates,
-			cond = require("lazy.status").has_updates,
-			color = { fg = colors.green },
-			padding = { left = 1, right = 4 },
-		})
-
-		ins_right({
-			"copilot",
-			symbols = {
-				status = {
-					hl = {
-						enabled = colors.green,
-						sleep = colors.fg,
-						disabled = colors.red,
-						warning = colors.yellow,
-						unknown = colors.red,
-					},
-				},
-			},
-			show_colors = true,
-			show_loading = false,
-			padding = { left = 1, right = 3 },
-		})
-
-		ins_right({ "progress", color = { fg = colors.fg } })
-		ins_right({ "location", color = { fg = colors.fg } })
-		ins_right({
-			function()
-				if vim.fn.mode():find("[vV]") then
-					local ln_beg = vim.fn.line("v")
-					local ln_end = vim.fn.line(".")
-
-					local lines = ln_beg <= ln_end and ln_end - ln_beg + 1 or ln_beg - ln_end + 1
-
-					return "sel: " .. tostring(vim.fn.wordcount().visual_chars) .. " | " .. tostring(lines)
-				else
-					return ""
-				end
-			end,
-			color = { fg = colors.fg },
-		})
-
-		ins_right({
-			-- filesize component
-			function()
-				local function format_file_size(file)
-					local size = vim.fn.getfsize(file)
-					if size <= 0 then
-						return ""
-					end
-					local sufixes = { "b", "k", "m", "g" }
-					local i = 1
-					while size > 1024 do
-						size = size / 1024
-						i = i + 1
-					end
-					return string.format("%.1f%s", size, sufixes[i])
-				end
-				local file = vim.fn.expand("%:p")
-				if string.len(file) == 0 then
-					return ""
-				end
-				return " " .. format_file_size(file)
-			end,
-			cond = conditions.buffer_not_empty,
-			color = { fg = colors.fg },
-		})
+		-- ins_left()
 
 		return config
 	end,

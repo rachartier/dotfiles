@@ -24,7 +24,7 @@ M.signs = {
 		not_saved = "󰉉 ",
 		readonly = "󰌾",
 		created = "",
-		unnamed = "",
+		unnamed = "No Name",
 	},
 	git = {
 		added = " ",
@@ -48,6 +48,15 @@ M.signs = {
 			renamed = "󰑕",
 		},
 	},
+	lualine_diagnostic = {
+		ok = "",
+		error = " ",
+		warning = " ",
+		warn = " ",
+		info = " ",
+		hint = " ",
+		-- other = "󰠠 ",
+	},
 	diagnostic = {
 		error = "●",
 		warning = "●",
@@ -55,13 +64,6 @@ M.signs = {
 		info = "●",
 		hint = "●",
 		other = "●",
-		ok = "",
-		-- error = " ",
-		-- warning = " ",
-		-- warn = " ",
-		-- info = " ",
-		-- hint = " ",
-		-- other = "󰠠 ",
 	},
 	others = {
 		copilot = " ",
