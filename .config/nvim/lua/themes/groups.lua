@@ -66,7 +66,7 @@ function M.get(colors)
 		NoicePopupmenuBorder = { link = "FloatBorder" },
 
 		PopupBorder = { link = "FloatBorder" },
-		PopupNormal = { bg = bg, fg = colors.text },
+		PopupNormal = { bg = colors.base, fg = colors.text },
 
 		SwitchBufferStatusColor = { fg = colors.red },
 
@@ -174,6 +174,8 @@ function M.get(colors)
 		RenderMarkdownH3Bg = { link = "RenderMarkdownH3" },
 		RenderMarkdownH4Bg = { link = "RenderMarkdownH4" },
 		RenderMarkdownH5Bg = { link = "RenderMarkdownH5" },
+
+		CopilotSuggestion = { fg = colors.subtext0, italic = true },
 	}
 end
 

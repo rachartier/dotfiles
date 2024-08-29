@@ -12,6 +12,20 @@ function M.buffers_clean()
 	end
 end
 
+function M.trim(str, opts)
+	if not opts then
+		return str
+	end
+	local res = str
+	if opts.suffix then
+		res = str:sub(#str - #opts.suffix + 1) == opts.suffix and str:sub(1, #str - #opts.suffix) or str
+	end
+	if opts.prefix then
+		res = str:sub(1, #opts.prefix) == opts.prefix and str:sub(#opts.prefix + 1) or str
+	end
+	return res
+end
+
 function M.dump(o)
 	if type(o) == "table" then
 		local s = "{ "

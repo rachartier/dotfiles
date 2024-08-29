@@ -55,7 +55,6 @@ end
 return {
 	"nvim-lualine/lualine.nvim",
 	dependencies = {
-		"AndreM222/copilot-lualine",
 		"catppuccin/nvim",
 	},
 	event = "VeryLazy",
@@ -164,23 +163,37 @@ return {
 					color = { fg = colors.green },
 					separator = { right = "" },
 				},
+				-- {
+				-- 	"copilot",
+				-- 	symbols = {
+				-- 		status = {
+				-- 			hl = {
+				-- 				enabled = colors.green,
+				-- 				sleep = colors.fg,
+				-- 				disabled = colors.red,
+				-- 				warning = colors.yellow,
+				-- 				unknown = colors.red,
+				-- 			},
+				-- 		},
+				-- 	},
+				-- 	show_colors = true,
+				-- 	show_loading = false,
+				-- 	padding = { left = 1, right = is_inside_docker and 1 or 2 },
+				-- 	separator = { right = "" },
+				-- },
 				{
-					"copilot",
-					symbols = {
-						status = {
-							hl = {
-								enabled = colors.green,
-								sleep = colors.fg,
-								disabled = colors.red,
-								warning = colors.yellow,
-								unknown = colors.red,
-							},
-						},
-					},
-					show_colors = true,
-					show_loading = false,
-					padding = { left = 1, right = is_inside_docker and 1 or 2 },
-					separator = { right = "" },
+					function()
+						local ok, copilot_enabled = pcall(vim.api.nvim_buf_get_var, 0, "copilot_enabled")
+
+						if copilot_enabled then
+							return icons.signs.others.copilot
+						end
+
+						return icons.signs.others.copilot_disabled
+					end,
+					-- cond = cond_disable_by_ft,
+					color = { fg = colors.fg },
+					padding = { left = 1, right = 3 },
 				},
 				{
 					function()
