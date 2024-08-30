@@ -5,12 +5,13 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		event = { "BufReadPre", "BufNewFile" },
+		priority = 900,
 		dependencies = {
 			"williamboman/mason.nvim",
 			"onsails/lspkind.nvim",
 		},
 		config = function()
-			vim.lsp.set_log_level("debug")
+			vim.lsp.set_log_level("info")
 
 			local on_attach = require("config.lsp.attach").on_attach
 			-- require("clangd_extensions.inlay_hints").setup_autocmd()
@@ -38,7 +39,7 @@ return {
 	},
 	{
 		"williamboman/mason.nvim",
-		event = "VeryLazy",
+		lazy = true,
 		dependencies = {
 			"williamboman/mason-lspconfig.nvim",
 			"williamboman/mason-nvim-dap.nvim",

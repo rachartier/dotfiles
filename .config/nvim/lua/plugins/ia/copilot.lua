@@ -3,6 +3,7 @@ local utils = require("utils")
 return {
 	{
 		"github/copilot.vim",
+		event = "VeryLazy",
 		config = function()
 			-- vim.keymap.set("i", "<C-g>", function()
 			-- 	vim.fn["copilot#Accept"]("")

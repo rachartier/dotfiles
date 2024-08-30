@@ -134,4 +134,9 @@ return {
 			})
 		end,
 	},
+	{
+		"echasnovski/mini.cursorword",
+		version = false,
+		opts = {},
+	},
 }

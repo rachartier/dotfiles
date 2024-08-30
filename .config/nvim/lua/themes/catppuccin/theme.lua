@@ -45,6 +45,8 @@ function M.setup()
 		theme = "latte"
 	end
 
+	M.flavour = theme
+
 	local underlines = {
 		errors = { "undercurl" },
 		hints = { "undercurl" },

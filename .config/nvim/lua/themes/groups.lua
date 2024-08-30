@@ -176,6 +176,8 @@ function M.get(colors)
 		RenderMarkdownH5Bg = { link = "RenderMarkdownH5" },
 
 		CopilotSuggestion = { fg = colors.subtext0, italic = true },
+		MiniCursorwordCurrent = { bg = colors.surface1 },
+		MiniCursorword = { link = "MiniCursorwordCurrent" },
 	}
 end
 
