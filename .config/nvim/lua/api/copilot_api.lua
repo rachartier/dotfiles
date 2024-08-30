@@ -5,7 +5,7 @@ local Path = require("plenary.path")
 
 M.vim_version = vim.version().major .. "." .. vim.version().minor .. "." .. vim.version().patch
 
-M.token = nil
+M.copilot_token = nil
 M.github_token = nil
 
 function M.find_config_path()
@@ -26,7 +26,7 @@ function M.find_config_path()
 end
 
 function M.validate_copilot_api_token()
-	if not M.token or (M.token.expires_at and M.token.expires_at <= math.floor(os.time())) then
+	if not M.copilot_token or (M.copilot_token.expires_at and M.copilot_token.expires_at <= math.floor(os.time())) then
 		curl.get("https://api.github.com/copilot_internal/v2/token", {
 			timeout = 5000,
 			headers = {
@@ -38,7 +38,7 @@ function M.validate_copilot_api_token()
 				error("Failed to get response: " .. vim.inspect(err))
 			end,
 			callback = function(output)
-				M.token = vim.json.decode(output.body)
+				M.copilot_token = vim.json.decode(output.body)
 			end,
 		})
 	end
