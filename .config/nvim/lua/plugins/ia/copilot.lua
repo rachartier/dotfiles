@@ -3,7 +3,6 @@ local utils = require("utils")
 return {
 	{
 		"github/copilot.vim",
-		event = "VeryLazy",
 		config = function()
 			-- vim.keymap.set("i", "<C-g>", function()
 			-- 	vim.fn["copilot#Accept"]("")
@@ -21,6 +20,7 @@ return {
 			-- 	return ret
 			-- end, { expr = true, silent = true, replace_keycodes = false })
 
+			-- vim.g.copilot_browser = "/mnt/c/Program Files/Mozilla Firefox/firefox.exe"
 			vim.keymap.set("i", "<C-g>", 'copilot#Accept("\\<CR>")', { expr = true, replace_keycodes = false })
 
 			---@diagnostic disable-next-line: inject-field
@@ -41,7 +41,6 @@ return {
 	},
 	-- {
 	-- 	"zbirenbaum/copilot.lua",
-	-- 	event = "VeryLazy",
 	-- 	config = function()
 	-- 		require("copilot").setup({
 	-- 			suggestion = {
@@ -136,38 +135,38 @@ return {
 					vim.cmd("normal vaf")
 
 					require("CopilotChat").ask([[
-As an expert ]] .. ft .. [[ developer, generate comprehensive and precise documentation for the following function/method. Adhere strictly to ]] .. ft .. [['s official documentation standards and best practices.
-Do not include implementation details, nor should you describe how the function works.
-Do not include any code snippets or examples.
-Do not include any information that is not directly related to the function's purpose and behavior.
-Do not describe the function's behavior in terms of the implementation.
-Do not assume any prior knowledge of the function's purpose or behavior.
-The length of a good documentation is between 50 and 100 words.
-The length of a line should not exceed 80 characters.
+	As an expert ]] .. ft .. [[ developer, generate comprehensive and precise documentation for the following function/method. Adhere strictly to ]] .. ft .. [['s official documentation standards and best practices.
+	Do not include implementation details, nor should you describe how the function works.
+	Do not include any code snippets or examples.
+	Do not include any information that is not directly related to the function's purpose and behavior.
+	Do not describe the function's behavior in terms of the implementation.
+	Do not assume any prior knowledge of the function's purpose or behavior.
+	The length of a good documentation is between 50 and 100 words.
+	The length of a line should not exceed 80 characters.
 
-Do include the following:
+	Do include the following:
 
-1. A concise yet informative description of the function's purpose and behavior.
-2. Detailed parameter information:
-   - Name
-   - Type (be specific, e.g., 'List[int]' instead of just 'List')
-   - Description, including any constraints or expected formats
-   - Whether the parameter is optional, and if so, its default value
-3. Return value:
-   - Type (be as specific as possible)
-   - Detailed description of what is returned
-   - Any special cases or conditions that affect the return value
-4. Exceptions or errors:
-   - Specific exceptions that may be raised/thrown
-   - Conditions under which each exception occurs
+	1. A concise yet informative description of the function's purpose and behavior.
+	2. Detailed parameter information:
+	   - Name
+	   - Type (be specific, e.g., 'List[int]' instead of just 'List')
+	   - Description, including any constraints or expected formats
+	   - Whether the parameter is optional, and if so, its default value
+	3. Return value:
+	   - Type (be as specific as possible)
+	   - Detailed description of what is returned
+	   - Any special cases or conditions that affect the return value
+	4. Exceptions or errors:
+	   - Specific exceptions that may be raised/thrown
+	   - Conditions under which each exception occurs
 
-Use appropriate ]] .. ft .. [[ specific documentation syntax and formatting.
+	Use appropriate ]] .. ft .. [[ specific documentation syntax and formatting.
 
-Others conditions:
- - If the language is lua, use the 3 dashes comment format.
+	Others conditions:
+	 - If the language is lua, use the 3 dashes comment format.
 
-Function signature:
-                    ]], {
+	Function signature:
+	                    ]], {
 						selection = require("CopilotChat.select").visual,
 						callback = function(response)
 							print("BetterDocs callback")
@@ -182,13 +181,13 @@ Function signature:
 				function()
 					local ft = vim.bo.filetype
 					local prompt = [[
-                    /COPILOT_GENERATE
-As an expert ]] .. ft .. [[ developer, respond concisely and accurately based only on the provided code selection. Do not provide too much detail or discuss unrelated topics. Follows this rules:
- 	1. If you find a mistake in the code, please correct it.
-    2. If you think an information can be interesting, please provide it.
-    3. If you think the code can be improved, please provide a better version.
-    4. Do only respond to the request, do not provide additional information.
-Question or request: ]]
+	                    /COPILOT_GENERATE
+	As an expert ]] .. ft .. [[ developer, respond concisely and accurately based only on the provided code selection. Do not provide too much detail or discuss unrelated topics. Follows this rules:
+	 	1. If you find a mistake in the code, please correct it.
+	    2. If you think an information can be interesting, please provide it.
+	    3. If you think the code can be improved, please provide a better version.
+	    4. Do only respond to the request, do not provide additional information.
+	Question or request: ]]
 
 					local mode = vim.api.nvim_get_mode().mode
 					local header = "Request"
@@ -326,8 +325,6 @@ Question or request: ]]
 		end,
 	},
 	{
-		-- No more copilot support :(
-		enabled = true,
 		"yetone/avante.nvim",
 		event = "VeryLazy",
 		build = "make",
@@ -352,54 +349,9 @@ Question or request: ]]
 				},
 			},
 		},
-
-		config = function()
-			local copilot_api = require("api.copilot_api")
-			copilot_api.setup()
-
-			require("avante").setup({
-				-- HACK: This is a hack to get it works with copilot
-				provider = "copilot_hack",
-
-				hints = { enabled = true },
-				vendors = {
-					copilot_hack = {
-						endpoint = "https://api.githubcopilot.com/chat/completions",
-						model = "gpt-4o-2024-05-13",
-						api_key_name = "EDITOR",
-						parse_curl_args = function(opts, code_opts)
-							copilot_api.validate_copilot_api_token()
-
-							return {
-								url = opts.endpoint,
-								headers = {
-									["Accept"] = "application/json",
-									["Authorization"] = "Bearer " .. copilot_api.get_github_token(),
-									["Content-Type"] = "application/json",
-									["Copilot-Integration-Id"] = "vscode-chat",
-									["editor-version"] = "Neovim/" .. copilot_api.vim_version,
-								},
-								body = {
-									model = opts.model,
-									messages = {
-										{ role = "system", content = code_opts.system_prompt },
-										{
-											role = "user",
-											content = require("avante.providers.openai").get_user_message(code_opts),
-										},
-									},
-									temperature = 0,
-									max_tokens = 4096,
-									stream = true, -- this will be set by default.
-								},
-							}
-						end,
-						parse_response_data = function(data_stream, event_state, opts)
-							require("avante.providers").openai.parse_response(data_stream, event_state, opts)
-						end,
-					},
-				},
-			})
-		end,
+		opts = {
+			provider = "copilot",
+			hints = { enabled = true },
+		},
 	},
 }
