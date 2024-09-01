@@ -63,6 +63,7 @@ M.signs = {
 		warn = "●",
 		info = "●",
 		hint = "●",
+		ok = "●",
 		other = "●",
 	},
 	others = {

@@ -29,6 +29,7 @@ function M.get(colors)
 		PmenuDocBorder = { link = "FloatBorder" },
 		PmenuSel = { link = "Visual" },
 
+		-- CursorLine = { bg = colors.surface1 },
 		CursorLine = { bg = "None" },
 		CursorLineNr = { fg = colors.mauve },
 		CursorLineSign = { link = "SignColumn" },
@@ -79,10 +80,10 @@ function M.get(colors)
 			link = "StatusLine",
 		},
 
-		DiagnosticError = { fg = colors.red }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default
-		DiagnosticWarn = { fg = colors.yellow }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default
-		DiagnosticInfo = { fg = colors.blue }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default
-		DiagnosticHint = { fg = colors.teal }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default
+		-- DiagnosticError = { fg = colors.red }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default
+		-- DiagnosticWarn = { fg = colors.yellow }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default
+		-- DiagnosticInfo = { fg = colors.blue }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default
+		-- DiagnosticHint = { fg = colors.teal }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default
 		--
 		-- DiagnosticVirtualTextError = { bg = modify_func(colors.red, darken_diag), fg = colors.red },          -- Used for "Error" diagnostic virtual text
 		-- DiagnosticVirtualTextWarn = { bg = modify_func(colors.yellow, darken_diag), fg = colors.yellow },     -- Used for "Warning" diagnostic virtual text
@@ -194,7 +195,7 @@ function M.override_lsp_hl(colors_table)
 
 	-- vim.api.nvim_set_hl(0, "@variable", { fg = colors.text })
 	-- vim.api.nvim_set_hl(0, "@_parent", { fg = colors.peach })
-	-- vim.api.nvim_set_hl(0, "@attribute", { fg = colors.lavender, italic = false })
+	-- vim.api.nvim_set_hl(0, "@attribute", { italic = true })
 	-- vim.api.nvim_set_hl(0, "@keyword.operator", { link = "@repeat" })
 	-- vim.api.nvim_set_hl(0, "@keyword.operator", { link = "@repeat" })
 	-- vim.api.nvim_set_hl(0, "@operator", { fg = colors.teal, italic = false })
@@ -206,6 +207,7 @@ function M.override_lsp_hl(colors_table)
 	-- vim.api.nvim_set_hl(0, "@variable.builtin", { fg = colors.red })
 	-- vim.api.nvim_set_hl(0, "@variable.member", { fg = colors.text })
 	vim.api.nvim_set_hl(0, "@variable.parameter", { fg = colors.red, italic = false })
+	vim.api.nvim_set_hl(0, "@function.method.call", { italic = true })
 	vim.api.nvim_set_hl(0, "@keyword.operator.python", { link = "Conditional" })
 end
 
