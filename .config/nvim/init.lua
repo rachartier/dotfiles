@@ -58,6 +58,11 @@ require("lazy").setup({
 				"osc52",
 				"spellfile",
 				"shada",
+				"rplugin",
+
+				-- replaced by vim-matchup
+				"matchit",
+				"matchparen",
 			},
 		},
 	},

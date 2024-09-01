@@ -61,6 +61,7 @@ function M.setup()
 			information = { "undercurl" },
 		}
 	end
+
 	require("catppuccin").setup({
 		lazy = true,
 		flavour = theme, -- latte, frappe, macchiato, mocha
@@ -90,7 +91,7 @@ function M.setup()
 			-- numbers = {},
 			-- booleans = {},
 			-- properties = {},
-			-- types = {},
+			types = {},
 			operators = {},
 		},
 		integrations = {

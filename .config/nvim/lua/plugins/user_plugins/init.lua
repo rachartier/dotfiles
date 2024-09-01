@@ -35,8 +35,8 @@ return {
 		end,
 	},
 	{
-		dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-code-actions.nvim",
-		-- "rachartier/tiny-code-action.nvim",
+		-- dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-code-actions.nvim",
+		"rachartier/tiny-code-action.nvim",
 		dependencies = {
 			{ "nvim-lua/plenary.nvim" },
 			{ "nvim-telescope/telescope.nvim" },
@@ -60,7 +60,7 @@ return {
 	{
 		dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-inline-diagnostic.nvim",
 		-- "rachartier/tiny-inline-diagnostic.nvim",
-		event = "LspAttach",
+		event = "VeryLazy",
 		config = function()
 			local signs = {}
 
@@ -83,6 +83,18 @@ return {
 				blend = {
 					factor = 0.22,
 				},
+			})
+
+			require("utils").on_event("ColorScheme", function()
+				local mixin_color = require("theme").get_colors().base
+				require("tiny-inline-diagnostic").change({
+					factor = 0.22,
+				}, {
+					mixing_color = mixin_color,
+				})
+			end, {
+				target = "*",
+				desc = "Change color scheme for tiny-inline-diagnostic",
 			})
 
 			--
