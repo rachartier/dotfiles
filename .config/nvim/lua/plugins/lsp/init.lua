@@ -21,7 +21,7 @@ return {
 				local bufnr = args.buf
 
 				-- client.server_capabilities.semanticTokensProvider = nil
-				if client.name == "GitHub Copilot" then
+				if client.name == "GitHub Copilot" or client.name == "ruff" then
 					return
 				end
 

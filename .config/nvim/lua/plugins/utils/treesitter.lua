@@ -1,5 +1,7 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
+	-- TODO: Remove this when the PR is merged
+	branch = "fix/matches",
 	build = ":TSUpdate",
 	dependencies = {
 		"nvim-treesitter/playground",
