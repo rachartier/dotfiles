@@ -113,7 +113,7 @@ function M.setup()
 			markdown = true,
 			telekasten = true,
 			telescope = true,
-			treesitter = false,
+			treesitter = true,
 			treesitter_context = false,
 			which_key = true,
 			symbols_outline = true,
