@@ -167,7 +167,7 @@ return {
 							settings.capabilities = capabilities
 
 							if server_name == "ruff" then
-								settings.capabilities.disabled_capabilities.textDocument.hover = false
+								settings.capabilities.textDocument.hover = false
 							end
 
 							require("lspconfig")[server_name].setup(settings)
