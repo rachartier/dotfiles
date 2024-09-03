@@ -3,7 +3,7 @@ local utils = require("utils")
 return {
 	{
 		"github/copilot.vim",
-		event = "VeryLazy",
+		event = "BufReadPost",
 		config = function()
 			-- vim.keymap.set("i", "<C-g>", function()
 			-- 	vim.fn["copilot#Accept"]("")
@@ -331,10 +331,10 @@ return {
 		event = "VeryLazy",
 		build = ":AvanteBuild source=false",
 		dependencies = {
-
 			"stevearc/dressing.nvim",
 			"nvim-lua/plenary.nvim",
 			"MunifTanjim/nui.nvim",
+			"github/copilot.vim",
 			"echasnovski/mini.icons",
 			{
 				"HakonHarnes/img-clip.nvim",
