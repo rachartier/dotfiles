@@ -297,6 +297,35 @@ install_git_delta() {
     __download_install_deb "https://github.com/dandavison/delta/releases/latest/download/git-delta_${git_delta_version}_amd64.deb" "delta"
 }
 
+install_github_gh() {
+    __echo_info "Installing gh"
+
+    local gh_version
+    gh_version=$(__get_latest_release "cli/cli")
+    gh_version="${gh_version:1}"
+
+    # vériier si la version actuelle est la même que la version à installer, si seulement la version actuelle est installée
+    if gh --version | grep -q "gh version $gh_version"; then
+        __echo_info "gh already installed."
+    else
+        __download_install_deb "https://github.com/cli/cli/releases/latest/download/gh_${gh_version}_linux_amd64.deb" "gh"
+    fi
+
+    gh auth status &>/dev/null
+    if [ "$?" -eq 0 ]; then
+        __echo_info "gh already authenticated."
+    else
+        __echo_info "Please authenticate with gh."
+        gh auth login
+    fi
+
+    if gh extension list | grep -q "gh-copilot"; then
+        gh extension upgrade gh-copilot
+    else
+        gh extension install github/gh-copilot
+    fi
+}
+
 # install_zsh_plugins() {
 # 	__install_zsh_plugin "https://github.com/zsh-users/zsh-autosuggestions.git"
 # 	__install_zsh_plugin "https://github.com/zsh-users/zsh-syntax-highlighting.git"
@@ -364,6 +393,7 @@ install_essentials() {
     install_zoxide
 
     install_git_delta
+    install_github_gh
 }
 
 install_minimal() {
@@ -417,6 +447,7 @@ do_reinstall() {
     "starship") install_starship ;;
     "tmux") install_tmux ;;
     "viu") install_viu ;;
+    "gh") install_github_gh ;;
     "fonts") install_fonts_for_windows ;;
     *) __echo_failure "'$1' unknown." ;;
     esac

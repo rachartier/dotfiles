@@ -110,3 +110,12 @@ eval "$(zoxide init zsh --cmd cd)"
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
+
+if command -v gh &> /dev/null; then
+    alias '??'='ghcs -t shell'
+    alias 'git?'='ghcs -t git'
+    alias 'explain'='ghcs explain'
+    alias 'gh?'='ghcs -t gh'
+
+    eval "$(gh copilot alias -- zsh)"
+fi
