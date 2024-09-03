@@ -55,6 +55,8 @@ end, {
 		"checkhealth",
 		"neotest-summary",
 		"neotest-output-panel",
+		"Avante",
+		"AvanteInput",
 	},
 	desc = "Easy quit buffers",
 })

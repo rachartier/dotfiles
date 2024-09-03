@@ -27,17 +27,17 @@ return {
 			---@diagnostic disable-next-line: inject-field
 			vim.g.copilot_no_tab_map = true
 
-			utils.on_event({ "BufEnter" }, function()
-				---@diagnostic disable-next-line: inject-field
-				vim.b.copilot_enabled = false
-			end, {
-				target = {
-					".env",
-					"*secret",
-					"*id_rsa",
-				},
-				desc = "Disable Copilot for sensitive files",
-			})
+			-- utils.on_event({ "BufEnter" }, function()
+			-- 	---@diagnostic disable-next-line: inject-field
+			-- 	vim.b.copilot_enabled = false
+			-- end, {
+			-- 	target = {
+			-- 		".env",
+			-- 		"*secret",
+			-- 		"*id_rsa",
+			-- 	},
+			-- 	desc = "Disable Copilot for sensitive files",
+			-- })
 		end,
 	},
 	-- {
@@ -329,7 +329,7 @@ return {
 		"yetone/avante.nvim",
 		enabled = true,
 		event = "VeryLazy",
-		build = "make",
+		build = ":AvanteBuild source=false",
 		dependencies = {
 
 			"stevearc/dressing.nvim",
