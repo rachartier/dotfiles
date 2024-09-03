@@ -185,7 +185,7 @@ return {
 					function()
 						local ok, copilot_enabled = pcall(vim.api.nvim_buf_get_var, 0, "copilot_enabled")
 
-						if copilot_enabled then
+						if ok and copilot_enabled then
 							return icons.signs.others.copilot
 						end
 
@@ -209,10 +209,7 @@ return {
 				},
 				{
 					function()
-						-- if is_inside_docker then
 						return " "
-						-- end
-						-- return ""
 					end,
 					separator = { right = "" },
 					padding = { left = 0, right = 0 },
