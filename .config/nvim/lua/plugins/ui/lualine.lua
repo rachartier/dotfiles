@@ -159,7 +159,7 @@ return {
 				{
 					require("lazy.status").updates,
 					cond = require("lazy.status").has_updates,
-					padding = { left = 1, right = 1 },
+					padding = { left = 1, right = 2 },
 					color = { fg = colors.green },
 					separator = { right = "" },
 				},
@@ -193,7 +193,8 @@ return {
 					end,
 					-- cond = cond_disable_by_ft,
 					color = { fg = colors.fg },
-					padding = { left = 1, right = 3 },
+					separator = { right = "" },
+					padding = { left = 1, right = 2 },
 				},
 				{
 					function()
@@ -202,8 +203,19 @@ return {
 						end
 						return ""
 					end,
+					separator = { right = "" },
 					color = { fg = colors.blue },
 					padding = { left = 1, right = 2 },
+				},
+				{
+					function()
+						-- if is_inside_docker then
+						return " "
+						-- end
+						-- return ""
+					end,
+					separator = { right = "" },
+					padding = { left = 0, right = 0 },
 				},
 			},
 			lualine_y = {
