@@ -109,7 +109,10 @@ eval "$(zoxide init zsh --cmd cd)"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+
+if command -v pyenv &> /dev/null; then
+    eval "$(pyenv init -)"
+fi
 
 if command -v gh &> /dev/null; then
     alias '??'='ghcs -t shell'
