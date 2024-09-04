@@ -166,15 +166,14 @@ return {
 						if settings then
 							settings.capabilities = capabilities
 
-							if server_name == "ruff" then
-								settings.capabilities.textDocument.hover = false
-							end
-
 							require("lspconfig")[server_name].setup(settings)
 						else
 							-- auto managed by flutter-tools.nvim
 							if server_name == "dartls" then
 								return
+							end
+							if server_name == "ruff" then
+								capabilities.hoverProvider = false
 							end
 
 							require("lspconfig")[server_name].setup({

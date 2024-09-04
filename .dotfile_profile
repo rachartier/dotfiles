@@ -91,6 +91,9 @@ else
     if [ -z "$LC_ALL" ]; then
         export LC_ALL=C
     fi
+
+	# For copilot.vim
+    export NODE_TLS_REJECT_UNAUTHORIZED=0
 fi
 
 
