@@ -176,7 +176,7 @@ function M.get(colors)
 		RenderMarkdownH4Bg = { link = "RenderMarkdownH4" },
 		RenderMarkdownH5Bg = { link = "RenderMarkdownH5" },
 
-		CopilotSuggestion = { fg = colors.subtext0, italic = true },
+		CopilotSuggestion = { fg = colors.subtext0, italic = false },
 		MiniCursorwordCurrent = { bg = colors.surface1 },
 		MiniCursorword = { link = "MiniCursorwordCurrent" },
 	}
