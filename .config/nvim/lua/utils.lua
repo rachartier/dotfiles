@@ -142,6 +142,7 @@ function M.to_list(value)
 end
 
 local group_index = 0
+
 --- Creates an auto command that triggers on a given list of events
 --- Inside user_opts, you can specify the target buffer or pattern like so: { target = 123 } or { target = "pattern" } or { target = { "pattern1", "pattern2" } }...
 ---@param events string|string[] # the list of events to trigger on
@@ -151,54 +152,39 @@ local group_index = 0
 function M.on_event(events, callback, user_opts)
 	assert(type(callback) == "function")
 
-	local target = nil
 	events = M.to_list(events)
-
-	local group_name = ""
-
-	if user_opts and user_opts.desc then
-		group_name = "custom_" .. user_opts.desc:gsub(" ", "_"):lower() .. "_" .. group_index
-	else
-		group_name = "custom_" .. group_index
-	end
+	local group_name = user_opts
+			and user_opts.desc
+			and "custom_" .. user_opts.desc:gsub(" ", "_"):lower() .. "_" .. group_index
+		or "custom_" .. group_index
 	group_index = group_index + 1
 
 	local group = vim.api.nvim_create_augroup(group_name, { clear = true })
-
 	local opts = {
 		callback = function(evt)
 			callback(evt, group)
 		end,
 		group = group,
+		desc = user_opts and user_opts.desc or "Custom event",
 	}
 
 	if user_opts then
 		local valid_opts = { "target", "desc" }
-
-		for key, _ in pairs(user_opts) do
-			if not vim.tbl_contains(valid_opts, key) then
-				error("Invalid option: " .. key)
-			end
+		for key in pairs(user_opts) do
+			assert(vim.tbl_contains(valid_opts, key), "Invalid option: " .. key)
 		end
 
-		if user_opts.target then
-			if type(user_opts.target) == "number" then
-				target = user_opts.target
+		local target = user_opts.target
+		if target then
+			if type(target) == "number" then
+				opts.buffer = target
 			else
-				target = M.to_list(user_opts.target or nil)
+				opts.pattern = M.to_list(target)
 			end
 		end
-		opts.desc = user_opts.desc or "Custom event"
-	end
-
-	if type(target) == "number" then
-		opts.buffer = target
-	elseif target then
-		opts.pattern = target
 	end
 
 	vim.api.nvim_create_autocmd(events, opts)
-
 	return group
 end
 
