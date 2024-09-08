@@ -30,7 +30,7 @@ config.font = wezterm.font_with_fallback({ "MonoLisa", "Symbols Nerd Font" })
 -- config.cell_width = 1
 config.line_height = 1
 
-config.font_size = 13
+config.font_size = 14
 config.font_rules = {
 	-- {
 	-- 	italic = true,
@@ -86,7 +86,7 @@ config.win32_system_backdrop = "Acrylic"
 config.win32_acrylic_accent_color = "rgba(36, 39, 58, 0)"
 -- config.window_background_opacity = 0.0
 -- config.window_background_opacity = 0.80
-config.window_background_opacity = 0.90
+config.window_background_opacity = 0.85
 
 config.window_close_confirmation = "NeverPrompt"
 

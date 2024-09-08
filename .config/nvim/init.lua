@@ -72,6 +72,7 @@ require("set")
 require("neovide")
 
 vim.defer_fn(function()
+	require("config.diagnostic")
 	require("remap")
 end, 50)
 
