@@ -49,6 +49,7 @@ return {
 	"nvim-telescope/telescope.nvim",
 	enabled = true,
 	dependencies = {
+		"nvim-tree/nvim-web-devicons",
 		"nvim-lua/plenary.nvim",
 		{
 			"nvim-telescope/telescope-fzf-native.nvim",
