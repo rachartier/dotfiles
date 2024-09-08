@@ -33,8 +33,6 @@ return {
 			require("lspconfig.ui.windows").default_options = {
 				border = icons.default_border,
 			}
-
-			require("config.diagnostic")
 		end,
 	},
 	{
