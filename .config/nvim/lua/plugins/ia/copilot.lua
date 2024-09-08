@@ -358,22 +358,26 @@ return {
 			"MunifTanjim/nui.nvim",
 			"github/copilot.vim",
 			"echasnovski/mini.icons",
-			{
-				"HakonHarnes/img-clip.nvim",
-				event = "VeryLazy",
-				opts = {
-					default = {
-						embed_image_as_base64 = false,
-						prompt_for_file_name = false,
-						drag_and_drop = {
-							insert_mode = true,
-						},
-						use_absolute_path = true,
-					},
-				},
-			},
+			-- {
+			-- 	"HakonHarnes/img-clip.nvim",
+			-- 	event = "VeryLazy",
+			-- 	opts = {
+			-- 		default = {
+			-- 			embed_image_as_base64 = false,
+			-- 			prompt_for_file_name = false,
+			-- 			drag_and_drop = {
+			-- 				insert_mode = true,
+			-- 			},
+			-- 			use_absolute_path = true,
+			-- 		},
+			-- 	},
+			-- },
 		},
 		opts = {
+			behaviour = {
+				auto_set_keymaps = true,
+				support_paste_from_clipboard = true,
+			},
 			provider = "copilot",
 			hints = { enabled = true },
 		},

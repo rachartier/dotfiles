@@ -242,21 +242,21 @@ return {
 			footer = dashboard.section.footer,
 		})
 
-		-- utils.on_event("VimResized", function()
-		-- 	if vim.bo.filetype == "alpha" then
-		-- 		header_padding = get_heading_padding()
-		--
-		-- 		dashboard.opts.layout = build_layout({
-		-- 			header_padding = header_padding,
-		-- 			header = header,
-		-- 			buttons = dashboard.section.buttons,
-		-- 			footer = dashboard.section.footer,
-		-- 		})
-		--
-		-- 		-- pcall(vim.cmd.AlphaRedraw)
-		-- 	end
-		-- end, { desc = "Redraw alpha on resize" })
-		-- no Idea how it works exactly, try n error with distinguishable colors lol
+		utils.on_event("VimResized", function()
+			if vim.bo.filetype == "alpha" then
+				header_padding = get_heading_padding()
+
+				dashboard.opts.layout = build_layout({
+					header_padding = header_padding,
+					header = header,
+					buttons = dashboard.section.buttons,
+					footer = dashboard.section.footer,
+				})
+
+				pcall(vim.cmd.AlphaRedraw)
+			end
+		end, { desc = "Redraw alpha on resize" })
+
 		return dashboard
 	end,
 	config = function(_, dashboard)
