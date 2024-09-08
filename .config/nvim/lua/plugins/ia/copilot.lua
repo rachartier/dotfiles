@@ -27,6 +27,28 @@ return {
 			---@diagnostic disable-next-line: inject-field
 			vim.g.copilot_no_tab_map = true
 
+			utils.on_event({ "BufEnter" }, function(event)
+				---@diagnostic disable-next-line: inject-field
+				vim.b.copilot_enabled = true
+
+				-- get buffer name
+				local bufname = vim.api.nvim_buf_get_name(event.buf)
+
+				-- get file name
+				local filename = vim.fn.fnamemodify(bufname, ":t")
+
+				if
+					string.match(filename, "^%.env.*")
+					or string.match(filename, "^%.secret.*")
+					or string.match(filename, "^%id_rsa.*")
+				then
+					vim.b.copilot_enabled = false
+				end
+			end, {
+				target = "*",
+				desc = "Enable/disable Copilot for sensitive files",
+			})
+
 			-- utils.on_event({ "BufEnter" }, function()
 			-- 	---@diagnostic disable-next-line: inject-field
 			-- 	vim.b.copilot_enabled = false
