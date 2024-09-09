@@ -1,7 +1,7 @@
 local M = {}
 local utils = require("utils")
 
-local darken_markdown_heading = 0.23
+local darken_markdown_heading = 0.18
 
 function M.get(colors)
 	-- local bg = colors.base

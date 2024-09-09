@@ -260,6 +260,31 @@ return {
 					TestsxUnit = {
 						prompt = "/COPILOT_GENERATE Write a set of detailed unit test functions for the following code with the xUnit framework.",
 					},
+					AddPEP = {
+						prompt = [[
+/COPILOT_GENERATE Analyze the selected code and add useful, related Python Enhancement Proposals (PEPs). The PEPs should be directly relevant to the concepts, functions, or constructs used in the code. Ensure the references are accurate and avoid including unrelated PEPs.
+
+Example input:
+
+### Classes in Python
+class MyClass:
+    def __init__(self, value: int):
+        self.value = value
+
+    def increment(self):
+        self.value += 1
+
+Output:
+:::info
+Useful PEPs for this section (not exhaustive):
+- [PEP 253 (Subtyping Built-in Types)](https://www.python.org/dev/peps/pep-0253/)
+- [PEP 257 (Docstring Conventions)](https://www.python.org/dev/peps/pep-0257/)
+- [PEP 526 (Syntax for Variable Annotations)](https://www.python.org/dev/peps/pep-0526/)
+- [PEP 3107 (Function Annotations)](https://www.python.org/dev/peps/pep-3107/)
+- [PEP 3119 (Introducing Abstract Base Classes)](https://www.python.org/dev/peps/pep-3119/)
+:::
+                        ]],
+					},
 				},
 				mappings = {
 					show_diff = {

@@ -189,10 +189,10 @@ return {
 	{
 		languages = { "markdown" },
 		mason = { "marksman" },
-		formatter = { "markdown-toc", "injected", "typos" },
-		linter = {
-			"markdownlint",
-		},
+		formatter = { "markdown-toc", "typos" },
+		-- linter = {
+		-- 	"markdownlint",
+		-- },
 	},
 	{
 		languages = { "text" },

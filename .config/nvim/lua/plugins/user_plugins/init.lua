@@ -35,8 +35,9 @@ return {
 		end,
 	},
 	{
-		dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-code-actions.nvim",
-		-- "rachartier/tiny-code-action.nvim",
+		-- dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-code-actions.nvim",
+		-- dir = "/home/rachartier/dev/nvim_plugins/tiny-code-action.nvim",
+		"rachartier/tiny-code-action.nvim",
 		dependencies = {
 			{ "nvim-lua/plenary.nvim" },
 			{ "nvim-telescope/telescope.nvim" },
@@ -77,6 +78,7 @@ return {
 				hi = {
 					-- background = "None",
 					mixing_color = require("theme").get_colors().base,
+					background = "None",
 				},
 				options = {
 					multilines = true,

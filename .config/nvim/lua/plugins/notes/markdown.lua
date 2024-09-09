@@ -13,6 +13,8 @@ return {
 			heading = {
 				icons = { "󰼏 ", "󰎨 ", "󰼑 ", "󰎲 ", "󰼓 ", "󰎴 " },
 				left_pad = 1,
+				border = false,
+				border_prefix = true,
 			},
 			checkbox = {
 				unchecked = {
