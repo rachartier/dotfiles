@@ -143,7 +143,8 @@ vim.api.nvim_command("filetype plugin on")
 
 opt.termguicolors = true
 
-opt.swapfile = false
+opt.swapfile = true
+opt.autoread = true
 opt.backup = true
 opt.backupdir = os.getenv("HOME") .. "/.local/share/nvim/backup/"
 opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
