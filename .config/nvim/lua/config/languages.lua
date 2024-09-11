@@ -166,9 +166,11 @@ return {
 		},
 	},
 	{
-		languages = { "docker" },
+		languages = { "dockerfile" },
 		mason = { "dockerls" },
-		formatter = { "hadolint", "typos" },
+		formatter = { "typos" },
+		linter = { "hadolint" },
+		lsp_fallback = false,
 	},
 	{
 		languages = { "sh" },

@@ -84,6 +84,7 @@ return {
 				format_on_save = function(bufnr)
 					local errors = vim.diagnostic.get(bufnr, { severity = { min = vim.diagnostic.severity.ERROR } })
 					local clients = vim.lsp.get_clients({ bufnr = bufnr })
+					local ft = vim.api.nvim_buf_get_option(bufnr, "filetype")
 
 					-- fix for omnisharp
 					for _, client in pairs(clients) do
@@ -94,9 +95,15 @@ return {
 						end
 					end
 
+					local lsp_fallback = true
+
+					if languages[ft] and languages[ft].lsp_fallback then
+						lsp_fallback = languages[ft].lsp_fallback
+					end
+
 					return {
 						timeout_ms = 1500,
-						lsp_fallback = true,
+						lsp_fallback = lsp_fallback,
 					}
 				end,
 				formatters = formatters_settings,
