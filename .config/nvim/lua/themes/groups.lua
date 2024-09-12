@@ -72,8 +72,9 @@ function M.get(colors)
 		SwitchBufferStatusColor = { fg = colors.red },
 
 		StatusLine = {
-			fg = colors.base,
-			bg = "None",
+			-- fg = colors.base,
+			-- bg = "None",
+			link = "Normal",
 		},
 
 		StatusLineNC = {
