@@ -8,11 +8,18 @@ alias cneo='neovide.exe --wsl --neovim-bin "$HOME/.local/bin/nvim" --server="$1:
 
 alias snvim='nvim --cmd "let g:neovide=1" --headless --listen 0.0.0.0:7301'
 
-alias c="ghcs -t gh"
-
 if command tmuxp &> /dev/null; then
     alias tl='tmuxp load'
     for s in $(tmuxp ls); do alias "$s"="tmuxp load -y $s"; done
+fi
+
+if command -v gh &> /dev/null; then
+    alias '??'='ghcs -t shell'
+    alias 'git?'='ghcs -t git'
+    alias 'explain'='ghcs explain'
+    alias 'gh?'='ghcs -t gh'
+
+    eval "$(gh copilot alias -- zsh)"
 fi
 
 if [ -n "$DOTFILES_DOCKER" ]; then

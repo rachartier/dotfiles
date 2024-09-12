@@ -1,4 +1,4 @@
-source $HOME/.profile
+eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/pure.toml)"
 
 ZSH_TMUX_AUTOSTART=false
 ZSH_TMUX_CONFIG="$HOME/.config/tmux/tmux.conf"
@@ -23,102 +23,93 @@ fi
 
 eza_command='$HOME/.config/scripts/preview_fzf.sh $realpath'
 
-zstyle ':fzf-tab:*' popup-min-size 38 0
-zstyle ':fzf-tab:*' fzf-flags --preview=''
-zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
-zstyle ":fzf-tab:complete:*:*" fzf-preview $eza_command
+function _set_opts() {
+    zstyle ':fzf-tab:*' popup-min-size 38 0
+    zstyle ':fzf-tab:*' fzf-flags --preview=''
+    zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
+    zstyle ":fzf-tab:complete:*:*" fzf-preview $eza_command
 
-zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm -w -w"
-zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-preview '[[ $group == "[process ID]" ]] && ps --pid=$word -o cmd --no-headers -w -w'
-zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-flags --preview-window=down:3:wrap
+    zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm -w -w"
+    zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-preview '[[ $group == "[process ID]" ]] && ps --pid=$word -o cmd --no-headers -w -w'
+    zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-flags --preview-window=down:3:wrap
 
-zstyle ':completion:*:git-checkout:*'               sort false
-zstyle ':completion:*'                              completer _extensions _expand _complete _ignored _approximate
-zstyle ':completion:*'                              menu no
-# zstyle ':completion:*'                              select-prompt '%SScrolling active: current selection at %p%s'
-zstyle ':completion:*:*:*:*:processes'              command 'ps -u $USER -o pid,user,comm,cmd -w -w'
-zstyle ':completion:*:correct:*'                    insert-unambiguous true             # start menu completion only if it could find no unambiguous initial string
-zstyle ':completion:*:correct:*'                    original true                       #
-# zstyle ':completion:*:corrections'                  format $'%F{red}%d (errors: %e)%f' #
-zstyle ':completion:*:default'                      list-colors ${(s.:.)LS_COLORS}      # activate color-completion(!)
-zstyle ':completion:*' 								list-colors ${(s.:.)LS_COLORS}
-# zstyle ':completion:*:descriptions'                 format $'%F{blue}Completing %B%d%b%%f'  # format on completion
-zstyle ':completion:*:expand:*'                     tag-order all-expansions            # insert all expansions for expand completer
-zstyle ':completion:*:man:*'                        menu yes select
-zstyle ':completion:*:manuals'                      separate-sections true
-zstyle ':completion:*:manuals.*'                    insert-sections   true
-# zstyle ':completion:*:messages'                     format ' %F{purple} %d %f'
-zstyle ':completion:*:urls'                         local 'www' '/var/www/' 'public_html'
-zstyle ':completion:*:warnings'                     format $'%{\e[0;31m%}No matches for:%{\e[0m%} %d' # set format for warnings
-zstyle ':completion::(^approximate*):*:functions'   ignored-patterns '_*'    # Ignore completion functions for commands you don't have:
-zstyle ':completion:complete:*:options'             sort false
-zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
+    zstyle ':completion:*:git-checkout:*'               sort false
+    zstyle ':completion:*'                              completer _extensions _expand _complete _ignored _approximate
+    zstyle ':completion:*'                              menu no
+    # zstyle ':completion:*'                              select-prompt '%3NScrolling active: current selection at %p%s'
+    zstyle ':completion:*:*:*:*:processes'              command 'ps -u $USER -o pid,user,comm,cmd -w -w'
+    zstyle ':completion:*:correct:*'                    insert-unambiguous true             # start menu completion only if it could find no unambiguous initial string
+    zstyle ':completion:*:correct:*'                    original true                       #
+    # zstyle ':completion:*:corrections'                  format $'%F{red}%d (errors: %e)%f' #
+    zstyle ':completion:*:default'                      list-colors ${(s.:.)LS_COLORS}      # activate color-completion(!)
+    zstyle ':completion:*' 								list-colors ${(s.:.)LS_COLORS}
+    # zstyle ':completion:*:descriptions'                 format $'%F{blue}Completing %B%d%b%%f'  # format on completion
+    zstyle ':completion:*:expand:*'                     tag-order all-expansions            # insert all expansions for expand completer
+    zstyle ':completion:*:man:*'                        menu yes select
+    zstyle ':completion:*:manuals'                      separate-sections true
+    zstyle ':completion:*:manuals.*'                    insert-sections   true
+    # zstyle ':completion:*:messages'                     format ' %F{purple} %d %f'
+    zstyle ':completion:*:urls'                         local 'www' '/var/www/' 'public_html'
+    zstyle ':completion:*:warnings'                     format $'%{\e[0;31m%}No matches for:%{\e[0m%} %d' # set format for warnings
+    zstyle ':completion::(^approximate*):*:functions'   ignored-patterns '_*'    # Ignore completion functions for commands you don't have:
+    zstyle ':completion:complete:*:options'             sort false
+    zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
 
-(( ${+ZSH_HIGHLIGHT_STYLES} )) || typeset -A ZSH_HIGHLIGHT_STYLES
-ZSH_HIGHLIGHT_STYLES[path]=none
-ZSH_HIGHLIGHT_STYLES[path_prefix]=none
-ZSH_HIGHLIGHT_STYLES[sudo]=none
+    (( ${+ZSH_HIGHLIGHT_STYLES} )) || typeset -A ZSH_HIGHLIGHT_STYLES
+    ZSH_HIGHLIGHT_STYLES[path]=none
+    ZSH_HIGHLIGHT_STYLES[path_prefix]=none
+    ZSH_HIGHLIGHT_STYLES[sudo]=none
 
-setopt always_to_end          # cursor moved to the end in full completion
-setopt autocd
-setopt automenu
-setopt complete_in_word       # allow completion from within a word/phrase
-setopt hash_list_all          # hash everything before completion
-setopt inc_append_history     # add commands to HISTFILE in order of execution
-setopt list_ambiguous         # complete as much of a completion until it gets ambiguous.
-setopt listpacked
-setopt nocorrect              # spelling correction for commands
-setopt nolisttypes
-setopt interactivecomments    # allow comments in interactive shells
-setopt long_list_jobs
-setopt COMPLETE_ALIASES
-unsetopt correct_all
-unsetopt BEEP
+    setopt always_to_end          # cursor moved to the end in full completion
+    setopt autocd
+    setopt automenu
+    setopt complete_in_word       # allow completion from within a word/phrase
+    setopt hash_list_all          # hash everything before completion
+    setopt inc_append_history     # add commands to HISTFILE in order of execution
+    setopt list_ambiguous         # complete as much of a completion until it gets ambiguous.
+    setopt listpacked
+    setopt nocorrect              # spelling correction for commands
+    setopt nolisttypes
+    setopt interactivecomments    # allow comments in interactive shells
+    setopt long_list_jobs
+    setopt COMPLETE_ALIASES
+    unsetopt correct_all
+    unsetopt BEEP
 
-## History file configuration
-[ -z "$HISTFILE" ] && HISTFILE="$HOME/.zsh_history"
-[ "$HISTSIZE" -lt 50000 ] && HISTSIZE=50000
-[ "$SAVEHIST" -lt 10000 ] && SAVEHIST=10000
+    ## History file configuration
+    [ -z "$HISTFILE" ] && HISTFILE="$HOME/.zsh_history"
+    [ "$HISTSIZE" -lt 50000 ] && HISTSIZE=50000
+    [ "$SAVEHIST" -lt 10000 ] && SAVEHIST=10000
 
-## History command configuration
-setopt appendhistory
-setopt extended_history       # record timestamp of command in HISTFILE
-setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE
-setopt hist_ignore_all_dups   # ignore duplicated commands history list
-setopt hist_save_no_dups      # do not save duplicated commands history list
-setopt hist_find_no_dups      # do not display duplicated commands history list
-setopt hist_reduce_blanks     # remove superfluous blanks from history list
-setopt hist_ignore_space      # ignore commands that start with space
-setopt hist_verify            # show command with history expansion to user before running it
-setopt share_history          # share command history data
+    ## History command configuration
+    setopt appendhistory
+    setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE
+    setopt hist_ignore_all_dups   # ignore duplicated commands history list
+    setopt hist_save_no_dups      # do not save duplicated commands history list
+    setopt hist_find_no_dups      # do not display duplicated commands history list
+    setopt hist_reduce_blanks     # remove superfluous blanks from history list
+    setopt hist_ignore_space      # ignore commands that start with space
+    setopt hist_verify            # show command with history expansion to user before running it
+    setopt share_history          # share command history data
 
-source $HOME/.aliases
+    bindkey "^[[1;5A" history-substring-search-up
+    bindkey "^[[1;5B" history-substring-search-down
+}
 
-bindkey "^[[1;5A" history-substring-search-up
-bindkey "^[[1;5B" history-substring-search-down
+zsh-defer _set_opts
 
 if ! [ -f "/tmp/tmux-theme.cache" ]; then
     echo "catppuccin_macchiato.conf" > /tmp/tmux-theme.cache
 fi
 
-export AUTOSWITCH_DEFAULT_PYTHON="/usr/bin/python3"
 
-eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/pure.toml)"
-eval "$(zoxide init zsh --cmd cd)"
+zsh-defer eval "$(zoxide init zsh --cmd cd)"
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+[ -f ~/.fzf.zsh ] && zsh-defer source ~/.fzf.zsh
 
 if command -v pyenv &> /dev/null; then
-    eval "$(pyenv init -)"
+    zsh-defer eval "$(pyenv init -)"
 fi
 
-if command -v gh &> /dev/null; then
-    alias '??'='ghcs -t shell'
-    alias 'git?'='ghcs -t git'
-    alias 'explain'='ghcs explain'
-    alias 'gh?'='ghcs -t gh'
-
-    eval "$(gh copilot alias -- zsh)"
-fi
+zsh-defer source $HOME/.aliases
+zsh-defer source $HOME/.profile

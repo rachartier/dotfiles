@@ -56,26 +56,6 @@ _fzf_compgen_dir() {
   fd --type=d --hidden --exclude .git . "$1"
 }
 
-export ENHANCD_FILTER="fzf --preview 'eza -al --tree --level 1 --group-directories-first \
-                       --color always --icons \
-                       --git --git-repos \
-                       --header --no-user --no-time --no-filesize --no-permissions {}' \
-                       --preview-window right,50% --height 50% --reverse --ansi \
-                       :fzy \
-                       :peco"
-
-export ENHANCD_ENABLE_DOUBLE_DOT=false
-export ENHANCD_ENABLE_HOME=false
-
-export GIT_PAGER="delta --config ~/.config/delta/delta.config"
-
-
-export DOTNET_ROOT="$HOME/.dotnet"
-export PATH="$HOME/.dotnet:$PATH"
-
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-export MANROFFOPT="-c"
-
 # Not inside a devcontainer
 if [ -z "$DOTFILES_DOCKER" ]; then
     export FZF_TMUX=1
@@ -96,4 +76,27 @@ else
     export NODE_TLS_REJECT_UNAUTHORIZED=0
 fi
 
+# =====================
 
+export ENHANCD_FILTER="fzf --preview 'eza -al --tree --level 1 --group-directories-first \
+                       --color always --icons \
+                       --git --git-repos \
+                       --header --no-user --no-time --no-filesize --no-permissions {}' \
+                       --preview-window right,50% --height 50% --reverse --ansi \
+                       :fzy \
+                       :peco"
+
+export ENHANCD_ENABLE_DOUBLE_DOT=false
+export ENHANCD_ENABLE_HOME=false
+
+export GIT_PAGER="delta --config ~/.config/delta/delta.config"
+
+export DOTNET_ROOT="$HOME/.dotnet"
+export PATH="$HOME/.dotnet:$PATH"
+
+export AUTOSWITCH_DEFAULT_PYTHON="/usr/bin/python3"
+export PYENV_ROOT="$HOME/.pyenv"
+[ -d $PYENV_ROOT/bin ] && export PATH="$PYENV_ROOT/bin:$PATH"
+
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+export MANROFFOPT="-c"
