@@ -63,7 +63,7 @@ $character"""
 [custom.inside_docker]
 command = """echo "󰡨 (${HOSTNAME:0:5})" """
 when = """ test "$($HOME/.config/scripts/is_inside_docker.sh)" = "1" """
-color = "blue"
+style = "blue"
 
 [character]
 success_symbol = "[❯](purple)"
