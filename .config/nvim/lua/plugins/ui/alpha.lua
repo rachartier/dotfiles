@@ -1,4 +1,5 @@
 local utils = require("utils")
+local config = require("config")
 
 local function build_layout(opts)
 	local header_padding = opts.header_padding or 0
@@ -74,18 +75,18 @@ return {
 		-- 			[[                                       ]],
 		-- 		},
 		-- 	}
-		if require("config").gif_alpha_enabled and vim.fn.executable("chafa") == 1 then
+		if config.gif_alpha_enabled and vim.fn.executable("chafa") == 1 then
 			header = {
 				type = "terminal",
 				command = "chafa $HOME/.config/nvim/dashboard/gif/kirby-dancing.gif",
-				width = 24,
-				height = 24,
+				width = 24 * 2,
+				height = 24 * 2,
 				opts = {
 					redraw = true,
 					position = "center",
 				},
 			}
-		elseif require("config").tty_clock_alpha_enabled and vim.fn.executable("tty-clock") == 1 then
+		elseif config.tty_clock_alpha_enabled and vim.fn.executable("tty-clock") == 1 then
 			header = {
 				type = "terminal",
 				command = "tty-clock -s -c -b -C 4",
@@ -272,7 +273,9 @@ return {
 			})
 		end
 
-		-- require("alpha.term")
+		if config.gif_alpha_enabled or config.tty_clock_alpha_enabled then
+			require("alpha.term")
+		end
 		local alpha = require("alpha")
 		local version = vim.version()
 

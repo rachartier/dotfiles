@@ -73,6 +73,7 @@ return {
 	-- 					accept = "<C-g>",
 	-- 				},
 	-- 			},
+	-- 			panel = { enabled = true },
 	-- 			filetypes = {
 	-- 				sh = function()
 	-- 					local filename = vim.fs.basename(vim.api.nvim_buf_get_name(0))
@@ -95,6 +96,7 @@ return {
 		"CopilotC-Nvim/CopilotChat.nvim",
 		branch = "canary",
 		dependencies = {
+			-- "zbirenbaum/copilot.lua",
 			"github/copilot.vim",
 			"nvim-lua/plenary.nvim", -- for curl, log wrapper
 		},

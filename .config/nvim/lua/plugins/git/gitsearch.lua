@@ -22,5 +22,6 @@ return {
 			end,
 		},
 		"sindrets/diffview.nvim",
+		"tpope/vim-rhubarb",
 	},
 }
