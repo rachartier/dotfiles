@@ -18,8 +18,6 @@ if command -v gh &> /dev/null; then
     alias 'git?'='ghcs -t git'
     alias 'explain'='ghcs explain'
     alias 'gh?'='ghcs -t gh'
-
-    eval "$(gh copilot alias -- zsh)"
 fi
 
 if [ -n "$DOTFILES_DOCKER" ]; then

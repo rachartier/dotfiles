@@ -1,12 +1,9 @@
-darvid/zsh-poetry
-Aloxaf/fzf-tab
-
-ohmyzsh/ohmyzsh path:plugins/command-not-found
-MichaelAquilina/zsh-autoswitch-virtualenv
-ohmyzsh/ohmyzsh path:plugins/tmux
-
-ohmyzsh/ohmyzsh path:lib/key-bindings.zsh
-
+darvid/zsh-poetry kind:defer
+Aloxaf/fzf-tab kind:defer
+ohmyzsh/ohmyzsh path:plugins/command-not-found kind:defer
+MichaelAquilina/zsh-autoswitch-virtualenv kind:defer
+ohmyzsh/ohmyzsh path:plugins/tmux kind:defer
+ohmyzsh/ohmyzsh path:lib/key-bindings.zsh kind:defer
 zsh-users/zsh-autosuggestions kind:defer
-zsh-users/zsh-syntax-highlighting
+zsh-users/zsh-syntax-highlighting kind:defer
 zsh-users/zsh-history-substring-search kind:defer

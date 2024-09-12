@@ -60,6 +60,18 @@ _fzf_compgen_dir() {
 if [ -z "$DOTFILES_DOCKER" ]; then
     export FZF_TMUX=1
     export FZF_TMUX_OPTS='-p80%,60%'
+
+
+    ZSH_TMUX_AUTOSTART=false
+    ZSH_TMUX_CONFIG="$HOME/.config/tmux/tmux.conf"
+
+    if [[ -n $SSH_CONNECTION ]]; then
+        export EDITOR='vim'
+    else
+        export EDITOR='nvim'
+    fi
+
+    export DISABLE_AUTO_TITLE='true'
 else
 	if ! [ -d "/usr/lib/terminfo" ]; then
         tempfile=$(mktemp) &&
@@ -99,4 +111,3 @@ export PYENV_ROOT="$HOME/.pyenv"
 [ -d $PYENV_ROOT/bin ] && export PATH="$PYENV_ROOT/bin:$PATH"
 
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-export MANROFFOPT="-c"

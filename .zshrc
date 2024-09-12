@@ -1,16 +1,5 @@
 eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/pure.toml)"
 
-ZSH_TMUX_AUTOSTART=false
-ZSH_TMUX_CONFIG="$HOME/.config/tmux/tmux.conf"
-
-if [[ -n $SSH_CONNECTION ]]; then
-    export EDITOR='vim'
-else
-    export EDITOR='nvim'
-fi
-
-export DISABLE_AUTO_TITLE='true'
-
 [ ! -d $HOME/.antidote ] && git clone --depth=1 https://github.com/mattmc3/antidote.git $HOME/.antidote
 source $HOME/.antidote/antidote.zsh
 
@@ -21,9 +10,9 @@ else
     antidote load ${ZDOTDIR:-$HOME}/.zsh_plugins.txt
 fi
 
-eza_command='$HOME/.config/scripts/preview_fzf.sh $realpath'
-
 function _set_opts() {
+    eza_command='$HOME/.config/scripts/preview_fzf.sh $realpath'
+
     zstyle ':fzf-tab:*' popup-min-size 38 0
     zstyle ':fzf-tab:*' fzf-flags --preview=''
     zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
@@ -96,20 +85,29 @@ function _set_opts() {
     bindkey "^[[1;5B" history-substring-search-down
 }
 
+function _set_theme() {
+    if ! [ -f "/tmp/tmux-theme.cache" ]; then
+        echo "catppuccin_macchiato.conf" > /tmp/tmux-theme.cache
+    fi
+}
+
+function _init_tools() {
+    [ -f ~/.fzf.zsh ] && zsh-defer source ~/.fzf.zsh
+
+    if command -v pyenv &> /dev/null; then
+        zsh-defer eval "$(pyenv init -)"
+    fi
+
+    if command -v gh &> /dev/null; then
+        eval "$(gh copilot alias -- zsh)"
+    fi
+}
+
 zsh-defer _set_opts
-
-if ! [ -f "/tmp/tmux-theme.cache" ]; then
-    echo "catppuccin_macchiato.conf" > /tmp/tmux-theme.cache
-fi
-
+zsh-defer _set_theme
+zsh-defer _init_tools
 
 zsh-defer eval "$(zoxide init zsh --cmd cd)"
-
-[ -f ~/.fzf.zsh ] && zsh-defer source ~/.fzf.zsh
-
-if command -v pyenv &> /dev/null; then
-    zsh-defer eval "$(pyenv init -)"
-fi
 
 zsh-defer source $HOME/.aliases
 zsh-defer source $HOME/.profile
