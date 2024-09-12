@@ -388,8 +388,8 @@ install_essentials() {
     install_viu
     install_lazygit
     install_lazydocker
-    # install_starship
-    install_ohmyposh
+    install_starship
+    # install_ohmyposh
     install_zoxide
 
     install_git_delta
@@ -407,8 +407,8 @@ install_minimal() {
     install_fzf
     install_viu
     install_zoxide
-    # install_starship
-    install_ohmyposh
+    install_starship
+    # install_ohmyposh
 }
 
 install_docker() {

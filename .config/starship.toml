@@ -1,31 +1,112 @@
+format = """
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_state\
+$git_status\
+$c\
+$cmake\
+$cobol\
+$daml\
+$dart\
+$deno\
+$dotnet\
+$elixir\
+$elm\
+$erlang\
+$fennel\
+$gleam\
+$golang\
+$guix_shell\
+$haskell\
+$haxe\
+$helm\
+$java\
+$julia\
+$kotlin\
+$gradle\
+$lua\
+$nim\
+$nodejs\
+$ocaml\
+$opa\
+$perl\
+$php\
+$pulumi\
+$purescript\
+$python\
+$quarto\
+$raku\
+$rlang\
+$red\
+$ruby\
+$rust\
+$scala\
+$solidity\
+$swift\
+$terraform\
+$typst\
+$vlang\
+$vagrant\
+$zig\
+$buf\
+$nix_shell\
+$conda\
+$meson\
+$cmd_duration\
+$line_break\
+$docker_context\
+$character"""
+
+[character]
+success_symbol = "[❯](purple)"
+error_symbol = "[❯](red)"
+vimcmd_symbol = "[❮](green)"
+
+[directory]
+read_only = " 󰌾"
+style = "blue"
+
 [username]
 disabled = true
 
 [docker_context]
-format = 'via [󰡨 $context](blue bold)'
+format = 'via [󰡨 $context](bold)'
 disabled = false
 
 [git_branch]
-symbol = " "
-style = 'bold purple'
+format = "[$branch]($style)"
+style = "bright-black"
+
+[git_state]
+format = '\([$state( $progress_current/$progress_total)]($style)\) '
+style = "bright-black"
 
 [git_status]
-unstaged = '󰄱 '
-stashed = ' '
-deleted = ' '
-modified = ''
-renamed = '󰑕'
-unmerged = ''
-untracked = ''
-disabled = true
+format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](218) ($ahead_behind$stashed)]($style) "
+style = "cyan"
+# unstaged = '󰄱 '
+# stashed = ' '
+# deleted = ' '
+# modified = ''
+# renamed = '󰑕'
+# unmerged = ''
+# untracked = ''
+conflicted = "​"
+untracked = "​"
+modified = "​"
+staged = "​"
+renamed = "​"
+deleted = "​"
+stashed = "≡"
 
-[directory]
-read_only = " 󰌾"
-truncate_to_repo = false
-# style = "bold blue"
+[cmd_duration]
+format = "[$duration]($style) "
+style = "yellow"
 
-[status]
-disabled = true
+# [status]
+# disabled = true
 
 [aws]
 symbol = "  "
@@ -35,19 +116,24 @@ symbol = " "
 
 [c]
 symbol = " "
-style = "bold green"
 
 [conda]
 symbol = " "
+
+[crystal]
+symbol = " "
 
 [dart]
 symbol = " "
 
 [elixir]
-symbol = " "
+symbol = " "
 
 [elm]
 symbol = " "
+
+[fennel]
+symbol = " "
 
 [fossil_branch]
 symbol = " "
@@ -76,6 +162,9 @@ symbol = " "
 [julia]
 symbol = " "
 
+[kotlin]
+symbol = " "
+
 [lua]
 symbol = " "
 
@@ -94,9 +183,13 @@ symbol = " "
 [nodejs]
 symbol = " "
 
+[ocaml]
+symbol = " "
+
 [os.symbols]
 Alpaquita = " "
 Alpine = " "
+AlmaLinux = " "
 Amazon = " "
 Android = " "
 Arch = " "
@@ -112,6 +205,7 @@ Garuda = "󰛓 "
 Gentoo = " "
 HardenedBSD = "󰞌 "
 Illumos = "󰈸 "
+Kali = " "
 Linux = " "
 Mabox = " "
 Macos = " "
@@ -128,15 +222,23 @@ Pop = " "
 Raspbian = " "
 Redhat = " "
 RedHatEnterprise = " "
+RockyLinux = " "
 Redox = "󰀘 "
 Solus = "󰠳 "
 SUSE = " "
 Ubuntu = " "
 Unknown = " "
+Void = " "
 Windows = "󰍲 "
 
 [package]
 symbol = "󰏗 "
+
+[perl]
+symbol = " "
+
+[php]
+symbol = " "
 
 [pijul_channel]
 symbol = " "
@@ -151,8 +253,13 @@ symbol = "󰟔 "
 symbol = " "
 
 [rust]
-symbol = " "
+symbol = "󱘗 "
 
 [scala]
 symbol = " "
 
+[swift]
+symbol = " "
+
+[zig]
+symbol = " "
