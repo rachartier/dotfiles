@@ -57,7 +57,12 @@ $meson\
 $cmd_duration\
 $line_break\
 $docker_context\
+${custom.inside_docker}\
 $character"""
+
+[custom.inside_docker]
+command = "echo 󰡨"
+when = """ test "$($HOME/.config/scripts/is_inside_docker.sh)" = "1" """
 
 [character]
 success_symbol = "[❯](purple)"
