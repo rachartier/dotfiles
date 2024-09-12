@@ -61,7 +61,7 @@ ${custom.inside_docker}\
 $character"""
 
 [custom.inside_docker]
-command = "echo 󰡨"
+command = """echo "󰡨 (${HOSTNAME:0:5})" """
 when = """ test "$($HOME/.config/scripts/is_inside_docker.sh)" = "1" """
 
 [character]
