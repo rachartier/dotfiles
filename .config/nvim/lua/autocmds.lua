@@ -1,5 +1,7 @@
 local utils = require("utils")
 
+require("assign_ft")
+
 utils.on_event({ "FocusGained", "TermClose", "TermLeave" }, function()
 	vim.cmd("checktime")
 end, {
@@ -85,20 +87,6 @@ utils.on_event({ "BufWritePre" }, function()
 end, {
 	target = "*",
 	desc = "Remove trailing whitespace",
-})
-
-utils.on_event({ "BufReadPost" }, function()
-	vim.opt_local.filetype = "pico8"
-end, {
-	target = "*.p8",
-	desc = "Set filetype to pico8",
-})
-
-utils.on_event({ "BufReadPost" }, function()
-	vim.opt_local.filetype = "css"
-end, {
-	target = "*.tcss",
-	desc = "Set filetype to css",
 })
 
 utils.on_event({ "BufReadPost" }, function()

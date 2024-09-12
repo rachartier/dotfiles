@@ -105,6 +105,7 @@ export GIT_PAGER="delta --config ~/.config/delta/delta.config"
 
 export DOTNET_ROOT="$HOME/.dotnet"
 export PATH="$HOME/.dotnet:$PATH"
+export PATH="$HOME/.dotnet/tools:$PATH"
 
 export AUTOSWITCH_DEFAULT_PYTHON="/usr/bin/python3"
 export PYENV_ROOT="$HOME/.pyenv"
