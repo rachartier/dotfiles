@@ -1,103 +1,107 @@
 local utils = require("utils")
 
 return {
-	{
-		"github/copilot.vim",
-		event = "BufReadPost",
-		config = function()
-			-- vim.keymap.set("i", "<C-g>", function()
-			-- 	vim.fn["copilot#Accept"]("")
-			-- 	local ret = vim.fn["copilot#TextQueuedForInsertion"]()
-			--
-			-- 	-- vim.defer_fn(function()
-			-- 	-- 	vim.api.nvim_exec_autocmds("User", {
-			-- 	-- 		pattern = "CustomFormatCopilot",
-			-- 	-- 		modeline = false,
-			-- 	-- 		data = {
-			-- 	-- 			lines_count = lines_count,
-			-- 	-- 		},
-			-- 	-- 	})
-			-- 	-- end, 500)
-			-- 	return ret
-			-- end, { expr = true, silent = true, replace_keycodes = false })
-
-			-- vim.g.copilot_browser = "/mnt/c/Program Files/Mozilla Firefox/firefox.exe"
-			vim.keymap.set("i", "<C-g>", 'copilot#Accept("\\<CR>")', { expr = true, replace_keycodes = false })
-
-			---@diagnostic disable-next-line: inject-field
-			vim.g.copilot_no_tab_map = true
-
-			utils.on_event({ "BufEnter" }, function(event)
-				---@diagnostic disable-next-line: inject-field
-				vim.b.copilot_enabled = true
-
-				-- get buffer name
-				local bufname = vim.api.nvim_buf_get_name(event.buf)
-
-				-- get file name
-				local filename = vim.fn.fnamemodify(bufname, ":t")
-
-				if
-					string.match(filename, "^%.env.*")
-					or string.match(filename, "^%.secret.*")
-					or string.match(filename, "^%id_rsa.*")
-				then
-					vim.b.copilot_enabled = false
-				end
-			end, {
-				target = "*",
-				desc = "Enable/disable Copilot for sensitive files",
-			})
-
-			-- utils.on_event({ "BufEnter" }, function()
-			-- 	---@diagnostic disable-next-line: inject-field
-			-- 	vim.b.copilot_enabled = false
-			-- end, {
-			-- 	target = {
-			-- 		".env",
-			-- 		"*secret",
-			-- 		"*id_rsa",
-			-- 	},
-			-- 	desc = "Disable Copilot for sensitive files",
-			-- })
-		end,
-	},
+	-- ERROR: error in neovim 0.11.0, crash with nerdfonts
 	-- {
-	-- 	"zbirenbaum/copilot.lua",
+	-- 	"github/copilot.vim",
+	-- 	event = "BufReadPost",
 	-- 	config = function()
-	-- 		require("copilot").setup({
-	-- 			suggestion = {
-	-- 				enabled = true,
-	-- 				auto_trigger = true,
-	-- 				keymap = {
-	-- 					accept = "<C-g>",
-	-- 				},
-	-- 			},
-	-- 			panel = { enabled = true },
-	-- 			filetypes = {
-	-- 				sh = function()
-	-- 					local filename = vim.fs.basename(vim.api.nvim_buf_get_name(0))
-	-- 					if
-	-- 						string.match(filename, "^%.env.*")
-	-- 						or string.match(filename, "^%.secret.*")
-	-- 						or string.match(filename, "^%id_rsa.*")
-	-- 					then
-	-- 						return false
-	-- 					end
+	-- 		-- vim.keymap.set("i", "<C-g>", function()
+	-- 		-- 	vim.fn["copilot#Accept"]("")
+	-- 		-- 	local ret = vim.fn["copilot#TextQueuedForInsertion"]()
+	-- 		--
+	-- 		-- 	-- vim.defer_fn(function()
+	-- 		-- 	-- 	vim.api.nvim_exec_autocmds("User", {
+	-- 		-- 	-- 		pattern = "CustomFormatCopilot",
+	-- 		-- 	-- 		modeline = false,
+	-- 		-- 	-- 		data = {
+	-- 		-- 	-- 			lines_count = lines_count,
+	-- 		-- 	-- 		},
+	-- 		-- 	-- 	})
+	-- 		-- 	-- end, 500)
+	-- 		-- 	return ret
+	-- 		-- end, { expr = true, silent = true, replace_keycodes = false })
 	--
-	-- 					return true
-	-- 				end,
-	-- 				["*"] = true,
-	-- 			},
+	-- 		-- vim.g.copilot_browser = "/mnt/c/Program Files/Mozilla Firefox/firefox.exe"
+	-- 		vim.keymap.set("i", "<C-g>", 'copilot#Accept("\\<CR>")', { expr = true, replace_keycodes = false })
+	--
+	-- 		---@diagnostic disable-next-line: inject-field
+	-- 		vim.g.copilot_no_tab_map = true
+	--
+	-- 		utils.on_event({ "BufEnter" }, function(event)
+	-- 			---@diagnostic disable-next-line: inject-field
+	-- 			vim.b.copilot_enabled = true
+	--
+	-- 			-- get buffer name
+	-- 			local bufname = vim.api.nvim_buf_get_name(event.buf)
+	--
+	-- 			-- get file name
+	-- 			local filename = vim.fn.fnamemodify(bufname, ":t")
+	--
+	-- 			if
+	-- 				string.match(filename, "^%.env.*")
+	-- 				or string.match(filename, "^%.secret.*")
+	-- 				or string.match(filename, "^%id_rsa.*")
+	-- 			then
+	-- 				vim.b.copilot_enabled = false
+	-- 			end
+	-- 		end, {
+	-- 			target = "*",
+	-- 			desc = "Enable/disable Copilot for sensitive files",
 	-- 		})
+	--
+	-- 		-- utils.on_event({ "BufEnter" }, function()
+	-- 		-- 	---@diagnostic disable-next-line: inject-field
+	-- 		-- 	vim.b.copilot_enabled = false
+	-- 		-- end, {
+	-- 		-- 	target = {
+	-- 		-- 		".env",
+	-- 		-- 		"*secret",
+	-- 		-- 		"*id_rsa",
+	-- 		-- 	},
+	-- 		-- 	desc = "Disable Copilot for sensitive files",
+	-- 		-- })
 	-- 	end,
 	-- },
+	{
+		"zbirenbaum/copilot.lua",
+		config = function()
+			require("copilot").setup({
+				suggestion = {
+					enabled = true,
+					auto_trigger = true,
+					keymap = {
+						accept = "<C-g>",
+					},
+				},
+				panel = { enabled = true },
+				filetypes = {
+					sh = function()
+						local filename = vim.fs.basename(vim.api.nvim_buf_get_name(0))
+						if
+							string.match(filename, "^%.env.*")
+							or string.match(filename, "^%.secret.*")
+							or string.match(filename, "^%id_rsa.*")
+						then
+							return false
+						end
+
+						return true
+					end,
+					["copilot-chat"] = true,
+					["*"] = true,
+					["."] = true,
+					markdown = true,
+				},
+			})
+		end,
+	},
 	{
 		"CopilotC-Nvim/CopilotChat.nvim",
 		branch = "canary",
 		dependencies = {
-			-- "zbirenbaum/copilot.lua",
-			"github/copilot.vim",
+			"zbirenbaum/copilot.lua",
+			-- "github/copilot.vim",
 			"nvim-lua/plenary.nvim", -- for curl, log wrapper
 		},
 		keys = {

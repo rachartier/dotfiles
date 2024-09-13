@@ -143,7 +143,7 @@ vim.api.nvim_command("filetype plugin on")
 
 opt.termguicolors = true
 
-opt.swapfile = true
+opt.swapfile = false
 opt.autoread = true
 opt.backup = true
 opt.backupdir = os.getenv("HOME") .. "/.local/share/nvim/backup/"

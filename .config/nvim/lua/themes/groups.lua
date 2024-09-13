@@ -14,11 +14,11 @@ function M.get(colors)
 		-- Visual = { bg = colors.blue, fg = colors.crust },
 
 		NormalFloat = { bg = bg, fg = colors.text },
-		FloatBorder = { fg = colors.text },
+		FloatBorder = { fg = colors.subtext2 },
 		FloatTitle = { bg = colors.yellow, fg = colors.crust },
 		LineNr = { fg = colors.surface1 },
 		SignColumn = { fg = colors.surface1 },
-		Visual = { bg = colors.surface1 },
+		-- Visual = { bg = colors.surface1 },
 
 		CmpGhostText = { link = "Comment", default = true },
 		CmpItemAbbrMatch = { fg = colors.yellow, bold = true, underline = false },

@@ -56,6 +56,7 @@ return {
 	"nvim-lualine/lualine.nvim",
 	dependencies = {
 		"catppuccin/nvim",
+		"AndreM222/copilot-lualine",
 	},
 	event = "VeryLazy",
 	priority = 500,
@@ -163,39 +164,39 @@ return {
 					color = { fg = colors.green },
 					separator = { right = "" },
 				},
-				-- {
-				-- 	"copilot",
-				-- 	symbols = {
-				-- 		status = {
-				-- 			hl = {
-				-- 				enabled = colors.green,
-				-- 				sleep = colors.fg,
-				-- 				disabled = colors.red,
-				-- 				warning = colors.yellow,
-				-- 				unknown = colors.red,
-				-- 			},
-				-- 		},
-				-- 	},
-				-- 	show_colors = true,
-				-- 	show_loading = false,
-				-- 	padding = { left = 1, right = is_inside_docker and 1 or 2 },
-				-- 	separator = { right = "" },
-				-- },
 				{
-					function()
-						local ok, copilot_enabled = pcall(vim.api.nvim_buf_get_var, 0, "copilot_enabled")
-
-						if ok and copilot_enabled then
-							return icons.signs.others.copilot
-						end
-
-						return icons.signs.others.copilot_disabled
-					end,
-					-- cond = cond_disable_by_ft,
-					color = { fg = colors.fg },
+					"copilot",
+					symbols = {
+						status = {
+							hl = {
+								enabled = colors.green,
+								sleep = colors.fg,
+								disabled = colors.red,
+								warning = colors.yellow,
+								unknown = colors.red,
+							},
+						},
+					},
+					show_colors = true,
+					show_loading = false,
+					padding = { left = 1, right = is_inside_docker and 1 or 2 },
 					separator = { right = "" },
-					padding = { left = 1, right = 2 },
 				},
+				-- {
+				-- 	function()
+				-- 		local ok, copilot_enabled = pcall(vim.api.nvim_buf_get_var, 0, "copilot_enabled")
+				--
+				-- 		if ok and copilot_enabled then
+				-- 			return icons.signs.others.copilot
+				-- 		end
+				--
+				-- 		return icons.signs.others.copilot_disabled
+				-- 	end,
+				-- 	-- cond = cond_disable_by_ft,
+				-- 	color = { fg = colors.fg },
+				-- 	separator = { right = "" },
+				-- 	padding = { left = 1, right = 2 },
+				-- },
 				{
 					function()
 						if is_inside_docker then
