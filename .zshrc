@@ -103,8 +103,8 @@ function _init_tools() {
 }
 
 
+source $HOME/.profile
 zsh-defer source $HOME/.aliases
-zsh-defer source $HOME/.profile
 
 zsh-defer _set_theme
 zsh-defer _init_tools
