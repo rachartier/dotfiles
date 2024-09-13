@@ -58,13 +58,13 @@ $meson\
 $cmd_duration\
 $line_break\
 $docker_context\
-$container\
+${custom.inside_docker}\
 $character"""
 
 
 [custom.inside_docker]
 disabled = true
-command = """echo "󰡨 (${HOSTNAME:0:5})" """
+command = """echo "  (${HOSTNAME:0:5})" """
 when = """ test "$($HOME/.config/scripts/is_inside_docker.sh)" = "1" """
 style = "blue"
 
@@ -78,8 +78,10 @@ when = "true"
 # shell = ["bash", "--noprofile", "--norc"]
 # format = "[](fg:blue)[ $output ](fg:black bg:blue)[](fg:blue bg:black)"
 
-[container]
-symbol = "󰡨 "
+# [container]
+# symbol = " "
+# style = "blue"
+# format = '[$symbol \($name\)]($style) '
 
 [character]
 success_symbol = "[❯](purple)"
