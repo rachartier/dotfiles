@@ -1,6 +1,7 @@
 format = """
 $username\
 $hostname\
+${custom.directory}\
 $directory\
 $git_branch\
 $git_state\
@@ -66,14 +67,15 @@ command = """echo "󰡨 (${HOSTNAME:0:5})" """
 when = """ test "$($HOME/.config/scripts/is_inside_docker.sh)" = "1" """
 style = "blue"
 
-[custom.giturl]
-# disabled = true
+[custom.directory]
+disabled = true
 description = "Display symbol for remote Git server"
 command = """$HOME/.config/scripts/check-git-remote.sh"""
-when = 'git rev-parse --is-inside-work-tree 2> /dev/null'
-require_repo = true
-shell = ["bash", "--noprofile", "--norc"]
-format = "at $output "
+when = "true"
+# when = 'git rev-parse --is-inside-work-tree 2> /dev/null'
+# require_repo = true
+# shell = ["bash", "--noprofile", "--norc"]
+# format = "[](fg:blue)[ $output ](fg:black bg:blue)[](fg:blue bg:black)"
 
 [character]
 success_symbol = "[❯](purple)"
@@ -82,6 +84,8 @@ vimcmd_symbol = "[❮](green)"
 
 [directory]
 read_only = " 󰌾"
+# format = "[ $path]($style)[$read_only]($read_only_style)[](black) "
+# style = "bg:black fg:blue"
 style = "blue"
 
 [username]
