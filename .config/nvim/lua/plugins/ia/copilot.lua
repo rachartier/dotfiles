@@ -388,7 +388,8 @@ Useful PEPs for this section (not exhaustive):
 			"stevearc/dressing.nvim",
 			"nvim-lua/plenary.nvim",
 			"MunifTanjim/nui.nvim",
-			"github/copilot.vim",
+			-- "github/copilot.vim",
+			"zbirenbaum/copilot.lua",
 			"echasnovski/mini.icons",
 			-- {
 			-- 	"HakonHarnes/img-clip.nvim",
