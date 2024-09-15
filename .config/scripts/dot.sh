@@ -361,6 +361,11 @@ install_nvim() {
     # fi
 
     install_luarocks
+
+    # Update plugins
+    __echo_info "Updating plugins..."
+    nvim --headless "+Lazy! sync" "+qall"
+    __echo_success "Plugins updated."
 }
 
 install_eza() {
