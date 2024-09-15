@@ -62,6 +62,7 @@ ${custom.inside_docker}\
 $character"""
 
 
+
 [custom.inside_docker]
 disabled = false
 command = """echo "  (${HOSTNAME:0:5})" """
@@ -84,9 +85,9 @@ when = "true"
 # format = '[$symbol \($name\)]($style) '
 
 [character]
-success_symbol = "[❯](purple)"
-error_symbol = "[❯](red)"
-vimcmd_symbol = "[❮](green)"
+success_symbol = "[❯](bold purple)"
+error_symbol = "[❯](bold red)"
+vimcmd_symbol = "[❮](bold green)"
 
 [directory]
 read_only = " 󰌾"
