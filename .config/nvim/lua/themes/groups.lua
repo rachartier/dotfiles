@@ -18,7 +18,8 @@ function M.get(colors)
 		FloatTitle = { bg = colors.yellow, fg = colors.crust },
 		LineNr = { fg = colors.surface1 },
 		SignColumn = { fg = colors.surface1 },
-		-- Visual = { bg = colors.surface1 },
+		Visual = { bg = colors.surface1 },
+		Comment = { fg = colors.surface2, italic = true },
 
 		CmpGhostText = { link = "Comment", default = true },
 		CmpItemAbbrMatch = { fg = colors.yellow, bold = true, underline = false },
@@ -176,6 +177,16 @@ function M.get(colors)
 		RenderMarkdownH3Bg = { link = "RenderMarkdownH3" },
 		RenderMarkdownH4Bg = { link = "RenderMarkdownH4" },
 		RenderMarkdownH5Bg = { link = "RenderMarkdownH5" },
+
+		RenderMarkdownListYes = { fg = colors.green },
+		RenderMarkdownListNo = { fg = colors.red },
+		RenderMarkdownListFire = { fg = colors.red },
+		RenderMarkdownListIdea = { fg = colors.yellow },
+		RenderMarkdownListStar = { fg = colors.yellow },
+		RenderMarkdownListSkipped = { fg = colors.red },
+		RenderMarkdownListQuestion = { fg = colors.yellow },
+		RenderMarkdownListInfo = { fg = colors.cyan },
+		RenderMarkdownListImportant = { fg = colors.peach },
 
 		CopilotSuggestion = { fg = colors.subtext0, italic = false },
 		MiniCursorwordCurrent = { bg = colors.surface1 },

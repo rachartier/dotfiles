@@ -96,7 +96,25 @@ return {
 		})
 
 		local checkboxes = augend.constant.new({
-			elements = { "[ ]", "[-]", "[x]" },
+			elements = { "[ ]", "[-]", "[x]", "[/]" },
+			word = false,
+			cyclic = true,
+		})
+
+		local checkboxes_thumbs = augend.constant.new({
+			elements = { "[y]", "[n]" },
+			word = false,
+			cyclic = true,
+		})
+
+		local checkboxes_others = augend.constant.new({
+			elements = { "[f]", "[s]", "[*]", "[!]" },
+			word = false,
+			cyclic = true,
+		})
+
+		local checkboxes_attr = augend.constant.new({
+			elements = { "[?]", "[i]" },
 			word = false,
 			cyclic = true,
 		})
@@ -147,6 +165,9 @@ return {
 				markdown = {
 					augend.misc.alias.markdown_header,
 					checkboxes,
+					checkboxes_thumbs,
+					checkboxes_others,
+					checkboxes_attr,
 				},
 				json = {
 					augend.integer.alias.decimal, -- nonnegative and negative decimal number

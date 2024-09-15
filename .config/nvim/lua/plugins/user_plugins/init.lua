@@ -52,7 +52,7 @@ return {
 				backend_opts = {
 					delta = {
 						args = {
-							"--config=" .. os.getenv("HOME") .. "/.config/delta/delta.config",
+							"--config=" .. os.getenv("HOME") .. "/.config/git/gitconfig",
 						},
 					},
 				},
