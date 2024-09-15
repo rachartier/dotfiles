@@ -339,6 +339,8 @@ install_github_gh() {
 # }
 
 install_nvim() {
+    sudo apt autoremove neovim -y # remove neovim installed by apt
+
     if [ "$1" = "stable" ]; then
         __install_appimage "https://github.com/neovim/neovim/releases/download/stable/nvim.appimage" nvim
     else
@@ -364,7 +366,14 @@ install_nvim() {
 
     # Update plugins
     __echo_info "Updating plugins..."
-    nvim --headless "+Lazy! sync" "+qall"
+    "$HOME/.local/bin/nvim" --headless "+Lazy! sync" "+qall"
+
+    if [ "$?" -eq 127 ]; then
+        __echo_warning "nvim.appimage can't be runned. Exporting APPIMAGE_EXTRACT_AND_RUN=1 and running nvim."
+        export APPIMAGE_EXTRACT_AND_RUN=1
+        "$HOME/.local/bin/nvim" --headless "+Lazy! sync" "+qall"
+    fi
+
     __echo_success "Plugins updated."
 }
 
