@@ -407,6 +407,7 @@ install_essentials() {
 install_minimal() {
     __echo_info "Exporting DOTFILES_MINIMAL=1 to $HOME/.profile"
     echo "export DOTFILES_MINIMAL=1" >>"$HOME/.profile"
+    export DOTFILES_MINIMAL=1
 
     install_packages
     install_nvim
@@ -422,6 +423,7 @@ install_minimal() {
 install_docker() {
     __echo_info "Exporting DOTFILES_DOCKER=1 to $HOME/.profile"
     echo "export DOTFILES_DOCKER=1" >>"$HOME/.profile"
+    export DOTFILES_DOCKER=1
 
     install_minimal
 }
