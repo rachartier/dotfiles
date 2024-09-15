@@ -1,0 +1,6 @@
+[include]
+	path = /home/rachartier/.config/delta/themes/catppuccin.gitconfig
+
+[delta]
+	features = catppuccin-macchiato
+    syntax-theme = "Catppuccin-macchiato"

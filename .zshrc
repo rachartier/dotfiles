@@ -1,5 +1,7 @@
 # eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/pure.toml)"
 # eval "$(starship init zsh)"
+source "$HOME/.profile"
+source "$HOME/.dotfile_profile"
 
 [ ! -d $HOME/.antidote ] && git clone --depth=1 https://github.com/mattmc3/antidote.git $HOME/.antidote
 source $HOME/.antidote/antidote.zsh
@@ -13,14 +15,46 @@ fi
 
 eza_command='$HOME/.config/scripts/preview_fzf.sh $realpath'
 
-zstyle ':fzf-tab:*' popup-min-size 38 0
-zstyle ':fzf-tab:*' fzf-flags --preview=''
-zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
+# zstyle ':fzf-tab:*' popup-min-size 38 0
+# zstyle ':fzf-tab:*' fzf-flags --preview=''
+zstyle ':fzf-tab:*' fzf-flags --height=40%
+# zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 zstyle ":fzf-tab:complete:*:*" fzf-preview $eza_command
 
-zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm -w -w"
+zstyle ':fzf-tab:complete:(-command-|-parameter-|-brace-parameter-|export|unset|expand):*' \
+	fzf-preview 'echo ${(P)word}'
+
 zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-preview '[[ $group == "[process ID]" ]] && ps --pid=$word -o cmd --no-headers -w -w'
 zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-flags --preview-window=down:3:wrap
+
+zstyle ':fzf-tab:complete:git:*' fzf-flags --preview-window=down:3:wrap
+zstyle ':fzf-tab:complete:git-(add|diff|restore):*' fzf-preview \
+	'git diff $word'
+
+zstyle ':fzf-tab:complete:git-log:*' fzf-preview \
+	'git log --color=always $word'
+
+zstyle ':fzf-tab:complete:git-help:*' fzf-preview \
+	'git help $word | bat -plman --color=always'
+
+zstyle ':fzf-tab:complete:git-show:*' fzf-preview \
+	'case "$group" in
+	"commit tag") git show --color=always $word ;;
+	*) git show --color=always $word ;;
+	esac'
+zstyle ':fzf-tab:complete:git-checkout:*' fzf-preview \
+	'case "$group" in
+    "modified file") git diff $word ;;
+    "recent commit object name") git show --color=always $word ;;
+	*) git log --color=always $word ;;
+	esac'
+
+
+zstyle ':fzf-tab:complete:ls:*' fzf-preview \
+    'eza -l $word'
+
+
+zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm -w -w"
 
 zstyle ':completion:*:git-checkout:*'               sort false
 zstyle ':completion:*'                              completer _extensions _expand _complete _ignored _approximate
@@ -103,7 +137,6 @@ function _init_tools() {
 }
 
 
-source $HOME/.profile
 zsh-defer source $HOME/.aliases
 
 zsh-defer _set_theme

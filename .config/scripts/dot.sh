@@ -278,6 +278,7 @@ install_packages() {
     if [ -z "$DOTFILES_MINIMAL" ]; then
         __install_package_apt chafa
         __install_package_apt tty-clock
+        __install_package_apt grc
     fi
 
     # install nodejs...
@@ -394,6 +395,8 @@ install_essentials() {
 
     install_git_delta
     install_github_gh
+
+    git config --global include.path "~/.config/git/gitconfig"
 }
 
 install_minimal() {

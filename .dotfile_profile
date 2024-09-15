@@ -101,7 +101,7 @@ export ENHANCD_FILTER="fzf --preview 'eza -al --tree --level 1 --group-directori
 export ENHANCD_ENABLE_DOUBLE_DOT=false
 export ENHANCD_ENABLE_HOME=false
 
-export GIT_PAGER="delta --config ~/.config/delta/delta.config"
+# export GIT_PAGER="/bin/delta --config ~/.config/delta/delta.config"
 
 export DOTNET_ROOT="$HOME/.dotnet"
 export PATH="$HOME/.dotnet:$PATH"

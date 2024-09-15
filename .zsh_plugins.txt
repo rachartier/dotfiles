@@ -1,5 +1,6 @@
 darvid/zsh-poetry
 Aloxaf/fzf-tab
+Freed-Wu/fzf-tab-source
 
 ohmyzsh/ohmyzsh path:plugins/command-not-found
 MichaelAquilina/zsh-autoswitch-virtualenv
