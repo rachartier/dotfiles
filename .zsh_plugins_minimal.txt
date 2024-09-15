@@ -1,3 +1,6 @@
+Aloxaf/fzf-tab
+Freed-Wu/fzf-tab-source
+
 ohmyzsh/ohmyzsh path:plugins/command-not-found
 ohmyzsh/ohmyzsh path:lib/key-bindings.zsh
 
