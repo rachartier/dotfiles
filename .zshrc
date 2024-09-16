@@ -50,8 +50,11 @@ zstyle ':fzf-tab:complete:git-checkout:*' fzf-preview \
 	esac'
 
 
-zstyle ':fzf-tab:complete:ls:*' fzf-preview \
-    'eza -l $word'
+zsh-defer zstyle ':fzf-tab:complete:ls:*' fzf-preview \
+    'eza --tree --level 1 --group-directories-first --color=always --icons $word'
+
+zsh-defer zstyle ':fzf-tab:complete:cd:*' fzf-preview \
+    'eza --tree --level 1 --group-directories-first --color=always --icons $word'
 
 
 zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm -w -w"
