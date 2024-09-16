@@ -4,7 +4,7 @@ return {
 		"MeanderingProgrammer/markdown.nvim",
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
 		name = "render-markdown",
-		ft = { "markdown", "pandoc", "avante" },
+		ft = { "markdown", "pandoc", "Avante" },
 		cond = require("config").config_type ~= "minimal",
 		opts = {
 			bullet = {

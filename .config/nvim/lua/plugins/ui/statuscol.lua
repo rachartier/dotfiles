@@ -17,6 +17,8 @@ return {
 				"oil",
 				"Trouble",
 				"TelescopePrompt",
+				"Avante",
+				"AvanteInput",
 			},
 
 			segments = {

@@ -412,6 +412,7 @@ Useful PEPs for this section (not exhaustive):
 				support_paste_from_clipboard = true,
 			},
 			provider = "copilot",
+			auto_suggestions_provider = "copilot",
 			hints = { enabled = true },
 		},
 	},
