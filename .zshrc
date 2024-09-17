@@ -92,5 +92,4 @@ function cd() {
     cd $@
 }
 
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

@@ -118,7 +118,7 @@ return {
 					"progress",
 					separator = { right = "" },
 					color = { fg = colors.fg },
-					padding = { left = 1, right = 0 },
+					padding = { left = 2, right = 0 },
 				},
 				{
 					"location",
@@ -142,6 +142,30 @@ return {
 				},
 			},
 			lualine_c = {
+				{
+					function()
+						local msg = " No Active Lsp"
+						local text_clients = ""
+
+						local clients = vim.lsp.get_clients({ bufnr = 0 })
+						if next(clients) == nil then
+							return msg
+						end
+						for _, client in ipairs(clients) do
+							if client.name ~= "copilot" then
+								text_clients = text_clients .. client.name .. ", "
+							end
+						end
+						if text_clients ~= "" then
+							return text_clients:sub(1, -3)
+						end
+						return msg
+					end,
+					icon = "",
+					color = { fg = colors.overlay1 },
+					padding = { left = 3, right = 0 },
+					separator = { right = "", left = "" },
+				},
 				{
 					"diagnostics",
 					sources = { "nvim_lsp" },
@@ -217,29 +241,6 @@ return {
 				},
 			},
 			lualine_y = {
-				-- {
-				-- 	-- Lsp server name .
-				-- 	function()
-				-- 		local msg = "No Active Lsp"
-				-- 		local text_clients = ""
-				--
-				-- 		local clients = vim.lsp.get_clients({ bufnr = 0 })
-				-- 		if next(clients) == nil then
-				-- 			return msg
-				-- 		end
-				-- 		for _, client in ipairs(clients) do
-				-- 			if client.name ~= "copilot" then
-				-- 				text_clients = text_clients .. client.name .. ", "
-				-- 			end
-				-- 		end
-				-- 		if text_clients ~= "" then
-				-- 			return text_clients:sub(1, -3)
-				-- 		end
-				-- 		return msg
-				-- 	end,
-				-- 	icon = "󰅡",
-				-- 	color = { fg = colors.text },
-				-- },
 				{
 					"branch",
 					icon = icons.signs.git.branch,
@@ -265,7 +266,7 @@ return {
 			lualine_z = {
 				{
 					"filetype",
-					color = { bg = colors.flamingo, fg = colors.bg },
+					color = { bg = colors.mauve, fg = colors.bg },
 					-- cond = cond_disable_by_ft,
 					icon_only = true,
 					colored = false,
@@ -276,7 +277,7 @@ return {
 					"filename",
 
 					padding = { right = 1, left = 0 },
-					color = { bg = colors.flamingo, fg = colors.bg },
+					color = { bg = colors.mauve, fg = colors.bg },
 
 					symbols = {
 						modified = icons.signs.file.modified, -- Text to show when the file is modified.
