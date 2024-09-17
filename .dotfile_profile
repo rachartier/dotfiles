@@ -62,7 +62,6 @@ if [ -z "$DOTFILES_DOCKER" ]; then
     export FZF_TMUX=1
     export FZF_TMUX_OPTS='-p80%,60%'
 
-
     ZSH_TMUX_AUTOSTART=false
     ZSH_TMUX_CONFIG="$HOME/.config/tmux/tmux.conf"
 
