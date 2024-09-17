@@ -1,14 +1,14 @@
-darvid/zsh-poetry
-Aloxaf/fzf-tab
-Freed-Wu/fzf-tab-source
+darvid/zsh-poetry kind:defer
+Aloxaf/fzf-tab kind:defer
+Freed-Wu/fzf-tab-source kind:defer
 
-ohmyzsh/ohmyzsh path:plugins/command-not-found
-MichaelAquilina/zsh-autoswitch-virtualenv
-ohmyzsh/ohmyzsh path:plugins/tmux
+ohmyzsh/ohmyzsh path:plugins/command-not-found kind:defer
+MichaelAquilina/zsh-autoswitch-virtualenv kind:defer
+ohmyzsh/ohmyzsh path:plugins/tmux kind:defer
 
-ohmyzsh/ohmyzsh path:lib/key-bindings.zsh
+ohmyzsh/ohmyzsh path:lib/key-bindings.zsh kind:defer
 
 zsh-users/zsh-autosuggestions kind:defer
-zsh-users/zsh-syntax-highlighting
+zsh-users/zsh-syntax-highlighting kind:defer
 zsh-users/zsh-history-substring-search kind:defer
 

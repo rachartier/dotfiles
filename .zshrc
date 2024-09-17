@@ -3,6 +3,8 @@
 source "$HOME/.profile"
 source "$HOME/.dotfile_profile"
 
+eval "$(starship init zsh)"
+
 [ ! -d $HOME/.antidote ] && git clone --depth=1 https://github.com/mattmc3/antidote.git $HOME/.antidote
 source $HOME/.antidote/antidote.zsh
 
@@ -120,6 +122,7 @@ setopt share_history          # share command history data
 
 bindkey "^[[1;5A" history-substring-search-up
 bindkey "^[[1;5B" history-substring-search-down
+# bindkey '^[' send-break
 
 function _set_theme() {
     if ! [ -f "/tmp/tmux-theme.cache" ]; then
@@ -128,10 +131,10 @@ function _set_theme() {
 }
 
 function _init_tools() {
-    [ -f ~/.fzf.zsh ] && zsh-defer source ~/.fzf.zsh
+    [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
     if command -v pyenv &> /dev/null; then
-        zsh-defer eval "$(pyenv init -)"
+        eval "$(pyenv init -)"
     fi
 
     if command -v gh &> /dev/null; then
@@ -139,15 +142,10 @@ function _init_tools() {
     fi
 }
 
-
 zsh-defer source $HOME/.aliases
-
-zsh-defer _set_theme
-zsh-defer _init_tools
-
+zsh-defer  _init_tools
 zsh-defer eval "$(zoxide init zsh --cmd cd)"
 
-eval "$(starship init zsh)"
 
 precmd_functions=(zvm_init "${(@)precmd_functions:#zvm_init}")
 precmd_functions+=(set-long-prompt)
