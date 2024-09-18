@@ -20,7 +20,6 @@ return {
 				local client = vim.lsp.get_client_by_id(args.data.client_id)
 				local bufnr = args.buf
 
-				print("LSP Attach", client.name)
 				-- client.server_capabilities.semanticTokensProvider = nil
 				if client.name == "GitHub Copilot" or client.name == "copilot" or client.name == "ruff" then
 					return
