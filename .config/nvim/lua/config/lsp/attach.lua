@@ -112,6 +112,7 @@ function M.on_attach(client, bufnr)
             { "<leader>gi", require("omnisharp_extended").lsp_implementation, desc = "Omnisharp Go to implementation" },
         })
     end
+
 	-- stylua: ignore end
 end
 

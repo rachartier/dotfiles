@@ -20,8 +20,9 @@ return {
 				local client = vim.lsp.get_client_by_id(args.data.client_id)
 				local bufnr = args.buf
 
+				print("LSP Attach", client.name)
 				-- client.server_capabilities.semanticTokensProvider = nil
-				if client.name == "GitHub Copilot" or client.name == "ruff" then
+				if client.name == "GitHub Copilot" or client.name == "copilot" or client.name == "ruff" then
 					return
 				end
 
@@ -153,7 +154,11 @@ return {
 						for _, config in ipairs(server_settings) do
 							if config.mason and vim.tbl_contains(config.mason, server_name) then
 								settings = config.lsp_settings
-								ignore = config.lsp_ignore or false
+								if type(config.lsp_ignore) == "table" then
+									ignore = vim.tbl_contains(config.lsp_ignore, server_name)
+								else
+									ignore = config.lsp_ignore or false
+								end
 							end
 						end
 

@@ -1,9 +1,10 @@
 return {
 	{
 		languages = { "python" },
-		mason = { "basedpyright" },
+		mason = { "basedpyright", "ruff" },
 		dap = { "debugpy" },
-		formatter = { "ruff", "ruff_format", "ruff_fix", "typos" },
+		formatter = { "ruff_format", "ruff_fix", "typos" },
+		lsp_ignore = { "ruff" },
 		lsp_settings = {
 			root_dir = function(fname)
 				return require("lspconfig.util").root_pattern(unpack({
