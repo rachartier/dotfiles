@@ -59,8 +59,8 @@ if ! [ -f "/tmp/tmux-theme.cache" ]; then
 fi
 
 source $HOME/.aliases
-source $HOME/.zsh/transient_prompt.zsh
-source $HOME/.zsh/style.zsh
+zsh-defer source $HOME/.zsh/transient_prompt.zsh
+zsh-defer source $HOME/.zsh/style.zsh
 
 eval "$(starship init zsh)"
 
@@ -91,5 +91,6 @@ function cd() {
 
     cd $@
 }
+
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
