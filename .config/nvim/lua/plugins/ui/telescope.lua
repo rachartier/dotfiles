@@ -85,7 +85,7 @@ return {
 			multi_icon = "",
 			entry_prefix = "   ",
 			prompt_prefix = "   ",
-			selection_caret = "  ",
+			selection_caret = " ▋ ",
 			hl_result_eol = true,
 			results_title = "",
 			mappings = {

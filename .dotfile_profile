@@ -31,17 +31,18 @@ export FZF_DEFAULT_COMMAND="fd --type f"
 export FZF_DEFAULT_OPTS="
     --multi \
     --reverse \
-    --margin=0,1 \
+    --margin=0,0 \
     --preview-window=right:50% \
     --preview-window=rounded \
     --preview-window=cycle \
     --scrollbar '▌' \
     --marker '✚ ' \
-    --pointer ' ' \
+    --pointer '▋' \
     --prompt ' ' \
     --no-separator \
     --color gutter:-1 \
     --bind 'esc:abort' \
+    --info=inline \
     $theme \
 "
 

@@ -13,6 +13,10 @@ return {
 			outline_window = {
 				width = 40,
 				relative_width = false,
+				focus_on_open = false,
+			},
+			outline_items = {
+				items = {},
 			},
 			symbol_folding = {
 				autofold_depth = 1,
@@ -39,10 +43,13 @@ return {
 		}
 	end,
 	config = function(_, opts)
-		require("outline").setup(opts)
+		local outline = require("outline")
+		outline.setup(opts)
 
 		utils.on_event("FileType", function(event)
-			vim.cmd("topleft Outline!")
+			vim.schedule(function()
+				vim.cmd("topleft Outline!")
+			end)
 		end, {
 			target = { "markdown" },
 			desc = "Outline for markdown",

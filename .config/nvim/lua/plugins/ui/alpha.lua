@@ -90,6 +90,7 @@ return {
 			header = {
 				type = "terminal",
 				command = "tty-clock -s -c -b -C 4",
+				-- command = "clock-rs clock",
 				width = 60,
 				height = 11,
 				opts = {
@@ -258,36 +259,21 @@ return {
 			end
 		end, { desc = "Redraw alpha on resize" })
 
-		return dashboard
-	end,
-	config = function(_, dashboard)
-		-- close Lazy and re-open when the dashboard is ready
-		if vim.o.filetype == "lazy" then
-			vim.cmd.close()
-			vim.api.nvim_create_autocmd("User", {
-				once = true,
-				pattern = "AlphaReady",
-				callback = function()
-					require("lazy").show()
-				end,
-			})
-		end
-
-		if config.gif_alpha_enabled or config.tty_clock_alpha_enabled then
-			require("alpha.term")
-		end
-		local alpha = require("alpha")
-		local version = vim.version()
-
-		alpha.setup(dashboard.config)
-
 		vim.api.nvim_create_autocmd("User", {
 			pattern = "LazyVimStarted",
 			desc = "Add Alpha dashboard footer",
 			once = true,
 			callback = function()
+				local version = vim.version()
 				local stats = require("lazy").stats()
 				local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
+
+				dashboard.opts.layout = build_layout({
+					header_padding = header_padding,
+					header = header,
+					buttons = dashboard.section.buttons,
+					footer = dashboard.section.footer,
+				})
 
 				dashboard.section.footer.val = "Plugins "
 					.. stats.loaded
@@ -305,8 +291,31 @@ return {
 					.. " ("
 					.. version.build
 					.. ")"
+
 				pcall(vim.cmd.AlphaRedraw)
 			end,
 		})
+
+		return dashboard
+	end,
+	config = function(_, dashboard)
+		-- close Lazy and re-open when the dashboard is ready
+		if vim.o.filetype == "lazy" then
+			vim.cmd.close()
+			vim.api.nvim_create_autocmd("User", {
+				once = true,
+				pattern = "AlphaReady",
+				callback = function()
+					require("lazy").show()
+				end,
+			})
+		end
+
+		local alpha = require("alpha")
+		if config.gif_alpha_enabled or config.tty_clock_alpha_enabled then
+			require("alpha.term")
+		end
+
+		alpha.setup(dashboard.config)
 	end,
 }
