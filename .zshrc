@@ -68,7 +68,7 @@ eval "$(starship init zsh)"
 function ghcs() {
     if [ -z "$DOT_GITHUB_COPILOT_LOADED" ]; then
         eval "$(gh copilot alias -- zsh)"
-        export DOT_GITHUB_COPILOT_LOADED=1
+        DOT_GITHUB_COPILOT_LOADED=1
     fi
 
     ghcs $@
@@ -77,7 +77,7 @@ function ghcs() {
 function pyenv() {
     if [ -z "$DOT_PYENV_LOADED" ]; then
         eval "$(pyenv init -)"
-        export DOT_PYENV_LOADED=1
+        DOT_PYENV_LOADED=1
     fi
 
     pyenv $@
@@ -86,7 +86,7 @@ function pyenv() {
 function cd() {
     if [ -z "$DOT_ZOXIDE_LOADED" ]; then
         eval "$(zoxide init zsh --cmd cd)"
-        export DOT_ZOXIDE_LOADED=1
+        DOT_ZOXIDE_LOADED=1
     fi
 
     cd $@
