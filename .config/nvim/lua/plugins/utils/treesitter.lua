@@ -7,6 +7,16 @@ return {
 		"nvim-treesitter/playground",
 		"nvim-treesitter/nvim-treesitter-textobjects",
 	},
+	init = function(plugin)
+		-- PERF: add nvim-treesitter queries to the rtp and it's custom query predicates early
+		-- This is needed because a bunch of plugins no longer `require("nvim-treesitter")`, which
+		-- no longer trigger the **nvim-treesitter** module to be loaded in time.
+		-- Luckily, the only things that those plugins need are the custom queries, which we make available
+		-- during startup.
+		require("lazy.core.loader").add_to_rtp(plugin)
+		require("nvim-treesitter.query_predicates")
+	end,
+	cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
 	event = { "VeryLazy" },
 	opts = {
 		ignore_install = {},
@@ -17,6 +27,11 @@ return {
 		-- Automatically install missing parsers when entering buffer
 		-- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
 		auto_install = true,
+
+		-- required for windwp/nvim-ts-autotag to works.
+		autotag = {
+			enable = false,
+		},
 
 		highlight = {
 			-- `false` will disable the whole extension
@@ -118,7 +133,5 @@ return {
 
 		-- vim.api.nvim_set_hl(0, "@string.documentation.python", { link = "Comment" })
 		-- vim.api.nvim_set_hl(0, "@markdown_check_done", { link = "@text.todo.checked" })
-		vim.treesitter.language.register("lua", "pico8")
-		vim.treesitter.language.register("css", "tcss")
 	end,
 }

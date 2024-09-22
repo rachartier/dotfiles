@@ -5,11 +5,9 @@ return {
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"MunifTanjim/nui.nvim",
-
 		"antosha417/nvim-lsp-file-operations",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
-			"nvim-neo-tree/neo-tree.nvim",
 		},
 		opts = {},
 	},
@@ -32,11 +30,11 @@ return {
 				-- indent guides
 				with_markers = true,
 			},
-			icon = {
-				folder_closed = "󰉋",
-				folder_open = "󰝰",
-				folder_empty = "󰉖",
-			},
+			-- icon = {
+			-- 	folder_closed = "󰉋",
+			-- 	folder_open = "󰝰",
+			-- 	folder_empty = "󰉖",
+			-- },
 			modified = {
 				symbol = signs.file.modified,
 				highlight = "NeoTreeModified",
