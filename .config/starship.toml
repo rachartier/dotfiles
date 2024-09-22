@@ -99,7 +99,7 @@ style = "blue"
 disabled = true
 
 [docker_context]
-format = 'via [󰡨 $context](bold)'
+format = 'via [  $context](bold)'
 disabled = false
 
 [git_branch]

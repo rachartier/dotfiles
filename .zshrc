@@ -64,7 +64,6 @@ zsh-defer source $HOME/.zsh/style.zsh
 
 eval "$(starship init zsh)"
 
-
 function ghcs() {
     if [ -z "$DOT_GITHUB_COPILOT_LOADED" ]; then
         eval "$(gh copilot alias -- zsh)"
@@ -89,7 +88,7 @@ function cd() {
         DOT_ZOXIDE_LOADED=1
     fi
 
-    cd $@
+    __zoxide_z "$@"
 }
 
 
