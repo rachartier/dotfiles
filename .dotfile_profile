@@ -49,6 +49,7 @@ export FZF_DEFAULT_OPTS="
 export FZF_CTRL_T_COMMAND='fd --type f --hidden --strip-cwd-prefix --exclude .git'
 export FZF_ALT_C_COMMAND='fd --type d --hidden --strip-cwd-prefix --exclude .git'
 export FZF_ALT_C_OPTS='--preview "eza --tree --level 1 --group-directories-first --color=always --icons {}"'
+export FZF_CTRL_R_OPTS=''
 
 _fzf_compgen_path() {
   fd --hidden --exclude .git . "$1"

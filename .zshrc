@@ -1,7 +1,6 @@
 # eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/pure.toml)"
 # eval "$(starship init zsh)"
 source "$HOME/.profile"
-source "$HOME/.dotfile_profile"
 
 [ ! -d $HOME/.antidote ] && git clone --depth=1 https://github.com/mattmc3/antidote.git $HOME/.antidote
 source $HOME/.antidote/antidote.zsh
@@ -93,3 +92,5 @@ function cd() {
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+source "$HOME/.dotfile_profile"

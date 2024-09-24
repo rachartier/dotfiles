@@ -6,7 +6,7 @@ ohmyzsh/ohmyzsh path:plugins/command-not-found kind:defer
 MichaelAquilina/zsh-autoswitch-virtualenv kind:defer
 ohmyzsh/ohmyzsh path:plugins/tmux kind:defer
 
-ohmyzsh/ohmyzsh path:lib/key-bindings.zsh kind:defer
+ohmyzsh/ohmyzsh path:lib/key-bindings.zsh
 
 zsh-users/zsh-autosuggestions kind:defer
 zsh-users/zsh-syntax-highlighting kind:defer
