@@ -1,6 +1,5 @@
 # eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/pure.toml)"
 # eval "$(starship init zsh)"
-source "$HOME/.profile"
 
 [ ! -d $HOME/.antidote ] && git clone --depth=1 https://github.com/mattmc3/antidote.git $HOME/.antidote
 source $HOME/.antidote/antidote.zsh
@@ -53,13 +52,23 @@ bindkey "^[[1;5A" history-substring-search-up
 bindkey "^[[1;5B" history-substring-search-down
 # bindkey '^[' send-break
 
-if ! [ -f "/tmp/tmux-theme.cache" ]; then
-    echo "catppuccin_macchiato.conf" > /tmp/tmux-theme.cache
-fi
 
-source $HOME/.aliases
-zsh-defer source $HOME/.zsh/transient_prompt.zsh
-zsh-defer source $HOME/.zsh/style.zsh
+function _setup()  {
+    source $HOME/.aliases
+    source $HOME/.zsh/transient_prompt.zsh
+    source $HOME/.zsh/style.zsh
+
+    source "$HOME/.profile"
+    source "$HOME/.dotfile_profile"
+
+    if ! [ -f "/tmp/tmux-theme.cache" ]; then
+        echo "catppuccin_macchiato.conf" > /tmp/tmux-theme.cache
+    fi
+
+    [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+}
+
+zsh-defer _setup
 
 eval "$(starship init zsh)"
 
@@ -91,6 +100,3 @@ function cd() {
 }
 
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-source "$HOME/.dotfile_profile"
