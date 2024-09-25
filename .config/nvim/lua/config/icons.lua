@@ -117,6 +117,8 @@ M.kind_icons = {
 	Codeium = " ",
 	Version = " ",
 	Unknown = "  ",
+	Calculator = " ",
+	Emoji = "󰞅 ",
 }
 
 return M

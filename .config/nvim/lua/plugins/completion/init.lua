@@ -7,6 +7,7 @@ return {
 		"hrsh7th/cmp-nvim-lsp",
 		"hrsh7th/cmp-nvim-lua",
 		"hrsh7th/cmp-emoji",
+		"hrsh7th/cmp-calc",
 		"chrisgrieser/cmp-nerdfont",
 		"saadparwaiz1/cmp_luasnip",
 		"lukas-reineke/cmp-under-comparator",
@@ -59,7 +60,7 @@ return {
 			return entry1.completion_item.label < entry2.completion_item.label
 		end
 
-		local function format(_, item)
+		local function format(entry, item)
 			local MAX_LABEL_WIDTH = 50
 			local function whitespace(max, len)
 				return (" "):rep(max - len)
@@ -72,7 +73,15 @@ return {
 				item.abbr = content .. whitespace(MAX_LABEL_WIDTH, #content)
 			end
 
-			item.kind = " " .. (icons.kind_icons[item.kind] or icons.kind_icons.Unknown) .. "│"
+			local kind = (icons.kind_icons[item.kind] or icons.kind_icons.Unknown)
+
+			if entry.source.name == "calc" then
+				kind = icons.kind_icons.Calculator
+			elseif entry.source.name == "emojis" or entry.source.name == "nerdfont" then
+				kind = icons.kind_icons.Emoji
+			end
+
+			item.kind = " " .. kind .. "│"
 			item.menu = nil
 
 			return item
@@ -121,11 +130,10 @@ return {
 					},
 					entry_filter = filter_text,
 				},
-				-- { name = "codeium" },
 				{ name = "dotenv" },
 				{ name = "luasnip", entry_filter = filter_text, keyword_length = 2 },
-				-- { name = "latex_symbols" },
 				{ name = "path" },
+				{ name = "calc", kind = "  " },
 			},
 			mapping = cmp.mapping.preset.insert({
 				["<C-BS>"] = {
