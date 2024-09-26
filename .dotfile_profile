@@ -38,7 +38,7 @@ export FZF_DEFAULT_OPTS="
     --scrollbar '▌' \
     --marker '✚ ' \
     --pointer '▋' \
-    --prompt ' ' \
+    --prompt ' ▍' \
     --no-separator \
     --color gutter:-1 \
     --bind 'esc:abort' \
