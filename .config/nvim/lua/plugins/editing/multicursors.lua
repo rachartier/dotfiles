@@ -50,21 +50,6 @@ return {
 		},
 		{
 			mode = { "n", "v" },
-			"<esc>",
-			function()
-				local mc = require("multicursor-nvim")
-
-				if not mc.cursorsEnabled() then
-					mc.enableCursors()
-				elseif mc.hasCursors() then
-					mc.clearCursors()
-				else
-					-- Default <esc> handler.
-				end
-			end,
-		},
-		{
-			mode = { "n", "v" },
 			"<leader>ma",
 			"<cmd>lua require('multicursor-nvim').alignCurosrs<CR>",
 		},
