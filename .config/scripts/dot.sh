@@ -440,13 +440,25 @@ install_docker() {
 }
 
 config_copilot_chat_cli() {
+    __echo_info "Configuring copilot-chat-cli..."
+
     cd "$HOME/.config/scripts/copilot-chat-cli" || return 1
-    if [ -d ".venv" ]; then
-        source .venv/bin/activate
-    else
+
+    if [ -f "$HOME/.local/bin/copilot-chat-cli" ]; then
+        __echo_info "Removing old copilot-chat-cli symlink."
+        rm "$HOME/.local/bin/copilot-chat-cli"
+    fi
+
+    ln -s "$HOME/.config/scripts/copilot-chat-cli/copilot-chat-cli.py" "$HOME/.local/bin/copilot-chat-cli" &&
+        __echo_success "copilot-chat-cli symlink created." ||
+        __echo_failure "copilot-chat-cli symlink not created."
+
+    if [ ! -d ".venv" ]; then
+        __echo_info "Creating virtual environment..."
         python3 -m venv .venv
         source .venv/bin/activate
         pip install -r requirements.txt
+        deactivate
     fi
 }
 
