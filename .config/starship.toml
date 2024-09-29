@@ -303,11 +303,11 @@ format = '[via](white dimmed) [$symbol($version)]($style)'
 [python]
 symbol = " "
 style = "yellow"
-format = '[via](white dimmed) [$symbol($version)]($style)'
+format = '[via](white dimmed) [${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
 
 [rlang]
 symbol = "󰟔 "
-format = '[via](white dimmed) [$symbol($version)]($style)'
+format = '[via](white dimmed) [$virtualenv $symbol($version)]($style)'
 
 [ruby]
 symbol = " "
