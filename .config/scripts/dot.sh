@@ -411,6 +411,8 @@ install_essentials() {
     install_github_gh
 
     git config --global include.path "~/.config/git/gitconfig"
+
+    config_copilot_chat_cli
 }
 
 install_minimal() {
