@@ -54,6 +54,10 @@ class CopilotTokenManager:
         self.machine_id = self._generate_machine_id()
         self.session_id = ""
 
+        if os.path.exists("/tmp/copilot_token.json"):
+            with open("/tmp/copilot_token.json", "r") as f:
+                self.github_token = CopilotToken(**json.load(f))
+
     def _get_oauth_token(self) -> str:
         config_dir = os.getenv("XDG_CONFIG_HOME", os.path.expanduser("~/.config"))
         hosts_file = os.path.join(config_dir, "github-copilot", "hosts.json")
@@ -98,7 +102,7 @@ class CopilotTokenManager:
                 "Accept": "application/json",
                 **AUTH_HEADERS,
             },
-            timeout=10,
+            timeout=10000,
         )
         response.raise_for_status()
 
@@ -111,6 +115,7 @@ class CopilotTokenManager:
         if not self.github_token or self.github_token.expires_at < int(
             datetime.now().timestamp()
         ):
+            print("Refreshing Copilot token...")
             self.refresh_token()
 
         if not self.github_token:

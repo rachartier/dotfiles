@@ -453,6 +453,8 @@ config_copilot_chat_cli() {
         __echo_success "copilot-chat-cli symlink created." ||
         __echo_failure "copilot-chat-cli symlink not created."
 
+    chmod +x "$HOME/.local/bin/copilot-chat-cli"
+
     if [ ! -d ".venv" ]; then
         __echo_info "Creating virtual environment..."
         python3 -m venv .venv
