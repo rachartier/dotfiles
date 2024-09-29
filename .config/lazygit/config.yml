@@ -2,3 +2,17 @@ git:
   paging:
     colorArg: always
     pager: delta --paging=never
+
+customCommands:
+  - key: "<c-a>" # ctrl + a
+    description: "pick AI commit"
+    command: 'git commit -m "{{.Form.Msg}}"'
+    context: "files"
+    prompts:
+      - type: "menuFromCommand"
+        title: "Copilot AI Commitizen"
+        key: "Msg"
+        command: "copilot-chat-cli --action 'lazygit-commitizen'"
+        filter: '^(?P<number>\d+):\s(?P<message>.+)$'
+        valueFormat: "{{ .message }}"
+        labelFormat: "{{ .number }}: {{ .message | green }}"

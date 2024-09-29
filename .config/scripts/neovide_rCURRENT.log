@@ -1,6 +1,0 @@
-TRACE [neovide] Neovide version: 0.12.1
-DEBUG [neovide::bridge::command] Starting neovim with: Command { std: "C:\\Program Files\\Neovim\\bin\\nvim.exe" "--embed" "-p", kill_on_drop: false }
-ERROR [neovide::error_handling] Neovide just crashed :(
-This is the error that caused the crash. In case you don't know what to do with this, please feel free to report this on https://github.com/neovide/neovide/issues!
-
-Neovide requires nvim version 0.9.2 or higher. Download the latest version here https://github.com/neovim/neovim/wiki/Installing-Neovim

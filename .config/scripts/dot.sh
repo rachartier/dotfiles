@@ -437,6 +437,17 @@ install_docker() {
     install_minimal
 }
 
+config_copilot_chat_cli() {
+    cd "$HOME/.config/scripts/copilot-chat-cli" || return 1
+    if [ -d ".venv" ]; then
+        source .venv/bin/activate
+    else
+        python3 -m venv .venv
+        source .venv/bin/activate
+        pip install -r requirements.txt
+    fi
+}
+
 do_reinstall_all() {
     if [ -n "$DOTFILES_MINIMAL" ]; then
         install_minimal
@@ -467,6 +478,7 @@ do_reinstall() {
     "tmux") install_tmux ;;
     "viu") install_viu ;;
     "gh") install_github_gh ;;
+    "copilot-chat-cli") config_copilot_chat_cli ;;
     "fonts") install_fonts_for_windows ;;
     *) __echo_failure "'$1' unknown." ;;
     esac
