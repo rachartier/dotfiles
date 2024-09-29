@@ -54,10 +54,6 @@ bindkey "^[[1;5B" history-substring-search-down
 
 
 function _setup()  {
-    source $HOME/.aliases
-    source $HOME/.zsh/transient_prompt.zsh
-    source $HOME/.zsh/style.zsh
-
     source "$HOME/.profile"
     source "$HOME/.dotfile_profile"
 
@@ -65,10 +61,13 @@ function _setup()  {
         echo "catppuccin_macchiato.conf" > /tmp/tmux-theme.cache
     fi
 
-    [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 }
 
 zsh-defer _setup
+
+source $HOME/.aliases
+source $HOME/.zsh/transient_prompt.zsh
+source $HOME/.zsh/style.zsh
 
 eval "$(starship init zsh)"
 
@@ -99,4 +98,4 @@ function cd() {
     __zoxide_z "$@"
 }
 
-
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
