@@ -64,7 +64,8 @@ def main() -> None:
                     text=True,
                     capture_output=True,
                 )
-                prompt += "```diff\n" + process_result.stdout + "\n```"
+                prompt += action_obj.callback(process_result.stdout)
+
         except subprocess.CalledProcessError as e:
             print(f"An error occurred: {e}")
             print(f"Command: {' '.join(action_obj.command)}")

@@ -1,3 +1,5 @@
+from typing import Callable
+
 from pydantic import BaseModel
 
 from prompt import DEFAULT_SYSTEM_PROMPT
@@ -9,6 +11,7 @@ class Action(BaseModel):
     system_prompt: str
     model: str
     command: list[str]
+    callback: Callable[[str], str] = lambda x: x
 
 
 class ActionManager:
@@ -25,7 +28,7 @@ Do NOT include ``` at the beginning and end of the commit message.
 Do NOT include a commit hash or any other metadata in the commit message.
 Prefix the commit message with the number of the commit message. Like this:
 Use this diff to generate a commit message: ",
-                    """,
+""",
                 system_prompt=DEFAULT_SYSTEM_PROMPT,
                 model="gpt-4o",
                 command=[
@@ -36,6 +39,7 @@ Use this diff to generate a commit message: ",
                     "--no-color",
                     "--no-ext-diff",
                 ],
+                callback=lambda response: f"```diff\n{response}\n```",
             ),
             "lazygit-commitizen": Action(
                 description="Generate a commit message with Commitizen",
@@ -61,6 +65,7 @@ Guidelines:
 8. Ensure each message starts with its index (1:, 2:, 3:, etc.).
 9. The short description should be in the imperative present tense (e.g., "add" instead of "added").
 10. Use the most logical types and scopes for each change. Do not force a type or scope if it doesn't fit.
+11. If there is no diff, provide this message "No changes to generate commit messages from."
 
 Expected output example:
 1: feat(auth): add Google login
@@ -68,7 +73,7 @@ Expected output example:
 3: docs(readme): update installation instructions
 
 Use the following diff to generate the commit messages:
-                    """,
+""",
                 system_prompt=DEFAULT_SYSTEM_PROMPT,
                 model="gpt-4o",
                 command=[
@@ -80,6 +85,7 @@ Use the following diff to generate the commit messages:
                     "--no-ext-diff",
                     "--staged",
                 ],
+                callback=lambda response: f"```diff\n{response}\n```",
             ),
         }
 
