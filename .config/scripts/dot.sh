@@ -449,7 +449,7 @@ config_copilot_chat_cli() {
         rm "$HOME/.local/bin/copilot-chat-cli"
     fi
 
-    ln -s "$HOME/.config/scripts/copilot-chat-cli/copilot-chat-cli.py" "$HOME/.local/bin/copilot-chat-cli" &&
+    ln -s "$HOME/.config/scripts/copilot-chat-cli.sh" "$HOME/.local/bin/copilot-chat-cli" &&
         __echo_success "copilot-chat-cli symlink created." ||
         __echo_failure "copilot-chat-cli symlink not created."
 
