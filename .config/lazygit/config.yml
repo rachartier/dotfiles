@@ -5,9 +5,10 @@ git:
 
 customCommands:
   - key: "<c-a>" # ctrl + a
-    description: "pick AI commit"
+    description: "Generate commit message"
     command: 'git commit -m "{{.Form.Msg}}"'
     context: "files"
+    loadingText: "Generating commit message..."
     prompts:
       - type: "menuFromCommand"
         title: "Copilot AI Commitizen"
