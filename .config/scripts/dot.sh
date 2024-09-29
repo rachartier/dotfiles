@@ -260,6 +260,12 @@ install_bat() {
 }
 
 install_packages() {
+    # install terminfo for wezterm
+    tempfile=$(mktemp) &&
+        curl -o $tempfile https://raw.githubusercontent.com/wez/wezterm/main/termwiz/data/wezterm.terminfo &&
+        tic -x -o ~/.terminfo $tempfile &&
+        rm $tempfile
+
     __install_package_apt pkg-config
     __install_package_apt build-essential
 

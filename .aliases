@@ -1,4 +1,7 @@
 alias config='/usr/bin/git --git-dir=/home/rachartier/.cfg/ --work-tree=/home/rachartier'
+
+alias lazygit='TERM=xterm-256color lazygit' # fix for lazygit with bad colors in tmux
+
 alias f="fzf"
 alias l="eza --tree --level 1 --group-directories-first --color=always --icons"
 alias ls='eza --group-directories-first --color=always --icons=auto'
