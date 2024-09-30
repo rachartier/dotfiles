@@ -6,7 +6,7 @@ git:
 customCommands:
   - key: "<c-a>" # ctrl + a
     description: "Generate commit message"
-    command: 'git commit -m "{{.Form.Msg}}"'
+    command: "git commit -m '{{.Form.Msg}}'"
     context: "files"
     loadingText: "Generating commit message..."
     subprocess: true

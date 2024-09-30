@@ -66,6 +66,7 @@ Guidelines:
 9. The short description should be in the imperative present tense (e.g., "add" instead of "added").
 10. Use the most logical types and scopes for each change. Do not force a type or scope if it doesn't fit.
 11. If there is no diff, provide this message "No changes to generate commit messages from."
+12. Summarize the changes made in the provided diff.
 
 Expected output example:
 1: feat(auth): add Google login
