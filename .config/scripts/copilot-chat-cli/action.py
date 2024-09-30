@@ -1,8 +1,8 @@
-from typing import Callable
+from typing import Any, Callable
 
 from pydantic import BaseModel
 
-from prompt import DEFAULT_SYSTEM_PROMPT
+from constants import DEFAULT_SYSTEM_PROMPT
 
 
 class Action(BaseModel):
@@ -11,7 +11,7 @@ class Action(BaseModel):
     system_prompt: str
     model: str
     command: list[str]
-    callback: Callable[[str], str] = lambda x: x
+    callback: Callable[[list[Any]], str] = lambda x: str(x[0])
 
 
 class ActionManager:
@@ -44,7 +44,7 @@ Use this diff to generate a commit message: ",
             "lazygit-commitizen": Action(
                 description="Generate a commit message with Commitizen",
                 prompt="""
-Generate an appropriate number (maximum 10) of professional Git commit messages using the Conventional Commits convention. Each message should follow the format:
+Generate an appropriate number (maximum 10) of professional Git commit messages using the Conventional Commits style. Each message should follow the format:
 
 <index>: <type>(<scope>): <short description>
 
@@ -72,7 +72,6 @@ Expected output example:
 2: fix(api): correct pagination bug
 3: docs(readme): update installation instructions
 
-Use the following diff to generate the commit messages:
 """,
                 system_prompt=DEFAULT_SYSTEM_PROMPT,
                 model="gpt-4o",
@@ -85,7 +84,12 @@ Use the following diff to generate the commit messages:
                     "--no-ext-diff",
                     "--staged",
                 ],
-                callback=lambda response: f"```diff\n{response}\n```",
+                callback=lambda args: f"""
+You need to generate the commit messages based on the following type: {args[1][0]}, and the following scope: {args[1][1]}.
+    {"At the end of the commit message, add all the following resolved issues: '" + args[1][2] if args[1][2] or 0 else "" + "'"}
+And use the following diff to generate the commit messages:
+```diff\n{args[0]}\n```
+""",
             ),
         }
 

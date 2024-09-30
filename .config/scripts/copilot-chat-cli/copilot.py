@@ -115,7 +115,6 @@ class CopilotTokenManager:
         if not self.github_token or self.github_token.expires_at < int(
             datetime.now().timestamp()
         ):
-            print("Refreshing Copilot token...")
             self.refresh_token()
 
         if not self.github_token:

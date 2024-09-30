@@ -2,8 +2,8 @@ import argparse
 import subprocess
 
 from action import ActionManager
+from constants import DEFAULT_SYSTEM_PROMPT
 from copilot import chat_with_copilot
-from prompt import DEFAULT_SYSTEM_PROMPT
 
 action_manager = ActionManager()
 
@@ -39,6 +39,23 @@ def main() -> None:
         help="Action to perform",
         choices=action_manager.get_actions_list(),
     )
+    _ = parser.add_argument(
+        "--type",
+        type=str,
+        help="Type of change",
+        default="feat",
+    )
+    _ = parser.add_argument(
+        "--scope",
+        type=str,
+        help="Scope of the change",
+    )
+    _ = parser.add_argument(
+        "--resolved",
+        type=str,
+        help="Resolved issues",
+        default="",
+    )
 
     args = parser.parse_args()
 
@@ -64,7 +81,16 @@ def main() -> None:
                     text=True,
                     capture_output=True,
                 )
-                prompt += action_obj.callback(process_result.stdout)
+                prompt += action_obj.callback(
+                    [
+                        process_result.stdout,
+                        [
+                            args.type,
+                            args.scope,
+                            args.resolved,
+                        ],
+                    ]
+                )
 
         except subprocess.CalledProcessError as e:
             print(f"An error occurred: {e}")

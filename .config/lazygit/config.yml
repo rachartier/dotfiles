@@ -9,11 +9,50 @@ customCommands:
     command: 'git commit -m "{{.Form.Msg}}"'
     context: "files"
     loadingText: "Generating commit message..."
+    subprocess: true
+    showOutput: true
     prompts:
+      - type: 'menu'
+        title: 'Select the type of change you are committing:'
+        key: 'Type'
+        options:
+          - name: 'feat'
+            description: 'A new feature'
+            value: 'feat'
+          - name: 'fix'
+            description: 'A bug fix'
+            value: 'fix'
+          - name: 'docs'
+            description: 'Documentation only changes'
+            value: 'docs'
+          - name: 'style'
+            description: 'Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)'
+            value: 'style'
+          - name: 'refactor'
+            description: 'A code change that neither fixes a bug nor adds a feature'
+            value: 'refactor'
+          - name: 'perf'
+            description: 'A code change that improves performance'
+            value: 'perf'
+          - name: 'test'
+            description: 'Adding missing tests or correcting existing tests'
+            value: 'test'
+          - name: 'chore'
+            description: 'Changes to the build process or auxiliary tools and libraries such as documentation generation'
+            value: 'chore'
+          - name: 'revert'
+            description: 'Reverts a previous commit'
+            value: 'revert'
+      - type: 'input'
+        title: 'What is the scope of this change (e.g. component or file name):'
+        key: 'Scope'
+      - type: 'input'
+        title: 'What issue does this commit resolve (e.g. "fixes #123", "closes #123")? (Optional):'
+        key: 'Issue'
       - type: "menuFromCommand"
         title: "Copilot AI Commitizen"
         key: "Msg"
-        command: "copilot-chat-cli --action 'lazygit-commitizen'"
+        command: "copilot-chat-cli --action 'lazygit-commitizen' --type '{{.Form.Type}}' --scope '{{.Form.Scope}}' --resolved '{{.Form.Issue}}'"
         filter: '^(?P<number>\d+):\s(?P<message>.+)$'
         valueFormat: "{{ .message }}"
         labelFormat: "{{ .number }}: {{ .message | green }}"
