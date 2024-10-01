@@ -15,7 +15,7 @@ customCommands:
         key: "Msg"
         command: copilot-chat-cli --action "lazygit-commitizen"
         filter: '^(?P<number>\d+):\s(?P<type>\w+)(?:\((?P<scope>[^)]+)\))?:\s(?P<message>.+)$'
-        valueFormat: "{{ .message }}"
+        valueFormat: "{{ .type }}{{ if .scope }}({{ .scope }}){{ end }}: {{ .message }}"
         labelFormat: "{{ .type | red }}{{ if .scope }}({{ .scope }}){{ end }}: {{ .message | green }}"
       - type: "menu"
         key: "Confirm"
