@@ -39,23 +39,6 @@ def main() -> None:
         help="Action to perform",
         choices=action_manager.get_actions_list(),
     )
-    _ = parser.add_argument(
-        "--type",
-        type=str,
-        help="Type of change",
-        default="feat",
-    )
-    _ = parser.add_argument(
-        "--scope",
-        type=str,
-        help="Scope of the change",
-    )
-    _ = parser.add_argument(
-        "--resolved",
-        type=str,
-        help="Resolved issues",
-        default="",
-    )
 
     args = parser.parse_args()
 

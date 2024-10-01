@@ -1,7 +1,5 @@
 from pydantic import BaseModel
 
-from constants import DEFAULT_SYSTEM_PROMPT
-
 
 class Action(BaseModel):
     description: str
@@ -98,7 +96,7 @@ Generate a maximum of 10 commit messages following the format above.
                         "--pretty=format:'%h %s'",
                     ],
                 },
-                system_prompt=DEFAULT_SYSTEM_PROMPT,
+                system_prompt="",
                 model="gpt-4o",
             ),
         }
