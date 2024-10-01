@@ -14,10 +14,10 @@ customCommands:
       - type: "menuFromCommand"
         title: "Copilot AI Commitizen"
         key: "Msg"
-        command: copilot-chat-cli --action 'lazygit-commitizen'
+        command: copilot-chat-cli --action "lazygit-commitizen"
         filter: '^(?P<number>\d+):\s(?P<message>.+)$'
         valueFormat: "{{ .message }}"
-        labelFormat: "{{ .message | green }}"
+        labelFormat: "{{ .number }}: {{ .message | green }}"
 
 gui:
   theme:
