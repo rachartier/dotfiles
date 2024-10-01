@@ -128,17 +128,20 @@ return {
 							table.insert(to_install_dap, tool)
 						end
 					end
-					if server_config.mason then
-						for _, tool in ipairs(server_config.mason) do
-							table.insert(to_install_lsp, tool)
-						end
-					end
 				end
 
 				require("mason-nvim-dap").setup({
 					ensure_installed = to_install_dap,
 					automatic_installation = true,
 				})
+			end
+
+			for _, server_config in ipairs(server_settings) do
+				if server_config.mason then
+					for _, tool in ipairs(server_config.mason) do
+						table.insert(to_install_lsp, tool)
+					end
+				end
 			end
 
 			local capabilities = require("config.lsp.attach").make_capabilities()
