@@ -6,7 +6,6 @@ git:
 customCommands:
   - key: "<c-a>" # ctrl + a
     description: "Generate commit message"
-    command: "git commit -m '{{.Form.Msg}}'"
     context: "files"
     loadingText: "Generating commit message..."
     subprocess: true
@@ -18,6 +17,22 @@ customCommands:
         filter: '^(?P<number>\d+):\s(?P<message>.+)$'
         valueFormat: "{{ .message }}"
         labelFormat: "{{ .number }}: {{ .message | green }}"
+      - type: "menu"
+        key: "Confirm"
+        title: "Confirm/Edit commit message"
+        options:
+          - name: "Commit"
+            value: "commit"
+          - name: "Edit"
+            value: "edit"
+    command: >
+      {{- if eq .Form.Confirm "commit" -}}
+        git commit -m '{{.Form.Msg}}'
+      {{- else if eq .Form.Confirm "edit" -}}
+        git commit -e -m '{{.Form.Msg}}'
+      {{- else -}}
+        echo "Commit cancelled" && exit 0
+      {{- end -}}
 
 gui:
   theme:
