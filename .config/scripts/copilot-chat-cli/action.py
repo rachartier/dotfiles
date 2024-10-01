@@ -75,6 +75,7 @@ Consider future maintainers reading the git history
 Remember: It's better to be insightful and occasionally wrong than consistently obvious. Focus on generating your absolute best suggestion, even if others might be less accurate.
 
 Generate a maximum of 10 commit messages following the format above.
+Focus on quality over quantity.
 """,
                 commands={
                     "diff": [
