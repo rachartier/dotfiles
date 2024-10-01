@@ -70,32 +70,24 @@ def main() -> None:
         prompt = action_obj.prompt
         system_prompt = action_obj.system_prompt
         model = model or action_obj.model
-        command = action_obj.command
+        commands = action_obj.commands
 
-        try:
-            if command:
-                command = [part.replace("$path", args.path) for part in command]
-                process_result = subprocess.run(
-                    command,
-                    check=True,
-                    text=True,
-                    capture_output=True,
-                )
-                prompt += action_obj.callback(
-                    [
-                        process_result.stdout,
-                        [
-                            args.type,
-                            args.scope,
-                            args.resolved,
-                        ],
-                    ]
-                )
+        if commands:
+            for key, command in commands.items():
+                try:
+                    command = [c.replace("$path", args.path) for c in command]
+                    command_result = subprocess.run(
+                        command,
+                        check=True,
+                        text=True,
+                        capture_output=True,
+                    )
 
-        except subprocess.CalledProcessError as e:
-            print(f"An error occurred: {e}")
-            print(f"Command: {' '.join(action_obj.command)}")
-            return
+                    prompt = prompt.replace(f"${key}", command_result.stdout)
+                except subprocess.CalledProcessError as e:
+                    print(f"An error occurred: {e}")
+                    print(f"Command: {' '.join(command)}")
+                    return
 
     try:
         response = chat_with_copilot(prompt, model, system_prompt)
