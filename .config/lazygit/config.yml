@@ -9,8 +9,6 @@ customCommands:
     command: "git commit -m '{{.Form.Msg}}'"
     context: "files"
     loadingText: "Generating commit message..."
-    subprocess: true
-    showOutput: true
     prompts:
       - type: 'menu'
         title: 'Select the type of change you are committing:'
