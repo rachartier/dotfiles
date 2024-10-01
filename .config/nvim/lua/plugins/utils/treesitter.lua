@@ -131,6 +131,8 @@ return {
 	config = function(_, opts)
 		require("nvim-treesitter.configs").setup(opts)
 
+		vim.treesitter.language.register("bash", "zsh")
+
 		-- vim.api.nvim_set_hl(0, "@string.documentation.python", { link = "Comment" })
 		-- vim.api.nvim_set_hl(0, "@markdown_check_done", { link = "@text.todo.checked" })
 	end,
