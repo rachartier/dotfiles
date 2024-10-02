@@ -1,155 +1,228 @@
+"""
+GitHub Copilot Client
+
+A professional Python implementation for interacting with GitHub Copilot's API.
+This module provides functionality to authenticate and communicate with the Copilot service.
+"""
+
 import json
 import os
-import random
+import uuid
 from dataclasses import dataclass
-from datetime import datetime
+from datetime import UTC, datetime
+from pathlib import Path
 from typing import TypedDict
 
 import requests
-
-API_ENDPOINT = "https://api.github.com/copilot_internal/v2/token"
-CHAT_ENDPOINT = "https://api.githubcopilot.com/chat/completions"
-
-AUTH_HEADERS = {
-    "editor-plugin-version": "copilotchatcli/1.0.0",
-    "user-agent": "copilotchatcli/1.0.0",
-    "editor-version": "vscode/1.63.0",
-}
+from requests.exceptions import RequestException
 
 
-@dataclass
+# API Constants
+class APIEndpoints:
+    TOKEN = "https://api.github.com/copilot_internal/v2/token"
+    CHAT = "https://api.githubcopilot.com/chat/completions"
+
+
+class Headers:
+    AUTH = {
+        "editor-plugin-version": "copilotchatcli/1.0.0",
+        "user-agent": "copilotchatcli/1.0.0",
+        "editor-version": "vscode/1.83.0",
+    }
+
+
+# Type Definitions
+@dataclass(frozen=True)
 class CopilotToken:
+    """Represents a GitHub Copilot authentication token and its associated metadata."""
+
+    token: str
+    expires_at: int
+    refresh_in: int
+    endpoints: dict[str, str]
+    tracking_id: str
+    sku: str
+
+    # Feature flags
     annotations_enabled: bool
     chat_enabled: bool
     chat_jetbrains_enabled: bool
     code_quote_enabled: bool
     codesearch: bool
     copilotignore_enabled: bool
-    endpoints: dict[str, str]
-    expires_at: int
     individual: bool
     nes_enabled: bool
     prompt_8k: bool
-    public_suggestions: str
-    refresh_in: int
-    sku: str
     snippy_load_test_enabled: bool
-    telemetry: str
-    token: str
-    tracking_id: str
     vsc_electron_fetcher: bool
     xcode: bool
     xcode_chat: bool
+
+    # Metadata
+    public_suggestions: str
+    telemetry: str
     enterprise_list: list[int]
 
 
+class ChatMessage(TypedDict):
+    role: str
+    content: str
+
+
+class ChatChoice(TypedDict):
+    message: ChatMessage
+
+
 class ChatResponse(TypedDict):
-    choices: list[dict[str, str]]
+    choices: list[ChatChoice]
 
 
-class CopilotTokenManager:
-    def __init__(self):
-        self.oauth_token = self._get_oauth_token()
-        self.github_token: CopilotToken | None = None
-        self.machine_id = self._generate_machine_id()
-        self.session_id = ""
+class CopilotClientError(Exception):
+    """Base exception for all client-related errors."""
 
-        if os.path.exists("/tmp/copilot_token.json"):
-            with open("/tmp/copilot_token.json", "r") as f:
-                self.github_token = CopilotToken(**json.load(f))
 
-    def _get_oauth_token(self) -> str:
-        config_dir = os.getenv("XDG_CONFIG_HOME", os.path.expanduser("~/.config"))
-        hosts_file = os.path.join(config_dir, "github-copilot", "hosts.json")
+class AuthenticationError(CopilotClientError):
+    """Raised when authentication fails."""
+
+
+class APIError(CopilotClientError):
+    """Raised when API calls fail."""
+
+
+class GithubCopilotClient:
+    """Client for interacting with GitHub Copilot's API."""
+
+    def __init__(self) -> None:
+        self._oauth_token: str | None = None
+        self._copilot_token: CopilotToken | None = None
+        self._machine_id: str = str(uuid.uuid4())
+        self._session_id: str = ""
+
+        self._load_cached_token()
+
+    def _load_cached_token(self) -> None:
+        """Attempts to load a cached Copilot token."""
+        cache_path = Path("/tmp/copilot_token.json")
+        if cache_path.exists():
+            try:
+                token_data = json.loads(cache_path.read_text())
+                self._copilot_token = CopilotToken(**token_data)
+            except (json.JSONDecodeError, TypeError):
+                cache_path.unlink(missing_ok=True)
+
+    def _load_oauth_token(self) -> str:
+        """Loads the OAuth token from the GitHub Copilot configuration."""
+        config_dir = os.getenv("XDG_CONFIG_HOME", Path.home() / ".config")
+        hosts_file = Path(config_dir) / "github-copilot" / "hosts.json"
 
         try:
-            with open(hosts_file, "r") as file:
-                data = json.load(file)
-                for k, v in data.items():
-                    if "github.com" in k:
-                        return v["oauth_token"]
-        except FileNotFoundError:
-            raise Exception(
-                "GitHub Copilot configuration not found. Please install and run it at least once."
-            )
+            hosts_data = json.loads(hosts_file.read_text())
+            for key, value in hosts_data.items():
+                if "github.com" in key:
+                    return value["oauth_token"]
+        except (FileNotFoundError, json.JSONDecodeError, KeyError):
+            raise AuthenticationError("GitHub Copilot configuration not found or invalid.")
 
-        raise Exception("OAuth token not found in GitHub Copilot configuration.")
+        raise AuthenticationError("OAuth token not found in GitHub Copilot configuration.")
 
-    def _generate_machine_id(self) -> str:
-        return "".join(random.choice("0123456789abcdef") for _ in range(65))
+    def _get_oauth_token(self) -> str:
+        """Gets or loads the OAuth token."""
+        if not self._oauth_token:
+            self._oauth_token = self._load_oauth_token()
+        return self._oauth_token
 
-    def generate_uuid(self) -> str:
-        hex_chars = "0123456789abcdef"
-        template = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx"
-        return "".join(
-            random.choice(hex_chars)
-            if c == "x"
-            else random.choice("89ab")
-            if c == "y"
-            else c
-            for c in template
-        )
+    def _refresh_copilot_token(self) -> None:
+        """Refreshes the Copilot token using the OAuth token."""
+        self._session_id = f"{uuid.uuid4()}{int(datetime.now(UTC).timestamp() * 1000)}"
 
-    def refresh_token(self) -> None:
-        self.session_id = (
-            f"{self.generate_uuid()}{int(datetime.now().timestamp() * 1000)}"
-        )
+        headers = {
+            "Authorization": f"token {self._get_oauth_token()}",
+            "Accept": "application/json",
+            **Headers.AUTH,
+        }
 
-        response = requests.get(
-            API_ENDPOINT,
-            headers={
-                "Authorization": f"token {self.oauth_token}",
-                "Accept": "application/json",
-                **AUTH_HEADERS,
-            },
-            timeout=10000,
-        )
-        response.raise_for_status()
+        try:
+            response = requests.get(APIEndpoints.TOKEN, headers=headers, timeout=10)
+            response.raise_for_status()
+            token_data = response.json()
 
-        self.github_token = CopilotToken(**response.json())
+            self._copilot_token = CopilotToken(**token_data)
 
-        with open("/tmp/copilot_token.json", "w") as f:
-            json.dump(response.json(), f)
+            # Cache the token
+            cache_path = Path("/tmp/copilot_token.json")
+            _ = cache_path.write_text(json.dumps(token_data))
 
-    def get_copilot_token(self) -> str:
-        if not self.github_token or self.github_token.expires_at < int(
-            datetime.now().timestamp()
-        ):
-            self.refresh_token()
+        except RequestException as e:
+            raise APIError(f"Failed to refresh Copilot token: {str(e)}") from e
 
-        if not self.github_token:
-            raise Exception("Failed to obtain Copilot token")
+    def _ensure_valid_token(self) -> None:
+        """Ensures a valid Copilot token is available."""
+        current_time = int(datetime.now(UTC).timestamp())
 
-        return self.github_token.token
+        if not self._copilot_token or current_time >= self._copilot_token.expires_at:
+            self._refresh_copilot_token()
+
+        if not self._copilot_token:
+            raise AuthenticationError("Failed to obtain Copilot token")
+
+    def chat_completion(self, prompt: str, model: str, system_prompt: str) -> str:
+        """
+        Sends a chat completion request to the Copilot API.
+
+        Args:
+            prompt: The user's input prompt
+            model: The model to use for completion
+            system_prompt: The system prompt to guide the model's behavior
+
+        Returns:
+            The model's response as a string
+
+        Raises:
+            APIError: If the API request fails
+        """
+        self._ensure_valid_token()
+
+        headers = {
+            "Content-Type": "application/json",
+            "x-request-id": str(uuid.uuid4()),
+            "vscode-machineid": self._machine_id,
+            "vscode-sessionid": self._session_id,
+            "Authorization": f"Bearer {self._copilot_token.token}",
+            "Copilot-Integration-Id": "vscode-chat",
+            "openai-organization": "github-copilot",
+            "openai-intent": "conversation-panel",
+            **Headers.AUTH,
+        }
+
+        body = {
+            "messages": [
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": prompt},
+            ],
+            "model": model,
+            "stream": False,
+        }
+
+        try:
+            response = requests.post(APIEndpoints.CHAT, headers=headers, json=body)
+            response.raise_for_status()
+
+            chat_response: ChatResponse = response.json()
+            return chat_response["choices"][0]["message"]["content"]
+
+        except RequestException as e:
+            raise APIError(f"Chat completion request failed: {str(e)}") from e
 
 
-def chat_with_copilot(prompt: str, model: str, system_prompt: str) -> str:
-    token_manager = CopilotTokenManager()
-    token = token_manager.get_copilot_token()
+# Example usage
+def example_usage() -> None:
+    client = GithubCopilotClient()
+    try:
+        response = client.chat_completion(prompt="What is Python?", model="gpt-4", system_prompt="You are a helpful assistant.")
+        print(response)
+    except CopilotClientError as e:
+        print(f"Error: {str(e)}")
 
-    headers = {
-        "Content-Type": "application/json",
-        "x-request-id": token_manager.generate_uuid(),
-        "vscode-machineid": token_manager.machine_id,
-        "vscode-sessionid": token_manager.session_id,
-        "Authorization": f"Bearer {token}",
-        "Copilot-Integration-Id": "vscode-chat",
-        "openai-organization": "github-copilot",
-        "openai-intent": "conversation-panel",
-        **AUTH_HEADERS,
-    }
 
-    body = {
-        "messages": [
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": prompt},
-        ],
-        "model": model,
-        "stream": False,
-    }
-
-    response = requests.post(CHAT_ENDPOINT, headers=headers, json=body)
-    response.raise_for_status()
-
-    chat_response: ChatResponse = response.json()
-    return chat_response["choices"][0]["message"].get("content", "")
+if __name__ == "__main__":
+    example_usage()

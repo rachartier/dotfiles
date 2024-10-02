@@ -3,7 +3,7 @@ import subprocess
 
 from action import ActionManager
 from constants import DEFAULT_SYSTEM_PROMPT
-from copilot import chat_with_copilot
+from copilot import GithubCopilotClient
 
 action_manager = ActionManager()
 
@@ -42,9 +42,11 @@ def main() -> None:
 
     args = parser.parse_args()
 
+    client = GithubCopilotClient()
+
     prompt: str = args.prompt
     system_prompt: str = args.system_prompt
-    model: str | None = args.model
+    model: str = args.model
     action: str | None = None
 
     if args.action:
@@ -73,7 +75,7 @@ def main() -> None:
                     return
 
     try:
-        response = chat_with_copilot(prompt, model, system_prompt)
+        response = client.chat_completion(prompt, model, system_prompt)
         print(response)
     except Exception as e:
         print(f"An error occurred: {e}")
