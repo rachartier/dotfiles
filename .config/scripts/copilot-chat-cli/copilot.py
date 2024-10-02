@@ -16,6 +16,9 @@ from typing import TypedDict
 import requests
 from requests.exceptions import RequestException
 
+from exception.api_error import APIError
+from exception.authentication_error import AuthenticationError
+
 
 # API Constants
 class APIEndpoints:
@@ -75,18 +78,6 @@ class ChatChoice(TypedDict):
 
 class ChatResponse(TypedDict):
     choices: list[ChatChoice]
-
-
-class CopilotClientError(Exception):
-    """Base exception for all client-related errors."""
-
-
-class AuthenticationError(CopilotClientError):
-    """Raised when authentication fails."""
-
-
-class APIError(CopilotClientError):
-    """Raised when API calls fail."""
 
 
 class GithubCopilotClient:
