@@ -418,7 +418,7 @@ install_essentials() {
 
     git config --global include.path "~/.config/git/gitconfig"
 
-    config_copilot_chat_cli
+    config_copilot_cli
 }
 
 install_minimal() {
@@ -445,21 +445,25 @@ install_docker() {
     install_minimal
 }
 
-config_copilot_chat_cli() {
-    __echo_info "Configuring copilot-chat-cli..."
+config_copilot_cli() {
+    __echo_info "Configuring copilot-cli..."
 
-    cd "$HOME/.config/scripts/copilot-chat-cli" || return 1
+    cd "$HOME/.config/scripts/copilot-cli" || return 1
 
     if [ -f "$HOME/.local/bin/copilot-chat-cli" ]; then
-        __echo_info "Removing old copilot-chat-cli symlink."
         rm "$HOME/.local/bin/copilot-chat-cli"
     fi
 
-    ln -s "$HOME/.config/scripts/copilot-chat-cli.sh" "$HOME/.local/bin/copilot-chat-cli" &&
-        __echo_success "copilot-chat-cli symlink created." ||
-        __echo_failure "copilot-chat-cli symlink not created."
+    if [ -f "$HOME/.local/bin/copilot-cli" ]; then
+        __echo_info "Removing old copilot-cli symlink."
+        rm "$HOME/.local/bin/copilot-cli"
+    fi
 
-    chmod +x "$HOME/.local/bin/copilot-chat-cli"
+    ln -s "$HOME/.config/scripts/copilot-cli.sh" "$HOME/.local/bin/copilot-cli" &&
+        __echo_success "copilot-cli symlink created." ||
+        __echo_failure "copilot-cli symlink not created."
+
+    chmod +x "$HOME/.local/bin/copilot-cli"
 
     if [ ! -d ".venv" ]; then
         __echo_info "Creating virtual environment..."
@@ -500,7 +504,7 @@ do_reinstall() {
     "tmux") install_tmux ;;
     "viu") install_viu ;;
     "gh") install_github_gh ;;
-    "copilot-chat-cli") config_copilot_chat_cli ;;
+    "copilot-cli") config_copilot_cli ;;
     "fonts") install_fonts_for_windows ;;
     *) __echo_failure "'$1' unknown." ;;
     esac

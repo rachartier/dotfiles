@@ -267,6 +267,7 @@ return {
 				{
 					"filetype",
 					color = { bg = colors.mauve, fg = colors.bg },
+					separator = { right = "", left = "" },
 					-- cond = cond_disable_by_ft,
 					icon_only = true,
 					colored = false,
@@ -278,6 +279,7 @@ return {
 
 					padding = { right = 1, left = 0 },
 					color = { bg = colors.mauve, fg = colors.bg },
+					separator = { right = "", left = "" },
 
 					symbols = {
 						modified = icons.signs.file.modified, -- Text to show when the file is modified.
