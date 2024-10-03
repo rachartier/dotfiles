@@ -5,6 +5,10 @@ return {
 		vim.opt.splitkeep = "screen"
 	end,
 	opts = {
+		icons = {
+			closed = "  ",
+			open = "  ",
+		},
 		animate = {
 			enabled = false,
 		},

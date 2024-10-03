@@ -11,24 +11,27 @@ function M.get(colors)
 	local cursor_line_bg = "None"
 	return {
 		-- Visual = { bg = "#234370" },
-		-- Visual = { bg = colors.blue, fg = colors.crust },
+		Visual = { bg = colors.base },
+		-- Visual = { bg = colors.blue, fg = colors.mantle },
 
-		NormalFloat = { bg = bg, fg = colors.text },
-		FloatBorder = { fg = colors.subtext2 },
-		FloatTitle = { bg = colors.yellow, fg = colors.crust },
+		-- NormalFloat = { bg = bg, fg = colors.text },
+		NormalFloat = { bg = colors.mantle, fg = colors.mantle },
+		FloatBorder = { fg = colors.mantle, bg = colors.mantle },
+		FloatTitle = { bg = colors.yellow, fg = colors.mantle },
 		LineNr = { fg = colors.surface1 },
 		SignColumn = { fg = colors.surface1 },
-		Visual = { bg = colors.surface1 },
+		-- Visual = { bg = colors.surface1 },
 		Comment = { fg = colors.surface2, italic = true },
 
 		CmpGhostText = { link = "Comment", default = true },
 		CmpItemAbbrMatch = { fg = colors.yellow, bold = true, underline = false },
 		CmpItemAbbrMatchFuzzy = { fg = colors.blue, underline = true, link = "CmpItemAbbrMatch" },
 
-		Pmenu = { link = "FloatBorder" },
+		Pmenu = { bg = colors.mantle, fg = colors.text },
 		PmenuBorder = { link = "FloatBorder" },
 		PmenuDocBorder = { link = "FloatBorder" },
 		PmenuSel = { link = "Visual" },
+		PopupNormal = { bg = colors.mantle, fg = colors.text },
 
 		-- CursorLine = { bg = colors.surface1 },
 		CursorLine = { bg = "None" },
@@ -36,9 +39,9 @@ function M.get(colors)
 		CursorLineSign = { link = "SignColumn" },
 		CursorColumn = { bg = "None" },
 
-		FlashLabel = { fg = colors.crust, bg = colors.yellow, bold = true },
+		FlashLabel = { fg = colors.mantle, bg = colors.yellow, bold = true },
 
-		AlphaShortcut = { fg = colors.crust, bg = colors.mauve, bold = true },
+		AlphaShortcut = { fg = colors.mantle, bg = colors.mauve, bold = true },
 		AlphaFooter = { fg = colors.peach, italic = true },
 
 		GitSignsAdd = { fg = colors.green },
@@ -49,26 +52,25 @@ function M.get(colors)
 		IlluminatedWordWrite = { link = "IlluminatedWordRead" },
 
 		LspLens = { italic = true, fg = colors.surface1 },
-		LspSignatureActiveParameter = { bg = colors.peach, fg = colors.crust },
+		LspSignatureActiveParameter = { bg = colors.peach, fg = colors.mantle },
 
 		MiniIndentscopeSymbol = { fg = colors.surface0 },
 		MarkviewLayer = { bg = colors.surface1, fg = colors.text },
 
 		NeoTreeCursorLine = { link = "PmenuSel" },
-		NeoTreeFloatTitle = { link = "NeoTreeTitlebar" },
 		NeoTreeIndentMarker = { fg = colors.surface0 },
-		NeoTreeNormal = { bg = bg },
+		NeoTreeNormal = { bg = colors.mantle },
 		NeoTreePreview = { link = "NeoTreeNormal" },
 
 		NoiceCmdlineIcon = { fg = colors.yellow, italic = false, bold = true },
-		NoiceCmdlinePopup = { bg = bg, fg = colors.text },
+		NoiceCmdlinePopup = { bg = colors.mantle, fg = colors.text },
 		NoiceCmdlinePopupBorder = { link = "FloatBorder" },
 		NoiceFormatLevelOff = { bg = colors.yellow },
 		NoicePopupmenu = { link = "PopupNormal" },
 		NoicePopupmenuBorder = { link = "FloatBorder" },
 
 		PopupBorder = { link = "FloatBorder" },
-		PopupNormal = { bg = colors.base, fg = colors.text },
+		-- PopupNormal = { bg = colors.mantle, fg = colors.mantle },
 
 		SwitchBufferStatusColor = { fg = colors.red },
 
@@ -102,17 +104,17 @@ function M.get(colors)
 		TelescopeSelection = { link = "PmenuSel" },
 
 		TelescopePromptPrefix = { fg = colors.blue },
-		-- TelescopePromptNormal = { bg = colors.surface0, fg = colors.text },
-		-- TelescopePromptBorder = { bg = colors.surface0, fg = colors.surface0 },
-		TelescopePromptBorder = { link = "FloatBorder" },
+		TelescopePromptNormal = { bg = colors.surface0, fg = colors.text },
+		-- TelescopePromptBorder = { bg = colors.mantle, fg = colors.surface0 },
+		TelescopePromptBorder = { bg = colors.surface0, fg = colors.surface0 },
 		TelescopePromptTitle = { bg = colors.pink, fg = colors.mantle },
 
-		-- TelescopeResultsNormal = { bg = colors.mantle, fg = colors.subtext1 },
+		TelescopeResultsNormal = { bg = colors.mantle, fg = colors.subtext1 },
 		TelescopeResultsBorder = { link = "FloatBorder" },
 		TelescopeResultsTitle = { bg = colors.blue, fg = colors.mantle },
 
 		TelescopePreviewBorder = { link = "FloatBorder" },
-		-- TelescopePreviewNormal = { bg = bg },
+		TelescopePreviewNormal = { bg = colors.mantle },
 		TelescopePreviewTitle = { bg = colors.green, fg = colors.mantle },
 
 		FzfLuaNormal = { bg = colors.bg, fg = colors.text },
@@ -135,13 +137,12 @@ function M.get(colors)
 		-- StatusLineNC = { fg = colors.surface0 },
 		-- StatusLine = { fg = colors.surface0 },
 
-		EdgyNormal = { bg = bg },
-		-- EdgyWinBar = { bg = colors.surface0 },
+		EdgyNormal = { bg = colors.mantle },
+		EdgyWinBar = { bg = colors.surface0, fg = "None" },
 		-- EdgyTitle = { bg = colors.surface0, fg = colors.blue },
 		-- EdgyIconActive = { bg = colors.surface0, fg = colors.peach },
-		EdgyWinBar = { bg = "None" },
-		EdgyTitle = { bg = "None", fg = colors.blue },
-		EdgyIconActive = { bg = "None", fg = colors.peach },
+		EdgyTitle = { bg = colors.surface0, fg = colors.blue },
+		EdgyIconActive = { bg = colors.surface0, fg = colors.peach },
 
 		-- DiagnosticUnderlineError = {
 		-- 	underline = true,
@@ -191,6 +192,8 @@ function M.get(colors)
 		CopilotSuggestion = { fg = colors.subtext0, italic = false },
 		MiniCursorwordCurrent = { bg = colors.surface1 },
 		MiniCursorword = { link = "MiniCursorwordCurrent" },
+
+		-- AvanteT,
 	}
 end
 
