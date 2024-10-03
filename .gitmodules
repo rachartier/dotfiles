@@ -1,0 +1,3 @@
+[submodule ".config/scripts/copilot-cli"]
+	path = .config/scripts/copilot-cli
+	url = git@github.com:rachartier/copilot-cli.git
