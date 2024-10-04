@@ -13,7 +13,7 @@ customCommands:
       - type: "menuFromCommand"
         title: "Copilot AI Commitizen"
         key: "Msg"
-        command: copilot-cli --action "lazygit-conventional-commit"
+        command: copilot-cli --action "lazygit-conventional-commit" --path "."
         filter: '^(?P<number>\d+):\s(?P<type>\w+)(?:\((?P<scope>[^)]+)\))?:\s(?P<message>.+)$'
         valueFormat: "{{ .type }}{{ if .scope }}({{ .scope }}){{ end }}: {{ .message }}"
         labelFormat: "{{ .type | red }}{{ if .scope }}({{ .scope }}){{ end }}: {{ .message | green }}"

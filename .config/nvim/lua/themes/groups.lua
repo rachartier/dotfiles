@@ -11,7 +11,7 @@ function M.get(colors)
 	local cursor_line_bg = "None"
 	return {
 		-- Visual = { bg = "#234370" },
-		Visual = { bg = colors.base },
+		Visual = { bg = colors.surface1 },
 		-- Visual = { bg = colors.blue, fg = colors.mantle },
 
 		-- NormalFloat = { bg = bg, fg = colors.text },
@@ -30,7 +30,7 @@ function M.get(colors)
 		Pmenu = { bg = colors.mantle, fg = colors.text },
 		PmenuBorder = { link = "FloatBorder" },
 		PmenuDocBorder = { link = "FloatBorder" },
-		PmenuSel = { link = "Visual" },
+		PmenuSel = { bg = colors.base },
 		PopupNormal = { bg = colors.mantle, fg = colors.text },
 
 		-- CursorLine = { bg = colors.surface1 },
@@ -42,7 +42,8 @@ function M.get(colors)
 		FlashLabel = { fg = colors.mantle, bg = colors.yellow, bold = true },
 
 		AlphaShortcut = { fg = colors.mantle, bg = colors.mauve, bold = true },
-		AlphaFooter = { fg = colors.peach, italic = true },
+		AlphaFooter = { fg = colors.maroon },
+		AlphaButtons = { fg = colors.subtext0 },
 
 		GitSignsAdd = { fg = colors.green },
 		GitSignsChange = { fg = colors.blue },

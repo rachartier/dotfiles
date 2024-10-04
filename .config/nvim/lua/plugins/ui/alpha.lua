@@ -1,6 +1,8 @@
 local utils = require("utils")
 local config = require("config")
 
+local version = vim.version()
+
 local function build_layout(opts)
 	local header_padding = opts.header_padding or 0
 	local header = opts.header or {}
@@ -122,9 +124,9 @@ return {
 					[['   : |      |   :   .'   \   \ .'        :   \ |;   |.' ;   | |`-'      ]],
 					[[;   |.'      |   | ,'      `---`           '---" '---'   |   ;/          ]],
 					[['---'        `----'                                      '---'           ]],
-					[[                                                 ]],
-					[[                                                 ]],
-					[[                                                 ]],
+					[[                                                                         ]],
+					[[                                                                         ]],
+					[[                                                                         ]],
 					--
 					-- [[     ___           ___           ___           ___                       ___     ]],
 					-- [[    /\__\         /\  \         /\  \         /\__\          ___        /\__\    ]],
@@ -202,9 +204,27 @@ return {
 				},
 			}
 		end
-		-- dashboard.section.header.val = {
 
-		-- }
+		local version_str = "  v"
+			.. version.major
+			.. "."
+			.. version.minor
+			.. "."
+			.. version.patch
+			.. " ("
+			.. version.build
+			.. ")"
+
+		header.val[#header.val] = string.rep(" ", #header.val[#header.val] / 2 - #version_str / 2)
+			.. "  v"
+			.. version.major
+			.. "."
+			.. version.minor
+			.. "."
+			.. version.patch
+			.. " ("
+			.. version.build
+			.. ")"
 
 		-- dashboard.section.footer = {
 		-- 	type = "text",
@@ -220,7 +240,7 @@ return {
 		--
 		dashboard.section.buttons.val = {
 			dashboard.button("    e    ", "󰈔  New file", "<cmd>ene<CR>"),
-			dashboard.button(" SPC f f ", "󰱼  Find file"),
+			dashboard.button(" SPC f f ", "  Find file"),
 			dashboard.button(" SPC f g ", "󰺮  Live grep"),
 			dashboard.button("    c    ", "  Configuration", "<cmd>cd ~/.config/nvim/ | e init.lua<CR>"),
 			dashboard.button("    l    ", "  Open Lazy", "<cmd>Lazy<CR>"),
@@ -264,7 +284,6 @@ return {
 			desc = "Add Alpha dashboard footer",
 			once = true,
 			callback = function()
-				local version = vim.version()
 				local stats = require("lazy").stats()
 				local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
 
@@ -275,22 +294,19 @@ return {
 					footer = dashboard.section.footer,
 				})
 
-				dashboard.section.footer.val = "Plugins "
+				local footer_txt = "   Loaded "
 					.. stats.loaded
 					.. "/"
 					.. stats.count
-					.. "   "
+					.. " plugins in "
 					.. ms
-					.. "ms"
-					.. "   v"
-					.. version.major
-					.. "."
-					.. version.minor
-					.. "."
-					.. version.patch
-					.. " ("
-					.. version.build
-					.. ")"
+					.. " ms"
+
+				dashboard.section.footer.val = {
+					string.rep("─", #footer_txt - 1),
+					footer_txt,
+					string.rep("─", #footer_txt - 1),
+				}
 
 				pcall(vim.cmd.AlphaRedraw)
 			end,
