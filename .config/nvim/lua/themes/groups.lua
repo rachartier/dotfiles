@@ -15,7 +15,7 @@ function M.get(colors)
 		-- Visual = { bg = colors.blue, fg = colors.mantle },
 
 		-- NormalFloat = { bg = bg, fg = colors.text },
-		NormalFloat = { bg = colors.mantle, fg = colors.mantle },
+		NormalFloat = { bg = colors.mantle, fg = colors.text },
 		FloatBorder = { fg = colors.mantle, bg = colors.mantle },
 		FloatTitle = { bg = colors.yellow, fg = colors.mantle },
 		LineNr = { fg = colors.surface1 },
