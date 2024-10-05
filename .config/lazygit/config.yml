@@ -33,6 +33,39 @@ customCommands:
       {{- else -}}
         echo "Commit cancelled" && exit 0
       {{- end -}}
+  - key: "<c-e>"
+    description: "Generate commit message with a starting prompt"
+    context: "files"
+    loadingText: "Generating commit message..."
+    subprocess: true
+    prompts:
+      - type: "input"
+        key: "Msg"
+        title: "Commit message"
+        initialValue: ""
+      - type: "menuFromCommand"
+        title: "Copilot AI Commitizen"
+        key: "Msg"
+        command: copilot-cli --action "lazygit-conventional-commit-prompt" --path "." --prompt "{{.Form.Msg}}"
+        filter: '^(?P<number>\d+):\s(?P<type>\w+)(?:\((?P<scope>[^)]+)\))?:\s(?P<message>.+)$'
+        valueFormat: "{{ .type }}{{ if .scope }}({{ .scope }}){{ end }}: {{ .message }}"
+        labelFormat: "{{ .type | red }}{{ if .scope }}({{ .scope }}){{ end }}: {{ .message | green }}"
+      - type: "menu"
+        key: "Confirm"
+        title: "Confirm/Edit commit message"
+        options:
+          - name: "Commit"
+            value: "commit"
+          - name: "Edit"
+            value: "edit"
+    command: >
+      {{- if eq .Form.Confirm "commit" -}}
+        git commit -m '{{.Form.Msg}}'
+      {{- else if eq .Form.Confirm "edit" -}}
+        git commit -e -m '{{.Form.Msg}}'
+      {{- else -}}
+        echo "Commit cancelled" && exit 0
+      {{- end -}}
 
 gui:
   theme:
