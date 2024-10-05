@@ -19,6 +19,12 @@ return {
 			change = { text = "▏" },
 			untracked = { text = "┆" },
 		},
+		signs_staged = {
+			add = { text = "▏" },
+			delete = { text = "" },
+			change = { text = "▏" },
+			untracked = { text = "┆" },
+		},
 		on_attach = function(bufnr)
 			local gs = package.loaded.gitsigns
 

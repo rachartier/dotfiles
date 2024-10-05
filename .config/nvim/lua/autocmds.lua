@@ -2,13 +2,6 @@ local utils = require("utils")
 
 require("assign_ft")
 
-utils.on_event({ "FocusGained", "TermClose", "TermLeave" }, function()
-	vim.cmd("checktime")
-end, {
-	target = "*",
-	desc = "Check time on focus gained",
-})
-
 utils.on_event({ "TextYankPost" }, function()
 	vim.highlight.on_yank({
 		higroup = "CurSearch",
@@ -128,3 +121,14 @@ end, {
 	target = { "markdown" },
 	desc = "Outline for markdown",
 })
+
+utils.on_event({ "FocusGained", "BufEnter", "CursorHold", "CursorHoldI" }, function()
+	if vim.fn.mode() ~= "c" then
+		vim.cmd("checktime")
+	end
+end)
+
+-- Notification after file change
+utils.on_event("FileChangedShellPost", function()
+	vim.api.nvim_echo({ { "File changed on disk. Buffer reloaded.", "WarningMsg" } }, false, {})
+end)

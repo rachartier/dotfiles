@@ -225,6 +225,7 @@ function M.override_lsp_hl(colors_table)
 	vim.api.nvim_set_hl(0, "@variable.parameter", { fg = colors.red, italic = false })
 	-- vim.api.nvim_set_hl(0, "@function.method.call", { italic = true })
 	vim.api.nvim_set_hl(0, "@keyword.operator.python", { link = "Conditional" })
+	-- vim.api.nvim_set_hl(0, "@string.documentation", { fg = "#7c8c8f" })
 end
 
 return M
