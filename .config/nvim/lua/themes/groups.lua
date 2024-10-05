@@ -41,9 +41,9 @@ function M.get(colors)
 
 		FlashLabel = { fg = colors.mantle, bg = colors.yellow, bold = true },
 
-		AlphaShortcut = { fg = colors.mantle, bg = colors.mauve, bold = true },
+		AlphaShortcut = { fg = colors.mantle, bg = colors.blue, bold = true },
 		AlphaFooter = { fg = colors.maroon },
-		AlphaButtons = { fg = colors.subtext0 },
+		AlphaButtons = { fg = colors.text },
 
 		GitSignsAdd = { fg = colors.green },
 		GitSignsChange = { fg = colors.blue },

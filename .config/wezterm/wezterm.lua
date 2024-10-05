@@ -29,7 +29,7 @@ config.font = wezterm.font_with_fallback({ "MonoLisa", "Symbols Nerd Font" })
 
 -- config.cell_width = 1
 config.line_height = 1
-config.font_size = 11.5
+config.font_size = 12
 config.font_rules = {
 	-- {
 	-- 	italic = true,
@@ -103,6 +103,8 @@ local theme = "Catppuccin Macchiato"
 
 if tmux_theme == "catppuccin_macchiato.conf" then
 	theme = "Catppuccin Macchiato"
+elseif tmux_theme == "catppuccin_frappe.conf" then
+	theme = "Catppuccin Frappe"
 elseif tmux_theme == "catppuccin_latte.conf" then
 	theme = "Catppuccin Latte"
 elseif tmux_theme == "catppuccin_mocha.conf" then
