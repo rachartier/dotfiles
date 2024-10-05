@@ -82,7 +82,7 @@ function ghcs() {
 
 function pyenv() {
     if [ -z "$DOT_PYENV_LOADED" ]; then
-        eval "$(pyenv init -)"
+        eval "$($HOME/.pyenv/bin/pyenv init -)"
         DOT_PYENV_LOADED=1
     fi
 
