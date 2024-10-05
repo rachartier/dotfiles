@@ -74,9 +74,9 @@ config.hide_tab_bar_if_only_one_tab = true
 config.adjust_window_size_when_changing_font_size = false
 config.selection_word_boundary = " \t\n{}[]()\"'`,;:│=&!%"
 config.window_padding = {
-	left = "2cell",
-	right = "2cell",
-	top = "0.2cell",
+	-- left = "2cell",
+	-- right = "2cell",
+	top = 0,
 	bottom = 0,
 }
 -- config.win32_system_backdrop = "Acrylic"
