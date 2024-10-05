@@ -37,8 +37,8 @@ export FZF_DEFAULT_OPTS="
     --preview-window=cycle \
     --scrollbar '▌' \
     --marker '✚ ' \
-    --pointer '▋' \
-    --prompt ' ▍' \
+    --pointer ' ' \
+    --prompt '  ▍' \
     --no-separator \
     --color gutter:-1 \
     --bind 'esc:abort' \

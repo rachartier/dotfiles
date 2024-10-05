@@ -11,7 +11,7 @@ customCommands:
     subprocess: true
     prompts:
       - type: "menuFromCommand"
-        title: "Copilot AI Commitizen"
+        title: "Copilot AI Convention Commit"
         key: "Msg"
         command: copilot-cli --action "lazygit-conventional-commit" --path "."
         filter: '^(?P<number>\d+):\s(?P<type>\w+)(?:\((?P<scope>[^)]+)\))?:\s(?P<message>.+)$'
@@ -44,7 +44,7 @@ customCommands:
         title: "Commit message"
         initialValue: ""
       - type: "menuFromCommand"
-        title: "Copilot AI Commitizen"
+        title: "Copilot AI Conventional Commit Helper"
         key: "Msg"
         command: copilot-cli --action "lazygit-conventional-commit-prompt" --path "." --prompt "{{.Form.Msg}}"
         filter: '^(?P<number>\d+):\s(?P<type>\w+)(?:\((?P<scope>[^)]+)\))?:\s(?P<message>.+)$'
@@ -66,26 +66,4 @@ customCommands:
       {{- else -}}
         echo "Commit cancelled" && exit 0
       {{- end -}}
-
-gui:
-  theme:
-    activeBorderColor:
-      - '#8aadf4'
-      - bold
-    inactiveBorderColor:
-      - '#a5adcb'
-    optionsTextColor:
-      - '#8aadf4'
-    selectedLineBgColor:
-      - '#363a4f'
-    cherryPickedCommitBgColor:
-      - '#494d64'
-    cherryPickedCommitFgColor:
-      - '#8aadf4'
-    unstagedChangesColor:
-      - '#ed8796'
-    defaultFgColor:
-      - '#cad3f5'
-    searchingActiveBorderColor:
-      - '#eed49f'
 

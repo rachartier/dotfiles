@@ -139,6 +139,7 @@ return {
 						end
 					end,
 					color = { fg = colors.fg },
+					separator = { right = "", left = "" },
 				},
 			},
 			lualine_c = {
@@ -266,7 +267,7 @@ return {
 			lualine_z = {
 				{
 					"filetype",
-					color = { bg = colors.mauve, fg = colors.bg },
+					color = { bg = colors.pink, fg = colors.bg },
 					separator = { right = "", left = "" },
 					-- cond = cond_disable_by_ft,
 					icon_only = true,
@@ -278,7 +279,7 @@ return {
 					"filename",
 
 					padding = { right = 1, left = 0 },
-					color = { bg = colors.mauve, fg = colors.bg },
+					color = { bg = colors.pink, fg = colors.bg },
 					separator = { right = "", left = "" },
 
 					symbols = {
