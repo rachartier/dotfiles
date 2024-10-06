@@ -166,6 +166,7 @@ function M.get(colors)
 
 		RenderMarkdownChecked = { fg = colors.green },
 		RenderMarkdownTodo = { fg = colors.blue },
+		RenderMarkdownPending = { fg = colors.blue },
 
 		RenderMarkdownH1 = { fg = colors.red, bg = utils.darken(colors.red, darken_markdown_heading) },
 		RenderMarkdownH2 = { fg = colors.peach, bg = utils.darken(colors.peach, darken_markdown_heading) },

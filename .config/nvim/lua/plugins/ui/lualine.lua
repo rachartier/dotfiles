@@ -139,7 +139,7 @@ return {
 						end
 					end,
 					color = { fg = colors.fg },
-					separator = { right = "", left = "" },
+					separator = { right = "" },
 				},
 			},
 			lualine_c = {

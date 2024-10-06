@@ -36,3 +36,5 @@ alias -g -- -h='-h 2>&1 | bat --language=help --style=plain -P'
 alias -g -- --help='--help 2>&1 | bat --language=help --style=plain -P'
 
 alias ssh='TERM=xterm ssh'
+
+alias trad="copilot-cli --action 'translate' --prompt"

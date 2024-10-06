@@ -18,16 +18,17 @@ return {
 			},
 			checkbox = {
 				unchecked = {
-					icon = "󰄱 ",
+					icon = " ",
 					highlight = "RenderMarkdownUnchecked",
 				},
 				checked = {
-					icon = "󰄲 ",
+					icon = " ",
 					highlight = "RenderMarkdownChecked",
 				},
 				custom = {
-					todo = { raw = "[-]", rendered = "󰡖 ", highlight = "RenderMarkdownListTodo" },
-					skipped = { raw = "[/]", rendered = "󱋭 ", highlight = "RenderMarkdownListSkipped" },
+					pending = { raw = "[-]", rendered = " ", highlight = "RenderMarkdownListPending" },
+					todo = { raw = "[~]", rendered = " ", highlight = "RenderMarkdownListTodo" },
+					skipped = { raw = "[/]", rendered = " ", highlight = "RenderMarkdownListSkipped" },
 					fire = { raw = "[f]", rendered = "󰈸 ", highlight = "RenderMarkdownListFire" },
 					star = { raw = "[s]", rendered = " ", highlight = "RenderMarkdownListStar" },
 					idea = { raw = "[*]", rendered = "󰌵 ", highlight = "RenderMarkdownListIdea" },
@@ -64,6 +65,24 @@ return {
 			end, { noremap = true, silent = true })
 		end,
 	},
+	-- {
+	-- 	"OXY2DEV/markview.nvim",
+	--
+	-- 	dependencies = {
+	-- 		"nvim-treesitter/nvim-treesitter",
+	-- 		"nvim-tree/nvim-web-devicons",
+	-- 	},
+	-- 	config = function()
+	-- 		local presets = require("markview.presets")
+	--
+	-- 		require("markview").setup({
+	--
+	-- 			filetypes = { "markdown", "quarto", "rmd", "Avante" },
+	-- 			checkboxes = presets.checkboxes.nerd,
+	-- 			headings = presets.headings.marker,
+	-- 		})
+	-- 	end,
+	-- },
 	{
 		"iamcco/markdown-preview.nvim",
 		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
