@@ -61,7 +61,6 @@ require("lazy").setup({
 				"tutor",
 				"zipPlugin",
 				"man",
-				"osc52",
 				"spellfile",
 				"shada",
 				"rplugin",

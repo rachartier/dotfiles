@@ -32,5 +32,21 @@ return {
 				error = "❌",
 			},
 		},
+		default_view = "headers_body",
 	},
 }
+--
+-- return {
+-- 	"rest-nvim/rest.nvim",
+-- 	lazy = false,
+-- 	keys = {
+-- 		{
+-- 			"<CR>",
+-- 			"<cmd>Rest run<cr>",
+-- 			{ noremap = true, silent = true, desc = "Execute the request" },
+-- 		},
+-- 	},
+-- 	config = function()
+-- 		vim.g.rest_nvim = {}
+-- 	end,
+-- }
