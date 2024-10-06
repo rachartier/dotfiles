@@ -56,7 +56,6 @@ function M.get(colors)
 		LspSignatureActiveParameter = { bg = colors.peach, fg = colors.mantle },
 
 		MiniIndentscopeSymbol = { fg = colors.surface0 },
-		MarkviewLayer = { bg = colors.surface1, fg = colors.text },
 
 		NeoTreeCursorLine = { link = "PmenuSel" },
 		NeoTreeIndentMarker = { fg = colors.surface0 },
@@ -181,19 +180,22 @@ function M.get(colors)
 		RenderMarkdownH4Bg = { link = "RenderMarkdownH4" },
 		RenderMarkdownH5Bg = { link = "RenderMarkdownH5" },
 
-		RenderMarkdownListYes = { fg = colors.green },
-		RenderMarkdownListNo = { fg = colors.red },
-		RenderMarkdownListFire = { fg = colors.red },
-		RenderMarkdownListIdea = { fg = colors.yellow },
-		RenderMarkdownListStar = { fg = colors.yellow },
-		RenderMarkdownListSkipped = { fg = colors.red },
-		RenderMarkdownListQuestion = { fg = colors.yellow },
-		RenderMarkdownListInfo = { fg = colors.cyan },
-		RenderMarkdownListImportant = { fg = colors.peach },
+		MarkdownCheckboxYes = { fg = colors.green },
+		MarkdownCheckboxNo = { fg = colors.red },
+		MarkdownCheckboxFire = { fg = colors.red },
+		MarkdownCheckboxIdea = { fg = colors.yellow },
+		MarkdownCheckboxStar = { fg = colors.yellow },
+		MarkdownCheckboxSkipped = { fg = colors.red },
+		MarkdownCheckboxQuestion = { fg = colors.yellow },
+		MarkdownCheckboxInfo = { fg = colors.cyan },
+		MarkdownCheckboxImportant = { fg = colors.peach },
 
 		CopilotSuggestion = { fg = colors.subtext0, italic = false },
 		MiniCursorwordCurrent = { bg = colors.surface1 },
 		MiniCursorword = { link = "MiniCursorwordCurrent" },
+
+		MarkviewCode = { bg = colors.surface0 },
+		MarkviewCodeInfo = { bg = colors.surface0 },
 
 		-- AvanteT,
 	}

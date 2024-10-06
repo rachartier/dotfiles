@@ -3,7 +3,6 @@ return {
 		"catppuccin/nvim",
 		priority = 1000,
 		enabled = true,
-		event = "VimEnter",
 		config = function()
 			require("theme").setup()
 		end,

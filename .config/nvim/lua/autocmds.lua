@@ -61,7 +61,7 @@ utils.on_event({ "FileType" }, function()
 	vim.opt_local.spell = true
 end, {
 	target = { "gitcommit", "markdown", "text" },
-	desc = "Enable zen mode",
+	desc = "Enable wrap and spell for markdown and text files",
 })
 
 utils.on_event({ "BufWritePre" }, function(event)
@@ -115,12 +115,12 @@ end, {
 -- 	end,
 -- 	group = augroup("custom_copilot"),
 -- })
-utils.on_event("FileType", function(event)
-	vim.cmd("topleft Outline")
-end, {
-	target = { "markdown" },
-	desc = "Outline for markdown",
-})
+-- utils.on_event("FileType", function(event)
+-- 	vim.cmd("topleft Outline")
+-- end, {
+-- 	target = { "markdown" },
+-- 	desc = "Outline for markdown",
+-- })
 
 utils.on_event({ "FocusGained", "BufEnter", "CursorHold", "CursorHoldI" }, function()
 	if vim.fn.mode() ~= "c" then

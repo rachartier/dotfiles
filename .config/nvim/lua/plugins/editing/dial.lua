@@ -96,7 +96,7 @@ return {
 		})
 
 		local checkboxes = augend.constant.new({
-			elements = { "[ ]", "[-]", "[x]", "[/]" },
+			elements = { "[/]", "[ ]", "[x]", "[~]", "[-]" },
 			word = false,
 			cyclic = true,
 		})
