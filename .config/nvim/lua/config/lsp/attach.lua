@@ -52,7 +52,8 @@ M.lsp_rename = function()
 end
 
 function M.make_capabilities()
-	local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+	-- local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+	local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 	capabilities.textDocument.completion.completionItem = {
 		documentationFormat = { "markdown", "plaintext" },

@@ -206,6 +206,7 @@ return {
 		languages = { "c", "h" },
 		mason = { "clangd" },
 		formatter = { "clang-format", "typos" },
+		lsp_ignore = true,
 	},
 	{
 		languages = { "rust" },

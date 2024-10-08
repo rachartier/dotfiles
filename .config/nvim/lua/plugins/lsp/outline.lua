@@ -46,13 +46,13 @@ return {
 		local outline = require("outline")
 		outline.setup(opts)
 
-		utils.on_event("FileType", function(event)
-			vim.schedule(function()
-				vim.cmd("topleft Outline!")
-			end)
-		end, {
-			target = { "markdown" },
-			desc = "Outline for markdown",
-		})
+		-- utils.on_event("FileType", function(event)
+		-- 	vim.schedule(function()
+		-- 		vim.cmd("topleft Outline!")
+		-- 	end)
+		-- end, {
+		-- 	target = { "markdown" },
+		-- 	desc = "Outline for markdown",
+		-- })
 	end,
 }
