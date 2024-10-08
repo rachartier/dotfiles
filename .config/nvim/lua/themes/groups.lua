@@ -33,6 +33,8 @@ function M.get(colors)
 		PmenuSel = { bg = colors.surface0 },
 		PopupNormal = { bg = colors.mantle, fg = colors.text },
 
+		BlinkCmpMenuBorder = { link = "FloatBorder" },
+
 		-- CursorLine = { bg = colors.surface1 },
 		CursorLine = { bg = "None" },
 		CursorLineNr = { fg = colors.mauve },

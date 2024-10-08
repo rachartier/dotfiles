@@ -28,16 +28,17 @@ return {
 			trigger = {
 				signature_help = { enabled = false },
 			},
-		},
-		windows = {
-			autocomplete = {
-				border = "single",
+
+			windows = {
+				-- autocomplete = {
+				-- 	border = require("config.icons").default_border,
+				-- },
+				documentation = {
+					border = require("config.icons").default_border,
+				},
 			},
-			documentation = {
-				border = "single",
-			},
+			kind_icons = require("config.icons").kind_icons,
 		},
-		kind_icons = require("config.icons").kind_icons,
 	},
 	{
 
