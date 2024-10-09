@@ -69,7 +69,7 @@ return {
 			},
 		},
 		config = function(_, opts)
-			vim.lsp.set_log_level("off") -- vim.lsp.set_log_level("debug")
+			vim.lsp.set_log_level("debug") -- vim.lsp.set_log_level("debug")
 			require("mason").setup(opts)
 
 			local dont_install = {
