@@ -30,7 +30,7 @@ function M.get(colors)
 		Pmenu = { bg = colors.mantle, fg = colors.text },
 		PmenuBorder = { link = "FloatBorder" },
 		PmenuDocBorder = { link = "FloatBorder" },
-		PmenuSel = { bg = colors.base },
+		PmenuSel = { bg = colors.surface0 },
 		PopupNormal = { bg = colors.mantle, fg = colors.text },
 
 		-- CursorLine = { bg = colors.surface1 },
@@ -191,7 +191,7 @@ function M.get(colors)
 		MarkdownCheckboxImportant = { fg = colors.peach },
 
 		CopilotSuggestion = { fg = colors.subtext0, italic = false },
-		MiniCursorwordCurrent = { bg = colors.surface1 },
+		MiniCursorwordCurrent = { bg = colors.surface0 },
 		MiniCursorword = { link = "MiniCursorwordCurrent" },
 
 		MarkviewCode = { bg = colors.surface0 },

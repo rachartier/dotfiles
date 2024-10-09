@@ -72,15 +72,15 @@ return {
 	},
 	config = function(_, opts)
 		require("roslyn").setup(opts)
-		vim.api.nvim_create_autocmd("LspAttach", {
-			pattern = { "*.cs", "*.xaml" },
-			callback = function()
-				utils.on_event("BufWritePre", function()
-					if vim.bo[0].filetype == "cs" then
-						fix_usings()
-					end
-				end, { desc = "Fix usings on save" })
-			end,
-		})
+		-- vim.api.nvim_create_autocmd("LspAttach", {
+		-- 	pattern = { "*.cs", "*.xaml" },
+		-- 	callback = function()
+		-- 		utils.on_event("BufWritePre", function()
+		-- 			if vim.bo[0].filetype == "cs" then
+		-- 				fix_usings()
+		-- 			end
+		-- 		end, { desc = "Fix usings on save" })
+		-- 	end,
+		-- })
 	end,
 }
