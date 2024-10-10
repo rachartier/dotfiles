@@ -32,7 +32,8 @@ end
 
 local function get_heading_padding(margin)
 	local win_height = vim.api.nvim_win_get_height(0)
-	local margin_top_percent = margin or 0.25
+	-- local margin_top_percent = margin or 0.25
+	local margin_top_percent = margin or 0.15
 
 	if win_height <= 32 then
 		margin_top_percent = 0
@@ -124,8 +125,6 @@ return {
 					[['   : |      |   :   .'   \   \ .'        :   \ |;   |.' ;   | |`-'      ]],
 					[[;   |.'      |   | ,'      `---`           '---" '---'   |   ;/          ]],
 					[['---'        `----'                                      '---'           ]],
-					[[                                                                         ]],
-					[[                                                                         ]],
 					[[                                                                         ]],
 					--
 					-- [[     ___           ___           ___           ___                       ___     ]],
