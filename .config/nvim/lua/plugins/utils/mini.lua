@@ -1,11 +1,4 @@
 local utils = require("utils")
-local M = {
-	cache = {},
-}
-
-function M.hl_group(name, buf)
-	return vim.api.nvim_buf_get_name(buf):find("kinds") and "LspKind" .. name or name
-end
 
 return {
 	{

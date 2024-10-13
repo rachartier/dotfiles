@@ -1,5 +1,8 @@
 # eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/pure.toml)"
 # eval "$(starship init zsh)"
+source "$HOME/.profile"
+source "$HOME/.dotfile_profile"
+
 
 [ ! -d $HOME/.antidote ] && git clone --depth=1 https://github.com/mattmc3/antidote.git $HOME/.antidote
 source $HOME/.antidote/antidote.zsh
@@ -15,6 +18,8 @@ fi
 ZSH_HIGHLIGHT_STYLES[path]=none
 ZSH_HIGHLIGHT_STYLES[path_prefix]=none
 ZSH_HIGHLIGHT_STYLES[sudo]=none
+
+
 
 setopt always_to_end          # cursor moved to the end in full completion
 setopt autocd
@@ -48,14 +53,13 @@ setopt hist_ignore_space      # ignore commands that start with space
 setopt hist_verify            # show command with history expansion to user before running it
 setopt share_history          # share command history data
 
+
 bindkey "^[[1;5A" history-substring-search-up
 bindkey "^[[1;5B" history-substring-search-down
 # bindkey '^[' send-break
 
 
 function _setup()  {
-    source "$HOME/.profile"
-    source "$HOME/.dotfile_profile"
 
     if ! [ -f "/tmp/tmux-theme.cache" ]; then
         echo "catppuccin_macchiato.conf" > /tmp/tmux-theme.cache

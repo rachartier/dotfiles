@@ -1,62 +1,62 @@
 return {
+
+	-- {
+	-- 	"saghen/blink.cmp",
+	-- 	dependencies = "rafamadriz/friendly-snippets",
+	-- 	event = "VeryLazy",
+	-- 	-- use a release tag to download pre-built binaries
+	-- 	version = "v0.*",
+	-- 	-- OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
+	-- 	-- build = 'cargo build --release',
+	--
+	-- 	opts = {
+	-- 		keymap = {
+	-- 			accept = "<Tab>",
+	-- 		},
+	-- 		highlight = {
+	-- 			-- sets the fallback highlight groups to nvim-cmp's highlight groups
+	-- 			-- useful for when your theme doesn't support blink.cmp
+	-- 			-- will be removed in a future release, assuming themes add support
+	-- 			use_nvim_cmp_as_default = true,
+	-- 		},
+	-- 		-- set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
+	-- 		-- adjusts spacing to ensure icons are aligned
+	-- 		nerd_font_variant = "normal",
+	--
+	-- 		accept = {
+	-- 			auto_brackets = { enabled = true },
+	-- 		},
+	--
+	-- 		trigger = {
+	-- 			signature_help = { enabled = false },
+	-- 		},
+	--
+	-- 		windows = {
+	-- 			-- autocomplete = {
+	-- 			-- 	border = require("config.icons").default_border,
+	-- 			-- },
+	-- 			documentation = {
+	-- 				border = require("config.icons").default_border,
+	-- 			},
+	-- 		},
+	-- 		kind_icons = require("config.icons").kind_icons,
+	-- 	},
+	-- },
 	{
-		"saghen/blink.cmp",
-		dependencies = "rafamadriz/friendly-snippets",
-		event = "VeryLazy",
-		-- use a release tag to download pre-built binaries
-		version = "v0.*",
-		-- OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
-		-- build = 'cargo build --release',
-
-		opts = {
-			keymap = {
-				accept = "<Tab>",
-			},
-			highlight = {
-				-- sets the fallback highlight groups to nvim-cmp's highlight groups
-				-- useful for when your theme doesn't support blink.cmp
-				-- will be removed in a future release, assuming themes add support
-				use_nvim_cmp_as_default = true,
-			},
-			-- set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
-			-- adjusts spacing to ensure icons are aligned
-			nerd_font_variant = "normal",
-
-			accept = {
-				auto_brackets = { enabled = true },
-			},
-
-			trigger = {
-				signature_help = { enabled = false },
-			},
-
-			windows = {
-				-- autocomplete = {
-				-- 	border = require("config.icons").default_border,
-				-- },
-				documentation = {
-					border = require("config.icons").default_border,
-				},
-			},
-			kind_icons = require("config.icons").kind_icons,
-		},
-	},
-	{
-
-		-- Waiting for blink.cmp to have command completion
-		enabled = true,
-		"hrsh7th/nvim-cmp",
+		-- "hrsh7th/nvim-cmp",
+		"iguanacucumber/magazine.nvim",
+		name = "nvim-cmp",
 		dependencies = {
-			-- "hrsh7th/cmp-buffer",
-			-- "hrsh7th/cmp-path",
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-cmdline",
-			-- "hrsh7th/cmp-nvim-lsp",
-			-- "hrsh7th/cmp-nvim-lua",
-			-- "hrsh7th/cmp-emoji",
-			-- "hrsh7th/cmp-calc",
-			-- "chrisgrieser/cmp-nerdfont",
-			-- "saadparwaiz1/cmp_luasnip",
-			-- "lukas-reineke/cmp-under-comparator",
+			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-nvim-lua",
+			"hrsh7th/cmp-emoji",
+			"hrsh7th/cmp-calc",
+			"chrisgrieser/cmp-nerdfont",
+			"saadparwaiz1/cmp_luasnip",
+			"lukas-reineke/cmp-under-comparator",
 		},
 		event = { "VeryLazy" },
 		opts = function(_, opts)
@@ -70,7 +70,7 @@ return {
 			local cmp = require("cmp")
 			local icons = require("config.icons")
 
-			-- local luasnip = require("luasnip")
+			local luasnip = require("luasnip")
 
 			local has_words_before = function()
 				if not table.unpack then
@@ -139,48 +139,48 @@ return {
 				return kind ~= "Text"
 			end
 
-			-- local mapping_selection_down = cmp.mapping(function(fallback)
-			-- 	if cmp.visible() then
-			-- 		cmp.select_next_item()
-			-- 	elseif luasnip.expand_or_jumpable() then
-			-- 		luasnip.expand_or_jump()
-			-- 	else
-			-- 		fallback()
-			-- 	end
-			-- end, { "i", "s", "c" })
-			--
-			-- local mapping_selection_up = cmp.mapping(function(fallback)
-			-- 	if cmp.visible() then
-			-- 		cmp.select_prev_item()
-			-- 	elseif luasnip.jumpable(-1) then
-			-- 		luasnip.jump(-1)
-			-- 	else
-			-- 		fallback()
-			-- 	end
-			-- end, { "i", "s", "c" })
+			local mapping_selection_down = cmp.mapping(function(fallback)
+				if cmp.visible() then
+					cmp.select_next_item()
+				elseif luasnip.expand_or_jumpable() then
+					luasnip.expand_or_jump()
+				else
+					fallback()
+				end
+			end, { "i", "s", "c" })
+
+			local mapping_selection_up = cmp.mapping(function(fallback)
+				if cmp.visible() then
+					cmp.select_prev_item()
+				elseif luasnip.jumpable(-1) then
+					luasnip.jump(-1)
+				else
+					fallback()
+				end
+			end, { "i", "s", "c" })
 
 			---@diagnostic disable-next-line: redundant-parameter
 			cmp.setup({
-				-- snippet = {
-				-- 	expand = function(args)
-				-- 		luasnip.lsp_expand(args.body)
-				-- 	end,
-				-- },
+				snippet = {
+					expand = function(args)
+						luasnip.lsp_expand(args.body)
+					end,
+				},
 				sources = {
-					-- { name = "nerdfont" },
-					-- { name = "emoji" },
-					-- { name = "nvim_lsp", entry_filter = filter_text, keyword_length = 2 },
-					-- {
-					-- 	name = "buffer",
-					-- 	option = {
-					-- 		keyword_length = 4,
-					-- 	},
-					-- 	entry_filter = filter_text,
-					-- },
-					-- { name = "dotenv" },
-					-- { name = "luasnip", entry_filter = filter_text, keyword_length = 2 },
-					-- { name = "path" },
-					-- { name = "calc", kind = "  " },
+					{ name = "nerdfont" },
+					{ name = "emoji" },
+					{ name = "nvim_lsp", entry_filter = filter_text, keyword_length = 2 },
+					{
+						name = "buffer",
+						option = {
+							keyword_length = 4,
+						},
+						entry_filter = filter_text,
+					},
+					{ name = "dotenv" },
+					{ name = "luasnip", entry_filter = filter_text, keyword_length = 2 },
+					{ name = "path" },
+					{ name = "calc", kind = "  " },
 				},
 				mapping = cmp.mapping.preset.insert({
 					["<C-BS>"] = {
@@ -191,11 +191,11 @@ return {
 					["<C-Space>"] = cmp.mapping.complete(),
 					["<C-e>"] = cmp.mapping.abort(),
 					["<CR>"] = cmp.mapping.confirm({ select = true }),
-					-- ["<Tab>"] = mapping_selection_down,
-					-- ["<S-Tab>"] = mapping_selection_up,
-					--
-					-- ["<Up>"] = mapping_selection_up,
-					-- ["<Down>"] = mapping_selection_down,
+					["<Tab>"] = mapping_selection_down,
+					["<S-Tab>"] = mapping_selection_up,
+
+					["<Up>"] = mapping_selection_up,
+					["<Down>"] = mapping_selection_down,
 				}),
 
 				formatting = {
@@ -249,14 +249,14 @@ return {
 					-- 	cmp.config.compare.length,
 					-- 	cmp.config.compare.order,
 					-- },
-					-- comparators = {
-					-- 	cmp.config.compare.offset,
-					-- 	cmp.config.compare.exact,
-					-- 	cmp.config.compare.score,
-					-- 	cmp.config.compare.recently_used,
-					-- 	require("cmp-under-comparator").under,
-					-- 	cmp.config.compare.kind,
-					-- },
+					comparators = {
+						cmp.config.compare.offset,
+						cmp.config.compare.exact,
+						cmp.config.compare.score,
+						cmp.config.compare.recently_used,
+						require("cmp-under-comparator").under,
+						cmp.config.compare.kind,
+					},
 				},
 
 				window = {
@@ -290,14 +290,14 @@ return {
 			local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 			cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 
-			-- cmp.setup.filetype("gitcommit", {
-			-- 	sources = cmp.config.sources({
-			-- 		{ name = "cmp_git" },
-			-- 	}, {
-			-- 		{ name = "buffer" },
-			-- 	}),
-			-- })
-			--
+			cmp.setup.filetype("gitcommit", {
+				sources = cmp.config.sources({
+					{ name = "cmp_git" },
+				}, {
+					{ name = "buffer" },
+				}),
+			})
+
 			cmp.setup.cmdline({ "/", "?" }, {
 				mapping = cmp.mapping.preset.cmdline(),
 				sources = {
@@ -317,11 +317,11 @@ return {
 				}),
 			})
 
-			-- cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
-			-- 	sources = {
-			-- 		{ name = "dap" },
-			-- 	},
-			-- })
+			cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
+				sources = {
+					{ name = "dap" },
+				},
+			})
 		end,
 	},
 }
