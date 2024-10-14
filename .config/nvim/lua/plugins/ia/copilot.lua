@@ -199,7 +199,6 @@ return {
 	                    ]], {
 						selection = require("CopilotChat.select").visual,
 						callback = function(response)
-							print("BetterDocs callback")
 							vim.cmd("normal <C-y>")
 						end,
 					})
@@ -262,7 +261,7 @@ return {
 
 				prompts = {
 					BetterNamings = {
-						prompt = "/COPILOT_GENERATE Please provide better names for the following variables and/or functions.",
+						prompt = "/COPILOT_GENERATE Provide better names for the following variables and/or functions.",
 					},
 					TestsxUnit = {
 						prompt = "/COPILOT_GENERATE Write a set of detailed unit test functions for the following code with the xUnit framework.",

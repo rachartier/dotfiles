@@ -66,7 +66,9 @@ function M.get(colors)
 
 		NoiceCmdlineIcon = { fg = colors.yellow, italic = false, bold = true },
 		NoiceCmdlinePopup = { bg = colors.mantle, fg = colors.text },
+		NoiceCmdlinePopupTitle = { bg = colors.red, fg = colors.text },
 		NoiceCmdlinePopupBorder = { link = "FloatBorder" },
+		NoiceCmdlinePopupTitleInput = { bg = colors.yellow, fg = colors.base },
 		NoiceFormatLevelOff = { bg = colors.yellow },
 		NoicePopupmenu = { link = "PopupNormal" },
 		NoicePopupmenuBorder = { link = "FloatBorder" },
@@ -103,6 +105,7 @@ function M.get(colors)
 		-- InvDiagnosticVirtualTextHint = { fg = modify_func(colors.teal, darken_diag), bg = cursor_line_bg },   -- Used for "Hint" diagnostic virtual text
 		--
 		TelescopeMatching = { link = "CmpItemAbbrMatch" },
+		TelescopeTitle = { bg = colors.surface0, fg = colors.text },
 		TelescopeSelection = { link = "PmenuSel" },
 
 		TelescopePromptPrefix = { fg = colors.blue },

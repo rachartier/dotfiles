@@ -36,11 +36,10 @@ return {
 	},
 	{
 		-- dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-code-actions.nvim",
-		-- dir = "/home/rachartier/dev/nvim_plugins/tiny-code-action.nvim",
 		"rachartier/tiny-code-action.nvim",
 		dependencies = {
-			{ "nvim-lua/plenary.nvim" },
-			{ "nvim-telescope/telescope.nvim" },
+			"nvim-lua/plenary.nvim",
+			"nvim-telescope/telescope.nvim",
 			"nvim-tree/nvim-web-devicons",
 		},
 		event = "LspAttach",
@@ -60,8 +59,8 @@ return {
 		end,
 	},
 	{
-		dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-inline-diagnostic.nvim",
-		-- "rachartier/tiny-inline-diagnostic.nvim",
+		-- dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-inline-diagnostic.nvim",
+		"rachartier/tiny-inline-diagnostic.nvim",
 		event = "VeryLazy",
 		config = function()
 			local signs = {}
