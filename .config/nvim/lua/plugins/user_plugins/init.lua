@@ -74,7 +74,9 @@ return {
 			end
 
 			require("tiny-inline-diagnostic").setup({
-				signs = signs,
+				signs = {
+					diag = nil,
+				},
 				hi = {
 					-- background = "None",
 					mixing_color = require("theme").get_colors().base,

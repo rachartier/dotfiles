@@ -1,5 +1,5 @@
-darvid/zsh-poetry
-Aloxaf/fzf-tab
+darvid/zsh-poetry kind:defer
+Aloxaf/fzf-tab kind:defer
 Freed-Wu/fzf-tab-source kind:defer
 
 ohmyzsh/ohmyzsh path:plugins/command-not-found
@@ -11,4 +11,4 @@ ohmyzsh/ohmyzsh path:lib/key-bindings.zsh
 zsh-users/zsh-autosuggestions
 zsh-users/zsh-syntax-highlighting kind:defer
 zsh-users/zsh-history-substring-search
-
+zsh-users/zsh-completions

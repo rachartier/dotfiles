@@ -9,11 +9,27 @@ return {
 				error = "❌",
 			},
 		},
+		contenttypes = {
+			["application/json"] = {
+				ft = "kulala-json",
+			},
+			["application/xml"] = {
+				ft = "kulala-xml",
+			},
+			["text/html"] = {
+				ft = "kulala-html",
+			},
+		},
+
 		default_view = "headers_body",
 	},
 
 	config = function(_, opts)
 		require("kulala").setup(opts)
+
+		vim.treesitter.language.register("json", "kulala-json")
+		vim.treesitter.language.register("xml", "kulala-xml")
+		vim.treesitter.language.register("html", "kulala-html")
 
 		vim.api.nvim_buf_set_keymap(
 			0,

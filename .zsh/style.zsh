@@ -2,11 +2,12 @@
 
 eza_command='$HOME/.config/scripts/preview_fzf.sh $realpath'
 
+zstyle ':fzf-tab:*' use-fzf-default-opts yes
 # zstyle ':fzf-tab:*' popup-min-size 38 0
 # zstyle ':fzf-tab:*' fzf-flags --preview=''
-zstyle ':fzf-tab:*' fzf-flags --height=40%
+# zstyle ':fzf-tab:*' fzf-flags --height=40%
 # zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
-zstyle ":fzf-tab:complete:*:*" fzf-preview $eza_command
+# zstyle ":fzf-tab:complete:*:*" fzf-preview $eza_command
 
 zstyle ':fzf-tab:complete:(-command-|-parameter-|-brace-parameter-|export|unset|expand):*' \
 	fzf-preview 'echo ${(P)word}'

@@ -101,27 +101,27 @@ return {
 			},
 		},
 	},
-	-- {
-	-- 	languages = { "c", "cpp" },
-	-- 	mason = { "clangd" },
-	-- 	formatter = {
-	-- 		-- ["clang-format"] = {
-	-- 		-- 	command = os.getenv("HOME") .. "/.local/share/nvim/mason/bin/clang-format",
-	-- 		-- 	inherit = false,
-	-- 		-- 	args = {
-	-- 		-- 		"--style=file:" .. linter_config .. "/clang-format",
-	-- 		-- 		"$FILENAME",
-	-- 		-- 	},
-	-- 		-- },
-	-- 		"typos",
-	-- 	},
-	-- 	lsp_settings = {
-	-- 		cmd = {
-	-- 			"clangd",
-	-- 			"--offset-encoding=utf-16",
-	-- 		},
-	-- 	},
-	-- },
+	{
+		languages = { "c", "cpp", "h", "hpp" },
+		mason = { "clangd" },
+		formatter = {
+			-- ["clang-format"] = {
+			-- 	command = os.getenv("HOME") .. "/.local/share/nvim/mason/bin/clang-format",
+			-- 	inherit = false,
+			-- 	args = {
+			-- 		"--style=file:" .. linter_config .. "/clang-format",
+			-- 		"$FILENAME",
+			-- 	},
+			-- },
+			"typos",
+		},
+		lsp_settings = {
+			cmd = {
+				"clangd",
+				"--offset-encoding=utf-16",
+			},
+		},
+	},
 
 	{
 		languages = { "typescript" },
@@ -202,12 +202,12 @@ return {
 		mason = {},
 		formatter = { "typos" },
 	},
-	{
-		languages = { "c", "h" },
-		mason = { "clangd" },
-		formatter = { "clang-format", "typos" },
-		lsp_ignore = true,
-	},
+	-- {
+	-- 	languages = { "c", "h", "cpp", "hpp" },
+	-- 	mason = { "clangd" },
+	-- 	formatter = { "clang-format", "typos" },
+	-- 	lsp_ignore = true,
+	-- },
 	{
 		languages = { "rust" },
 		lsp_ignore = true,
