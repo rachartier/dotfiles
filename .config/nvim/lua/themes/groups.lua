@@ -11,7 +11,7 @@ function M.get(colors)
 	local cursor_line_bg = "None"
 	return {
 		-- Visual = { bg = "#234370" },
-		Visual = { bg = colors.surface1 },
+		Visual = { bg = colors.surface0 },
 		-- Visual = { bg = colors.blue, fg = colors.mantle },
 
 		-- NormalFloat = { bg = bg, fg = colors.text },
