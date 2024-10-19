@@ -12,12 +12,12 @@ function M.get(colors)
 	return {
 		-- Visual = { bg = "#234370" },
 		Visual = { bg = colors.surface0 },
-		-- Visual = { bg = colors.blue, fg = colors.mantle },
+		-- Visual = { bg = colors.blue, fg = colors.base },
 
 		-- NormalFloat = { bg = bg, fg = colors.text },
-		NormalFloat = { bg = colors.mantle, fg = colors.text },
-		FloatBorder = { fg = colors.mantle, bg = colors.mantle },
-		FloatTitle = { bg = colors.yellow, fg = colors.mantle },
+		NormalFloat = { bg = colors.base, fg = colors.text },
+		FloatBorder = { fg = colors.lavender, bg = colors.base },
+		FloatTitle = { bg = colors.yellow, fg = colors.base },
 		LineNr = { fg = colors.surface1 },
 		SignColumn = { fg = colors.surface1 },
 		-- Visual = { bg = colors.surface1 },
@@ -27,11 +27,11 @@ function M.get(colors)
 		CmpItemAbbrMatch = { fg = colors.yellow, bold = true, underline = false },
 		CmpItemAbbrMatchFuzzy = { fg = colors.blue, underline = true, link = "CmpItemAbbrMatch" },
 
-		Pmenu = { bg = colors.mantle, fg = colors.text },
+		Pmenu = { bg = colors.base, fg = colors.text },
 		PmenuBorder = { link = "FloatBorder" },
 		PmenuDocBorder = { link = "FloatBorder" },
 		PmenuSel = { bg = colors.surface0 },
-		PopupNormal = { bg = colors.mantle, fg = colors.text },
+		PopupNormal = { bg = colors.base, fg = colors.text },
 
 		BlinkCmpMenuBorder = { link = "FloatBorder" },
 
@@ -41,9 +41,9 @@ function M.get(colors)
 		CursorLineSign = { link = "SignColumn" },
 		CursorColumn = { bg = "None" },
 
-		FlashLabel = { fg = colors.mantle, bg = colors.yellow, bold = true },
+		FlashLabel = { fg = colors.base, bg = colors.yellow, bold = true },
 
-		AlphaShortcut = { fg = colors.mantle, bg = colors.blue, bold = true },
+		AlphaShortcut = { fg = colors.base, bg = colors.blue, bold = true },
 		AlphaFooter = { fg = colors.maroon },
 		AlphaButtons = { fg = colors.text },
 
@@ -55,17 +55,17 @@ function M.get(colors)
 		IlluminatedWordWrite = { link = "IlluminatedWordRead" },
 
 		LspLens = { italic = true, fg = colors.surface1 },
-		LspSignatureActiveParameter = { bg = colors.peach, fg = colors.mantle },
+		LspSignatureActiveParameter = { bg = colors.peach, fg = colors.base },
 
 		MiniIndentscopeSymbol = { fg = colors.surface0 },
 
 		NeoTreeCursorLine = { link = "PmenuSel" },
 		NeoTreeIndentMarker = { fg = colors.surface0 },
-		NeoTreeNormal = { bg = colors.mantle },
+		NeoTreeNormal = { bg = colors.base },
 		NeoTreePreview = { link = "NeoTreeNormal" },
 
 		NoiceCmdlineIcon = { fg = colors.yellow, italic = false, bold = true },
-		NoiceCmdlinePopup = { bg = colors.mantle, fg = colors.text },
+		NoiceCmdlinePopup = { bg = colors.base, fg = colors.text },
 		NoiceCmdlinePopupTitle = { bg = colors.red, fg = colors.text },
 		NoiceCmdlinePopupBorder = { link = "FloatBorder" },
 		NoiceCmdlinePopupTitleInput = { bg = colors.yellow, fg = colors.base },
@@ -74,7 +74,7 @@ function M.get(colors)
 		NoicePopupmenuBorder = { link = "FloatBorder" },
 
 		PopupBorder = { link = "FloatBorder" },
-		-- PopupNormal = { bg = colors.mantle, fg = colors.mantle },
+		-- PopupNormal = { bg = colors.base, fg = colors.mantle },
 
 		SwitchBufferStatusColor = { fg = colors.red },
 
@@ -109,22 +109,22 @@ function M.get(colors)
 		TelescopeSelection = { link = "PmenuSel" },
 
 		TelescopePromptPrefix = { fg = colors.blue },
-		TelescopePromptNormal = { bg = colors.surface0, fg = colors.text },
-		-- TelescopePromptBorder = { bg = colors.mantle, fg = colors.surface0 },
-		TelescopePromptBorder = { bg = colors.surface0, fg = colors.surface0 },
-		TelescopePromptTitle = { bg = colors.pink, fg = colors.mantle },
+		TelescopePromptNormal = { bg = colors.base, fg = colors.text },
+		-- TelescopePromptBorder = { bg = colors.base, fg = colors.surface0 },
+		TelescopePromptBorder = { link = "FloatBorder" },
+		TelescopePromptTitle = { bg = colors.pink, fg = colors.base },
 
-		TelescopeResultsNormal = { bg = colors.mantle, fg = colors.subtext1 },
+		TelescopeResultsNormal = { bg = colors.base, fg = colors.subtext1 },
 		TelescopeResultsBorder = { link = "FloatBorder" },
-		TelescopeResultsTitle = { bg = colors.blue, fg = colors.mantle },
+		TelescopeResultsTitle = { bg = colors.blue, fg = colors.base },
 
 		TelescopePreviewBorder = { link = "FloatBorder" },
-		TelescopePreviewNormal = { bg = colors.mantle },
-		TelescopePreviewTitle = { bg = colors.green, fg = colors.mantle },
+		TelescopePreviewNormal = { bg = colors.base },
+		TelescopePreviewTitle = { bg = colors.green, fg = colors.base },
 
 		FzfLuaNormal = { bg = colors.bg, fg = colors.text },
 		FzfPreviewTitle = { bg = colors.blue, fg = colors.text },
-		FzfLuaPreviewTitle = { bg = colors.green, fg = colors.mantle },
+		FzfLuaPreviewTitle = { bg = colors.green, fg = colors.base },
 		FzfLuaBorder = { link = "FloatBorder" },
 
 		WinSeparator = { fg = colors.surface0 },
@@ -142,7 +142,7 @@ function M.get(colors)
 		-- StatusLineNC = { fg = colors.surface0 },
 		-- StatusLine = { fg = colors.surface0 },
 
-		EdgyNormal = { bg = colors.mantle },
+		EdgyNormal = { bg = colors.base },
 		EdgyWinBar = { bg = colors.surface0, fg = "None" },
 		-- EdgyTitle = { bg = colors.surface0, fg = colors.blue },
 		-- EdgyIconActive = { bg = colors.surface0, fg = colors.peach },
@@ -158,8 +158,8 @@ function M.get(colors)
 		-- 	sp = colors.red,
 		-- },
 
-		HighlightUndo = { bg = colors.red, fg = colors.mantle },
-		HighlightRedo = { bg = colors.green, fg = colors.mantle },
+		HighlightUndo = { bg = colors.red, fg = colors.base },
+		HighlightRedo = { bg = colors.green, fg = colors.base },
 
 		AlphaHeader = { fg = colors.yellow, bold = true },
 		AlphaNeovimLogoMauve = { fg = colors.mauve },
