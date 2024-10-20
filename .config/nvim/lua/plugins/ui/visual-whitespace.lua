@@ -5,7 +5,7 @@ return {
 		local colors = require("theme").get_colors()
 
 		return {
-			highlight = { bg = colors.surface0, fg = colors.surface2 },
+			highlight = { bg = colors.surface0, fg = colors.surface1 },
 		}
 	end,
 }

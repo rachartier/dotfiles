@@ -60,7 +60,7 @@ function M.get(colors)
 		MiniIndentscopeSymbol = { fg = colors.surface0 },
 
 		NeoTreeCursorLine = { link = "PmenuSel" },
-		NeoTreeIndentMarker = { fg = colors.surface0 },
+		NeoTreeIndentMarker = { fg = colors.surface2 },
 		NeoTreeNormal = { bg = colors.base },
 		NeoTreePreview = { link = "NeoTreeNormal" },
 
