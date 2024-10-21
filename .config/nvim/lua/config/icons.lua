@@ -13,10 +13,13 @@ M.border = {
 	outer_thin_telescope = { "▔", "▕", "▁", "▏", "🭽", "🭾", "🭿", "🭼" },
 	outer_thick_telescope = { "▀", "▐", "▄", "▌", "▛", "▜", "▟", "▙" },
 	rounded_telescope = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+	square = { "┌", "─", "┐", "│", "┘", "─", "└", "│" },
+	square_telescope = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
 }
 
 -- M.default_border = M.border.empty
-M.default_border = "rounded"
+M.default_border = M.border.square
+-- M.default_border = "rounded"
 
 M.signs = {
 	file = {

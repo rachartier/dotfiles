@@ -1,3 +1,5 @@
+local icons = require("config.icons")
+
 local function flash(prompt_bufnr)
 	local actions = require("telescope.actions")
 	require("flash").jump({
@@ -42,7 +44,7 @@ local search_layout = {
 			dynamic_width = true,
 		},
 	},
-	-- borderchars = require("config.icons").default_border,
+	borderchars = icons.border.square_telescope,
 }
 
 return {
@@ -75,6 +77,7 @@ return {
 			-- borderchars = icons.default_border,
 			-- { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
 
+			borderchars = icons.border.square_telescope,
 			set_env = { ["COLORTERM"] = "truecolor" },
 			prompt = { "─", "│", " ", "│", "╭", "╮", "│", "│" },
 			results = { "─", "│", "─", "│", "├", "┤", "╯", "╰" },

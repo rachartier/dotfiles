@@ -32,20 +32,51 @@ return {
 	-- 		},
 	--
 	-- 		windows = {
-	-- 			-- autocomplete = {
-	-- 			-- 	border = require("config.icons").default_border,
-	-- 			-- },
 	-- 			documentation = {
+	-- 				min_width = 15,
+	-- 				max_width = 50,
+	-- 				max_height = 15,
 	-- 				border = require("config.icons").default_border,
+	-- 				auto_show = true,
+	-- 				auto_show_delay_ms = 0,
+	-- 			},
+	-- 			autocomplete = {
+	-- 				min_width = 10,
+	-- 				max_height = 10,
+	-- 				border = require("config.icons").default_border,
+	--
+	-- 				-- autocomplete = {
+	-- 				-- 	border = require("config.icons").default_border,
+	-- 				-- },
+	--
+	-- 				icon_gap = 2,
+	-- 				selection = "preselect",
+	-- 				draw = function(ctx)
+	-- 					-- local icon_hl = vim.api.nvim_get_hl_by_name("BlinkCmpKind", true) and "BlinkCmpKind" .. ctx.kind
+	-- 					-- 	or "BlinkCmpKind"
+	-- 					local icon_hl = "BlinkCmpKind" .. ctx.kind
+	-- 					return {
+	-- 						{
+	-- 							" " .. ctx.kind_icon .. "│" .. ctx.icon_gap,
+	-- 							hl_group = icon_hl,
+	-- 						},
+	-- 						{
+	-- 							ctx.item.label .. " ",
+	-- 							fill = true,
+	-- 							hl_group = ctx.deprecated and "BlinkCmpLabelDeprecated" or "BlinkCmpLabel",
+	-- 							max_width = 45,
+	-- 						},
+	-- 					}
+	-- 				end,
 	-- 			},
 	-- 		},
 	-- 		kind_icons = require("config.icons").kind_icons,
 	-- 	},
 	-- },
 	{
-		-- "hrsh7th/nvim-cmp",
-		"iguanacucumber/magazine.nvim",
-		name = "nvim-cmp",
+		"hrsh7th/nvim-cmp",
+		-- "iguanacucumber/magazine.nvim",
+		-- name = "nvim-cmp",
 		dependencies = {
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",

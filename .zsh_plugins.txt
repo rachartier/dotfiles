@@ -8,7 +8,7 @@ ohmyzsh/ohmyzsh path:plugins/tmux kind:defer
 
 ohmyzsh/ohmyzsh path:lib/key-bindings.zsh
 
-zsh-users/zsh-autosuggestions
+zsh-users/zsh-autosuggestions kind:defer
 zsh-users/zsh-syntax-highlighting kind:defer
-zsh-users/zsh-history-substring-search
-zsh-users/zsh-completions
+zsh-users/zsh-history-substring-search kind:defer
+zsh-users/zsh-completions kind:defer

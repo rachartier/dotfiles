@@ -1,5 +1,9 @@
 # eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/pure.toml)"
 # eval "$(starship init zsh)"
+
+
+eval "$(starship init zsh)"
+
 source "$HOME/.profile"
 source "$HOME/.dotfile_profile"
 
@@ -18,7 +22,6 @@ fi
 ZSH_HIGHLIGHT_STYLES[path]=none
 ZSH_HIGHLIGHT_STYLES[path_prefix]=none
 ZSH_HIGHLIGHT_STYLES[sudo]=none
-
 
 
 setopt always_to_end          # cursor moved to the end in full completion
@@ -60,11 +63,9 @@ bindkey "^[[1;5B" history-substring-search-down
 
 
 function _setup()  {
-
     if ! [ -f "/tmp/tmux-theme.cache" ]; then
         echo "catppuccin_macchiato.conf" > /tmp/tmux-theme.cache
     fi
-
 }
 
 zsh-defer _setup
@@ -73,7 +74,6 @@ source $HOME/.aliases
 source $HOME/.zsh/transient_prompt.zsh
 source $HOME/.zsh/style.zsh
 
-eval "$(starship init zsh)"
 
 function ghcs() {
     if [ -z "$DOT_GITHUB_COPILOT_LOADED" ]; then
