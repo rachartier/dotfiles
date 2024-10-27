@@ -63,6 +63,7 @@ return {
     keys = {
         { "<leader>f", "", "+telescope", mode = {"n"} },
         { "<leader>ff", "<cmd>Telescope find_files<cr>",  desc = "Find files"  },
+        { "<leader><leader>", "<cmd>Telescope find_files<cr>",  desc = "Find files"  },
         {  "<leader>fr", "<cmd>Telescope lsp_references show_line=false<cr>",  desc = "Find all LSP references"  },
         -- { "n", "<C-p>", require("telescope.builtin").git_files, { desc = "Find git files" } },
         {  "<leader>fg", "<cmd>Telescope live_grep<cr>",  desc = "Grep words inside files" },
