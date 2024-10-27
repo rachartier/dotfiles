@@ -168,8 +168,11 @@ return {
 							return
 						end
 
+						local handlers = require("config.lsp.handlers").handlers
+
 						if settings then
 							settings.capabilities = capabilities
+							settings.handlers = handlers
 
 							require("lspconfig")[server_name].setup(settings)
 						else
@@ -183,6 +186,7 @@ return {
 
 							require("lspconfig")[server_name].setup({
 								capabilities = capabilities,
+								handlers = handlers,
 							})
 						end
 					end,
