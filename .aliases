@@ -39,3 +39,9 @@ alias ssh='TERM=xterm ssh'
 
 alias trad="copilot-cli --action 'translate' --prompt"
 alias enhance="copilot-cli --action 'enhance' --prompt"
+
+function correct() {
+    result=$(copilot-cli --action 'correct' --prompt "$1")
+    echo "$result"
+    echo "$result" | xsel --clipboard
+}
