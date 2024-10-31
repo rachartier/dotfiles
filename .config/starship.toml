@@ -1,6 +1,7 @@
 format = """
 $username\
 $hostname\
+${custom.inside_docker}\
 ${custom.directory}\
 $directory\
 $git_branch\
@@ -56,12 +57,10 @@ $nix_shell\
 $conda\
 $meson\
 $cmd_duration\
-$line_break\
 $docker_context\
-${custom.inside_docker}\
 $character"""
 
-
+add_newline = false
 
 [custom.inside_docker]
 disabled = false
