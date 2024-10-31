@@ -58,8 +58,8 @@ map("n", "p", "p=`]", { silent = true })
 map("x", ">", ">gv", { noremap = true })
 map("x", "<", "<gv", { noremap = true })
 
-map({ "n", "x", "o" }, "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
-map({ "n", "x", "o" }, "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
+-- map({ "n", "x", "o" }, "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
+-- map({ "n", "x", "o" }, "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
 
 local function indent_empty_line()
 	if #vim.fn.getline(".") == 0 then

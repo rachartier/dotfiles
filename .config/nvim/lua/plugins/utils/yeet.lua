@@ -4,7 +4,6 @@ return {
 		"stevearc/dressing.nvim", -- optional, provides sane UX
 	},
 	version = "*", -- update only on releases
-	cmd = "Yeet",
 	keys = {
 		{
 			-- Pop command cache open

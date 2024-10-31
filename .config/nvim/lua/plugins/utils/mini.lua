@@ -85,7 +85,7 @@ return {
 	},
 	{
 		"echasnovski/mini.cursorword",
-		event = { "VeryLazy" },
+		event = { "CursorMoved" },
 		version = false,
 		opts = {},
 	},

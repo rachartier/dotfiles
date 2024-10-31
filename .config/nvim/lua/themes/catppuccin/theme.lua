@@ -114,7 +114,7 @@ function M.setup()
 			telekasten = true,
 			telescope = true,
 			treesitter = true,
-			treesitter_context = false,
+			treesitter_context = true,
 			which_key = true,
 			symbols_outline = true,
 			native_lsp = {

@@ -35,8 +35,7 @@ function M.get(colors)
 
 		BlinkCmpMenuBorder = { link = "FloatBorder" },
 
-		-- CursorLine = { bg = colors.surface1 },
-		CursorLine = { bg = "None" },
+		-- CursorLine = { bg = "None" },
 		CursorLineNr = { fg = colors.mauve },
 		CursorLineSign = { link = "SignColumn" },
 		CursorColumn = { bg = "None" },
@@ -56,8 +55,6 @@ function M.get(colors)
 
 		LspLens = { italic = true, fg = colors.surface1 },
 		LspSignatureActiveParameter = { bg = colors.peach, fg = colors.base },
-
-		MiniIndentscopeSymbol = { fg = colors.surface0 },
 
 		NeoTreeCursorLine = { link = "PmenuSel" },
 		NeoTreeIndentMarker = { fg = colors.surface2 },
@@ -88,6 +85,7 @@ function M.get(colors)
 			link = "StatusLine",
 		},
 
+		DiagnosticUnnecessary = { fg = colors.overlay0 },
 		-- DiagnosticError = { fg = colors.red }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default
 		-- DiagnosticWarn = { fg = colors.yellow }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default
 		-- DiagnosticInfo = { fg = colors.blue }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default
@@ -198,6 +196,7 @@ function M.get(colors)
 		CopilotSuggestion = { fg = colors.subtext0, italic = false },
 		MiniCursorwordCurrent = { bg = colors.surface0 },
 		MiniCursorword = { link = "MiniCursorwordCurrent" },
+		MiniIndentscopeSymbol = { fg = colors.surface1 },
 
 		MarkviewCode = { bg = colors.surface0 },
 		MarkviewCodeInfo = { bg = colors.surface0 },
@@ -230,7 +229,7 @@ function M.override_lsp_hl(colors_table)
 	-- vim.api.nvim_set_hl(0, "@variable", { fg = colors.text, italic = false })
 	-- vim.api.nvim_set_hl(0, "@variable.builtin", { fg = colors.red })
 	-- vim.api.nvim_set_hl(0, "@variable.member", { fg = colors.text })
-	vim.api.nvim_set_hl(0, "@variable.parameter", { fg = colors.red, italic = false })
+	-- vim.api.nvim_set_hl(0, "@variable.parameter", { fg = colors.red, italic = true })
 	-- vim.api.nvim_set_hl(0, "@function.method.call", { italic = true })
 	vim.api.nvim_set_hl(0, "@keyword.operator.python", { link = "Conditional" })
 	-- vim.api.nvim_set_hl(0, "@string.documentation", { fg = "#7c8c8f" })
