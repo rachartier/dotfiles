@@ -11,18 +11,6 @@ alias cneo='neovide.exe --wsl --neovim-bin "$HOME/.local/bin/nvim" --server="$1:
 
 alias snvim='nvim --cmd "let g:neovide=1" --headless --listen 0.0.0.0:7301'
 
-if command tmuxp &> /dev/null; then
-    alias tl='tmuxp load'
-    for s in $(tmuxp ls); do alias "$s"="tmuxp load -y $s"; done
-fi
-
-if command -v gh &> /dev/null; then
-    alias '??'='ghcs -t shell'
-    alias 'git?'='ghcs -t git'
-    alias 'explain'='ghcs explain'
-    alias 'gh?'='ghcs -t gh'
-fi
-
 if [ -n "$DOTFILES_DOCKER" ]; then
     alias nvim="env TERM=wezterm nvim"
 fi
@@ -37,11 +25,20 @@ alias -g -- --help='--help 2>&1 | bat --language=help --style=plain -P'
 
 alias ssh='TERM=xterm ssh'
 
-alias trad="copilot-cli --action 'translate' --prompt"
-alias enhance="copilot-cli --action 'enhance' --prompt"
+function enhance() {
+    result=$(copilot-cli --action 'enhance' --prompt "$1")
+    echo "$result"
+    echo "$result" | xsel --clipboard
+}
 
 function correct() {
     result=$(copilot-cli --action 'correct' --prompt "$1")
+    echo "$result"
+    echo "$result" | xsel --clipboard
+}
+
+function translate() {
+    result=$(copilot-cli --action 'translate' --prompt "$1")
     echo "$result"
     echo "$result" | xsel --clipboard
 }

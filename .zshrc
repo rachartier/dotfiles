@@ -1,7 +1,3 @@
-# eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/pure.toml)"
-# eval "$(starship init zsh)"
-
-
 eval "$(starship init zsh)"
 
 source "$HOME/.profile"
@@ -66,14 +62,14 @@ function _setup()  {
     if ! [ -f "/tmp/tmux-theme.cache" ]; then
         echo "catppuccin_macchiato.conf" > /tmp/tmux-theme.cache
     fi
+
+    [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+    # source $HOME/.zsh/transient_prompt.zsh
+    source $HOME/.aliases
+    source $HOME/.zsh/style.zsh
 }
 
 zsh-defer _setup
-
-source $HOME/.aliases
-source $HOME/.zsh/transient_prompt.zsh
-source $HOME/.zsh/style.zsh
-
 
 function ghcs() {
     if [ -z "$DOT_GITHUB_COPILOT_LOADED" ]; then
@@ -102,4 +98,11 @@ function cd() {
     __zoxide_z "$@"
 }
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+function tmuxp() {
+    if [ -z "$DOT_TMUXP_LOADED" ]; then
+        for s in $($HOME/.local/bin/tmuxp ls); do alias "$s"="tmuxp load -y $s"; done
+        DOT_TMUXP_LOADED=1
+    fi
+
+    "$HOME/.local/bin/tmuxp" $@
+}
