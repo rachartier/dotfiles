@@ -72,6 +72,14 @@ return {
 			vim.lsp.set_log_level("debug") -- vim.lsp.set_log_level("debug")
 			require("mason").setup(opts)
 
+			-- Override lsp hover and signature help handlers to use custom border
+			local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+			function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+				opts = opts or {}
+				opts.border = opts.border or require("config.icons").default_border
+				return orig_util_open_floating_preview(contents, syntax, opts, ...)
+			end
+
 			local dont_install = {
 				-- installed externally due to its plugins: https://github.com/williamboman/mason.nvim/issues/695
 				"stylelint",
