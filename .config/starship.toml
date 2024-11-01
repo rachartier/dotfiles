@@ -1,7 +1,6 @@
 format = """
 $username\
 $hostname\
-${custom.inside_docker}\
 ${custom.directory}\
 $directory\
 $git_branch\
@@ -58,9 +57,11 @@ $conda\
 $meson\
 $cmd_duration\
 $docker_context\
+$line_break\
+${custom.inside_docker}\
 $character"""
 
-add_newline = false
+add_newline = true
 
 [custom.inside_docker]
 disabled = false
@@ -102,22 +103,12 @@ format = 'via [  $context](bold)'
 disabled = false
 
 [git_branch]
-format = "[on](white dimmed) [](bright-purple) [$branch](bright-purple italic)"
-
-[git_state]
-format = '\([$state( $progress_current/$progress_total)]($style)\) '
+format = "[$branch]($style)"
 style = "bright-black"
 
 [git_status]
-format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](218) ($ahead_behind$stashed)]($style) "
+format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](218) ($ahead_behind$stashed)]($style)"
 style = "cyan"
-# unstaged = '󰄱 '
-# stashed = ' '
-# deleted = ' '
-# modified = ''
-# renamed = '󰑕'
-# unmerged = ''
-# untracked = ''
 conflicted = "​"
 untracked = "​"
 modified = "​"
@@ -125,6 +116,35 @@ staged = "​"
 renamed = "​"
 deleted = "​"
 stashed = "≡"
+
+[git_state]
+format = '\([$state( $progress_current/$progress_total)]($style)\) '
+style = "bright-black"
+
+# [git_branch]
+# format = "[on](white dimmed) [](bright-purple) [$branch](bright-purple italic)"
+#
+# [git_state]
+# format = '\([$state( $progress_current/$progress_total)]($style)\)'
+# style = "bright-black"
+#
+# [git_status]
+# format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](218) ($ahead_behind$stashed)]($style)"
+# style = "cyan"
+# unstaged = '󰄱 '
+# stashed = ' '
+# deleted = ' '
+# modified = ''
+# renamed = '󰑕'
+# unmerged = ''
+# untracked = ''
+# conflicted = "​"
+# untracked = "​"
+# modified = "​"
+# staged = "​"
+# renamed = "​"
+# deleted = "​"
+# stashed = "≡"
 
 [cmd_duration]
 min_time = 500
@@ -136,107 +156,107 @@ style = "yellow"
 
 [aws]
 symbol = "  "
-format = '[via](white dimmed) [$symbol($version)]($style)'
+format = '[$symbol($version)($style)'
 
 [buf]
 symbol = " "
-format = '[via](white dimmed) [$symbol($version)]($style)'
+format = '$symbol($version)($style)'
 
 [c]
 symbol = " "
-format = '[via](white dimmed) [$symbol($version)]($style)'
+format = '$symbol($version)($style)'
 
 [conda]
 symbol = " "
-format = '[via](white dimmed) [$symbol($version)]($style)'
+format = '$symbol($version)($style)'
 
 [crystal]
 symbol = " "
-format = '[via](white dimmed) [$symbol($version)]($style)'
+format = '$symbol($version)($style)'
 
 [dart]
 symbol = " "
-format = '[via](white dimmed) [$symbol($version)]($style)'
+format = '$symbol($version)($style)'
 
 [elixir]
 symbol = " "
-format = '[via](white dimmed) [$symbol($version)]($style)'
+format = '$symbol($version)($style)'
 
 [elm]
 symbol = " "
-format = '[via](white dimmed) [$symbol($version)]($style)'
+format = '$symbol($version)($style)'
 
 [fennel]
 symbol = " "
-format = '[via](white dimmed) [$symbol($version)]($style)'
+format = '$symbol($version)($style)'
 
 [fossil_branch]
 symbol = " "
-format = '[via](white dimmed) [$symbol($version)]($style)'
+format = '$symbol($version)($style)'
 
 [golang]
 symbol = " "
-format = '[via](white dimmed) [$symbol($version)]($style)'
+format = '$symbol($version)($style)'
 
 [guix_shell]
 symbol = " "
-format = '[via](white dimmed) [$symbol($version)]($style)'
+format = '$symbol($version)($style)'
 
 [haskell]
 symbol = " "
-format = '[via](white dimmed) [$symbol($version)]($style)'
+format = '$symbol($version)($style)'
 
 [haxe]
 symbol = " "
-format = '[via](white dimmed) [$symbol($version)]($style)'
+format = '$symbol($version)($style)'
 
 [hg_branch]
 symbol = " "
-format = '[via](white dimmed) [$symbol($version)]($style)'
+format = '$symbol($version)($style)'
 
 [hostname]
 ssh_symbol = " "
-format = '[via](white dimmed) [$symbol($version)]($style)'
+format = '$symbol($version)($style)'
 
 [java]
 symbol = " "
-format = '[via](white dimmed) [$symbol($version)]($style)'
+format = '$symbol($version)($style)'
 
 [julia]
 symbol = " "
-format = '[via](white dimmed) [$symbol($version)]($style)'
+format = '$symbol($version)($style)'
 
 [kotlin]
 symbol = " "
-format = '[via](white dimmed) [$symbol($version)]($style)'
+format = '$symbol($version)($style)'
 
 [lua]
 symbol = " "
-format = '[via](white dimmed) [$symbol($version)]($style)'
+format = '$symbol($version)($style)'
 
 [memory_usage]
 symbol = "󰍛 "
-format = '[via](white dimmed) [$symbol($version)]($style)'
+format = '$symbol($version)($style)'
 
 [meson]
 symbol = "󰔷 "
-format = '[via](white dimmed) [$symbol($version)]($style)'
+format = '$symbol($version)($style)'
 
 [nim]
 symbol = "󰆥 "
-format = '[via](white dimmed) [$symbol($version)]($style)'
+format = '$symbol($version)($style)'
 
 [nix_shell]
 symbol = " "
-format = '[via](white dimmed) [$symbol($version)]($style)'
+format = '$symbol($version)($style)'
 
 [nodejs]
 symbol = " "
-format = '[via](white dimmed) [$symbol($version)]($style)'
+format = '$symbol($version)($style)'
 
 [ocaml]
 symbol = " "
-format = '[via](white dimmed) [$symbol($version)]($style)'
+format = '$symbol($version)($style)'
 
 [os.symbols]
 Alpaquita = " "
@@ -285,45 +305,45 @@ Windows = "󰍲 "
 
 [package]
 symbol = "󰏗 "
-format = '[via](white dimmed) [$symbol($version)]($style)'
+format = '$symbol($version)($style)'
 
 [perl]
 symbol = " "
-format = '[via](white dimmed) [$symbol($version)]($style)'
+format = '$symbol($version)($style)'
 
 [php]
 symbol = " "
-format = '[via](white dimmed) [$symbol($version)]($style)'
+format = '$symbol($version)($style)'
 
 [pijul_channel]
 symbol = " "
-format = '[via](white dimmed) [$symbol($version)]($style)'
+format = '$symbol($version)($style)'
 
 [python]
 symbol = " "
 style = "yellow"
-format = '[via](white dimmed) [${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
 
 [rlang]
 symbol = "󰟔 "
-format = '[via](white dimmed) [$virtualenv $symbol($version)]($style)'
+format = '$virtualenv $symbol($version)($style)'
 
 [ruby]
 symbol = " "
-format = '[via](white dimmed) [$symbol($version)]($style)'
+format = '$symbol($version)($style)'
 
 [rust]
 symbol = "󱘗 "
-format = '[via](white dimmed) [$symbol($version)]($style)'
+format = '$symbol($version)($style)'
 
 [scala]
 symbol = " "
-format = '[via](white dimmed) [$symbol($version)]($style)'
+format = '$symbol($version)($style)'
 
 [swift]
 symbol = " "
-format = '[via](white dimmed) [$symbol($version)]($style)'
+format = '$symbol($version)($style)'
 
 [zig]
 symbol = " "
-format = '[via](white dimmed) [$symbol($version)]($style)'
+format = '$symbol($version)($style)'
