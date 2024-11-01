@@ -88,8 +88,10 @@ else
 
 	# For copilot.vim
     export NODE_TLS_REJECT_UNAUTHORIZED=0
+
     export APPIMAGE_EXTRACT_AND_RUN=1
     export TERM=wezterm
+    export XDG_RUNTIME_DIR="/tmp/"
 fi
 
 # =====================
@@ -104,4 +106,5 @@ export PYENV_ROOT="$HOME/.pyenv"
 [ -d $PYENV_ROOT/bin ] && export PATH="$PYENV_ROOT/bin:$PATH"
 
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+export MANROFFOPT="-c"
 # export MANPAGER="sh -c 'sed -u -e \"s/\\x1B\[[0-9;]*m//g; s/.\\x08//g\" | bat -p -lman'"
