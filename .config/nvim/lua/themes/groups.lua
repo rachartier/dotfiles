@@ -1,7 +1,7 @@
 local M = {}
 local utils = require("utils")
 
-local darken_markdown_heading = 0.18
+local darken_markdown_heading = 0.16
 
 function M.get(colors)
 	-- local bg = colors.base
@@ -198,8 +198,8 @@ function M.get(colors)
 		MiniCursorword = { link = "MiniCursorwordCurrent" },
 		MiniIndentscopeSymbol = { fg = colors.surface1 },
 
-		MarkviewCode = { bg = colors.surface0 },
-		MarkviewCodeInfo = { bg = colors.surface0 },
+		-- MarkviewCode = { bg = colors.surface0 },
+		-- MarkviewCodeInfo = { bg = colors.surface0 },
 
 		-- AvanteT,
 	}

@@ -46,7 +46,7 @@ return {
 	"goolord/alpha-nvim",
 	init = false,
 	lazy = false,
-	opts = function()
+	config = function()
 		local dashboard = require("alpha.themes.dashboard")
 
 		local header = {}
@@ -214,17 +214,8 @@ return {
 			.. version.build
 			.. ")"
 
-		header.val[#header.val] = string.rep(" ", #header.val[#header.val] / 2 - #version_str / 2)
-			.. "  v"
-			.. version.major
-			.. "."
-			.. version.minor
-			.. "."
-			.. version.patch
-			.. " ("
-			.. version.build
-			.. ")"
-
+		header.val[#header.val] = string.rep(" ", #header.val[#header.val] / 2 - #version_str / 2) .. version_str
+		--
 		-- dashboard.section.footer = {
 		-- 	type = "text",
 		-- 	opts = {
@@ -256,27 +247,27 @@ return {
 
 		local header_padding = get_heading_padding()
 
-		dashboard.config.layout = build_layout({
+		dashboard.opts.layout = build_layout({
 			header_padding = header_padding,
 			header = header,
 			buttons = dashboard.section.buttons,
 			footer = dashboard.section.footer,
 		})
-
-		utils.on_event("VimResized", function()
-			if vim.bo.filetype == "alpha" then
-				header_padding = get_heading_padding()
-
-				dashboard.opts.layout = build_layout({
-					header_padding = header_padding,
-					header = header,
-					buttons = dashboard.section.buttons,
-					footer = dashboard.section.footer,
-				})
-
-				pcall(vim.cmd.AlphaRedraw)
-			end
-		end, { desc = "Redraw alpha on resize" })
+		--
+		-- utils.on_event("VimResized", function()
+		-- 	if vim.bo.filetype == "alpha" then
+		-- 		header_padding = get_heading_padding()
+		--
+		-- 		dashboard.opts.layout = build_layout({
+		-- 			header_padding = header_padding,
+		-- 			header = header,
+		-- 			buttons = dashboard.section.buttons,
+		-- 			footer = dashboard.section.footer,
+		-- 		})
+		--
+		-- 		pcall(vim.cmd.AlphaRedraw)
+		-- 	end
+		-- end, { desc = "Redraw alpha on resize" })
 
 		vim.api.nvim_create_autocmd("User", {
 			pattern = "LazyVimStarted",
@@ -302,18 +293,15 @@ return {
 					.. " ms"
 
 				dashboard.section.footer.val = {
-					string.rep("─", #footer_txt - 1),
+					-- string.rep("─", #footer_txt - 1),
 					footer_txt,
-					string.rep("─", #footer_txt - 1),
+					-- string.rep("─", #footer_txt - 1),
 				}
 
 				pcall(vim.cmd.AlphaRedraw)
 			end,
 		})
 
-		return dashboard
-	end,
-	config = function(_, dashboard)
 		-- close Lazy and re-open when the dashboard is ready
 		if vim.o.filetype == "lazy" then
 			vim.cmd.close()
@@ -331,6 +319,11 @@ return {
 			require("alpha.term")
 		end
 
-		alpha.setup(dashboard.config)
+		dashboard.opts.config = {
+			noautocmd = true,
+			redraw_on_resize = true,
+		}
+
+		alpha.setup(dashboard.opts)
 	end,
 }

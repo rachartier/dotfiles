@@ -109,7 +109,7 @@ function M.setup()
 			neotree = true,
 			noice = true,
 			notify = true,
-			-- render_markdown = false,
+			render_markdown = true,
 			-- markdown = true,
 			telekasten = true,
 			telescope = true,

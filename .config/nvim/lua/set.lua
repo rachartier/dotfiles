@@ -78,7 +78,9 @@ opt.grepformat = "%f:%l:%c:%m" -- Grep output format
 opt.grepprg = "rg --vimgrep" -- Program to use for grep
 opt.ignorecase = true -- Ignore case
 opt.inccommand = "nosplit" -- Preview incremental replacement
-opt.laststatus = 0 -- Configure status line display
+opt.laststatus = 3 -- Configure status line display
+opt.statusline = '%{repeat(" ",winwidth("."))}'
+
 opt.cmdheight = 1 -- Command line height
 opt.list = false -- Show some invisible characters (tabs...)
 opt.mouse = "a" -- Enable mouse mode
@@ -138,7 +140,6 @@ opt.fillchars = {
 	eob = " ",
 }
 
-opt.statusline = ""
 opt.smoothscroll = true
 
 vim.o.timeout = true
