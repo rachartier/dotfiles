@@ -96,6 +96,7 @@ function M.setup()
 		},
 		integrations = {
 			alpha = true,
+			blink_cmp = true,
 			cmp = true,
 			dap = true,
 			dap_ui = true,

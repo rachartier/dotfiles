@@ -59,7 +59,7 @@ return {
 		"AndreM222/copilot-lualine",
 	},
 	event = "VeryLazy",
-	priority = 500,
+	priority = 900,
 	enabled = true,
 	opts = function()
 		local icons = require("config.icons")

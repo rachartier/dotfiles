@@ -41,6 +41,7 @@ return {
 		dependencies = {
 			"williamboman/mason-lspconfig.nvim",
 			"williamboman/mason-nvim-dap.nvim",
+			"saghen/blink.cmp",
 		},
 		build = ":MasonUpdate",
 		opts = {
@@ -70,15 +71,10 @@ return {
 		},
 		config = function(_, opts)
 			vim.lsp.set_log_level("debug") -- vim.lsp.set_log_level("debug")
+
 			require("mason").setup(opts)
 
 			-- Override lsp hover and signature help handlers to use custom border
-			local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
-			function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
-				opts = opts or {}
-				opts.border = opts.border or require("config.icons").default_border
-				return orig_util_open_floating_preview(contents, syntax, opts, ...)
-			end
 
 			local dont_install = {
 				-- installed externally due to its plugins: https://github.com/williamboman/mason.nvim/issues/695
@@ -153,6 +149,11 @@ return {
 			end
 
 			local capabilities = require("config.lsp.attach").make_capabilities()
+			local border = "rounded"
+			local handlers = {
+				["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border }),
+				["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border }),
+			}
 
 			require("mason-lspconfig").setup({
 				ensure_installed = to_install_lsp,
@@ -175,8 +176,6 @@ return {
 						if ignore then
 							return
 						end
-
-						local handlers = require("config.lsp.handlers").handlers
 
 						if settings then
 							settings.capabilities = capabilities

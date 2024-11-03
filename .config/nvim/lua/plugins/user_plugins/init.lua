@@ -59,8 +59,8 @@ return {
 		end,
 	},
 	{
-		-- dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-inline-diagnostic.nvim",
-		"rachartier/tiny-inline-diagnostic.nvim",
+		dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-inline-diagnostic.nvim",
+		-- "rachartier/tiny-inline-diagnostic.nvim",
 		event = "VeryLazy",
 		config = function()
 			local signs = {}
@@ -79,7 +79,7 @@ return {
 				hi = {
 					-- background = "None",
 					mixing_color = require("theme").get_colors().base,
-					background = "None",
+					background = "CursorLine",
 				},
 				options = {
 					multilines = true,
@@ -136,6 +136,7 @@ return {
 			})
 		end,
 	},
+
 	-- {
 	-- 	"mrcjkb/rustaceanvim",
 	-- 	version = "^5", -- Recommended

@@ -23,6 +23,10 @@ function M.get(colors)
 		-- Visual = { bg = colors.surface1 },
 		Comment = { fg = colors.surface2, italic = true },
 
+		BlinkCmpSignatureHelpBorder = { link = "FloatBorder" },
+		BlinkCmpDocBorder = { link = "FloatBorder" },
+		BlinkCmpMenuBorder = { link = "FloatBorder" },
+
 		CmpGhostText = { link = "Comment", default = true },
 		CmpItemAbbrMatch = { fg = colors.yellow, bold = true, underline = false },
 		CmpItemAbbrMatchFuzzy = { fg = colors.blue, underline = true, link = "CmpItemAbbrMatch" },
@@ -32,8 +36,6 @@ function M.get(colors)
 		PmenuDocBorder = { link = "FloatBorder" },
 		PmenuSel = { bg = colors.surface0 },
 		PopupNormal = { bg = colors.base, fg = colors.text },
-
-		BlinkCmpMenuBorder = { link = "FloatBorder" },
 
 		-- CursorLine = { bg = "None" },
 		CursorLineNr = { fg = colors.mauve },

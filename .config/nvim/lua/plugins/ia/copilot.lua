@@ -305,7 +305,7 @@ Useful PEPs for this section (not exhaustive):
 		config = function(_, opts)
 			local chat = require("CopilotChat")
 
-			require("CopilotChat.integrations.cmp").setup()
+			-- require("CopilotChat.integrations.cmp").setup()
 			chat.setup(opts)
 
 			vim.keymap.set("n", "<leader>cy", function()
@@ -371,7 +371,7 @@ Useful PEPs for this section (not exhaustive):
 				vim.opt_local.number = false
 				vim.opt_local.statuscolumn = " "
 				-- 			vim.bo.filetype = "markdown"
-				require("cmp").setup.buffer({ enabled = false })
+				-- require("cmp").setup.buffer({ enabled = false })
 			end, {
 				target = "copilot-*",
 				desc = "Disable relative number and cmp for CopilotChat",
