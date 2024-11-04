@@ -1,3 +1,5 @@
+local default_border = require("config.icons").default_border
+
 return {
 	{
 		"folke/noice.nvim",
@@ -19,9 +21,12 @@ return {
 				view_search = "virtualtext", -- view for search count messages. Set to `false` to disable
 			},
 			views = {
+				hover = {
+					border = { style = default_border },
+				},
 				cmdline_popup = {
 					border = {
-						style = require("config.icons").default_border,
+						style = default_border,
 					},
 				},
 			},
@@ -45,13 +50,12 @@ return {
 				command_palette = false, -- position the cmdline and popupmenu together
 				long_message_to_split = true, -- long messages will be sent to a split
 				inc_rename = false, -- enables an input dialog for inc-rename.nvim
-				lsp_doc_border = false, -- add a border to hover docs and signature help
+				lsp_doc_border = true, -- add a border to hover docs and signature help
 			},
 			hover = {
 				enabled = true,
 				silent = false, -- set to true to not show a message if hover is not available
-				view = nil, -- when nil, use defaults from documentation
-				opts = {}, -- merged with defaults from documentation
+				opts = {},
 			},
 			routes = {
 				{

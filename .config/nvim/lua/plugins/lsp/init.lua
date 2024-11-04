@@ -149,11 +149,6 @@ return {
 			end
 
 			local capabilities = require("config.lsp.attach").make_capabilities()
-			local border = "rounded"
-			local handlers = {
-				["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border }),
-				["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border }),
-			}
 
 			require("mason-lspconfig").setup({
 				ensure_installed = to_install_lsp,
@@ -179,7 +174,6 @@ return {
 
 						if settings then
 							settings.capabilities = capabilities
-							settings.handlers = handlers
 
 							require("lspconfig")[server_name].setup(settings)
 						else
@@ -193,7 +187,6 @@ return {
 
 							require("lspconfig")[server_name].setup({
 								capabilities = capabilities,
-								handlers = handlers,
 							})
 						end
 					end,

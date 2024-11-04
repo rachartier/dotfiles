@@ -7,6 +7,9 @@ vim.fn.sign_define("DiagnosticSignInfo", { text = icons.signs.diagnostic.info, t
 vim.fn.sign_define("DiagnosticSignHint", { text = icons.signs.diagnostic.hint, texthl = "DiagnosticSignHint" })
 
 vim.diagnostic.config({
+	float = {
+		border = require("config.icons").default_border,
+	},
 	underline = true,
 	update_in_insert = false,
 	-- virtual_lines = {
