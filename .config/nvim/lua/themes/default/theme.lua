@@ -36,7 +36,6 @@ function M.get_colors()
 	-- local default_cursor_hl = U.get_hl("Cursor")
 
 	return {
-
 		bg = "None",
 		mantle = "#07080d",
 		crust = "#14161b",

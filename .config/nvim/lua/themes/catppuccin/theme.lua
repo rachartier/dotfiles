@@ -97,7 +97,7 @@ function M.setup()
 		integrations = {
 			alpha = true,
 			blink_cmp = true,
-			cmp = true,
+			cmp = false,
 			dap = true,
 			dap_ui = true,
 			diffview = true,
@@ -115,7 +115,7 @@ function M.setup()
 			telekasten = true,
 			telescope = true,
 			treesitter = true,
-			treesitter_context = true,
+			treesitter_context = false,
 			which_key = true,
 			symbols_outline = true,
 			native_lsp = {

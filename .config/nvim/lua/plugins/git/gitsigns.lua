@@ -11,7 +11,7 @@ return {
 			ignore_whitespace = false,
 		},
 		preview_config = {
-			border = require("config.icons").default_border,
+			border = require("config.ui.border").default_border,
 		},
 		signs = {
 			add = { text = "▏" },

@@ -1,4 +1,4 @@
-local default_border = require("config.icons").default_border
+local default_border = require("config.ui.border").default_border
 
 return {
 	{

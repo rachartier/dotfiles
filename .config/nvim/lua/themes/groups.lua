@@ -26,6 +26,7 @@ function M.get(colors)
 		BlinkCmpSignatureHelpBorder = { link = "FloatBorder" },
 		BlinkCmpDocBorder = { link = "FloatBorder" },
 		BlinkCmpMenuBorder = { link = "FloatBorder" },
+		BlinkCmpScrollBarThumb = { bg = colors.text },
 
 		CmpGhostText = { link = "Comment", default = true },
 		CmpItemAbbrMatch = { fg = colors.yellow, bold = true, underline = false },

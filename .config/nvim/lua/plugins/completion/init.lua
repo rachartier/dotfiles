@@ -1,6 +1,7 @@
 return {
 	{
 		"saghen/blink.cmp",
+		build = "cargo build --release",
 		dependencies = {
 			"rafamadriz/friendly-snippets",
 			"saghen/blink.compat",
@@ -8,7 +9,6 @@ return {
 			{ "hrsh7th/cmp-emoji", lazy = true },
 		},
 		event = "VeryLazy",
-		version = "v0.*",
 
 		opts = {
 			keymap = { preset = "super-tab" },
@@ -70,22 +70,19 @@ return {
 
 			windows = {
 				documentation = {
-					min_width = 15,
-					max_width = 50,
-					max_height = 15,
-					border = require("config.icons").default_border,
+					border = require("config.ui.border").default_border,
 					auto_show = true,
 					auto_show_delay_ms = 0,
 				},
 				-- signature_help = {
-				-- 	border = require("config.icons").default_border,
+				-- 	border = require("config.ui.border").default_border,
 				-- },
 				autocomplete = {
 					min_width = 10,
-					border = require("config.icons").default_border,
+					border = require("config.ui.border").default_border,
 
 					-- autocomplete = {
-					-- 	border = require("config.icons").default_border,
+					-- 	border = require("config.ui.border").default_border,
 					-- },
 
 					selection = "preselect",

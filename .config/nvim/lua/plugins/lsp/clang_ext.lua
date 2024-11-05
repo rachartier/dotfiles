@@ -60,10 +60,10 @@ return {
 			},
 		},
 		memory_usage = {
-			border = require("config.icons").default_border,
+			border = require("config.ui.border").default_border,
 		},
 		symbol_info = {
-			border = require("config.icons").default_border,
+			border = require("config.ui.border").default_border,
 		},
 	},
 }

@@ -62,7 +62,7 @@ return {
 	priority = 900,
 	enabled = true,
 	opts = function()
-		local icons = require("config.icons")
+		local signs = require("config.ui.signs")
 		local colors = require("theme").get_lualine_colors()
 
 		local kirby_default = "(>*-*)>"
@@ -170,7 +170,7 @@ return {
 				{
 					"diagnostics",
 					sources = { "nvim_lsp" },
-					symbols = icons.signs.lualine_diagnostic,
+					symbols = signs.lualine_diagnostic,
 					-- diagnostics_color = {
 					-- 	error = { fg = c.error },
 					-- 	warn = { fg = c.warn },
@@ -212,10 +212,10 @@ return {
 				-- 		local ok, copilot_enabled = pcall(vim.api.nvim_buf_get_var, 0, "copilot_enabled")
 				--
 				-- 		if ok and copilot_enabled then
-				-- 			return icons.signs.others.copilot
+				-- 			return signs.others.copilot
 				-- 		end
 				--
-				-- 		return icons.signs.others.copilot_disabled
+				-- 		return signs.others.copilot_disabled
 				-- 	end,
 				-- 	-- cond = cond_disable_by_ft,
 				-- 	color = { fg = colors.fg },
@@ -244,7 +244,7 @@ return {
 			lualine_y = {
 				{
 					"branch",
-					icon = icons.signs.git.branch,
+					icon = signs.git.branch,
 					color = { fg = colors.violet },
 					separator = { right = "", left = "" },
 				},
@@ -253,9 +253,9 @@ return {
 					colored = true,
 					source = diff_source,
 					symbols = {
-						added = icons.signs.git.added,
-						modified = icons.signs.git.modified,
-						removed = icons.signs.git.removed,
+						added = signs.git.added,
+						modified = signs.git.modified,
+						removed = signs.git.removed,
 					},
 					-- diff_color = {
 					-- 	added = { gui = "bold" },
@@ -283,10 +283,10 @@ return {
 					separator = { right = "", left = "" },
 
 					symbols = {
-						modified = icons.signs.file.modified, -- Text to show when the file is modified.
-						readonly = icons.signs.file.readonly, -- Text to show when the file is non-modifiable or readonly.
-						unnamed = icons.signs.file.unnamed, -- Text to show for unnamed buffers.
-						newfile = icons.signs.file.created, -- Text to show for newly created file before first write
+						modified = signs.file.modified, -- Text to show when the file is modified.
+						readonly = signs.file.readonly, -- Text to show when the file is non-modifiable or readonly.
+						unnamed = signs.file.unnamed, -- Text to show for unnamed buffers.
+						newfile = signs.file.created, -- Text to show for newly created file before first write
 					},
 				},
 			},
