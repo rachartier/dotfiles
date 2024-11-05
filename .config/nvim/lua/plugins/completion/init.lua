@@ -44,7 +44,7 @@ return {
 							-- TODO: check https://github.com/Saghen/blink.cmp/pull/253#issuecomment-2454984622
 							local kind = require("blink.cmp.types").CompletionItemKind.Text
 
-							for i, _ in ipairs(items) do
+							for i = 1, #items do
 								items[i].kind = kind
 							end
 
@@ -58,7 +58,7 @@ return {
 							-- TODO: check https://github.com/Saghen/blink.cmp/pull/253#issuecomment-2454984622
 							local kind = require("blink.cmp.types").CompletionItemKind.Text
 
-							for i, _ in ipairs(items) do
+							for i = 1, #items do
 								items[i].kind = kind
 							end
 
