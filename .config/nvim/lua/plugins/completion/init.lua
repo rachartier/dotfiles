@@ -4,9 +4,9 @@ return {
 		dependencies = {
 			"rafamadriz/friendly-snippets",
 			"saghen/blink.compat",
+			{ "petertriho/cmp-git", lazy = true },
 			{ "chrisgrieser/cmp-nerdfont", lazy = true },
 			{ "hrsh7th/cmp-emoji", lazy = true },
-			{ "petertriho/cmp-git", lazy = true },
 		},
 		event = "VeryLazy",
 		version = "v0.*",
@@ -39,17 +39,37 @@ return {
 					-- dont show LuaLS require statements when lazydev has items
 					lsp = { fallback_for = { "lazydev" } },
 					lazydev = { name = "LazyDev", module = "lazydev.integrations.blink" },
+					git = {
+						name = "git",
+						module = "blink.compat.source",
+					},
 					nerdfont = {
 						name = "nerdfont",
 						module = "blink.compat.source",
+						transform_items = function(ctx, items)
+							-- TODO: check https://github.com/Saghen/blink.cmp/pull/253#issuecomment-2454984622
+							local kind = require("blink.cmp.types").CompletionItemKind.Text
+
+							for i = 1, #items do
+								items[i].kind = kind
+							end
+
+							return items
+						end,
 					},
 					emoji = {
 						name = "emoji",
 						module = "blink.compat.source",
-					},
-					git = {
-						name = "git",
-						module = "blink.compat.source",
+						transform_items = function(ctx, items)
+							-- TODO: check https://github.com/Saghen/blink.cmp/pull/253#issuecomment-2454984622
+							local kind = require("blink.cmp.types").CompletionItemKind.Text
+
+							for i = 1, #items do
+								items[i].kind = kind
+							end
+
+							return items
+						end,
 					},
 				},
 			},
