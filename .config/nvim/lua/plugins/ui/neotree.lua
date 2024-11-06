@@ -1,4 +1,4 @@
-local signs = require("config.icons").signs
+local signs = require("config.ui.signs")
 
 return {
 	"nvim-neo-tree/neo-tree.nvim",
@@ -12,7 +12,7 @@ return {
 	},
 	opts = {
 		close_if_last_window = true, -- Close Neo-tree if it is the last window left in the tab
-		popup_border_style = require("config.icons").default_border,
+		popup_border_style = require("config.ui.border").default_border,
 		enable_git_status = true,
 		enable_diagnostics = true,
 		open_files_do_not_replace_types = { "terminal", "trouble", "qf" },

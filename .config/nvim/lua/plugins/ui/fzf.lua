@@ -19,11 +19,11 @@ local M = {
 
 function M.config()
 	local fzf = require("fzf-lua")
-	local signs = require("config.icons").signs
+	local signs = require("config.ui.signs")
 
 	fzf.setup({
 		winopts = {
-			border = require("config.icons").default_border,
+			border = require("config.ui.border").default_border,
 			width = 0.6,
 			height = 0.6,
 			row = 0.5, -- window row position (0=top, 1=bottom)

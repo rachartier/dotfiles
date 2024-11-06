@@ -23,7 +23,8 @@ config.default_domain = "WSL:Ubuntu"
 -- config.font = wezterm.font_with_fallback({ "IBM Plex Mono", "Symbols Nerd Font" })
 -- config.font = wezterm.font_with_fallback({ "Monaspace Neon", "Symbols Nerd Font" })
 -- config.font = wezterm.font_with_fallback({ "Symbols Nerd Font" })
-config.font = wezterm.font_with_fallback({ "MonoLisa", "Symbols Nerd Font" })
+-- config.font = wezterm.font_with_fallback({ "MonoLisa", "Symbols Nerd Font" })
+config.font = wezterm.font_with_fallback({ "Cartograph CF", "Symbols Nerd Font" })
 -- config.font = wezterm.font_with_fallback({ "Maple Mono NF", "Symbols Nerd Font" })
 -- config.font = wezterm.font_with_fallback({ "IBM Plex Mono", "Symbols Nerd Font" })
 

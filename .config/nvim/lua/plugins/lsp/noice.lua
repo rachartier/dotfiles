@@ -1,4 +1,4 @@
-local default_border = require("config.icons").default_border
+local default_border = require("config.ui.border").default_border
 
 return {
 	{
@@ -22,7 +22,7 @@ return {
 			},
 			views = {
 				hover = {
-					border = { style = default_border },
+					border = { style = require("config.ui.border").empty },
 				},
 				cmdline_popup = {
 					border = {

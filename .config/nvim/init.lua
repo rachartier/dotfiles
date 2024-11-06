@@ -37,7 +37,7 @@ require("lazy").setup({
 		{ import = "plugins.user_plugins" },
 	},
 	ui = {
-		border = "rounded",
+		border = require("config.ui.border").default_border,
 	},
 	checker = {
 		-- automatically check for plugin updates
