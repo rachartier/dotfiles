@@ -110,7 +110,7 @@ return {
 						return mode_kirby[vim.fn.mode()] or vim.api.nvim_get_mode().mode
 					end,
 					separator = { right = "" },
-					padding = { left = 1, right = 1 },
+					padding = { left = 1, right = 0 },
 				},
 			},
 			lualine_b = {
@@ -124,6 +124,7 @@ return {
 					"location",
 					separator = { right = "" },
 					color = { fg = colors.fg },
+					padding = { left = 1, right = 0 },
 				},
 				{
 					function()
@@ -272,7 +273,7 @@ return {
 					cond = cond_disable_by_ft,
 					icon_only = true,
 					colored = false,
-					padding = { right = 0, left = 1 },
+					padding = { right = 0, left = 0 },
 					condition = conditions.buffer_not_empty,
 				},
 				{

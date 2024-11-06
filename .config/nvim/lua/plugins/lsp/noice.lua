@@ -5,21 +5,10 @@ return {
 		"folke/noice.nvim",
 		dependencies = {
 			"MunifTanjim/nui.nvim",
-			"rcarriga/nvim-notify",
 		},
 		event = "UiEnter",
 		enabled = true,
 		opts = {
-			messages = {
-				-- NOTE: If you enable messages, then the cmdline is enabled automatically.
-				-- This is a current Neovim limitation.
-				enabled = true, -- enables the Noice messages UI
-				view = "notify", -- default view for messages
-				view_error = "notify", -- view for errors
-				view_warn = "notify", -- view for warnings
-				view_history = "messages", -- view for :messages
-				view_search = "virtualtext", -- view for search count messages. Set to `false` to disable
-			},
 			views = {
 				hover = {
 					border = { style = require("config.ui.border").empty },
@@ -31,9 +20,6 @@ return {
 				},
 			},
 			lsp = {
-				progress = {
-					enabled = true,
-				},
 				-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
 				override = {
 					["vim.lsp.util.convert_input_to_markdown_lines"] = true,
@@ -48,9 +34,9 @@ return {
 			presets = {
 				bottom_search = true, -- use a classic bottom cmdline for search
 				command_palette = false, -- position the cmdline and popupmenu together
-				long_message_to_split = true, -- long messages will be sent to a split
+				long_message_to_split = false, -- long messages will be sent to a split
 				inc_rename = false, -- enables an input dialog for inc-rename.nvim
-				lsp_doc_border = true, -- add a border to hover docs and signature help
+				lsp_doc_border = false, -- add a border to hover docs and signature help
 			},
 			hover = {
 				enabled = true,

@@ -8,7 +8,7 @@ local function number(args)
 
 	-- Repeats the behavior for `vim.opt.numberwidth`
 	local width = vim.opt.numberwidth:get() - 3
-	local l_count_width = #tostring(vim.api.nvim_buf_line_count(0))
+	local l_count_width = #tostring(vim.api.nvim_buf_line_count(args.buf))
 	-- If buffer have more lines than `vim.opt.numberwidth` then use width of line count
 	width = width >= l_count_width and width or l_count_width
 
