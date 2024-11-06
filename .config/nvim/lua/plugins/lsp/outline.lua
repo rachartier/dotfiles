@@ -26,7 +26,7 @@ return {
 			},
 			symbols = {
 				icon_fetcher = function(kind, bufnr)
-					local kinds = require("config.icons").kind_icons
+					local kinds = require("config.ui.kind")
 
 					local ft = vim.api.nvim_get_option_value("ft", { buf = bufnr })
 					if ft == "markdown" then

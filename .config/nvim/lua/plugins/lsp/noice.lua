@@ -22,7 +22,7 @@ return {
 			},
 			views = {
 				hover = {
-					border = { style = default_border },
+					border = { style = require("config.ui.border").empty },
 				},
 				cmdline_popup = {
 					border = {

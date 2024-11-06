@@ -70,7 +70,8 @@ return {
 
 			windows = {
 				documentation = {
-					border = require("config.ui.border").default_border,
+					-- border = "padded",
+					border = require("config.ui.border").blink_empty,
 					auto_show = true,
 					auto_show_delay_ms = 0,
 				},
@@ -78,34 +79,32 @@ return {
 				-- 	border = require("config.ui.border").default_border,
 				-- },
 				autocomplete = {
-					min_width = 10,
-					border = require("config.ui.border").default_border,
-
-					-- autocomplete = {
-					-- 	border = require("config.ui.border").default_border,
-					-- },
+					scrollbar = true,
+					-- border = "padded",
+					-- border = require("config.ui.border").default_border,
 
 					selection = "preselect",
-					draw = function(ctx)
-						-- local icon_hl = vim.api.nvim_get_hl_by_name("BlinkCmpKind", true) and "BlinkCmpKind" .. ctx.kind
-						-- 	or "BlinkCmpKind"
-						local icon_hl = "BlinkCmpKind" .. ctx.kind
-						return {
-							{
-								" " .. ctx.kind_icon .. "│" .. " ",
-								hl_group = icon_hl,
-							},
-							{
-								ctx.item.label .. " ",
-								fill = true,
-								hl_group = ctx.deprecated and "BlinkCmpLabelDeprecated" or "BlinkCmpLabel",
-								max_width = 45,
-							},
-						}
-					end,
+					draw = "simple",
+					-- draw = function(ctx)
+					-- 	-- local icon_hl = vim.api.nvim_get_hl_by_name("BlinkCmpKind", true) and "BlinkCmpKind" .. ctx.kind
+					-- 	-- 	or "BlinkCmpKind"
+					-- 	local icon_hl = "BlinkCmpKind" .. ctx.kind
+					-- 	return {
+					-- 		{
+					-- 			" " .. ctx.kind_icon .. " ",
+					-- 			hl_group = icon_hl,
+					-- 		},
+					-- 		{
+					-- 			ctx.item.label .. " ",
+					-- 			fill = true,
+					-- 			hl_group = ctx.deprecated and "BlinkCmpLabelDeprecated" or "BlinkCmpLabel",
+					-- 			max_width = 45,
+					-- 		},
+					-- 	}
+					-- end,
 				},
 			},
-			kind_icons = require("config.icons").kind_icons,
+			kind_icons = require("config.ui.kind"),
 		},
 	},
 	-- {
