@@ -2,7 +2,7 @@ return {
 	"folke/which-key.nvim",
 	event = "VeryLazy",
 	opts = {
-		preset = "modern",
+		preset = "helix",
 		win = {
 			border = require("config.ui.border").default_border,
 			padding = { 0, 0 }, -- extra window padding [top, right, bottom, left]

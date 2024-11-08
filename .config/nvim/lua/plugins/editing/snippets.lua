@@ -11,7 +11,7 @@ return {
 			editSnippetPopup = {
 				height = 0.4, -- relative to the window, number between 0 and 1
 				width = 0.6,
-				border = "rounded",
+				border = require("config.ui.border").default_border,
 				keymaps = {
 					cancel = "q",
 					saveChanges = "<CR>", -- alternatively, can also use `:w`

@@ -6,6 +6,13 @@ local function number(args)
 	local rnu = vim.opt.relativenumber:get()
 	local cur_line = vim.fn.line(".") == vim.v.lnum and vim.v.lnum or vim.v.relnum
 
+	local is_num = vim.wo[args.win].number
+	local is_relnum = vim.wo[args.win].relativenumber
+
+	if not is_num and not is_relnum then
+		return ""
+	end
+
 	-- Repeats the behavior for `vim.opt.numberwidth`
 	local width = vim.opt.numberwidth:get() - 3
 	local l_count_width = #tostring(vim.api.nvim_buf_line_count(args.buf))
@@ -76,6 +83,14 @@ return {
 						number,
 						" ",
 					},
+					condition = {
+						function(args)
+							local is_num = vim.wo[args.win].number
+							local is_relnum = vim.wo[args.win].relativenumber
+
+							return is_num or is_relnum
+						end,
+					},
 					click = "v:lua.ScLa",
 				},
 				{
@@ -93,6 +108,14 @@ return {
 						maxwidth = 1,
 						colwidth = 1,
 						fillcharhl = "MiniIndentscopeSymbol",
+					},
+					condition = {
+						function(args)
+							local is_num = vim.wo[args.win].number
+							local is_relnum = vim.wo[args.win].relativenumber
+
+							return is_num or is_relnum
+						end,
 					},
 					click = "v:lua.ScSa",
 				},

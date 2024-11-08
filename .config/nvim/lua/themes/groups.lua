@@ -30,6 +30,7 @@ function M.get(colors)
 		BlinkCmpDoc = { bg = colors.mantle },
 		BlinkCmpScrollBarGutter = { bg = colors.mantle, fg = colors.mantle },
 		BlinkCmpScrollBarThumb = { bg = colors.surface1 },
+		BlinkCmpLabelMatch = { bg = "None", fg = colors.blue },
 		-- BlinkCmpScrollBarThumb = { bg = colors.text },
 
 		CmpGhostText = { link = "Comment", default = true },

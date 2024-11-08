@@ -1,7 +1,10 @@
+local M = {}
+
 return {
 	{
 		"catppuccin/nvim",
-		priority = 1000,
+		priority = 9999,
+		lazy = false,
 		enabled = true,
 		config = function()
 			require("theme").setup()

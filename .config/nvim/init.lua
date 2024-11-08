@@ -1,4 +1,5 @@
 vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
 vim.filetype.add({
 	extension = {
@@ -50,7 +51,6 @@ require("lazy").setup({
 		cache = {
 			enabled = true,
 		},
-
 		rtp = {
 			disabled_plugins = {
 				"startify",

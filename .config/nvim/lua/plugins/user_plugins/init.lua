@@ -59,9 +59,9 @@ return {
 		end,
 	},
 	{
-		dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-inline-diagnostic.nvim",
-		-- "rachartier/tiny-inline-diagnostic.nvim",
-		event = "VeryLazy",
+		-- dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-inline-diagnostic.nvim",
+		"rachartier/tiny-inline-diagnostic.nvim",
+		event = "BufReadPost",
 		config = function()
 			local signs = {}
 
@@ -83,6 +83,10 @@ return {
 				},
 				options = {
 					multilines = true,
+					break_line = {
+						enabled = true,
+						after = 30,
+					},
 				},
 				blend = {
 					factor = 0.22,

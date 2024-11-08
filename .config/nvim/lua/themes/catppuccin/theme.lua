@@ -65,7 +65,7 @@ function M.setup()
 	require("catppuccin").setup({
 		lazy = true,
 		flavour = theme, -- latte, frappe, macchiato, mocha
-		transparent_background = not vim.g.neovide,
+		transparent_background = false,
 		show_end_of_buffer = false,
 		term_colors = true,
 		dim_inactive = {

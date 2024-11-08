@@ -1,3 +1,55 @@
+local function get_lualine_colors()
+	local c = require("catppuccin.palettes").get_palette(vim.g.catppuccin_flavour)
+
+	local lualine_colors = {
+		-- bg = "#232639", --c.mantle,
+		-- bg = U.lighten(c.base, 0.99),
+		-- bg = c.mantle,
+		bg = c.surface0,
+		fg = c.subtext0,
+		surface0 = c.surface0,
+		yellow = c.yellow,
+		flamingo = c.flamingo,
+		cyan = c.sapphire,
+		darkblue = c.mantle,
+		green = c.green,
+		orange = c.peach,
+		violet = c.lavender,
+		mauve = c.mauve,
+		blue = c.blue,
+		red = c.red,
+	}
+
+	return vim.tbl_extend("force", lualine_colors, c)
+end
+
+local function get_kirby_colors()
+	local colors = get_lualine_colors()
+
+	return {
+		n = colors.red,
+		i = colors.green,
+		v = colors.blue,
+		[""] = colors.blue,
+		V = colors.blue,
+		c = colors.mauve,
+		no = colors.red,
+		s = colors.orange,
+		S = colors.orange,
+		[""] = colors.orange,
+		ic = colors.yellow,
+		R = colors.violet,
+		Rv = colors.violet,
+		cv = colors.red,
+		ce = colors.red,
+		r = colors.cyan,
+		rm = colors.cyan,
+		["r?"] = colors.cyan,
+		["!"] = colors.red,
+		t = colors.red,
+	}
+end
+
 local conditions = {
 	buffer_not_empty = function()
 		return vim.fn.empty(vim.fn.expand("%:t")) ~= 1
@@ -63,7 +115,7 @@ return {
 	enabled = true,
 	opts = function()
 		local signs = require("config.ui.signs")
-		local colors = require("theme").get_lualine_colors()
+		local colors = get_lualine_colors()
 
 		local kirby_default = "(>*-*)>"
 		local mode_kirby = {
@@ -171,7 +223,7 @@ return {
 				{
 					"diagnostics",
 					sources = { "nvim_lsp" },
-					symbols = signs.lualine_diagnostic,
+					symbols = signs.full_diagnostic,
 					-- diagnostics_color = {
 					-- 	error = { fg = c.error },
 					-- 	warn = { fg = c.warn },

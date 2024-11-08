@@ -9,7 +9,7 @@ return {
 			{ "chrisgrieser/cmp-nerdfont", lazy = true },
 			{ "hrsh7th/cmp-emoji", lazy = true },
 		},
-		event = "VeryLazy",
+		lazy = true,
 
 		opts = {
 			keymap = { preset = "super-tab" },
@@ -77,10 +77,11 @@ return {
 			windows = {
 				documentation = {
 					-- border = "padded",
-					border = require("config.ui.border").blink_empty,
+					-- border = require("config.ui.border").blink_empty,
 					auto_show = true,
 					auto_show_delay_ms = 0,
 				},
+
 				-- signature_help = {
 				-- 	border = require("config.ui.border").default_border,
 				-- },
@@ -90,25 +91,26 @@ return {
 					-- border = require("config.ui.border").default_border,
 
 					selection = "preselect",
-					draw = "simple",
-					-- draw = function(ctx)
-					-- 	-- local icon_hl = vim.api.nvim_get_hl_by_name("BlinkCmpKind", true) and "BlinkCmpKind" .. ctx.kind
-					-- 	-- 	or "BlinkCmpKind"
-					-- 	local icon_hl = "BlinkCmpKind" .. ctx.kind
-					-- 	return {
-					-- 		{
-					-- 			" " .. ctx.kind_icon .. " ",
-					-- 			hl_group = icon_hl,
-					-- 		},
-					-- 		{
-					-- 			ctx.item.label .. " ",
-					-- 			fill = true,
-					-- 			hl_group = ctx.deprecated and "BlinkCmpLabelDeprecated" or "BlinkCmpLabel",
-					-- 			max_width = 45,
-					-- 		},
-					-- 	}
-					-- end,
 				},
+				-- 	-- draw = "simple",
+				-- 	-- draw = function(ctx)
+				-- 	-- 	-- local icon_hl = vim.api.nvim_get_hl_by_name("BlinkCmpKind", true) and "BlinkCmpKind" .. ctx.kind
+				-- 	-- 	-- 	or "BlinkCmpKind"
+				-- 	-- 	local icon_hl = "BlinkCmpKind" .. ctx.kind
+				-- 	-- 	return {
+				-- 	-- 		{
+				-- 	-- 			" " .. ctx.kind_icon .. " ",
+				-- 	-- 			hl_group = icon_hl,
+				-- 	-- 		},
+				-- 	-- 		{
+				-- 	-- 			ctx.item.label .. " ",
+				-- 	-- 			fill = true,
+				-- 	-- 			hl_group = ctx.deprecated and "BlinkCmpLabelDeprecated" or "BlinkCmpLabel",
+				-- 	-- 			max_width = 45,
+				-- 	-- 		},
+				-- 	-- 	}
+				-- 	-- end,
+				-- },
 			},
 			kind_icons = require("config.ui.kind"),
 		},

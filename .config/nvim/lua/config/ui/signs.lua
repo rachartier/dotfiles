@@ -28,7 +28,7 @@ return {
 			renamed = "󰑕",
 		},
 	},
-	lualine_diagnostic = {
+	full_diagnostic = {
 		ok = "",
 		error = " ",
 		warning = " ",

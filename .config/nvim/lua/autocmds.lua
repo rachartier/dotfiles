@@ -31,6 +31,19 @@ end, {
 	desc = "Disable conceallevel for json files",
 })
 
+utils.on_event({ "FileType" }, function(event)
+	vim.schedule(function()
+		vim.opt_local.number = false
+		vim.opt_local.relativenumber = false
+		vim.opt_local.cursorline = false
+	end)
+end, {
+	target = {
+		"grug-far",
+	},
+	desc = "Clean buffer",
+})
+
 utils.on_event("FileType", function(event)
 	vim.bo[event.buf].buflisted = false
 	vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })

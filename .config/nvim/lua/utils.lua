@@ -93,6 +93,11 @@ function M.blend(foreground, background, alpha)
 	return string.format("#%02x%02x%02x", blend_channel(1), blend_channel(2), blend_channel(3))
 end
 
+function M.blend_bg(hex, amount)
+	local default_bg = require("theme").get_colors().base
+	return M.blend(hex, default_bg, amount)
+end
+
 function M.darken(hex, amount, bg)
 	local default_bg = require("theme").get_colors().base
 	return M.blend(hex, bg or default_bg, amount)
