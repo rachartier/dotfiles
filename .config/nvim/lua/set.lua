@@ -114,6 +114,7 @@ opt.spelllang = { -- Languages for spell checking
 	"fr",
 	"en",
 }
+opt.spelloptions:append("noplainbuffer")
 opt.splitbelow = true -- Put new windows below current
 opt.splitkeep = "screen" -- Keep screen on split
 opt.splitright = true -- Put new windows right of current

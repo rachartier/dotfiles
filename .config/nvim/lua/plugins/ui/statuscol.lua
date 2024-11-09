@@ -30,6 +30,7 @@ local function number(args)
 	if mode == "v" then
 		local v_range = utils.get_visual_range()
 		local is_in_range = vim.v.lnum >= v_range[1] and vim.v.lnum <= v_range[3]
+
 		v_hl = is_in_range and "%#CursorLineNr#" or ""
 	end
 

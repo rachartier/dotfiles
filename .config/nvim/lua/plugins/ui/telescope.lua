@@ -145,7 +145,6 @@ return {
 				mappings = {
 					i = {
 						["<C-d>"] = "delete_buffer",
-						["<S-d>"] = require("utils").buffers_clean,
 						["<S-Tab>"] = "move_selection_previous",
 						["<Esc>"] = "close",
 						["<Tab>"] = "move_selection_next",

@@ -29,7 +29,7 @@ function M.get(colors)
 		BlinkCmpMenu = { bg = colors.mantle },
 		BlinkCmpDoc = { bg = colors.mantle },
 		BlinkCmpScrollBarGutter = { bg = colors.mantle, fg = colors.mantle },
-		BlinkCmpScrollBarThumb = { bg = colors.surface1 },
+		-- BlinkCmpScrollBarThumb = { bg = colors.surface1 },
 		BlinkCmpLabelMatch = { bg = "None", fg = colors.blue },
 		-- BlinkCmpScrollBarThumb = { bg = colors.text },
 
@@ -51,7 +51,7 @@ function M.get(colors)
 		FlashLabel = { fg = colors.base, bg = colors.yellow, bold = true },
 
 		AlphaShortcut = { fg = colors.base, bg = colors.blue, bold = true },
-		AlphaFooter = { fg = colors.maroon },
+		-- AlphaFooter = { fg = colors.maroon },
 		AlphaButtons = { fg = colors.text },
 
 		GitSignsAdd = { fg = colors.green },

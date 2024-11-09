@@ -15,7 +15,7 @@ return {
 	},
 	opts = {
 		icons = {
-			kinds = require("config.ui.kind"),
+			kinds = require("config.ui.kinds"),
 		},
 	},
 }

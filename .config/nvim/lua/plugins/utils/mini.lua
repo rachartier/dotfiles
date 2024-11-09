@@ -87,7 +87,10 @@ return {
 		"echasnovski/mini.cursorword",
 		event = { "CursorMoved" },
 		version = false,
-		opts = {},
+		enabled = false,
+		opts = {
+			delay = 0,
+		},
 	},
 	-- {
 	-- 	"echasnovski/mini.animate",

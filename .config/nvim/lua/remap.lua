@@ -83,14 +83,4 @@ map("n", "dd", function()
 	end
 end, { expr = true, desc = "Smart dd" })
 
-map("n", "<Leader>db", function()
-	local curbufnr = vim.api.nvim_get_current_buf()
-	local buflist = vim.api.nvim_list_bufs()
-	for _, bufnr in ipairs(buflist) do
-		if vim.bo[bufnr].buflisted and bufnr ~= curbufnr and (vim.fn.getbufvar(bufnr, "bufpersist") ~= 1) then
-			vim.cmd("bd " .. tostring(bufnr))
-		end
-	end
-end, { silent = true, desc = "Close unused buffers" })
-
 map("n", "<Leader>r", ":%s/<c-r><c-w>//g<left><left>", { desc = "Rename word under cursor" })

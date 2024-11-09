@@ -4,8 +4,7 @@ local utils = require("utils")
 return {
 	{
 		"neovim/nvim-lspconfig",
-		event = { "BufReadPre", "BufNewFile" },
-		priority = 900,
+		event = { "BufReadPre" },
 		dependencies = {
 			"williamboman/mason.nvim",
 			"onsails/lspkind.nvim",

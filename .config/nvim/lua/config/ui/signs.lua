@@ -49,6 +49,7 @@ return {
 	others = {
 		copilot = " ",
 		copilot_disabled = " ",
+		terminal = " ",
 	},
 }
 

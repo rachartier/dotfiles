@@ -38,5 +38,8 @@ return {
 		lazygit = { enabled = false },
 		terminal = { enabled = false },
 		statuscol = { enabled = false },
+		words = {
+			debounce = 10,
+		},
 	},
 }

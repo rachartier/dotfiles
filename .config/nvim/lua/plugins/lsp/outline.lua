@@ -1,5 +1,3 @@
-local utils = require("utils")
-
 return {
 	"hedyhli/outline.nvim",
 	lazy = true,
@@ -26,7 +24,7 @@ return {
 			},
 			symbols = {
 				icon_fetcher = function(kind, bufnr)
-					local kinds = require("config.ui.kind")
+					local kinds = require("config.ui.kinds")
 
 					local ft = vim.api.nvim_get_option_value("ft", { buf = bufnr })
 					if ft == "markdown" then
@@ -45,14 +43,5 @@ return {
 	config = function(_, opts)
 		local outline = require("outline")
 		outline.setup(opts)
-
-		-- utils.on_event("FileType", function(event)
-		-- 	vim.schedule(function()
-		-- 		vim.cmd("topleft Outline!")
-		-- 	end)
-		-- end, {
-		-- 	target = { "markdown" },
-		-- 	desc = "Outline for markdown",
-		-- })
 	end,
 }
