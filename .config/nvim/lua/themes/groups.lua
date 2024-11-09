@@ -212,6 +212,8 @@ function M.get(colors)
 		-- MarkviewCodeInfo = { bg = colors.surface0 },
 
 		-- AvanteT,
+		-- === Lsp
+		["@keyword.operator.python"] = { link = "Conditional" },
 	}
 end
 

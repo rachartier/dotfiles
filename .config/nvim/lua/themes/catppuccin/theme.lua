@@ -73,10 +73,10 @@ function M.setup()
 			shade = "dark",
 			percentage = 0.35,
 		},
-		color_overrides = {
-			all = {
-				-- base = "#16161d",
-			},
+		highlight_overrides = {
+			all = function(colors)
+				return require("themes.groups").get(colors)
+			end,
 		},
 		no_italic = false, -- Force no italic
 		no_bold = false, -- Force no bold
@@ -139,8 +139,8 @@ function M.setup()
 	vim.cmd.colorscheme("catppuccin")
 	vim.cmd([[echo " "]]) -- fix flickering... https://github.com/neovim/neovim/issues/19362
 
-	require("themes.groups").override_hl(M.get_colors())
-	require("themes.groups").override_lsp_hl(M.get_colors())
+	-- require("themes.groups").override_hl(M.get_colors())
+	-- require("themes.groups").override_lsp_hl(M.get_colors())
 end
 
 return M

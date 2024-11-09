@@ -16,7 +16,6 @@ return {
 		select_prompt = "Search for keymaps/commands",
 		extensions = {
 			lazy_nvim = true,
-			which_key = true,
 		},
 		icons = {
 			-- keymap items list the modes in which the keymap applies

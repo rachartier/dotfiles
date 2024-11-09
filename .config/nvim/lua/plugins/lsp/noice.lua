@@ -72,17 +72,6 @@ return {
 					view = "notify",
 					filter = { event = "msg_showmode" },
 				},
-				{
-					filter = {
-						any = {
-							{
-								cond = function(_)
-									return true
-								end,
-							},
-						},
-					},
-				},
 			},
 		},
 		keys = {
