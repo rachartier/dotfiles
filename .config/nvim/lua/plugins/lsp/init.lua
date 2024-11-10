@@ -208,7 +208,6 @@ return {
 			if require("config").config_type ~= "minimal" then
 				local function ensure_installed()
 					for _, tool in ipairs(to_autoinstall_formatter_linter()) do
-						print(tool)
 						local p = mr.get_package(tool)
 						if not p:is_installed() then
 							p:install()

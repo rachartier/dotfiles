@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/env zsh
 
 __echo_success() {
     echo "[SUCCESS] $(tput setaf 2)$1"
@@ -135,6 +135,7 @@ install_luarocks() {
         tar zxpf luarocks-3.11.1.tar.gz &&
         cd luarocks-3.11.1 &&
         ./configure && make && sudo make install
+
 }
 
 install_fonts_for_windows() {
@@ -527,6 +528,18 @@ use_tool_dotnet() {
     bash "$script_path" "$@"
 }
 
+update_all() {
+    __echo_info "Updating neovim plugins..."
+    "$HOME/.local/bin/nvim" --headless "+Lazy! sync" "+qall"
+
+    __echo_info "Updating tmux plugins..."
+    "$HOME/.config/tmux/plugins/tpm/bin/update_plugins" all
+
+    . "$HOME/.antidote/antidote.zsh"
+    __echo_info "Updating antidote plugins..."
+    antidote update
+}
+
 do_tool() {
     local tool_name="$1"
 
@@ -542,6 +555,7 @@ do_tool() {
 do_command() {
     case "$1" in
     "init") install_essentials ;;
+    "update") update_all ;;
     "minimal") install_minimal ;;
     "docker") install_docker ;;
     "reinstall")
