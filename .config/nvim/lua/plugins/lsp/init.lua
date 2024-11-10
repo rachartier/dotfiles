@@ -1,6 +1,8 @@
 local icons = require("config.icons")
 local utils = require("utils")
 
+local border = require("config.ui.border").default_border
+
 return {
 	{
 		"neovim/nvim-lspconfig",
@@ -30,7 +32,7 @@ return {
 			})
 
 			require("lspconfig.ui.windows").default_options = {
-				border = icons.default_border,
+				border = border,
 			}
 		end,
 	},
@@ -55,7 +57,7 @@ return {
 					package_installed = "󰄳 ",
 					package_uninstalled = " ",
 				},
-				border = icons.default_border,
+				border = border,
 			},
 			keymaps = {
 				toggle_server_expand = "<CR>",
@@ -206,6 +208,7 @@ return {
 			if require("config").config_type ~= "minimal" then
 				local function ensure_installed()
 					for _, tool in ipairs(to_autoinstall_formatter_linter()) do
+						print(tool)
 						local p = mr.get_package(tool)
 						if not p:is_installed() then
 							p:install()

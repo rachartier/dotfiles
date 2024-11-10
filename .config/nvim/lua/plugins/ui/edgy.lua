@@ -17,10 +17,10 @@ return {
 			{ ft = "kulala-json", title = "Kulala (JSON)", size = { width = 0.30 } },
 			{ ft = "kulala-xml", title = "Kulala (XML)", size = { width = 0.30 } },
 			{ ft = "kulala-html", title = "Kulala (HTML)", size = { width = 0.30 } },
-			{ ft = "grug-far", title = "Grug Far", size = { width = 0.4 } },
+			{ ft = "grug-far", title = "Grug Far", size = { width = 0.40 } },
 		},
 		left = {
-			{ ft = "spectre_panel", size = { width = 0.40 } },
+			{ ft = "aerial", size = { width = 0.20 } },
 		},
 		bottom = {
 			"trouble",

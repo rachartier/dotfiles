@@ -2,6 +2,9 @@ return {
 	"lewis6991/gitsigns.nvim",
 	event = { "VeryLazy" },
 	enabled = true,
+	keys = {
+		{ "<leader>h", "", "+Git Hunk", mode = { "n" } },
+	},
 	opts = {
 		signcolumn = true,
 		current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`

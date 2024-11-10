@@ -95,6 +95,7 @@ function M.setup()
 			operators = {},
 		},
 		integrations = {
+			aerial = true,
 			alpha = true,
 			blink_cmp = true,
 			cmp = false,
@@ -102,8 +103,6 @@ function M.setup()
 			dap_ui = true,
 			diffview = true,
 			gitsigns = true,
-			-- harpoon = true,
-			-- illuminate = true,
 			lsp_trouble = false,
 			mason = true,
 			mini = true,
@@ -111,13 +110,12 @@ function M.setup()
 			noice = true,
 			notify = true,
 			render_markdown = true,
-			-- markdown = true,
+			symbols_outline = true,
 			telekasten = true,
 			telescope = true,
 			treesitter = true,
 			treesitter_context = false,
 			which_key = true,
-			symbols_outline = true,
 			native_lsp = {
 				enabled = true,
 				virtual_text = {
