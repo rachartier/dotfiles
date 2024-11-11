@@ -23,7 +23,7 @@ jobs:
     - name: Build and push Dotfile Image
       uses: docker/build-push-action@v3
       with:
-        context: .config/scripts/
+        context: .config/scripts
         file: .config/scripts/Dockerfile
         push: true
         tags: |
