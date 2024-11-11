@@ -1,7 +1,7 @@
-eval "$(starship init zsh)"
-
 source "$HOME/.profile"
 source "$HOME/.dotfile_profile"
+
+eval "$(starship init zsh)"
 
 [ ! -d $HOME/.antidote ] && git clone --depth=1 https://github.com/mattmc3/antidote.git $HOME/.antidote
 source $HOME/.antidote/antidote.zsh
