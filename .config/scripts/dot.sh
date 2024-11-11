@@ -415,7 +415,7 @@ install_essentials() {
     install_zoxide
 
     install_git_delta
-    install_github_gh
+    # install_github_gh
 
     git config --global include.path "~/.config/git/gitconfig"
 

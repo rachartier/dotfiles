@@ -1,0 +1,40 @@
+FROM ubuntu:24.04 AS base
+
+ENV DEBIAN_FRONTEND=noninteractive
+ENV GIT_CLONE_METHOD=https
+ENV LANG=en_US.UTF-8
+ENV APPIMAGE_EXTRACT_AND_RUN=1
+
+ARG USER_NAME
+ARG USER_PASSWORD
+
+RUN apt-get update \
+	&& apt-get install -y curl sudo \
+    && yes | useradd -m -p $(perl -e 'print crypt($ARGV[0], "password")' "$USER_PASSWORD") "$USER_NAME" \
+    && usermod -aG sudo "$USER_NAME"
+
+RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> \
+/etc/sudoers
+
+USER $USER_NAME
+ENV DOTFILES_DOCKER=1
+ENV TERM=xterm-256color
+
+RUN chown -R $USER_NAME:$USER_NAME /home/$USER_NAME
+COPY ./first_install.sh /tmp/first_install.sh
+
+RUN sudo chmod +x /tmp/first_install.sh \
+    && /tmp/first_install.sh
+
+RUN sudo rm /tmp/first_install.sh
+
+RUN sudo apt-get clean \
+    && sudo rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+RUN git clone --depth=1 https://github.com/mattmc3/antidote.git /home/$USER_NAME/.antidote \
+    && zsh -c "/home/$USER_NAME/.config/scripts/dot.sh update"
+
+RUN sudo sed -i '/%sudo ALL=(ALL) NOPASSWD:ALL/d' /etc/sudoers
+
+WORKDIR /home/$USER_NAME
+CMD ["/bin/zsh"]
