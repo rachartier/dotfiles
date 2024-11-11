@@ -24,7 +24,7 @@ jobs:
         push: true
         tags: |
           rachartier/dotfile-dev:latest
-          rachartier/dotfile-dev:$(date +"%Y_%m_%d")
+          rachartier/dotfile-dev:$(date +"%Y%m%d")
         platforms: linux/amd64,linux/arm64
         build-args: |
           USER_NAME=${{ secrets.USER_NAME }}
