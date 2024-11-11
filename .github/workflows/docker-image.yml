@@ -16,6 +16,10 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
+    - name: Set current date as env variable
+      run: |
+        echo "DATE=$(TZ='Europe/Paris' date +'%Y%m%d')" >> $GITHUB_ENV
+
     - name: Build and push Dotfile Image
       uses: docker/build-push-action@v3
       with:
@@ -24,7 +28,7 @@ jobs:
         push: true
         tags: |
           rachartier/dotfile-dev:latest
-          rachartier/dotfile-dev:$(date +"%Y%m%d")
+          rachartier/dotfile-dev:${{ env.DATE }}
         platforms: linux/amd64,linux/arm64
         build-args: |
           USER_NAME=${{ secrets.USER_NAME }}
