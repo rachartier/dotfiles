@@ -154,18 +154,10 @@ install_fonts_for_windows() {
 }
 
 install_starship() {
-    if [ -n "$DOTFILES_DOCKER" ]; then
-        if curl -sS https://starship.rs/install.sh | sh -s -- -b ~/.local/bin -y; then
-            __echo_success "starship installed."
-        else
-            __echo_failure "starship not installed."
-        fi
+    if curl -sS https://starship.rs/install.sh | sh -s -- -b ~/.local/bin -y; then
+        __echo_success "starship installed."
     else
-        if curl -sS https://starship.rs/install.sh | sh -s -- -y; then
-            __echo_success "starship installed."
-        else
-            __echo_failure "starship not installed."
-        fi
+        __echo_failure "starship not installed."
     fi
 }
 
@@ -293,7 +285,7 @@ install_packages() {
 
     install_bat
 
-    __make_symlink "$HOME/.local/bin/fd" fdfind
+    __make_symlink "$HOME/.local/bin/fd" $(which fdfind)
 }
 
 install_git_delta() {
