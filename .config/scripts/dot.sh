@@ -104,7 +104,7 @@ __install_package_apt() {
         if __is_pkg_installed "$pkg"; then
             __echo_info "$pkg already installed."
         else
-            sudo apt install -y -qq -o=Dpkg::Use-Pty=0 "$pkg" && __echo_success "$pkg installed."
+            sudo apt-get install -y -qq -o=Dpkg::Use-Pty=0 "$pkg" && __echo_success "$pkg installed."
         fi
     done
 }
