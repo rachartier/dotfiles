@@ -58,6 +58,14 @@ cd && export LANG=en_US.UTF-8 && export APPIMAGE_EXTRACT_AND_RUN=1
 
 You should be able to try the config!
 
+# [WIP] Dotfiles DEV
+
+A portable dotfiles, in a docker, to be used on any device without installation.
+
+```
+docker run -v "$HOME/dev:/home/ubuntu/dev" -v "$HOME/.config/github-copilot:/home/ubuntu/.config/github-copilot" -v "/tmp/X11-unix:/tmp/X11-unix" -e DISPLAY=$DISPLAY --net=host --name="dotfile-dev" --entrypoint zsh --privileged -d -ti rachartier/dotfile-dev:latest
+```
+
 # Images
 ![image](https://github.com/rachartier/dotfiles/assets/2057541/d70e00d6-8186-461e-af5b-94ea32e0a345)
 
