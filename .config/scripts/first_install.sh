@@ -6,9 +6,16 @@ __echo_info() {
 }
 
 install_essentials() {
-    sudo apt install -y -qq -o=Dpkg::Use-Pty=0 git \
+    sudo apt install -y -qq -o=Dpkg::Use-Pty=0 \
+        git \
         wget \
-        zsh
+        zsh \
+        autotools-dev \
+        coreutils
+
+    sudo apt install -y -qq -o=Dpkg::Use-Pty=0 \
+        automake \
+        autoconf
 }
 
 # install_ohmyzsh() {

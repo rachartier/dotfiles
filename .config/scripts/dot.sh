@@ -70,7 +70,7 @@ __install_package_release() {
     wget -q "$url" && __echo_success "'$filename' downloaded." || return 1
     tar -xf "$filename" && __echo_success "$filename extracted." || return 1
     chmod +x "$name"
-    mv "$name" "$HOME/.local/bin/$name" && __echo_success "'$name' moved in $HOME/local/bin/" || return 1
+    mv "$name" "$HOME/.local/bin/$name" && __echo_success "'$name' moved in $HOME/.local/bin/" || return 1
 }
 
 __download_install_deb() {
@@ -104,7 +104,7 @@ __install_package_apt() {
         if __is_pkg_installed "$pkg"; then
             __echo_info "$pkg already installed."
         else
-            sudo apt install -y -qq -o=Dpkg::Use-Pty=0 "$pkg" && __echo_success "$pkg installed."
+            sudo apt-get install -y -qq -o=Dpkg::Use-Pty=0 "$pkg" && __echo_success "$pkg installed."
         fi
     done
 }
@@ -216,6 +216,7 @@ install_tmux() {
     __echo_info "Installing tmux"
 
     __install_package_apt libevent-dev ncurses-dev build-essential bison pkg-config
+
     git clone https://github.com/tmux/tmux.git /tmp/tmux
     cd /tmp/tmux || exit
     sh autogen.sh
@@ -285,7 +286,7 @@ install_packages() {
 
     install_bat
 
-    __make_symlink "$HOME/.local/bin/fd" $(which fdfind)
+    __make_symlink "$HOME/.local/bin/fd" fdfind
 }
 
 install_git_delta() {
