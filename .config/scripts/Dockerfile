@@ -12,7 +12,7 @@ RUN apt-get update \
 	&& apt-get install -y curl sudo \
     && usermod -aG sudo "$USER_NAME"
 
-RUN echo "$USER_NAME:$USER_PASSWORD" | chpasswd
+# RUN echo "$USER_NAME:$USER_PASSWORD" | chpasswd
 
 RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> \
 /etc/sudoers
@@ -28,14 +28,18 @@ RUN sudo chmod +x /tmp/first_install.sh \
 
 RUN sudo rm /tmp/first_install.sh
 
+
+WORKDIR /home/$USER_NAME
+RUN /usr/bin/git --git-dir="$HOME/.cfg/" --work-tree="$HOME" submodule update --remote
+
 RUN sudo apt-get clean \
-    && sudo rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+    && sudo rm -rf /var/lib/apt/lists/*
 
 RUN git clone --depth=1 https://github.com/mattmc3/antidote.git /home/$USER_NAME/.antidote \
     && zsh -c "/home/$USER_NAME/.config/scripts/dot.sh update"
 
-RUN sudo sed -i '/%sudo ALL=(ALL) NOPASSWD:ALL/d' /etc/sudoers
+# RUN sudo sed -i '/%sudo ALL=(ALL) NOPASSWD:ALL/d' /etc/sudoers
 RUN zsh -c ". '$HOME/.antidote/antidote.zsh' && antidote load '${ZDOTDIR:-$HOME}/.zsh_plugins.txt'"
 
-WORKDIR /home/$USER_NAME
+ENV TERM=wezterm
 ENTRYPOINT ["/bin/zsh"]
