@@ -28,6 +28,7 @@ return {
 		-- 	refresh = 50,
 		-- },
 		notifier = {
+			enabled = true,
 			icons = {
 				error = signs.error,
 				warn = signs.warning,
@@ -35,11 +36,11 @@ return {
 				trace = signs.hint,
 			},
 		},
-		lazygit = { enabled = false },
-		terminal = { enabled = false },
-		statuscol = { enabled = false },
-		words = {
-			debounce = 10,
-		},
+		notify = { enabled = true },
+		toggle = { enabled = true },
+		bigfile = { enabled = true },
+		quickfile = { enabled = true },
+		rename = { enabled = true },
+		words = { enabled = true, debounce = 10 },
 	},
 }

@@ -208,6 +208,8 @@ function M.get(colors)
 		MiniCursorword = { link = "MiniCursorwordCurrent" },
 		MiniIndentscopeSymbol = { fg = colors.surface1 },
 
+		VisualNonText = { bg = colors.surface0, fg = colors.surface1 },
+
 		-- MarkviewCode = { bg = colors.surface0 },
 		-- MarkviewCodeInfo = { bg = colors.surface0 },
 
