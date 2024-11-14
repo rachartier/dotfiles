@@ -37,7 +37,7 @@ M.lsp_rename = function()
 		end
 
 		-- compose the right print message
-		require("notify")(
+		vim.notify(
 			string.format(
 				"Renamed %s instance%s in %s file%s.",
 				changed_instances_count,
