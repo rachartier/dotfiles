@@ -5,7 +5,6 @@ return {
 		dependencies = {
 			"rafamadriz/friendly-snippets",
 			"saghen/blink.compat",
-			{ "petertriho/cmp-git", lazy = true },
 			{ "chrisgrieser/cmp-nerdfont", lazy = true },
 			{ "hrsh7th/cmp-emoji", lazy = true },
 		},
@@ -29,7 +28,6 @@ return {
 						"snippets",
 						"buffer",
 						"lazydev",
-						"git",
 						"nerdfont",
 						"emoji",
 					},
@@ -38,10 +36,6 @@ return {
 					-- dont show LuaLS require statements when lazydev has items
 					lsp = { fallback_for = { "lazydev" } },
 					lazydev = { name = "LazyDev", module = "lazydev.integrations.blink" },
-					git = {
-						name = "git",
-						module = "blink.compat.source",
-					},
 					nerdfont = {
 						name = "nerdfont",
 						module = "blink.compat.source",
