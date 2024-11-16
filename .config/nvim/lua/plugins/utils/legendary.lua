@@ -10,7 +10,7 @@ return {
 			silent = true,
 		},
 	},
-	event = "BufReadPre",
+	event = "VeryLazy",
 	priority = 1,
 	opts = {
 		select_prompt = "Search for keymaps/commands",
