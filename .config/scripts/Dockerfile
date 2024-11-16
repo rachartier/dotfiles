@@ -21,6 +21,9 @@ USER $USER_NAME
 ENV TERM=xterm-256color
 
 RUN chown -R $USER_NAME:$USER_NAME /home/$USER_NAME
+
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --default-toolchain nightly -y
+
 COPY ./first_install.sh /tmp/first_install.sh
 
 RUN sudo chmod +x /tmp/first_install.sh \

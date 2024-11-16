@@ -68,6 +68,7 @@ __install_package_release() {
     cd /tmp || exit 1
     wget -q "$url" && __echo_success "'$filename' downloaded." || return 1
 
+    # check if $filename is a directory
     if [[ "$filename" == *.tar.gz ]]; then
         tar -xf "$filename" && __echo_success "$filename extracted." || return 1
     else
@@ -227,12 +228,14 @@ install_zoxide() {
 
 install_tmux() {
     __echo_info "Installing tmux"
+    TMUX_VERSION=$(__get_latest_release "tmux/tmux")
 
     __install_package_apt libevent-dev ncurses-dev build-essential bison pkg-config
+	wget "https://github.com/tmux/tmux/releases/latest/download/tmux-${TMUX_VERSION}.tar.gz" -O /tmp/tmux.tar.gz
 
-    git clone https://github.com/tmux/tmux.git /tmp/tmux
-    cd /tmp/tmux || exit
-    sh autogen.sh
+    tar -xzvf /tmp/tmux.tar.gz -C /tmp
+
+    cd "/tmp/tmux-$TMUX_VERSION" || exit
     ./configure --enable-sixel
     make && sudo make install
 
