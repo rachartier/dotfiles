@@ -9,13 +9,23 @@ local function build_layout(opts)
 	local buttons = opts.buttons or {}
 	local footer = opts.footer or {}
 
+	local version_str = " v"
+		.. version.major
+		.. "."
+		.. version.minor
+		.. "."
+		.. version.patch
+		.. " ("
+		.. version.build
+		.. ")"
+
 	return {
 		{ type = "padding", val = header_padding },
 		header,
 		{
 			type = "text",
 			val = {
-				-- string.format("%s", vim.version()),
+				version_str,
 			},
 			opts = {
 				position = "center",
@@ -59,7 +69,7 @@ return {
 				width = 24 * 2,
 				height = 24 * 2,
 				opts = {
-					redraw = true,
+					redraw = false,
 					position = "center",
 				},
 			}
@@ -179,17 +189,7 @@ return {
 			}
 		end
 
-		local version_str = " v"
-			.. version.major
-			.. "."
-			.. version.minor
-			.. "."
-			.. version.patch
-			.. " ("
-			.. version.build
-			.. ")"
-
-		header.val[#header.val] = string.rep(" ", #header.val[#header.val] / 2 - #version_str / 2 - 2) .. version_str
+		-- header.val[#header.val] = string.rep(" ", #header.val[#header.val] / 2 - #version_str / 2 - 2) .. version_str
 		--
 		-- dashboard.section.footer = {
 		-- 	type = "text",
@@ -211,6 +211,7 @@ return {
 			dashboard.button("    l    ", "  Open Lazy", "<cmd>Lazy<CR>"),
 			dashboard.button("    q    ", "󰩈  Quit", "<cmd>qa<CR>"),
 		}
+
 		for _, button in ipairs(dashboard.section.buttons.val) do
 			button.opts.hl = "AlphaButtons"
 			button.opts.hl_shortcut = "AlphaShortcut"
@@ -273,7 +274,7 @@ return {
 					-- string.rep("─", #footer_txt - 1),
 				}
 
-				pcall(vim.cmd.AlphaRedraw)
+				-- pcall(vim.cmd.AlphaRedraw)
 			end,
 		})
 

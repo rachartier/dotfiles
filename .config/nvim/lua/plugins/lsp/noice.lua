@@ -13,7 +13,7 @@ return {
 				-- NOTE: If you enable messages, then the cmdline is enabled automatically.
 				-- This is a current Neovim limitation.
 				enabled = true, -- enables the Noice messages UI
-				view = "notify", -- default view for messages
+				view = "split", -- default view for messages
 				view_error = "notify", -- view for errors
 				view_warn = "notify", -- view for warnings
 				view_history = "messages", -- view for :messages
@@ -69,8 +69,11 @@ return {
 					view = "mini",
 				},
 				{
-					view = "notify",
-					filter = { event = "msg_showmode" },
+					filter = {
+						event = "notify",
+						min_height = 15,
+					},
+					view = "split",
 				},
 			},
 		},

@@ -75,10 +75,10 @@ end
 function M.setup()
 	vim.cmd([[colorscheme default]])
 
-	local colors = M.get_colors()
+	-- local colors = M.get_colors()
 
-	require("themes.groups").override_hl(colors)
-	require("themes.groups").override_lsp_hl(colors)
+	-- require("themes.groups").override_hl(colors)
+	-- require("themes.groups").override_lsp_hl(colors)
 end
 
 return M

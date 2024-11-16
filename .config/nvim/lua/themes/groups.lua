@@ -9,9 +9,11 @@ function M.get(colors)
 
 	-- local cursor_line_bg = U.lighten(colors.base, 0.955)
 	local cursor_line_bg = "None"
+
 	return {
+
 		-- Visual = { bg = "#234370" },
-		Visual = { bg = colors.surface0 },
+		Visual = { bg = colors.surface0, bold = false },
 		-- Visual = { bg = colors.blue, fg = colors.base },
 
 		-- NormalFloat = { bg = bg, fg = colors.text },
@@ -34,13 +36,13 @@ function M.get(colors)
 		-- BlinkCmpScrollBarThumb = { bg = colors.text },
 
 		CmpGhostText = { link = "Comment", default = true },
-		CmpItemAbbrMatch = { fg = colors.yellow, bold = true, underline = false },
+		CmpItemAbbrMatch = { fg = colors.yellow, underline = false },
 		CmpItemAbbrMatchFuzzy = { fg = colors.blue, underline = true, link = "CmpItemAbbrMatch" },
 
 		Pmenu = { bg = colors.base, fg = colors.text },
 		PmenuBorder = { link = "FloatBorder" },
 		PmenuDocBorder = { link = "FloatBorder" },
-		PmenuSel = { bg = colors.surface0 },
+		PmenuSel = { bg = colors.surface0, bold = false },
 		PopupNormal = { bg = colors.base, fg = colors.text },
 
 		-- CursorLine = { bg = "None" },
@@ -51,8 +53,8 @@ function M.get(colors)
 		FlashLabel = { fg = colors.base, bg = colors.yellow, bold = true },
 
 		AlphaShortcut = { fg = colors.base, bg = colors.blue, bold = true },
-		-- AlphaFooter = { fg = colors.maroon },
-		AlphaButtons = { fg = colors.text },
+		AlphaFooter = { fg = colors.peach },
+		AlphaButtons = { fg = colors.subtext2 },
 
 		GitSignsAdd = { fg = colors.green },
 		GitSignsChange = { fg = colors.blue },
@@ -130,7 +132,7 @@ function M.get(colors)
 		TelescopePreviewNormal = { bg = colors.base },
 		TelescopePreviewTitle = { bg = colors.green, fg = colors.base },
 
-		FzfLuaNormal = { bg = colors.bg, fg = colors.text },
+		FzfLuaNormal = { bg = colors.base, fg = colors.text },
 		FzfPreviewTitle = { bg = colors.blue, fg = colors.text },
 		FzfLuaPreviewTitle = { bg = colors.green, fg = colors.base },
 		FzfLuaBorder = { link = "FloatBorder" },
@@ -200,7 +202,7 @@ function M.get(colors)
 		MarkdownCheckboxStar = { fg = colors.yellow },
 		MarkdownCheckboxSkipped = { fg = colors.red },
 		MarkdownCheckboxQuestion = { fg = colors.yellow },
-		MarkdownCheckboxInfo = { fg = colors.cyan },
+		MarkdownCheckboxInfo = { fg = colors.sapphire },
 		MarkdownCheckboxImportant = { fg = colors.peach },
 
 		CopilotSuggestion = { fg = colors.subtext0, italic = false },
