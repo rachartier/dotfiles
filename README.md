@@ -65,7 +65,7 @@ A portable dotfiles, in a docker, to be used on any device without installation.
 ## With a script
 
 ```sh
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/rachartier/dotfiles/main/.config/scripts/setup_container_env.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/rachartier/dotfiles/main/.config/scripts/setup-container-env.sh)"
 ```
 
 ## Directly with docker
