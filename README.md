@@ -62,6 +62,13 @@ You should be able to try the config!
 
 A portable dotfiles, in a docker, to be used on any device without installation.
 
+## With a script
+
+```sh
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/rachartier/dotfiles/main/.config/scripts/setup_container_env.sh)"
+```
+
+## Directly with docker
 ```
 docker run -v "$HOME/dev:/home/ubuntu/dev" -v "$HOME/.config/github-copilot:/home/ubuntu/.config/github-copilot" -v "/tmp/X11-unix:/tmp/X11-unix" -e DISPLAY=$DISPLAY --net=host --name="dotfile-dev" --entrypoint zsh --privileged -d -ti rachartier/dotfile-dev:latest
 ```
