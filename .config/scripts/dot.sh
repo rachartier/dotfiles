@@ -66,10 +66,14 @@ __install_package_release() {
 
     __echo_info "Downloading $filename"
     cd /tmp || exit 1
-    echo "$url"
     wget -q "$url" && __echo_success "'$filename' downloaded." || return 1
-    tar -xf "$filename" && __echo_success "$filename extracted." || return 1
-    echo "Installing $name..."
+
+    if [[ "$filename" == *.tar.gz ]]; then
+        tar -xf "$filename" && __echo_success "$filename extracted." || return 1
+    else
+        mv "$filename" "$name"
+    fi
+
     chmod +x "$name"
     mv "$name" "$HOME/.local/bin/$name" && __echo_success "'$name' moved in $HOME/.local/bin/" || return 1
 }
@@ -83,7 +87,6 @@ __download_install_deb() {
 
     __echo_info "Downloading $filename"
     cd /tmp || exit 1
-    echo "$url"
     wget -q "$url" && __echo_success "'$filename' downloaded." || return 1
     sudo dpkg -i "$filename" && __echo_success "$name installed." || return 1
 }
@@ -188,21 +191,30 @@ install_fzf() {
 }
 
 install_viu() {
-    cd /tmp || exit 1
-    wget -q "https://github.com/atanunq/viu/releases/download/v1.4.0/viu"
-    chmod +x viu
-    mv viu "$HOME"/.local/bin && __echo_success "viu installed."
+    __install_package_release "https://github.com/atanunq/viu/releases/latest/download/viu-x86_64-unknown-linux-musl" viu
 }
 
 install_lazygit() {
     LAZYGIT_VERSION=$(__get_latest_release "jesseduffield/lazygit")
-    curl -sLo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
-    tar xf lazygit.tar.gz lazygit
-    sudo install lazygit /usr/local/bin && __echo_success "lazygit installed."
+    LAZYGIT_VERSION="${LAZYGIT_VERSION:1}"
+
+    if [ -f "/usr/local/bin/lazygit" ]; then
+        __echo_info "Removing old lazygit symlink."
+        sudo rm "/usr/local/bin/lazygit"
+    fi
+    __install_package_release "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz" lazygit
 }
 
 install_lazydocker() {
-    curl https://raw.githubusercontent.com/jesseduffield/lazydocker/master/scripts/install_update_linux.sh | bash
+    LAZYDOCKER_VERSION=$(__get_latest_release "jesseduffield/lazydocker")
+	LAZYDOCKER_VERSION="${LAZYDOCKER_VERSION:1}"
+
+    if [ -f "/usr/local/bin/lazydocker" ]; then
+        __echo_info "Removing old lazydocker symlink."
+        sudo rm "/usr/local/bin/lazydocker"
+    fi
+
+    __install_package_release "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYDOCKER_VERSION}_Linux_x86_64.tar.gz" lazydocker
 }
 
 install_zoxide() {
@@ -241,8 +253,6 @@ install_bat() {
     bat_version=$(__get_latest_release "sharkdp/bat")
 
     __download_install_deb "https://github.com/sharkdp/bat/releases/download/$bat_version/bat_${bat_version:1}_amd64.deb" "bat"
-
-    # __make_symlink "$HOME/.local/bin/bat" batcat
 
     if ! [ -d "$(bat --config-dir)" ]; then
         mkdir -p "$(bat --config-dir)/themes"
