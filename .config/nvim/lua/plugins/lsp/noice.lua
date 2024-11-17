@@ -68,13 +68,13 @@ return {
 					},
 					view = "mini",
 				},
-				{
-					filter = {
-						event = "notify",
-						min_height = 15,
-					},
-					view = "split",
-				},
+				-- {
+				-- 	filter = {
+				-- 		event = "notify",
+				-- 		min_height = 15,
+				-- 	},
+				-- 	view = "split",
+				-- },
 			},
 		},
 		keys = {

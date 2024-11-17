@@ -253,6 +253,8 @@ return {
 				separator = "───",
 				show_folds = false,
 				auto_follow_cursor = false,
+				debug = false,
+				log_level = "error",
 				-- context = "buffer",
 
 				selection = function(source)
