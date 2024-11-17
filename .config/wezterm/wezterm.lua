@@ -23,8 +23,8 @@ config.default_domain = "WSL:Ubuntu"
 -- config.font = wezterm.font_with_fallback({ "IBM Plex Mono", "Symbols Nerd Font" })
 -- config.font = wezterm.font_with_fallback({ "Monaspace Neon", "Symbols Nerd Font" })
 -- config.font = wezterm.font_with_fallback({ "Symbols Nerd Font" })
--- config.font = wezterm.font_with_fallback({ "MonoLisa", "Symbols Nerd Font" })
-config.font = wezterm.font_with_fallback({ "Cartograph CF", "Symbols Nerd Font" })
+config.font = wezterm.font_with_fallback({ "MonoLisa", "Symbols Nerd Font" })
+-- config.font = wezterm.font_with_fallback({ "Cartograph CF", "Symbols Nerd Font" })
 -- config.font = wezterm.font_with_fallback({ "Maple Mono NF", "Symbols Nerd Font" })
 -- config.font = wezterm.font_with_fallback({ "IBM Plex Mono", "Symbols Nerd Font" })
 
@@ -67,7 +67,8 @@ config.harfbuzz_features = {
 
 config.underline_thickness = "2pt"
 config.underline_position = "-1.5pt"
-config.enable_kitty_graphics = true
+config.enable_kitty_graphics = false
+config.enable_sixel = true
 config.allow_square_glyphs_to_overflow_width = "Always"
 config.bold_brightens_ansi_colors = "BrightAndBold"
 
