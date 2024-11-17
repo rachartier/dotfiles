@@ -381,6 +381,7 @@ Useful PEPs for this section (not exhaustive):
 		end,
 	},
 	{
+		-- dir = os.getenv("HOME") .. "/dev/nvim_plugins/avante.nvim",
 		"yetone/avante.nvim",
 		enabled = true,
 		event = "VeryLazy",

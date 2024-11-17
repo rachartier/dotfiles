@@ -13,6 +13,8 @@ local function read_file(path)
 	return content
 end
 
+config.max_fps = 165
+
 config.check_for_updates = true
 config.automatically_reload_config = true
 config.default_domain = "WSL:Ubuntu"
@@ -23,8 +25,8 @@ config.default_domain = "WSL:Ubuntu"
 -- config.font = wezterm.font_with_fallback({ "IBM Plex Mono", "Symbols Nerd Font" })
 -- config.font = wezterm.font_with_fallback({ "Monaspace Neon", "Symbols Nerd Font" })
 -- config.font = wezterm.font_with_fallback({ "Symbols Nerd Font" })
-config.font = wezterm.font_with_fallback({ "MonoLisa", "Symbols Nerd Font" })
--- config.font = wezterm.font_with_fallback({ "Cartograph CF", "Symbols Nerd Font" })
+-- config.font = wezterm.font_with_fallback({ "MonoLisa", "Symbols Nerd Font" })
+config.font = wezterm.font_with_fallback({ "Cartograph CF", "Symbols Nerd Font" })
 -- config.font = wezterm.font_with_fallback({ "Maple Mono NF", "Symbols Nerd Font" })
 -- config.font = wezterm.font_with_fallback({ "IBM Plex Mono", "Symbols Nerd Font" })
 
@@ -49,6 +51,7 @@ config.font_rules = {
 	-- },
 }
 
+-- == ~= != <=a >=
 config.harfbuzz_features = {
 	"zero=1",
 	"calt=1",
