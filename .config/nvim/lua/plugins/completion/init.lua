@@ -17,6 +17,9 @@ return {
 			},
 
 			trigger = {
+				completion = {
+					keyword_range = "full",
+				},
 				signature_help = { enabled = false },
 			},
 

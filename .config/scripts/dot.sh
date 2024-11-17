@@ -208,7 +208,7 @@ install_lazygit() {
 
 install_lazydocker() {
     LAZYDOCKER_VERSION=$(__get_latest_release "jesseduffield/lazydocker")
-	LAZYDOCKER_VERSION="${LAZYDOCKER_VERSION:1}"
+    LAZYDOCKER_VERSION="${LAZYDOCKER_VERSION:1}"
 
     if [ -f "/usr/local/bin/lazydocker" ]; then
         __echo_info "Removing old lazydocker symlink."
@@ -231,7 +231,7 @@ install_tmux() {
     TMUX_VERSION=$(__get_latest_release "tmux/tmux")
 
     __install_package_apt libevent-dev ncurses-dev build-essential bison pkg-config
-	wget "https://github.com/tmux/tmux/releases/latest/download/tmux-${TMUX_VERSION}.tar.gz" -O /tmp/tmux.tar.gz
+    wget "https://github.com/tmux/tmux/releases/latest/download/tmux-${TMUX_VERSION}.tar.gz" -O /tmp/tmux.tar.gz
 
     tar -xzvf /tmp/tmux.tar.gz -C /tmp
 
