@@ -56,7 +56,7 @@ return {
 	"goolord/alpha-nvim",
 	init = false,
 	lazy = false,
-	enabled = true,
+	enabled = false,
 	config = function()
 		local dashboard = require("alpha.themes.dashboard")
 

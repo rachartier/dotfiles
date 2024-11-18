@@ -2,12 +2,15 @@ local signs = require("config.ui.signs").full_diagnostic
 
 return {
 	"folke/snacks.nvim",
-	priority = 900,
+	priority = 1000,
 	lazy = false,
-	enabled = true,
-	keys = {},
 	opts = {
 		styles = {
+			dashboard = {
+				wo = {
+					winblend = 0,
+				},
+			},
 			notification = {
 				border = require("config.ui.border").default_border,
 				wo = {
@@ -36,6 +39,9 @@ return {
 				info = signs.info,
 				trace = signs.hint,
 			},
+		},
+		dashboard = {
+			enabled = true,
 		},
 		notify = { enabled = true },
 		toggle = { enabled = true },
