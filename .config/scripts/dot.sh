@@ -35,7 +35,8 @@ __get_windows_user() {
 }
 
 __get_latest_release() {
-    curl -s "https://api.github.com/repos/$1/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/'
+
+        curl -s "https://api.github.com/repos/$1/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/'
 }
 
 __is_pkg_installed() {
@@ -355,11 +356,19 @@ install_github_gh() {
 install_nvim() {
     sudo apt autoremove neovim -y # remove neovim installed by apt
 
-    if [ "$1" = "stable" ]; then
-        __install_appimage "https://github.com/neovim/neovim/releases/download/stable/nvim.appimage" nvim
-    else
-        __install_appimage "https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage" nvim
+    if [ -f "$HOME/.local/bin/nvim" ]; then
+        rm "$HOME/.local/bin/nvim"
     fi
+
+    cd /tmp || exit
+    if [ "$1" = "stable" ]; then
+        wget "https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.tar.gz"
+    else
+        wget "https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz"
+    fi
+
+    sudo rm -rf /opt/nvim
+    sudo tar -C /opt -xzf nvim-linux64.tar.gz
 
     __install_package_apt python3-pynvim
 
@@ -380,13 +389,7 @@ install_nvim() {
 
     # Update plugins
     __echo_info "Updating plugins..."
-    "$HOME/.local/bin/nvim" --headless "+Lazy! sync" "+qall"
-
-    if [ "$?" -eq 127 ]; then
-        __echo_warning "nvim.appimage can't be runned. Exporting APPIMAGE_EXTRACT_AND_RUN=1 and running nvim."
-        export APPIMAGE_EXTRACT_AND_RUN=1
-        "$HOME/.local/bin/nvim" --headless "+Lazy! sync" "+qall"
-    fi
+    "nvim" --headless "+Lazy! sync" "+qall"
 
     __echo_success "Plugins updated."
 }

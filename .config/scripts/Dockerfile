@@ -26,6 +26,7 @@ RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --defau
 
 COPY ./first_install.sh /tmp/first_install.sh
 
+ARG CACHEBUST=1
 RUN sudo chmod +x /tmp/first_install.sh \
     && /tmp/first_install.sh
 
