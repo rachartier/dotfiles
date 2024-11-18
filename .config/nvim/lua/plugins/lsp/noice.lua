@@ -3,17 +3,15 @@ local default_border = require("config.ui.border").default_border
 return {
 	{
 		"folke/noice.nvim",
-		dependencies = {
-			"MunifTanjim/nui.nvim",
-		},
-		event = "UiEnter",
+		priority = 9999,
+		lazy = false,
 		enabled = true,
 		opts = {
 			messages = {
 				-- NOTE: If you enable messages, then the cmdline is enabled automatically.
 				-- This is a current Neovim limitation.
 				enabled = true, -- enables the Noice messages UI
-				view = "split", -- default view for messages
+				view = "notify", -- default view for messages
 				view_error = "notify", -- view for errors
 				view_warn = "notify", -- view for warnings
 				view_history = "messages", -- view for :messages
@@ -86,5 +84,14 @@ return {
 				{ noremap = true, silent = true, desc = "Dismiss all Notifications" },
 			},
 		},
+		config = function(_, opts)
+			-- HACK: noice shows messages from before it was enabled,
+			-- but this is not ideal when Lazy is installing plugins,
+			-- so clear the messages in this case.
+			if vim.o.filetype == "lazy" then
+				vim.cmd([[messages clear]])
+			end
+			require("noice").setup(opts)
+		end,
 	},
 }

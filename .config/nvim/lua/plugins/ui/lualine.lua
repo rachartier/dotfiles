@@ -348,8 +348,8 @@ return {
 		local config = {
 			options = {
 				theme = "auto",
+				disabled_filetypes = { statusline = { "alpha", "snacks_dashboard" } },
 				icons_enabled = true,
-				disabled_filetypes = { "alpha" },
 				globalstatus = true,
 				component_separators = { left = "", right = "" },
 				section_separators = { left = "", right = "" },
@@ -357,7 +357,6 @@ return {
 			},
 			sections = sections,
 			inactive_sections = sections,
-			disabled_filetypes = { "alpha" },
 		}
 
 		-- ins_left()

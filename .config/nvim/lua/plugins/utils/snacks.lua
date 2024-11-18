@@ -1,6 +1,34 @@
 local signs = require("config.ui.signs").full_diagnostic
 
+local M = {}
+
+local version = vim.version()
+local version_str = " v"
+	.. version.major
+	.. "."
+	.. version.minor
+	.. "."
+	.. version.patch
+	.. " ("
+	.. version.build
+	.. ")"
+
+local function startup()
+	M.lazy_stats = M.lazy_stats and M.lazy_stats.startuptime > 0 and M.lazy_stats or require("lazy.stats").stats()
+	local ms = (math.floor(M.lazy_stats.startuptime * 100 + 0.5) / 100)
+	return {
+		align = "center",
+		text = {
+			{ "  Neovim loaded ", hl = "footer" },
+			{ M.lazy_stats.loaded .. "/" .. M.lazy_stats.count, hl = "special" },
+			{ " plugins in ", hl = "footer" },
+			{ ms .. "ms", hl = "special" },
+		},
+	}
+end
+
 return {
+	-- dir = os.getenv("HOME") .. "/dev/nvim_plugins/snacks.nvim",
 	"folke/snacks.nvim",
 	priority = 1000,
 	lazy = false,
@@ -42,6 +70,59 @@ return {
 		},
 		dashboard = {
 			enabled = true,
+			preset = {
+				---@type snacks.dashboard.Item[]|fun(items:snacks.dashboard.Item[]):snacks.dashboard.Item[]?
+				keys = {
+					{ icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
+					{ icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
+					{
+						icon = " ",
+						key = "g",
+						desc = "Find Text",
+						action = ":lua Snacks.dashboard.pick('live_grep')",
+					},
+					{
+						icon = " ",
+						key = "r",
+						desc = "Recent Files",
+						action = ":lua Snacks.dashboard.pick('oldfiles')",
+					},
+					{
+						icon = " ",
+						key = "c",
+						desc = "Config",
+						action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})",
+					},
+					{ icon = " ", key = "s", desc = "Restore Session", section = "session" },
+					{ icon = "󰒲 ", key = "l", desc = "Lazy", action = ":Lazy", enabled = package.loaded.lazy },
+					{ icon = " ", key = "q", desc = "Quit", action = ":qa" },
+				},
+
+				header = [[
+███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗
+████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║
+██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║
+██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║
+██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
+╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝
+]],
+			},
+			formats = {
+				terminal = { align = "center" },
+			},
+
+			sections = {
+				-- { section = "header" },
+				{
+					section = "terminal",
+					cmd = "tty-clock -s -b -C 4",
+					padding = 1,
+					indent = 4,
+					-- height = 12,
+				},
+				{ section = "keys", gap = 1, padding = 1 },
+				{ section = "startup" },
+			},
 		},
 		notify = { enabled = true },
 		toggle = { enabled = true },
@@ -63,5 +144,9 @@ return {
 				vim.print = _G.dd -- Override print to use snacks for `:=` command
 			end,
 		})
+	end,
+	config = function(_, opts)
+		Snacks.dashboard.sections.startup = startup
+		require("snacks").setup(opts)
 	end,
 }

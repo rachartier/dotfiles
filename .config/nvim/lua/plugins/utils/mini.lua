@@ -64,6 +64,9 @@ return {
 					"lazyterm",
 					"fzf",
 					"spectre_panel",
+					"snacks_dashboard",
+					"snacks_notif",
+					"snacks_terminal",
 				},
 				desc = "Disable mini.indentscope",
 			})
@@ -79,7 +82,7 @@ return {
 					try_as_border = true,
 					border = "top",
 				},
-				symbol = "╎",
+				symbol = "│",
 			})
 		end,
 	},
