@@ -105,7 +105,7 @@ return {
 				{
 					section = "terminal",
 					cmd = "tty-clock -s -b -C 4",
-					indent = 4,
+					indent = 2,
 					-- height = 12,
 				},
 				{ section = "keys", gap = 1, padding = 1 },
