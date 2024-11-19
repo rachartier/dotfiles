@@ -17,7 +17,7 @@ return {
 	-- require("nvim-treesitter.query_predicates")
 	-- end,
 	cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
-	event = { "VeryLazy" },
+	event = { "LazyFile", "VeryLazy" },
 	opts = {
 		ignore_install = {},
 		modules = {},

@@ -12,6 +12,7 @@ return {
 	dependencies = {
 		"nvim-treesitter/nvim-treesitter",
 	},
+	event = "LazyFile",
 	opts = {
 		layout = {
 			default_direction = "prefer_left",

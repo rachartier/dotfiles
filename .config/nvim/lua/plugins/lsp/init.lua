@@ -6,7 +6,7 @@ local border = require("config.ui.border").default_border
 return {
 	{
 		"neovim/nvim-lspconfig",
-		event = { "BufReadPre" },
+		event = { "LazyFile" },
 		dependencies = {
 			"williamboman/mason.nvim",
 			"onsails/lspkind.nvim",

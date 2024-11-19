@@ -23,16 +23,46 @@ return {
 	{
 		"echasnovski/mini.hipatterns",
 		enabled = true,
-		event = { "VeryLazy" },
+		event = { "LazyFile" },
 		config = function()
-			local hipatterns = require("mini.hipatterns")
-
-			hipatterns.setup({
-				highlighters = {
-					-- Highlight hex color strings (`#rrggbb`) using that color
-					hex_color = hipatterns.gen_highlighter.hex_color(),
+			local hi = require("mini.hipatterns")
+			return {
+				tailwind = {
+					enabled = true,
+					ft = {
+						"astro",
+						"css",
+						"heex",
+						"html",
+						"html-eex",
+						"javascript",
+						"javascriptreact",
+						"rust",
+						"svelte",
+						"typescript",
+						"typescriptreact",
+						"vue",
+					},
+					-- full: the whole css class will be highlighted
+					-- compact: only the color will be highlighted
+					style = "full",
 				},
-			})
+				highlighters = {
+					hex_color = hi.gen_highlighter.hex_color({ priority = 2000 }),
+					shorthand = {
+						pattern = "()#%x%x%x()%f[^%x%w]",
+						group = function(_, _, data)
+							---@type string
+							local match = data.full_match
+							local r, g, b = match:sub(2, 2), match:sub(3, 3), match:sub(4, 4)
+							local hex_color = "#" .. r .. r .. g .. g .. b .. b
+
+							return MiniHipatterns.compute_hex_color_group(hex_color, "bg")
+						end,
+						extmark_opts = { priority = 2000 },
+					},
+				},
+			}
 		end,
 	},
 	{
@@ -42,7 +72,7 @@ return {
 	},
 	{
 		"echasnovski/mini.indentscope",
-		event = { "VeryLazy" },
+		event = { "LazyFile" },
 		init = function()
 			utils.on_event("FileType", function()
 				---@diagnostic disable-next-line: inject-field
@@ -64,9 +94,10 @@ return {
 					"lazyterm",
 					"fzf",
 					"spectre_panel",
-					"snacks_dashboard",
+					"snacks_dashoard",
 					"snacks_notif",
 					"snacks_terminal",
+					"snacks_win",
 				},
 				desc = "Disable mini.indentscope",
 			})
@@ -82,7 +113,7 @@ return {
 					try_as_border = true,
 					border = "top",
 				},
-				symbol = "│",
+				symbol = "┆",
 			})
 		end,
 	},

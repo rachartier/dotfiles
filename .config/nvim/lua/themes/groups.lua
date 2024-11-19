@@ -97,6 +97,8 @@ function M.get(colors)
 			link = "StatusLine",
 		},
 
+		-- SnacksDashboardHeader = { fg = colors.yellow },
+
 		DiagnosticUnnecessary = { fg = colors.overlay0 },
 		-- DiagnosticError = { fg = colors.red }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default
 		-- DiagnosticWarn = { fg = colors.yellow }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default

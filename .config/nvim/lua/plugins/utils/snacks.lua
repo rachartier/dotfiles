@@ -2,24 +2,13 @@ local signs = require("config.ui.signs").full_diagnostic
 
 local M = {}
 
-local version = vim.version()
-local version_str = " v"
-	.. version.major
-	.. "."
-	.. version.minor
-	.. "."
-	.. version.patch
-	.. " ("
-	.. version.build
-	.. ")"
-
 local function startup()
 	M.lazy_stats = M.lazy_stats and M.lazy_stats.startuptime > 0 and M.lazy_stats or require("lazy.stats").stats()
 	local ms = (math.floor(M.lazy_stats.startuptime * 100 + 0.5) / 100)
 	return {
 		align = "center",
 		text = {
-			{ "  Neovim loaded ", hl = "footer" },
+			{ "  Loaded ", hl = "footer" },
 			{ M.lazy_stats.loaded .. "/" .. M.lazy_stats.count, hl = "special" },
 			{ " plugins in ", hl = "footer" },
 			{ ms .. "ms", hl = "special" },
@@ -116,7 +105,6 @@ return {
 				{
 					section = "terminal",
 					cmd = "tty-clock -s -b -C 4",
-					padding = 1,
 					indent = 4,
 					-- height = 12,
 				},

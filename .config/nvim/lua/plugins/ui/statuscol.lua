@@ -104,7 +104,7 @@ return {
 						namespace = { "gitsigns" },
 						auto = false,
 
-						fillchar = "▏",
+						fillchar = " ",
 						-- fillchar = " ",
 						maxwidth = 1,
 						colwidth = 1,

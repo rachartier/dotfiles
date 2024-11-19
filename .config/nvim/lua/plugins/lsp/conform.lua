@@ -35,7 +35,7 @@ end
 return {
 	{ -- Linter integration
 		"mfussenegger/nvim-lint",
-		event = { "BufWritePre" },
+		event = { "LazyFile" },
 		config = function()
 			local lint = require("lint")
 			local linter_by_ft = require("config.languages")
