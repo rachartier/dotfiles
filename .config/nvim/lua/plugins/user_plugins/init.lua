@@ -42,7 +42,7 @@ return {
 			"nvim-telescope/telescope.nvim",
 			"nvim-tree/nvim-web-devicons",
 		},
-		event = "LspAttach",
+		event = "LazyFile",
 		config = function()
 			require("tiny-code-action").setup({
 				-- backend = "difftastic",
@@ -61,7 +61,7 @@ return {
 	{
 		-- dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-inline-diagnostic.nvim",
 		"rachartier/tiny-inline-diagnostic.nvim",
-		event = "BufReadPost",
+		event = "LazyFile",
 		config = function()
 			local signs = {}
 

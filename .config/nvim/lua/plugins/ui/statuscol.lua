@@ -47,7 +47,7 @@ end
 
 return {
 	"luukvbaal/statuscol.nvim",
-	event = { "BufReadPost", "BufNewFile", "BufWritePre" },
+	event = { "BufReadPost" },
 	enabled = true,
 	opts = function()
 		local builtin = require("statuscol.builtin")
