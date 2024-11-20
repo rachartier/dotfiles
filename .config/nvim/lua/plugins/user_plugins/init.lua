@@ -42,7 +42,7 @@ return {
 			"nvim-telescope/telescope.nvim",
 			"nvim-tree/nvim-web-devicons",
 		},
-		event = "LspAttach",
+		event = "LazyFile",
 		config = function()
 			require("tiny-code-action").setup({
 				-- backend = "difftastic",
