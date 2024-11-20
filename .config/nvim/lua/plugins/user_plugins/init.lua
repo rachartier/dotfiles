@@ -61,7 +61,7 @@ return {
 	{
 		-- dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-inline-diagnostic.nvim",
 		"rachartier/tiny-inline-diagnostic.nvim",
-		event = "BufReadPost",
+		event = "LazyFile",
 		config = function()
 			local signs = {}
 
