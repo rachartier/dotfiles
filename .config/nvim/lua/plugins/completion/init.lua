@@ -11,8 +11,7 @@ return {
 			-- { "chrisgrieser/cmp-nerdfont", lazy = true },
 			-- { "hrsh7th/cmp-emoji", lazy = true },
 		},
-		lazy = true,
-
+		event = "InsertEnter",
 		opts = {
 			keymap = { preset = "super-tab" },
 			accept = {

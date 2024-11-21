@@ -412,6 +412,7 @@ Useful PEPs for this section (not exhaustive):
 			behaviour = {
 				auto_set_keymaps = true,
 				support_paste_from_clipboard = true,
+				auto_suggestions = false,
 			},
 			provider = "copilot",
 			auto_suggestions_provider = "copilot",
