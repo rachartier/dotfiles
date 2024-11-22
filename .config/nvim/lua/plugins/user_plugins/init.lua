@@ -35,9 +35,9 @@ return {
 		end,
 	},
 	{
-		dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-code-actions.nvim",
-		branch = "qw457812-scroll_fn",
-		-- "rachartier/tiny-code-action.nvim",
+		-- dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-code-actions.nvim",
+		-- branch = "qw457812-scroll_fn",
+		"rachartier/tiny-code-action.nvim",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-telescope/telescope.nvim",
