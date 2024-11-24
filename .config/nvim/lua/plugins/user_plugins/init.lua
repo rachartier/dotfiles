@@ -35,9 +35,7 @@ return {
 		end,
 	},
 	{
-		dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-code-actions.nvim",
-		branch = "qw457812-scroll_fn",
-		-- "rachartier/tiny-code-action.nvim",
+		"rachartier/tiny-code-action.nvim",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-telescope/telescope.nvim",
@@ -83,11 +81,9 @@ return {
 					background = "CursorLine",
 				},
 				options = {
+					softwrap = 60,
+					show_source = true,
 					multilines = true,
-					break_line = {
-						enabled = true,
-						after = 30,
-					},
 				},
 				blend = {
 					factor = 0.22,
