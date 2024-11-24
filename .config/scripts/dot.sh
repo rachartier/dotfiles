@@ -354,7 +354,7 @@ install_github_gh() {
 # }
 
 install_nvim() {
-    sudo apt autoremove neovim -y # remove neovim installed by apt
+    sudo apt-get autoremove neovim -y # remove neovim installed by apt
 
     if [ -f "$HOME/.local/bin/nvim" ]; then
         rm "$HOME/.local/bin/nvim"
