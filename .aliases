@@ -42,3 +42,9 @@ function translate() {
     echo "$result"
     echo "$result" | xsel --clipboard
 }
+
+function ask() {
+    result=$(copilot-cli --action 'ask' --prompt "$1")
+        echo "$result"
+        echo "$result" | xsel --clipboard
+}
