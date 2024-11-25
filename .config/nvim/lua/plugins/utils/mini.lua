@@ -133,23 +133,11 @@ return {
 	-- 		local animate = require("mini.animate")
 	--
 	-- 		return {
-	-- 			cursor = {
-	-- 				enabled = false,
-	-- 				-- Animate for 200 milliseconds with linear easing
+	-- 			scroll = {
 	-- 				timing = animate.gen_timing.linear({ duration = 140, unit = "total" }),
-	--
-	-- 				-- Animate with shortest line for any cursor move
-	-- 				path = animate.gen_path.line({
-	-- 					predicate = function()
-	-- 						return true
-	-- 					end,
-	-- 				}),
 	-- 			},
-	-- 			open = {
-	-- 				-- timing = animate.gen_timing.linear({ duration = 100, unit = "total" }),
-	--
-	-- 				-- winconfig = animate.gen_winconfig.wipe({ direction = "from_edge" }),
-	-- 			},
+	-- 			open = { enabled = false },
+	-- 			close = { enabled = false },
 	-- 		}
 	-- 	end,
 	-- },

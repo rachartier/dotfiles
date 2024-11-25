@@ -7,34 +7,52 @@ return {
 		opts = {
 			smear_between_neighbor_lines = true,
 			legacy_computing_symbols_support = true,
-			cursor_color = theme.get_colors().rosewater,
+			distance_stop_animating = 0.5,
+
+			hide_target_hack = true,
 		},
 	},
-	-- {
-	-- 	"karb94/neoscroll.nvim",
-	-- 	opts = {
-	-- 		mappings = {
-	-- 			"<C-u>",
-	-- 			"<C-d>",
-	-- 			"<C-b>",
-	-- 			"<C-f>",
-	-- 			"<C-y>",
-	-- 			"<C-e>",
-	-- 			"zt",
-	-- 			"zz",
-	-- 			"zb",
-	-- 		},
-	-- 		post_hook = function(info)
-	-- 			if info == nil then
-	-- 				return
-	-- 			end
-	-- 			if info.kind == "gg" then
-	-- 				vim.api.nvim_win_set_cursor(info.winid, { 1, 0 })
-	-- 			elseif info.kind == "G" then
-	-- 				local line = vim.api.nvim_buf_line_count(info.bufnr)
-	-- 				vim.api.nvim_win_set_cursor(info.winid, { line, 0 })
-	-- 			end
-	-- 		end,
-	-- 	},
-	-- },
+	{
+		"karb94/neoscroll.nvim",
+		event = "LazyFile",
+		config = function()
+			local neoscroll = require("neoscroll")
+			neoscroll.setup({
+				hide_cursor = false,
+			})
+			local keymap = {
+				["<C-u>"] = function()
+					neoscroll.ctrl_u({ duration = 80 })
+				end,
+				["<C-d>"] = function()
+					neoscroll.ctrl_d({ duration = 80 })
+				end,
+				["<C-b>"] = function()
+					neoscroll.ctrl_b({ duration = 100 })
+				end,
+				["<C-f>"] = function()
+					neoscroll.ctrl_f({ duration = 100 })
+				end,
+				["<C-y>"] = function()
+					neoscroll.scroll(-0.2, { move_cursor = false, duration = 80 })
+				end,
+				["<C-e>"] = function()
+					neoscroll.scroll(0.2, { move_cursor = false, duration = 80 })
+				end,
+				["zt"] = function()
+					neoscroll.zt({ half_win_duration = 80 })
+				end,
+				["zz"] = function()
+					neoscroll.zz({ half_win_duration = 80 })
+				end,
+				["zb"] = function()
+					neoscroll.zb({ half_win_duration = 80 })
+				end,
+			}
+			local modes = { "n", "v", "x" }
+			for key, func in pairs(keymap) do
+				vim.keymap.set(modes, key, func)
+			end
+		end,
+	},
 }
