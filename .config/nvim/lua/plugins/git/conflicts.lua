@@ -2,6 +2,7 @@ return {
 	"akinsho/git-conflict.nvim",
 	cond = require("config").config_type ~= "minimal",
 	event = "VeryLazy",
+	version = "*",
 	keys = {
 		{ "<leader>gc", ":GitConflictListQf<CR>", { noremap = true, silent = true, desc = "List git conflicts" } },
 	},
