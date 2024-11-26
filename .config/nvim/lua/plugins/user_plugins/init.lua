@@ -81,8 +81,7 @@ return {
 					background = "CursorLine",
 				},
 				options = {
-					softwrap = 60,
-					show_source = true,
+					-- show_source = true,
 					multilines = true,
 				},
 				blend = {
