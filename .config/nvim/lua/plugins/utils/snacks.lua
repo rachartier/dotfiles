@@ -136,7 +136,7 @@ return {
 		bigfile = { enabled = true },
 		quickfile = { enabled = true },
 		rename = { enabled = true },
-		words = { enabled = true, debounce = 10 },
+		words = { enabled = false, debounce = 10 },
 	},
 	init = function()
 		vim.api.nvim_create_autocmd("User", {

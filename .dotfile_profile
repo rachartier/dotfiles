@@ -43,6 +43,7 @@ export FZF_DEFAULT_OPTS="
     --color gutter:-1 \
     --bind 'esc:abort' \
     --info=inline \
+    --no-clear \
     $theme \
 "
 

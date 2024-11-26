@@ -59,6 +59,7 @@ vim.schedule(function()
 			},
 			cache_enabled = 0,
 		}
+	else
 		vim.opt.clipboard = "unnamedplus"
 	end
 end)
