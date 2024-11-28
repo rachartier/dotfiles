@@ -301,7 +301,7 @@ install_packages() {
 
     install_bat
 
-    __make_symlink "$HOME/.local/bin/fd" fdfind
+    ln -s $(which fdfind) ~/.local/bin/fd
 }
 
 install_git_delta() {

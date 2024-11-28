@@ -6,7 +6,7 @@ opt.autowrite = true -- Enable auto write
 vim.schedule(function()
 	-- vim.opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus" -- Sync with system clipboard
 
-	if vim.fn.has("wsl") then
+	if vim.fn.executable("wsl.exe") == 1 then
 		-- if vim.fn.executable("wl-copy") == 0 then
 		--     print("wl-clipboard not found, clipboard integration won't work")
 		-- else

@@ -5,11 +5,7 @@ return {
 		"sphamba/smear-cursor.nvim",
 		event = "VeryLazy",
 		opts = {
-			smear_between_neighbor_lines = true,
-			legacy_computing_symbols_support = true,
-			distance_stop_animating = 0.5,
-
-			hide_target_hack = true,
+			legacy_computing_symbols_support = false,
 		},
 	},
 	{
