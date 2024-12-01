@@ -18,7 +18,7 @@ RUN apt-get update && \
 USER $USER_NAME
 RUN chown -R $USER_NAME:$USER_NAME /home/$USER_NAME
 
-ARG CACHEBUST=4
+ARG CACHEBUST=5
 COPY ./first_install.sh /tmp/first_install.sh
 RUN sudo chmod +x /tmp/first_install.sh && \
     /tmp/first_install.sh && \

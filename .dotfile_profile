@@ -5,7 +5,7 @@ theme="\
     --color=marker:#f4dbd6,fg+:#cad3f5,prompt:#c6a0f6,hl+:bold:#eed49f"
 
 if [ "$TMUX_THEME" = "catppuccin_frappe.conf" ]; then
-	theme="\
+    theme="\
         --color=bg+:#51576d,bg:-1,spinner:#f2d5cf,hl:bold:#e5c890\
         --color=fg:#c6d0f5,header:#e78284,info:#ca9ee6,pointer:#f2d5cf \
         --color=border:#c6d0f5 \
@@ -38,7 +38,7 @@ export FZF_DEFAULT_OPTS="
     --scrollbar '▌' \
     --marker '✚ ' \
     --pointer ' ' \
-    --prompt '  ▍' \
+    --prompt ' ' \
     --no-separator \
     --color gutter:-1 \
     --bind 'esc:abort' \
@@ -53,11 +53,11 @@ export FZF_ALT_C_OPTS='--preview "eza --tree --level 1 --group-directories-first
 export FZF_CTRL_R_OPTS=''
 
 _fzf_compgen_path() {
-  fd --hidden --exclude .git . "$1"
+    fd --hidden --exclude .git . "$1"
 }
 
 _fzf_compgen_dir() {
-  fd --type=d --hidden --exclude .git . "$1"
+    fd --type=d --hidden --exclude .git . "$1"
 }
 
 # Not inside a devcontainer
@@ -65,8 +65,8 @@ if [ -z "$DOTFILES_DOCKER" ]; then
     export FZF_TMUX=1
     export FZF_TMUX_OPTS='-p80%,60%'
 
-    ZSH_TMUX_AUTOSTART=false
-    ZSH_TMUX_CONFIG="$HOME/.config/tmux/tmux.conf"
+    export ZSH_TMUX_AUTOSTART=false
+    export ZSH_TMUX_CONFIG="$HOME/.config/tmux/tmux.conf"
 
     if [[ -n $SSH_CONNECTION ]]; then
         export EDITOR='vim'
@@ -76,7 +76,7 @@ if [ -z "$DOTFILES_DOCKER" ]; then
 
     export DISABLE_AUTO_TITLE='true'
 else
-	if ! [ -d "/usr/lib/terminfo" ]; then
+    if ! [ -d "/usr/lib/terminfo" ]; then
         tempfile=$(mktemp) &&
             curl -o "$tempfile" https://raw.githubusercontent.com/wez/wezterm/master/termwiz/data/wezterm.terminfo &&
             tic -x -o /usr/lib/terminfo "$tempfile" &&
@@ -87,7 +87,7 @@ else
         export LC_ALL=C
     fi
 
-	# For copilot.vim
+    # For copilot.vim
     export NODE_TLS_REJECT_UNAUTHORIZED=0
 
     export APPIMAGE_EXTRACT_AND_RUN=1

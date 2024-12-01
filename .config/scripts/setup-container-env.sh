@@ -25,6 +25,7 @@ else
         -v "$HOME/dev:/home/ubuntu/dev" \
         -v "$HOME/.config/github-copilot:/home/ubuntu/.config/github-copilot" \
         -v "/tmp/X11-unix:/tmp/X11-unix" \
+        -v "/run/user/$UID:/run/user/1000" \
         -e DISPLAY="$DISPLAY" \
         --net=host \
         --name="$CONTAINER_NAME" \
