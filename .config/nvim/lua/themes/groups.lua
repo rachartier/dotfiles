@@ -45,7 +45,7 @@ function M.get(colors)
 		PmenuSel = { bg = colors.surface0, bold = false },
 		PopupNormal = { bg = colors.base, fg = colors.text },
 
-		-- CursorLine = { bg = "None" },
+		CursorLine = { bg = "None" },
 		CursorLineNr = { fg = colors.mauve },
 		CursorLineSign = { link = "SignColumn" },
 		CursorColumn = { bg = "None" },

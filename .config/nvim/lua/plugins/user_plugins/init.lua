@@ -58,8 +58,8 @@ return {
 		end,
 	},
 	{
-		-- dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-inline-diagnostic.nvim",
-		"rachartier/tiny-inline-diagnostic.nvim",
+		dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-inline-diagnostic.nvim",
+		-- "rachartier/tiny-inline-diagnostic.nvim",
 		event = "LazyFile",
 		config = function()
 			local signs = {}
@@ -72,21 +72,18 @@ return {
 			end
 
 			require("tiny-inline-diagnostic").setup({
-				signs = {
-					diag = nil,
-				},
-				hi = {
-					-- background = "None",
-					mixing_color = require("theme").get_colors().base,
-					background = "CursorLine",
-				},
+				-- hi = {
+				-- background = "None",
+				-- mixing_color = require("theme").get_colors().base,
+				-- background = "None",
+				-- },
 				options = {
 					-- show_source = true,
 					multilines = true,
 				},
-				blend = {
-					factor = 0.22,
-				},
+				-- blend = {
+				-- 	factor = 0.22,
+				-- },
 			})
 
 			require("utils").on_event("ColorScheme", function()
