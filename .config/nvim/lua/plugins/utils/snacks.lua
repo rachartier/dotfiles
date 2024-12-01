@@ -19,8 +19,31 @@ end
 return {
 	-- dir = os.getenv("HOME") .. "/dev/nvim_plugins/snacks.nvim",
 	"folke/snacks.nvim",
-	priority = 1000,
+	priority = 9999,
 	lazy = false,
+	keys = {
+		{
+			"<leader>.",
+			function()
+				Snacks.scratch()
+			end,
+			desc = "Toggle Scratch Buffer",
+		},
+		{
+			"<leader>S",
+			function()
+				Snacks.scratch.select()
+			end,
+			desc = "Select Scratch Buffer",
+		},
+		{
+			"<leader>ps",
+			function()
+				Snacks.profiler.scratch()
+			end,
+			desc = "Profiler Scratch Buffer",
+		},
+	},
 	opts = {
 		styles = {
 			dashboard = {
@@ -155,5 +178,20 @@ return {
 	config = function(_, opts)
 		Snacks.dashboard.sections.startup = startup
 		require("snacks").setup(opts)
+
+		Snacks.toggle.profiler():map("<leader>pp")
+		Snacks.toggle.profiler_highlights():map("<leader>ph")
+
+		if vim.env.PROF then
+			local snacks = vim.fn.stdpath("data") .. "/lazy/snacks.nvim"
+			vim.opt.rtp:append(snacks)
+			require("snacks.profiler").startup({
+				startup = {
+					-- event = "VimEnter", -- stop profiler on this event. Defaults to `VimEnter`
+					-- event = "UIEnter",
+					event = "LspAttach",
+				},
+			})
+		end
 	end,
 }

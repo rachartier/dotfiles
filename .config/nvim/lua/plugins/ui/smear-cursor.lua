@@ -6,6 +6,9 @@ return {
 		event = "VeryLazy",
 		opts = {
 			legacy_computing_symbols_support = false,
+			trailing_exponent = 0,
+			trailing_stiffness = 0.5,
+			stiffness = 0.5,
 		},
 	},
 	{
