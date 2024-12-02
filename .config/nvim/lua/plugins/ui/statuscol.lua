@@ -80,10 +80,7 @@ return {
 					click = "v:lua.ScSa",
 				},
 				{
-					text = {
-						number,
-						" ",
-					},
+					text = { builtin.lnumfunc, " " },
 					condition = {
 						function(args)
 							local is_num = vim.wo[args.win].number

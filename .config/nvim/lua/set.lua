@@ -28,7 +28,6 @@ vim.schedule(function()
 		--     }
 		-- end
 		-- vim.g.clipboard = {
-		-- 	name = "WslClipboard",
 		-- 	copy = {
 		-- 		["+"] = "clip.exe",
 		-- 		["*"] = "clip.exe",
