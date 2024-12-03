@@ -58,19 +58,19 @@ return {
 		end,
 	},
 	{
-		-- dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-inline-diagnostic.nvim",
-		"rachartier/tiny-inline-diagnostic.nvim",
+		dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-inline-diagnostic.nvim",
+		-- "rachartier/tiny-inline-diagnostic.nvim",
 		event = "LazyFile",
 		config = function()
 			require("tiny-inline-diagnostic").setup({
-				-- preset = "amongus",
+				-- preset = "classic",
 				-- hi = {
 				-- background = "None",
 				-- mixing_color = require("theme").get_colors().base,
 				-- background = "None",
 				-- },
 				options = {
-					-- show_source = true,
+					show_source = false,
 					multilines = true,
 				},
 				-- blend = {

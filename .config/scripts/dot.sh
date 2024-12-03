@@ -362,12 +362,12 @@ install_nvim() {
 
     cd /tmp || exit
     if [ "$1" = "stable" ]; then
-        wget "https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.tar.gz"
+        wget "https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.tar.gz" -O nvim-linux64.tar.gz
     else
-        wget "https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz"
+        wget "https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz" -O nvim-linux64.tar.gz
     fi
 
-    sudo rm -rf /opt/nvim
+    sudo rm -rf /opt/nvim-linux64/
     sudo tar -C /opt -xzf nvim-linux64.tar.gz
 
     __install_package_apt python3-pynvim

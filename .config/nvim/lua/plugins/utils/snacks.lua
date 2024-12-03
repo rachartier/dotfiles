@@ -160,6 +160,7 @@ return {
 		quickfile = { enabled = true },
 		rename = { enabled = true },
 		words = { enabled = false, debounce = 10 },
+		-- statuscolumn = { enabled = true },
 	},
 	init = function()
 		vim.api.nvim_create_autocmd("User", {
