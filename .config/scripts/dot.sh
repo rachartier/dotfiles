@@ -304,13 +304,19 @@ install_packages() {
     ln -s $(which fdfind) ~/.local/bin/fd
 }
 
-install_git_delta() {
+install_git_tools() {
     __echo_info "Installing git-delta..."
 
     local git_delta_version
     git_delta_version=$(__get_latest_release "dandavison/delta")
 
     __download_install_deb "https://github.com/dandavison/delta/releases/latest/download/git-delta_${git_delta_version}_amd64.deb" "delta"
+
+    __echo_info "Installing git-graph..."
+
+    local git_graph_version
+    git_graph_version=$(__get_latest_release "mlange-42/git-graph")
+    __install_package_release "https://github.com/mlange-42/git-graph/releases/latest/download/git-graph-$git_graph_version-linux-amd64.tar.gz" git-graph
 }
 
 install_github_gh() {
@@ -424,7 +430,7 @@ install_essentials() {
     # install_ohmyposh
     install_zoxide
 
-    install_git_delta
+    install_git_tools
     # install_github_gh
 
     git config --global include.path "~/.config/git/gitconfig"
@@ -502,7 +508,7 @@ do_reinstall() {
     "all") do_reinstall_all ;;
     "bat") install_bat ;;
     "docker") install_docker ;;
-    "delta") install_git_delta ;;
+    "gittools") install_git_tools ;;
     "eza") install_eza ;;
     "fzf") install_fzf ;;
     "glow") install_glow ;;

@@ -145,13 +145,47 @@ return {
 			sections = {
 				{ section = "header" },
 				-- {
+				-- 	pane = 2,
 				-- 	section = "terminal",
 				-- 	cmd = "tty-clock -s -b -C 4",
 				-- 	indent = 2,
+				-- 	enabled = function()
+				-- 		return vim.fn.executable("tty-clock") == 1 and vim.o.columns > 130
+				-- 	end,
 				-- 	-- height = 12,
 				-- },
 				{ section = "keys", gap = 1, padding = 1 },
 				{ section = "startup" },
+
+				function()
+					local in_git = Snacks.git.get_root() ~= nil
+					local cmds = {
+						{
+							title = "Git Graph",
+							icon = " ",
+							cmd = [[echo -e "$(git-graph --style round --color always --wrap 50 0 8 -f 'oneline')"]],
+							indent = 1,
+							-- height = 10,
+						},
+						{
+							icon = " ",
+							title = "Git Status",
+							cmd = "git diff --stat -B -M -C",
+							indent = 3,
+						},
+					}
+					return vim.tbl_map(function(cmd)
+						return vim.tbl_extend("force", {
+							pane = 2,
+							section = "terminal",
+							enabled = function()
+								return in_git and vim.o.columns > 130
+							end,
+							padding = 1,
+							-- ttl = 5 * 60,
+						}, cmd)
+					end, cmds)
+				end,
 			},
 		},
 		notify = { enabled = true },

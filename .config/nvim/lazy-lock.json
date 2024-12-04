@@ -71,6 +71,7 @@
   "quicker.nvim": { "branch": "master", "commit": "049d66534d3de5920663ee1b8dd0096d70f55a67" },
   "roslyn.nvim": { "branch": "main", "commit": "17ab3fda128f4df577c1d792244ac4491513cc8f" },
   "smear-cursor.nvim": { "branch": "main", "commit": "ff79d7dd0e2d1c5e22d0856365c07d17d43cbf63" },
+  "snacks.nvim": { "branch": "main", "commit": "60bd4e108cf7b2df0c0f578815b2b985d2cc2871" },
   "statuscol.nvim": { "branch": "main", "commit": "8822f76e105549620ef9c0d96e7b95aedf14c490" },
   "telekasten.nvim": { "branch": "main", "commit": "6a10a7929421d6e696e46bbc5aa5627a8cbcf61d" },
   "telescope-fzf-native.nvim": { "branch": "main", "commit": "cf48d4dfce44e0b9a2e19a008d6ec6ea6f01a83b" },
