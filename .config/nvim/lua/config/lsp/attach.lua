@@ -80,9 +80,8 @@ end
 function M.on_attach(client, bufnr)
 	-- client.server_capabilities.semanticTokensProvider = nil
 
-	-- local inlay_hint = vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint
-	-- if client.supports_method("textDocument/inlayHint") then
-	--     inlay_hint(bufnr, true)
+	-- if client.server_capabilities.inlayHintProvider then
+	-- 	vim.lsp.inlay_hint.enable(true)
 	-- end
 
 	local wk = require("which-key")

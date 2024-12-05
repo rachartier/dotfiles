@@ -22,8 +22,8 @@ return {
 	},
 	{
 		"echasnovski/mini.hipatterns",
-		enabled = true,
-		event = { "LazyFile" },
+		enabled = false,
+		event = { "VeryLazy" },
 		config = function()
 			local hi = require("mini.hipatterns")
 			return {
