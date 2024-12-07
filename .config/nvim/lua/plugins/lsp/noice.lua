@@ -4,7 +4,7 @@ return {
 	{
 		"folke/noice.nvim",
 		-- lazy = false,
-		event = "LazyFile",
+		event = "VeryLazy",
 		enabled = true,
 		opts = {
 			messages = {

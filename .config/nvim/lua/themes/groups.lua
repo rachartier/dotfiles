@@ -19,7 +19,7 @@ function M.get(colors)
 		-- NormalFloat = { bg = bg, fg = colors.text },
 		NormalFloat = { bg = colors.base, fg = colors.text },
 		FloatBorder = { fg = colors.lavender, bg = colors.base },
-		FloatTitle = { bg = colors.yellow, fg = colors.base },
+		FloatTitle = { bg = colors.base, fg = colors.text, italic = true },
 		LineNr = { fg = colors.surface1 },
 		SignColumn = { fg = colors.surface1 },
 		-- Visual = { bg = colors.surface1 },
@@ -117,14 +117,14 @@ function M.get(colors)
 		-- InvDiagnosticVirtualTextHint = { fg = modify_func(colors.teal, darken_diag), bg = cursor_line_bg },   -- Used for "Hint" diagnostic virtual text
 		--
 		TelescopeMatching = { link = "CmpItemAbbrMatch" },
-		TelescopeTitle = { bg = colors.surface0, fg = colors.text },
+		TelescopeTitle = { link = "FloatTitle" },
 		TelescopeSelection = { link = "PmenuSel" },
 
 		TelescopePromptPrefix = { fg = colors.blue },
 		TelescopePromptNormal = { bg = colors.base, fg = colors.text },
 		-- TelescopePromptBorder = { bg = colors.base, fg = colors.surface0 },
 		TelescopePromptBorder = { link = "FloatBorder" },
-		TelescopePromptTitle = { bg = colors.pink, fg = colors.base },
+		TelescopePromptTitle = { link = "FloatTitle" },
 
 		TelescopeResultsNormal = { bg = colors.base, fg = colors.subtext1 },
 		TelescopeResultsBorder = { link = "FloatBorder" },
@@ -132,7 +132,7 @@ function M.get(colors)
 
 		TelescopePreviewBorder = { link = "FloatBorder" },
 		TelescopePreviewNormal = { bg = colors.base },
-		TelescopePreviewTitle = { bg = colors.green, fg = colors.base },
+		TelescopePreviewTitle = { link = "FloatTitle" },
 
 		FzfLuaNormal = { bg = colors.base, fg = colors.text },
 		FzfPreviewTitle = { bg = colors.blue, fg = colors.text },

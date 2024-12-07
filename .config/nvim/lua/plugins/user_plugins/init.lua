@@ -116,12 +116,12 @@ return {
 		event = "VeryLazy",
 		enabled = false,
 		config = function()
-			local colors = require("theme").get_colors()
+			-- local colors = require("theme").get_colors()
 			-- local colors = require("tokyonight.colors").setup()
 			require("tiny-devicons-auto-colors").setup({
-				colors = colors,
-				-- autoreload = true,
-				cache = { enabled = true },
+				-- colors = colors,
+				autoreload = true,
+				cache = { enabled = false },
 			})
 		end,
 	},

@@ -43,6 +43,13 @@ return {
 			end,
 			desc = "Profiler Scratch Buffer",
 		},
+		{
+			"<leader>gb",
+			function()
+				Snacks.gitbrowse()
+			end,
+			desc = "Git Browser",
+		},
 	},
 	opts = {
 		styles = {
@@ -188,6 +195,7 @@ return {
 				end,
 			},
 		},
+		gitbrowse = { enabled = true },
 		notify = { enabled = true },
 		toggle = { enabled = true },
 		bigfile = { enabled = true },
