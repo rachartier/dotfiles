@@ -72,23 +72,24 @@ return {
 				options = {
 					show_source = false,
 					multilines = true,
+					use_icons_from_diagnostic = false,
 				},
 				-- blend = {
 				-- 	factor = 0.22,
 				-- },
 			})
 
-			require("utils").on_event("ColorScheme", function()
-				local mixin_color = require("theme").get_colors().base
-				require("tiny-inline-diagnostic").change({
-					factor = 0.22,
-				}, {
-					mixing_color = mixin_color,
-				})
-			end, {
-				target = "*",
-				desc = "Change color scheme for tiny-inline-diagnostic",
-			})
+			-- require("utils").on_event("ColorScheme", function()
+			-- 	local mixin_color = require("theme").get_colors().base
+			-- 	require("tiny-inline-diagnostic").change({
+			-- 		factor = 0.22,
+			-- 	}, {
+			-- 		mixing_color = mixin_color,
+			-- 	})
+			-- end, {
+			-- 	target = "*",
+			-- 	desc = "Change color scheme for tiny-inline-diagnostic",
+			-- })
 
 			--
 			-- vim.keymap.set("n", "<leader>dd", "<cmd>set background=light<CR>",
