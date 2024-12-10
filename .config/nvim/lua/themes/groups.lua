@@ -210,7 +210,7 @@ function M.get(colors)
 		CopilotSuggestion = { fg = colors.subtext0, italic = false },
 		MiniCursorwordCurrent = { bg = colors.surface0 },
 		MiniCursorword = { link = "MiniCursorwordCurrent" },
-		MiniIndentscopeSymbol = { fg = colors.surface1 },
+		SnacksIndentScope = { fg = colors.surface1 },
 
 		VisualNonText = { bg = colors.surface0, fg = colors.surface1 },
 

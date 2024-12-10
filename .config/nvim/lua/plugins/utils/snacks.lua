@@ -195,6 +195,25 @@ return {
 				end,
 			},
 		},
+		animate = {},
+		scroll = {
+			animate = {
+				duration = { step = 15, total = 140 },
+				easing = "inOutQuad",
+			},
+		},
+		indent = {
+			indent = {
+				char = " ",
+			},
+			scope = {
+				char = "┆",
+				animate = {
+					enabled = false,
+				},
+			},
+		},
+		input = {},
 		gitbrowse = { enabled = true },
 		notify = { enabled = true },
 		toggle = { enabled = true },
@@ -236,5 +255,15 @@ return {
 				},
 			})
 		end
+
+		require("utils").on_event({ "CmdlineEnter", "CmdlineLeave" }, function(ev)
+			if ev.event == "CmdlineEnter" then
+				Snacks.scroll.disable()
+			else
+				Snacks.scroll.enable()
+			end
+		end, {
+			target = "/",
+		})
 	end,
 }

@@ -73,6 +73,7 @@ return {
 	{
 		"echasnovski/mini.indentscope",
 		event = { "LazyFile" },
+		enabled = false,
 		init = function()
 			utils.on_event("FileType", function()
 				---@diagnostic disable-next-line: inject-field
