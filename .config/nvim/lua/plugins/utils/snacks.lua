@@ -172,7 +172,7 @@ return {
 							icon = " ",
 							cmd = [[echo -e "$(git-graph --style round --color always --wrap 50 0 8 -f 'oneline')"]],
 							indent = 1,
-							-- height = 10,
+							height = 15,
 						},
 						{
 							icon = " ",
