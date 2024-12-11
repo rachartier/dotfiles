@@ -52,6 +52,7 @@ return {
 	-- },
 	{
 		"OXY2DEV/markview.nvim",
+		branch = "dev",
 		ft = "markdown",
 		config = function()
 			local presets = require("markview.presets")
@@ -61,18 +62,19 @@ return {
 			checkbox.custom = vim.tbl_extend("force", checkbox.custom, {
 				{ match_string = "-", text = "", hl = "MarkviewCheckboxPending" },
 				{ match_string = "~", text = "", hl = "MarkviewCheckboxProgress" },
-				{ match_string = "/", text = " ", hl = "MarkdownCheckboxSkipped" },
-				{ match_string = "f", text = "󰈸 ", hl = "MarkdownCheckboxFire" },
-				{ match_string = "s", text = " ", hl = "MarkdownCheckboxStar" },
-				{ match_string = "*", text = "󰌵 ", hl = "MarkdownCheckboxIdea" },
-				{ match_string = "y", text = "󰔓 ", hl = "MarkdownCheckboxYes" },
-				{ match_string = "n", text = "󰔑 ", hl = "MarkdownCheckboxNo" },
-				{ match_string = "?", text = " ", hl = "MarkdownCheckboxQuestion" },
-				{ match_string = "i", text = " ", hl = "MarkdownCheckboxInfo" },
-				{ match_string = "!", text = "󱅶 ", hl = "MarkdownCheckboxImportant" },
+				{ match_string = "/", text = "", hl = "MarkdownCheckboxSkipped" },
+				{ match_string = "f", text = "󰈸", hl = "MarkdownCheckboxFire" },
+				{ match_string = "s", text = "", hl = "MarkdownCheckboxStar" },
+				{ match_string = "*", text = "󰌵", hl = "MarkdownCheckboxIdea" },
+				{ match_string = "y", text = "󰔓", hl = "MarkdownCheckboxYes" },
+				{ match_string = "n", text = "󰔑", hl = "MarkdownCheckboxNo" },
+				{ match_string = "?", text = "", hl = "MarkdownCheckboxQuestion" },
+				{ match_string = "i", text = "", hl = "MarkdownCheckboxInfo" },
+				{ match_string = "!", text = "󱅶", hl = "MarkdownCheckboxImportant" },
 			})
 
 			require("markview").setup({
+
 				modes = { "n", "i", "v", "V", "c", "nc" },
 				hybrid_modes = { "i" },
 

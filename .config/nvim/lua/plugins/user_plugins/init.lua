@@ -70,9 +70,8 @@ return {
 				-- background = "None",
 				-- },
 				options = {
-					show_source = false,
+					-- add_messages = false,
 					multilines = true,
-					use_icons_from_diagnostic = false,
 				},
 				-- blend = {
 				-- 	factor = 0.22,
