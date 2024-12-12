@@ -1,7 +1,6 @@
 return {
 	{
 		"chrisgrieser/nvim-scissors",
-		-- dependencies = { "hrsh7th/nvim-cmp" },
 		event = { "VeryLazy" },
 		opts = {
 			backdrop = {
