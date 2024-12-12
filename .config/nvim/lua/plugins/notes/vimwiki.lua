@@ -29,4 +29,12 @@ return {
 			target = "vimwiki",
 		})
 	end,
+	config = function()
+		vim.g.vimwiki_key_mappings = {
+			table_mappings = 0,
+		}
+
+		vim.keymap.set("n", "<leader>nl", "<Plug>VimwikiNextLink", { silent = true }) -- For Tab
+		vim.keymap.set("n", "<leader>pl", "<Plug>VimwikiPrevLink", { silent = true }) -- For STab
+	end,
 }
