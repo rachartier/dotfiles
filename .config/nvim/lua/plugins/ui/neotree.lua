@@ -1,5 +1,14 @@
 local signs = require("config.ui.signs")
 
+local function open_float()
+	local bufname = vim.fn.expand("%:p")
+	if vim.startswith(bufname, vim.fn.expand("~/.config/nvim/notes")) then
+		vim.cmd("Neotree float ~/.config/nvim/notes")
+		return
+	end
+
+	vim.cmd("Neotree float %:p")
+end
 return {
 	"nvim-neo-tree/neo-tree.nvim",
 	dependencies = {
@@ -8,7 +17,13 @@ return {
 		"antosha417/nvim-lsp-file-operations",
 	},
 	keys = {
-		{ "<leader>te", "<cmd>Neotree float %:p<CR>", desc = "Toggle NeoTree" },
+		{
+			"<leader>te",
+			function()
+				open_float()
+			end,
+			desc = "Toggle NeoTree",
+		},
 	},
 	opts = function(_, opts)
 		opts = {

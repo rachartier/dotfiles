@@ -52,8 +52,8 @@ return {
 	-- },
 	{
 		"OXY2DEV/markview.nvim",
-		branch = "dev",
-		ft = "markdown",
+		-- branch = "dev",
+		ft = { "markdown", "vimwiki" },
 		config = function()
 			local presets = require("markview.presets")
 
@@ -81,6 +81,9 @@ return {
 				filetypes = { "markdown", "quarto", "rmd", "Avante" },
 				checkboxes = checkbox,
 				headings = presets.headings.decorated,
+				list_items = {
+					shift_width = 2,
+				},
 				code_blocks = {
 					style = "language",
 					icons = "mini",
