@@ -1,28 +1,133 @@
 #!/bin/env zsh
 
-__echo_success() {
-    echo "[SUCCESS] $(tput setaf 2)$1"
-    tput sgr 0
+show_spinner() {
+    local pid=$1
+    local message=$2
+    local frames='⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏'
+    local delay=0.1
+
+    while [ "$(ps a | awk '{print $1}' | grep $pid)" ]; do
+        for frame in $(echo $frames | grep -o .); do
+            echo -ne "\r${COLORS[cyan]}$frame${COLORS[reset]} $message"
+            sleep $delay
+        done
+    done
+    echo -ne "\r${COLORS[green]}${ICON_SUCCESS}${COLORS[reset]} $message\n"
 }
 
-__echo_warning() {
-    echo "[WARN] $(tput setaf 3)$1"
-    tput sgr 0
+print_step() {
+    local message="$1"
+    echo -e "${COLORS[blue]}${ICON_GEAR} ${COLORS[bold]}$message${COLORS[reset]}"
 }
 
-__echo_info() {
-    echo "[INFO] $(tput setaf 6)$1"
-    tput sgr 0
+print_separator() {
+    line=$(printf ─%.0s $(seq 1 60))
+    echo -e "\n${COLORS[dim]}${line}${COLORS[reset]}\n"
 }
 
-__echo_failure() {
-    echo >&2 "[FAILURE] $(tput setaf 1)$1"
-    tput sgr 0
+print_header() {
+    local title="$1"
+    local width=60
+    local title_length=${#title}
+
+    # Calculate padding for centering
+    local padding_left=$(((width - title_length) / 2))
+    local padding_right=$((width - title_length - padding_left))
+
+    # Create the repeated characters
+    local horizontal_line=$(printf '─%.0s' $(seq 1 $width))
+    local padding_spaces_left=$(printf ' %.0s' $(seq 1 $padding_left))
+    local padding_spaces_right=$(printf ' %.0s' $(seq 1 $padding_right))
+
+    # Build the box
+    local top_border="${COLORS[cyan]}╭${horizontal_line}╮${COLORS[reset]}"
+    local middle_line="${COLORS[cyan]}│${COLORS[reset]}${padding_spaces_left}${COLORS[bold]}${title}${COLORS[reset]}${padding_spaces_right}${COLORS[cyan]}│${COLORS[reset]}"
+    local bottom_border="${COLORS[cyan]}╰${horizontal_line}╯${COLORS[reset]}"
+
+    # Print the header box
+    echo
+    echo -e "$top_border"
+    echo -e "$middle_line"
+    echo -e "$bottom_border"
+    echo
+}
+
+declare -A COLORS=(
+    ["reset"]="\033[0m"
+    ["bold"]="\033[1m"
+    ["dim"]="\033[2m"
+    ["italic"]="\033[3m"
+    ["underline"]="\033[4m"
+
+    ["black"]="\033[30m"
+    ["red"]="\033[31m"
+    ["green"]="\033[32m"
+    ["yellow"]="\033[33m"
+    ["blue"]="\033[34m"
+    ["magenta"]="\033[35m"
+    ["cyan"]="\033[36m"
+    ["white"]="\033[37m"
+
+    ["bg_black"]="\033[40m"
+    ["bg_red"]="\033[41m"
+    ["bg_green"]="\033[42m"
+    ["bg_yellow"]="\033[43m"
+    ["bg_blue"]="\033[44m"
+    ["bg_magenta"]="\033[45m"
+    ["bg_cyan"]="\033[46m"
+    ["bg_white"]="\033[47m"
+)
+
+readonly ICON_SUCCESS="✓"
+readonly ICON_ERROR="✗"
+readonly ICON_WARNING="⚠"
+readonly ICON_INFO=""
+readonly ICON_PACKAGE=""
+readonly ICON_DOWNLOAD="↓"
+readonly ICON_GEAR="⚙"
+readonly ICON_ROCKET="🚀"
+
+log() {
+    local level="$1"
+    local message="$2"
+    local icon=""
+    local color=""
+    local timestamp
+    timestamp=$(date "+%H:%M:%S")
+
+    case "$level" in
+    "success")
+        icon="${ICON_SUCCESS}"
+        color="${COLORS[green]}"
+        ;;
+    "warning")
+        icon="${ICON_WARNING}"
+        color="${COLORS[yellow]}"
+        ;;
+    "error")
+        icon="${ICON_ERROR}"
+        color="${COLORS[red]}"
+        ;;
+    "info")
+        icon="${ICON_INFO}"
+        color="${COLORS[blue]}"
+        ;;
+    "download")
+        icon="${ICON_DOWNLOAD}"
+        color="${COLORS[magenta]}"
+        ;;
+    *)
+        icon=" "
+        color="${COLORS[reset]}"
+        ;;
+    esac
+
+    echo -e "$color$icon${COLORS[reset]} ${COLORS[dim]}[$timestamp]${COLORS[reset]} $message"
 }
 
 __need_sudo() {
     if [ "${EUID:-$(id -u)}" -eq 0 ]; then
-        __echo_failure "Please run as root: sudo -E dot"
+        log "error" "Please run as root: sudo -E dot"
         exit
     fi
     eval $@
@@ -36,13 +141,13 @@ __get_windows_user() {
 
 __get_latest_release() {
 
-        curl -s "https://api.github.com/repos/$1/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/'
+    curl -s "https://api.github.com/repos/$1/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/'
 }
 
 __is_pkg_installed() {
     local name="$1"
 
-    dpkg-query -W --showformat='${Status}\n' "$name" 2>/dev/null | grep "install ok installed" >/dev/null
+    dpkg-query -W --showformat='${Status}\n' "$name" >/dev/null | grep "install ok installed" >/dev/null
 }
 
 __install_appimage() {
@@ -53,9 +158,9 @@ __install_appimage() {
     filename=$(basename "$url" ".tar.gz")
 
     cd /tmp || exit 1
-    wget -q "$url" && __echo_success "'$filename' downloaded." || return 1
+    wget -nv -q "$url" && log "success" "'$filename' downloaded." >/dev/null || return 1
     chmod +x "$filename"
-    mv "$filename" "$HOME/.local/bin/$name" && __echo_success "'$name' moved in $HOME/.local/bin/" || return 1
+    mv "$filename" "$HOME/.local/bin/$name" && log "success" "'$name' moved in $HOME/.local/bin/" || return 1
 }
 
 __install_package_release() {
@@ -65,19 +170,31 @@ __install_package_release() {
 
     filename=$(basename "$url")
 
-    __echo_info "Downloading $filename"
+    log "info" "Downloading $filename"
     cd /tmp || exit 1
-    wget -q "$url" && __echo_success "'$filename' downloaded." || return 1
+
+    if [ -d "/tmp/$name" ]; then
+        log "info" "Removing old $name directory."
+        rm -rf "/tmp/$name"
+    fi
+
+    if [ -f "/tmp/$filename" ]; then
+        log "info" "Removing old $filename file."
+        rm "/tmp/$filename"
+    fi
+
+    wget -nv -q "$url" >/dev/null && log "success" "'$filename' downloaded." || return 1
 
     # check if $filename is a directory
     if [[ "$filename" == *.tar.gz ]]; then
-        tar -xf "$filename" && __echo_success "$filename extracted." || return 1
+
+        tar -xf "$filename" && log "success" "$filename extracted." || return 1
     else
         mv "$filename" "$name"
     fi
 
     chmod +x "$name"
-    mv "$name" "$HOME/.local/bin/$name" && __echo_success "'$name' moved in $HOME/.local/bin/" || return 1
+    mv "$name" "$HOME/.local/bin/$name" && log "success" "'$name' moved in $HOME/.local/bin/" || return 1
 }
 
 __download_install_deb() {
@@ -87,10 +204,10 @@ __download_install_deb() {
 
     filename=$(basename "$url")
 
-    __echo_info "Downloading $filename"
+    log "info" "Downloading $filename"
     cd /tmp || exit 1
-    wget -q "$url" && __echo_success "'$filename' downloaded." || return 1
-    sudo dpkg -i "$filename" && __echo_success "$name installed." || return 1
+    wget -nv -q "$url" >/dev/null && log "success" "'$filename' downloaded." || return 1
+    sudo dpkg -i "$filename" >/dev/null && log "success" "$name installed." || return 1
 }
 
 __install_zsh_plugin() {
@@ -102,15 +219,15 @@ __install_zsh_plugin() {
 
     [ -d "$installation_folder" ] && rm -rf "$installation_folder"
 
-    git clone "$url" "$installation_folder" && __echo_success "$folder installed." || return 1
+    git clone "$url" "$installation_folder" && log "success" "$folder installed." || return 1
 }
 
 __install_package_apt() {
     for pkg in "$@"; do
         if __is_pkg_installed "$pkg"; then
-            __echo_info "$pkg already installed."
+            log "info" "$pkg already installed."
         else
-            sudo apt-get install -y -qq -o=Dpkg::Use-Pty=0 "$pkg" && __echo_success "$pkg installed."
+            sudo apt-get install -y -qq -o=Dpkg::Use-Pty=0 "$pkg" && log "success" "$pkg installed."
         fi
     done
 }
@@ -132,12 +249,12 @@ __git_dot() {
 }
 
 install_luarocks() {
-    __echo_info "Installing luarocks..."
+    log "info" "Installing luarocks..."
 
     __install_package_apt lua5.1
     __install_package_apt liblua5.1-dev
 
-    wget https://luarocks.org/releases/luarocks-3.11.1.tar.gz &&
+    wget -nv -q https://luarocks.org/releases/luarocks-3.11.1.tar.gz &&
         tar zxpf luarocks-3.11.1.tar.gz &&
         cd luarocks-3.11.1 &&
         ./configure && make && sudo make install
@@ -145,74 +262,87 @@ install_luarocks() {
 }
 
 install_fonts_for_windows() {
-    __echo_info "Installing fonts for Windows"
+    log "info" "Installing fonts for Windows"
 
     fonts=$(find "$HOME/.fonts" -type f -name "*.ttf" -o -name "*.otf")
 
     for font in $fonts; do
-        __echo_info "Installing $font..."
+        log "info" "Installing $font..."
         font_name=$(basename "$font")
-        # cp "$font" "/mnt/c/Users/$(__get_windows_user)/AppData/Local/Microsoft/Windows/Fonts/$font_name" || __echo_info "Font $font_name already installed."
-        cp "$font" "/mnt/c/Windows/Fonts/$font_name" || __echo_info "Font $font_name already installed."
+        # cp "$font" "/mnt/c/Users/$(__get_windows_user)/AppData/Local/Microsoft/Windows/Fonts/$font_name" || log "info" "Font $font_name already installed."
+        cp "$font" "/mnt/c/Windows/Fonts/$font_name" || log "info" "Font $font_name already installed."
     done
 
-    __echo_success "Fonts installed."
+    log "success" "Fonts installed."
 }
 
 install_starship() {
-    if curl -sS https://starship.rs/install.sh | sh -s -- -b ~/.local/bin -y; then
-        __echo_success "starship installed."
+    print_step "Installing Starship"
+
+    if curl -sS https://starship.rs/install.sh | sh -s -- -b ~/.local/bin -y >/dev/null; then
+        log "success" "starship installed."
     else
-        __echo_failure "starship not installed."
+        log "error" "starship not installed."
     fi
-}
-
-install_ohmyposh() {
-    if [ ! -d "$HOME/.local/bin" ]; then
-        mkdir -p "$HOME/.local/bin"
-    fi
-
-    curl -s https://ohmyposh.dev/install.sh | bash -s -- -d "$HOME/.local/bin"
-    __echo_success "ohmyposh installed."
 }
 
 install_fzf() {
+    print_step "Installing Fzf"
+
     if [ -d "$HOME/.fzf/" ]; then
         cd ~/.fzf || return 0
         git pull --quiet
         if yes | ./install; then
-            __echo_success "fzf updated."
+            log "success" "fzf updated."
         else
-            __echo_error "fzf not updated."
+            log "error" "fzf not updated."
         fi
         return 0
     fi
 
-    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf &>/dev/null
-    yes | ~/.fzf/install
+    log "info" "Cloning fzf..."
+    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf >/dev/null
+
+    log "info" "Installing fzf..."
+    yes | ~/.fzf/install >/dev/null
 }
 
 install_viu() {
+    print_step "Installing Viu"
+
+    local version
+    version=$(__get_latest_release "atanunq/viu")
+
+    log "download" "Installing viu $version ..."
+
     __install_package_release "https://github.com/atanunq/viu/releases/latest/download/viu-x86_64-unknown-linux-musl" viu
 }
 
 install_lazygit() {
+    print_step "Installing Lazygit"
+
     LAZYGIT_VERSION=$(__get_latest_release "jesseduffield/lazygit")
     LAZYGIT_VERSION="${LAZYGIT_VERSION:1}"
 
+    log "download" "Installing lazygit ${LAZYGIT_VERSION} ..."
+
     if [ -f "/usr/local/bin/lazygit" ]; then
-        __echo_info "Removing old lazygit symlink."
+        log "info" "Removing old lazygit symlink."
         sudo rm "/usr/local/bin/lazygit"
     fi
     __install_package_release "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz" lazygit
 }
 
 install_lazydocker() {
+    print_step "Installing Lazydocker"
+
     LAZYDOCKER_VERSION=$(__get_latest_release "jesseduffield/lazydocker")
     LAZYDOCKER_VERSION="${LAZYDOCKER_VERSION:1}"
 
+    log "download" "Installing lazydocker ${LAZYDOCKER_VERSION} ..."
+
     if [ -f "/usr/local/bin/lazydocker" ]; then
-        __echo_info "Removing old lazydocker symlink."
+        log "info" "Removing old lazydocker symlink."
         sudo rm "/usr/local/bin/lazydocker"
     fi
 
@@ -220,61 +350,80 @@ install_lazydocker() {
 }
 
 install_zoxide() {
-    __echo_info "Installing zoxide..."
+    print_step "Installing Zoxide"
 
-    curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
+    log "info" "Installing zoxide..."
 
-    __echo_success "zoxide installed."
+    curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh >/dev/null
+
+    log "success" "zoxide installed."
 }
 
 install_tmux() {
-    __echo_info "Installing tmux"
+    print_step "Installing Tmux"
     TMUX_VERSION=$(__get_latest_release "tmux/tmux")
 
+    log "info" "Installing dependencies"
     __install_package_apt libevent-dev ncurses-dev build-essential bison pkg-config
-    wget "https://github.com/tmux/tmux/releases/latest/download/tmux-${TMUX_VERSION}.tar.gz" -O /tmp/tmux.tar.gz
 
-    tar -xzvf /tmp/tmux.tar.gz -C /tmp
+    cd /tmp || exit 1
+    wget -nv -q "https://github.com/tmux/tmux/releases/latest/download/tmux-${TMUX_VERSION}.tar.gz" -O tmux.tar.gz
+    tar -xzvf tmux.tar.gz >/dev/null
+    cd "tmux-$TMUX_VERSION" || exit
 
-    cd "/tmp/tmux-$TMUX_VERSION" || exit
-    ./configure --enable-sixel
-    make && sudo make install
+    log "info" "Compiling tmux"
+    ./configure --enable-sixel >/dev/null
 
-    __echo_info "Installing tmux plugins"
+    log "info" "Installing tmux"
+    make && sudo make install >/dev/null
 
+    log "info" "Installing tmux plugins manager"
     if ! [ -d "$HOME"/.config/tmux/plugins/tpm ]; then
         git clone https://github.com/tmux-plugins/tpm "$HOME"/.config/tmux/plugins/tpm
     fi
 
+    log "info" "Installing tmux plugins"
     "$HOME"/.config/tmux/plugins/tpm/bin/install_plugins
+
+    log "success" "Tmux installation completed"
+    print_separator
 }
 
 install_bat() {
-    __echo_info "Installing bat..."
+    print_step "Installing Bat"
+
     cd /tmp || exit
 
     local bat_version
     bat_version=$(__get_latest_release "sharkdp/bat")
 
+    log "download" "Installing bat ${bat_version} ..."
     __download_install_deb "https://github.com/sharkdp/bat/releases/download/$bat_version/bat_${bat_version:1}_amd64.deb" "bat"
 
     if ! [ -d "$(bat --config-dir)" ]; then
+        log "info" "Installing bat themes..."
         mkdir -p "$(bat --config-dir)/themes"
-        wget -P "$(bat --config-dir)/themes" https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Latte.tmTheme
-        wget -P "$(bat --config-dir)/themes" https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Frappe.tmTheme
-        wget -P "$(bat --config-dir)/themes" https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Macchiato.tmTheme
-        wget -P "$(bat --config-dir)/themes" https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Mocha.tmTheme
+        wget -nvq -P "$(bat --config-dir)/themes" https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Latte.tmTheme
+        wget -nvq -P "$(bat --config-dir)/themes" https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Frappe.tmTheme
+        wget -nvq -P "$(bat --config-dir)/themes" https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Macchiato.tmTheme
+        wget -nvq -P "$(bat --config-dir)/themes" https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Mocha.tmTheme
+
+        log "success" "bat themes installed."
         bat cache --build
     fi
 }
 
 install_packages() {
+    print_step "Installing Base Packages"
+
     # install terminfo for wezterm
+    print_step "Setting up wezterm terminfo"
     tempfile=$(mktemp) &&
-        curl -o $tempfile https://raw.githubusercontent.com/wez/wezterm/main/termwiz/data/wezterm.terminfo &&
+        curl -sS -o $tempfile https://raw.githubusercontent.com/wez/wezterm/main/termwiz/data/wezterm.terminfo &&
         tic -x -o ~/.terminfo $tempfile &&
         rm $tempfile
 
+    print_step "Installing system packages"
     __install_package_apt pkg-config
     __install_package_apt build-essential
 
@@ -296,31 +445,37 @@ install_packages() {
         __install_package_apt grc
     fi
 
+    print_step "Installing Node.js LTS"
     # install nodejs...
-    curl -fsSL https://raw.githubusercontent.com/tj/n/master/bin/n | sudo bash -s lts
+    curl -fsSL https://raw.githubusercontent.com/tj/n/master/bin/n | sudo bash -s lts >/dev/null
 
-    install_bat
+    if [ -f "$HOME/.local/bin/fd" ]; then
+        log "info" "Removing old fd symlink."
+        rm "$HOME/.local/bin/fd"
+    fi
 
     ln -s $(which fdfind) ~/.local/bin/fd
+
+    print_separator
 }
 
 install_git_tools() {
-    __echo_info "Installing git-delta..."
+    log "info" "Installing git-delta..."
 
     local git_delta_version
     git_delta_version=$(__get_latest_release "dandavison/delta")
 
     __download_install_deb "https://github.com/dandavison/delta/releases/latest/download/git-delta_${git_delta_version}_amd64.deb" "delta"
 
-    __echo_info "Installing git-graph..."
-
     local git_graph_version
     git_graph_version=$(__get_latest_release "mlange-42/git-graph")
+    log "info" "Installing git-graph ${git_graph_version}..."
+
     __install_package_release "https://github.com/mlange-42/git-graph/releases/latest/download/git-graph-$git_graph_version-linux-amd64.tar.gz" git-graph
 }
 
 install_github_gh() {
-    __echo_info "Installing gh"
+    log "info" "Installing gh"
 
     local gh_version
     gh_version=$(__get_latest_release "cli/cli")
@@ -328,16 +483,16 @@ install_github_gh() {
 
     # vériier si la version actuelle est la même que la version à installer, si seulement la version actuelle est installée
     if gh --version | grep -q "gh version $gh_version"; then
-        __echo_info "gh already installed."
+        log "info" "gh already installed."
     else
         __download_install_deb "https://github.com/cli/cli/releases/latest/download/gh_${gh_version}_linux_amd64.deb" "gh"
     fi
 
-    gh auth status &>/dev/null
+    gh auth status >/dev/null
     if [ "$?" -eq 0 ]; then
-        __echo_info "gh already authenticated."
+        log "info" "gh already authenticated."
     else
-        __echo_info "Please authenticate with gh."
+        log "info" "Please authenticate with gh."
         gh auth login
     fi
 
@@ -360,56 +515,61 @@ install_github_gh() {
 # }
 
 install_nvim() {
-    sudo apt-get autoremove neovim -y # remove neovim installed by apt
+
+    print_step "Installing Neovim"
+    local version=${1:-"stable"}
+
+    log "info" "Removing existing Neovim installation"
+    sudo apt-get autoremove neovim -y >/dev/null
 
     if [ -f "$HOME/.local/bin/nvim" ]; then
         rm "$HOME/.local/bin/nvim"
     fi
 
-    cd /tmp || exit
-    if [ "$1" = "stable" ]; then
-        wget "https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.tar.gz" -O nvim-linux64.tar.gz
-    else
-        wget "https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz" -O nvim-linux64.tar.gz
-    fi
+    log "download" "Downloading Neovim $version"
+    cd /tmp || exit 1
+    local url="https://github.com/neovim/neovim/releases/download/$version/nvim-linux64.tar.gz"
+    wget -q "$url" -O nvim-linux64.tar.gz >/dev/null
 
+    log "info" "Installing Neovim"
     sudo rm -rf /opt/nvim-linux64/
     sudo tar -C /opt -xzf nvim-linux64.tar.gz
 
-    __install_package_apt python3-pynvim
+    # __install_package_apt python3-pynvim
 
     if [ ! -f "$HOME/.local/share/nvim/site/spell/fr.utf-8.spl" ]; then
         mkdir -p ~/.local/share/nvim/site/spell
-        wget https://ftp.nluug.nl/pub/vim/runtime/spell/fr.utf-8.spl -O ~/.local/share/nvim/site/spell/fr.utf-8.spl
+        wget https://ftp.nluug.nl/pub/vim/runtime/spell/fr.utf-8.spl \
+            -O ~/.local/share/nvim/site/spell/fr.utf-8.spl
     fi
 
-    # if [ ! -d "/usr/local/lib/lua/5.1" ]; then
-    # 	sudo mkdir -p /usr/local/lib/lua/5.1
-    # fi
+    log "info" "Installing luarocks"
+    install_luarocks >/dev/null
 
-    # if [ ! -f "/usr/local/lib/lua/5.1/tiktoken_core.so" ]; then
-    # 	sudo wget https://github.com/gptlang/lua-tiktoken/releases/download/0.2.1/tiktoken_core-linux-lua51.so -O /usr/local/lib/lua/5.1/tiktoken_core.so
-    # fi
+    log "info" "Updating plugins"
+    nvim --headless "+Lazy! sync" "+qall" >/dev/null
 
-    install_luarocks
-
-    # Update plugins
-    __echo_info "Updating plugins..."
-    "nvim" --headless "+Lazy! sync" "+qall"
-
-    __echo_success "Plugins updated."
+    log "success" "Neovim installation completed"
+    print_separator
 }
 
 install_eza() {
+    print_step "Installing eza"
+
+    local version
+    version=$(__get_latest_release "eza-community/eza")
+
+    log "download" "Downloading $version"
     __install_package_release "https://github.com/eza-community/eza/releases/latest/download/eza_x86_64-unknown-linux-gnu.tar.gz" eza
 }
 
 install_glow() {
-    echo "Installing glow..."
+    print_step "Installing Glow"
 
     local glow_version
     glow_version=$(__get_latest_release "charmbracelet/glow")
 
+    log "download" "Installing glow..."
     __install_package_release "https://github.com/charmbracelet/glow/latest/download/${glow_version}/glow_Linux_x86_64.tar.gz" glow
 }
 
@@ -427,8 +587,8 @@ install_essentials() {
     install_lazygit
     install_lazydocker
     install_starship
-    # install_ohmyposh
     install_zoxide
+    install_bat
 
     install_git_tools
     # install_github_gh
@@ -439,7 +599,7 @@ install_essentials() {
 }
 
 install_minimal() {
-    __echo_info "Exporting DOTFILES_MINIMAL=1 to $HOME/.profile"
+    log "info" "Exporting DOTFILES_MINIMAL=1 to $HOME/.profile"
     echo "export DOTFILES_MINIMAL=1" >>"$HOME/.profile"
     export DOTFILES_MINIMAL=1
 
@@ -455,7 +615,7 @@ install_minimal() {
 }
 
 install_docker() {
-    __echo_info "Exporting DOTFILES_DOCKER=1 to $HOME/.profile"
+    log "info" "Exporting DOTFILES_DOCKER=1 to $HOME/.profile"
     echo "export DOTFILES_DOCKER=1" >>"$HOME/.profile"
     export DOTFILES_DOCKER=1
 
@@ -463,7 +623,7 @@ install_docker() {
 }
 
 install_copilot_cli() {
-    __echo_info "Installing copilot-cli..."
+    log "info" "Installing copilot-cli..."
 
     # local copilot_cli_version
     # copilot_cli_version=$(__get_latest_release "rachartier/copilot-cli")
@@ -472,20 +632,20 @@ install_copilot_cli() {
     # __install_package_release "https://github.com/charmbracelet/glow/latest/download/${copilot_cli_version}/glow_Linux_x86_64.tar.gz" glow
 
     if [ -f "$HOME/.local/bin/copilot-cli" ]; then
-        __echo_info "Removing old copilot-cli symlink."
+        log "info" "Removing old copilot-cli symlink."
         rm "$HOME/.local/bin/copilot-cli"
     fi
 
     __install_package_release "https://github.com/rachartier/copilot-cli/releases/latest/download/copilot-cli.tar.gz" copilot-cli
     #
     # ln -s "$HOME/.config/scripts/copilot-cli.sh" "$HOME/.local/bin/copilot-cli" &&
-    #     __echo_success "copilot-cli symlink created." ||
-    #     __echo_failure "copilot-cli symlink not created."
+    #     log "success" "copilot-cli symlink created." ||
+    #     log "error" "copilot-cli symlink not created."
     #
     # chmod +x "$HOME/.local/bin/copilot-cli"
     #
     # if [ ! -d ".venv" ]; then
-    #     __echo_info "Creating virtual environment..."
+    #     log "info" "Creating virtual environment..."
     #     python3 -m venv .venv
     #     source .venv/bin/activate
     #     pip install -r requirements.txt
@@ -508,7 +668,7 @@ do_reinstall() {
     "all") do_reinstall_all ;;
     "bat") install_bat ;;
     "docker") install_docker ;;
-    "gittools") install_git_tools ;;
+    "git-tools") install_git_tools ;;
     "eza") install_eza ;;
     "fzf") install_fzf ;;
     "glow") install_glow ;;
@@ -525,36 +685,36 @@ do_reinstall() {
     "gh") install_github_gh ;;
     "copilot-cli") install_copilot_cli ;;
     "fonts") install_fonts_for_windows ;;
-    *) __echo_failure "'$1' unknown." ;;
+    *) log "error" "'$1' unknown." ;;
     esac
 }
 
 use_tool_dotnet() {
     if [ ! -f "$HOME/.dotnet" ]; then
-        __echo_info "Creating $HOME/.dotnet directory."
+        log "info" "Creating $HOME/.dotnet directory."
         mkdir -p "$HOME/.dotnet"
     fi
 
     local script_path="$HOME/.config/scripts/dotnet-install.sh"
     if [ ! -f "$script_path" ]; then
-        __echo_info "Downloading dotnet-install.sh script."
+        log "info" "Downloading dotnet-install.sh script."
         wget -q "https://dot.net/v1/dotnet-install.sh" -O "$script_path"
         chmod +x "$script_path"
     fi
 
-    __echo_info "Running dotnet-install.sh script."
+    log "info" "Running dotnet-install.sh script."
     bash "$script_path" "$@"
 }
 
 update_all() {
-    __echo_info "Updating neovim plugins..."
+    log "info" "Updating neovim plugins..."
     "$HOME/.local/bin/nvim" --headless "+Lazy! sync" "+qall"
 
-    __echo_info "Updating tmux plugins..."
+    log "info" "Updating tmux plugins..."
     "$HOME/.config/tmux/plugins/tpm/bin/update_plugins" all
 
     . "$HOME/.antidote/antidote.zsh"
-    __echo_info "Updating antidote plugins..."
+    log "info" "Updating antidote plugins..."
     antidote update
 }
 
@@ -566,7 +726,7 @@ do_tool() {
         shift
         use_tool_dotnet "$@"
         ;;
-    *) __echo_failure "'$tool_name' unknown." ;;
+    *) log "error" "'$tool_name' unknown." ;;
     esac
 }
 
