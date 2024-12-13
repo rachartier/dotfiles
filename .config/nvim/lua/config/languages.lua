@@ -3,7 +3,7 @@ return {
 		languages = { "python" },
 		mason = { "basedpyright", "ruff" },
 		dap = { "debugpy" },
-		formatter = { "ruff_format", "ruff_fix", "typos" },
+		formatter = { "ruff_format", "ruff_fix" },
 		lsp_ignore = { "ruff" },
 		lsp_settings = {
 			root_dir = function(fname)
@@ -40,7 +40,6 @@ return {
 				command = "dotnet-csharpier",
 				args = { "--write-stdout" },
 			},
-			"typos",
 		},
 		lsp_settings = {
 			root_dir = function(fname)
@@ -77,7 +76,7 @@ return {
 	{
 		languages = { "lua" },
 		mason = { "lua_ls" },
-		formatter = { "stylua", "typos" },
+		formatter = { "stylua" },
 		linter = { "selene" },
 		lsp_settings = {
 			settings = {
@@ -113,7 +112,6 @@ return {
 			-- 		"$FILENAME",
 			-- 	},
 			-- },
-			"typos",
 		},
 		lsp_settings = {
 			cmd = {
@@ -169,30 +167,30 @@ return {
 	{
 		languages = { "dockerfile" },
 		mason = { "dockerls" },
-		formatter = { "typos" },
+		formatter = {},
 		linter = { "hadolint" },
 		lsp_fallback = false,
 	},
 	{
 		languages = { "sh" },
 		mason = { "bashls" },
-		formatter = { "shfmt", "typos" },
+		formatter = { "shfmt" },
 		linter = { "shellcheck" },
 	},
 	{
 		languages = { "json" },
 		mason = { "jsonls" },
-		formatter = { "jq", "fixjson", "typos" },
+		formatter = { "jq", "fixjson" },
 	},
 	{
 		languages = { "yaml" },
 		mason = { "yamlls" },
-		formatter = { "typos" },
+		formatter = {},
 	},
 	{
 		languages = { "markdown" },
 		mason = { "marksman" },
-		formatter = { "markdown-toc", "typos" },
+		formatter = { "markdown-toc" },
 		-- linter = {
 		-- 	"markdownlint",
 		-- },
@@ -200,12 +198,12 @@ return {
 	{
 		languages = { "text" },
 		mason = {},
-		formatter = { "typos" },
+		formatter = {},
 	},
 	-- {
 	-- 	languages = { "c", "h", "cpp", "hpp" },
 	-- 	mason = { "clangd" },
-	-- 	formatter = { "clang-format", "typos" },
+	-- 	formatter = { "clang-format",  },
 	-- 	lsp_ignore = true,
 	-- },
 	{

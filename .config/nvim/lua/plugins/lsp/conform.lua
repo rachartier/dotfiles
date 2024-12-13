@@ -108,6 +108,16 @@ return {
 				end,
 				formatters = formatters_settings,
 			})
+
+			-- require("conform").formatters.typos = {
+			-- 	stdin = true,
+			-- 	args = {
+			-- 		"--config",
+			-- 		vim.fn.expand("~/.config/typos/typos.toml"),
+			-- 		"--write-changes",
+			-- 		"-",
+			-- 	},
+			-- }
 		end,
 	},
 }
