@@ -13,7 +13,6 @@ function M.get(colors)
 	return {
 
 		-- Visual = { bg = "#234370" },
-		Visual = { bg = colors.surface0, bold = false },
 		-- Visual = { bg = colors.blue, fg = colors.base },
 
 		-- NormalFloat = { bg = bg, fg = colors.text },
@@ -220,6 +219,7 @@ function M.get(colors)
 		-- AvanteT,
 		-- === Lsp
 		["@keyword.operator.python"] = { link = "Conditional" },
+		Visual = { bg = colors.surface0, bold = false },
 	}
 end
 
