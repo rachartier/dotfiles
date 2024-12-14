@@ -58,6 +58,7 @@ return {
 	Event = " ",
 	Operator = "󰆕 ",
 	TypeParameter = " ",
+	Emoji = "󰞅 ",
 }
 
 -- VSCode codicons

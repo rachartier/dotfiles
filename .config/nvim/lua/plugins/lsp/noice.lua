@@ -4,6 +4,7 @@ return {
 	{
 		"folke/noice.nvim",
 		event = "VeryLazy",
+		-- enabled = false,
 		opts = {
 			messages = {
 				-- NOTE: If you enable messages, then the cmdline is enabled automatically.
