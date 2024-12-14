@@ -26,25 +26,17 @@ alias -g -- --help='--help 2>&1 | bat --language=help --style=plain -P'
 alias ssh='TERM=xterm ssh'
 
 function enhance() {
-    result=$(copilot-cli --action 'enhance' --prompt "$1")
-    echo "$result"
-    echo "$result" | xsel --clipboard
+    copilot-cli --action 'enhance' --prompt "$1"
 }
 
 function correct() {
-    result=$(copilot-cli --action 'correct' --prompt "$1")
-    echo "$result"
-    echo "$result" | xsel --clipboard
+    copilot-cli --action 'correct' --prompt "$1"
 }
 
 function translate() {
-    result=$(copilot-cli --action 'translate' --prompt "$1")
-    echo "$result"
-    echo "$result" | xsel --clipboard
+    copilot-cli --action 'translate' --prompt "$1"
 }
 
 function ask() {
-    result=$(copilot-cli --action 'ask' --prompt "$1")
-        echo "$result"
-        echo "$result" | xsel --clipboard
+    copilot-cli --action 'ask' --prompt "$1" | unbuffer tee  /tmp/test.txt
 }

@@ -17,6 +17,7 @@ show_spinner() {
 
 print_step() {
     local message="$1"
+    echo
     echo -e "${COLORS[blue]}${ICON_GEAR} ${COLORS[bold]}$message${COLORS[reset]}"
 }
 
@@ -375,7 +376,7 @@ install_tmux() {
     ./configure --enable-sixel >/dev/null
 
     log "info" "Installing tmux"
-    make && sudo make install >/dev/null
+    make >/dev/null && sudo make install >/dev/null
 
     log "info" "Installing tmux plugins manager"
     if ! [ -d "$HOME"/.config/tmux/plugins/tpm ]; then
@@ -386,7 +387,6 @@ install_tmux() {
     "$HOME"/.config/tmux/plugins/tpm/bin/install_plugins
 
     log "success" "Tmux installation completed"
-    print_separator
 }
 
 install_bat() {
@@ -456,7 +456,6 @@ install_packages() {
 
     ln -s $(which fdfind) ~/.local/bin/fd
 
-    print_separator
 }
 
 install_git_tools() {
@@ -550,7 +549,6 @@ install_nvim() {
     nvim --headless "+Lazy! sync" "+qall" >/dev/null
 
     log "success" "Neovim installation completed"
-    print_separator
 }
 
 install_eza() {
