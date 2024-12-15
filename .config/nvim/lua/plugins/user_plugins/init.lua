@@ -22,7 +22,7 @@ return {
 		},
 		config = function()
 			require("tiny-buffers-switcher").setup({
-				--				use_fzf_lua = true,
+				use_fzf_lua = false,
 			})
 		end,
 	},
@@ -35,7 +35,9 @@ return {
 		end,
 	},
 	{
+		-- dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-code-actions.nvim",
 		"rachartier/tiny-code-action.nvim",
+		enabled = true,
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-telescope/telescope.nvim",

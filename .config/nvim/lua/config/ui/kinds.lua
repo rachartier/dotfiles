@@ -31,9 +31,9 @@
 -- 	Emoji = "󰞅 ",
 -- }
 
--- VSCode
+-- Custom
 return {
-	Text = "󰉿 ",
+	Text = " ",
 	Method = "󰆧 ",
 	Function = "󰊕 ",
 	Constructor = " ",

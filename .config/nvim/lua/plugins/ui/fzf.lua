@@ -28,7 +28,9 @@ function M.config()
 			height = 0.8,
 			row = 0.5,
 			col = 0.5,
+			backdrop = 100,
 			preview = {
+				delay = 0,
 				scrollchars = { "┃", "" },
 			},
 		},
@@ -42,10 +44,24 @@ function M.config()
 		files = {
 			formatter = "path.filename_first",
 			ignore_patterns = { "*.gif" },
+			fd_opts = "--type f --hidden --follow",
 		},
 		diagnostics = {
 			winopts = {
 				preview = { hidden = "hidden" },
+			},
+		},
+		lsp = {
+			code_actions = {
+				prompt = "Code Actions> ",
+				async_or_timeout = 5000,
+				-- when git-delta is installed use "codeaction_native" for beautiful diffs
+				-- try it out with `:FzfLua lsp_code_actions previewer=codeaction_native`
+				-- scroll up to `previewers.codeaction{_native}` for more previewer options
+				previewer = "codeaction_native",
+			},
+			symbols = {
+				symbol_icons = require("config.ui.kinds").icons,
 			},
 		},
 		git = {
@@ -54,6 +70,12 @@ function M.config()
 				["D"] = { icon = signs.fzf.git.removed, color = "red" },
 				["A"] = { icon = signs.fzf.git.added, color = "green" },
 				["R"] = { icon = signs.fzf.git.renamed, color = "yellow" },
+			},
+		},
+		previewers = {
+			builtin = {
+				delay = 0, -- Pas de délai pour le preview
+				treesitter = { enable = false }, -- Désactiver treesitter si non nécessaire
 			},
 		},
 	})

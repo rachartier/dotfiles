@@ -134,9 +134,10 @@ function M.get(colors)
 		TelescopePreviewTitle = { link = "FloatTitle" },
 
 		FzfLuaNormal = { bg = colors.base, fg = colors.text },
-		FzfPreviewTitle = { bg = colors.blue, fg = colors.text },
-		FzfLuaPreviewTitle = { bg = colors.green, fg = colors.base },
+		FzfPreviewTitle = { fg = colors.text, italic = true },
+		FzfLuaPreviewTitle = { fg = colors.base, italic = true },
 		FzfLuaBorder = { link = "FloatBorder" },
+		FzfLuaBackdrop = { bg = "None" },
 
 		WinSeparator = { fg = colors.surface0 },
 		WinBar = { fg = colors.rosewater, bg = "None" },

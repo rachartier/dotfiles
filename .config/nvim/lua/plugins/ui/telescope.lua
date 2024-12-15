@@ -110,7 +110,6 @@ return {
 			},
 			layout_config = {
 				horizontal = {
-
 					preview_cutoff = 200,
 					prompt_position = "top",
 					preview_width = 0.55,
