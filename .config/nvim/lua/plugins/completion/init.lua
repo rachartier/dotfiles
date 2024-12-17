@@ -29,6 +29,9 @@ return {
 					return { vim.o.lines - 1, 0 }
 				end,
 			},
+			trigger = {
+				show_on_insert_on_trigger_character = false,
+			},
 		},
 
 		sources = {
