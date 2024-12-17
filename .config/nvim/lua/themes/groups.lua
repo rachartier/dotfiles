@@ -18,7 +18,7 @@ function M.get(colors)
 		-- NormalFloat = { bg = bg, fg = colors.text },
 		NormalFloat = { bg = colors.base, fg = colors.text },
 		FloatBorder = { fg = colors.lavender, bg = colors.base },
-		FloatTitle = { bg = colors.base, fg = colors.text, italic = true },
+		FloatTitle = { bg = colors.base, fg = colors.text, italic = true, bold = true },
 		LineNr = { fg = colors.surface1 },
 		SignColumn = { fg = colors.surface1 },
 		-- Visual = { bg = colors.surface1 },

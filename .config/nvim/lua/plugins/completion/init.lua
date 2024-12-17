@@ -13,6 +13,13 @@ return {
 	opts = {
 		keymap = { preset = "super-tab" },
 
+		enabled = function()
+			return not vim.tbl_contains({
+				"Avante",
+				"copilot-chat",
+			}, vim.bo.filetype) and vim.bo.buftype ~= "prompt" and vim.b.completion ~= false
+		end,
+
 		completion = {
 			documentation = {
 				-- border = "padded",
@@ -24,9 +31,13 @@ return {
 				cmdline_position = function()
 					if vim.g.ui_cmdline_pos ~= nil then
 						local pos = vim.g.ui_cmdline_pos -- (1, 0)-indexed
+						if vim.fn.mode() == "c" and vim.fn.getcmdtype() == "/" then
+							return { pos[1] - 1, pos[2] }
+						end
 						return { pos[1], pos[2] }
 					end
-					return { vim.o.lines - 1, 0 }
+
+					return { vim.o.lines + 1, 0 }
 				end,
 			},
 			trigger = {

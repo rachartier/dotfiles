@@ -111,7 +111,7 @@ return {
 			layout_config = {
 				horizontal = {
 					preview_cutoff = 200,
-					prompt_position = "top",
+					prompt_position = "bottom",
 					preview_width = 0.55,
 					results_width = 0.8,
 				},
@@ -167,7 +167,6 @@ return {
 	},
 	config = function(_, opts)
 		require("telescope").setup(opts)
-
 		require("telescope").load_extension("fzf")
 	end,
 }

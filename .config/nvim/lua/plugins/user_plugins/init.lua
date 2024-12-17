@@ -60,8 +60,8 @@ return {
 		end,
 	},
 	{
-		-- dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-inline-diagnostic.nvim",
-		"rachartier/tiny-inline-diagnostic.nvim",
+		dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-inline-diagnostic.nvim",
+		-- "rachartier/tiny-inline-diagnostic.nvim",
 		event = "LazyFile",
 		config = function()
 			require("tiny-inline-diagnostic").setup({
