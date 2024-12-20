@@ -514,7 +514,6 @@ install_github_gh() {
 # }
 
 install_nvim() {
-
     print_step "Installing Neovim"
     local version=${1:-"stable"}
 

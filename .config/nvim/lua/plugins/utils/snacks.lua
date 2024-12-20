@@ -196,12 +196,12 @@ return {
 			},
 		},
 		animate = {},
-		scroll = {
-			animate = {
-				duration = { step = 15, total = 140 },
-				easing = "inOutQuad",
-			},
-		},
+		-- scroll = {
+		-- 	animate = {
+		-- 		duration = { step = 15, total = 140 },
+		-- 		easing = "inOutQuad",
+		-- 	},
+		-- },
 		indent = {
 			animate = {
 				enabled = false,
@@ -256,14 +256,16 @@ return {
 			})
 		end
 
-		require("utils").on_event({ "CmdlineEnter", "CmdlineLeave" }, function(ev)
-			if ev.event == "CmdlineEnter" then
-				Snacks.scroll.disable()
-			else
-				Snacks.scroll.enable()
-			end
-		end, {
-			target = "/",
-		})
+		if opts.scroll then
+			require("utils").on_event({ "CmdlineEnter", "CmdlineLeave" }, function(ev)
+				if ev.event == "CmdlineEnter" then
+					Snacks.scroll.disable()
+				else
+					Snacks.scroll.enable()
+				end
+			end, {
+				target = "/",
+			})
+		end
 	end,
 }

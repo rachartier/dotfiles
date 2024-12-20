@@ -24,12 +24,14 @@ return {
 		},
 		winopts = {
 			border = require("config.ui.border").default_border,
+			backdrop = 100,
 			width = 0.8,
 			height = 0.8,
 			row = 0.5,
 			col = 0.5,
 			preview = {
 				scrollchars = { "┃", "" },
+				delay = 10,
 			},
 		},
 		keymap = {
@@ -63,12 +65,6 @@ return {
 				["D"] = { icon = signs.fzf.git.removed, color = "red" },
 				["A"] = { icon = signs.fzf.git.added, color = "green" },
 				["R"] = { icon = signs.fzf.git.renamed, color = "yellow" },
-			},
-		},
-		previewers = {
-			builtin = {
-				delay = 0, -- Pas de délai pour le preview
-				treesitter = { enable = false }, -- Désactiver treesitter si non nécessaire
 			},
 		},
 	},
