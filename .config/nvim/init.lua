@@ -75,8 +75,8 @@ require("lazy").setup({
 	},
 })
 
-require("set")
 require("neovide")
+require("set")
 
 vim.defer_fn(function()
 	require("config.diagnostic")

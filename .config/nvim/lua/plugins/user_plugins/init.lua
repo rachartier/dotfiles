@@ -59,8 +59,17 @@ return {
 			})
 		end,
 	},
+
+	-- {
+	-- 	dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-line-alert.nvim",
+	-- 	enabled = true,
+	-- 	config = function()
+	-- 		require("tiny-line-alert").setup()
+	-- 	end,
+	-- },
 	{
 		dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-inline-diagnostic.nvim",
+		-- commit = "0978703d0acd2a75036da5700677840d6b677485",
 		-- "rachartier/tiny-inline-diagnostic.nvim",
 		event = "LazyFile",
 		config = function()
@@ -73,7 +82,11 @@ return {
 				-- },
 				options = {
 					-- add_messages = false,
-					multilines = true,
+					multilines = {
+						enabled = true,
+						always_show = false,
+					},
+					enable_on_insert = true,
 				},
 				-- blend = {
 				-- 	factor = 0.22,

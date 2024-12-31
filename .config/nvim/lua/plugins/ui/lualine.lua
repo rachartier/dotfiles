@@ -110,7 +110,7 @@ return {
 		"catppuccin/nvim",
 		"AndreM222/copilot-lualine",
 	},
-	event = "VeryLazy",
+	event = "LazyFile",
 	priority = 900,
 	enabled = true,
 	opts = function()
@@ -167,58 +167,66 @@ return {
 			},
 			lualine_b = {
 				{
-					"progress",
-					separator = { right = "" },
-					color = { fg = colors.fg },
-					padding = { left = 2, right = 0 },
+					"filetype",
+					color = { fg = colors.overlay1 },
+					separator = { right = "", left = "" },
+					cond = cond_disable_by_ft,
+					icon_only = true,
+					colored = false,
+					padding = { right = 0, left = 2 },
+					condition = conditions.buffer_not_empty,
 				},
 				{
-					"location",
-					separator = { right = "" },
-					color = { fg = colors.fg },
-					padding = { left = 1, right = 0 },
-				},
-				{
-					function()
-						if vim.fn.mode():find("[vV]") then
-							local ln_beg = vim.fn.line("v")
-							local ln_end = vim.fn.line(".")
+					"filename",
 
-							local lines = ln_beg <= ln_end and ln_end - ln_beg + 1 or ln_beg - ln_end + 1
+					padding = { right = 1, left = 0 },
+					color = { fg = colors.overlay1 },
+					separator = { right = "", left = "" },
 
-							return "sel: " .. tostring(vim.fn.wordcount().visual_chars) .. " | " .. tostring(lines)
-						else
-							return ""
-						end
-					end,
-					color = { fg = colors.fg },
-					separator = { right = "" },
+					symbols = {
+						modified = signs.file.modified, -- Text to show when the file is modified.
+						readonly = signs.file.readonly, -- Text to show when the file is non-modifiable or readonly.
+						unnamed = signs.file.unnamed, -- Text to show for unnamed buffers.
+						newfile = signs.file.created, -- Text to show for newly created file before first write
+					},
 				},
 			},
 			lualine_c = {
 				{
-					function()
-						local msg = " No Active Lsp"
-						local text_clients = ""
-
-						local clients = vim.lsp.get_clients({ bufnr = 0 })
-						if next(clients) == nil then
-							return msg
-						end
-						for _, client in ipairs(clients) do
-							if client.name ~= "copilot" then
-								text_clients = text_clients .. client.name .. ", "
-							end
-						end
-						if text_clients ~= "" then
-							return text_clients:sub(1, -3)
-						end
-						return msg
-					end,
-					icon = "",
-					color = { fg = colors.overlay1 },
-					padding = { left = 3, right = 0 },
+					"branch",
+					icon = signs.git.branch,
+					color = { fg = colors.violet },
 					separator = { right = "", left = "" },
+					padding = { left = 2, right = 0 },
+				},
+				{
+					"diff",
+					colored = true,
+					source = diff_source,
+					symbols = {
+						added = signs.git.added,
+						modified = signs.git.modified,
+						removed = signs.git.removed,
+					},
+					separator = { right = "", left = "" },
+					-- diff_color = {
+					-- 	added = { gui = "bold" },
+					-- 	modified = { gui = "bold" },
+					-- 	removed = { gui = "bold" },
+					-- },
+				},
+				{
+					function()
+						local diags = vim.diagnostic.get(0)
+
+						if #diags > 0 then
+							return "|"
+						end
+						return ""
+					end,
+					cond = conditions.check_git_workspace,
+					separator = { right = "", left = "" },
+					color = { bg = colors.mantle, fg = colors.overlay0 },
 				},
 				{
 					"diagnostics",
@@ -231,7 +239,8 @@ return {
 					-- 	hint = { fg = c.hint },
 					-- },
 					colored = true,
-					padding = { left = 3, right = 1 },
+					padding = { left = 1, right = 1 },
+					color = { bg = colors.mantle, fg = colors.subtext0 },
 				},
 			},
 			lualine_x = {
@@ -296,51 +305,58 @@ return {
 			},
 			lualine_y = {
 				{
-					"branch",
-					icon = signs.git.branch,
-					color = { fg = colors.violet },
+					function()
+						local msg = " No Active Lsp"
+						local text_clients = ""
+
+						local clients = vim.lsp.get_clients({ bufnr = 0 })
+						if next(clients) == nil then
+							return msg
+						end
+						for _, client in ipairs(clients) do
+							if client.name ~= "copilot" then
+								text_clients = text_clients .. client.name .. ", "
+							end
+						end
+						if text_clients ~= "" then
+							return text_clients:sub(1, -3)
+						end
+						return msg
+					end,
+					icon = "",
+					color = { fg = colors.overlay1 },
+					padding = { left = 1, right = 2 },
 					separator = { right = "", left = "" },
-				},
-				{
-					"diff",
-					colored = true,
-					source = diff_source,
-					symbols = {
-						added = signs.git.added,
-						modified = signs.git.modified,
-						removed = signs.git.removed,
-					},
-					-- diff_color = {
-					-- 	added = { gui = "bold" },
-					-- 	modified = { gui = "bold" },
-					-- 	removed = { gui = "bold" },
-					-- },
 				},
 			},
 			lualine_z = {
 				{
-					"filetype",
-					color = { bg = colors.pink, fg = colors.bg },
-					separator = { right = "", left = "" },
-					cond = cond_disable_by_ft,
-					icon_only = true,
-					colored = false,
-					padding = { right = 0, left = 0 },
-					condition = conditions.buffer_not_empty,
+					"progress",
+					separator = { left = "" },
+					color = { fg = colors.base },
+					padding = { left = 1, right = 0 },
 				},
 				{
-					"filename",
+					"location",
+					separator = { right = "" },
+					color = { fg = colors.base },
+					padding = { left = 1, right = 1 },
+				},
+				{
+					function()
+						if vim.fn.mode():find("[vV]") then
+							local ln_beg = vim.fn.line("v")
+							local ln_end = vim.fn.line(".")
 
-					padding = { right = 1, left = 0 },
-					color = { bg = colors.pink, fg = colors.bg },
-					separator = { right = "", left = "" },
+							local lines = ln_beg <= ln_end and ln_end - ln_beg + 1 or ln_beg - ln_end + 1
 
-					symbols = {
-						modified = signs.file.modified, -- Text to show when the file is modified.
-						readonly = signs.file.readonly, -- Text to show when the file is non-modifiable or readonly.
-						unnamed = signs.file.unnamed, -- Text to show for unnamed buffers.
-						newfile = signs.file.created, -- Text to show for newly created file before first write
-					},
+							return "sel: " .. tostring(vim.fn.wordcount().visual_chars) .. " | " .. tostring(lines)
+						else
+							return ""
+						end
+					end,
+					color = { fg = colors.base },
+					separator = { left = "" },
 				},
 			},
 		}
@@ -363,6 +379,7 @@ return {
 
 		return config
 	end,
+
 	config = function(_, opts)
 		require("lualine").setup(opts)
 	end,

@@ -6,6 +6,7 @@ local M = {}
 
 function M.setup()
 	M._theme = require("themes.catppuccin.theme")
+	-- M._theme = require("themes.nano.theme")
 	if M._theme ~= nil then
 		M._theme.setup()
 	end
@@ -15,6 +16,14 @@ function M.get_colors()
 	if M._theme == nil then
 		return {}
 	end
+
+	if M._theme.get_colors == nil then
+		return {
+			base = require("utils").get_hl("Normal", "bg"),
+			text = require("utils").get_hl("Normal", "fg"),
+		}
+	end
+
 	return M._theme.get_colors()
 end
 
@@ -22,10 +31,23 @@ function M.get_lualine_colors()
 	if M._theme == nil then
 		return {}
 	end
+
+	if M._theme.get_lualine_colors == nil then
+		return {}
+	end
+
 	return M._theme.get_lualine_colors()
 end
 
 function M.get_kirby_colors()
+	if M._theme == nil then
+		return {}
+	end
+
+	if M._theme.get_kirby_colors == nil then
+		return {}
+	end
+
 	local colors = M.get_lualine_colors()
 
 	return {

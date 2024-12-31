@@ -195,7 +195,7 @@ return {
 				end,
 			},
 		},
-		animate = {},
+		-- animate = {},
 		-- scroll = {
 		-- 	animate = {
 		-- 		duration = { step = 15, total = 140 },

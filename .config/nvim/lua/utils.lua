@@ -232,4 +232,9 @@ function M.get_visual_range()
 end
 -------------------------------
 
+function M.get_hl(group, attr)
+	local hl = vim.api.nvim_get_hl_by_name(group, true)
+	return hl[attr]
+end
+
 return M

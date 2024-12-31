@@ -75,30 +75,9 @@ return {
 	},
 	{
 		languages = { "lua" },
-		mason = { "lua_ls" },
 		formatter = { "stylua" },
 		linter = { "selene" },
-		lsp_settings = {
-			settings = {
-				Lua = {
-					workspace = {
-						checkThirdParty = false,
-					},
-					codeLens = {
-						enable = true,
-					},
-					completion = {
-						callSnippet = "Replace",
-					},
-					hint = {
-						enabled = true,
-					},
-					diagnostics = {
-						globals = { "vim" },
-					},
-				},
-			},
-		},
+		lsp_ignore = true,
 	},
 	{
 		languages = { "c", "cpp", "h", "hpp" },

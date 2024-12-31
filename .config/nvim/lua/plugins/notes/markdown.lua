@@ -74,7 +74,6 @@ return {
 			-- })
 
 			require("markview").setup({
-				modes = { "n", "i", "v", "V", "c", "nc" },
 				hybrid_modes = { "i" },
 
 				filetypes = { "markdown", "quarto", "rmd", "Avante" },

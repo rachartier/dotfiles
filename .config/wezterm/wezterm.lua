@@ -127,7 +127,6 @@ end
 config.color_scheme = theme
 
 config.mouse_bindings = {
-
 	-- CTRL-Click open hyperlinks
 	{
 		mouse_reporting = true,

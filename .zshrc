@@ -1,6 +1,7 @@
 source "$HOME/.profile"
 source "$HOME/.dotfile_profile"
 
+export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 eval "$(starship init zsh)"
 
 [ ! -d $HOME/.antidote ] && git clone --depth=1 https://github.com/mattmc3/antidote.git $HOME/.antidote

@@ -1,9 +1,9 @@
 return {
 	file = {
-		modified = "",
-		not_saved = "󰉉 ",
+		modified = "•",
+		not_saved = "󰉉",
 		readonly = "󰌾",
-		created = "",
+		created = "●",
 		unnamed = "No Name",
 	},
 	git = {
@@ -34,7 +34,7 @@ return {
 		warning = " ",
 		warn = " ",
 		info = " ",
-		hint = " ",
+		hint = " ",
 		-- other = "󰠠 ",
 	},
 	diagnostic = {
