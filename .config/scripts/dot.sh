@@ -705,7 +705,7 @@ use_tool_dotnet() {
 
 update_all() {
     log "info" "Updating neovim plugins..."
-    "$HOME/.local/bin/nvim" --headless "+Lazy! sync" "+qall"
+    "/opt/nvim-linux64/bin/nvim" --headless "+Lazy! sync" "+qall"
 
     log "info" "Updating tmux plugins..."
     "$HOME/.config/tmux/plugins/tpm/bin/update_plugins" all
