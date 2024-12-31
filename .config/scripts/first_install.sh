@@ -15,7 +15,9 @@ install_essentials() {
 
     sudo apt install -y -qq -o=Dpkg::Use-Pty=0 \
         automake \
-        autoconf
+        autoconf \
+        build-essential \
+        cmake
 }
 
 # install_ohmyzsh() {
