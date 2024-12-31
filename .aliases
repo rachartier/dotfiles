@@ -25,18 +25,48 @@ alias -g -- --help='--help 2>&1 | bat --language=help --style=plain -P'
 
 alias ssh='TERM=xterm ssh'
 
+function __get_clipboard_contents() {
+    if command -v xclip &>/dev/null; then
+        xclip -o -selection clipboard
+    elif command -v pbpaste &>/dev/null; then
+        pbpaste
+    else
+        powershell.exe -NoLogo -NoProfile -c "[Console]::Out.Write(\$(Get-Clipboard -Raw).tostring().replace('\`r', ''))"
+    fi
+}
+
 function enhance() {
+    if [ -z "$1" ]; then
+        copilot-cli --copy-to-clipboard --action 'enhance' --prompt "$(__get_clipboard_contents)"
+        return
+    fi
+
     copilot-cli --copy-to-clipboard --action 'enhance' --prompt "$1"
 }
 
 function correct() {
+    if [ -z "$1" ]; then
+        copilot-cli --copy-to-clipboard --action 'correct' --prompt "$(__get_clipboard_contents)"
+        return
+    fi
+
     copilot-cli --copy-to-clipboard --action 'correct' --prompt "$1"
 }
 
 function translate() {
+    if [ -z "$1" ]; then
+        copilot-cli --copy-to-clipboard --action 'translate' --prompt "$(__get_clipboard_contents)"
+        return
+    fi
+
     copilot-cli --copy-to-clipboard --action 'translate' --prompt "$1"
 }
 
 function ask() {
+    if [ -z "$1" ]; then
+        copilot-cli --copy-to-clipboard --action 'ask' --prompt "$(__get_clipboard_contents)"
+        return
+    fi
+
     copilot-cli --copy-to-clipboard --action 'ask' --prompt "$1"
 }
