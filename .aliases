@@ -37,11 +37,11 @@ function __get_clipboard_contents() {
 
 function __copilot_cli_action() {
     if [ -z "$1" ]; then
-        copilot-cli --copy-to-clipboard --action "$2" --prompt "$(__get_clipboard_contents)"
+        copilot-cli --copy-to-clipboard --action "$2" --prompt "$3: $(__get_clipboard_contents)"
         return
     fi
 
-    copilot-cli --copy-to-clipboard --action "$2" --prompt "$1"
+    copilot-cli --copy-to-clipboard --action "$2" --prompt "$3: $1"
 }
 
 function enhance() {
@@ -53,7 +53,12 @@ function correct() {
 }
 
 function translate() {
-    __copilot_cli_action "$1" 'translate'
+    if [ "$1" = "--lang" ]; then
+        __copilot_cli_action "$3" 'translate' "$2"
+        return
+    fi
+
+    __copilot_cli_action "$2" 'translate' "Traduit en $1 le texte suivant: "
 }
 
 function ask() {
