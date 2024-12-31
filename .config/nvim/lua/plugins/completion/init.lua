@@ -1,14 +1,14 @@
 return {
 
 	"saghen/blink.cmp",
-	-- version = "v0.*",
+	version = "*",
 	dependencies = {
 		"rafamadriz/friendly-snippets",
 		-- { "saghen/blink.compat", version = "*", opts = { impersonate_nvim_cmp = false } },
 		-- { "chrisgrieser/cmp-nerdfont", lazy = true },
 		-- { "hrsh7th/cmp-emoji", lazy = true },
 	},
-	build = "cargo build --release",
+	-- build = "cargo build --release",
 	event = { "InsertEnter", "CmdlineEnter" },
 	opts = {
 		keymap = { preset = "super-tab" },
