@@ -35,38 +35,27 @@ function __get_clipboard_contents() {
     fi
 }
 
-function enhance() {
+function __copilot_cli_action() {
     if [ -z "$1" ]; then
-        copilot-cli --copy-to-clipboard --action 'enhance' --prompt "$(__get_clipboard_contents)"
+        copilot-cli --copy-to-clipboard --action "$2" --prompt "$(__get_clipboard_contents)"
         return
     fi
 
-    copilot-cli --copy-to-clipboard --action 'enhance' --prompt "$1"
+    copilot-cli --copy-to-clipboard --action "$2" --prompt "$1"
+}
+
+function enhance() {
+    __copilot_cli_action "$1" 'enhance'
 }
 
 function correct() {
-    if [ -z "$1" ]; then
-        copilot-cli --copy-to-clipboard --action 'correct' --prompt "$(__get_clipboard_contents)"
-        return
-    fi
-
-    copilot-cli --copy-to-clipboard --action 'correct' --prompt "$1"
+    __copilot_cli_action "$1" 'correct'
 }
 
 function translate() {
-    if [ -z "$1" ]; then
-        copilot-cli --copy-to-clipboard --action 'translate' --prompt "$(__get_clipboard_contents)"
-        return
-    fi
-
-    copilot-cli --copy-to-clipboard --action 'translate' --prompt "$1"
+    __copilot_cli_action "$1" 'translate'
 }
 
 function ask() {
-    if [ -z "$1" ]; then
-        copilot-cli --copy-to-clipboard --action 'ask' --prompt "$(__get_clipboard_contents)"
-        return
-    fi
-
-    copilot-cli --copy-to-clipboard --action 'ask' --prompt "$1"
+    __copilot_cli_action "$1" 'ask'
 }
