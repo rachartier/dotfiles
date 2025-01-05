@@ -18,7 +18,8 @@ RUN apt-get update && \
 USER $USER_NAME
 RUN chown -R $USER_NAME:$USER_NAME /home/$USER_NAME
 
-ARG CACHEBUST=7
+ARG CACHEBUST=9
+RUN sudo apt-get update
 COPY ./first_install.sh /tmp/first_install.sh
 RUN sudo chmod +x /tmp/first_install.sh && \
     /tmp/first_install.sh && \
@@ -33,7 +34,6 @@ RUN sudo apt-get clean && \
 
 RUN git clone --depth=1 https://github.com/mattmc3/antidote.git /home/$USER_NAME/.antidote && \
     zsh -c ". '$HOME/.antidote/antidote.zsh' && antidote load '${ZDOTDIR:-$HOME}/.zsh_plugins.txt'"
-
 
 RUN zsh -c "/home/$USER_NAME/.config/scripts/dot.sh update"
 

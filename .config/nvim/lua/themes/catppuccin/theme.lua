@@ -1,6 +1,7 @@
 local M = {}
 
-M.flavour = "macchiato"
+-- M.flavour = "macchiato"
+M.flavour = "mocha"
 
 function M.get_colors()
 	return require("catppuccin.palettes").get_palette(M.flavour)

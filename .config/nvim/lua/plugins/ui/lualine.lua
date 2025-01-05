@@ -197,7 +197,7 @@ return {
 					icon = signs.git.branch,
 					color = { fg = colors.violet },
 					separator = { right = "", left = "" },
-					padding = { left = 2, right = 0 },
+					padding = { left = 2, right = 2 },
 				},
 				{
 					"diff",

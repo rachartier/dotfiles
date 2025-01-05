@@ -103,7 +103,11 @@ if tmux_theme ~= nil then
 	tmux_theme = tmux_theme:gsub("[\r\n]", "")
 end
 
-local theme = "Catppuccin Macchiato"
+config.set_environment_variables = {
+	TMUX_THEME = tmux_theme,
+}
+
+local theme = "Catppuccin Mocha"
 
 if tmux_theme == "catppuccin_macchiato.conf" then
 	theme = "Catppuccin Macchiato"

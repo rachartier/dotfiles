@@ -124,12 +124,12 @@ return {
 		end,
 	},
 	{
-		-- dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-devicons-auto-colors.nvim",
-		"rachartier/tiny-devicons-auto-colors.nvim",
+		dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-devicons-auto-colors.nvim",
+		-- "rachartier/tiny-devicons-auto-colors.nvim",
 		branch = "main",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		event = "VeryLazy",
-		enabled = false,
+		enabled = true,
 		config = function()
 			-- local colors = require("theme").get_colors()
 			-- local colors = require("tokyonight.colors").setup()
@@ -138,6 +138,8 @@ return {
 				autoreload = true,
 				cache = { enabled = false },
 			})
+
+			require("tiny-devicons-auto-colors").apply()
 		end,
 	},
 

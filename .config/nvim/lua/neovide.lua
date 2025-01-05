@@ -1,12 +1,13 @@
 if vim.g.neovide then
-	-- vim.o.guifont = "CaskaydiaCove NF, Symbols Nerd Font"
+	-- vim.o.guifont = "CaskaydiaCove NF"
 	-- vim.o.guifont = "Cascadia Code,Symbols Nerd Font"
-	vim.o.guifont = "MonoLisa,Symbols Nerd Font:h14"
+	-- vim.o.guifont = "MonoLisa,Symbols Nerd Font:h14"
+	vim.o.guifont = "MonoLisa Nerd Font:h12"
 
 	vim.g.neovide_underline_stroke_scale = 1.5
 	-- vim.g.neovide_underline_automatic_scaling = true
 
-	vim.g.neovide_scale_factor = 0.84
+	-- vim.g.neovide_scale_factor = 0.84
 	-- vim.g.neovide_floating_shadow = "v:true"
 	-- vim.g.neovide_floating_z_height = 10
 	-- vim.g.neovide_transparency = 1
@@ -37,18 +38,22 @@ if vim.g.neovide then
 
 	vim.g.neovide_floating_shadow = true
 
-	vim.g.neovide_floating_blur_amount_x = 1.5
-	vim.g.neovide_floating_blur_amount_y = 1.5
-	vim.g.neovide_floating_z_height = 10
+	vim.g.neovide_floating_blur_amount_x = 2
+	vim.g.neovide_floating_blur_amount_y = 2
+	vim.g.neovide_floating_z_height = 5
+	vim.g.neovide_floating_corner_radius = 0.0
 	vim.g.neovide_light_angle_degrees = 45
 	vim.g.neovide_light_radius = 5
+
+	vim.g.neovide_normal_opacity = 1
+	vim.g.neovide_transparency = 1
 
 	-- -- Helper function for transparency formatting
 	-- local alpha = function()
 	-- 	return string.format("%x", math.floor(255 * (vim.g.transparency or 0.8)))
 	-- end
 	-- -- -- g:neovide_transparency should be 0 if you want to unify transparency of content and title bar.
-	-- vim.g.neovide_transparency = 0.9
+	-- vim.g.neovide_transparency = 1
 	-- vim.g.transparency = 0.0
 	-- vim.g.neovide_background_color = require("theme").get_colors().base .. alpha()
 
@@ -58,6 +63,9 @@ if vim.g.neovide then
 	vim.keymap.set("v", "<D-v>", '"+P') -- Paste visual mode
 	vim.keymap.set("c", "<D-v>", "<C-R>+") -- Paste command mode
 	vim.keymap.set("i", "<D-v>", '<ESC>l"+Pli') -- Paste insert mode
+
+	vim.keymap.set("n", "<C-S>", '"+P') -- Paste normal mode
+	vim.keymap.set("v", "<C-S>", '"+P') -- Paste visual mode
 end
 
 -- Allow clipboard copy paste in neovim

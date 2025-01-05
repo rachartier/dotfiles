@@ -16,7 +16,7 @@ function M.get(colors)
 		-- Visual = { bg = colors.blue, fg = colors.base },
 
 		-- NormalFloat = { bg = bg, fg = colors.text },
-		NormalFloat = { bg = colors.base, fg = colors.text },
+		NormalFloat = { bg = "None", fg = colors.text },
 		FloatBorder = { fg = colors.lavender, bg = colors.base },
 		FloatTitle = { bg = colors.base, fg = colors.text, italic = true, bold = true },
 		LineNr = { fg = colors.surface1 },
@@ -25,14 +25,16 @@ function M.get(colors)
 		Comment = { fg = colors.surface2, italic = true },
 
 		-- BlinkCmpSignatureHelpBorder = { link = "FloatBorder" },
-		BlinkCmpDocBorder = { bg = colors.surface0 },
-		BlinkCmpDocSeparator = { bg = colors.surface0 },
-		-- BlinkCmpMenuBorder = { link = "FloatBorder" },
-		BlinkCmpMenu = { bg = colors.surface0 },
-		BlinkCmpDoc = { bg = colors.surface0 },
-		BlinkCmpScrollBarGutter = { bg = colors.surface0, fg = colors.surface0 },
-		BlinkCmpMenuSelection = { bg = colors.surface1 },
-		-- BlinkCmpScrollBarThumb = { bg = colors.surface1 },
+		-- BlinkCmpDocBorder = { bg = colors.surface0 },
+		-- BlinkCmpDocSeparator = { bg = colors.surface0 },
+		-- -- BlinkCmpMenuBorder = { link = "FloatBorder" },
+		-- BlinkCmpMenu = { bg = "None" },
+		--
+		-- BlinkCmpDoc = { bg = colors.surface0 },
+		-- BlinkCmpScrollBarGutter = { bg = colors.surface0, fg = colors.surface0 },
+		-- BlinkCmpMenuSelection = { bg = colors.surface1 },
+		-- -- BlinkCmpScrollBarThumb = { bg = colors.surface1 },
+
 		BlinkCmpLabelMatch = { bg = "None", fg = colors.blue },
 		-- BlinkCmpScrollBarThumb = { bg = colors.text },
 
@@ -69,7 +71,8 @@ function M.get(colors)
 
 		NeoTreeCursorLine = { link = "PmenuSel" },
 		NeoTreeIndentMarker = { fg = colors.surface2 },
-		NeoTreeNormal = { bg = colors.base },
+		NeoTreeNormal = { bg = "None" },
+		NeoTreeNormalNC = { bg = "None" },
 		NeoTreePreview = { link = "NeoTreeNormal" },
 
 		NoiceCmdlineIcon = { fg = colors.yellow, italic = false, bold = true },

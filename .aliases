@@ -6,8 +6,8 @@ alias f="fzf"
 alias l="eza --tree --level 1 --group-directories-first --color=always --icons"
 alias ls='eza --group-directories-first --color=always --icons=auto'
 
-alias neo='neovide.exe --wsl --neovim-bin "$HOME/.local/bin/nvim" -- '
-alias cneo='neovide.exe --wsl --neovim-bin "$HOME/.local/bin/nvim" --server="$1:7301 -- '
+alias neo='neovide.exe --wsl --neovim-bin "/opt/nvim-linux64/bin/nvim" -- '
+alias cneo='neovide.exe --wsl --neovim-bin "/opt/nvim-linux64/bin/nvim" --server="$1:7301 -- '
 
 alias snvim='nvim --cmd "let g:neovide=1" --headless --listen 0.0.0.0:7301'
 
@@ -53,6 +53,12 @@ function correct() {
 }
 
 function translate() {
+    if [ -z "$2" ]; then
+        echo ok
+        __copilot_cli_action "$(__get_clipboard_contents)" 'translate' "Si le texte suivant est en français, traduit le en anglais. Autrement, traduit le en français"
+        return
+    fi
+
     if [ "$1" = "--lang" ]; then
         __copilot_cli_action "$3" 'translate' "$2"
         return

@@ -55,14 +55,14 @@ return {
 		styles = {
 			dashboard = {
 				wo = {
-					winblend = 0,
+					winblend = require("config").winblend,
 				},
 			},
 			notification = {
 				border = require("config.ui.border").default_border,
 				wo = {
 					wrap = true,
-					winblend = 0,
+					winblend = require("config").winblend,
 				},
 			},
 		},
