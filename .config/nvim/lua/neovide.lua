@@ -66,6 +66,10 @@ if vim.g.neovide then
 
 	vim.keymap.set("n", "<C-S>", '"+P') -- Paste normal mode
 	vim.keymap.set("v", "<C-S>", '"+P') -- Paste visual mode
+
+	vim.keymap.set("n", "<C-S-v>", '"+P') -- Paste normal mode
+	vim.keymap.set("v", "<C-S-v>", '"+P') -- Paste visual mode
+	vim.keymap.set("i", "<C-S-v>", '<ESC>l"+Pli') -- Paste insert mode
 end
 
 -- Allow clipboard copy paste in neovim

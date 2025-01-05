@@ -4,16 +4,11 @@ local utils = require("utils")
 local darken_markdown_heading = 0.16
 
 function M.get(colors)
-	-- local bg = colors.base
-	local bg = "None"
-
-	-- local cursor_line_bg = U.lighten(colors.base, 0.955)
-	local cursor_line_bg = "None"
-
 	return {
 
 		-- Visual = { bg = "#234370" },
 		-- Visual = { bg = colors.blue, fg = colors.base },
+		Visual = { bg = colors.surface0, bold = false },
 
 		-- NormalFloat = { bg = bg, fg = colors.text },
 		NormalFloat = { bg = "None", fg = colors.text },
@@ -24,19 +19,19 @@ function M.get(colors)
 		-- Visual = { bg = colors.surface1 },
 		Comment = { fg = colors.surface2, italic = true },
 
-		-- BlinkCmpSignatureHelpBorder = { link = "FloatBorder" },
-		-- BlinkCmpDocBorder = { bg = colors.surface0 },
-		-- BlinkCmpDocSeparator = { bg = colors.surface0 },
-		-- -- BlinkCmpMenuBorder = { link = "FloatBorder" },
-		-- BlinkCmpMenu = { bg = "None" },
-		--
-		-- BlinkCmpDoc = { bg = colors.surface0 },
-		-- BlinkCmpScrollBarGutter = { bg = colors.surface0, fg = colors.surface0 },
-		-- BlinkCmpMenuSelection = { bg = colors.surface1 },
-		-- -- BlinkCmpScrollBarThumb = { bg = colors.surface1 },
+		BlinkCmpSignatureHelpBorder = { link = "FloatBorder" },
+		BlinkCmpDocBorder = { bg = colors.surface0 },
+		BlinkCmpDocSeparator = { bg = colors.surface0 },
+		-- BlinkCmpMenuBorder = { link = "FloatBorder" },
+		BlinkCmpMenu = { bg = colors.surface0 },
+
+		BlinkCmpDoc = { bg = colors.surface0 },
+		BlinkCmpScrollBarGutter = { bg = colors.surface2 },
+		BlinkCmpScrollBarThumb = { bg = colors.lavender },
+		BlinkCmpMenuSelection = { bg = colors.surface1 },
+		-- BlinkCmpScrollBarThumb = { bg = colors.surface1 },
 
 		BlinkCmpLabelMatch = { bg = "None", fg = colors.blue },
-		-- BlinkCmpScrollBarThumb = { bg = colors.text },
 
 		CmpGhostText = { link = "Comment", default = true },
 		CmpItemAbbrMatch = { fg = colors.yellow, underline = false },
@@ -225,7 +220,6 @@ function M.get(colors)
 		-- AvanteT,
 		-- === Lsp
 		["@keyword.operator.python"] = { link = "Conditional" },
-		Visual = { bg = colors.surface0, bold = false },
 	}
 end
 
