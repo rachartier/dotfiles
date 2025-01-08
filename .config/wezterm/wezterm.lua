@@ -107,7 +107,7 @@ config.set_environment_variables = {
 	TMUX_THEME = tmux_theme,
 }
 
-local theme = "Catppuccin Mocha"
+local theme = "Catppuccin Macchiato"
 
 if tmux_theme == "catppuccin_macchiato.conf" then
 	theme = "Catppuccin Macchiato"

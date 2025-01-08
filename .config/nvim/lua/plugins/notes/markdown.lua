@@ -57,27 +57,27 @@ return {
 		config = function()
 			local presets = require("markview.presets")
 
-			-- local checkbox = presets.checkboxes.nerd
+			local checkbox = presets.checkboxes.nerd
 
-			-- checkbox.custom = vim.tbl_extend("force", checkbox.custom, {
-			-- 	{ match_string = "-", text = "", hl = "MarkviewCheckboxPending" },
-			-- 	{ match_string = "~", text = "", hl = "MarkviewCheckboxProgress" },
-			-- 	{ match_string = "/", text = "", hl = "MarkdownCheckboxSkipped" },
-			-- 	{ match_string = "f", text = "󰈸", hl = "MarkdownCheckboxFire" },
-			-- 	{ match_string = "s", text = "", hl = "MarkdownCheckboxStar" },
-			-- 	{ match_string = "*", text = "󰌵", hl = "MarkdownCheckboxIdea" },
-			-- 	{ match_string = "y", text = "󰔓", hl = "MarkdownCheckboxYes" },
-			-- 	{ match_string = "n", text = "󰔑", hl = "MarkdownCheckboxNo" },
-			-- 	{ match_string = "?", text = "", hl = "MarkdownCheckboxQuestion" },
-			-- 	{ match_string = "i", text = "", hl = "MarkdownCheckboxInfo" },
-			-- 	{ match_string = "!", text = "󱅶", hl = "MarkdownCheckboxImportant" },
-			-- })
+			checkbox.custom = vim.tbl_extend("force", checkbox.custom, {
+				-- { match_string = "/", text = "", hl = "MarkviewCheckboxPending" },
+				{ match_string = "/", text = "", hl = "MarkviewCheckboxProgress" },
+				{ match_string = "-", text = "", hl = "MarkdownCheckboxSkipped" },
+				{ match_string = "f", text = "󰈸", hl = "MarkdownCheckboxFire" },
+				{ match_string = "s", text = "", hl = "MarkdownCheckboxStar" },
+				{ match_string = "*", text = "󰌵", hl = "MarkdownCheckboxIdea" },
+				{ match_string = "y", text = "󰔓", hl = "MarkdownCheckboxYes" },
+				{ match_string = "n", text = "󰔑", hl = "MarkdownCheckboxNo" },
+				{ match_string = "?", text = "", hl = "MarkdownCheckboxQuestion" },
+				{ match_string = "i", text = "", hl = "MarkdownCheckboxInfo" },
+				{ match_string = "!", text = "󱅶", hl = "MarkdownCheckboxImportant" },
+			})
 
 			require("markview").setup({
 				hybrid_modes = { "i" },
 
 				filetypes = { "markdown", "quarto", "rmd", "Avante" },
-				-- checkboxes = checkbox,
+				checkboxes = checkbox,
 				headings = presets.headings.decorated,
 				list_items = {
 					shift_width = 2,

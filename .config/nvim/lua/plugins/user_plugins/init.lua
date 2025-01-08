@@ -74,7 +74,7 @@ return {
 		event = "LazyFile",
 		config = function()
 			require("tiny-inline-diagnostic").setup({
-				-- preset = "classic",
+				preset = "powerline",
 				-- hi = {
 				-- background = "None",
 				-- mixing_color = require("theme").get_colors().base,
@@ -83,7 +83,7 @@ return {
 				options = {
 					-- add_messages = false,
 					multilines = {
-						enabled = true,
+						enabled = false,
 						always_show = false,
 					},
 					enable_on_insert = true,
