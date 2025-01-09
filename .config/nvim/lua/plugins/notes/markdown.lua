@@ -56,8 +56,12 @@ return {
 		ft = { "markdown", "vimwiki" },
 		config = function()
 			local presets = require("markview.presets")
-
 			local checkbox = presets.checkboxes.nerd
+
+			checkbox.checked = {
+				hl = "MarkviewCheckboxChecked",
+				text = "",
+			}
 
 			checkbox.custom = vim.tbl_extend("force", checkbox.custom, {
 				-- { match_string = "/", text = "", hl = "MarkviewCheckboxPending" },
