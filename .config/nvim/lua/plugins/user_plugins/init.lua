@@ -68,13 +68,12 @@ return {
 	-- 	end,
 	-- },
 	{
-		dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-inline-diagnostic.nvim",
-		-- commit = "0978703d0acd2a75036da5700677840d6b677485",
-		-- "rachartier/tiny-inline-diagnostic.nvim",
+		-- dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-inline-diagnostic.nvim",
+		"rachartier/tiny-inline-diagnostic.nvim",
 		event = "LazyFile",
 		config = function()
 			require("tiny-inline-diagnostic").setup({
-				preset = "powerline",
+				-- preset = "powerline",
 				-- hi = {
 				-- background = "None",
 				-- mixing_color = require("theme").get_colors().base,
@@ -86,7 +85,9 @@ return {
 						enabled = false,
 						always_show = false,
 					},
-					enable_on_insert = true,
+					virt_texts = {
+						priority = 2048,
+					},
 				},
 				-- blend = {
 				-- 	factor = 0.22,
