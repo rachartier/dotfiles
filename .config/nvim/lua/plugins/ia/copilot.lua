@@ -415,7 +415,6 @@ Useful PEPs for this section (not exhaustive):
 				auto_suggestions = false,
 			},
 			provider = "copilot",
-			auto_suggestions_provider = "copilot",
 			hints = { enabled = true },
 		},
 	},

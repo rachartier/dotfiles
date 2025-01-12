@@ -2,6 +2,8 @@ local default_border = require("config.ui.border").default_border
 
 return {
 	"folke/noice.nvim",
+	-- event = "VimEnter",
+	-- enabled = true,
 	opts = {
 		messages = {
 			-- NOTE: If you enable messages, then the cmdline is enabled automatically.

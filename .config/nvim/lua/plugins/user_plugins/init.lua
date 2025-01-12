@@ -82,7 +82,7 @@ return {
 				options = {
 					-- add_messages = false,
 					multilines = {
-						enabled = false,
+						enabled = true,
 						always_show = false,
 					},
 					virt_texts = {
@@ -91,6 +91,7 @@ return {
 				},
 				-- blend = {
 				-- 	factor = 0.22,
+				--
 				-- },
 			})
 
@@ -109,24 +110,17 @@ return {
 			--
 			-- vim.keymap.set("n", "<leader>dd", "<cmd>set background=light<CR>",
 			--     { noremap = true, silent = true })
-			-- vim.keymap.set("n", "<leader>da", function()
-			--         vim.o.background = "dark"
-			--         require("tiny-inline-diagnostic").change({
-			--                 factor = 0.22,
-			--             },
-			--             {
-			--                 mixing_color = "#eaeaea"
-			--             }
-			--         )
-			--     end,
-			--     { noremap = true, silent = true })
+			-- vim.keymap.set("n", "<leader>tid", function()
+			-- 	vim.o.background = "dark"
+			-- 	require("tiny-inline-diagnostic").change_severities()
+			-- end, { noremap = true, silent = true })
 			-- vim.keymap.set("n", "<leader>de", "<cmd>set background=dark<CR>",
 			--     { noremap = true, silent = true })
 		end,
 	},
 	{
-		dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-devicons-auto-colors.nvim",
-		-- "rachartier/tiny-devicons-auto-colors.nvim",
+		-- dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-devicons-auto-colors.nvim",
+		"rachartier/tiny-devicons-auto-colors.nvim",
 		branch = "main",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		event = "VeryLazy",
