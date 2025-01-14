@@ -15,8 +15,10 @@ return {
 			end,
 		},
 	},
-	config = function()
+	config = function(_, opts)
 		local utils = require("utils")
+
+		require("grug-far").setup(opts)
 
 		utils.on_event({ "FileType" }, function()
 			vim.schedule(function()

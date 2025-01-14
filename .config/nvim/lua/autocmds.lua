@@ -2,16 +2,16 @@ local utils = require("utils")
 
 require("assign_ft")
 
-utils.on_event({ "TextYankPost" }, function()
-	vim.highlight.on_yank({
-		higroup = "CurSearch",
-		timeout = 85,
-		priority = 1,
-	})
-end, {
-	target = "*",
-	desc = "Highlight yanked text",
-})
+-- utils.on_event({ "TextYankPost" }, function()
+-- 	vim.highlight.on_yank({
+-- 		higroup = "CurSearch",
+-- 		timeout = 85,
+-- 		priority = 1,
+-- 	})
+-- end, {
+-- 	target = "*",
+-- 	desc = "Highlight yanked text",
+-- })
 
 utils.on_event({ "VimResized" }, function()
 	local current_tab = vim.fn.tabpagenr()

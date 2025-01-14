@@ -60,13 +60,13 @@ return {
 		end,
 	},
 
-	-- {
-	-- 	dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-line-alert.nvim",
-	-- 	enabled = true,
-	-- 	config = function()
-	-- 		require("tiny-line-alert").setup()
-	-- 	end,
-	-- },
+	{
+
+		-- dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-glimmer.nvim",
+		"rachartier/tiny-glimmer.nvim",
+		event = "TextYankPost",
+		opts = {},
+	},
 	{
 		-- dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-inline-diagnostic.nvim",
 		"rachartier/tiny-inline-diagnostic.nvim",
