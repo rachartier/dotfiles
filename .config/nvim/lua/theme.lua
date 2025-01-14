@@ -4,9 +4,9 @@ local M = {}
 -- M._theme = require("themes.alabaster.theme")
 -- M._theme = require("themes.default.theme")
 
+M._theme = require("themes.catppuccin.theme")
 function M.setup()
 	-- M._theme = require("themes.alabaster.theme")
-	M._theme = require("themes.catppuccin.theme")
 	-- M._theme = require("themes.nano.theme")
 	if M._theme ~= nil then
 		M._theme.setup()
