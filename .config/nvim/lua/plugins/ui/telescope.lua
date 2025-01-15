@@ -49,7 +49,7 @@ local search_layout = {
 
 return {
 	"nvim-telescope/telescope.nvim",
-	enabled = true,
+	enabled = false,
 	dependencies = {
 		"nvim-tree/nvim-web-devicons",
 		"nvim-lua/plenary.nvim",

@@ -1,5 +1,6 @@
 return {
 	"aaronhallaert/advanced-git-search.nvim",
+	enabled = true,
 	cmd = { "AdvancedGitSearch" },
 	keys = {
 		{ mode = "n", "<leader>gs", "<cmd>AdvancedGitSearch<CR>", { noremap = true, silent = true } },

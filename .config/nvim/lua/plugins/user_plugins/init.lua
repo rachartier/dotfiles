@@ -2,7 +2,7 @@ return {
 	{
 		-- dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny_buffers_switcher.nvim",
 		"rachartier/tiny-buffers-switcher.nvim",
-		enabled = true,
+		enabled = false,
 		event = "VeryLazy",
 		keys = {
 			{
@@ -37,7 +37,7 @@ return {
 	{
 		-- dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-code-actions.nvim",
 		"rachartier/tiny-code-action.nvim",
-		enabled = true,
+		enabled = false,
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-telescope/telescope.nvim",
@@ -64,8 +64,53 @@ return {
 
 		-- dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-glimmer.nvim",
 		"rachartier/tiny-glimmer.nvim",
-		event = "TextYankPost",
-		opts = {},
+		event = "VeryLazy",
+		keys = {
+			{
+				"n",
+				function()
+					require("tiny-glimmer").search_next()
+				end,
+				{ noremap = true, silent = true },
+			},
+			{
+				"N",
+				function()
+					require("tiny-glimmer").search_prev()
+				end,
+				{ noremap = true, silent = true },
+			},
+			{
+				"p",
+				function()
+					require("tiny-glimmer").paste()
+				end,
+				{ noremap = true, silent = true },
+			},
+			{
+				"P",
+				function()
+					require("tiny-glimmer").Paste()
+				end,
+				{ noremap = true, silent = true },
+			},
+		},
+		opts = {
+			refresh_interval_ms = 1,
+			overwrite = {
+				search = {
+					enabled = true,
+				},
+				paste = {
+					enabled = true,
+				},
+			},
+			animations = {
+				fade = {
+					from_color = require("theme").get_colors().surface1,
+				},
+			},
+		},
 	},
 	{
 		-- dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-inline-diagnostic.nvim",

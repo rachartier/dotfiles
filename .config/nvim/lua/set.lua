@@ -157,7 +157,7 @@ opt.backupdir = os.getenv("HOME") .. "/.local/share/nvim/backup/"
 opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 opt.undofile = true
 
-opt.hlsearch = true
+opt.hlsearch = false
 opt.incsearch = true
 
 -- vim.g.netrw_browse_split = 0

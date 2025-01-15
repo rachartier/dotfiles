@@ -10,6 +10,8 @@ function M.get(colors)
 		-- Visual = { bg = colors.blue, fg = colors.base },
 		Visual = { bg = colors.surface0, bold = false },
 
+		CurSearch = { bg = "None" },
+
 		-- NormalFloat = { bg = bg, fg = colors.text },
 		NormalFloat = { bg = "None", fg = colors.text },
 		FloatBorder = { fg = colors.lavender, bg = colors.base },

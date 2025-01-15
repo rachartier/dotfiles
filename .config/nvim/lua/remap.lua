@@ -6,8 +6,8 @@ map("v", "K", ":m '<-2<CR>gv=gv", { desc = "Raise the selection" })
 map("n", "J", "mzJ`z", { desc = "Join line" })
 map("n", "<C-d>", "<C-d>zz")
 map("n", "<C-u>", "<C-u>zz")
-map("n", "n", "nzzzv")
-map("n", "N", "Nzzzv")
+-- map("n", "n", "nzzzv")
+-- map("n", "N", "Nzzzv")
 
 map("i", "<C-c>", "<Esc>")
 
@@ -52,7 +52,7 @@ end
 -- from https://www.reddit.com/r/neovim/comments/13y3thq/whats_a_very_simple_config_change_that_you_cant/
 map("i", "<C-BS>", "<Esc>cvb", {})
 map("v", "y", "ygv<esc>")
-map("n", "p", "p=`]", { silent = true })
+-- map("n", "p", "p=`]", { silent = true })
 
 -- Don't leave visual mode when changing indent
 map("x", ">", ">gv", { noremap = true })

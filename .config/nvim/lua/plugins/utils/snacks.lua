@@ -1,4 +1,5 @@
 local signs = require("config.ui.signs").full_diagnostic
+local border = require("config.ui.border").default_border
 
 local M = {}
 
@@ -17,40 +18,33 @@ local function startup()
 end
 
 return {
-	-- dir = os.getenv("HOME") .. "/dev/nvim_plugins/snacks.nvim",
 	"folke/snacks.nvim",
 	priority = 9999,
 	lazy = false,
+    -- stylua: ignore start
 	keys = {
-		{
-			"<leader>.",
-			function()
-				Snacks.scratch()
-			end,
-			desc = "Toggle Scratch Buffer",
-		},
-		{
-			"<leader>S",
-			function()
-				Snacks.scratch.select()
-			end,
-			desc = "Select Scratch Buffer",
-		},
-		{
-			"<leader>ps",
-			function()
-				Snacks.profiler.scratch()
-			end,
-			desc = "Profiler Scratch Buffer",
-		},
-		{
-			"<leader>gb",
-			function()
-				Snacks.gitbrowse()
-			end,
-			desc = "Git Browser",
-		},
+		{"<leader>.", function() Snacks.scratch() end, desc = "Toggle Scratch Buffer",},
+		{"<leader>S", function() Snacks.scratch.select() end, desc = "Select Scratch Buffer",},
+		{"<leader>ps", function() Snacks.profiler.scratch() end, desc = "Profiler Scratch Buffer",},
+		{"<leader>gb", function() Snacks.gitbrowse() end, desc = "Git Browser",},
+        { "<leader>gc", function() Snacks.picker.git_log() end, desc = "Git Log" },
+        { "<leader>gs", function() Snacks.picker.git_status() end, desc = "Git Status" },
+        { "<leader>ft", function() Snacks.picker.todo_comments() end, desc = "Todo" },
+        { "<leader>fg", function() Snacks.picker.grep() end, desc = "Grep" },
+        { "<leader>fw", function() Snacks.picker.grep_word() end, desc = "Visual selection or word", mode = { "n", "x" } },
+        { "<leader>fd", function() Snacks.picker.lsp_definitions() end, desc = "Goto Definition" },
+        { "<leader>fr", function() Snacks.picker.lsp_references() end, nowait = true, desc = "References" },
+        { "<leader>fI", function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
+        { "<leader>gy", function() Snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition" },
+        { "<leader>ff", function() Snacks.picker.files() end, desc = "Find Files" },
+        { "<leader>gf", function() Snacks.picker.git_files() end, desc = "Find Git Files" },
+        { "<leader>sM", function() Snacks.picker.man() end, desc = "Man Pages" },
+        { "<Tab>", function() Snacks.picker.buffers({
+            sort_lastused = true,
+            current = false,
+        }) end, desc = "Find Git Files" },
 	},
+	-- stylua: ignore end
 	opts = {
 		styles = {
 			dashboard = {
@@ -213,14 +207,87 @@ return {
 				char = "┆",
 			},
 		},
+		picker = {
+			reverse = true,
+			formatters = {
+				file = {
+					filename_first = true,
+				},
+			},
+			layout = {
+				cycle = true,
+				--- Use the default layout or vertical if the window is too narrow
+				preset = function()
+					return vim.o.columns >= 130 and "custom" or "vertical"
+				end,
+			},
+			win = {
+				input = {
+					keys = {
+						["<Tab>"] = { "list_down", mode = { "n", "i" } },
+						["<S-Tab>"] = "list_up",
+					},
+				},
+				list = {
+					keys = {
+						["<Tab>"] = { "list_down", mode = { "n", "i" } },
+						["<S-Tab>"] = "list_up",
+					},
+				},
+			},
+			layouts = {
+				custom = {
+					layout = {
+						box = "horizontal",
+						backdrop = false,
+						width = 0.6,
+						height = 0.7,
+						border = "none",
+						{
+							box = "vertical",
+							{ win = "list", title = " Results ", title_pos = "center", border = border },
+							{
+								win = "input",
+								height = 1,
+								border = border,
+								title = "{source} {live}",
+								title_pos = "center",
+							},
+						},
+						{
+							win = "preview",
+							width = 0.45,
+							border = border,
+							title = " Preview ",
+							title_pos = "center",
+						},
+					},
+				},
+				vertical = {
+					layout = {
+						backdrop = false,
+						width = 0.5,
+						min_width = 80,
+						height = 0.8,
+						min_height = 30,
+						box = "vertical",
+						border = border,
+						title_pos = "center",
+						{ win = "preview", height = 0.4, border = "none" },
+						{ win = "list", border = "top" },
+						{ win = "input", height = 1, border = "top" },
+					},
+				},
+			},
+		},
 		input = {},
-		gitbrowse = { enabled = true },
-		notify = { enabled = true },
-		toggle = { enabled = true },
-		bigfile = { enabled = true },
-		quickfile = { enabled = true },
-		rename = { enabled = true },
-		words = { enabled = false, debounce = 10 },
+		gitbrowse = {},
+		notify = {},
+		toggle = {},
+		bigfile = {},
+		quickfile = {},
+		rename = {},
+		layout = {},
 		-- statuscolumn = { enabled = true },
 	},
 	init = function()
