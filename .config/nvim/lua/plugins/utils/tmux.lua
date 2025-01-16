@@ -26,10 +26,10 @@ return {
 			-- overwrites vim.g.clipboard to redirect * and + to the system
 			-- clipboard using tmux. If you sync your system clipboard without tmux,
 			-- disable this option!
-			sync_clipboard = true,
+			sync_clipboard = false,
 
 			-- synchronizes registers *, +, unnamed, and 0 till 9 with tmux buffers.
-			sync_registers = true,
+			sync_registers = false,
 
 			-- syncs deletes with tmux clipboard as well, it is advised to
 			-- do so. Nvim does not allow syncing registers 0 and 1 without

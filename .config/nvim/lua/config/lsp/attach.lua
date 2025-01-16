@@ -98,13 +98,11 @@ function M.on_attach(client, bufnr)
             { "gd",          function() vim.lsp.buf.definition() end,                   desc = "Go to definition" },
             { "<leader>gn",  function() vim.diagnostic.jump({ count = 1 }) end,         desc = "Go to next diagnostic" },
             { "<leader>gp",  function() vim.diagnostic.jump({ count = -1 }) end,        desc = "Go to previous diagnostic" },
-            -- { "<leader>ca",  function() require("tiny-code-action").code_action()  end, {noremap = true, silent=true}, desc = "Open code action menu" },
         },
         { "<C-h>", function() vim.lsp.buf.signature_help() end, desc = "Help", mode = { "i" } },
     })
-    -- vim.keymap.set({ "v", "n" }, "<leader>ca", require("fzf-lua").lsp_code_actions, { desc = "Open code action menu" })
 
-    vim.keymap.set({"n"},  "<leader>ca",  function() require("tiny-code-action").code_action()  end, {noremap = true, silent=true, desc = "Open code action menu"})
+    vim.keymap.set({"n"},  "<leader>ca",  function() vim.lsp.buf.code_action() end, { noremap = true, silent = true })
     if client.name == "omnisharp" then
         wk.add({
             mode = "n",

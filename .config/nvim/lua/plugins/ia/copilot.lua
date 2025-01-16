@@ -251,6 +251,7 @@ return {
 				answer_header = "  Copilot ",
 				error_header = "  Error ",
 				separator = "───",
+				model = "claude-3.5-sonnet",
 				show_folds = false,
 				auto_follow_cursor = false,
 				debug = false,

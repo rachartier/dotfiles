@@ -59,38 +59,21 @@ return {
 			})
 		end,
 	},
-
 	{
-
-		-- dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-glimmer.nvim",
-		"rachartier/tiny-glimmer.nvim",
+		dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-glimmer.nvim",
+		-- "rachartier/tiny-glimmer.nvim",
 		event = "VeryLazy",
 		keys = {
 			{
-				"n",
+				"<leader>tg",
 				function()
-					require("tiny-glimmer").search_next()
-				end,
-				{ noremap = true, silent = true },
-			},
-			{
-				"N",
-				function()
-					require("tiny-glimmer").search_prev()
-				end,
-				{ noremap = true, silent = true },
-			},
-			{
-				"p",
-				function()
-					require("tiny-glimmer").paste()
-				end,
-				{ noremap = true, silent = true },
-			},
-			{
-				"P",
-				function()
-					require("tiny-glimmer").Paste()
+					require("tiny-glimmer").change_hl({
+						"fade",
+						"pulse",
+					}, {
+						from_color = "DiffAdd",
+						to_color = "DiffDelete",
+					})
 				end,
 				{ noremap = true, silent = true },
 			},
@@ -182,7 +165,6 @@ return {
 			require("tiny-devicons-auto-colors").apply()
 		end,
 	},
-
 	-- {
 	-- 	"mrcjkb/rustaceanvim",
 	-- 	version = "^5", -- Recommended

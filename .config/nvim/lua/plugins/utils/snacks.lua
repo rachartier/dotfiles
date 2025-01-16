@@ -225,13 +225,14 @@ return {
 				input = {
 					keys = {
 						["<Tab>"] = { "list_down", mode = { "n", "i" } },
-						["<S-Tab>"] = "list_up",
+						["<S-Tab>"] = { "list_up", mode = { "n", "i" } },
+						["<Esc>"] = { "close", mode = { "n", "i" } },
 					},
 				},
 				list = {
 					keys = {
 						["<Tab>"] = { "list_down", mode = { "n", "i" } },
-						["<S-Tab>"] = "list_up",
+						["<S-Tab>"] = { "list_up", mode = { "n", "i" } },
 					},
 				},
 			},
