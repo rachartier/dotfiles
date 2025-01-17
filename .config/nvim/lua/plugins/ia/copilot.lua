@@ -384,7 +384,7 @@ Useful PEPs for this section (not exhaustive):
 	{
 		-- dir = os.getenv("HOME") .. "/dev/nvim_plugins/avante.nvim",
 		"yetone/avante.nvim",
-		enabled = false,
+		enabled = true,
 		event = "VeryLazy",
 		build = "make",
 		dependencies = {
@@ -416,6 +416,9 @@ Useful PEPs for this section (not exhaustive):
 				auto_suggestions = false,
 			},
 			provider = "copilot",
+			copilot = {
+				model = "claude-3.5-sonnet",
+			},
 			hints = { enabled = true },
 		},
 	},

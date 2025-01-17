@@ -132,3 +132,19 @@ end)
 utils.on_event("FileChangedShellPost", function()
 	vim.api.nvim_echo({ { "File changed on disk. Buffer reloaded.", "WarningMsg" } }, false, {})
 end)
+
+-- Set local settings for terminal buffers
+utils.on_event("TermOpen", function(event)
+	if vim.opt.buftype:get() == "terminal" then
+		local set = vim.opt_local
+		set.number = false -- Don't show numbers
+		set.relativenumber = false -- Don't show relativenumbers
+		set.scrolloff = 0 -- Don't scroll when at the top or bottom of the terminal buffer
+		vim.opt.filetype = "terminal"
+
+		vim.cmd.startinsert() -- Start in insert mode
+	end
+end, {
+	target = "term://*",
+	desc = "Settings for terminal buffers",
+})

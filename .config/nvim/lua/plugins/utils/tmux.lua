@@ -26,7 +26,7 @@ return {
 			-- overwrites vim.g.clipboard to redirect * and + to the system
 			-- clipboard using tmux. If you sync your system clipboard without tmux,
 			-- disable this option!
-			sync_clipboard = false,
+			sync_clipboard = true,
 
 			-- synchronizes registers *, +, unnamed, and 0 till 9 with tmux buffers.
 			sync_registers = false,

@@ -30,6 +30,7 @@ return {
         { "<leader>gc", function() Snacks.picker.git_log() end, desc = "Git Log" },
         { "<leader>gs", function() Snacks.picker.git_status() end, desc = "Git Status" },
         { "<leader>ft", function() Snacks.picker.todo_comments() end, desc = "Todo" },
+        { "<leader>fl", function() Snacks.picker.resume() end, desc = "Resume last picker" },
         { "<leader>fg", function() Snacks.picker.grep() end, desc = "Grep" },
         { "<leader>fw", function() Snacks.picker.grep_word() end, desc = "Visual selection or word", mode = { "n", "x" } },
         { "<leader>fd", function() Snacks.picker.lsp_definitions() end, desc = "Goto Definition" },
@@ -241,8 +242,8 @@ return {
 					layout = {
 						box = "horizontal",
 						backdrop = false,
-						width = 0.6,
-						height = 0.7,
+						width = 0.9,
+						height = 0.8,
 						border = "none",
 						{
 							box = "vertical",
@@ -257,7 +258,7 @@ return {
 						},
 						{
 							win = "preview",
-							width = 0.45,
+							width = 0.60,
 							border = border,
 							title = " Preview ",
 							title_pos = "center",

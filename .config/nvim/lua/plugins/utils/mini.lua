@@ -126,6 +126,11 @@ return {
 		opts = {
 			delay = 0,
 		},
+		config = function(_, opts)
+			require("mini.cursorword").setup(opts)
+			vim.api.nvim_set_hl(0, "MiniCursorwordCurrent", { link = "Visual" })
+			vim.api.nvim_set_hl(0, "MiniCursorword", { link = "Visual" })
+		end,
 	},
 	-- {
 	-- 	"echasnovski/mini.animate",
