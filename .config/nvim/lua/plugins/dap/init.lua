@@ -13,7 +13,8 @@ return {
 	"mfussenegger/nvim-dap",
 	-- cond = require("config").config_type ~= "minimal",
 	dependencies = {
-		"rcarriga/nvim-dap-ui",
+		{ "igorlfs/nvim-dap-view", opts = {} },
+		-- "rcarriga/nvim-dap-ui",
 		"theHamsta/nvim-dap-virtual-text",
 		"mfussenegger/nvim-dap-python",
 		"mfussenegger/nvim-jdtls",
@@ -41,8 +42,6 @@ return {
         { "<leader>dt", "<cmd>lua require('dap').terminate()<cr>", desc = "Terminate" },
         { "<leader>dw", "<cmd>lua require('dap.ui.widgets').hover()<cr>", desc = "Widgets" },
         { "<F5>", "<cmd>lua local continue = function() if vim.fn.filereadable('.vscode/launch.json') then require('dap.ext.vscode').load_launchjs(nil, { coreclr = { 'cs' } }) end require('dap').continue() end continue()<cr>", desc = "Continue (F5)" },
-
-        { "<leader>de", "<cmd>lua require'dapui'.eval()<cr>", desc = "Eval" },
         {
             "<leader>dI",
             "<cmd>lua require('dap.ui.widgets').hover()<cr>",
@@ -62,13 +61,7 @@ return {
 			highlight_new_as_changed = true,
 		})
 
-		require("dapui").setup({
-			icons = {
-				collapsed = "▶",
-				current_frame = "▶",
-				expanded = "▼",
-			},
-		})
+		vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
 
 		require("dap-python").setup("python")
 		require("dap.ext.vscode").load_launchjs(nil, { netcoredbg = { "cs" } })
@@ -90,15 +83,23 @@ return {
 		sign("DapLogPoint", { text = "◆", texthl = "DapLogPoint", linehl = "", numhl = "" })
 		sign("DapStopped", { text = "󰧂", texthl = "DapStopped", linehl = "", numhl = "" })
 
-		local dap, dapui = require("dap"), require("dapui")
-		dap.listeners.after.event_initialized["dapui_config"] = function()
-			dapui.open()
+		local dap, dapview = require("dap"), require("dap-view")
+		dap.listeners.after.event_initialized["dapview-config"] = function()
+			dapview.open()
+
+			vim.keymap.set(
+				"n",
+				"<leader><leader>",
+				"<cmd>lua require('dap').step_over()<cr>",
+				{ noremap = true, silent = true }
+			)
 		end
-		dap.listeners.before.event_terminated["dapui_config"] = function()
-			dapui.close()
+		dap.listeners.before.event_terminated["dapview-config"] = function()
+			dapview.close()
+			vim.keymap.del("n", "<leader><leader>")
 		end
-		dap.listeners.before.event_exited["dapui_config"] = function()
-			dapui.close()
+		dap.listeners.before.event_exited["dapview-config"] = function()
+			dapview.close()
 		end
 	end,
 }

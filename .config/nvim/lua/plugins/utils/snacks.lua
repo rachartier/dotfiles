@@ -32,6 +32,7 @@ return {
         { "<leader>ft", function() Snacks.picker.todo_comments() end, desc = "Todo" },
         { "<leader>fl", function() Snacks.picker.resume() end, desc = "Resume last picker" },
         { "<leader>fg", function() Snacks.picker.grep() end, desc = "Grep" },
+        { "<leader>fh", function() Snacks.picker.highlights() end, desc = "Show highlights" },
         { "<leader>fw", function() Snacks.picker.grep_word() end, desc = "Visual selection or word", mode = { "n", "x" } },
         { "<leader>fd", function() Snacks.picker.lsp_definitions() end, desc = "Goto Definition" },
         { "<leader>fr", function() Snacks.picker.lsp_references() end, nowait = true, desc = "References" },
@@ -39,6 +40,7 @@ return {
         { "<leader>gy", function() Snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition" },
         { "<leader>ff", function() Snacks.picker.files() end, desc = "Find Files" },
         { "<leader>gf", function() Snacks.picker.git_files() end, desc = "Find Git Files" },
+        { "<leader>gl", function() Snacks.picker.git_log() end, desc = "Find Git Logs" },
         { "<leader>sM", function() Snacks.picker.man() end, desc = "Man Pages" },
         { "<Tab>", function() Snacks.picker.buffers({
             sort_lastused = true,
@@ -167,14 +169,14 @@ return {
 							icon = " ",
 							cmd = [[echo -e "$(git-graph --style round --color always --wrap 50 0 8 -f 'oneline')"]],
 							indent = 1,
-							height = 15,
+							height = 22,
 						},
-						{
-							icon = " ",
-							title = "Git Status",
-							cmd = "git diff --stat -B -M -C",
-							indent = 3,
-						},
+						-- {
+						-- 	icon = " ",
+						-- 	title = "Git Status",
+						-- 	cmd = "git diff --stat -B -M -C",
+						-- 	indent = 3,
+						-- },
 					}
 					return vim.tbl_map(function(cmd)
 						return vim.tbl_extend("force", {
