@@ -29,7 +29,6 @@ return {
 		{"<leader>gb", function() Snacks.gitbrowse() end, desc = "Git Browser",},
         { "<leader>gc", function() Snacks.picker.git_log() end, desc = "Git Log" },
         { "<leader>gs", function() Snacks.picker.git_status() end, desc = "Git Status" },
-        { "<leader>ft", function() Snacks.picker.todo_comments() end, desc = "Todo" },
         { "<leader>fl", function() Snacks.picker.resume() end, desc = "Resume last picker" },
         { "<leader>fg", function() Snacks.picker.grep() end, desc = "Grep" },
         { "<leader>fh", function() Snacks.picker.highlights() end, desc = "Show highlights" },
