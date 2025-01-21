@@ -71,6 +71,14 @@ function _setup()  {
 
 zsh-defer _setup
 
+if [ command -v pyenv 1>/dev/null 2>&1 ]; then
+    eval "$(pyenv init -)"
+fi
+
+if [ command -v pyenv 1>/dev/null 2>&1 ]; then
+    eval "$(zoxide init zsh --cmd cd)"
+fi
+
 function ghcs() {
     if [ -z "$DOT_GITHUB_COPILOT_LOADED" ]; then
         eval "$(gh copilot alias -- zsh)"
@@ -78,24 +86,6 @@ function ghcs() {
     fi
 
     ghcs $@
-}
-
-function pyenv() {
-    if [ -z "$DOT_PYENV_LOADED" ]; then
-        eval "$($HOME/.pyenv/bin/pyenv init -)"
-        DOT_PYENV_LOADED=1
-    fi
-
-    pyenv $@
-}
-
-function cd() {
-    if [ -z "$DOT_ZOXIDE_LOADED" ]; then
-        eval "$(zoxide init zsh --cmd cd)"
-        DOT_ZOXIDE_LOADED=1
-    fi
-
-    __zoxide_z "$@"
 }
 
 function tmuxp() {
