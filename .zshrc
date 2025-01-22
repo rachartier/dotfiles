@@ -71,13 +71,14 @@ function _setup()  {
 
 zsh-defer _setup
 
+# check if pyenv is installed
+
 if [ command -v pyenv 1>/dev/null 2>&1 ]; then
     eval "$(pyenv init -)"
 fi
 
-if [ command -v pyenv 1>/dev/null 2>&1 ]; then
-    eval "$(zoxide init zsh --cmd cd)"
-fi
+eval "$(zoxide init zsh --cmd cd)"
+
 
 function ghcs() {
     if [ -z "$DOT_GITHUB_COPILOT_LOADED" ]; then
