@@ -52,6 +52,7 @@ end, {
 		"neotest-output-panel",
 		"Avante",
 		"AvanteInput",
+		"oil",
 	},
 	desc = "Easy quit buffers",
 })
