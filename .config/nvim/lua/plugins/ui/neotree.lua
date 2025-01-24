@@ -11,6 +11,7 @@ local function open_float()
 end
 return {
 	"nvim-neo-tree/neo-tree.nvim",
+	enabled = false,
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"MunifTanjim/nui.nvim",
