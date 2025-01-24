@@ -60,8 +60,8 @@ return {
 		end,
 	},
 	{
-		-- dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-glimmer.nvim",
-		"rachartier/tiny-glimmer.nvim",
+		dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-glimmer.nvim",
+		-- "rachartier/tiny-glimmer.nvim",
 		event = "VeryLazy",
 		keys = {
 			{
@@ -96,9 +96,10 @@ return {
 		},
 	},
 	{
-		-- dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-inline-diagnostic.nvim",
-		"rachartier/tiny-inline-diagnostic.nvim",
+		dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-inline-diagnostic.nvim",
+		-- "rachartier/tiny-inline-diagnostic.nvim",
 		event = "LazyFile",
+		-- commit = "0ac1133f0869730ced61b5f3c540748e29acca1a",
 		config = function()
 			require("tiny-inline-diagnostic").setup({
 				-- preset = "powerline",
@@ -109,6 +110,7 @@ return {
 				-- },
 				options = {
 					-- add_messages = false,
+					-- multiple_diag_under_cursor = true,
 					multilines = {
 						enabled = true,
 						always_show = false,

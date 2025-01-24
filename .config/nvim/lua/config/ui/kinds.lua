@@ -59,6 +59,7 @@ return {
 	Operator = "󰆕 ",
 	TypeParameter = " ",
 	Emoji = "󰞅 ",
+	Copilot = " ",
 }
 
 -- VSCode codicons

@@ -6,6 +6,7 @@ local open_on_ft = {
 return {
 	"stevearc/aerial.nvim",
 	ft = open_on_ft,
+	enabled = true,
 	keys = {
 		{ "<leader>a", "<cmd>AerialToggle!<CR>", desc = "Toggle Aerial" },
 	},

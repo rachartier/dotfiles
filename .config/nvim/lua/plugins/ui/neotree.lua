@@ -11,7 +11,7 @@ local function open_float()
 end
 return {
 	"nvim-neo-tree/neo-tree.nvim",
-	enabled = false,
+	enabled = true,
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"MunifTanjim/nui.nvim",
@@ -88,6 +88,14 @@ return {
 			},
 			filesystem = {
 				use_libuv_file_watcher = true,
+				filtered_items = {
+					hide_by_name = {
+						".DS_Store",
+						"thumbs.db",
+						"node_modules",
+						"__pycache__",
+					},
+				},
 				follow_current_file = {
 					enabled = true,
 					leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`

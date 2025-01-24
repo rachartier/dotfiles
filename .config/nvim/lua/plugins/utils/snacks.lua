@@ -37,7 +37,9 @@ return {
         { "<leader>fr", function() Snacks.picker.lsp_references() end, nowait = true, desc = "References" },
         { "<leader>fI", function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
         { "<leader>gy", function() Snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition" },
-        { "<leader>ff", function() Snacks.picker.files() end, desc = "Find Files" },
+        { "<leader>ff", function() Snacks.picker.files({
+            exclude = { "node_modules", ".git", ".cache", ".local", ".npm", ".yarn", "__pycache__", ".venv" },
+        }) end, desc = "Find Files" },
         { "<leader>gf", function() Snacks.picker.git_files() end, desc = "Find Git Files" },
         { "<leader>gl", function() Snacks.picker.git_log() end, desc = "Find Git Logs" },
         { "<leader>sM", function() Snacks.picker.man() end, desc = "Man Pages" },
@@ -209,6 +211,9 @@ return {
 			},
 		},
 		picker = {
+			matcher = {
+				frecency = true,
+			},
 			reverse = true,
 			formatters = {
 				file = {

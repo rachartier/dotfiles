@@ -4,6 +4,7 @@ return {
 	version = "*",
 	dependencies = {
 		"rafamadriz/friendly-snippets",
+		"fang2hou/blink-copilot",
 		-- { "saghen/blink.compat", version = "*", opts = { impersonate_nvim_cmp = false } },
 		-- { "chrisgrieser/cmp-nerdfont", lazy = true },
 		-- { "hrsh7th/cmp-emoji", lazy = true },
@@ -21,6 +22,12 @@ return {
 		end,
 
 		completion = {
+			list = {
+				selection = {
+					preselect = true,
+					auto_insert = false,
+				},
+			},
 			documentation = {
 				-- border = "padded",
 				-- border = require("config.ui.border").blink_empty,
@@ -64,6 +71,7 @@ return {
 
 		sources = {
 			default = {
+				"copilot",
 				"lsp",
 				"path",
 				"snippets",
@@ -75,6 +83,16 @@ return {
 			providers = {
 				-- dont show LuaLS require statements when lazydev has items
 				lazydev = { name = "LazyDev", module = "lazydev.integrations.blink", fallbacks = { "lsp" } },
+				copilot = {
+					name = "copilot",
+					module = "blink-copilot",
+					score_offset = 100,
+					async = true,
+					opts = {
+						max_completions = 3,
+						max_attempts = 4,
+					},
+				},
 				-- nerdfont = {
 				-- 	name = "nerdfont",
 				-- 	module = "blink.compat.source",

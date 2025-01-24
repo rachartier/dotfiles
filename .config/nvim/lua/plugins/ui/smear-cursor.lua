@@ -3,7 +3,8 @@ local colors = require("theme").get_colors()
 return {
 	"sphamba/smear-cursor.nvim",
 	event = "VeryLazy",
-	enabled = not vim.g.neovide,
+	-- enabled = not vim.g.neovide,
+	enabled = false,
 	opts = {
 		legacy_computing_symbols_support = true,
 		normal_bg = colors.base,
@@ -14,5 +15,6 @@ return {
 		trailing_stiffness = 0.25,
 		-- trailing_exponent = 0.1,
 		-- gamma = 1,
+		min_horizontal_distance_smear = 10,
 	},
 }

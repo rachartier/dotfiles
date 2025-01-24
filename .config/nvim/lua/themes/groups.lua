@@ -45,7 +45,7 @@ function M.get(colors)
 		PmenuSel = { bg = colors.surface0, bold = false },
 		PopupNormal = { bg = colors.base, fg = colors.text },
 
-		-- CursorLine = { bg = colors.yellow },
+		-- CursorLine = { bg = colors.surface1 },
 		CursorLine = { bg = "None" },
 		CursorLineNr = { fg = colors.mauve },
 		CursorLineSign = { link = "SignColumn" },
@@ -88,6 +88,8 @@ function M.get(colors)
 		-- PopupNormal = { bg = colors.base, fg = colors.mantle },
 
 		SwitchBufferStatusColor = { fg = colors.red },
+
+		SnacksPickerDir = { italic = true, fg = colors.surface2 },
 
 		StatusLine = {
 			-- fg = colors.base,
