@@ -79,13 +79,18 @@ return {
 			})
 
 			require("markview").setup({
-				hybrid_modes = { "i" },
+				preview = {
+					hybrid_modes = { "i" },
+					filetypes = { "markdown", "quarto", "rmd", "Avante" },
+				},
 
-				filetypes = { "markdown", "quarto", "rmd", "Avante" },
 				checkboxes = checkbox,
 				headings = presets.headings.decorated,
-				list_items = {
-					shift_width = 2,
+				markdown = {
+					horizontal_rules = presets.horizontal_rules.thin,
+					-- list_items = {
+					-- 	shift_width = 2,
+					-- },
 				},
 				code_blocks = {
 					style = "language",
@@ -96,17 +101,12 @@ return {
 					pad_char = " ",
 					pad_amount = 3,
 
-					language_names = {
-						["txt"] = "Text",
-					},
-
-					hl = "MarkviewCode",
+					border_hl = "MarkviewCode",
 					info_hl = "MarkviewCodeInfo",
 
 					sign = true,
 					sign_hl = nil,
 				},
-				horizontal_rules = presets.horizontal_rules.thin,
 			})
 		end,
 	},
