@@ -70,3 +70,8 @@ function translate() {
 function ask() {
     __copilot_cli_action "$1" 'ask'
 }
+
+function gitignore() {
+    echo "Generating .gitignore file for $1"
+    copilot-cli  --action "gitignore" --prompt "$1" > .gitignore
+}

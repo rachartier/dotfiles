@@ -53,7 +53,8 @@ return {
 	{
 		"OXY2DEV/markview.nvim",
 		enabled = true,
-		branch = "dev",
+		lazy = false,
+		-- branch = "dev",
 		ft = { "markdown", "vimwiki" },
 		config = function()
 			local presets = require("markview.presets")
@@ -80,8 +81,9 @@ return {
 
 			require("markview").setup({
 				preview = {
-					hybrid_modes = { "i" },
 					filetypes = { "markdown", "quarto", "rmd", "Avante" },
+					hybrid_modes = { "i" },
+					modes = { "i", "n", "no", "c" },
 				},
 
 				checkboxes = checkbox,
@@ -91,6 +93,9 @@ return {
 					-- list_items = {
 					-- 	shift_width = 2,
 					-- },
+				},
+				yaml = {
+					enable = false,
 				},
 				code_blocks = {
 					style = "language",
