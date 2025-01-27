@@ -1,4 +1,3 @@
-darvid/zsh-poetry kind:defer
 Aloxaf/fzf-tab kind:defer
 Freed-Wu/fzf-tab-source kind:defer
 

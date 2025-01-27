@@ -1,3 +1,5 @@
+skip_global_compinit=1
+
 source "$HOME/.profile"
 source "$HOME/.dotfile_profile"
 
