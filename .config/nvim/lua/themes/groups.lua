@@ -90,6 +90,8 @@ function M.get(colors)
 		SwitchBufferStatusColor = { fg = colors.red },
 
 		SnacksPickerDir = { italic = true, fg = colors.surface2 },
+		SnacksDashboardHeader = { fg = colors.mauve },
+		-- SnacksDashboardFooter = { fg = colors.peach },
 
 		StatusLine = {
 			-- fg = colors.base,
