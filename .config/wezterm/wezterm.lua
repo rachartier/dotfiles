@@ -69,7 +69,7 @@ config.harfbuzz_features = {
 }
 
 config.underline_thickness = "2pt"
-config.underline_position = "-1.5pt"
+config.underline_position = "-2pt"
 config.enable_kitty_graphics = false
 config.allow_square_glyphs_to_overflow_width = "Always"
 config.bold_brightens_ansi_colors = "BrightAndBold"
@@ -83,11 +83,11 @@ config.window_padding = {
 	top = 0,
 	bottom = 0,
 }
--- config.win32_system_backdrop = "Acrylic"
+config.win32_system_backdrop = "Acrylic"
 -- config.win32_system_backdrop = "Mica"
 
 -- config.win32_acrylic_accent_color = "rgba(36, 39, 58, 0)"
--- config.window_background_opacity = 0.0
+-- config.window_background_opacity = 0.93
 -- config.window_background_opacity = 0.80
 -- config.window_background_opacity = 1
 
