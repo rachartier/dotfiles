@@ -526,11 +526,11 @@ install_nvim() {
 
     log "download" "Downloading Neovim $version"
     cd /tmp || exit 1
-    local url="https://github.com/neovim/neovim/releases/download/$version/nvim-linux64.tar.gz"
+    local url="https://github.com/neovim/neovim/releases/download/$version/nvim-linux-x86_64.tar.gz"
     wget -q "$url" -O nvim-linux64.tar.gz >/dev/null
 
     log "info" "Installing Neovim"
-    sudo rm -rf /opt/nvim-linux64/
+    sudo rm -rf /opt/nvim-linux-x86_64/
     sudo tar -C /opt -xzf nvim-linux64.tar.gz
 
     # __install_package_apt python3-pynvim
@@ -545,7 +545,7 @@ install_nvim() {
     install_luarocks >/dev/null
 
     log "info" "Updating plugins"
-    nvim --headless "+Lazy! sync" "+qall" >/dev/null
+    /opt/nvim-linux-x86_64/bin/nvim --headless "+Lazy! sync" "+qall" >/dev/null
 
     log "success" "Neovim installation completed"
 }
