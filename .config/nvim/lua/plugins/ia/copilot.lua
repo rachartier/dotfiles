@@ -99,6 +99,7 @@ return {
 	},
 	{
 		"CopilotC-Nvim/CopilotChat.nvim",
+		enabled = true,
 		branch = "main",
 		dependencies = {
 			"zbirenbaum/copilot.lua",
@@ -118,7 +119,8 @@ return {
 				function()
 					local actions = require("CopilotChat.actions")
 					-- require("CopilotChat.integrations.telescope").pick(actions.help_actions())
-					require("CopilotChat.integrations.telescope").pick(actions.help_actions())
+					-- require("CopilotChat.integrations.telescope").pick(actions.help_actions())
+					require("CopilotChat.integrations.snacks").pick(actions.prompt_actions())
 				end,
 				desc = "CopilotChat - Help actions",
 			},
@@ -130,7 +132,8 @@ return {
 					-- require("CopilotChat.integrations.telescope").pick(actions.prompt_actions({
 					-- 	selection = require("CopilotChat.select").visual,
 					-- }))
-					require("CopilotChat.integrations.telescope").pick(actions.prompt_actions({
+
+					require("CopilotChat.integrations.snacks").pick(actions.prompt_actions({
 						selection = require("CopilotChat.select").visual,
 					}))
 				end,
@@ -251,7 +254,7 @@ return {
 				answer_header = "  Copilot ",
 				error_header = "  Error ",
 				separator = "───",
-				-- model = "claude-3.5-sonnet",
+				model = "claude-3.5-sonnet",
 				show_folds = false,
 				auto_follow_cursor = false,
 				debug = false,
@@ -421,5 +424,59 @@ Useful PEPs for this section (not exhaustive):
 			},
 			hints = { enabled = true },
 		},
+	},
+	{
+		-- dir = "/tmp/codecompanion.nvim",
+		"olimorris/codecompanion.nvim",
+		enabled = false,
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-treesitter/nvim-treesitter",
+			"zbirenbaum/copilot.lua",
+		},
+		keys = {
+			{ "<leader>cc", "<cmd>CodeCompanionChat<CR>", desc = "CodeCompanion - Chat" },
+			{ "<leader>cq", "<cmd>CodeCompanionActions<CR>", desc = "CodeCompanion - Actions" },
+			{
+				"<leader>ci",
+				function()
+					local input = vim.fn.input("> ")
+
+					return "<cmd>CodeCompanion /buffer " .. input .. "<CR>"
+				end,
+				desc = "CodeCompanion - Actions",
+			},
+		},
+		opts = {
+			strategies = {
+				chat = {
+					adapter = "copilot",
+					keymaps = {
+						close = {
+							modes = { n = "q", i = "<C-c>" },
+						},
+					},
+				},
+				inline = {
+					adapter = "copilot",
+				},
+				agent = {
+					adapter = "copilot",
+				},
+			},
+			display = {
+				chat = {
+					window = {
+						opts = {
+							number = false,
+							relativenumber = false,
+						},
+					},
+				},
+			},
+		},
+		config = function(_, opts)
+			require("codecompanion").setup(opts)
+		end,
 	},
 }

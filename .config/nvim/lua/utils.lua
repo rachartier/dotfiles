@@ -233,8 +233,50 @@ end
 -------------------------------
 
 function M.get_hl(group, attr)
-	local hl = vim.api.nvim_get_hl_by_name(group, true)
+	local hl = vim.api.nvim_get_hl(0, { name = group })
 	return hl[attr]
+end
+
+function M.close_if_last_window(buf_name)
+	local current_win = vim.api.nvim_get_current_win()
+	if vim.api.nvim_win_get_config(current_win).relative ~= "" then
+		return
+	end
+
+	local current_tab = vim.api.nvim_get_current_tabpage()
+	local normal_windows = vim.tbl_filter(function(win)
+		return vim.api.nvim_win_get_config(win).relative == ""
+	end, vim.api.nvim_tabpage_list_wins(current_tab))
+
+	local window_count = #normal_windows
+	if window_count ~= 1 and window_count ~= 2 then
+		return
+	end
+
+	local function get_window_filetypes(windows)
+		local types = {}
+		for _, win in ipairs(windows) do
+			local bufnr = vim.api.nvim_win_get_buf(win)
+			table.insert(types, vim.bo[bufnr].filetype)
+		end
+		return types
+	end
+
+	local filetypes = get_window_filetypes(normal_windows)
+
+	local function should_close()
+		if window_count == 1 then
+			return filetypes[1] == buf_name
+		end
+
+		local has_buf_name = filetypes[1] == buf_name or filetypes[2] == buf_name
+
+		return has_buf_name
+	end
+
+	if should_close() then
+		vim.cmd("qa!")
+	end
 end
 
 return M

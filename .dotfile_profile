@@ -101,7 +101,7 @@ fi
 export DOTNET_ROOT="$HOME/.dotnet"
 export PATH="$HOME/.dotnet:$PATH"
 export PATH="$HOME/.dotnet/tools:$PATH"
-export PATH="$PATH:/opt/nvim-linux64/bin"
+export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
 
 export AUTOSWITCH_DEFAULT_PYTHON="/usr/bin/python3"
 export PYENV_ROOT="$HOME/.pyenv"
