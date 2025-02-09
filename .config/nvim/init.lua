@@ -4,6 +4,12 @@ vim.g.maplocalleader = " "
 vim.filetype.add({
 	extension = {
 		["http"] = "http",
+		["*.p8"] = "pico8",
+		["*.dotfile*"] = "bash",
+		["*.zsh"] = "bash",
+		["*.zsh_*"] = "bash",
+		["*.tcss"] = "css",
+		["*.xaml"] = "xml",
 	},
 })
 
