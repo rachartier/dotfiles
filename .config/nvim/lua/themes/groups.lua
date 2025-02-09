@@ -5,7 +5,6 @@ local darken_markdown_heading = 0.16
 
 function M.get(colors)
 	return {
-
 		-- Visual = { bg = "#234370" },
 		-- Visual = { bg = colors.blue, fg = colors.base },
 		Visual = { bg = colors.surface0, bold = false },
@@ -93,35 +92,13 @@ function M.get(colors)
 		SnacksDashboardHeader = { fg = colors.mauve },
 		-- SnacksDashboardFooter = { fg = colors.peach },
 
-		StatusLine = {
-			-- fg = colors.base,
-			-- bg = "None",
-			link = "Normal",
-		},
-
-		StatusLineNC = {
-			link = "StatusLine",
-		},
+		StatusLine = { fg = colors.base, bg = "None" },
+		StatusLineNC = { link = "StatusLine" },
 
 		-- SnacksDashboardHeader = { fg = colors.yellow },
 
 		DiagnosticUnnecessary = { fg = colors.overlay0 },
-		-- DiagnosticError = { fg = colors.red }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default
-		-- DiagnosticWarn = { fg = colors.yellow }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default
-		-- DiagnosticInfo = { fg = colors.blue }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default
-		-- DiagnosticHint = { fg = colors.teal }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default
-		--
-		-- DiagnosticVirtualTextError = { bg = modify_func(colors.red, darken_diag), fg = colors.red },          -- Used for "Error" diagnostic virtual text
-		-- DiagnosticVirtualTextWarn = { bg = modify_func(colors.yellow, darken_diag), fg = colors.yellow },     -- Used for "Warning" diagnostic virtual text
-		-- DiagnosticVirtualTextInfo = { bg = modify_func(colors.blue, darken_diag), fg = colors.blue },         -- Used for "Information" diagnostic virtual text
-		-- DiagnosticVirtualTextHint = { bg = modify_func(colors.teal, darken_diag), fg = colors.teal },         -- Used for "Hint" diagnostic virtual text
-		-- DiagnosticVirtualTextNone = { bg = cursor_line_bg, fg = colors.surface1 },                            -- Used for "Hint" diagnostic virtual text
-		--
-		-- InvDiagnosticVirtualTextError = { fg = modify_func(colors.red, darken_diag), bg = cursor_line_bg },   -- Used for "Error" diagnostic virtual text
-		-- InvDiagnosticVirtualTextWarn = { fg = modify_func(colors.yellow, darken_diag), bg = cursor_line_bg }, -- Used for "Warning" diagnostic virtual text
-		-- InvDiagnosticVirtualTextInfo = { fg = modify_func(colors.blue, darken_diag), bg = cursor_line_bg },   -- Used for "Information" diagnostic virtual text
-		-- InvDiagnosticVirtualTextHint = { fg = modify_func(colors.teal, darken_diag), bg = cursor_line_bg },   -- Used for "Hint" diagnostic virtual text
-		--
+
 		TelescopeMatching = { link = "CmpItemAbbrMatch" },
 		TelescopeTitle = { link = "FloatTitle" },
 		TelescopeSelection = { link = "PmenuSel" },
@@ -168,15 +145,6 @@ function M.get(colors)
 		EdgyTitle = { bg = colors.surface0, fg = colors.blue },
 		EdgyIconActive = { bg = colors.surface0, fg = colors.peach },
 
-		-- DiagnosticUnderlineError = {
-		-- 	underline = true,
-		-- 	sp = colors.red,
-		-- },
-		-- LspDiagnosticsUnderlineError = {
-		-- 	underline = true,
-		-- 	sp = colors.red,
-		-- },
-
 		HighlightUndo = { bg = colors.red, fg = colors.base },
 		HighlightRedo = { bg = colors.green, fg = colors.base },
 
@@ -219,10 +187,6 @@ function M.get(colors)
 
 		VisualNonText = { bg = colors.surface0, fg = colors.surface1 },
 
-		-- MarkviewCode = { bg = colors.surface0 },
-		-- MarkviewCodeInfo = { bg = colors.surface0 },
-
-		-- AvanteT,
 		-- === Lsp
 		["@keyword.operator.python"] = { link = "Conditional" },
 	}
@@ -239,23 +203,7 @@ end
 function M.override_lsp_hl(colors_table)
 	local colors = colors_table
 
-	-- vim.api.nvim_set_hl(0, "@variable", { fg = colors.text })
-	-- vim.api.nvim_set_hl(0, "@_parent", { fg = colors.peach })
-	-- vim.api.nvim_set_hl(0, "@attribute", { italic = true })
-	-- vim.api.nvim_set_hl(0, "@keyword.operator", { link = "@repeat" })
-	-- vim.api.nvim_set_hl(0, "@keyword.operator", { link = "@repeat" })
-	-- vim.api.nvim_set_hl(0, "@operator", { fg = colors.teal, italic = false })
-	-- vim.api.nvim_set_hl(0, "@property", { fg = colors.text })
-	-- vim.api.nvim_set_hl(0, "@storageclass", { fg = colors.red })
-	-- vim.api.nvim_set_hl(0, "@type.builtin", { fg = colors.red })
-	-- vim.api.nvim_set_hl(0, "@type.qualifier", { fg = colors.red })
-	-- vim.api.nvim_set_hl(0, "@variable", { fg = colors.text, italic = false })
-	-- vim.api.nvim_set_hl(0, "@variable.builtin", { fg = colors.red })
-	-- vim.api.nvim_set_hl(0, "@variable.member", { fg = colors.text })
-	-- vim.api.nvim_set_hl(0, "@variable.parameter", { fg = colors.red, italic = true })
-	-- vim.api.nvim_set_hl(0, "@function.method.call", { italic = true })
 	vim.api.nvim_set_hl(0, "@keyword.operator.python", { link = "Conditional" })
-	-- vim.api.nvim_set_hl(0, "@string.documentation", { fg = "#7c8c8f" })
 end
 
 return M

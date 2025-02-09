@@ -21,6 +21,7 @@ return {
 		-- "nvim-neotest/nvim-nio",
 		-- "nvim-telescope/telescope-dap.nvim",
 	},
+	lazy = true,
 	-- priority = 100,
     -- stylua: ignore
 	keys = {
@@ -64,7 +65,11 @@ return {
 		vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
 
 		require("dap-python").setup("python")
-		require("dap.ext.vscode").load_launchjs(nil, { netcoredbg = { "cs" } })
+		local vscode = require("dap.ext.vscode")
+		local json = require("plenary.json")
+		vscode.json_decode = function(str)
+			return vim.json.decode(json.json_strip_comments(str))
+		end
 
 		-- dap.configurations.cs = {
 		-- 	{

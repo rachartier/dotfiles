@@ -107,12 +107,19 @@ end
 return {
 	"nvim-lualine/lualine.nvim",
 	dependencies = {
-		"catppuccin/nvim",
 		"AndreM222/copilot-lualine",
 	},
-	event = "LazyFile",
-	priority = 900,
+	event = "VeryLazy",
+	-- priority = 900,
 	enabled = true,
+	init = function()
+		vim.g.lualine_laststatus = vim.o.laststatus
+		if vim.fn.argc(-1) > 0 then
+			vim.o.statusline = " "
+		else
+			vim.o.laststatus = 0
+		end
+	end,
 	opts = function()
 		local signs = require("config.ui.signs")
 		local colors = get_lualine_colors()

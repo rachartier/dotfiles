@@ -5,9 +5,6 @@ return {
 	dependencies = {
 		"rafamadriz/friendly-snippets",
 		"fang2hou/blink-copilot",
-		-- { "saghen/blink.compat", version = "*", opts = { impersonate_nvim_cmp = false } },
-		-- { "chrisgrieser/cmp-nerdfont", lazy = true },
-		-- { "hrsh7th/cmp-emoji", lazy = true },
 	},
 	-- build = "cargo build --release",
 	event = { "InsertEnter", "CmdlineEnter" },
@@ -48,20 +45,6 @@ return {
 				end,
 				draw = {
 					treesitter = { "lsp" },
-					-- components = {
-					-- 	kind_icon = {
-					-- 		ellipsis = false,
-					-- 		text = function(ctx)
-					-- 			local kind_icon, _, _ = require("mini.icons").get("lsp", ctx.kind)
-					-- 			return kind_icon
-					-- 		end,
-					-- 		-- Optionally, you may also use the highlights from mini.icons
-					-- 		highlight = function(ctx)
-					-- 			local _, hl, _ = require("mini.icons").get("lsp", ctx.kind)
-					-- 			return hl
-					-- 		end,
-					-- 	},
-					-- },
 				},
 			},
 			trigger = {
@@ -77,8 +60,6 @@ return {
 				"snippets",
 				"buffer",
 				"lazydev",
-				-- "nerdfont",
-				-- "emoji",
 			},
 			providers = {
 				-- dont show LuaLS require statements when lazydev has items
@@ -93,51 +74,9 @@ return {
 						max_attempts = 4,
 					},
 				},
-				-- nerdfont = {
-				-- 	name = "nerdfont",
-				-- 	module = "blink.compat.source",
-				-- 	transform_items = function(ctx, items)
-				-- 		-- TODO: check https://github.com/Saghen/blink.cmp/pull/253#issuecomment-2454984622
-				-- 		local kind = require("blink.cmp.types").CompletionItemKind.Emoji
-				--
-				-- 		for i = 1, #items do
-				-- 			items[i].kind = kind
-				-- 		end
-				--
-				-- 		return items
-				-- 	end,
-				-- },
-				-- emoji = {
-				-- 	name = "emoji",
-				-- 	module = "blink.compat.source",
-				-- 	score_offset = -4,
-				-- 	transform_items = function(ctx, items)
-				-- 		-- TODO: check https://github.com/Saghen/blink.cmp/pull/253#issuecomment-2454984622
-				-- 		local kind = require("blink.cmp.types").CompletionItemKind.Emoji
-				--
-				-- 		for i = 1, #items do
-				-- 			items[i].kind = kind
-				-- 		end
-				--
-				-- 		return items
-				-- 	end,
-				-- },
 			},
 		},
 
-		-- windows = {
-
-		-- signature_help = {
-		-- 	border = require("config.ui.border").default_border,
-		-- },
-		-- autocomplete = {
-		-- 	scrollbar = true,
-		-- 	-- border = "padded",
-		-- 	-- border = require("config.ui.border").default_border,
-		--
-		-- 	selection = "preselect",
-		-- },
-		-- },
 		appearance = {
 			kind_icons = require("config.ui.kinds"),
 		},

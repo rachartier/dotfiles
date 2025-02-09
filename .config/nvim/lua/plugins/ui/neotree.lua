@@ -9,6 +9,7 @@ local function open_float()
 
 	vim.cmd("Neotree float %:p")
 end
+
 return {
 	"nvim-neo-tree/neo-tree.nvim",
 	enabled = true,

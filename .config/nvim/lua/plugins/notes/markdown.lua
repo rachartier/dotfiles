@@ -53,7 +53,7 @@ return {
 	{
 		"OXY2DEV/markview.nvim",
 		enabled = true,
-		lazy = false,
+		lazy = true,
 		-- branch = "dev",
 		ft = { "markdown", "vimwiki" },
 		config = function()

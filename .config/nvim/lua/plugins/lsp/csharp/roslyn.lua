@@ -1,46 +1,3 @@
-local utils = require("utils")
-
-local function fix_usings()
-	local bufnr = vim.api.nvim_get_current_buf()
-
-	local clients = vim.lsp.get_clients({ name = "roslyn" })
-	if not clients or vim.tbl_isempty(clients) then
-		vim.notify("Couldn't find client", vim.log.levels.ERROR, { title = "Roslyn" })
-		return
-	end
-
-	local client = clients[1]
-	local action = {
-		title = "Remove unnecessary usings",
-		kind = "quickfix",
-		data = {
-			TextDocument = { uri = vim.uri_from_bufnr(bufnr) },
-			CodeActionPath = { "Remove unnecessary usings" },
-			CustomTags = { "RemoveUnnecessaryImports" },
-			NestedCodeActions = {},
-			Range = {
-				["end"] = {
-					character = 0,
-					line = 0,
-				},
-				start = {
-					character = 0,
-					line = 0,
-				},
-			},
-			UniqueIdentifier = "Remove unnecessary usings",
-		},
-	}
-
-	client.request("codeAction/resolve", action, function(err, resolved_action)
-		if err then
-			vim.notify("Fix using directives failed", vim.log.levels.ERROR, { title = "Roslyn" })
-			return
-		end
-		vim.lsp.util.apply_workspace_edit(resolved_action.edit, client.offset_encoding)
-	end)
-end
-
 return {
 	"seblj/roslyn.nvim",
 	ft = { "cs", "vb" },
@@ -70,17 +27,4 @@ return {
 		filewatching = true,
 		on_attach = require("config.lsp.attach").on_attach,
 	},
-	config = function(_, opts)
-		require("roslyn").setup(opts)
-		-- vim.api.nvim_create_autocmd("LspAttach", {
-		-- 	pattern = { "*.cs", "*.xaml" },
-		-- 	callback = function()
-		-- 		utils.on_event("BufWritePre", function()
-		-- 			if vim.bo[0].filetype == "cs" then
-		-- 				fix_usings()
-		-- 			end
-		-- 		end, { desc = "Fix usings on save" })
-		-- 	end,
-		-- })
-	end,
 }

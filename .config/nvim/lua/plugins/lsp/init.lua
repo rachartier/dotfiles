@@ -1,4 +1,3 @@
-local icons = require("config.icons")
 local utils = require("utils")
 
 local border = require("config.ui.border").default_border
