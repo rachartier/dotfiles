@@ -61,10 +61,6 @@ bindkey "^[[1;5B" history-substring-search-down
 
 
 function _setup()  {
-    if ! [ -f "/tmp/tmux-theme.cache" ]; then
-        echo "catppuccin_macchiato.conf" > /tmp/tmux-theme.cache
-    fi
-
     [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
     # source $HOME/.zsh/transient_prompt.zsh
     source $HOME/.aliases
@@ -80,7 +76,7 @@ if [ command -v pyenv 1>/dev/null 2>&1 ]; then
 fi
 
 eval "$(zoxide init zsh --cmd cd)"
-
+eval "$(direnv hook zsh)"
 
 function ghcs() {
     if [ -z "$DOT_GITHUB_COPILOT_LOADED" ]; then
@@ -99,3 +95,4 @@ function tmuxp() {
 
     "$HOME/.local/bin/tmuxp" $@
 }
+

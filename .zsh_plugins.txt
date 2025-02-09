@@ -2,7 +2,6 @@ Aloxaf/fzf-tab kind:defer
 Freed-Wu/fzf-tab-source kind:defer
 
 ohmyzsh/ohmyzsh path:plugins/command-not-found
-MichaelAquilina/zsh-autoswitch-virtualenv kind:defer
 ohmyzsh/ohmyzsh path:plugins/tmux kind:defer
 
 ohmyzsh/ohmyzsh path:lib/key-bindings.zsh

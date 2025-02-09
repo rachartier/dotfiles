@@ -2,17 +2,6 @@ local wezterm = require("wezterm")
 local act = wezterm.action
 local config = {}
 
-local function read_file(path)
-	local file = io.open(path, "r")
-	if not file then
-		wezterm.log_error("File not found: " .. path)
-		return nil
-	end
-	local content = file:read("*a")
-	file:close()
-	return content
-end
-
 config.max_fps = 165
 
 config.check_for_updates = true
@@ -92,32 +81,7 @@ config.win32_system_backdrop = "Acrylic"
 -- config.window_background_opacity = 1
 
 config.window_close_confirmation = "NeverPrompt"
-
-local windows_user = os.getenv("USERNAME")
-local cache_path = "C:/Users/" .. windows_user .. "/AppData/Local/Temp/windows-tmux-theme.cache"
-
-wezterm.add_to_config_reload_watch_list(cache_path)
-local tmux_theme = read_file(cache_path)
-
-if tmux_theme ~= nil then
-	tmux_theme = tmux_theme:gsub("[\r\n]", "")
-end
-
-config.set_environment_variables = {
-	TMUX_THEME = tmux_theme,
-}
-
 local theme = "Catppuccin Macchiato"
-
-if tmux_theme == "catppuccin_macchiato.conf" then
-	theme = "Catppuccin Macchiato"
-elseif tmux_theme == "catppuccin_frappe.conf" then
-	theme = "Catppuccin Frappe"
-elseif tmux_theme == "catppuccin_latte.conf" then
-	theme = "Catppuccin Latte"
-elseif tmux_theme == "catppuccin_mocha.conf" then
-	theme = "Catppuccin Mocha"
-end
 --
 -- local custom = wezterm.color.get_builtin_schemes()[theme]
 -- -- custom.ansi[6] = "#c6a0f6"

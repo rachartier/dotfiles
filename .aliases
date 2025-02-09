@@ -75,3 +75,23 @@ function gitignore() {
     echo "Generating .gitignore file for $1"
     copilot-cli  --action "gitignore" --prompt "$1" > .gitignore
 }
+
+function venv() {
+    if [ -z "$1" ]; then
+        echo "Usage: venv <name>"
+        return
+    fi
+
+	if ! [ -d "$1" ]; then
+        python3 -m venv "$1"
+    fi
+
+    source "$1/bin/activate"
+
+    if command -v direnv &>/dev/null; then
+        echo 'export VIRTUAL_ENV=."venv"' > .envrc
+        echo "layout python python3" > .envrc
+        direnv allow
+    fi
+}
+
