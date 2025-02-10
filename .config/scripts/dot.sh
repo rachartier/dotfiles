@@ -515,7 +515,7 @@ install_github_gh() {
 
 install_nvim() {
     print_step "Installing Neovim"
-    local version=${1:-"stable"}
+    local version=${1:-"nightly"}
 
     log "info" "Removing existing Neovim installation"
     sudo apt-get autoremove neovim -y >/dev/null
