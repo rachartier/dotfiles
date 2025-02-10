@@ -21,7 +21,7 @@ config.font = wezterm.font_with_fallback({ "MonoLisa", "Symbols Nerd Font" })
 
 -- config.cell_width = 1
 config.line_height = 1
-config.font_size = 12
+config.font_size = 13
 config.font_rules = {
 	-- {
 	-- 	italic = true,
