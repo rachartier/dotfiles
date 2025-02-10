@@ -1,0 +1,43 @@
+persistence = ['^(master|main)$']
+order = [
+    '^tags/.*$',
+    '^(master|main)$',
+]
+
+[terminal_colors]
+matches = [
+    [
+    '^(master|main)$',
+    ['bright_blue'],
+],
+    [
+    '^tags/.*$',
+    ['bright_green'],
+],
+]
+unknown = [
+    'bright_yellow',
+    'bright_green',
+    'bright_red',
+    'bright_magenta',
+    'bright_cyan',
+]
+
+[svg_colors]
+matches = [
+    [
+    '^(master|main)$',
+    ['blue'],
+],
+    [
+    '^tags/.*$',
+    ['green'],
+],
+]
+unknown = [
+    'orange',
+    'green',
+    'red',
+    'purple',
+    'turquoise',
+]

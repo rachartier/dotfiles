@@ -1,0 +1,77 @@
+persistence = [
+    '^(master|main)$',
+    '^(develop|dev)$',
+    '^feature.*$',
+    '^release.*$',
+    '^hotfix.*$',
+    '^bugfix.*$',
+]
+order = [
+    '^(master|main)$',
+    '^(hotfix|release).*$',
+    '^(develop|dev)$',
+]
+
+[terminal_colors]
+matches = [
+    [
+    '^(master|main)$',
+    ['bright_blue'],
+],
+    [
+    '^(develop|dev)$',
+    ['bright_yellow'],
+],
+    [
+    '^(feature|fork/).*$',
+    [
+    'bright_magenta',
+    'bright_cyan',
+],
+],
+    [
+    '^release.*$',
+    ['bright_green'],
+],
+    [
+    '^(bugfix|hotfix).*$',
+    ['bright_red'],
+],
+    [
+    '^tags/.*$',
+    ['bright_green'],
+],
+]
+unknown = ['white']
+
+[svg_colors]
+matches = [
+    [
+    '^(master|main)$',
+    ['blue'],
+],
+    [
+    '^(develop|dev)$',
+    ['orange'],
+],
+    [
+    '^(feature|fork/).*$',
+    [
+    'purple',
+    'turquoise',
+],
+],
+    [
+    '^release.*$',
+    ['green'],
+],
+    [
+    '^(bugfix|hotfix).*$',
+    ['red'],
+],
+    [
+    '^tags/.*$',
+    ['green'],
+],
+]
+unknown = ['gray']

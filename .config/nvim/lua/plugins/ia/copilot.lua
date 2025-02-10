@@ -1,68 +1,6 @@
 local utils = require("utils")
 
 return {
-	-- ERROR: error in neovim 0.11.0, crash with nerdfonts
-	-- {
-	-- 	"github/copilot.vim",
-	-- 	event = "BufReadPost",
-	-- 	config = function()
-	-- 		-- vim.keymap.set("i", "<C-g>", function()
-	-- 		-- 	vim.fn["copilot#Accept"]("")
-	-- 		-- 	local ret = vim.fn["copilot#TextQueuedForInsertion"]()
-	-- 		--
-	-- 		-- 	-- vim.defer_fn(function()
-	-- 		-- 	-- 	vim.api.nvim_exec_autocmds("User", {
-	-- 		-- 	-- 		pattern = "CustomFormatCopilot",
-	-- 		-- 	-- 		modeline = false,
-	-- 		-- 	-- 		data = {
-	-- 		-- 	-- 			lines_count = lines_count,
-	-- 		-- 	-- 		},
-	-- 		-- 	-- 	})
-	-- 		-- 	-- end, 500)
-	-- 		-- 	return ret
-	-- 		-- end, { expr = true, silent = true, replace_keycodes = false })
-	--
-	-- 		-- vim.g.copilot_browser = "/mnt/c/Program Files/Mozilla Firefox/firefox.exe"
-	-- 		vim.keymap.set("i", "<C-g>", 'copilot#Accept("\\<CR>")', { expr = true, replace_keycodes = false })
-	--
-	-- 		---@diagnostic disable-next-line: inject-field
-	-- 		vim.g.copilot_no_tab_map = true
-	--
-	-- 		utils.on_event({ "BufEnter" }, function(event)
-	-- 			---@diagnostic disable-next-line: inject-field
-	-- 			vim.b.copilot_enabled = true
-	--
-	-- 			-- get buffer name
-	-- 			local bufname = vim.api.nvim_buf_get_name(event.buf)
-	--
-	-- 			-- get file name
-	-- 			local filename = vim.fn.fnamemodify(bufname, ":t")
-	--
-	-- 			if
-	-- 				string.match(filename, "^%.env.*")
-	-- 				or string.match(filename, "^%.secret.*")
-	-- 				or string.match(filename, "^%id_rsa.*")
-	-- 			then
-	-- 				vim.b.copilot_enabled = false
-	-- 			end
-	-- 		end, {
-	-- 			target = "*",
-	-- 			desc = "Enable/disable Copilot for sensitive files",
-	-- 		})
-	--
-	-- 		-- utils.on_event({ "BufEnter" }, function()
-	-- 		-- 	---@diagnostic disable-next-line: inject-field
-	-- 		-- 	vim.b.copilot_enabled = false
-	-- 		-- end, {
-	-- 		-- 	target = {
-	-- 		-- 		".env",
-	-- 		-- 		"*secret",
-	-- 		-- 		"*id_rsa",
-	-- 		-- 	},
-	-- 		-- 	desc = "Disable Copilot for sensitive files",
-	-- 		-- })
-	-- 	end,
-	-- },
 	{
 		"zbirenbaum/copilot.lua",
 		event = "VeryLazy",
@@ -254,7 +192,7 @@ return {
 				answer_header = "  Copilot ",
 				error_header = "  Error ",
 				separator = "───",
-				model = "claude-3.5-sonnet",
+				model = "o3-mini",
 				show_folds = false,
 				auto_follow_cursor = false,
 				debug = false,
@@ -424,59 +362,5 @@ Useful PEPs for this section (not exhaustive):
 			},
 			hints = { enabled = true },
 		},
-	},
-	{
-		-- dir = "/tmp/codecompanion.nvim",
-		"olimorris/codecompanion.nvim",
-		enabled = false,
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-treesitter/nvim-treesitter",
-			"zbirenbaum/copilot.lua",
-		},
-		keys = {
-			{ "<leader>cc", "<cmd>CodeCompanionChat<CR>", desc = "CodeCompanion - Chat" },
-			{ "<leader>cq", "<cmd>CodeCompanionActions<CR>", desc = "CodeCompanion - Actions" },
-			{
-				"<leader>ci",
-				function()
-					local input = vim.fn.input("> ")
-
-					return "<cmd>CodeCompanion /buffer " .. input .. "<CR>"
-				end,
-				desc = "CodeCompanion - Actions",
-			},
-		},
-		opts = {
-			strategies = {
-				chat = {
-					adapter = "copilot",
-					keymaps = {
-						close = {
-							modes = { n = "q", i = "<C-c>" },
-						},
-					},
-				},
-				inline = {
-					adapter = "copilot",
-				},
-				agent = {
-					adapter = "copilot",
-				},
-			},
-			display = {
-				chat = {
-					window = {
-						opts = {
-							number = false,
-							relativenumber = false,
-						},
-					},
-				},
-			},
-		},
-		config = function(_, opts)
-			require("codecompanion").setup(opts)
-		end,
 	},
 }

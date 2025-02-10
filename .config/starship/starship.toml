@@ -1,7 +1,6 @@
 format = """
 $username\
 $hostname\
-${custom.directory}\
 $directory\
 $git_branch\
 $git_state\
@@ -69,21 +68,6 @@ command = """echo "  (${HOSTNAME:0:5})" """
 when = """ test "$($HOME/.config/scripts/is_inside_docker.sh)" = "1" """
 style = "blue"
 
-[custom.directory]
-disabled = true
-description = "Display symbol for remote Git server"
-command = """$HOME/.config/scripts/check-git-remote.sh"""
-when = "true"
-# when = 'git rev-parse --is-inside-work-tree 2> /dev/null'
-# require_repo = true
-# shell = ["bash", "--noprofile", "--norc"]
-# format = "[](fg:blue)[ $output ](fg:black bg:blue)[](fg:blue bg:black)"
-
-# [container]
-# symbol = " "
-# style = "blue"
-# format = '[$symbol \($name\)]($style) '
-
 [character]
 success_symbol = "[❯](bold purple)"
 error_symbol = "[❯](bold red)"
@@ -120,31 +104,6 @@ stashed = "≡ "
 [git_state]
 format = '\([$state( $progress_current/$progress_total)]($style)\) '
 style = "bright-black"
-
-# [git_branch]
-# format = "[on](white dimmed) [](bright-purple) [$branch](bright-purple italic)"
-#
-# [git_state]
-# format = '\([$state( $progress_current/$progress_total)]($style)\)'
-# style = "bright-black"
-#
-# [git_status]
-# format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](218) ($ahead_behind$stashed)]($style)"
-# style = "cyan"
-# unstaged = '󰄱 '
-# stashed = ' '
-# deleted = ' '
-# modified = ''
-# renamed = '󰑕'
-# unmerged = ''
-# untracked = ''
-# conflicted = "​"
-# untracked = "​"
-# modified = "​"
-# staged = "​"
-# renamed = "​"
-# deleted = "​"
-# stashed = "≡"
 
 [cmd_duration]
 min_time = 500

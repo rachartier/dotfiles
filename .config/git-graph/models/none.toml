@@ -1,0 +1,24 @@
+persistence = []
+order = []
+
+[terminal_colors]
+matches = []
+unknown = [
+    'bright_blue',
+    'bright_yellow',
+    'bright_green',
+    'bright_red',
+    'bright_magenta',
+    'bright_cyan',
+]
+
+[svg_colors]
+matches = []
+unknown = [
+    'blue',
+    'orange',
+    'green',
+    'red',
+    'purple',
+    'turquoise',
+]

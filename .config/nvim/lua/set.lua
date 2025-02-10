@@ -1,14 +1,13 @@
 local opt = vim.opt
 
-local utils = require("utils")
 opt.autowrite = true -- Enable auto write
 
 vim.schedule(function()
-	opt.spelllang = { -- Languages for spell checking
-		"fr",
-		"en",
-	}
-	opt.spell = true -- Enable spell checking
+	-- opt.spelllang = { -- Languages for spell checking
+	-- 	"fr",
+	-- 	"en",
+	-- }
+	opt.spell = false -- Enable spell checking
 
 	if vim.fn.executable("wsl.exe") == 1 then
 		-- if vim.fn.executable("wl-copy") == 0 then
@@ -31,17 +30,17 @@ vim.schedule(function()
 		--         cache_enabled = true
 		--     }
 		-- end
-		-- vim.g.clipboard = {
-		-- 	copy = {
-		-- 		["+"] = "clip.exe",
-		-- 		["*"] = "clip.exe",
-		-- 	},
-		-- 	paste = {
-		-- 		["+"] = 'powershell.exe -NoLogo -NoProfile -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-		-- 		["*"] = 'powershell.exe -NoLogo -NoProfile -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-		-- 	},
-		-- 	cache_enabled = 0,
-		-- }
+		vim.g.clipboard = {
+			copy = {
+				["+"] = "clip.exe",
+				["*"] = "clip.exe",
+			},
+			paste = {
+				["+"] = 'powershell.exe -NoLogo -NoProfile -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+				["*"] = 'powershell.exe -NoLogo -NoProfile -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+			},
+			cache_enabled = 0,
+		}
 		--
 		-- if os.getenv("TMUX") then
 		-- 	utils.on_event({ "TextYankPost" }, function()
@@ -50,18 +49,18 @@ vim.schedule(function()
 		-- end
 
 		-- choco install win32yank
-		vim.g.clipboard = {
-			name = "win32yank-wsl",
-			copy = {
-				["+"] = "win32yank.exe -i --crlf",
-				["*"] = "win32yank.exe -i --crlf",
-			},
-			paste = {
-				["+"] = "win32yank.exe -o --lf",
-				["*"] = "win32yank.exe -o --lf",
-			},
-			cache_enabled = 0,
-		}
+		-- vim.g.clipboard = {
+		-- 	name = "win32yank-wsl",
+		-- 	copy = {
+		-- 		["+"] = "win32yank.exe -i --crlf",
+		-- 		["*"] = "win32yank.exe -i --crlf",
+		-- 	},
+		-- 	paste = {
+		-- 		["+"] = "win32yank.exe -o --lf",
+		-- 		["*"] = "win32yank.exe -o --lf",
+		-- 	},
+		-- 	cache_enabled = 0,
+		-- }
 	else
 		vim.opt.clipboard = "unnamedplus"
 	end
@@ -74,6 +73,7 @@ opt.winblend = conf.winblend -- Window blend
 opt.whichwrap:append("<>[]hl")
 opt.completeopt = "menu,menuone,noselect" -- Configure completion behavior
 opt.conceallevel = 0 -- Hide * markup for bold and italic
+opt.ruler = false
 opt.confirm = false -- Confirm to save changes before exiting modified buffer
 opt.cursorline = true -- Enable highlighting of the current line
 opt.expandtab = true -- Use spaces instead of tabs
@@ -83,7 +83,7 @@ opt.grepprg = "rg --vimgrep" -- Program to use for grep
 opt.ignorecase = true -- Ignore case
 opt.inccommand = "nosplit" -- Preview incremental replacement
 opt.laststatus = 3 -- Configure status line display
--- opt.statusline = '%{repeat(" ",winwidth("."))}'
+opt.statusline = " "
 
 opt.cmdheight = 1 -- Command line height
 opt.list = false -- Show some invisible characters (tabs...)
@@ -92,6 +92,7 @@ opt.pumheight = 20 -- Maximum number of entries in a popup
 opt.number = true -- Print line number
 opt.relativenumber = true -- Relative line numbers
 opt.scrolloff = 8 -- Lines of context
+opt.sidescrolloff = 8 -- Columns of context
 opt.sessionoptions = { -- Session options
 	"buffers",
 	"curdir",
@@ -141,8 +142,6 @@ opt.fillchars = {
 	eob = " ",
 }
 
-opt.smoothscroll = true
-
 vim.o.timeout = true
 vim.o.timeoutlen = 300
 
@@ -163,6 +162,16 @@ opt.incsearch = true
 -- vim.g.netrw_browse_split = 0
 -- vim.g.netrw_banner = 0
 -- vim.g.netrw_winsize = 25
+
+if vim.fn.has("nvim-0.10") == 1 then
+	opt.smoothscroll = true
+	opt.foldexpr = "v:lua.require'lazyvim.util'.ui.foldexpr()"
+	opt.foldmethod = "expr"
+	opt.foldtext = ""
+else
+	opt.foldmethod = "indent"
+	opt.foldtext = "v:lua.require'lazyvim.util'.ui.foldtext()"
+end
 
 vim.api.nvim_set_var("t_Cs", "\\e[4:3m")
 vim.api.nvim_set_var("t_Ce", "\\e[4:0m")

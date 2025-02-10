@@ -1,7 +1,5 @@
 local utils = require("utils")
 
-require("assign_ft")
-
 -- utils.on_event({ "TextYankPost" }, function()
 -- 	vim.highlight.on_yank({
 -- 		higroup = "CurSearch",

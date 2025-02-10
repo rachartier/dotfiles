@@ -570,6 +570,14 @@ install_glow() {
     __install_package_release "https://github.com/charmbracelet/glow/latest/download/${glow_version}/glow_Linux_x86_64.tar.gz" glow
 }
 
+install_direnv() {
+    print_step "Installing direnv"
+
+    curl -sfL https://direnv.net/install.sh | bash
+
+    log "success" "direnv installed."
+}
+
 install_essentials() {
     install_packages
 
@@ -593,6 +601,7 @@ install_essentials() {
     git config --global include.path "~/.config/git/gitconfig"
 
     install_copilot_cli
+    install_direnv
 }
 
 install_minimal() {
@@ -681,6 +690,7 @@ do_reinstall() {
     "viu") install_viu ;;
     "gh") install_github_gh ;;
     "copilot-cli") install_copilot_cli ;;
+    "direnv") install_direnv ;;
     "fonts") install_fonts_for_windows ;;
     *) log "error" "'$1' unknown." ;;
     esac
@@ -705,7 +715,7 @@ use_tool_dotnet() {
 
 update_all() {
     log "info" "Updating neovim plugins..."
-    "/opt/nvim-linux64/bin/nvim" --headless "+Lazy! sync" "+qall"
+    "/opt/nvim-linux-x86_64/bin/nvim" --headless "+Lazy! sync" "+qall"
 
     log "info" "Updating tmux plugins..."
     "$HOME/.config/tmux/plugins/tpm/bin/update_plugins" all

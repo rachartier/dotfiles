@@ -90,7 +90,7 @@ function M.on_attach(client, bufnr)
         {
             mode = "n",
             { "gD",          function() vim.lsp.buf.declaration() end,                  desc = "Go to declaration" },
-            { "K",           function() require("noice.lsp").hover() end,                        desc = "Show hover" },
+            { "K",           function() require("noice.lsp").hover() end,               desc = "Show hover" },
             { "<leader>vws", function() vim.lsp.buf.workspace_symbol() end,             desc = "Workspace symbol" },
             { "<leader>vd",  function() vim.diagnostic.open_float() end,                desc = "Open diagnostic inside a floating window" },
             { "<leader>rr",  function() vim.lsp.buf.references() end,                   desc = "Find references" },
