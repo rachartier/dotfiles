@@ -1,5 +1,5 @@
 return {
-	"seblj/roslyn.nvim",
+	"seblyng/roslyn.nvim",
 	ft = { "cs", "vb" },
 	opts = {
 		config = {
@@ -9,10 +9,6 @@ return {
 			--     - `cmd`
 			--     - `root_dir`
 			--     - `on_init`
-		},
-		exe = {
-			"dotnet",
-			vim.fs.joinpath(vim.fn.stdpath("data"), "roslyn", "Microsoft.CodeAnalysis.LanguageServer.dll"),
 		},
 		-- NOTE: Set `filewatching` to false if you experience performance problems.
 		-- Defaults to true, since turning it off is a hack.

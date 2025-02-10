@@ -46,6 +46,10 @@ return {
 		},
 		build = ":MasonUpdate",
 		opts = {
+			registries = {
+				"github:mason-org/mason-registry",
+				"github:Crashdummyy/mason-registry", -- for roslyn
+			},
 			ensure_installed = {
 				"stylua",
 				"shfmt",
