@@ -11,7 +11,7 @@ end
 
 return {
 	"mfussenegger/nvim-dap",
-	-- cond = require("config").config_type ~= "minimal",
+	-- cond = vim.g.dotfile_config_type ~= "minimal",
 	dependencies = {
 		{ "igorlfs/nvim-dap-view", opts = {} },
 		-- "rcarriga/nvim-dap-ui",

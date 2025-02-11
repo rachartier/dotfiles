@@ -1,10 +1,10 @@
 return {
-
 	"saghen/blink.cmp",
 	version = "*",
 	dependencies = {
 		"rafamadriz/friendly-snippets",
 		"fang2hou/blink-copilot",
+		"brenoprata10/nvim-highlight-colors",
 	},
 	-- build = "cargo build --release",
 	event = { "InsertEnter", "CmdlineEnter" },

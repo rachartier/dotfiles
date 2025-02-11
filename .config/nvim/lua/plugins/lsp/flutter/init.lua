@@ -1,7 +1,7 @@
 return {
 	"akinsho/flutter-tools.nvim",
 	ft = { "dart" },
-	cond = require("config").config_type ~= "minimal",
+	cond = vim.g.dotfile_config_type ~= "minimal",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"stevearc/dressing.nvim", -- optional for vim.ui.select

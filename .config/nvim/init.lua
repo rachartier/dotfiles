@@ -1,17 +1,4 @@
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-
-vim.filetype.add({
-	extension = {
-		["http"] = "http",
-		["*.p8"] = "pico8",
-		["*.dotfile*"] = "bash",
-		["*.zsh"] = "bash",
-		["*.zsh_*"] = "bash",
-		["*.tcss"] = "css",
-		["*.xaml"] = "xml",
-	},
-})
+require("config")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then

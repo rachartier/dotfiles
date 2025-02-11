@@ -1,7 +1,6 @@
 return {
 	"renerocksai/telekasten.nvim",
-	cond = require("config").config_type ~= "minimal",
-	dependencies = {},
+	cond = vim.g.dotfile_config_type ~= "minimal",
     -- stylua: ignore
     keys = {
         { mode = { "n" }, "<leader>z",  "<cmd>Telekasten panel<CR>",                   { desc = "Show Telekasten panel" } },

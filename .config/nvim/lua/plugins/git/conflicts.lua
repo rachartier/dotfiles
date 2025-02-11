@@ -1,6 +1,6 @@
 return {
 	"akinsho/git-conflict.nvim",
-	cond = require("config").config_type ~= "minimal",
+	cond = vim.g.dotfile_config_type ~= "minimal",
 	event = "VeryLazy",
 	version = "*",
 	keys = {

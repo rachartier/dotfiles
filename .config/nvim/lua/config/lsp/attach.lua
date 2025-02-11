@@ -16,11 +16,9 @@ M.lsp_rename = function()
 			return
 		end
 
-		-- apply renames
 		local client = vim.lsp.get_client_by_id(ctx.client_id)
 		vim.lsp.util.apply_workspace_edit(res, client.offset_encoding)
 
-		-- print renames
 		local changed_files_count = 0
 		local changed_instances_count = 0
 
@@ -52,29 +50,7 @@ M.lsp_rename = function()
 end
 
 function M.make_capabilities()
-	-- local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 	return require("blink.cmp").get_lsp_capabilities()
-	-- local capabilities = vim.lsp.protocol.make_client_capabilities()
-	--
-	-- capabilities.textDocument.completion.completionItem = {
-	-- 	documentationFormat = { "markdown", "plaintext" },
-	-- 	snippetSupport = true,
-	-- 	preselectSupport = true,
-	-- 	insertReplaceSupport = true,
-	-- 	labelDetailsSupport = true,
-	-- 	deprecatedSupport = true,
-	-- 	commitCharactersSupport = true,
-	-- 	tagSupport = { valueSet = { 1 } },
-	-- 	resolveSupport = {
-	-- 		properties = {
-	-- 			"documentation",
-	-- 			"detail",
-	-- 			"additionalTextEdits",
-	-- 		},
-	-- 	},
-	-- }
-	--
-	-- return capabilities
 end
 
 function M.on_attach(client, bufnr)

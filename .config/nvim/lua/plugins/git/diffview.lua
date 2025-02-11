@@ -1,6 +1,6 @@
 return {
 	"sindrets/diffview.nvim",
-	cond = require("config").config_type ~= "minimal",
+	cond = vim.g.dotfile_config_type ~= "minimal",
 	cmd = {
 		"DiffviewOpen",
 		"DiffviewClose",

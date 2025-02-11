@@ -1,10 +1,4 @@
 local signs = require("config.ui.signs")
-local utils = require("utils")
-
--- vim.fn.sign_define("DiagnosticSignError", { text = signs.diagnostic.error, texthl = "DiagnosticSignError" })
--- vim.fn.sign_define("DiagnosticSignWarn", { text = signs.diagnostic.warning, texthl = "DiagnosticSignWarn" })
--- vim.fn.sign_define("DiagnosticSignInfo", { text = signs.diagnostic.info, texthl = "DiagnosticSignInfo" })
--- vim.fn.sign_define("DiagnosticSignHint", { text = signs.diagnostic.hint, texthl = "DiagnosticSignHint" })
 
 vim.diagnostic.config({
 	-- float = {

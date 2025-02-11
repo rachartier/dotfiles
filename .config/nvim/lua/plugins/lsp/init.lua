@@ -130,7 +130,7 @@ return {
 			local to_install_dap = {}
 			local to_install_lsp = {}
 
-			if require("config").config_type ~= "minimal" then
+			if vim.g.dotfile_config_type ~= "minimal" then
 				for _, server_config in ipairs(server_settings) do
 					if server_config.dap then
 						for _, tool in ipairs(server_config.dap) do
@@ -209,7 +209,7 @@ return {
 				end, 100)
 			end)
 
-			if require("config").config_type ~= "minimal" then
+			if vim.g.dotfile_config_type ~= "minimal" then
 				local function ensure_installed()
 					for _, tool in ipairs(to_autoinstall_formatter_linter()) do
 						local p = mr.get_package(tool)

@@ -11,10 +11,25 @@ end
 M.gif_alpha_enabled = false
 M.tty_clock_alpha_enabled = true
 
-M.config_type = "normal"
+vim.g.dotfile_config_type = "normal"
 
 if os.getenv("DOTFILES_MINIMAL") then
-	M.config_type = "minimal"
+	vim.g.dotfile_config_type = "minimal"
 end
+
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
+vim.filetype.add({
+	extension = {
+		["http"] = "http",
+		["*.p8"] = "pico8",
+		["*.dotfile*"] = "bash",
+		["*.zsh"] = "bash",
+		["*.zsh_*"] = "bash",
+		["*.tcss"] = "css",
+		["*.xaml"] = "xml",
+	},
+})
 
 return M
