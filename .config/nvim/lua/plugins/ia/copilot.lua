@@ -192,7 +192,7 @@ return {
 				answer_header = "  Copilot ",
 				error_header = "  Error ",
 				separator = "───",
-				model = "o3-mini",
+				model = "claude-3.5-sonnet",
 				show_folds = false,
 				auto_follow_cursor = false,
 				debug = false,
@@ -205,7 +205,7 @@ return {
 
 				prompts = {
 					Refactor = {
-						prompt = "/COPILOT_GENERATE Refactor the following code to improve readability, maintainability, and professionalism while keeping the same functionality. Ensure the code remains simple, clean, and easy to understand. Use clear variable and function names, add meaningful comments where necessary, and follow best coding practices.",
+						prompt = "Refactor the following code to improve readability, maintainability, and professionalism while keeping the same functionality. Ensure the code remains simple, clean, and easy to understand. Use clear variable and function names, add meaningful comments where necessary, and follow best coding practices.",
 					},
 					BetterNamings = {
 						prompt = "/COPILOT_GENERATE Provide better names for the following variables and/or functions.",
