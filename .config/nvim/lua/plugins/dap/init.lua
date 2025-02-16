@@ -13,7 +13,7 @@ return {
 	"mfussenegger/nvim-dap",
 	-- cond = vim.g.dotfile_config_type ~= "minimal",
 	dependencies = {
-		{ "igorlfs/nvim-dap-view", opts = {} },
+		-- { "igorlfs/nvim-dap-view", opts = {} },
 		-- "rcarriga/nvim-dap-ui",
 		"theHamsta/nvim-dap-virtual-text",
 		"mfussenegger/nvim-dap-python",
@@ -88,23 +88,23 @@ return {
 		sign("DapLogPoint", { text = "◆", texthl = "DapLogPoint", linehl = "", numhl = "" })
 		sign("DapStopped", { text = "󰧂", texthl = "DapStopped", linehl = "", numhl = "" })
 
-		local dap, dapview = require("dap"), require("dap-view")
-		dap.listeners.after.event_initialized["dapview-config"] = function()
-			dapview.open()
-
-			vim.keymap.set(
-				"n",
-				"<leader><leader>",
-				"<cmd>lua require('dap').step_over()<cr>",
-				{ noremap = true, silent = true }
-			)
-		end
-		dap.listeners.before.event_terminated["dapview-config"] = function()
-			dapview.close()
-			vim.keymap.del("n", "<leader><leader>")
-		end
-		dap.listeners.before.event_exited["dapview-config"] = function()
-			dapview.close()
-		end
+		-- local dap, dapview = require("dap"), require("dap-view")
+		-- dap.listeners.after.event_initialized["dapview-config"] = function()
+		-- 	dapview.open()
+		--
+		-- 	vim.keymap.set(
+		-- 		"n",
+		-- 		"<leader><leader>",
+		-- 		"<cmd>lua require('dap').step_over()<cr>",
+		-- 		{ noremap = true, silent = true }
+		-- 	)
+		-- end
+		-- dap.listeners.before.event_terminated["dapview-config"] = function()
+		-- 	dapview.close()
+		-- 	vim.keymap.del("n", "<leader><leader>")
+		-- end
+		-- dap.listeners.before.event_exited["dapview-config"] = function()
+		-- 	dapview.close()
+		-- end
 	end,
 }
