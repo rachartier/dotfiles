@@ -1,9 +1,9 @@
 local utils = require("utils")
 return {
 	{
-		-- dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny_buffers_switcher.nvim",
-		"rachartier/tiny-buffers-switcher.nvim",
-		enabled = false,
+		dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny_buffers_switcher.nvim",
+		-- "rachartier/tiny-buffers-switcher.nvim",
+		enabled = true,
 		event = "VeryLazy",
 		keys = {
 			{
@@ -21,11 +21,9 @@ return {
 				{ noremap = true, silent = true },
 			},
 		},
-		config = function()
-			require("tiny-buffers-switcher").setup({
-				use_fzf_lua = false,
-			})
-		end,
+		opts = {
+			use_snacks = true,
+		},
 	},
 	{
 		-- dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny_interpo_string.nvim",

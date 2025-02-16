@@ -43,10 +43,10 @@ return {
         { "<leader>gf", function() Snacks.picker.git_files() end, desc = "Find Git Files" },
         { "<leader>gl", function() Snacks.picker.git_log() end, desc = "Find Git Logs" },
         { "<leader>sM", function() Snacks.picker.man() end, desc = "Man Pages" },
-        { "<Tab>", function() Snacks.picker.buffers({
-            sort_lastused = true,
-            current = false,
-        }) end, desc = "Find Git Files" },
+        -- { "<Tab>", function() Snacks.picker.buffers({
+        --     sort_lastused = true,
+        --     current = false,
+        -- }) end, desc = "Find Git Files" },
 	},
 	-- stylua: ignore end
 	opts = {
