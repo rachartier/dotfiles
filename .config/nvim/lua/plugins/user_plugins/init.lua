@@ -1,3 +1,4 @@
+local utils = require("utils")
 return {
 	{
 		-- dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny_buffers_switcher.nvim",
@@ -60,37 +61,55 @@ return {
 		end,
 	},
 	{
-		dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-glimmer.nvim",
-		-- "rachartier/tiny-glimmer.nvim",
+		-- dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-glimmer.nvim",
+		"rachartier/tiny-glimmer.nvim",
+		-- dependencies = {
+		-- 	{
+		-- 		"gbprod/yanky.nvim",
+		-- 		opts = {
+		-- 			highlight = {
+		-- 				on_put = false,
+		-- 				on_yank = false,
+		-- 				timer = 150,
+		-- 			},
+		-- 		},
+		-- 	},
+		-- },
+		--
 		event = "VeryLazy",
-		keys = {
-			{
-				"<leader>tg",
-				function()
-					require("tiny-glimmer").change_hl({
-						"fade",
-						"pulse",
-					}, {
-						from_color = "DiffAdd",
-						to_color = "DiffDelete",
-					})
-				end,
-				{ noremap = true, silent = true },
-			},
-		},
+		enabled = true,
 		opts = {
-			refresh_interval_ms = 1,
 			overwrite = {
+				yank = {
+					enabled = true,
+					default_animation = {
+						name = "fade",
+						settings = {
+							from_color = require("theme").get_colors().overlay1,
+						},
+					},
+				},
 				search = {
 					enabled = true,
 				},
 				paste = {
 					enabled = true,
 				},
-			},
-			animations = {
-				fade = {
-					from_color = require("theme").get_colors().surface1,
+				undo = {
+					enabled = true,
+					default_animation = {
+						settings = {
+							from_color = utils.darken(require("theme").get_colors().red, 0.6),
+						},
+					},
+				},
+				redo = {
+					enabled = true,
+					default_animation = {
+						settings = {
+							from_color = utils.darken(require("theme").get_colors().green, 0.6),
+						},
+					},
 				},
 			},
 		},
