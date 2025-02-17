@@ -96,3 +96,4 @@ function tmuxp() {
     "$HOME/.local/bin/tmuxp" $@
 }
 
+
