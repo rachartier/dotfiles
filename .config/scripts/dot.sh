@@ -85,7 +85,7 @@ readonly ICON_WARNING="⚠"
 readonly ICON_INFO=""
 readonly ICON_PACKAGE=""
 readonly ICON_DOWNLOAD="↓"
-readonly ICON_GEAR="⚙"
+readonly ICON_GEAR="⚙ "
 readonly ICON_ROCKET="🚀"
 
 log() {
