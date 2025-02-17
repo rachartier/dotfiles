@@ -91,13 +91,15 @@ return {
 		{
 			section = "terminal",
 			-- cmd = 'timg --loops=-1 -V -g 32x32 "$HOME/.config/nvim/dashboard/gif/kirby-dancing2.gif"',
-			cmd = 'chafa --speed=0.9 --clear --passthrough=tmux --scale max "$HOME/.config/nvim/dashboard/gif/kirby-dancing2.gif"',
+			cmd = 'chafa -p off --speed=0.9 --clear --passthrough=tmux --scale max "$HOME/.config/nvim/dashboard/gif/kirby-dancing2.gif"',
+			-- cmd = 'viu "$HOME/.config/nvim/dashboard/gif/kirby-dancing2.gif"',
 			indent = 8,
 			ttl = 0,
 			enabled = function()
 				return vim.fn.executable("chafa") == 1
 			end,
 			height = 24,
+			padding = 1,
 		},
 		{ section = "keys", gap = 1, padding = 1 },
 		{ section = "startup" },

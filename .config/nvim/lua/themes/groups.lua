@@ -90,6 +90,8 @@ function M.get(colors)
 
 		SnacksPickerDir = { italic = true, fg = colors.surface2 },
 		SnacksDashboardHeader = { fg = colors.mauve },
+		SnacksDashboardIcon = { fg = colors.mauve },
+		SnacksDashboardDesc = { fg = colors.text },
 		-- SnacksDashboardFooter = { fg = colors.peach },
 
 		StatusLine = { fg = colors.base, bg = "None" },
