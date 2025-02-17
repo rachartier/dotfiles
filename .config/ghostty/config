@@ -23,3 +23,8 @@ window-theme = ghostty
 cursor-invert-fg-bg = true
 window-padding-x = 8
 window-padding-y = 8,0
+
+link-url = true
+
+
+auto-update = download
