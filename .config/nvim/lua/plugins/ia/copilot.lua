@@ -332,7 +332,6 @@ Useful PEPs for this section (not exhaustive):
 		event = "VeryLazy",
 		build = "make",
 		dependencies = {
-			"stevearc/dressing.nvim",
 			"nvim-lua/plenary.nvim",
 			"MunifTanjim/nui.nvim",
 			-- "github/copilot.vim",

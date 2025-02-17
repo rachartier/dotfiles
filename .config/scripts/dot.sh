@@ -188,8 +188,11 @@ __install_package_release() {
 
     # check if $filename is a directory
     if [[ "$filename" == *.tar.gz ]]; then
-
         tar -xf "$filename" && log "success" "$filename extracted." || return 1
+        filename=$(basename "$filename" ".tar.gz")
+        if [ -d "/tmp/$filename" ]; then
+            cd "/tmp/$filename"
+        fi
     else
         mv "$filename" "$name"
     fi
@@ -348,6 +351,7 @@ install_lazydocker() {
     fi
 
     __install_package_release "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYDOCKER_VERSION}_Linux_x86_64.tar.gz" lazydocker
+	log "info" "lazydocker installed."
 }
 
 install_zoxide() {
@@ -436,8 +440,8 @@ install_packages() {
     __install_package_apt unzip
 
     __install_package_apt ripgrep
-    __install_package_apt fd-find
     __install_package_apt xsel
+
 
     if [ -z "$DOTFILES_MINIMAL" ]; then
         __install_package_apt chafa
@@ -471,6 +475,15 @@ install_git_tools() {
     log "info" "Installing git-graph ${git_graph_version}..."
 
     __install_package_release "https://github.com/mlange-42/git-graph/releases/latest/download/git-graph-$git_graph_version-linux-amd64.tar.gz" git-graph
+}
+
+install_fd_find() {
+    log "info" "Installing fd-find..."
+
+    local fd_version
+    fd_version=$(__get_latest_release "sharkdp/fd")
+
+    __install_package_release "https://github.com/sharkdp/fd/releases/latest/download/fd-${fd_version}-x86_64-unknown-linux-gnu.tar.gz" fd
 }
 
 install_github_gh() {
@@ -581,6 +594,7 @@ install_direnv() {
 install_essentials() {
     install_packages
 
+	install_fd_find
     install_tmux
     install_nvim
 
@@ -676,6 +690,7 @@ do_reinstall() {
     "docker") install_docker ;;
     "git-tools") install_git_tools ;;
     "eza") install_eza ;;
+    "fd") install_fd_find ;;
     "fzf") install_fzf ;;
     "glow") install_glow ;;
     "zoxide") install_zoxide ;;
