@@ -92,6 +92,7 @@ function M.get(colors)
 		SnacksDashboardHeader = { fg = colors.mauve },
 		SnacksDashboardIcon = { fg = colors.mauve },
 		SnacksDashboardDesc = { fg = colors.text },
+		SnacksDashboardKey = { fg = colors.peach },
 		-- SnacksDashboardFooter = { fg = colors.peach },
 
 		StatusLine = { fg = colors.base, bg = "None" },
