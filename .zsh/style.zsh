@@ -8,6 +8,7 @@ zstyle ':fzf-tab:*' use-fzf-default-opts yes
 # zstyle ':fzf-tab:*' fzf-flags --height=40%
 # zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 zstyle ":fzf-tab:complete:*:*" fzf-preview $eza_command
+zstyle ":fzf-tab:complete:*:*" fzf-min-height 32
 
 zstyle ':fzf-tab:complete:(-command-|-parameter-|-brace-parameter-|export|unset|expand):*' \
 	fzf-preview 'echo ${(P)word}'
