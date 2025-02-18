@@ -1,5 +1,7 @@
 skip_global_compinit=1
 
+export TERM=ghostty
+
 source "$HOME/.profile"
 source "$HOME/.dotfile_profile"
 

@@ -420,12 +420,19 @@ install_bat() {
 install_packages() {
     print_step "Installing Base Packages"
 
-    # install terminfo for wezterm
-    print_step "Setting up wezterm terminfo"
-    tempfile=$(mktemp) &&
-        curl -sS -o $tempfile https://raw.githubusercontent.com/wez/wezterm/main/termwiz/data/wezterm.terminfo &&
-        tic -x -o ~/.terminfo $tempfile &&
-        rm $tempfile
+    if [ "$TERM" = "wezterm" ]; then
+        print_step "Setting up wezterm terminfo"
+        tempfile=$(mktemp) &&
+            curl -sS -o "$tempfile" https://raw.githubusercontent.com/wez/wezterm/master/termwiz/data/wezterm.terminfo &&
+            tic -x -o "$HOME/.terminfo" "$tempfile" &&
+            rm "$tempfile"
+    elif [ "$TERM" = "ghostty" ] || [ "$TERM" = "xterm-ghostty" ]; then
+        print_step "Setting up ghostty terminfo"
+        tempfile=$(mktemp) &&
+            curl -sS -o "$tempfile" https://raw.githubusercontent.com/rachartier/dotfiles/refs/heads/main/.config/ghostty/terminfo/ghostty.terminfo &&
+            tic -x -o  "$HOME/.terminfo"  "$tempfile" &&
+            rm "$tempfile"
+    fi
 
     print_step "Installing system packages"
     __install_package_apt pkg-config

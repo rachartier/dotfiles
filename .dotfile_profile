@@ -54,11 +54,20 @@ if [ -z "$DOTFILES_DOCKER" ]; then
 
     export DISABLE_AUTO_TITLE='true'
 else
+    export TERM=ghostty
+
     if ! [ -d "/usr/lib/terminfo" ]; then
-        tempfile=$(mktemp) &&
-            curl -o "$tempfile" https://raw.githubusercontent.com/wez/wezterm/master/termwiz/data/wezterm.terminfo &&
-            tic -x -o /usr/lib/terminfo "$tempfile" &&
-            rm "$tempfile"
+        if [ "$TERM" = "wezterm" ]; then
+            tempfile=$(mktemp) &&
+                curl -o "$tempfile" https://raw.githubusercontent.com/wez/wezterm/master/termwiz/data/wezterm.terminfo &&
+                tic -x -o "$HOME/.terminfo" "$tempfile" &&
+                rm "$tempfile"
+        elif [ "$TERM" = "ghostty" ] || [ "$TERM" = "xterm-ghostty" ]; then
+            tempfile=$(mktemp) &&
+                curl -o "$tempfile" https://raw.githubusercontent.com/rachartier/dotfiles/refs/heads/main/.config/ghostty/terminfo/ghostty.terminfo &&
+                tic -x -o "$HOME/.terminfo" "$tempfile" &&
+                rm "$tempfile"
+        fi
     fi
 
     if [ -z "$LC_ALL" ]; then
@@ -69,7 +78,6 @@ else
     export NODE_TLS_REJECT_UNAUTHORIZED=0
 
     export APPIMAGE_EXTRACT_AND_RUN=1
-    export TERM=wezterm
     export XDG_RUNTIME_DIR="/tmp/"
 fi
 
