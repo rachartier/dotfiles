@@ -6,10 +6,7 @@ font-family = MonoLisa
 font-style = Regular
 font-size = 13
 
-font-feature = zero=1
-font-feature = calt=1
-font-feature = liga=1
-font-feature = ss01=1
+font-feature = +zero, +calt, +liga, +clig, +ss02
 
 font-thicken = true
 
