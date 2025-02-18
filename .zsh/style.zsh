@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-eza_command='$HOME/.config/scripts/preview_fzf.sh $realpath'
+eza_command='$HOME/.fzf/bin/fzf-preview.sh $realpath'
 
 zstyle ':fzf-tab:*' use-fzf-default-opts yes
 # zstyle ':fzf-tab:*' popup-min-size 38 0
