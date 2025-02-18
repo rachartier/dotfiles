@@ -655,6 +655,31 @@ install_minimal() {
     # install_ohmyposh
 }
 
+install_terminal() {
+    local terminal_name="$1"
+
+    cd /tmp
+    case "$terminal_name" in
+    "wezterm")
+        log "info" "Installing wezterm..."
+        __download_install_deb https://github.com/wezterm/wezterm/releases/download/nightly/wezterm-nightly.Ubuntu24.04.deb wezterm
+        ;;
+    "kitty")
+        log "info" "Installing kitty..."
+        curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
+        if [ -L "$HOME/.local/bin/kitty" ]; then
+            log "info" "Removing old kitty symlink."
+            rm "$HOME/.local/bin/kitty"
+        fi
+        ln -s ~/.local/kitty.app/bin/kitty ~/.local/bin/kitty
+        ;;
+    *)
+        log "info" "Installing ghostty..."
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/mkasberg/ghostty-ubuntu/HEAD/install.sh)"
+        ;;
+    esac
+}
+
 install_docker() {
     log "info" "Exporting DOTFILES_DOCKER=1 to $HOME/.profile"
     echo "export DOTFILES_DOCKER=1" >>"$HOME/.profile"
@@ -729,6 +754,7 @@ do_reinstall() {
     "copilot-cli") install_copilot_cli ;;
     "direnv") install_direnv ;;
     "fonts") install_fonts_for_windows ;;
+    "terminal") install_terminal $2 ;;
     *) log "error" "'$1' unknown."; return ;;
     esac
 

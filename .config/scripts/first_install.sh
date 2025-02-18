@@ -76,4 +76,5 @@ elif [ -n "$DOTFILES_DOCKER" ]; then
     "$HOME"/.config/scripts/dot.sh docker
 else
     "$HOME"/.config/scripts/dot.sh init
+    "$HOME"/.config/scripts/dot.sh reinstall terminal
 fi
