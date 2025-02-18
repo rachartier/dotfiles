@@ -86,8 +86,14 @@ return {
 	},
 
 	sections = {
-		-- { section = "header", height = 14, width = 10 },
-
+		{
+			section = "header",
+			height = 14,
+			width = 10,
+			enabled = function()
+				return vim.fn.environ()["SSH_CLIENT"] ~= nil
+			end,
+		},
 		{
 			section = "terminal",
 			-- cmd = 'timg --loops=-1 -V -g 32x32 "$HOME/.config/nvim/dashboard/gif/kirby-dancing2.gif"',
@@ -96,7 +102,7 @@ return {
 			indent = 16,
 			ttl = 0,
 			enabled = function()
-				return vim.fn.executable("chafa") == 1
+				return vim.fn.executable("chafa") == 1 and vim.fn.environ()["SSH_CLIENT"] == nil
 			end,
 			height = 16,
 			padding = 1,
