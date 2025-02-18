@@ -1,5 +1,5 @@
 [include]
-	path = delta_themes/catppuccin.gitconfig
+	path = ./delta_themes/catppuccin.gitconfig
 
 [core]
     pager = delta
@@ -9,7 +9,7 @@
 
 [delta]
 	features = catppuccin-macchiato
-    # syntax-theme = Catppuccin Macchiato
+    syntax-theme = Catppuccin Macchiato
 
 [interactive]
     diffFilter = delta --color-only
@@ -22,7 +22,7 @@
     # light = true
 
 [merge]
-    conflictstyle = diff3
+    conflictstyle = zdiff3
 
 [diff]
     colorMoved = default
