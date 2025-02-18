@@ -29,3 +29,4 @@ adjust-strikethrough-thickness = 0
 link-url = true
 focus-follows-mouse = true
 auto-update = download
+auto-update-channel = tip
