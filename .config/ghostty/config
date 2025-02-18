@@ -7,7 +7,6 @@ font-style = Regular
 font-size = 13
 
 font-feature = +zero, +calt, +liga, +clig, +ss02
-
 font-thicken = true
 
 gtk-wide-tabs = false
@@ -21,7 +20,10 @@ cursor-invert-fg-bg = true
 window-padding-x = 8
 window-padding-y = 8,0
 
-link-url = true
+adjust-underline-thickness = 1
+adjust-underline-position = 1
+adjust-strikethrough-thickness = 0
 
+link-url = true
 
 auto-update = download
