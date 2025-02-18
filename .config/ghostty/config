@@ -2,6 +2,9 @@ theme=catppuccin-macchiato
 
 shell-integration = zsh
 
+cursor-text = "#000000"
+cursor-invert-fg-bg = false
+
 font-family = MonoLisa
 font-style = Regular
 font-size = 13
@@ -10,13 +13,12 @@ font-feature = +zero, +calt, +liga, +clig, +ss02
 font-thicken = true
 
 gtk-wide-tabs = false
-shell-integration-features = no-cursor,sudo,no-title
+shell-integration-features = true
 copy-on-select = clipboard
 
 window-decoration = client
 window-theme = ghostty
 
-cursor-invert-fg-bg = true
 window-padding-x = 8
 window-padding-y = 8,0
 
@@ -25,5 +27,5 @@ adjust-underline-position = 1
 adjust-strikethrough-thickness = 0
 
 link-url = true
-
+focus-follows-mouse = true
 auto-update = download
