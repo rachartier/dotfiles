@@ -451,7 +451,6 @@ install_packages() {
 
 
     if [ -z "$DOTFILES_MINIMAL" ]; then
-        __install_package_apt chafa
         __install_package_apt tty-clock
         __install_package_apt grc
     fi
@@ -467,6 +466,18 @@ install_packages() {
 
     ln -s $(which fdfind) ~/.local/bin/fd
 
+}
+
+install_chafa() {
+	log "info" "Installing chafa..."
+
+    cd /tmp
+
+    git clone https://github.com/hpjansson/chafa &&
+    	cd chafa &&
+        ./autogen.sh &&
+        make &&
+        sudo make install
 }
 
 install_git_tools() {
@@ -615,6 +626,7 @@ install_essentials() {
     install_starship
     install_zoxide
     install_bat
+    install_chafa
 
     install_git_tools
     # install_github_gh
@@ -638,6 +650,8 @@ install_minimal() {
     install_viu
     install_zoxide
     install_starship
+    install_copilot_cli
+    install_chafa
     # install_ohmyposh
 }
 
@@ -694,6 +708,7 @@ do_reinstall() {
     case "$1" in
     "all") do_reinstall_all ;;
     "bat") install_bat ;;
+    "chafa") install_chafa ;;
     "docker") install_docker ;;
     "git-tools") install_git_tools ;;
     "eza") install_eza ;;
@@ -714,8 +729,10 @@ do_reinstall() {
     "copilot-cli") install_copilot_cli ;;
     "direnv") install_direnv ;;
     "fonts") install_fonts_for_windows ;;
-    *) log "error" "'$1' unknown." ;;
+    *) log "error" "'$1' unknown."; return ;;
     esac
+
+    sudo ldconfig
 }
 
 use_tool_dotnet() {
