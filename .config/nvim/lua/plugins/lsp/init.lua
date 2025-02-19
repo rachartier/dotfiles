@@ -38,9 +38,13 @@ return {
 	},
 	{
 		"williamboman/mason.nvim",
+		branch = "v2.x",
 		lazy = true,
 		dependencies = {
-			"williamboman/mason-lspconfig.nvim",
+			{
+				"williamboman/mason-lspconfig.nvim",
+				branch = "2.x",
+			},
 			"williamboman/mason-nvim-dap.nvim",
 			"saghen/blink.cmp",
 		},
