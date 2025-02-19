@@ -30,3 +30,5 @@ link-url = true
 focus-follows-mouse = true
 auto-update = download
 auto-update-channel = tip
+
+term=ghostty
