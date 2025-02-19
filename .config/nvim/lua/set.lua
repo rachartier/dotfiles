@@ -41,12 +41,12 @@ vim.schedule(function()
 			},
 			cache_enabled = 0,
 		}
-		--
-		-- if os.getenv("TMUX") then
-		-- 	utils.on_event({ "TextYankPost" }, function()
-		-- 		vim.fn.system("clip.exe", vim.fn.getreg('"'))
-		-- 	end, { target = "*", desc = "Copy yanked text to clipboard" })
-		-- end
+
+		if os.getenv("TMUX") then
+			require("utils").on_event({ "TextYankPost" }, function()
+				vim.fn.system("clip.exe", vim.fn.getreg('"'))
+			end, { target = "*", desc = "Copy yanked text to clipboard" })
+		end
 
 		-- choco install win32yank
 		-- vim.g.clipboard = {
