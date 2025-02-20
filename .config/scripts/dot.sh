@@ -671,7 +671,14 @@ install_terminal() {
             log "info" "Removing old kitty symlink."
             rm "$HOME/.local/bin/kitty"
         fi
+
+        if [ -L "$HOME/.local/bin/kitten" ]; then
+            log "info" "Removing old kitten symlink."
+            rm "$HOME/.local/bin/kitten"
+        fi
+
         ln -s ~/.local/kitty.app/bin/kitty ~/.local/bin/kitty
+        ln -s ~/.local/kitty.app/bin/kitten ~/.local/bin/kitten
         ;;
     *)
         log "info" "Installing ghostty..."
