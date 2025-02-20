@@ -15,6 +15,8 @@ font-thicken = true
 gtk-wide-tabs = false
 shell-integration-features = true
 copy-on-select = clipboard
+clipboard-read = allow
+clipboard-write = allow
 
 window-decoration = client
 window-theme = ghostty
