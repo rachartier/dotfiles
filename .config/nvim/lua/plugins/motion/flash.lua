@@ -42,4 +42,12 @@ return {
 			desc = "Toggle Flash Search",
 		},
 	},
+	opts = {
+		-- modes = {
+		-- 	search = {
+		-- 		enabled = true,
+		-- 	},
+		-- 	char = { enabled = true },
+		-- },
+	},
 }
