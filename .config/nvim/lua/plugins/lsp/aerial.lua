@@ -28,7 +28,7 @@ return {
 		open_automatic = function(bufnr)
 			local aerial = require("aerial")
 
-			local ft = vim.api.nvim_buf_get_option(bufnr, "filetype")
+			local ft = vim.api.nvim_get_option_value("filetype", { buf = bufnr })
 			return vim.tbl_contains(open_on_ft, ft) and not aerial.was_closed()
 		end,
 	},

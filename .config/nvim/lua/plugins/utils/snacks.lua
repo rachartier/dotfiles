@@ -19,32 +19,51 @@ return {
 	priority = 9999,
 	lazy = false,
     -- stylua: ignore start
-	keys = {
-		{"<leader>.", function() Snacks.scratch() end, desc = "Toggle Scratch Buffer",},
-		{"<leader>S", function() Snacks.scratch.select() end, desc = "Select Scratch Buffer",},
-		{"<leader>ps", function() Snacks.profiler.scratch() end, desc = "Profiler Scratch Buffer",},
-		{"<leader>gb", function() Snacks.gitbrowse() end, desc = "Git Browser",},
-        { "<leader>gc", function() Snacks.picker.git_log() end, desc = "Git Log" },
-        { "<leader>gs", function() Snacks.picker.git_status() end, desc = "Git Status" },
-        { "<leader>fl", function() Snacks.picker.resume() end, desc = "Resume last picker" },
-        { "<leader>fg", function() Snacks.picker.grep() end, desc = "Grep" },
-        { "<leader>fh", function() Snacks.picker.highlights() end, desc = "Show highlights" },
-        { "<leader>fw", function() Snacks.picker.grep_word() end, desc = "Visual selection or word", mode = { "n", "x" } },
-        { "<leader>fd", function() Snacks.picker.lsp_definitions() end, desc = "Goto Definition" },
-        { "<leader>fr", function() Snacks.picker.lsp_references() end, nowait = true, desc = "References" },
-        { "<leader>fI", function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
+    keys = {
+        { "<leader>.",  function() Snacks.scratch() end,                     desc = "Toggle Scratch Buffer", },
+        { "<leader>S",  function() Snacks.scratch.select() end,              desc = "Select Scratch Buffer", },
+        { "<leader>gb", function() Snacks.gitbrowse() end,                   desc = "Git Browser", },
+        { "<leader>ps", function() Snacks.profiler.scratch() end,            desc = "Profiler Scratch Buffer", },
+        { "<leader>fI", function() Snacks.picker.lsp_implementations() end,  desc = "Goto Implementation" },
+        { "<leader>fd", function() Snacks.picker.lsp_definitions() end,      desc = "Goto Definition" },
+        { "<leader>fg", function() Snacks.picker.grep() end,                 desc = "Grep" },
+        { "<leader>fh", function() Snacks.picker.highlights() end,           desc = "Show highlights" },
+        { "<leader>fl", function() Snacks.picker.resume() end,               desc = "Resume last picker" },
+        { "<leader>fr", function() Snacks.picker.lsp_references() end,       nowait = true,                     desc = "References" },
+        { "<leader>fw", function() Snacks.picker.grep_word() end,            desc = "Visual selection or word", mode = { "n", "x" } },
+        { "<leader>gL", function() Snacks.picker.git_log_line() end,         desc = "Git Log Line" },
+        { "<leader>gS", function() Snacks.picker.git_stash() end,            desc = "Git Stash" },
+        { "<leader>gb", function() Snacks.picker.git_branches() end,         desc = "Git Branches" },
+        { "<leader>gd", function() Snacks.picker.git_diff() end,             desc = "Git Diff (Hunks)" },
+        { "<leader>gf", function() Snacks.picker.git_log_file() end,         desc = "Git Log File" },
+        { "<leader>gl", function() Snacks.picker.git_log() end,              desc = "Git Log" },
+        { "<leader>gs", function() Snacks.picker.git_status() end,           desc = "Git Status" },
         { "<leader>gy", function() Snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition" },
-        { "<leader>ff", function() Snacks.picker.files({
-            exclude = { "node_modules", ".git", ".cache", ".local", ".npm", ".yarn", "__pycache__", ".venv" },
-        }) end, desc = "Find Files" },
-        { "<leader>gf", function() Snacks.picker.git_files() end, desc = "Find Git Files" },
-        { "<leader>gl", function() Snacks.picker.git_log() end, desc = "Find Git Logs" },
-        { "<leader>sM", function() Snacks.picker.man() end, desc = "Man Pages" },
+        {
+            "<leader>ff",
+            function()
+                Snacks.picker.files({
+                    exclude = { "node_modules", ".git", ".cache", ".local", ".npm", ".yarn", "__pycache__", ".venv" },
+                })
+            end,
+            desc = "Find Files"
+        },
+        { "<leader>gf", function() Snacks.picker.git_files() end,             desc = "Find Git Files" },
+        { "<leader>gl", function() Snacks.picker.git_log() end,               desc = "Find Git Logs" },
+        { "<leader>sM", function() Snacks.picker.man() end,                   desc = "Man Pages" },
+
+        { "gd",         function() Snacks.picker.lsp_definitions() end,       desc = "Goto Definition" },
+        { "gD",         function() Snacks.picker.lsp_declarations() end,      desc = "Goto Declaration" },
+        { "gr",         function() Snacks.picker.lsp_references() end,        nowait = true,                  desc = "References" },
+        { "gI",         function() Snacks.picker.lsp_implementations() end,   desc = "Goto Implementation" },
+        { "gy",         function() Snacks.picker.lsp_type_definitions() end,  desc = "Goto T[y]pe Definition" },
+        { "gs",         function() Snacks.picker.lsp_symbols() end,           desc = "LSP Symbols" },
+        { "gS",         function() Snacks.picker.lsp_workspace_symbols() end, desc = "LSP Workspace Symbols" },
         -- { "<Tab>", function() Snacks.picker.buffers({
         --     sort_lastused = true,
         --     current = false,
         -- }) end, desc = "Find Git Files" },
-	},
+    },
 	-- stylua: ignore end
 	opts = {
 		styles = {
