@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-eza_command='$HOME/.fzf/bin/fzf-preview.sh $realpath'
+eza_command='$HOME/.fzf/bin/fzf-preview.sht $realpath'
 
 zstyle ':fzf-tab:*' use-fzf-default-opts yes
 # zstyle ':fzf-tab:*' popup-min-size 38 0
@@ -17,11 +17,6 @@ zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-preview '[[ $group == "[p
 zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-flags --preview-window=down:3:wrap
 
 zstyle ':fzf-tab:complete:git:*' fzf-flags --preview-window=down:3:wrap
-zstyle ':fzf-tab:complete:git-(add|diff|restore):*' fzf-preview \
-	'git diff $word'
-
-zstyle ':fzf-tab:complete:git-log:*' fzf-preview \
-	'git log --color=always $word'
 
 zstyle ':fzf-tab:complete:git-help:*' fzf-preview \
 	'git help $word | bat -plman --color=always'
