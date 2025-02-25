@@ -49,14 +49,12 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     vec3 base = vec3(0.141, 0.153, 0.227);    // #24273A
     vec3 mantle = vec3(0.118, 0.125, 0.188);  // #1E2030
     // in between
-    vec3 inBetween = mix(base, mantle, 0.25);
-    vec3 inBetween2 = mix(base, mantle, 0.75);
+    vec3 inBetween = mix(base, mantle, 0.50);
 
-    vec3 layer1 = mix(base, inBetween2, S(-.3, .2, (tuv*Rot(radians(-5.))).x));
-    vec3 layer2 = mix(inBetween, mantle, S(-.3, .8, (tuv*Rot(radians(-5.))).x));
+    vec3 layer1 = mix(base, inBetween, S(-.3, .2, (tuv*Rot(radians(-5.))).x));
+    vec3 layer2 = mix(base, mantle, S(-.3, .8, (tuv*Rot(radians(-5.))).x));
 
     vec3 finalLayer = mix(layer1, layer2, S(.5, -.3, tuv.y));
-
 
     vec3 finalComp = finalLayer;
 
