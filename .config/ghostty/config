@@ -17,6 +17,8 @@ font-size = 13
 font-feature = +zero, +calt, +liga, +clig, +ss01, +ss02
 font-thicken = true
 
+custom-shader = /home/rachartier/.config/ghostty/ghostty-shaders/custom3.glsl
+
 gtk-wide-tabs = false
 shell-integration-features = true
 copy-on-select = clipboard
@@ -37,5 +39,7 @@ link-url = true
 focus-follows-mouse = true
 auto-update = download
 auto-update-channel = tip
+
+
 
 term=xterm-ghostty
