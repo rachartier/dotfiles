@@ -48,15 +48,19 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     // Couleurs Catppuccin Macchiato
     vec3 base = vec3(0.141, 0.153, 0.227);    // #24273A
     vec3 mantle = vec3(0.118, 0.125, 0.188);  // #1E2030
+    vec3 crust = vec3(0.094, 0.102, 0.149);
     // in between
-    vec3 inBetween = mix(base, mantle, 0.50);
+    vec3 inBetween = mix(base, crust, 0.33);
 
-    vec3 layer1 = mix(base, inBetween, S(-.3, .2, (tuv*Rot(radians(-5.))).x));
-    vec3 layer2 = mix(base, mantle, S(-.3, .8, (tuv*Rot(radians(-5.))).x));
+    float x = (tuv*Rot(radians(-5.))).x;
+    vec3 layer1 = mix(base, inBetween, S(-.3, .2, x));
+    vec3 layer2 = mix(mantle, inBetween, S(-.3, .4, x));
+    vec3 layer3 = mix(base, mantle, S(-.3, .8, x));
 
     vec3 finalLayer = mix(layer1, layer2, S(.5, -.3, tuv.y));
+    vec3 finalLayer2 = mix(finalLayer, layer3, S(.5, -.3, tuv.y));
 
-    vec3 finalComp = finalLayer;
+    vec3 finalComp = finalLayer2;
 
     vec4 terminalColor = texture(iChannel0, uv);
     float mask = 1.0 - step(0.5, dot(terminalColor.rgb, vec3(0.955)));
