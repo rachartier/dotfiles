@@ -39,7 +39,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     tuv.y *= 1./ratio;
     tuv *= Rot(radians((degree-.5)*720.+180.));
 
-    float frequency = 5.;
+    float frequency = 50.;
     float amplitude = 300.;
     float speed = iTime * 0.02;
     tuv.x += sin(tuv.y*frequency+speed)/amplitude;
@@ -50,7 +50,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     vec3 mantle = vec3(0.118, 0.125, 0.188);  // #1E2030
     vec3 crust = vec3(0.094, 0.102, 0.149);
     // in between
-    vec3 inBetween = mix(base, crust, 0.33);
+    vec3 inBetween = mix(base, crust, 0.66);
 
     float x = (tuv*Rot(radians(-5.))).x;
     vec3 layer1 = mix(base, inBetween, S(-.3, .2, x));
@@ -63,7 +63,11 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     vec3 finalComp = finalLayer2;
 
     vec4 terminalColor = texture(iChannel0, uv);
-    float mask = 1.0 - step(0.5, dot(terminalColor.rgb, vec3(0.955)));
+
+    // Define the mask (e.g., based on the luminance of the terminal color)
+    float mask = length(terminalColor.rgb - base) < 0.001 ? 1.0 : 0.0;
+
+    // Blend the finalComp color with the terminalColor based on the mask
     vec3 blendedColor = mix(terminalColor.rgb, finalComp, mask);
 
     fragColor = vec4(blendedColor, terminalColor.a);
