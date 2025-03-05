@@ -19,6 +19,9 @@ return {
 		end,
 
 		completion = {
+			ghost_text = {
+				enabled = true,
+			},
 			list = {
 				selection = {
 					preselect = true,
@@ -81,4 +84,22 @@ return {
 			kind_icons = require("config.ui.kinds"),
 		},
 	},
+	config = function(_, opts)
+		require("blink-cmp").setup(opts)
+
+		vim.api.nvim_create_autocmd("User", {
+			pattern = "BlinkCmpMenuOpen",
+			callback = function()
+				require("copilot.suggestion").dismiss()
+				vim.b.copilot_suggestion_hidden = true
+			end,
+		})
+
+		vim.api.nvim_create_autocmd("User", {
+			pattern = "BlinkCmpMenuClose",
+			callback = function()
+				vim.b.copilot_suggestion_hidden = false
+			end,
+		})
+	end,
 }
