@@ -89,6 +89,7 @@ export DOTNET_ROOT="$HOME/.dotnet"
 export PATH="$HOME/.dotnet:$PATH"
 export PATH="$HOME/.dotnet/tools:$PATH"
 export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
+export PATH="$PATH:/snap/bin"
 
 export PYENV_ROOT="$HOME/.pyenv"
 [ -d $PYENV_ROOT/bin ] && export PATH="$PYENV_ROOT/bin:$PATH"
