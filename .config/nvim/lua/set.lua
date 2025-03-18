@@ -74,7 +74,7 @@ if vim.fn.exists("+winborder") > 0 then
 	opt.winborder = require("config.ui.border").default_border
 end
 
-vim.o.background = "light"
+vim.o.background = "dark"
 opt.whichwrap:append("<>[]hl")
 opt.completeopt = "menu,menuone,noselect" -- Configure completion behavior
 opt.conceallevel = 0 -- Hide * markup for bold and italic
