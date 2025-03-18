@@ -70,11 +70,16 @@ local conf = require("config")
 opt.pumblend = conf.pumblend -- Popup blend
 opt.winblend = conf.winblend -- Window blend
 
+if vim.fn.exists("+winborder") > 0 then
+	opt.winborder = require("config.ui.border").default_border
+end
+
 vim.o.background = "light"
 opt.whichwrap:append("<>[]hl")
 opt.completeopt = "menu,menuone,noselect" -- Configure completion behavior
 opt.conceallevel = 0 -- Hide * markup for bold and italic
 opt.ruler = false
+opt.foldenable = false -- Disable folding
 opt.confirm = false -- Confirm to save changes before exiting modified buffer
 opt.cursorline = true -- Enable highlighting of the current line
 opt.expandtab = true -- Use spaces instead of tabs
@@ -147,8 +152,6 @@ vim.o.timeout = true
 vim.o.timeoutlen = 300
 
 vim.api.nvim_command("filetype plugin on")
-
-opt.termguicolors = true
 
 opt.swapfile = false
 opt.autoread = true
