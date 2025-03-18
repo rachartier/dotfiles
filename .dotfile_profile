@@ -1,8 +1,16 @@
+#theme="\
+#    --color=bg+:#494d64,bg:-1,spinner:#f4dbd6,hl:bold:#eed49f\
+#    --color=fg:#cad3f5,header:#ed8796,info:#c6a0f6,pointer:#f4dbd6 \
+#    --color=border:#cad3f5 \
+#    --color=marker:#f4dbd6,fg+:#cad3f5,prompt:#c6a0f6,hl+:bold:#eed49f"
+
 theme="\
-    --color=bg+:#494d64,bg:-1,spinner:#f4dbd6,hl:bold:#eed49f\
-    --color=fg:#cad3f5,header:#ed8796,info:#c6a0f6,pointer:#f4dbd6 \
-    --color=border:#cad3f5 \
-    --color=marker:#f4dbd6,fg+:#cad3f5,prompt:#c6a0f6,hl+:bold:#eed49f"
+    --color=bg+:#317da7,bg:-1,spinner:#a43b35,hl:bold:#bd8800\
+    --color=fg:#474155,header:#ff3532,info:#aa3685,pointer:#a43b35 \
+    --color=border:#474155 \
+    --color=marker:#a43b35,fg+:#474155,prompt:#aa3685,hl+:bold:#e8e2c8"
+
+
 
 # --preview \"$HOME/.config/scripts/preview_fzf.sh {}\" \
 export FZF_DEFAULT_COMMAND="fd --type f"

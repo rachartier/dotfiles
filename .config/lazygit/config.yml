@@ -70,26 +70,26 @@ customCommands:
 gui:
   theme:
     activeBorderColor:
-      - '#b7bdf8'
+      - '#317da7'
       - bold
     inactiveBorderColor:
-      - '#a5adcb'
+      - '#474155'
     optionsTextColor:
-      - '#8aadf4'
+      - '#52b1c7'
     selectedLineBgColor:
-      - '#363a4f'
+      - '#52b1c7'
     cherryPickedCommitBgColor:
-      - '#494d64'
+      - '#d8d3ba'
     cherryPickedCommitFgColor:
-      - '#b7bdf8'
+      - '#317da7'
     unstagedChangesColor:
-      - '#ed8796'
+      - '#ff3532'
     defaultFgColor:
-      - '#cad3f5'
+      - '#4d4742'
     searchingActiveBorderColor:
-      - '#eed49f'
+      - '#bd8800'
 
   authorColors:
-    '*': '#b7bdf8'
-    'Raphaël CHARTIER': '#ed8796'
-    'Raphael CHARTIER': '#ed8796'
+    '*': '#317da7'
+    'Raphaël CHARTIER': '#ff3532'
+    'Raphael CHARTIER': '#ff3532'

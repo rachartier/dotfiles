@@ -7,7 +7,7 @@ function M.get(colors)
 	return {
 		-- Visual = { bg = "#234370" },
 		-- Visual = { bg = colors.blue, fg = colors.base },
-		Visual = { bg = colors.surface0, bold = false },
+		Visual = { bg = colors.surface1, bold = false },
 
 		CurSearch = { bg = "None" },
 
@@ -15,7 +15,7 @@ function M.get(colors)
 		NormalFloat = { bg = "None", fg = colors.text },
 		FloatBorder = { fg = colors.lavender, bg = colors.base },
 		FloatTitle = { bg = colors.base, fg = colors.text, italic = true, bold = true },
-		LineNr = { fg = colors.surface1 },
+		LineNr = { fg = colors.surface2 },
 		SignColumn = { fg = colors.surface1 },
 		-- Visual = { bg = colors.surface1 },
 		Comment = { fg = colors.surface2, italic = true },
@@ -43,7 +43,7 @@ function M.get(colors)
 		Pmenu = { bg = colors.base, fg = colors.text },
 		PmenuBorder = { link = "FloatBorder" },
 		PmenuDocBorder = { link = "FloatBorder" },
-		PmenuSel = { bg = colors.surface0, bold = false },
+		PmenuSel = { bg = colors.surface1, bold = false },
 		PopupNormal = { bg = colors.base, fg = colors.text },
 
 		-- CursorLine = { bg = colors.surface1 },
@@ -90,7 +90,7 @@ function M.get(colors)
 
 		SwitchBufferStatusColor = { fg = colors.red },
 
-		SnacksPickerDir = { italic = true, fg = colors.surface2 },
+		SnacksPickerDir = { italic = true, fg = colors.overlay0 },
 		SnacksDashboardHeader = { fg = colors.mauve },
 		SnacksDashboardIcon = { fg = colors.mauve },
 		SnacksDashboardDesc = { fg = colors.text },
@@ -128,7 +128,7 @@ function M.get(colors)
 		FzfLuaBorder = { link = "FloatBorder" },
 		FzfLuaBackdrop = { bg = "None" },
 
-		WinSeparator = { fg = colors.surface0 },
+		WinSeparator = { fg = colors.surface1 },
 		WinBar = { fg = colors.rosewater, bg = "None" },
 
 		DapUIPlayPauseNC = { link = "DapUIPlayPause" },

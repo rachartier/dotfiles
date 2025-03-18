@@ -1,3 +1,34 @@
+[delta "catppuccin-latte-custom"]
+	blame-palette = "#ebe4c8 #e8e2c8 #d8d3ba #c9bea5 #a18d66"
+	commit-decoration-style = "#8c7c62" bold box ul
+	light = true
+	file-decoration-style = "#8c7c62"
+	file-style = "#4d4742"
+	hunk-header-decoration-style = "#8c7c62" box ul
+	hunk-header-file-style = bold
+	hunk-header-line-number-style = bold "#6d6655"
+	hunk-header-style = file line-number syntax
+	line-numbers-left-style = "#8c7c62"
+	line-numbers-minus-style = bold "#ff3532"
+	line-numbers-plus-style = bold "#596600"
+	line-numbers-right-style = "#8c7c62"
+	line-numbers-zero-style = "#8c7c62"
+	# 25% red 75% base
+	minus-emph-style = bold syntax "#f0c7c6"
+	# 10% red 90% base
+	minus-style = syntax "#f2d2d0"
+	# 25% green 75% base
+	plus-emph-style = bold syntax "#d0d3b9"
+	# 10% green 90% base
+	plus-style = syntax "#e5e4cb"
+	map-styles = \
+		bold purple => syntax "#d5c7d4", \
+		bold blue => syntax "#c4d2da", \
+		bold cyan => syntax "#c3dbd6", \
+		bold yellow => syntax "#e3d9b1"
+	# Should match the name of the bat theme
+	syntax-theme = Catppuccin Latte Custom
+
 [delta "catppuccin-latte"]
 	blame-palette = "#eff1f5 #e6e9ef #dce0e8 #ccd0da #bcc0cc"
 	commit-decoration-style = "#9ca0b0" bold box ul
