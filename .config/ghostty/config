@@ -1,4 +1,5 @@
-theme=catppuccin-macchiato
+# theme=catppuccin-macchiato
+theme=custom-latte-catppuccin
 
 shell-integration = zsh
 
@@ -17,7 +18,7 @@ font-size = 13
 font-feature = +zero, +calt, +liga, +clig, +ss01, +ss02
 font-thicken = true
 
-custom-shader = /home/rachartier/.config/ghostty/ghostty-shaders/custom3.glsl
+# custom-shader = /home/rachartier/.config/ghostty/ghostty-shaders/custom3.glsl
 
 gtk-wide-tabs = false
 shell-integration-features = true
@@ -41,5 +42,6 @@ auto-update = download
 auto-update-channel = tip
 
 
+adjust-box-thickness = 120%
 
 term=xterm-ghostty

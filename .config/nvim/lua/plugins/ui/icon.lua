@@ -1,5 +1,6 @@
 return {
 	"echasnovski/mini.icons",
+	version = "*",
 	opts = {
 		filetype = {
 			json = { glyph = "" },

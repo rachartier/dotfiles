@@ -70,6 +70,7 @@ local conf = require("config")
 opt.pumblend = conf.pumblend -- Popup blend
 opt.winblend = conf.winblend -- Window blend
 
+vim.o.background = "light"
 opt.whichwrap:append("<>[]hl")
 opt.completeopt = "menu,menuone,noselect" -- Configure completion behavior
 opt.conceallevel = 0 -- Hide * markup for bold and italic

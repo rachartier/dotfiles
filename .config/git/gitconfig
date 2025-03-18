@@ -8,8 +8,8 @@
 	diff = delta
 
 [delta]
-	features = catppuccin-macchiato
-    syntax-theme = Catppuccin Macchiato
+	features = catppuccin-latte-custom
+    syntax-theme = Catppuccin Latte Custom
 
 [interactive]
     diffFilter = delta --color-only

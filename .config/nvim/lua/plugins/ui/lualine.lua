@@ -8,6 +8,8 @@ local function get_lualine_colors()
 		bg = c.surface0,
 		fg = c.subtext0,
 		surface0 = c.surface0,
+		surface1 = c.surface1,
+		crust = c.crust,
 		yellow = c.yellow,
 		flamingo = c.flamingo,
 		cyan = c.sapphire,
@@ -175,9 +177,8 @@ return {
 			lualine_b = {
 				{
 					"filetype",
-					color = { fg = colors.overlay1 },
+					color = { fg = colors.overlay1, bg = colors.crust },
 					separator = { right = "", left = "" },
-					cond = cond_disable_by_ft,
 					icon_only = true,
 					colored = false,
 					padding = { right = 0, left = 2 },
@@ -187,7 +188,7 @@ return {
 					"filename",
 
 					padding = { right = 1, left = 0 },
-					color = { fg = colors.overlay1 },
+					color = { fg = colors.overlay1, bg = colors.crust },
 					separator = { right = "", left = "" },
 
 					symbols = {
@@ -331,7 +332,7 @@ return {
 						return msg
 					end,
 					icon = "",
-					color = { fg = colors.overlay1 },
+					color = { fg = colors.overlay1, bg = colors.crust },
 					padding = { left = 1, right = 2 },
 					separator = { right = "", left = "" },
 				},
@@ -370,7 +371,7 @@ return {
 
 		local config = {
 			options = {
-				theme = "auto",
+				theme = "catppuccin",
 				disabled_filetypes = { statusline = { "alpha", "snacks_dashboard" } },
 				icons_enabled = true,
 				globalstatus = true,
