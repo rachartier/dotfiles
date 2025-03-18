@@ -1,7 +1,7 @@
 local M = {}
 
 function M.get_colors()
-	return require("catppuccin.palettes").get_palette(M.flavour)
+	return require("catppuccin.palettes").get_palette(vim.g.catppuccin_flavour)
 end
 
 function M.get_lualine_colors()

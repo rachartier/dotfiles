@@ -32,4 +32,6 @@ vim.filetype.add({
 	},
 })
 
+vim.g.catppuccin_flavour = "macchiato"
+
 return M
