@@ -77,6 +77,7 @@ return {
 		event = "VeryLazy",
 		enabled = true,
 		opts = {
+			transparency_color = require("theme").get_colors().base,
 			overwrite = {
 				yank = {
 					enabled = true,

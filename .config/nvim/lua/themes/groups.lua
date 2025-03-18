@@ -13,7 +13,7 @@ function M.get(colors)
 
 		-- NormalFloat = { bg = bg, fg = colors.text },
 		NormalFloat = { bg = "None", fg = colors.text },
-		FloatBorder = { fg = colors.lavender, bg = colors.base },
+		FloatBorder = { fg = colors.lavender, bg = "None" },
 		FloatTitle = { bg = colors.base, fg = colors.text, italic = true, bold = true },
 		LineNr = { fg = colors.surface2 },
 		SignColumn = { fg = colors.surface1 },
@@ -75,7 +75,7 @@ function M.get(colors)
 		NeoTreePreview = { link = "NeoTreeNormal" },
 
 		NoiceCmdlineIcon = { fg = colors.yellow, italic = false, bold = true },
-		NoiceCmdlinePopup = { bg = colors.base, fg = colors.text },
+		NoiceCmdlinePopup = { bg = "None", fg = colors.text },
 		NoiceCmdlinePopupTitle = { bg = colors.red, fg = colors.text },
 		NoiceCmdlinePopupBorder = { link = "FloatBorder" },
 		NoiceCmdlinePopupTitleInput = { bg = colors.yellow, fg = colors.base },
@@ -91,6 +91,7 @@ function M.get(colors)
 		SwitchBufferStatusColor = { fg = colors.red },
 
 		SnacksPickerDir = { italic = true, fg = colors.overlay0 },
+		SnacksPickerTitle = { bg = "None", fg = colors.text, italic = true, bold = true },
 		SnacksDashboardHeader = { fg = colors.mauve },
 		SnacksDashboardIcon = { fg = colors.mauve },
 		SnacksDashboardDesc = { fg = colors.text },
