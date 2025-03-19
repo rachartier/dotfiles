@@ -61,6 +61,7 @@ ${custom.inside_docker}\
 $character"""
 
 add_newline = true
+command_timeout = 1000
 
 [custom.inside_docker]
 disabled = false
