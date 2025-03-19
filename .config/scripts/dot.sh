@@ -473,6 +473,8 @@ install_chafa() {
 
     cd /tmp
 
+    __install_package_apt libglib2.0-dev
+
     git clone https://github.com/hpjansson/chafa &&
     	cd chafa &&
         ./autogen.sh &&
