@@ -70,9 +70,10 @@ local conf = require("config")
 opt.pumblend = conf.pumblend -- Popup blend
 opt.winblend = conf.winblend -- Window blend
 
-if vim.fn.exists("+winborder") > 0 then
-	opt.winborder = require("config.ui.border").default_border
-end
+-- TODO: to enable when winborder is more widespread
+-- if vim.fn.exists("+winborder") > 0 then
+-- 	opt.winborder = require("config.ui.border").default_border
+-- end
 
 vim.o.background = "dark"
 opt.whichwrap:append("<>[]hl")
