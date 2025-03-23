@@ -39,6 +39,7 @@ return {
 		"CopilotC-Nvim/CopilotChat.nvim",
 		enabled = true,
 		branch = "main",
+		build = "make tiktoken",
 		dependencies = {
 			"zbirenbaum/copilot.lua",
 			-- "github/copilot.vim",
@@ -355,14 +356,39 @@ Useful PEPs for this section (not exhaustive):
 		opts = {
 			behaviour = {
 				auto_set_keymaps = true,
-				support_paste_from_clipboard = true,
 				auto_suggestions = false,
+				enable_cursor_planning_mode = true,
+				support_paste_from_clipboard = true,
 			},
 			provider = "copilot",
+			cursor_applying_provider = "copilot",
 			copilot = {
 				model = "claude-3.7-sonnet",
 			},
 			hints = { enabled = true },
+			windows = {
+				---@type "right" | "left" | "top" | "bottom"
+				position = "right", -- the position of the sidebar
+				wrap = true, -- similar to vim.o.wrap
+				width = 30, -- default % based on available width
+				sidebar_header = {
+					enabled = false, -- true, false to enable/disable the header
+					align = "center", -- left, center, right for title
+					rounded = true,
+				},
+				input = {
+					prefix = "> ",
+					height = 8, -- Height of the input window in vertical layout
+				},
+				edit = {
+					border = "none",
+					start_insert = true, -- Start insert mode when opening the edit window
+				},
+				ask = {
+					start_insert = true, -- Start insert mode when opening the ask window
+					border = "none",
+				},
+			},
 		},
 	},
 }

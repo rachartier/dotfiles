@@ -4,6 +4,7 @@ return {
 	dependencies = {
 		"rafamadriz/friendly-snippets",
 		"fang2hou/blink-copilot",
+		"Kaiser-Yang/blink-cmp-avante",
 		"brenoprata10/nvim-highlight-colors",
 	},
 	-- build = "cargo build --release",
@@ -57,6 +58,7 @@ return {
 
 		sources = {
 			default = {
+				"avante",
 				"copilot",
 				"lsp",
 				"path",
@@ -76,6 +78,11 @@ return {
 						max_completions = 3,
 						max_attempts = 4,
 					},
+				},
+				avante = {
+					module = "blink-cmp-avante",
+					name = "Avante",
+					opts = {},
 				},
 			},
 		},
