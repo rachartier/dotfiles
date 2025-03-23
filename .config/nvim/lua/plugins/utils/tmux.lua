@@ -8,7 +8,7 @@ return {
 		copy_sync = {
 			-- enables copy sync. by default, all registers are synchronized.
 			-- to control which registers are synced, see the `sync_*` options.
-			enable = true,
+			enable = false,
 
 			-- ignore specific tmux buffers e.g. buffer0 = true to ignore the
 			-- first buffer or named_buffer_name = true to ignore a named tmux
