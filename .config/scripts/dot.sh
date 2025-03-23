@@ -186,10 +186,15 @@ __install_package_release() {
 
     wget -nv -q "$url" >/dev/null && log "success" "'$filename' downloaded." || return 1
 
-    # check if $filename is a directory
     if [[ "$filename" == *.tar.gz ]]; then
         tar -xf "$filename" && log "success" "$filename extracted." || return 1
         filename=$(basename "$filename" ".tar.gz")
+        if [ -d "/tmp/$filename" ]; then
+            cd "/tmp/$filename"
+        fi
+    elif [[ "$filename" == *.zip  ]]; then
+        unzip "$filename" && log "success" "$filename extracted." || return 1
+        filename=$(basename "$filename" ".zip")
         if [ -d "/tmp/$filename" ]; then
             cd "/tmp/$filename"
         fi
@@ -265,19 +270,23 @@ install_luarocks() {
 
 }
 
-install_fonts_for_windows() {
-    log "info" "Installing fonts for Windows"
+install_fonts() {
+    log "info" "Installing fonts..."
 
-    fonts=$(find "$HOME/.fonts" -type f -name "*.ttf" -o -name "*.otf")
+    local fonts_dir="$HOME/.local/share/fonts"
+    mkdir -p "$fonts_dir"
 
-    for font in $fonts; do
-        log "info" "Installing $font..."
-        font_name=$(basename "$font")
-        # cp "$font" "/mnt/c/Users/$(__get_windows_user)/AppData/Local/Microsoft/Windows/Fonts/$font_name" || log "info" "Font $font_name already installed."
-        cp "$font" "/mnt/c/Windows/Fonts/$font_name" || log "info" "Font $font_name already installed."
+    log "info" "Downloading fonts..."
+    fonts=(
+        "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/NerdFontsSymbolsOnly.zip"
+    )
+
+    for font in "${fonts[@]}"; do
+        log "installing" "Installing $font..."
+        wget -nv -q "$font" -O /tmp/font.zip
+        unzip -q /tmp/font.zip -d /tmp/fonts
+        mv /tmp/fonts/*.ttf "$fonts_dir"
     done
-
-    log "success" "Fonts installed."
 }
 
 install_starship() {
@@ -609,6 +618,16 @@ install_direnv() {
     log "success" "direnv installed."
 }
 
+install_win32yank() {
+    print_step "Installing win32yank"
+
+    local win32yank_version
+    win32yank_version=$(__get_latest_release "equalsraf/win32yank")
+
+    log "download" "Installing win32yank..."
+    __install_package_release "https://github.com/equalsraf/win32yank/releases/latest/download/win32yank-x64.zip" win32yank.exe
+}
+
 install_essentials() {
     install_packages
 
@@ -635,6 +654,9 @@ install_essentials() {
 
     install_copilot_cli
     install_direnv
+
+    install_win32yank
+    install_fonts
 }
 
 install_minimal() {
@@ -764,8 +786,9 @@ do_reinstall() {
     "gh") install_github_gh ;;
     "copilot-cli") install_copilot_cli ;;
     "direnv") install_direnv ;;
-    "fonts") install_fonts_for_windows ;;
+    "fonts") install_fonts ;;
     "terminal") install_terminal $2 ;;
+    "win32yank") install_win32yank ;;
     *) log "error" "'$1' unknown."; return ;;
     esac
 
