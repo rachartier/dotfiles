@@ -473,7 +473,8 @@ install_chafa() {
 
     cd /tmp
 
-    __install_package_apt libglib2.0-dev
+    __install_package_apt libglib2.0-dev \
+        freetype2-devel
 
     git clone https://github.com/hpjansson/chafa &&
     	cd chafa &&
