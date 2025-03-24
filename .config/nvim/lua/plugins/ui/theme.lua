@@ -75,6 +75,7 @@ return {
 			gitsigns = true,
 			lsp_trouble = false,
 			mason = true,
+			markdown = true,
 			mini = true,
 			neotree = true,
 			noice = true,

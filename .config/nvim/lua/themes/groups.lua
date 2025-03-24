@@ -130,7 +130,8 @@ function M.get(colors)
 		FzfLuaBackdrop = { bg = "None" },
 
 		WinSeparator = { fg = colors.surface1 },
-		WinBar = { fg = colors.rosewater, bg = "None" },
+		WinBar = { fg = colors.surface1, bg = "None" },
+		AvanteSidebarWinSeparator = { fg = colors.surface0, bg = "None" },
 
 		DapUIPlayPauseNC = { link = "DapUIPlayPause" },
 		DapUIRestartNC = { link = "DapUIRestart" },
@@ -187,6 +188,8 @@ function M.get(colors)
 		MarkdownCheckboxQuestion = { fg = colors.yellow },
 		MarkdownCheckboxInfo = { fg = colors.sapphire },
 		MarkdownCheckboxImportant = { fg = colors.peach },
+
+		MarkviewCode = { bg = colors.orange },
 
 		CopilotSuggestion = { fg = colors.subtext0, italic = false },
 		SnacksIndentScope = { fg = colors.surface1 },

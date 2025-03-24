@@ -30,23 +30,36 @@ vim.schedule(function()
 		--         cache_enabled = true
 		--     }
 		-- end
+		-- vim.g.clipboard = {
+		-- 	copy = {
+		-- 		["+"] = "clip.exe",
+		-- 		["*"] = "clip.exe",
+		-- 	},
+		-- 	paste = {
+		-- 		["+"] = 'powershell.exe -NoLogo -NoProfile -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+		-- 		["*"] = 'powershell.exe -NoLogo -NoProfile -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+		-- 	},
+		-- 	cache_enabled = 0,
+		-- }
+		vim.opt.clipboard = "unnamedplus"
 		vim.g.clipboard = {
+			name = "win32yank",
 			copy = {
-				["+"] = "clip.exe",
-				["*"] = "clip.exe",
+				["+"] = "win32yank.exe -i --crlf",
+				["*"] = "win32yank.exe -i --crlf",
 			},
 			paste = {
-				["+"] = 'powershell.exe -NoLogo -NoProfile -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-				["*"] = 'powershell.exe -NoLogo -NoProfile -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+				["+"] = "win32yank.exe -o --lf",
+				["*"] = "win32yank.exe -o --lf",
 			},
-			cache_enabled = 0,
+			cache_enabled = 1,
 		}
 
-		if os.getenv("TMUX") then
-			require("utils").on_event({ "TextYankPost" }, function()
-				vim.fn.system("clip.exe", vim.fn.getreg('"'))
-			end, { target = "*", desc = "Copy yanked text to clipboard" })
-		end
+		-- if os.getenv("TMUX") then
+		-- 	require("utils").on_event({ "TextYankPost" }, function()
+		-- 		vim.fn.system("win32yank.exe -i ", vim.fn.getreg("0"))
+		-- 	end, { target = "*", desc = "Copy yanked text to clipboard" })
+		-- end
 
 		-- choco install win32yank
 		-- vim.g.clipboard = {
