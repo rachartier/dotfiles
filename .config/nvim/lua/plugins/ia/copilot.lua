@@ -357,7 +357,7 @@ Useful PEPs for this section (not exhaustive):
 			behaviour = {
 				auto_set_keymaps = true,
 				auto_suggestions = false,
-				enable_cursor_planning_mode = true,
+				enable_cursor_planning_mode = false,
 				support_paste_from_clipboard = true,
 			},
 			provider = "copilot",
