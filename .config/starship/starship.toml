@@ -2,12 +2,12 @@
 format = """
 $username\
 $hostname\
-$status\
 $directory\
 $git_branch\
 $git_state\
 $git_status\
 $all\
+$status\
 $cmd_duration\
 $docker_context\
 $line_break\
@@ -43,7 +43,7 @@ style = "blue"
 [status]
 format = "[$symbol](fg:$style) "
 success_symbol = ""
-symbol = ""
+symbol = ""
 success_style = "green"
 failure_style = "red"
 disabled = false
