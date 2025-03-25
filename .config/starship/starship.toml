@@ -36,7 +36,7 @@ format = "[$path]($style)[$read_only]($read_only_style) "
 style = "blue"
 
 [status]
-format = "[$symbol](fg:$style)"
+format = "[$symbol](fg:$style) "
 success_symbol = ""
 symbol = ""
 success_style = "green"
