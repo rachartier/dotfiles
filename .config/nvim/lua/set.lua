@@ -2,81 +2,26 @@ local opt = vim.opt
 
 opt.autowrite = true -- Enable auto write
 
-vim.schedule(function()
+vim.defer_fn(function()
 	-- opt.spelllang = { -- Languages for spell checking
 	-- 	"fr",
 	-- 	"en",
 	-- }
 	opt.spell = false -- Enable spell checking
 
-	if vim.fn.executable("wsl.exe") == 1 then
-		-- if vim.fn.executable("wl-copy") == 0 then
-		--     print("wl-clipboard not found, clipboard integration won't work")
-		-- else
-		--     vim.g.clipboard = {
-		--         name = "wl-clipboard (wsl)",
-		--         copy = {
-		--             ["+"] = 'wl-copy --foreground --type text/plain',
-		--             ["*"] = 'wl-copy --foreground --primary --type text/plain',
-		--         },
-		--         paste = {
-		--             ["+"] = (function()
-		--                 return vim.fn.systemlist('wl-paste --no-newline|sed -e "s/\r$//"', {''}, 1) -- '1' keeps empty lines
-		--             end),
-		--             ["*"] = (function()
-		--                 return vim.fn.systemlist('wl-paste --primary --no-newline|sed -e "s/\r$//"', {''}, 1)
-		--             end),
-		--         },
-		--         cache_enabled = true
-		--     }
-		-- end
-		-- vim.g.clipboard = {
-		-- 	copy = {
-		-- 		["+"] = "clip.exe",
-		-- 		["*"] = "clip.exe",
-		-- 	},
-		-- 	paste = {
-		-- 		["+"] = 'powershell.exe -NoLogo -NoProfile -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-		-- 		["*"] = 'powershell.exe -NoLogo -NoProfile -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-		-- 	},
-		-- 	cache_enabled = 0,
-		-- }
-		vim.opt.clipboard = "unnamedplus"
-		vim.g.clipboard = {
-			name = "win32yank",
-			copy = {
-				["+"] = "win32yank.exe -i --crlf",
-				["*"] = "win32yank.exe -i --crlf",
-			},
-			paste = {
-				["+"] = "win32yank.exe -o --lf",
-				["*"] = "win32yank.exe -o --lf",
-			},
-			cache_enabled = 1,
-		}
-
-		-- if os.getenv("TMUX") then
-		-- 	require("utils").on_event({ "TextYankPost" }, function()
-		-- 		vim.fn.system("win32yank.exe -i ", vim.fn.getreg("0"))
-		-- 	end, { target = "*", desc = "Copy yanked text to clipboard" })
-		-- end
-
-		-- choco install win32yank
-		-- vim.g.clipboard = {
-		-- 	name = "win32yank-wsl",
-		-- 	copy = {
-		-- 		["+"] = "win32yank.exe -i --crlf",
-		-- 		["*"] = "win32yank.exe -i --crlf",
-		-- 	},
-		-- 	paste = {
-		-- 		["+"] = "win32yank.exe -o --lf",
-		-- 		["*"] = "win32yank.exe -o --lf",
-		-- 	},
-		-- 	cache_enabled = 0,
-		-- }
-	else
-		vim.opt.clipboard = "unnamedplus"
-	end
+	vim.opt.clipboard = "unnamedplus"
+	vim.g.clipboard = {
+		cache_enabled = 1,
+		name = "OSC 52",
+		copy = {
+			["+"] = require("vim.ui.clipboard.osc52").copy("+"),
+			["*"] = require("vim.ui.clipboard.osc52").copy("*"),
+		},
+		paste = {
+			["+"] = require("vim.ui.clipboard.osc52").paste("+"),
+			["*"] = require("vim.ui.clipboard.osc52").paste("*"),
+		},
+	}
 end, 50)
 
 local conf = require("config")

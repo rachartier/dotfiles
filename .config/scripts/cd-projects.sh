@@ -14,7 +14,7 @@ repos_raw=$(fd -u -t d -H "^\.git$" "$HOME/dev" -x dirname {})
 repos=""
 while IFS= read -r repo; do
     last_modified=$(get_last_modified "$repo")
-    name=$(echo "$repo" | awk -F/ '{print $(NF)}')
+    name=$(basename "$repo")
     repos="${repos}${repo} :: [${last_modified}] ${name}"$'\n'
 done <<<"$repos_raw"
 
@@ -25,9 +25,7 @@ if [ -z "$repos" ]; then
     exit 1
 fi
 
-echo "$repos"
-
-selection=$(echo -e "$repos" | fzf --ansi --with-nth 3,4 --preview "eza --color=always --long --no-filesize --icons=always --no-time --no-user --no-permissions {1}")
+selection=$(echo -e "$repos" | fzf --ansi --with-nth 3,4,5 --preview "eza --color=always --long --no-filesize --icons=always --no-time --no-user --no-permissions {1}")
 
 if [ -z "$selection" ]; then
     exit 2
@@ -35,7 +33,7 @@ fi
 
 project=$(echo "$selection" | awk -F" :: " '{print $1}')
 
-name=$(echo "$selection" | awk -F" :: " '{print $2}' | cut -d' ' -f2-)
+name=$(echo "$selection" | awk '{print $NF}')
 name=$(echo "$name" | tr . _)
 
 if [ -z "$project" ]; then
