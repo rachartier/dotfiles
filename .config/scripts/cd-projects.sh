@@ -33,7 +33,7 @@ fi
 
 project=$(echo "$selection" | awk -F" :: " '{print $1}')
 
-name=$(echo "$selection" | awk -F" :: " '{print $2}' | cut -d' ' -f2-)
+name=$(echo "$selection" | awk '{print $NF}')
 name=$(echo "$name" | tr . _)
 
 if [ -z "$project" ]; then
