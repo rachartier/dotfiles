@@ -44,3 +44,5 @@ vim.diagnostic.config({
 	},
 	severity_sort = true,
 })
+
+vim.lsp.log.set_level(vim.log.levels.WARN)
