@@ -32,6 +32,11 @@ return {
 					["."] = true,
 					markdown = true,
 				},
+				copilot_model = "gpt-4o-copilot",
+				server = {
+					type = "binary", -- "nodejs" | "binary"
+					custom_server_filepath = nil,
+				},
 			})
 		end,
 	},
@@ -59,7 +64,7 @@ return {
 					local actions = require("CopilotChat.actions")
 					-- require("CopilotChat.integrations.telescope").pick(actions.help_actions())
 					-- require("CopilotChat.integrations.telescope").pick(actions.help_actions())
-					require("CopilotChat.integrations.snacks").pick(actions.prompt_actions())
+					require("CopilotChat").select_prompt()
 				end,
 				desc = "CopilotChat - Help actions",
 			},
@@ -72,9 +77,9 @@ return {
 					-- 	selection = require("CopilotChat.select").visual,
 					-- }))
 
-					require("CopilotChat.integrations.snacks").pick(actions.prompt_actions({
+					require("CopilotChat").select_prompt({
 						selection = require("CopilotChat.select").visual,
-					}))
+					})
 				end,
 				mode = { "n", "x", "v" },
 				desc = "CopilotChat - Prompt actions",
@@ -364,6 +369,9 @@ Useful PEPs for this section (not exhaustive):
 			cursor_applying_provider = "copilot",
 			copilot = {
 				model = "claude-3.7-sonnet",
+			},
+			web_search_engine = {
+				provider = "google", -- tavily, serpapi, searchapi, google or kagi
 			},
 			hints = { enabled = true },
 			windows = {

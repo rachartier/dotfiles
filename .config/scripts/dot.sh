@@ -426,6 +426,12 @@ install_bat() {
     fi
 }
 
+install_node_js() {
+    print_step "Installing Node.js LTS"
+
+    curl -fsSL https://raw.githubusercontent.com/tj/n/master/bin/n | sudo bash -s lts >/dev/null
+}
+
 install_packages() {
     print_step "Installing Base Packages"
 
@@ -458,15 +464,10 @@ install_packages() {
     __install_package_apt ripgrep
     __install_package_apt xsel
 
-
     if [ -z "$DOTFILES_MINIMAL" ]; then
         __install_package_apt tty-clock
         __install_package_apt grc
     fi
-
-    print_step "Installing Node.js LTS"
-    # install nodejs...
-    curl -fsSL https://raw.githubusercontent.com/tj/n/master/bin/n | sudo bash -s lts >/dev/null
 
     if [ -f "$HOME/.local/bin/fd" ]; then
         log "info" "Removing old fd symlink."
@@ -787,6 +788,7 @@ do_reinstall() {
     "tmux") install_tmux ;;
     "viu") install_viu ;;
     "gh") install_github_gh ;;
+    "node") install_node_js ;;
     "copilot-cli") install_copilot_cli ;;
     "direnv") install_direnv ;;
     "fonts") install_fonts ;;
