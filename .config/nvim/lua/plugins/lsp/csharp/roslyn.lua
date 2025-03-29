@@ -20,7 +20,7 @@ return {
 		-- Setting this option to false will indicate to the server that neovim will do the file watching.
 		-- However, in `hacks.lua` I will also just don't start off any watchers, which seems to make the server
 		-- a lot faster to initialize.
-		filewatching = true,
+		filewatching = "auto",
 		on_attach = require("config.lsp.attach").on_attach,
 	},
 }

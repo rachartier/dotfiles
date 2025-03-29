@@ -39,12 +39,13 @@ return {
 	{
 		"williamboman/mason.nvim",
 		branch = "v2.x",
-		lazy = true,
+		lazy = false,
 		dependencies = {
 			{
 				"williamboman/mason-lspconfig.nvim",
 				branch = "2.x",
 			},
+			"seblyng/roslyn.nvim", -- needed to resolve a bug where roslyn call a non existing method from mason
 			"williamboman/mason-nvim-dap.nvim",
 			"saghen/blink.cmp",
 		},
