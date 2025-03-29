@@ -60,6 +60,19 @@ function M.on_attach(client, bufnr)
 	-- 	vim.lsp.inlay_hint.enable(true)
 	-- end
 
+	local lsp_keymaps = {
+		"grr",
+		"gra",
+		"grn",
+		"gri",
+		"gO",
+		"<C-S>",
+	}
+
+	for _, keymap in ipairs(lsp_keymaps) do
+		vim.keymap.del("n", keymap)
+	end
+
 	local wk = require("which-key")
     -- stylua: ignore start
     wk.add({
