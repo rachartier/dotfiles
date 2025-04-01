@@ -1,3 +1,35 @@
+local utils = require("utils")
+
+local function get_vlinecount_str()
+	local raw_count = vim.fn.line(".") - vim.fn.line("v")
+	raw_count = raw_count < 0 and raw_count - 1 or raw_count + 1
+
+	return math.abs(raw_count)
+end
+
+local function get_scrollbar()
+	local sbar_chars = {
+		"▔",
+		"🮂",
+		"🬂",
+		"🮃",
+		"▀",
+		"▄",
+		"▃",
+		"🬭",
+		"▂",
+		"▁",
+	}
+
+	local cur_line = vim.api.nvim_win_get_cursor(0)[1]
+	local lines = vim.api.nvim_buf_line_count(0)
+
+	local i = math.floor((cur_line - 1) / lines * #sbar_chars) + 1
+	local sbar = string.rep(sbar_chars[i], 1)
+
+	return sbar
+end
+
 local function get_lualine_colors()
 	local c = require("catppuccin.palettes").get_palette(vim.g.catppuccin_flavour)
 
@@ -181,7 +213,6 @@ return {
 					icon_only = true,
 					colored = false,
 					padding = { right = 0, left = 2 },
-					condition = conditions.buffer_not_empty,
 				},
 				{
 					"filename",
@@ -337,33 +368,82 @@ return {
 				},
 			},
 			lualine_z = {
+				-- {
+				-- 	"progress",
+				-- 	separator = { left = "" },
+				-- 	color = { fg = colors.base },
+				-- 	padding = { left = 1, right = 0 },
+				-- 	cond = function()
+				-- 		local ft = vim.api.nvim_get_option_value("filetype", { buf = 0 })
+				-- 		return not vim.tbl_contains(vim.g.noncode_ft, ft)
+				-- 	end,
+				-- },
 				{
-					"progress",
-					separator = { left = "" },
+					"location",
+					separator = { left = "", right = "" },
 					color = { fg = colors.base },
+					padding = { left = 1, right = 0 },
+					cond = function()
+						local ft = vim.api.nvim_get_option_value("filetype", { buf = 0 })
+						return not vim.tbl_contains(vim.g.noncode_ft, ft)
+					end,
+				},
+				-- {
+				-- 	function()
+				-- 		if vim.fn.mode():find("[vV]") then
+				-- 			local ln_beg = vim.fn.line("v")
+				-- 			local ln_end = vim.fn.line(".")
+				--
+				-- 			local lines = ln_beg <= ln_end and ln_end - ln_beg + 1 or ln_beg - ln_end + 1
+				--
+				-- 			return "sel: " .. tostring(vim.fn.wordcount().visual_chars) .. " | " .. tostring(lines)
+				-- 		else
+				-- 			return ""
+				-- 		end
+				-- 	end,
+				-- 	color = { fg = colors.base },
+				-- 	separator = { left = "" },
+				-- },
+				{
+					function()
+						local ft = vim.api.nvim_get_option_value("filetype", { buf = 0 })
+						local lines = vim.api.nvim_buf_line_count(0)
+
+						local wc_table = vim.fn.wordcount()
+
+						if wc_table.visual_words and wc_table.visual_chars then
+							return table.concat({
+								"‹› ",
+								get_vlinecount_str(),
+								" lines  ",
+								wc_table.visual_words,
+								" words  ",
+								wc_table.visual_chars,
+								" chars ",
+							})
+						end
+
+						if vim.tbl_contains(vim.g.noncode_ft, ft) then
+							return table.concat({
+								lines,
+								" lines  ",
+								wc_table.words,
+								" words ",
+							})
+						end
+
+						return ""
+					end,
+					separator = { left = "" },
 					padding = { left = 1, right = 0 },
 				},
 				{
-					"location",
-					separator = { right = "" },
-					color = { fg = colors.base },
-					padding = { left = 1, right = 1 },
-				},
-				{
 					function()
-						if vim.fn.mode():find("[vV]") then
-							local ln_beg = vim.fn.line("v")
-							local ln_end = vim.fn.line(".")
-
-							local lines = ln_beg <= ln_end and ln_end - ln_beg + 1 or ln_beg - ln_end + 1
-
-							return "sel: " .. tostring(vim.fn.wordcount().visual_chars) .. " | " .. tostring(lines)
-						else
-							return ""
-						end
+						return get_scrollbar()
 					end,
-					color = { fg = colors.base },
-					separator = { left = "" },
+					separator = { left = "" },
+					color = { fg = colors.surface0 },
+					padding = { left = 1, right = 0 },
 				},
 			},
 		}

@@ -4,7 +4,7 @@ return {
 	name = "catppuccin",
 	enabled = true,
 	opts = {
-		flavour = "mocha", -- latte, frappe, macchiato, mocha
+		flavour = vim.g.catppuccin_flavour, -- latte, frappe, macchiato, mocha
 		transparent_background = true,
 		show_end_of_buffer = false,
 		term_colors = true,

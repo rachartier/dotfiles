@@ -32,6 +32,19 @@ vim.filetype.add({
 	},
 })
 
+vim.g.noncode_ft = {
+	"text",
+	"help",
+	"gitcommit",
+	"gitrebase",
+	"svn",
+	"diff",
+	"markdown",
+	"txt",
+	"plaintext",
+	"jsonc",
+}
+
 vim.g.catppuccin_flavour = "macchiato"
 
 return M

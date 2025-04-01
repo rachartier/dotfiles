@@ -7,7 +7,8 @@ function M.get(colors)
 	return {
 		-- Visual = { bg = "#234370" },
 		-- Visual = { bg = colors.blue, fg = colors.base },
-		Visual = { bg = colors.surface1, bold = false },
+		Visual = { bg = colors.surface0, bold = false },
+		VisualNonText = { bg = colors.surface0, fg = colors.surface1 },
 
 		CurSearch = { bg = "None" },
 
@@ -191,10 +192,10 @@ function M.get(colors)
 
 		MarkviewCode = { bg = colors.orange },
 
+		LualineCustomScrollBar = { fg = colors.base },
+
 		CopilotSuggestion = { fg = colors.subtext0, italic = false },
 		SnacksIndentScope = { fg = colors.surface1 },
-
-		VisualNonText = { bg = colors.surface0, fg = colors.surface1 },
 
 		-- === Lsp
 		["@keyword.operator.python"] = { link = "Conditional" },

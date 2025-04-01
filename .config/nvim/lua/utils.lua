@@ -279,4 +279,8 @@ function M.close_if_last_window(buf_name)
 	end
 end
 
+function M.hl_str(hl, str)
+	return "%#" .. hl .. "#" .. str .. "%*"
+end
+
 return M
