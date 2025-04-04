@@ -34,12 +34,11 @@ return {
 		end,
 	},
 	{
-		-- dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-code-actions.nvim",
-		"rachartier/tiny-code-action.nvim",
-		enabled = false,
+		dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-code-actions.nvim",
+		-- "rachartier/tiny-code-action.nvim",
+		enabled = true,
 		dependencies = {
 			"nvim-lua/plenary.nvim",
-			"nvim-telescope/telescope.nvim",
 			"nvim-tree/nvim-web-devicons",
 		},
 		event = "LazyFile",
@@ -122,6 +121,7 @@ return {
 		enabled = true,
 		-- commit = "0ac1133f0869730ced61b5f3c540748e29acca1a",
 		config = function()
+			-- vim.api.nvim_set_hl(0, "CursorLine", { bg = require("theme").get_colors().surface1, bold = false })
 			require("tiny-inline-diagnostic").setup({
 				transparent_bg = false,
 				hi = {
@@ -140,6 +140,27 @@ return {
 				disabled_ft = {},
 			})
 
+			-- require("tiny-inline-diagnostic").setup({
+			-- 	signs = {
+			-- 		left = "",
+			-- 		right = "",
+			-- 		diag = "■",
+			-- 		arrow = "",
+			-- 		up_arrow = "",
+			-- 		vertical = "  │",
+			-- 		vertical_end = "  └",
+			-- 	},
+			-- 	blend = { factor = 0 },
+			-- 	hi = {
+			-- 		background = "None",
+			-- 	},
+			-- 	options = {
+			-- 		multilines = {
+			-- 			enabled = true,
+			-- 			always_show = true,
+			-- 		},
+			-- 	},
+			-- })
 			-- require("utils").on_event("ColorScheme", function()
 			-- 	local mixin_color = require("theme").get_colors().base
 			-- 	require("tiny-inline-diagnostic").change({

@@ -39,7 +39,7 @@ return {
 	{
 		"williamboman/mason.nvim",
 		branch = "v2.x",
-		lazy = false,
+		lazy = true,
 		dependencies = {
 			{
 				"williamboman/mason-lspconfig.nvim",
