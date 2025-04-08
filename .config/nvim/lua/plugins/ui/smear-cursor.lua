@@ -19,6 +19,7 @@ return {
 			min_vertical_distance_smear = 2,
 
 			cursor_color = require("theme").get_colors().text,
+			transparent_bg_fallback_color = require("theme").get_colors().base,
 		})
 	end,
 }
