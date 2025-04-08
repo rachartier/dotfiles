@@ -76,7 +76,10 @@ if [ command -v pyenv 1>/dev/null 2>&1 ]; then
 fi
 
 eval "$(zoxide init zsh --cmd cd)"
-eval "$(direnv hook zsh)"
+
+if [ command -v direnv 1>/dev/null 2>&1 ]; then
+    eval "$(direnv hook zsh)"
+fi
 
 function ghcs() {
     if [ -z "$DOT_GITHUB_COPILOT_LOADED" ]; then
