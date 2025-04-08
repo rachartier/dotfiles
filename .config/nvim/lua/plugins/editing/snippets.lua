@@ -16,9 +16,6 @@ return {
 					saveChanges = "<CR>", -- alternatively, can also use `:w`
 				},
 			},
-			telescope = {
-				alsoSearchSnippetBody = true,
-			},
 			jsonFormatter = "jq", -- "yq"|"jq"|"none"
 		},
 	},

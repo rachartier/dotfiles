@@ -1,6 +1,6 @@
 return {
 	"sphamba/smear-cursor.nvim",
-	event = "VeryLazy",
+	event = "LazyFile",
 	-- enabled = not vim.g.neovide,
 	enabled = true,
 	priority = 10,

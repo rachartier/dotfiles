@@ -12,9 +12,13 @@ local utils = require("utils")
 -- })
 
 utils.on_event({ "VimResized" }, function()
-	local current_tab = vim.fn.tabpagenr()
-	vim.cmd("tabdo wincmd =")
-	vim.cmd("tabnext " .. current_tab)
+	local ft = vim.bo.filetype
+
+	if not string.find(ft, "Avante") then
+		local current_tab = vim.fn.tabpagenr()
+		vim.cmd("tabdo wincmd =")
+		vim.cmd("tabnext " .. current_tab)
+	end
 end, {
 	target = "*",
 	desc = "Resize splits if window got resized",
@@ -146,4 +150,11 @@ utils.on_event("TermOpen", function(event)
 end, {
 	target = "term://*",
 	desc = "Settings for terminal buffers",
+})
+
+vim.api.nvim_create_autocmd("BufWritePost", {
+	pattern = vim.fn.expand("~/.config/kitty/kitty.conf"),
+	callback = function()
+		vim.fn.system("kill -SIGUSR1 $(pgrep kitty)")
+	end,
 })
