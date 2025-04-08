@@ -463,6 +463,8 @@ install_packages() {
 
     __install_package_apt ripgrep
     __install_package_apt xsel
+    __install_package_apt freetype2-devel
+    __install_package_apt libglib2.0-dev
 
     if [ -z "$DOTFILES_MINIMAL" ]; then
         __install_package_apt tty-clock
@@ -482,9 +484,6 @@ install_chafa() {
 	log "info" "Installing chafa..."
 
     cd /tmp
-
-    __install_package_apt libglib2.0-dev \
-        freetype2-devel
 
     git clone https://github.com/hpjansson/chafa &&
     	cd chafa &&
