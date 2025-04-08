@@ -8,7 +8,7 @@ M._theme = require("themes.catppuccin.theme")
 function M.setup()
 	-- M._theme = require("themes.alabaster.theme")
 	-- M._theme = require("themes.nano.theme")
-	if M._theme ~= nil then
+	if M._theme ~= nil and M._theme.setup ~= nil then
 		M._theme.setup()
 	end
 end
