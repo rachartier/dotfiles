@@ -69,7 +69,7 @@ config.selection_word_boundary = " \t\n{}[]()\"'`,;:│=&!%"
 config.window_padding = {
 	-- left = "2cell",
 	-- right = "2cell",
-	top = 0,
+	top = 12,
 	bottom = 0,
 }
 config.win32_system_backdrop = "Acrylic"

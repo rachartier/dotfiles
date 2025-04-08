@@ -707,11 +707,12 @@ install_terminal() {
         ;;
     *)
         log "info" "Installing ghostty..."
-        git clone https://github.com/ghostty-org/ghostty
-        cd ghostty || return 1
-        __install_package_apt libgtk-4-dev libadwaita-1-dev
-        sudo snap install --beta zig --classic
-        sudo zig build -p /usr -Doptimize=ReleaseFast
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/mkasberg/ghostty-ubuntu/HEAD/install.sh)"
+        # git clone https://github.com/ghostty-org/ghostty
+        # cd ghostty || return 1
+        # __install_package_apt libgtk-4-dev libadwaita-1-dev
+        # sudo snap install --beta zig --classic
+        # sudo zig build -p /usr -Doptimize=ReleaseFast
         ;;
     esac
 }
