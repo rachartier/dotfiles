@@ -23,7 +23,18 @@ alias -g ......='../../../../..'
 alias -g -- -h='-h 2>&1 | bat --language=help --style=plain -P'
 alias -g -- --help='--help 2>&1 | bat --language=help --style=plain -P'
 
-alias ssh='TERM=xterm ssh'
+alias ssh='ssh'
+alias ga='git add .'
+alias gb='git branch'
+alias gcb='git checkout -b'
+alias gcm='git commit'
+alias gc='git checkout'
+alias gs='git status'
+alias gp='git pull'
+alias gbd='git branch -D'
+alias gpu='git push'
+alias gpt='git push --tags'
+alias gfu='git fetch upstream'
 
 function __get_clipboard_contents() {
     if command -v xclip &>/dev/null; then
