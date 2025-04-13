@@ -9,6 +9,7 @@ return {
 	},
 	-- build = "cargo build --release",
 	event = { "InsertEnter", "CmdlineEnter" },
+	-- lazy = false,
 	opts = {
 		keymap = { preset = "super-tab" },
 
@@ -53,6 +54,14 @@ return {
 			},
 			trigger = {
 				show_on_insert_on_trigger_character = false,
+			},
+		},
+		fuzzy = {
+			sorts = {
+				"exact",
+				-- defaults
+				"score",
+				"sort_text",
 			},
 		},
 
