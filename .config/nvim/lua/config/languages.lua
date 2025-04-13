@@ -7,7 +7,7 @@ return {
 		lsp_ignore = { "ruff" },
 		lsp_settings = {
 			root_dir = function(fname)
-				return require("lspconfig.util").root_pattern(unpack({
+				return require("lspconfig.util").root_pattern(
 					"main.py",
 					"pyproject.toml",
 					"setup.py",
@@ -15,8 +15,8 @@ return {
 					"requirements.txt",
 					"Pipfile",
 					"pyrightconfig.json",
-					".git",
-				}))(fname)
+					".git"
+				)(fname)
 			end,
 			settings = {
 				basedpyright = {
@@ -25,7 +25,6 @@ return {
 						diagnosticMode = "workspace",
 						useLibraryCodeForTypes = true,
 						typecheckingMode = "standard",
-						-- ignore = { "*" },
 					},
 				},
 			},
@@ -44,29 +43,16 @@ return {
 		},
 		lsp_settings = {
 			root_dir = function(fname)
-				return require("lspconfig.util").root_pattern(unpack({
-					"*.sln",
-					"*.csproj",
-				}))(fname)
+				return require("lspconfig.util").root_pattern("*.sln", "*.csproj")(fname)
 			end,
-			-- cmd = {
-			-- 	os.getenv("HOME") .. "/.local/share/nvim/mason/bin/omnisharp",
-			-- 	"--languagesserver",
-			-- 	"--hostPID",
-			-- 	tostring(pid),
-			-- },
 			settings = {
 				FormattingOptions = {
 					EnableEditorConfigSupport = true,
 					OrganizeImports = true,
 				},
-				MsBuild = {
-					LoadProjectsOnDemand = nil,
-				},
 				RoslynExtensionsOptions = {
 					EnableAnalyzersSupport = true,
 					EnableImportCompletion = true,
-					AnalyzeOpenDocumentsOnly = nil,
 				},
 				Sdk = {
 					IncludePrereleases = true,
@@ -77,22 +63,14 @@ return {
 	{
 		languages = { "lua" },
 		formatter = { "stylua" },
+		mason = { "lua_ls" },
 		linter = { "selene" },
-		lsp_ignore = true,
+		lsp_ignore = false,
 	},
 	{
 		languages = { "c", "cpp", "h", "hpp" },
 		mason = { "clangd" },
-		formatter = {
-			-- ["clang-format"] = {
-			-- 	command = os.getenv("HOME") .. "/.local/share/nvim/mason/bin/clang-format",
-			-- 	inherit = false,
-			-- 	args = {
-			-- 		"--style=file:" .. linter_config .. "/clang-format",
-			-- 		"$FILENAME",
-			-- 	},
-			-- },
-		},
+		formatter = {},
 		lsp_settings = {
 			cmd = {
 				"clangd",
@@ -100,14 +78,11 @@ return {
 			},
 		},
 	},
-
 	{
 		languages = { "typescript" },
 		mason = { "vtsls" },
 		formatter = { "prettierd" },
 		lsp_settings = {
-			-- explicitly add default filetypes, so that we can extend
-			-- them in related extras
 			filetypes = {
 				"javascript",
 				"javascriptreact",
@@ -171,21 +146,12 @@ return {
 		languages = { "markdown" },
 		mason = { "marksman" },
 		formatter = { "markdown-toc" },
-		-- linter = {
-		-- 	"markdownlint",
-		-- },
 	},
 	{
 		languages = { "text" },
 		mason = {},
 		formatter = {},
 	},
-	-- {
-	-- 	languages = { "c", "h", "cpp", "hpp" },
-	-- 	mason = { "clangd" },
-	-- 	formatter = { "clang-format",  },
-	-- 	lsp_ignore = true,
-	-- },
 	{
 		languages = { "rust" },
 		lsp_ignore = true,

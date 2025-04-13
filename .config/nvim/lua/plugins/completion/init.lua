@@ -60,6 +60,7 @@ return {
 			sorts = {
 				"exact",
 				-- defaults
+
 				"score",
 				"sort_text",
 			},

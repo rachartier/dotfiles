@@ -1,5 +1,4 @@
 local utils = require("utils")
-
 local border = require("config.ui.border").default_border
 
 return {
@@ -9,19 +8,18 @@ return {
 		dependencies = {
 			"saghen/blink.cmp",
 			"williamboman/mason.nvim",
-			"onsails/lspkind.nvim",
+			"williamboman/mason-lspconfig.nvim",
 		},
 		config = function()
 			vim.lsp.set_log_level("info")
 
 			local on_attach = require("config.lsp.attach").on_attach
-			-- require("clangd_extensions.inlay_hints").setup_autocmd()
 
 			utils.on_event("LspAttach", function(args)
 				local client = vim.lsp.get_client_by_id(args.data.client_id)
 				local bufnr = args.buf
 
-				-- client.server_capabilities.semanticTokensProvider = nil
+				-- Skip specific clients
 				if client.name == "GitHub Copilot" or client.name == "copilot" or client.name == "ruff" then
 					return
 				end
@@ -31,6 +29,7 @@ return {
 				desc = "LSP Attach",
 			})
 
+			-- Set default window options with border
 			require("lspconfig.ui.windows").default_options = {
 				border = border,
 			}
@@ -45,7 +44,7 @@ return {
 				"williamboman/mason-lspconfig.nvim",
 				branch = "2.x",
 			},
-			"seblyng/roslyn.nvim", -- needed to resolve a bug where roslyn call a non existing method from mason
+			"seblyng/roslyn.nvim", -- resolves a bug with roslyn calling non-existing mason method
 			"williamboman/mason-nvim-dap.nvim",
 			"saghen/blink.cmp",
 		},
@@ -58,13 +57,12 @@ return {
 			ensure_installed = {
 				"stylua",
 				"shfmt",
-				-- "flake8",
 			},
 			ui = {
 				icons = {
-					package_pending = " ",
+					package_pending = " ",
 					package_installed = "󰄳 ",
-					package_uninstalled = " ",
+					package_uninstalled = " ",
 				},
 				border = border,
 			},
@@ -80,16 +78,14 @@ return {
 			},
 		},
 		config = function(_, opts)
-			vim.lsp.set_log_level("debug") -- vim.lsp.set_log_level("debug")
+			vim.lsp.set_log_level("debug")
 
 			require("mason").setup(opts)
 
-			-- Override lsp hover and signature help handlers to use custom border
-
-			local dont_install = {
-				-- installed externally due to its plugins: https://github.com/williamboman/mason.nvim/issues/695
-				"stylelint",
-				-- not real formatters, but pseudo-formatters from conform.nvim
+			-- Tools that should be excluded from auto-installation
+			local excluded_tools = {
+				"stylelint", -- installed externally due to plugins
+				-- pseudo-formatters from conform.nvim
 				"trim_whitespace",
 				"trim_newlines",
 				"squeeze_blanks",
@@ -99,124 +95,123 @@ return {
 			}
 
 			local server_settings = require("config.languages")
+			local capabilities = require("config.lsp.attach").make_capabilities()
 
-			local function to_autoinstall_formatter_linter()
-				local tools = {}
+			-- Collect tools to auto-install
+			local function collect_tools()
+				local lsp_servers = {}
+				local formatters_linters = {}
+				local dap_tools = {}
 
-				for _, server_config in ipairs(server_settings) do
-					for tool, tool_name in pairs(server_config.linter or {}) do
-						if type(tool_name) == "table" then
-							table.insert(tools, tool)
-						else
-							table.insert(tools, tool_name)
+				for _, config in ipairs(server_settings) do
+					-- Collect Mason LSP servers
+					if config.mason then
+						for _, server in ipairs(config.mason) do
+							table.insert(lsp_servers, server)
 						end
 					end
 
-					for tool, tool_name in pairs(server_config.formatter or {}) do
-						if type(tool_name) == "table" then
-							table.insert(tools, tool)
-						else
-							table.insert(tools, tool_name)
+					-- Collect DAP tools if not minimal config
+					if vim.g.dotfile_config_type ~= "minimal" and config.dap then
+						for _, tool in ipairs(config.dap) do
+							table.insert(dap_tools, tool)
 						end
 					end
+
+					-- Collect formatters and linters
+					local function add_tools(tool_type)
+						if config[tool_type] then
+							for tool, tool_name in pairs(config[tool_type]) do
+								if type(tool_name) == "table" then
+									table.insert(formatters_linters, tool)
+								else
+									table.insert(formatters_linters, tool_name)
+								end
+							end
+						end
+					end
+
+					add_tools("formatter")
+					add_tools("linter")
 				end
 
-				-- only unique tools
-				table.sort(tools)
-				local unique_tools = vim.fn.uniq(tools)
+				-- Filter and deduplicate tools
+				local function filter_and_deduplicate(tools)
+					table.sort(tools)
+					local unique_tools = vim.fn.uniq(tools)
 
-				-- remove exceptions not to install
-				local filtered_tools = vim.tbl_filter(function(tool)
-					return not vim.tbl_contains(dont_install, tool)
-				end, unique_tools)
-				return filtered_tools
+					return vim.tbl_filter(function(tool)
+						return not vim.tbl_contains(excluded_tools, tool)
+					end, unique_tools)
+				end
+
+				return {
+					lsp = lsp_servers,
+					dap = dap_tools,
+					tools = filter_and_deduplicate(formatters_linters),
+				}
 			end
 
-			local to_install_dap = {}
-			local to_install_lsp = {}
+			local tools = collect_tools()
 
+			-- Setup Mason DAP if not minimal config
 			if vim.g.dotfile_config_type ~= "minimal" then
-				for _, server_config in ipairs(server_settings) do
-					if server_config.dap then
-						for _, tool in ipairs(server_config.dap) do
-							table.insert(to_install_dap, tool)
-						end
-					end
-				end
-
 				require("mason-nvim-dap").setup({
-					ensure_installed = to_install_dap,
+					ensure_installed = tools.dap,
 					automatic_installation = true,
 				})
 			end
 
+			-- Setup Mason LSP config
+			require("mason-lspconfig").setup({
+				automatic_installation = true,
+			})
+
+			-- Configure and enable each LSP server
 			for _, server_config in ipairs(server_settings) do
 				if server_config.mason then
-					for _, tool in ipairs(server_config.mason) do
-						table.insert(to_install_lsp, tool)
+					for _, server_name in ipairs(server_config.mason) do
+						-- Skip if this server should be ignored
+						print("server_name", server_name)
+						local should_ignore = false
+
+						if type(server_config.lsp_ignore) == "table" then
+							should_ignore = vim.tbl_contains(server_config.lsp_ignore, server_name)
+							print("name:", server_name, "should_ignore", should_ignore)
+						else
+							should_ignore = server_config.lsp_ignore or false
+						end
+
+						if should_ignore then
+							goto continue
+						end
+
+						if server_name == "dartls" then
+							goto continue
+						end
+
+						local settings = server_config.lsp_settings or {}
+
+						if server_name == "ruff" then
+							capabilities.hoverProvider = false
+						end
+
+						settings.capabilities = capabilities
+
+						vim.lsp.config(server_name, settings)
+						vim.lsp.enable(server_name)
+
+						::continue::
 					end
 				end
 			end
 
-			local capabilities = require("config.lsp.attach").make_capabilities()
-
-			require("mason-lspconfig").setup({
-				ensure_installed = to_install_lsp,
-				handlers = {
-					function(server_name)
-						local settings
-						local ignore
-
-						for _, config in ipairs(server_settings) do
-							if config.mason and vim.tbl_contains(config.mason, server_name) then
-								settings = config.lsp_settings
-								if type(config.lsp_ignore) == "table" then
-									ignore = vim.tbl_contains(config.lsp_ignore, server_name)
-								else
-									ignore = config.lsp_ignore or false
-								end
-							end
-						end
-
-						if ignore then
-							return
-						end
-
-						if settings then
-							settings.capabilities = capabilities
-
-							require("lspconfig")[server_name].setup(settings)
-						else
-							-- auto managed by flutter-tools.nvim
-							if server_name == "dartls" then
-								return
-							end
-							if server_name == "ruff" then
-								capabilities.hoverProvider = false
-							end
-
-							require("lspconfig")[server_name].setup({
-								capabilities = capabilities,
-							})
-						end
-					end,
-				},
-			})
-
-			local mr = require("mason-registry")
-			mr:on("package:install:success", function()
-				vim.defer_fn(function()
-					-- trigger FileType event to possibly load this newly installed LSP server
-					require("lazy.core.handler.event").trigger({
-						event = "FileType",
-						buf = vim.api.nvim_get_current_buf(),
-					})
-				end, 100)
-			end)
-
 			if vim.g.dotfile_config_type ~= "minimal" then
-				local function ensure_installed()
-					for _, tool in ipairs(to_autoinstall_formatter_linter()) do
+				local mr = require("mason-registry")
+
+				-- Refresh registry and install
+				local function ensure_tools_installed()
+					for _, tool in ipairs(tools.tools) do
 						local p = mr.get_package(tool)
 						if not p:is_installed() then
 							p:install()
@@ -224,10 +219,20 @@ return {
 					end
 				end
 
+				-- Add hook to refresh FileType on new installs
+				mr:on("package:install:success", function()
+					vim.defer_fn(function()
+						require("lazy.core.handler.event").trigger({
+							event = "FileType",
+							buf = vim.api.nvim_get_current_buf(),
+						})
+					end, 100)
+				end)
+
 				if mr.refresh then
-					mr.refresh(ensure_installed)
+					mr.refresh(ensure_tools_installed)
 				else
-					ensure_installed()
+					ensure_tools_installed()
 				end
 			end
 		end,
