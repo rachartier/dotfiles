@@ -3,7 +3,14 @@ return {
 		languages = { "python" },
 		mason = { "basedpyright", "ruff" },
 		dap = { "debugpy" },
-		formatter = { "ruff_format", "ruff_fix" },
+		formatter = {
+			ruff_format = {
+				command = "ruff",
+				args = { "format", "--config", os.getenv("HOME") .. "/.config/ruff/ruff.toml", "-" },
+				stdin = true,
+			},
+			"ruff_fix",
+		},
 		lsp_ignore = { "ruff" },
 	},
 	{

@@ -182,10 +182,9 @@ return {
 						end
 					end
 
-					-- if ignore then
-					-- 	print("Ignoring server: " .. server_name)
-					-- 	return
-					-- end
+					if ignore then
+						return
+					end
 
 					-- if settings then
 					-- else
