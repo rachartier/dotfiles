@@ -44,7 +44,6 @@ return {
 				"williamboman/mason-lspconfig.nvim",
 				branch = "2.x",
 			},
-			"seblyng/roslyn.nvim", -- resolves a bug with roslyn calling non-existing mason method
 			"williamboman/mason-nvim-dap.nvim",
 			"saghen/blink.cmp",
 		},
@@ -164,47 +163,48 @@ return {
 
 			-- Setup Mason LSP config
 			require("mason-lspconfig").setup({
+				ensure_installed = tools.lsp,
 				automatic_installation = true,
 			})
 
-			-- Configure and enable each LSP server
-			for _, server_config in ipairs(server_settings) do
-				if server_config.mason then
-					for _, server_name in ipairs(server_config.mason) do
-						-- Skip if this server should be ignored
-						print("server_name", server_name)
-						local should_ignore = false
+			require("mason-lspconfig").setup_handlers({
+				function(server_name)
+					local settings
+					local ignore
 
-						if type(server_config.lsp_ignore) == "table" then
-							should_ignore = vim.tbl_contains(server_config.lsp_ignore, server_name)
-							print("name:", server_name, "should_ignore", should_ignore)
-						else
-							should_ignore = server_config.lsp_ignore or false
+					for _, config in ipairs(server_settings) do
+						if config.mason and vim.tbl_contains(config.mason, server_name) then
+							if type(config.lsp_ignore) == "table" then
+								ignore = vim.tbl_contains(config.lsp_ignore, server_name)
+							else
+								ignore = config.lsp_ignore or false
+							end
 						end
-
-						if should_ignore then
-							goto continue
-						end
-
-						if server_name == "dartls" then
-							goto continue
-						end
-
-						local settings = server_config.lsp_settings or {}
-
-						if server_name == "ruff" then
-							capabilities.hoverProvider = false
-						end
-
-						settings.capabilities = capabilities
-
-						vim.lsp.config(server_name, settings)
-						vim.lsp.enable(server_name)
-
-						::continue::
 					end
-				end
-			end
+
+					-- if ignore then
+					-- 	print("Ignoring server: " .. server_name)
+					-- 	return
+					-- end
+
+					-- if settings then
+					-- else
+					-- 	-- auto managed by flutter-tools.nvim
+					-- 	if server_name == "dartls" then
+					-- 		return
+					-- 	end
+					-- 	if server_name == "ruff" then
+					-- 		capabilities.hoverProvider = false
+					-- 	end
+					--
+					-- 	vim.lsp.config(server_name, {
+					-- 		capabilities = capabilities,
+					-- 	})
+					-- end
+
+					vim.lsp.enable(server_name)
+				end,
+			})
 
 			if vim.g.dotfile_config_type ~= "minimal" then
 				local mr = require("mason-registry")

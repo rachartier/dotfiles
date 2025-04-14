@@ -1,6 +1,9 @@
 return {
 	"seblyng/roslyn.nvim",
 	ft = { "cs", "vb" },
+	dependencies = {
+		"seblyng/roslyn.nvim",
+	},
 	opts = {
 		config = {
 			-- Here you can pass in any options that that you would like to pass to `vim.lsp.start`

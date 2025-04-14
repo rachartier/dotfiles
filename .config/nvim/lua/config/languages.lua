@@ -5,30 +5,6 @@ return {
 		dap = { "debugpy" },
 		formatter = { "ruff_format", "ruff_fix" },
 		lsp_ignore = { "ruff" },
-		lsp_settings = {
-			root_dir = function(fname)
-				return require("lspconfig.util").root_pattern(
-					"main.py",
-					"pyproject.toml",
-					"setup.py",
-					"setup.cfg",
-					"requirements.txt",
-					"Pipfile",
-					"pyrightconfig.json",
-					".git"
-				)(fname)
-			end,
-			settings = {
-				basedpyright = {
-					analysis = {
-						autoSearchPaths = true,
-						diagnosticMode = "workspace",
-						useLibraryCodeForTypes = true,
-						typecheckingMode = "standard",
-					},
-				},
-			},
-		},
 	},
 	{
 		languages = { "cs" },
@@ -39,24 +15,6 @@ return {
 			csharpier = {
 				command = "dotnet-csharpier",
 				args = { "--write-stdout" },
-			},
-		},
-		lsp_settings = {
-			root_dir = function(fname)
-				return require("lspconfig.util").root_pattern("*.sln", "*.csproj")(fname)
-			end,
-			settings = {
-				FormattingOptions = {
-					EnableEditorConfigSupport = true,
-					OrganizeImports = true,
-				},
-				RoslynExtensionsOptions = {
-					EnableAnalyzersSupport = true,
-					EnableImportCompletion = true,
-				},
-				Sdk = {
-					IncludePrereleases = true,
-				},
 			},
 		},
 	},
@@ -71,53 +29,11 @@ return {
 		languages = { "c", "cpp", "h", "hpp" },
 		mason = { "clangd" },
 		formatter = {},
-		lsp_settings = {
-			cmd = {
-				"clangd",
-				"--offset-encoding=utf-16",
-			},
-		},
 	},
 	{
 		languages = { "typescript" },
 		mason = { "vtsls" },
 		formatter = { "prettierd" },
-		lsp_settings = {
-			filetypes = {
-				"javascript",
-				"javascriptreact",
-				"javascript.jsx",
-				"typescript",
-				"typescriptreact",
-				"typescript.tsx",
-			},
-			settings = {
-				complete_function_calls = true,
-				vtsls = {
-					enableMoveToFileCodeAction = true,
-					autoUseWorkspaceTsdk = true,
-					experimental = {
-						completion = {
-							enableServerSideFuzzyMatch = true,
-						},
-					},
-				},
-				typescript = {
-					updateImportsOnFileMove = { enabled = "always" },
-					suggest = {
-						completeFunctionCalls = true,
-					},
-					inlayHints = {
-						enumMemberValues = { enabled = true },
-						functionLikeReturnTypes = { enabled = true },
-						parameterNames = { enabled = "literals" },
-						parameterTypes = { enabled = true },
-						propertyDeclarationTypes = { enabled = true },
-						variableTypes = { enabled = false },
-					},
-				},
-			},
-		},
 	},
 	{
 		languages = { "dockerfile" },
