@@ -677,6 +677,8 @@ install_minimal() {
     install_starship
     install_copilot_cli
     install_chafa
+
+    install_git_tools
     # install_ohmyposh
 }
 
