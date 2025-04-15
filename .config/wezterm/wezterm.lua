@@ -6,7 +6,10 @@ config.max_fps = 165
 
 config.check_for_updates = true
 config.automatically_reload_config = true
-config.default_domain = "WSL:Ubuntu"
+
+if not os.getenv("WSL_DISTRO_NAME") then
+	config.default_domain = "WSL:Ubuntu"
+end
 
 -- config.font = wezterm.font_with_fallback({ "Agave", "Symbols Nerd Font" })
 -- config.font = wezterm.font_with_fallback({ "Cascadia Code", "Symbols Nerd Font" })
@@ -25,6 +28,8 @@ config.font = wezterm.font_with_fallback({ "Berkeley Mono", "Symbols Nerd Font" 
 -- config.freetype_load_target = "Light"
 -- config.freetype_render_target = "HorizontalLcd"
 
+config.freetype_load_target = "Light"
+-- config.undercurl_wave_per_cell = 1
 -- config.cell_width = 1
 config.line_height = 1
 config.font_size = 14
