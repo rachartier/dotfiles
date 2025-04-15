@@ -14,14 +14,20 @@ config.default_domain = "WSL:Ubuntu"
 -- config.font = wezterm.font_with_fallback({ "IBM Plex Mono", "Symbols Nerd Font" })
 -- config.font = wezterm.font_with_fallback({ "Monaspace Neon", "Symbols Nerd Font" })
 -- config.font = wezterm.font_with_fallback({ "Symbols Nerd Font" })
-config.font = wezterm.font_with_fallback({ "MonoLisa", "Symbols Nerd Font" })
+-- config.font = wezterm.font_with_fallback({ "MonoLisa", "Symbols Nerd Font" })
+config.font = wezterm.font_with_fallback({ "Berkeley Mono", "Symbols Nerd Font" })
+-- config.font = wezterm.font_with_fallback({ "CommitMono", "Symbols Nerd Font" })
+-- config.font = wezterm.font_with_fallback({ "0xProto", "Symbols Nerd Font" })
+-- config.font = wezterm.font_with_fallback({ "Fantasque Sans Mono", "Symbols Nerd Font" })
 -- config.font = wezterm.font_with_fallback({ "Cartograph CF", "Symbols Nerd Font" })
 -- config.font = wezterm.font_with_fallback({ "Maple Mono NF", "Symbols Nerd Font" })
 -- config.font = wezterm.font_with_fallback({ "IBM Plex Mono", "Symbols Nerd Font" })
+-- config.freetype_load_target = "Light"
+-- config.freetype_render_target = "HorizontalLcd"
 
 -- config.cell_width = 1
 config.line_height = 1
-config.font_size = 13
+config.font_size = 14
 config.font_rules = {
 	-- {
 	-- 	italic = true,
@@ -58,7 +64,7 @@ config.harfbuzz_features = {
 }
 
 config.underline_thickness = "2pt"
-config.underline_position = "-2pt"
+config.underline_position = "-1pt"
 config.enable_kitty_graphics = false
 config.allow_square_glyphs_to_overflow_width = "Always"
 config.bold_brightens_ansi_colors = "BrightAndBold"
