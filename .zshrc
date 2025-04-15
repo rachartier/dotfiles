@@ -71,13 +71,13 @@ zsh-defer _setup
 
 # check if pyenv is installed
 
-if [ command -v pyenv 1>/dev/null 2>&1 ]; then
+if command -v pyenv &> /dev/null; then
     eval "$(pyenv init -)"
 fi
 
 eval "$(zoxide init zsh --cmd cd)"
 
-if [ command -v direnv 1>/dev/null 2>&1 ]; then
+if command -v direnv &> /dev/null; then
     eval "$(direnv hook zsh)"
 fi
 
