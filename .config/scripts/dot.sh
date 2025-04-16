@@ -346,6 +346,21 @@ install_lazygit() {
     __install_package_release "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz" lazygit
 }
 
+install_gitu() {
+    print_step "Installing Gitu"
+
+    local gitu_version
+    gitu_version=$(__get_latest_release "altsem/gitu")
+
+    log "download" "Installing gitu ${gitu_version} ..."
+    if [ -f "$HOME/.local/bin/gitu" ]; then
+        log "info" "Removing old gitu symlink."
+        sudo rm "$HOME/.local/bin/gitu"
+    fi
+
+    __install_package_release "https://github.com/altsem/gitu/releases/latest/download/gitu-${gitu_version}-x86_64-unknown-linux-gnu.tar.gz" gitu
+}
+
 install_lazydocker() {
     print_step "Installing Lazydocker"
 
@@ -644,6 +659,7 @@ install_essentials() {
     install_fzf
     install_viu
     install_lazygit
+    install_gitu
     install_lazydocker
     install_starship
     install_zoxide
@@ -782,6 +798,7 @@ do_reinstall() {
     "zoxide") install_zoxide ;;
     "lazydocker") install_lazydocker ;;
     "lazygit") install_lazygit ;;
+    "gitu") install_gitu ;;
     "minimal") install_minimal ;;
     "nvim") install_nvim "$2" ;;
     "ohmyposh") install_ohmyposh ;;
