@@ -64,7 +64,7 @@ if [ -z "$DOTFILES_DOCKER" ]; then
 
     export DISABLE_AUTO_TITLE='true'
 else
-    export TERM=xterm-ghostty
+    export TERM=$TERM
 
     if ! [ -d "/usr/lib/terminfo" ]; then
         if [ "$TERM" = "wezterm" ]; then
