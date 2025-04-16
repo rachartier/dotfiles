@@ -1,10 +1,15 @@
+local compact_value = 60
+
+local function is_compact()
+	return vim.o.columns < compact_value
+end
+
 return {
 	enabled = true,
 	preset = {
 		---@type snacks.dashboard.Item[]|fun(items:snacks.dashboard.Item[]):snacks.dashboard.Item[]?
 
 		keys = function()
-			local compact = vim.o.columns < 60
 			---@type snacks.dashboard.Item[]
 			local items = {
 				{ icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
@@ -25,10 +30,26 @@ return {
 			local width = vim.o.columns
 			local max_line_width = 0
 
-			if compact then
+			if is_compact() then
 				for _, item in ipairs(items) do
-					item.desc = "[" .. item.key .. "] " .. item.desc
-					max_line_width = math.max(max_line_width, #item.desc + vim.fn.strdisplaywidth(item.icon))
+					item.desc = {
+						{ "[" },
+						{ item.key, hl = "SnacksDashboardKey" },
+						{ "] ", hl = "Normal" },
+						{ item.desc, hl = "SnacksDashboardDesc" },
+					}
+
+					local item_width = 0
+
+					for _, part in ipairs(item.desc) do
+						if type(part) == "string" then
+							item_width = item_width + #part
+						elseif type(part) == "table" and part.hl then
+							item_width = item_width + vim.fn.strdisplaywidth(part[1])
+						end
+					end
+
+					max_line_width = math.max(max_line_width, item_width + vim.fn.strdisplaywidth(item.icon))
 				end
 
 				for _, item in ipairs(items) do
@@ -55,17 +76,24 @@ return {
 	},
 
 	sections = {
-		{
-			section = "header",
-			-- height = 14,
-			-- width = 10,
-			-- enabled = function()
-			-- 	return vim.o.lines > 30
-			-- end,
-		},
+		function()
+			if is_compact() then
+				return {
+					text = { " NEOVIM    \n", hl = "SnacksDashboardHeader" },
+					hl = "Comment",
+					align = "center",
+					height = 5,
+					width = 20,
+				}
+			end
+
+			return {
+				section = "header",
+			}
+		end,
 		function()
 			local gap = 1
-			if vim.o.lines <= 30 then
+			if vim.o.lines < 30 then
 				gap = 0
 			end
 			return {
