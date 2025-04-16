@@ -29,9 +29,12 @@ config.font = wezterm.font_with_fallback({ "Berkeley Mono", "Symbols Nerd Font" 
 -- config.freetype_render_target = "HorizontalLcd"
 
 config.freetype_load_target = "Light"
--- config.undercurl_wave_per_cell = 1
+config.freetype_render_target = "HorizontalLcd"
+config.freetype_load_flags = "NO_HINTING"
+config.freetype_load_target = "Normal"
+config.undercurl_wave_per_cell = 2
 -- config.cell_width = 1
-config.line_height = 1
+config.line_height = 1.0
 config.font_size = 14
 config.font_rules = {
 	-- {
@@ -51,10 +54,9 @@ config.font_rules = {
 	-- },
 }
 
--- == ~= != <=a >=
+-- == ~= != <= >= #################### 00000 =================> ==>
 config.harfbuzz_features = {
 	"zero=1",
-	"calt=1",
 	-- "ss01=1",
 	-- "ss02=1",
 	-- "ss03=1",
@@ -87,7 +89,7 @@ config.win32_system_backdrop = "Acrylic"
 
 -- config.win32_acrylic_accent_color = "rgba(36, 39, 58, 0)"
 -- config.window_background_opacity = 0.0
-config.window_background_opacity = 0.92
+config.window_background_opacity = 1
 -- config.window_background_opacity = 1
 
 config.window_close_confirmation = "NeverPrompt"
