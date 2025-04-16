@@ -6,7 +6,6 @@ return {
 	priority = 10,
 	config = function()
 		require("smear_cursor").setup({
-			never_draw_over_target = false,
 			legacy_computing_symbols_support = true,
 			-- -- trailing_exponent = 0.3,
 			-- -- trailing_stiffness = 0.5,
