@@ -77,6 +77,7 @@ return {
 	},
 	{
 		languages = { "rust" },
+		mason = { "rust_analyzer" },
 		lsp_ignore = true,
 	},
 }

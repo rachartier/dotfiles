@@ -169,7 +169,6 @@ return {
 
 			require("mason-lspconfig").setup_handlers({
 				function(server_name)
-					local settings
 					local ignore
 
 					for _, config in ipairs(server_settings) do

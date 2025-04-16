@@ -6,7 +6,10 @@ config.max_fps = 165
 
 config.check_for_updates = true
 config.automatically_reload_config = true
-config.default_domain = "WSL:Ubuntu"
+
+if not os.getenv("WSL_DISTRO_NAME") then
+	config.default_domain = "WSL:Ubuntu"
+end
 
 -- config.font = wezterm.font_with_fallback({ "Agave", "Symbols Nerd Font" })
 -- config.font = wezterm.font_with_fallback({ "Cascadia Code", "Symbols Nerd Font" })
@@ -14,14 +17,22 @@ config.default_domain = "WSL:Ubuntu"
 -- config.font = wezterm.font_with_fallback({ "IBM Plex Mono", "Symbols Nerd Font" })
 -- config.font = wezterm.font_with_fallback({ "Monaspace Neon", "Symbols Nerd Font" })
 -- config.font = wezterm.font_with_fallback({ "Symbols Nerd Font" })
-config.font = wezterm.font_with_fallback({ "MonoLisa", "Symbols Nerd Font" })
+-- config.font = wezterm.font_with_fallback({ "MonoLisa", "Symbols Nerd Font" })
+config.font = wezterm.font_with_fallback({ "Berkeley Mono", "Symbols Nerd Font" })
+-- config.font = wezterm.font_with_fallback({ "CommitMono", "Symbols Nerd Font" })
+-- config.font = wezterm.font_with_fallback({ "0xProto", "Symbols Nerd Font" })
+-- config.font = wezterm.font_with_fallback({ "Fantasque Sans Mono", "Symbols Nerd Font" })
 -- config.font = wezterm.font_with_fallback({ "Cartograph CF", "Symbols Nerd Font" })
 -- config.font = wezterm.font_with_fallback({ "Maple Mono NF", "Symbols Nerd Font" })
 -- config.font = wezterm.font_with_fallback({ "IBM Plex Mono", "Symbols Nerd Font" })
+-- config.freetype_load_target = "Light"
+-- config.freetype_render_target = "HorizontalLcd"
 
+config.freetype_load_target = "Light"
+-- config.undercurl_wave_per_cell = 1
 -- config.cell_width = 1
 config.line_height = 1
-config.font_size = 13
+config.font_size = 14
 config.font_rules = {
 	-- {
 	-- 	italic = true,
@@ -57,9 +68,8 @@ config.harfbuzz_features = {
 	"clig=1",
 }
 
-config.underline_thickness = "2pt"
-config.underline_position = "-2pt"
-config.enable_kitty_graphics = false
+config.underline_thickness = "0.11cell"
+config.underline_position = "-1pt"
 config.allow_square_glyphs_to_overflow_width = "Always"
 config.bold_brightens_ansi_colors = "BrightAndBold"
 
@@ -69,15 +79,15 @@ config.selection_word_boundary = " \t\n{}[]()\"'`,;:│=&!%"
 config.window_padding = {
 	-- left = "2cell",
 	-- right = "2cell",
-	top = 12,
+	top = 4,
 	bottom = 0,
 }
 config.win32_system_backdrop = "Acrylic"
 -- config.win32_system_backdrop = "Mica"
 
 -- config.win32_acrylic_accent_color = "rgba(36, 39, 58, 0)"
--- config.window_background_opacity = 0.93
--- config.window_background_opacity = 0.80
+-- config.window_background_opacity = 0.0
+config.window_background_opacity = 0.92
 -- config.window_background_opacity = 1
 
 config.window_close_confirmation = "NeverPrompt"

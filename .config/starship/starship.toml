@@ -9,7 +9,6 @@ $git_status\
 $all\
 $status\
 $cmd_duration\
-$docker_context\
 $line_break\
 ${custom.inside_docker}\
 $character"""

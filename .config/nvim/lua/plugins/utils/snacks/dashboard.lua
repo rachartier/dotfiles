@@ -2,31 +2,42 @@ return {
 	enabled = true,
 	preset = {
 		---@type snacks.dashboard.Item[]|fun(items:snacks.dashboard.Item[]):snacks.dashboard.Item[]?
-		keys = {
-			{ icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
-			{ icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
-			{
-				icon = " ",
-				key = "g",
-				desc = "Find Text",
-				action = ":lua Snacks.dashboard.pick('live_grep')",
-			},
-			{
-				icon = " ",
-				key = "r",
-				desc = "Recent Files",
-				action = ":lua Snacks.dashboard.pick('oldfiles')",
-			},
-			{
-				icon = " ",
-				key = "c",
-				desc = "Config",
-				action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})",
-			},
-			{ icon = " ", key = "s", desc = "Restore Session", section = "session" },
-			{ icon = "󰒲 ", key = "l", desc = "Lazy", action = ":Lazy", enabled = package.loaded.lazy },
-			{ icon = " ", key = "q", desc = "Quit", action = ":qa" },
-		},
+
+		keys = function()
+			local compact = vim.o.columns < 60
+			---@type snacks.dashboard.Item[]
+			local items = {
+				{ icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
+				{ icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
+				{ icon = " ", key = "g", desc = "Find Text", action = ":lua Snacks.dashboard.pick('live_grep')" },
+				{ icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
+				{
+					icon = " ",
+					key = "c",
+					desc = "Config",
+					action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})",
+				},
+				{ icon = " ", key = "s", desc = "Restore Session", section = "session" },
+				{ icon = "󰒲 ", key = "l", desc = "Lazy", action = ":Lazy", enabled = package.loaded.lazy },
+				{ icon = " ", key = "q", desc = "Quit", action = ":qa" },
+			}
+
+			local width = vim.o.columns
+			local max_line_width = 0
+
+			if compact then
+				for _, item in ipairs(items) do
+					item.desc = "[" .. item.key .. "] " .. item.desc
+					max_line_width = math.max(max_line_width, #item.desc + vim.fn.strdisplaywidth(item.icon))
+				end
+
+				for _, item in ipairs(items) do
+					item.icon = string.rep(" ", (width - max_line_width) / 2 + max_line_width / 4) .. item.icon
+				end
+			end
+
+			return items
+		end,
 
 		header = [[
 
@@ -37,49 +48,6 @@ return {
 ██│ └████│███████┐└██████┌┘ └████┌┘ ██│██│ └─┘ ██│
 └─┘  └───┘└──────┘ └─────┘   └───┘  └─┘└─┘     └─┘
 ]],
-		-- 				-- 				header = [[
-		-- 				--  __    __ ________  ______  __     __ ______ __       __
-		-- 				-- |  \  |  \        \/      \|  \   |  \      \  \     /  \
-		-- 				-- | ▓▓\ | ▓▓ ▓▓▓▓▓▓▓▓  ▓▓▓▓▓▓\ ▓▓   | ▓▓\▓▓▓▓▓▓ ▓▓\   /  ▓▓
-		-- 				-- | ▓▓▓\| ▓▓ ▓▓__   | ▓▓  | ▓▓ ▓▓   | ▓▓ | ▓▓ | ▓▓▓\ /  ▓▓▓
-		-- 				-- | ▓▓▓▓\ ▓▓ ▓▓  \  | ▓▓  | ▓▓\▓▓\ /  ▓▓ | ▓▓ | ▓▓▓▓\  ▓▓▓▓
-		-- 				-- | ▓▓\▓▓ ▓▓ ▓▓▓▓▓  | ▓▓  | ▓▓ \▓▓\  ▓▓  | ▓▓ | ▓▓\▓▓ ▓▓ ▓▓
-		-- 				-- | ▓▓ \▓▓▓▓ ▓▓_____| ▓▓__/ ▓▓  \▓▓ ▓▓  _| ▓▓_| ▓▓ \▓▓▓| ▓▓
-		-- 				-- | ▓▓  \▓▓▓ ▓▓     \\▓▓    ▓▓   \▓▓▓  |   ▓▓ \ ▓▓  \▓ | ▓▓
-		-- 				--  \▓▓   \▓▓\▓▓▓▓▓▓▓▓ \▓▓▓▓▓▓     \▓    \▓▓▓▓▓▓\▓▓      \▓▓
-		-- 				-- ]],
-		-- 				-- 				header = [[
-		-- 				-- ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗
-		-- 				-- ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║
-		-- 				-- ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║
-		-- 				-- ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║
-		-- 				-- ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
-		-- 				-- ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝
-		-- 				-- ]],
-		-- 		header = [[
-		-- ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣠⣤⢤⠶⠶⠶⢦⣤⣤⣄⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-		-- ⠀⠀⠀⣀⡤⠴⠶⢤⣄⡀⠀⠀⠀⢀⣤⠶⠛⠋⣁⣀⣤⣤⣤⣤⣤⣤⣤⣀⣈⠉⠛⠳⢤⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-		-- ⠀⣠⠞⢁⣠⣤⣤⣤⣀⠙⠲⣤⠖⠋⣀⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣦⣄⡈⠓⢦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-		-- ⢰⠃⢠⣿⣿⣿⣿⣿⣿⣷⡦⢀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⡀⠙⢦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-		-- ⡏⠀⣿⣿⣿⣿⣿⣿⣿⣿⣶⣿⣿⣿⣿⣿⣿⣿⣿⠿⢿⣿⣿⣿⣿⣿⣿⠿⢿⣿⣿⣿⣿⣿⣿⣿⣦⡀⠙⣄⠀⠀⠀⠀⠀⠀⠀⠀
-		-- ⡇⠘⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⢱⣶⡎⢿⣿⣿⣿⣿⢣⣾⣆⢻⣿⣿⣿⣿⣿⣿⣿⣿⣆⠈⢦⡀⠀⠀⠀⠀⠀⠀
-		-- ⣷⠀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⢸⣿⡇⢸⣿⣿⣿⡏⢸⣿⡟⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣆⠈⢧⠀⠀⠀⠀⠀⠀
-		-- ⢹⡆⠸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠉⠀⢸⣿⣿⣿⡇⠀⠉⠁⠀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡆⠘⡇⠀⠀⠀⠀⠀
-		-- ⠀⢿⡄⠘⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⢸⣿⣿⣿⣇⠀⠀⠀⢰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⠹⣆⠀⠀⠀⠀
-		-- ⠀⠀⠙⣆⠈⢋⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⠀⠀⠀⣾⣿⣿⣿⣿⡀⠀⠀⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣄⠈⢦⠀⠀⠀
-		-- ⠀⠀⠀⢸⡇⠸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣤⣾⡟⠉⠉⠉⠙⣷⣤⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣧⠈⢧⡀⠀
-		-- ⠀⠀⠀⠘⡇⠀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣧⠰⣿⡷⢰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡆⠸⡇⠀
-		-- ⠀⠀⠀⠀⣧⠀⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣤⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⣿⠀
-		-- ⠀⠀⠀⠀⢻⡆⠸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠇⢠⡿⠀
-		-- ⠀⠀⠀⠀⠈⣿⡀⢹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠻⣿⣿⣿⠿⠋⢀⡞⠁⠀
-		-- ⠀⠀⠀⠀⠀⣸⠇⠀⠹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠗⠀⠀⢤⣤⠶⠋⠀⠀⠀
-		-- ⠀⠀⢀⡴⠋⠀⣴⣾⣦⡘⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠋⣰⣷⣦⣄⠉⠳⣄⠀⠀⠀
-		-- ⠀⡴⠋⠀⠐⠋⢹⣿⣿⣿⣦⡙⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠋⣠⣾⣿⣿⡏⠉⠓⠄⠈⢧⡀⠀
-		-- ⣼⠁⣰⡇⠀⣀⣼⣿⣿⣿⣿⣿⣦⣌⠛⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠟⣉⣴⣿⣿⣿⣿⣿⣷⣄⡀⢀⣆⠀⢧⠀
-		-- ⣿⠀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣤⣍⡙⠛⠛⠿⠿⣿⡿⠿⠟⠛⠛⣉⣤⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠆⢸⡆
-		-- ⠻⣄⠈⠻⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠿⠟⠓⠀⣠⣤⣄⠀⠐⠚⠿⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠟⠋⢀⡼⠁
-		-- ⠀⠈⠛⠶⣤⣤⣀⣀⣉⣉⣉⣉⣉⣀⣀⣀⣠⣤⣤⠴⠖⠋⠁⠀⠈⠙⠲⠶⣤⣤⣄⣀⣀⣀⣉⣉⣉⣉⣉⣁⣀⣤⣤⠴⠞⠋⠀⠀
-		-- ]],
 	},
 	formats = {
 		terminal = { align = "center" },
@@ -95,30 +63,6 @@ return {
 			-- 	return vim.o.lines > 30
 			-- end,
 		},
-		-- {
-		-- 	section = "terminal",
-		-- 	cmd = "tty-clock -c -s -C 4 -r",
-		-- 	indent = 1,
-		-- 	ttl = 0,
-		-- 	enabled = function()
-		-- 		return vim.fn.executable("tty-clock") == 1
-		-- 	end,
-		-- 	height = 14,
-		-- 	padding = 1,
-		-- },
-		-- {
-		-- 	section = "terminal",
-		-- 	-- cmd = 'timg --loops=-1 -V -g 32x32 "$HOME/.config/nvim/dashboard/gif/kirby-dancing2.gif"',
-		-- 	-- cmd = 'chafa -p off --speed=0.9 --clear --passthrough=tmux --scale max "$HOME/.config/nvim/dashboard/gif/kirby-dancing2.gif"',
-		-- 	cmd = 'viu "$HOME/.config/nvim/dashboard/gif/kirby-dancing2.gif"',
-		-- 	indent = 14,
-		-- 	ttl = 0,
-		-- 	enabled = function()
-		-- 		return vim.fn.executable("chafa") == 1 and vim.fn.environ()["SSH_CLIENT"] == nil
-		-- 	end,
-		-- 	height = 16,
-		-- 	padding = 1,
-		-- },
 		function()
 			local gap = 1
 			if vim.o.lines <= 30 then
