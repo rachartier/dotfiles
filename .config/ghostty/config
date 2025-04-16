@@ -7,13 +7,14 @@ cursor-text = "#000000"
 cursor-invert-fg-bg = false
 
 font-family = ""
-font-family = MonoLisa
+# font-family = MonoLisa
+font-family = Berkeley Mono
 font-family = Symbols Nerd Fonts Mono
 # font-family = MapleMono
 # font-family = CommitMono
 # font-family = IBMPlexMono
 # font-style = Regular
-font-size = 13
+font-size = 16
 
 font-feature = +zero, +calt, +liga, +clig, +ss01, +ss02
 font-thicken = true

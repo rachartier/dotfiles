@@ -48,7 +48,7 @@ function M.get(colors)
 		PopupNormal = { bg = colors.base, fg = colors.text },
 
 		-- CursorLine = { bg = colors.surface1 },
-		CursorLine = { bg = "None" },
+		-- CursorLine = { bg = "None" },
 		CursorLineNr = { fg = colors.mauve },
 		CursorLineSign = { link = "SignColumn" },
 		CursorColumn = { bg = "None" },
@@ -68,6 +68,8 @@ function M.get(colors)
 
 		LspLens = { italic = true, fg = colors.surface1 },
 		LspSignatureActiveParameter = { bg = colors.peach, fg = colors.base },
+
+		NeogitDiffContextCursor = { bg = colors.surface0, fg = colors.text },
 
 		NeoTreeCursorLine = { link = "PmenuSel" },
 		NeoTreeIndentMarker = { fg = colors.surface2 },

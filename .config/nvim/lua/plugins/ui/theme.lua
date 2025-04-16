@@ -78,6 +78,7 @@ return {
 			markdown = true,
 			mini = true,
 			neotree = true,
+			neogit = true,
 			noice = true,
 			notify = true,
 			render_markdown = true,
