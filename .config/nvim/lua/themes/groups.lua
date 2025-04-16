@@ -70,6 +70,7 @@ function M.get(colors)
 		LspSignatureActiveParameter = { bg = colors.peach, fg = colors.base },
 
 		NeogitDiffContextCursor = { bg = colors.surface0, fg = colors.text },
+		NeogitSubtleText = { bg = "None", fg = colors.surface2, italic = false },
 
 		NeoTreeCursorLine = { link = "PmenuSel" },
 		NeoTreeIndentMarker = { fg = colors.surface2 },

@@ -11,6 +11,11 @@ return {
 	opts = {
 		graph_style = "unicode",
 		process_spinner = true,
+		signs = {
+			section = { "", "" },
+			item = { "", "" },
+			hunk = { "", "" },
+		},
 		integrations = {
 			diffview = true,
 		},
