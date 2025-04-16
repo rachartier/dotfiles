@@ -36,6 +36,14 @@ alias gpu='git push'
 alias gpt='git push --tags'
 alias gfu='git fetch upstream'
 
+function gl() {
+    if command -v git-graph &>/dev/null; then
+        git-graph -s round
+    else
+        git log --oneline --graph --decorate --all
+    fi
+}
+
 function __get_clipboard_contents() {
     if command -v xclip &>/dev/null; then
         xclip -o -selection clipboard
