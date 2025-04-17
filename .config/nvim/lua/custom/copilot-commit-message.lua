@@ -23,7 +23,7 @@ function Spinner:start()
 	end
 
 	self.is_running = true
-	self.timer:start(0, 100, function()
+	self.timer:start(0, 80, function()
 		self:update()
 	end)
 end
@@ -78,8 +78,6 @@ local function generate_message()
 
 		for _, line in ipairs(vim.split(obj.stdout, "\n")) do
 			if line ~= "" then
-				-- remove the index from the line
-				-- example: 1: aaa
 				items[#items + 1] = {
 					idx = #items,
 					score = #items,
