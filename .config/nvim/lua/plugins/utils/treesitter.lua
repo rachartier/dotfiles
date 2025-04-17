@@ -21,7 +21,17 @@ return {
 	opts = {
 		ignore_install = {},
 		modules = {},
-		ensure_installed = { "markdown", "markdown_inline", "regex", "vim", "requirements" },
+		ensure_installed = {
+			"markdown",
+			"markdown_inline",
+			"regex",
+			"vim",
+			"requirements",
+			"gitcommit",
+			"git_rebase",
+			"lua",
+			"python",
+		},
 		-- Install parsers synchronously (only applied to `ensure_installed`)
 		sync_install = false,
 		-- Automatically install missing parsers when entering buffer
@@ -76,7 +86,7 @@ return {
 			},
 		},
 		indent = {
-			enable = true,
+			enable = false,
 			disable = {
 				"markdown", -- indentation at bullet points is worse
 			},

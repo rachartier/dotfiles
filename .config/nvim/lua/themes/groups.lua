@@ -71,6 +71,7 @@ function M.get(colors)
 
 		NeogitDiffContextCursor = { bg = colors.surface0, fg = colors.text },
 		NeogitSubtleText = { bg = "None", fg = colors.surface2, italic = false },
+		NeogitFloatHeader = { bg = colors.mauve, fg = colors.base },
 
 		NeoTreeCursorLine = { link = "PmenuSel" },
 		NeoTreeIndentMarker = { fg = colors.surface2 },
