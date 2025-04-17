@@ -3,6 +3,9 @@ local utils = require("utils")
 return {
 	{
 		"zbirenbaum/copilot.lua",
+		dependencies = {
+			"saghen/blink.cmp",
+		},
 		event = "VeryLazy",
 		config = function()
 			require("copilot").setup({
@@ -38,6 +41,14 @@ return {
 					custom_server_filepath = nil,
 				},
 			})
+
+			vim.keymap.set("i", "<tab>", function()
+				if require("copilot.suggestion").is_visible() then
+					require("copilot.suggestion").accept()
+					return "<Ignore>"
+				end
+				return "<tab>"
+			end, { expr = true, noremap = true })
 		end,
 	},
 	{
