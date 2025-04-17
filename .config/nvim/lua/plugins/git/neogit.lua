@@ -34,12 +34,14 @@ return {
 
 			vim.defer_fn(function()
 				require("utils").on_event("BufEnter", function()
-					local bufnr = vim.api.nvim_get_current_buf()
-					local filetype = vim.api.nvim_get_option_value("filetype", { buf = bufnr })
+					vim.defer_fn(function()
+						local bufnr = vim.api.nvim_get_current_buf()
+						local filetype = vim.api.nvim_get_option_value("filetype", { buf = bufnr })
 
-					if is_buffer_no_name(bufnr) and filetype == "" then
-						vim.cmd("qall!")
-					end
+						if is_buffer_no_name(bufnr) and filetype == "" then
+							vim.cmd("qall!")
+						end
+					end, 50)
 				end)
 			end, 50)
 		end
