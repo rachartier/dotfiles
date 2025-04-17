@@ -35,13 +35,11 @@ return {
 			vim.defer_fn(function()
 				require("utils").on_event("BufEnter", function()
 					local bufnr = vim.api.nvim_get_current_buf()
-					print("bufnr", bufnr)
 					if is_buffer_no_name(bufnr) then
-						print("is_buffer_no_name")
 						vim.cmd("qall!")
 					end
 				end)
-			end, 100)
+			end, 50)
 		end
 	end,
 }
