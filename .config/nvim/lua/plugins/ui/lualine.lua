@@ -1,5 +1,3 @@
-local utils = require("utils")
-
 local function get_vlinecount_str()
 	local raw_count = vim.fn.line(".") - vim.fn.line("v")
 	raw_count = raw_count < 0 and raw_count - 1 or raw_count + 1
@@ -143,7 +141,7 @@ return {
 	},
 	event = "VeryLazy",
 	-- priority = 900,
-	enabled = true,
+	enabled = vim.env.TMUX_NEOGIT_POPUP == nil,
 	init = function()
 		vim.g.lualine_laststatus = vim.o.laststatus
 		if vim.fn.argc(-1) > 0 then
