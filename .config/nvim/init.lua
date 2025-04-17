@@ -73,6 +73,8 @@ vim.defer_fn(function()
 	require("config.diagnostic")
 	require("remap")
 
+	require("custom.copilot-commit-message")
+
 	-- Don't know why Visual do not accept "bold" settings in Catppuccin, so putting it here fix it
 	vim.api.nvim_set_hl(0, "Visual", { bg = require("theme").get_colors().surface0, bold = false })
 end, 10)
