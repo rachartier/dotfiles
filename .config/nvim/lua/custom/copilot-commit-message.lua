@@ -137,6 +137,10 @@ local function generate_message()
 	}, { text = true }, callback)
 end
 
-vim.keymap.set("n", "<leader>ggc", function()
-	generate_message()
-end)
+require("utils").on_event("FileType", function()
+	vim.keymap.set("n", "<Leader>c", function()
+		generate_message()
+	end)
+end, {
+	target = "gitcommit",
+})
