@@ -32,10 +32,9 @@ config.freetype_load_target = "Light"
 config.freetype_render_target = "HorizontalLcd"
 config.freetype_load_flags = "NO_HINTING"
 config.freetype_load_target = "Normal"
-config.undercurl_wave_per_cell = 2
 -- config.cell_width = 1
 config.line_height = 1.0
-config.font_size = 14
+config.font_size = 15
 config.font_rules = {
 	-- {
 	-- 	italic = true,
