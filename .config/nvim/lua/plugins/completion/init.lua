@@ -67,15 +67,29 @@ return {
 		},
 
 		sources = {
-			default = {
-				"avante",
-				"copilot",
-				"lsp",
-				"path",
-				"snippets",
-				"buffer",
-				"lazydev",
-			},
+			default = function()
+				local sources = {
+					"avante",
+					"copilot",
+					"lsp",
+					"path",
+					"snippets",
+					"buffer",
+					"lazydev",
+				}
+				local ok, node = pcall(vim.treesitter.get_node)
+
+				if ok and node then
+					if not vim.tbl_contains({ "comment", "line_comment", "block_comment" }, node:type()) then
+						table.insert(sources, "path")
+					end
+					if node:type() ~= "string" then
+						table.insert(sources, "snippets")
+					end
+				end
+
+				return sources
+			end,
 			providers = {
 				-- dont show LuaLS require statements when lazydev has items
 				lazydev = { name = "LazyDev", module = "lazydev.integrations.blink", fallbacks = { "lsp" } },
