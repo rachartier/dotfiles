@@ -38,9 +38,9 @@ function Spinner:update()
 			return
 		end
 		self.index = (self.index % #self.characters) + 1
-		local last_line = vim.fn.line("$")
+		local cursor_line = vim.fn.line(".")
 		vim.api.nvim_buf_clear_namespace(0, self.ns_id, 0, -1)
-		vim.api.nvim_buf_set_extmark(0, self.ns_id, last_line - 1, 0, {
+		vim.api.nvim_buf_set_extmark(0, self.ns_id, cursor_line - 1, 0, {
 			virt_text = { { self.characters[self.index] .. " Generating commit message...", "Comment" } },
 			virt_text_pos = "overlay",
 		})
@@ -60,7 +60,7 @@ function Spinner:stop()
 end
 
 local spinner = Spinner:new()
-vim.api.nvim_set_hl(0, "CommitMessageStyle", { fg = require("theme").get_colors().green, bg = "None" })
+vim.api.nvim_set_hl(0, "CopilotCommitMessageStyle", { fg = require("theme").get_colors().green, bg = "None" })
 vim.api.nvim_set_hl(0, "CommitMessageScope", { fg = require("theme").get_colors().red, bg = "None" })
 
 local function generate_message()
@@ -138,7 +138,7 @@ local function generate_message()
 end
 
 require("utils").on_event("FileType", function()
-	vim.keymap.set("n", "<Leader>c", function()
+	vim.keymap.set({ "n", "i" }, "<M-a>", function()
 		generate_message()
 	end)
 end, {
