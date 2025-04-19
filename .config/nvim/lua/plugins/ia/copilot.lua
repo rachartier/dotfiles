@@ -380,7 +380,7 @@ Useful PEPs for this section (not exhaustive):
 			provider = "copilot",
 			cursor_applying_provider = "copilot",
 			copilot = {
-				model = "claude-3.5-sonnet",
+				model = "claude-3.7-sonnet",
 			},
 			web_search_engine = {
 				provider = "google", -- tavily, serpapi, searchapi, google or kagi
