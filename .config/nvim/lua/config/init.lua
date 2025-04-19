@@ -23,12 +23,22 @@ vim.g.maplocalleader = " "
 vim.filetype.add({
 	extension = {
 		["http"] = "http",
-		["*.p8"] = "pico8",
-		["*.dotfile*"] = "bash",
-		["*.zsh"] = "bash",
-		["*.zsh_*"] = "bash",
-		["*.tcss"] = "css",
-		["*.xaml"] = "xml",
+		["p8"] = "pico8",
+		["dotfile*"] = "bash",
+		["zsh"] = "bash",
+		["zsh_*"] = "bash",
+		["tcss"] = "css",
+		["xaml"] = "xml",
+	},
+	filename = {
+		["vifmrc"] = "vim",
+	},
+	pattern = {
+		[".*/waybar/config"] = "jsonc",
+		[".*/mako/config"] = "dosini",
+		[".*/kitty/.+%.conf"] = "kitty",
+		[".*/hypr/.+%.conf"] = "hyprlang",
+		["%.env%.[%w_.-]+"] = "sh",
 	},
 })
 

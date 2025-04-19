@@ -1,6 +1,7 @@
 return {
 	"NeogitOrg/neogit",
 	cmd = "Neogit",
+	lazy = not vim.env.TMUX_NEOGIT_POPUP,
 	dependencies = {
 		"nvim-lua/plenary.nvim", -- required
 		"sindrets/diffview.nvim", -- optional - Diff integration
@@ -32,18 +33,16 @@ return {
 				return name == "" and (buftype == "" or buftype == "acwrite")
 			end
 
-			vim.defer_fn(function()
-				require("utils").on_event("BufEnter", function()
-					vim.defer_fn(function()
-						local bufnr = vim.api.nvim_get_current_buf()
-						local filetype = vim.api.nvim_get_option_value("filetype", { buf = bufnr })
+			require("utils").on_event("BufEnter", function()
+				vim.defer_fn(function()
+					local bufnr = vim.api.nvim_get_current_buf()
+					local filetype = vim.api.nvim_get_option_value("filetype", { buf = bufnr })
 
-						if is_buffer_no_name(bufnr) and filetype == "" then
-							vim.cmd("qall!")
-						end
-					end, 50)
-				end)
-			end, 50)
+					if filetype == "snacks_dashboard" or (is_buffer_no_name(bufnr) and filetype == "") then
+						vim.cmd("qall!")
+					end
+				end, 50)
+			end)
 		end
 	end,
 }
