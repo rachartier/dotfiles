@@ -44,6 +44,7 @@ return {
 								["git"] = "󰊢 ",
 								["project"] = " ",
 								["todo"] = "󰒲 ",
+								["terminal"] = " ",
 							}
 
 							for link, icon in pairs(special_links) do

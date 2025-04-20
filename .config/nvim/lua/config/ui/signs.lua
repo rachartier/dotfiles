@@ -34,7 +34,7 @@ return {
 		warning = "",
 		warn = "",
 		info = "",
-		hint = " ",
+		hint = "",
 		-- other = "󰠠 ",
 	},
 	diagnostic = {
