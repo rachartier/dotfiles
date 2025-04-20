@@ -38,6 +38,29 @@ return {
 					},
 				},
 				markdown_inline = {
+					internal_links = {
+						default = function(_, item)
+							local special_links = {
+								["git"] = "󰊢 ",
+								["project"] = " ",
+								["todo"] = "󰒲 ",
+							}
+
+							for link, icon in pairs(special_links) do
+								if string.lower(item.label):find(link) then
+									return {
+										hl = "MarkviewSubscript",
+										icon = icon,
+									}
+								end
+							end
+
+							return {
+								hl = "MarkviewSubscript",
+								icon = "󱗖 ",
+							}
+						end,
+					},
 					checkboxes = {
 						enable = true,
 						["!"] = {
