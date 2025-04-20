@@ -267,7 +267,13 @@ return {
 				{
 					"diagnostics",
 					sources = { "nvim_lsp" },
-					symbols = signs.full_diagnostic,
+					symbols = {
+						ok = signs.full_diagnostic.ok .. " ",
+						error = signs.full_diagnostic.error .. " ",
+						warn = signs.full_diagnostic.warn .. " ",
+						hint = signs.full_diagnostic.hint .. " ",
+						info = signs.full_diagnostic.info .. " ",
+					},
 					-- diagnostics_color = {
 					-- 	error = { fg = c.error },
 					-- 	warn = { fg = c.warn },
