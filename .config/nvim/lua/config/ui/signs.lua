@@ -4,7 +4,7 @@ return {
 		not_saved = "󰉉",
 		readonly = "󰌾",
 		created = "●",
-		unnamed = "No Name",
+		unnamed = " No Name",
 	},
 	git = {
 		added = " ",
