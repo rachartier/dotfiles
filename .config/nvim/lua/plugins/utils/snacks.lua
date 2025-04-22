@@ -93,6 +93,7 @@ return {
 		quickfile = {},
 		rename = {},
 		layout = {},
+		terminal = {},
 		-- statuscolumn = { enabled = true },
 	},
 	init = function()

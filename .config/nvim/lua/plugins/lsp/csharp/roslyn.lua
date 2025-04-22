@@ -1,9 +1,6 @@
 return {
 	"seblyng/roslyn.nvim",
 	ft = { "cs", "vb" },
-	dependencies = {
-		"seblyng/roslyn.nvim",
-	},
 	opts = {
 		config = {
 			-- Here you can pass in any options that that you would like to pass to `vim.lsp.start`
@@ -26,4 +23,12 @@ return {
 		filewatching = "auto",
 		on_attach = require("config.lsp.attach").on_attach,
 	},
+	config = function(_, opts)
+		-- FIXME: Can't deal with this shit anymore
+		local set_registries_save = require("mason-registry.sources").set_registries
+
+		require("mason-registry.sources").set_registries = function(foo) end
+		require("roslyn").setup(opts)
+		require("mason-registry.sources").set_registries = set_registries_save
+	end,
 }

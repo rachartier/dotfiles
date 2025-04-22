@@ -15,7 +15,6 @@ return {
 	},
 	{
 		languages = { "cs" },
-		mason = { "omnisharp" },
 		dap = { "netcoredbg" },
 		lsp_ignore = true,
 		formatter = {
