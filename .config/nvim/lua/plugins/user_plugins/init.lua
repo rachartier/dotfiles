@@ -34,19 +34,18 @@ return {
 		end,
 	},
 	{
-		dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-code-actions.nvim",
-		-- "rachartier/tiny-code-action.nvim",
-		enabled = false,
+		-- dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-code-action.nvim",
+		"rachartier/tiny-code-action.nvim",
+		enabled = true,
 		dependencies = {
 			"nvim-lua/plenary.nvim",
-			"nvim-tree/nvim-web-devicons",
 		},
 		event = "LazyFile",
 		config = function()
 			require("tiny-code-action").setup({
 				-- backend = "difftastic",
 				backend = "delta",
-				-- backend = "vim",
+				picker = "snacks",
 				backend_opts = {
 					delta = {
 						args = {
