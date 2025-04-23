@@ -67,6 +67,7 @@ end
 
 return {
 	"neovim/nvim-lspconfig",
+	event = "LazyFile",
 	dependencies = {
 		"saghen/blink.cmp",
 		"williamboman/mason-lspconfig.nvim",
