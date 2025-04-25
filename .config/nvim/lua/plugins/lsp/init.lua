@@ -105,6 +105,21 @@ return {
 	config = function()
 		-- require("mason").setup(opts)
 
+		local on_attach = require("config.lsp.attach").on_attach
+		utils.on_event("LspAttach", function(args)
+			local client = vim.lsp.get_client_by_id(args.data.client_id)
+			local bufnr = args.buf
+
+			-- Skip specific clients
+			if client.name == "GitHub Copilot" or client.name == "copilot" or client.name == "ruff" then
+				return
+			end
+
+			on_attach(client, bufnr)
+		end, {
+			desc = "LSP Attach",
+		})
+
 		local capabilities = vim.tbl_deep_extend(
 			"force",
 			{},
