@@ -1,5 +1,9 @@
 #!/bin/env bash
 
+if [ -n "$_HELPER_ALREADY_LOADED" ]; then
+    return 0
+fi
+
 show_spinner() {
     local pid=$1
     local message=$2
@@ -173,7 +177,7 @@ __install_package_release() {
 
     filename=$(basename "$url")
 
-    log "info" "Downloading $filename"
+    log "download" "Downloading $filename"
     cd /tmp || exit 1
 
     if [ -d "/tmp/$name" ]; then
@@ -215,7 +219,7 @@ __download_install_deb() {
 
     filename=$(basename "$url")
 
-    log "info" "Downloading $filename"
+    log "download" "Downloading $filename"
     cd /tmp || exit 1
     wget -nv -q "$url" >/dev/null && log "success" "'$filename' downloaded." || return 1
 
@@ -272,3 +276,5 @@ __make_symlink() {
 __git_dot() {
     /usr/bin/git --git-dir="$HOME/.cfg/" --work-tree="$HOME" "$@"
 }
+
+_HELPER_ALREADY_LOADED=1

@@ -1,6 +1,6 @@
 #!/bin/env bash
 
-source "${0%/*}/../../helper.sh"
+source "$DOT_MANAGER_DIR/helper.sh"
 
 install_bat() {
     print_step "Installing Bat"
@@ -10,7 +10,7 @@ install_bat() {
     local bat_version
     bat_version=$(__get_latest_release "sharkdp/bat")
 
-    log "download" "Installing bat ${bat_version} ..."
+    log "info" "Installing bat ${bat_version} ..."
     __download_install_deb "https://github.com/sharkdp/bat/releases/download/$bat_version/bat_${bat_version:1}_amd64.deb" "bat"
 
     if ! [ -d "$(bat --config-dir)" ]; then

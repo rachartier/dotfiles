@@ -1,6 +1,6 @@
 #!/bin/env bash
 
-source "${0%/*}/../../helper.sh"
+source "$DOT_MANAGER_DIR/helper.sh"
 
 install_copilot_cli() {
     log "info" "Installing copilot-cli..."
