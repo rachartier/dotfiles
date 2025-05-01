@@ -1,5 +1,51 @@
 #!/bin/env zsh
 
+###
+### Programs to install by default
+####
+DOT_MANAGER_COMPLETE_PROGRAMS=(
+    "fd_find"
+    "tmux"
+    "nvim"
+    "eza"
+    "glow"
+    "fzf"
+    "viu"
+    "lazygit"
+    "lazydocker"
+    "starship"
+    "zoxide"
+    "bat"
+    "chafa"
+    "git_tools"
+    "copilot_cli"
+    "direnv"
+    "win32yank"
+)
+
+###
+### Programs to install for a "lightwheight" configuration
+###
+DOT_MANAGER_MINIMAL_PROGRAMS=(
+    "fd_find"
+    "nvim"
+    "eza"
+    "fzf"
+    "viu"
+    "zoxide"
+    "starship"
+    "copilot_cli"
+    "chafa"
+    "git_tools"
+)
+
+###
+### Programs to install for a docker configuration
+###
+DOT_MANAGER_DOCKER_PROGRAMS=$DOT_MANAGER_MINIMAL_PROGRAMS
+
+
+# ---------------------------------------------------------------------------
 DOT_MANAGER_DIR="$HOME/.config/dot-manager"
 DOT_MANAGER_CACHE_DIR="$HOME/.cache/dot-manager"
 source "$DOT_MANAGER_DIR/helper.sh"
@@ -14,7 +60,10 @@ __install_program() {
 
     if [ -f "$install_script" ]; then
         shift
-        source "$install_script"
+        if ! source "$install_script"; then
+            log "error" "Failed to source '$program_name' script."
+            return 1
+        fi
     else
         log "error" "'$program_name' unknown."
         return 1
@@ -81,30 +130,10 @@ install_complete() {
     print_header "Installing Complete Configuration"
     install_packages
 
-    local programs=(
-        "fd_find"
-        "tmux"
-        "nvim"
-        "eza"
-        "glow"
-        "fzf"
-        "viu"
-        "lazygit"
-        "gitu"
-        "lazydocker"
-        "starship"
-        "zoxide"
-        "bat"
-        "chafa"
-        "git_tools"
-        "copilot_cli"
-        "direnv"
-        "win32yank"
-    )
-
-    __install_program_list "${programs[@]}"
+    __install_program_list "${DOT_MANAGER_COMPLETE_PROGRAMS[@]}"
 
     git config --global include.path "~/.config/git/gitconfig"
+    sudo ldconfig
 }
 
 install_minimal() {
@@ -113,19 +142,8 @@ install_minimal() {
     echo "export DOTFILES_MINIMAL=1" >>"$HOME/.profile"
     export DOTFILES_MINIMAL=1
 
-    local programs=(
-        "nvim",
-        "eza",
-        "fzf",
-        "viu",
-        "zoxide",
-        "starship",
-        "copilot_cli",
-        "chafa",
-        "git_tools"
-    )
-
-    __install_program_list "${programs[@]}"
+    __install_program_list "${DOT_MANAGER_MINIMAL_PROGRAMS[@]}"
+    sudo ldconfig
 }
 
 install_docker() {
@@ -134,7 +152,8 @@ install_docker() {
     echo "export DOTFILES_DOCKER=1" >>"$HOME/.profile"
     export DOTFILES_DOCKER=1
 
-    install_minimal
+    __install_program_list "${DOT_MANAGER_DOCKER_PROGRAMS[@]}"
+    sudo ldconfig
 }
 
 do_reinstall_all() {
@@ -175,6 +194,13 @@ update_all() {
     antidote update
 }
 
+show_programs_list() {
+    echo "Available programs:"
+    for program in "${DOT_MANAGER_COMPLETE_PROGRAMS[@]}"; do
+        echo "  - $program"
+    done
+}
+
 do_tool() {
     local tool_name="$1"
     local tool_path="$DOT_MANAGER_DIR/install/tools/$tool_name.sh"
@@ -190,19 +216,20 @@ do_tool() {
 
 do_command() {
     case "$1" in
-    "init") install_complete ;;
-    "update") update_all ;;
-    "minimal") install_minimal ;;
-    "docker") install_docker ;;
-    "reinstall")
-        shift
-        do_reinstall "$@"
-        ;;
-    "tool")
-        shift
-        do_tool "$@"
-        ;;
-    *) __git_dot "$@" ;;
+        "list") show_programs_list ;;
+        "init") install_complete ;;
+        "update") update_all ;;
+        "minimal") install_minimal ;;
+        "docker") install_docker ;;
+        "reinstall")
+            shift
+            do_reinstall "$@"
+            ;;
+        "tool")
+            shift
+            do_tool "$@"
+            ;;
+        *) __git_dot "$@" ;;
     esac
 }
 
