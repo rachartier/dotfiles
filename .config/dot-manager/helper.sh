@@ -79,14 +79,13 @@ declare -A COLORS=(
     ["bg_white"]="\033[47m"
 )
 
-readonly ICON_SUCCESS="✓"
-readonly ICON_ERROR="✗"
-readonly ICON_WARNING="⚠"
-readonly ICON_INFO=""
-readonly ICON_PACKAGE=""
-readonly ICON_DOWNLOAD="↓"
-readonly ICON_GEAR="⚙ "
-readonly ICON_ROCKET="🚀"
+ICON_SUCCESS="✓"
+ICON_ERROR="✗"
+ICON_WARNING="⚠"
+ICON_INFO=""
+ICON_PACKAGE=""
+ICON_DOWNLOAD="↓"
+ICON_GEAR="⚙ "
 
 log() {
     local level="$1"

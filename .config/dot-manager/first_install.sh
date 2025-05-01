@@ -59,7 +59,7 @@ prepare_dotfiles() {
     fi
 
     if [ ! -L "$dot_script_link" ] || [ ! -e "$dot_script_link" ]; then
-        sudo ln -s "$dot_script_path" "$dot_script_link"
+        ln -s "$dot_script_path" "$dot_script_link"
     fi
 }
 

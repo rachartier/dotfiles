@@ -1,5 +1,7 @@
 #!/bin/env bash
 
+DOT_MANAGER_VERSION="2"
+
 ###
 ### Programs to install by default
 ####
@@ -96,21 +98,18 @@ install_packages() {
     fi
 
     print_step "Installing system packages"
-    __install_package_apt pkg-config
-    __install_package_apt build-essential
-
-    __install_package_apt wget
-    __install_package_apt libfuse2
-
-    __install_package_apt python3-venv
-    __install_package_apt python3-pip
-    __install_package_apt npm
-    __install_package_apt unzip
-
-    __install_package_apt ripgrep
-    __install_package_apt xsel
-    __install_package_apt freetype2-devel
-    __install_package_apt libglib2.0-dev
+    __install_package_apt pkg-config \
+        build-essential \
+        wget \
+        libfuse2 \
+        python3-venv \
+        python3-pip \
+        npm \
+        unzip \
+        ripgrep \
+        xsel \
+        freetype2-devel \
+        libglib2.0-dev
 
     if [ -z "$DOTFILES_MINIMAL" ]; then
         __install_package_apt tty-clock
@@ -228,6 +227,10 @@ do_command() {
         "tool")
             shift
             do_tool "$@"
+            ;;
+        "migrate")
+            shift
+            source "$DOT_MANAGER_DIR/migrate.sh" "$@"
             ;;
         *) __git_dot "$@" ;;
     esac
