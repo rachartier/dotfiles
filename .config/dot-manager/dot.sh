@@ -187,9 +187,8 @@ update_all() {
     log "info" "Updating tmux plugins..."
     "$HOME/.config/tmux/plugins/tpm/bin/update_plugins" all
 
-    . "$HOME/.antidote/antidote.zsh"
     log "info" "Updating antidote plugins..."
-    antidote update
+    zsh -c ". \"$HOME/.antidote/antidote.zsh\" &&  antidote update"
 }
 
 show_programs_list() {
