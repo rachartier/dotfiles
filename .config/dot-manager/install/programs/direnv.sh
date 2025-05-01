@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/env bash
 
 source "${0%/*}/../../helper.sh"
 

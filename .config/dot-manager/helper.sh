@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/env bash
 
 show_spinner() {
     local pid=$1

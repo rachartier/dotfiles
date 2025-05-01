@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/env bash
 
 __echo_info() {
     echo "[INFO] $(tput setaf 6)$1"

@@ -1,4 +1,4 @@
-#!/bin/env zsh
+#!/bin/env bash
 
 ###
 ### Programs to install by default
