@@ -4,7 +4,7 @@ DOT_MANAGER_VERSION="2"
 
 ###
 ### Programs to install by default
-####
+###
 DOT_MANAGER_COMPLETE_PROGRAMS=(
     "fd_find"
     "tmux"
@@ -44,8 +44,7 @@ DOT_MANAGER_MINIMAL_PROGRAMS=(
 ###
 ### Programs to install for a docker configuration
 ###
-DOT_MANAGER_DOCKER_PROGRAMS=$DOT_MANAGER_MINIMAL_PROGRAMS
-
+DOT_MANAGER_DOCKER_PROGRAMS=("${DOT_MANAGER_MINIMAL_PROGRAMS[@]}")
 
 # ---------------------------------------------------------------------------
 DOT_MANAGER_DIR="$HOME/.config/dot-manager"
@@ -93,7 +92,7 @@ install_packages() {
         print_step "Setting up ghostty terminfo"
         tempfile=$(mktemp) &&
             curl -sS -o "$tempfile" https://raw.githubusercontent.com/rachartier/dotfiles/refs/heads/main/.config/ghostty/terminfo/ghostty.terminfo &&
-            tic -x -o  "$HOME/.terminfo"  "$tempfile" &&
+            tic -x -o "$HOME/.terminfo" "$tempfile" &&
             rm "$tempfile"
     fi
 
@@ -215,24 +214,24 @@ do_tool() {
 
 do_command() {
     case "$1" in
-        "list") show_programs_list ;;
-        "init") install_complete ;;
-        "update") update_all ;;
-        "minimal") install_minimal ;;
-        "docker") install_docker ;;
-        "reinstall")
-            shift
-            do_reinstall "$@"
-            ;;
-        "tool")
-            shift
-            do_tool "$@"
-            ;;
-        "migrate")
-            shift
-            source "$DOT_MANAGER_DIR/migrate.sh" "$@"
-            ;;
-        *) __git_dot "$@" ;;
+    "list") show_programs_list ;;
+    "init") install_complete ;;
+    "update") update_all ;;
+    "minimal") install_minimal ;;
+    "docker") install_docker ;;
+    "reinstall")
+        shift
+        do_reinstall "$@"
+        ;;
+    "tool")
+        shift
+        do_tool "$@"
+        ;;
+    "migrate")
+        shift
+        source "$DOT_MANAGER_DIR/migrate.sh" "$@"
+        ;;
+    *) __git_dot "$@" ;;
     esac
 }
 

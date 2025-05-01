@@ -48,7 +48,7 @@ function M.get(colors)
 		PopupNormal = { bg = colors.base, fg = colors.text },
 
 		-- CursorLine = { bg = colors.surface1 },
-		-- CursorLine = { bg = "None" },
+		CursorLine = { bg = "None" },
 		CursorLineNr = { fg = colors.mauve },
 		CursorLineSign = { link = "SignColumn" },
 		CursorColumn = { bg = "None" },
