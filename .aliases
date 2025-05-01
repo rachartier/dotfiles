@@ -23,7 +23,7 @@ alias -g ......='../../../../..'
 alias -g -- -h='-h 2>&1 | bat --language=help --style=plain -P'
 alias -g -- --help='--help 2>&1 | bat --language=help --style=plain -P'
 
-alias ssh='TERM=tmux256-color ssh'
+alias ssh='TERM=tmux-256color ssh'
 alias ga='git add .'
 alias gb='git branch'
 alias gcb='git checkout -b'
