@@ -1,6 +1,7 @@
 local border = require("config.ui.border").default_border
 
 return {
+	prompt = " ",
 	ui_select = true,
 	matcher = {
 		frecency = true,

@@ -365,7 +365,7 @@ return {
 						end
 						return msg
 					end,
-					icon = "",
+					icon = "",
 					color = { fg = colors.overlay1 },
 					padding = { left = 1, right = 2 },
 					separator = { right = "", left = "" },
