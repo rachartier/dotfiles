@@ -30,7 +30,7 @@ function M.get(colors)
 		BlinkCmpDoc = { bg = colors.surface0 },
 		BlinkCmpScrollBarGutter = { bg = colors.surface2 },
 		BlinkCmpScrollBarThumb = { bg = colors.lavender },
-		BlinkCmpMenuSelection = { bg = colors.surface1 },
+		BlinkCmpMenuSelection = { link = "PmenuSel" },
 		BlinkCmpLabelDetail = { bg = colors.maroon, fg = colors.base },
 		BlinkCmpLabelDescription = { link = "BlinkCmpLabelDetail" },
 		-- BlinkCmpScrollBarThumb = { bg = colors.surface1 },
@@ -44,7 +44,7 @@ function M.get(colors)
 		Pmenu = { bg = colors.base, fg = colors.text },
 		PmenuBorder = { link = "FloatBorder" },
 		PmenuDocBorder = { link = "FloatBorder" },
-		PmenuSel = { bg = colors.surface1, bold = false },
+		PmenuSel = { bg = colors.surface0, bold = false },
 		PopupNormal = { bg = colors.base, fg = colors.text },
 
 		-- CursorLine = { bg = colors.surface1 },
@@ -101,9 +101,11 @@ function M.get(colors)
 		SnacksDashboardIcon = { fg = colors.mauve },
 		SnacksDashboardDesc = { fg = colors.text },
 		SnacksDashboardKey = { fg = colors.peach },
+		SnacksPickerBoxCursorLine = { link = "PmenuSel" },
+		SnacksPickerListCursorLine = { link = "PmenuSel" },
 		-- SnacksDashboardFooter = { fg = colors.peach },
 
-		StatusLine = { fg = colors.base, bg = "None" },
+		StatusLine = { fg = colors.text, bg = colors.base },
 		StatusLineNC = { link = "StatusLine" },
 
 		-- SnacksDashboardHeader = { fg = colors.yellow },
