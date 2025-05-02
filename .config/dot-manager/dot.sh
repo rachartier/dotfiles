@@ -61,7 +61,7 @@ __install_program() {
 
     if [ -f "$install_script" ]; then
         shift
-        if ! source "$install_script"; then
+        if ! source "$install_script" "$@"; then
             log "error" "Failed to source '$program_name' script."
             return 1
         fi
@@ -177,7 +177,8 @@ do_reinstall() {
         return 0
     fi
 
-    __install_program "$tool_name"
+    shift
+    __install_program "$tool_name" "$@"
 }
 
 update_all() {
