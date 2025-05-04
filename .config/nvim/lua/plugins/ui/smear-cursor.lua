@@ -1,8 +1,8 @@
 return {
 	"sphamba/smear-cursor.nvim",
 	event = "LazyFile",
-	-- enabled = not vim.g.neovide,
-	enabled = true,
+	enabled = not vim.g.neovide,
+	-- enabled = true,
 	priority = 10,
 	config = function()
 		require("smear_cursor").setup({

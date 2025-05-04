@@ -159,7 +159,7 @@ return {
 					fmt = function()
 						return mode_kirby[vim.fn.mode()] or vim.api.nvim_get_mode().mode
 					end,
-					separator = { right = "" },
+					separator = { right = "" },
 					padding = { left = 1, right = 1 },
 				},
 			},

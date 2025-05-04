@@ -2,7 +2,8 @@ if vim.g.neovide then
 	-- vim.o.guifont = "CaskaydiaCove NF"
 	-- vim.o.guifont = "Cascadia Code,Symbols Nerd Font"
 	-- vim.o.guifont = "MonoLisa,Symbols Nerd Font:h14"
-	vim.o.guifont = "MonoLisa Nerd Font:h12"
+	-- vim.o.guifont = "MonoLisa Nerd Font:h12"
+	vim.o.guifont = "Berkeley Mono,Symbols Nerd Font:h16"
 
 	vim.g.neovide_underline_stroke_scale = 1.5
 	-- vim.g.neovide_underline_automatic_scaling = true
@@ -46,7 +47,7 @@ if vim.g.neovide then
 	vim.g.neovide_light_radius = 5
 
 	vim.g.neovide_normal_opacity = 1
-	vim.g.neovide_transparency = 1
+	vim.g.neovide_opacity = 1
 
 	-- -- Helper function for transparency formatting
 	-- local alpha = function()

@@ -5,7 +5,7 @@ return {
 	enabled = true,
 	opts = {
 		flavour = vim.g.catppuccin_flavour, -- latte, frappe, macchiato, mocha
-		transparent_background = true,
+		transparent_background = not vim.g.neovide,
 		show_end_of_buffer = false,
 		term_colors = true,
 		dim_inactive = {
@@ -73,6 +73,7 @@ return {
 			dap_ui = true,
 			diffview = true,
 			gitsigns = true,
+			grug_far = true,
 			lsp_trouble = false,
 			mason = true,
 			markdown = true,
@@ -82,7 +83,9 @@ return {
 			noice = true,
 			notify = true,
 			render_markdown = true,
+			semantic_tokens = true,
 			symbols_outline = true,
+			snacks = true,
 			telekasten = true,
 			telescope = true,
 			treesitter = true,
