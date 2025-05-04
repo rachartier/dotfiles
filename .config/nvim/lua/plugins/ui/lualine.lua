@@ -337,7 +337,7 @@ return {
 			},
 			options = {
 				theme = theme,
-				disabled_filetypes = { statusline = { "alpha", "snacks_dashboard" } },
+				disabled_filetypes = { "alpha", "snacks_dashboard" },
 				icons_enabled = true,
 				globalstatus = true,
 				component_separators = { left = "", right = "" },

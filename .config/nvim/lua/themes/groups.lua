@@ -35,7 +35,7 @@ function M.get(colors)
 		BlinkCmpLabelDescription = { link = "BlinkCmpLabelDetail" },
 		-- BlinkCmpScrollBarThumb = { bg = colors.surface1 },
 
-		BlinkCmpLabelMatch = { bg = "None", fg = colors.blue },
+		-- BlinkCmpLabelMatch = { bg = "None", fg = colors.blue },
 
 		CmpGhostText = { link = "Comment", default = true },
 		CmpItemAbbrMatch = { fg = colors.yellow, underline = false },
@@ -95,15 +95,16 @@ function M.get(colors)
 
 		SwitchBufferStatusColor = { fg = colors.red },
 
-		SnacksPickerDir = { italic = true, fg = colors.overlay0 },
-		SnacksPickerTitle = { bg = "None", fg = colors.text, italic = true, bold = true },
-		SnacksDashboardHeader = { fg = colors.mauve },
-		SnacksDashboardIcon = { fg = colors.mauve },
-		SnacksDashboardDesc = { fg = colors.text },
-		SnacksDashboardKey = { fg = colors.peach },
-		SnacksPickerBoxCursorLine = { link = "PmenuSel" },
-		SnacksPickerListCursorLine = { link = "PmenuSel" },
+		-- SnacksPickerDir = { italic = true, fg = colors.overlay0 },
+		-- SnacksPickerTitle = { bg = "None", fg = colors.text, italic = true, bold = true },
+		-- SnacksDashboardHeader = { fg = colors.mauve },
+		-- SnacksDashboardIcon = { fg = colors.mauve },
+		-- SnacksDashboardDesc = { fg = colors.text },
+		-- SnacksDashboardKey = { fg = colors.peach },
+		-- SnacksPickerBoxCursorLine = { link = "PmenuSel" },
+		-- SnacksPickerListCursorLine = { link = "PmenuSel" },
 		-- SnacksDashboardFooter = { fg = colors.peach },
+		SnacksIndentScope = { fg = colors.surface1 },
 
 		StatusLine = { fg = colors.text, bg = colors.base },
 		StatusLineNC = { link = "StatusLine" },
@@ -167,7 +168,6 @@ function M.get(colors)
 		AlphaNeovimLogoBlue = { fg = colors.blue },
 		AlphaNeovimLogoGreen = { fg = colors.green },
 		AlphaNeovimLogoGreenFBlueB = { fg = colors.green, bg = colors.blue },
-		CopilotChatSeparator = { fg = colors.surface1 },
 
 		RenderMarkdownChecked = { fg = colors.green },
 		RenderMarkdownTodo = { fg = colors.blue },
@@ -200,8 +200,8 @@ function M.get(colors)
 
 		LualineCustomScrollBar = { fg = colors.base },
 
-		CopilotSuggestion = { fg = colors.subtext0, italic = false },
-		SnacksIndentScope = { fg = colors.surface1 },
+		CopilotSuggestion = { fg = colors.overlay1, italic = false },
+		-- CopilotChatSeparator = { fg = colors.surface1 },
 
 		WinBarDir = { fg = colors.pink, bg = utils.darken(colors.surface0, 0.65, colors.base), bold = true },
 		Winbar = { fg = colors.overlay0, bg = utils.darken(colors.surface0, 0.65, colors.base), bold = false },
