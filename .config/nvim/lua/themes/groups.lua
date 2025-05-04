@@ -30,7 +30,7 @@ function M.get(colors)
 		BlinkCmpDoc = { bg = colors.surface0 },
 		BlinkCmpScrollBarGutter = { bg = colors.surface2 },
 		BlinkCmpScrollBarThumb = { bg = colors.lavender },
-		BlinkCmpMenuSelection = { link = "PmenuSel" },
+		BlinkCmpMenuSelection = { bg = colors.surface1 },
 		BlinkCmpLabelDetail = { bg = colors.maroon, fg = colors.base },
 		BlinkCmpLabelDescription = { link = "BlinkCmpLabelDetail" },
 		-- BlinkCmpScrollBarThumb = { bg = colors.surface1 },
@@ -202,6 +202,9 @@ function M.get(colors)
 
 		CopilotSuggestion = { fg = colors.subtext0, italic = false },
 		SnacksIndentScope = { fg = colors.surface1 },
+
+		WinBarDir = { fg = colors.pink, bg = utils.darken(colors.surface0, 0.65, colors.base), bold = true },
+		Winbar = { fg = colors.overlay0, bg = utils.darken(colors.surface0, 0.65, colors.base), bold = false },
 
 		-- === Lsp
 		["@keyword.operator.python"] = { link = "Conditional" },

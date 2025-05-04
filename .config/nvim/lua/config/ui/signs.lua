@@ -50,6 +50,7 @@ return {
 		copilot = " ",
 		copilot_disabled = " ",
 		terminal = " ",
+		folder = "󰉖 ",
 	},
 }
 

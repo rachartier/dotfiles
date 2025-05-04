@@ -12,6 +12,8 @@ M.gif_alpha_enabled = false
 M.tty_clock_alpha_enabled = true
 
 vim.g.dotfile_config_type = "normal"
+vim.g.path_dotfiles = vim.env.HOME .. "/.config"
+vim.g.path_dev = vim.env.HOME .. "/dev"
 
 if os.getenv("DOTFILES_MINIMAL") then
 	vim.g.dotfile_config_type = "minimal"

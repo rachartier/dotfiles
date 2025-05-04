@@ -44,7 +44,7 @@ return {
 		config = function()
 			require("tiny-code-action").setup({
 				-- backend = "difftastic",
-				backend = "delta",
+				backend = "vim",
 				picker = "snacks",
 				backend_opts = {
 					delta = {

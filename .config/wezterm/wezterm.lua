@@ -38,8 +38,9 @@ config.font_size = 15
 config.font_rules = {
 	-- {
 	-- 	italic = true,
-	-- 	-- font = wezterm.font("Cascadia Code", { weight = "Regular", italic = true }),
-	-- 	font = wezterm.font("Monaspace Radon", { weight = "Regular", italic = true }),
+	-- 	font = wezterm.font("MonoLisa", { weight = "Regular", italic = true }),
+	-- font = wezterm.font("Cascadia Code", { weight = "Regular", italic = true }),
+	-- font = wezterm.font("Monaspace Radon", { weight = "Regular", italic = true }),
 	-- },
 	--
 	-- {
@@ -56,9 +57,9 @@ config.font_rules = {
 -- == ~= != <= >= #################### 00000 =================> ==>
 config.harfbuzz_features = {
 	"zero=1",
-	-- "ss01=1",
-	-- "ss02=1",
-	-- "ss03=1",
+	"ss01=1",
+	"ss02=1",
+	"ss03=1",
 	-- "ss04=0",
 	-- "ss05=1",
 	-- "ss07=1",

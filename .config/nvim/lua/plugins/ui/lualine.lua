@@ -53,33 +53,6 @@ local function get_lualine_colors()
 	return vim.tbl_extend("force", lualine_colors, c)
 end
 
-local function get_kirby_colors()
-	local colors = get_lualine_colors()
-
-	return {
-		n = colors.red,
-		i = colors.green,
-		v = colors.blue,
-		[""] = colors.blue,
-		V = colors.blue,
-		c = colors.mauve,
-		no = colors.red,
-		s = colors.orange,
-		S = colors.orange,
-		[""] = colors.orange,
-		ic = colors.yellow,
-		R = colors.violet,
-		Rv = colors.violet,
-		cv = colors.red,
-		ce = colors.red,
-		r = colors.cyan,
-		rm = colors.cyan,
-		["r?"] = colors.cyan,
-		["!"] = colors.red,
-		t = colors.red,
-	}
-end
-
 local conditions = {
 	buffer_not_empty = function()
 		return vim.fn.empty(vim.fn.expand("%:t")) ~= 1
@@ -93,18 +66,6 @@ local conditions = {
 		return gitdir and #gitdir > 0 and #gitdir < #filepath
 	end,
 }
-
-local function diff_source()
-	local gitsigns = vim.b.gitsigns_status_dict
-	if gitsigns then
-		return {
-			added = gitsigns.added,
-			modified = gitsigns.changed,
-			removed = gitsigns.removed,
-		}
-	end
-end
-
 local function cond_disable_by_ft()
 	local not_empty = conditions.buffer_not_empty()
 	local filetype = vim.api.nvim_get_option_value("filetype", { buf = 0 })
@@ -199,153 +160,16 @@ return {
 						return mode_kirby[vim.fn.mode()] or vim.api.nvim_get_mode().mode
 					end,
 					separator = { right = "" },
-					padding = { left = 1, right = 0 },
+					padding = { left = 1, right = 1 },
 				},
 			},
 			lualine_b = {
 				{
-					"filetype",
-					color = { fg = colors.overlay1 },
-					separator = { right = "", left = "" },
-					cond = cond_disable_by_ft,
-					icon_only = true,
-					colored = false,
-					padding = { right = 0, left = 2 },
-				},
-				{
-					"filename",
-
-					padding = { right = 1, left = 0 },
-					color = { fg = colors.overlay1 },
-					separator = { right = "", left = "" },
-
-					symbols = {
-						modified = signs.file.modified, -- Text to show when the file is modified.
-						readonly = signs.file.readonly, -- Text to show when the file is non-modifiable or readonly.
-						unnamed = signs.file.unnamed, -- Text to show for unnamed buffers.
-						newfile = signs.file.created, -- Text to show for newly created file before first write
-					},
-				},
-			},
-			lualine_c = {
-				{
 					"branch",
 					icon = signs.git.branch,
 					color = { fg = colors.violet },
-					separator = { right = "", left = "" },
-					padding = { left = 2, right = 1 },
+					padding = { left = 4, right = 2 },
 				},
-				{
-					"diff",
-					colored = true,
-					source = diff_source,
-					symbols = {
-						added = signs.git.added,
-						modified = signs.git.modified,
-						removed = signs.git.removed,
-					},
-					separator = { right = "", left = "" },
-					-- diff_color = {
-					-- 	added = { gui = "bold" },
-					-- 	modified = { gui = "bold" },
-					-- 	removed = { gui = "bold" },
-					-- },
-				},
-				{
-					function()
-						local diags = vim.diagnostic.get(0)
-
-						if #diags > 0 then
-							return "|"
-						end
-						return ""
-					end,
-					cond = conditions.check_git_workspace,
-					separator = { right = "", left = "" },
-					color = { bg = colors.mantle, fg = colors.overlay0 },
-				},
-				{
-					"diagnostics",
-					sources = { "nvim_lsp" },
-					symbols = {
-						ok = signs.full_diagnostic.ok .. " ",
-						error = signs.full_diagnostic.error .. " ",
-						warn = signs.full_diagnostic.warn .. " ",
-						hint = signs.full_diagnostic.hint .. " ",
-						info = signs.full_diagnostic.info .. " ",
-					},
-					-- diagnostics_color = {
-					-- 	error = { fg = c.error },
-					-- 	warn = { fg = c.warn },
-					-- 	info = { fg = c.info },
-					-- 	hint = { fg = c.hint },
-					-- },
-					colored = true,
-					padding = { left = 1, right = 1 },
-					color = { bg = colors.mantle, fg = colors.subtext0 },
-				},
-			},
-			lualine_x = {
-				{
-					require("lazy.status").updates,
-					cond = require("lazy.status").has_updates,
-					padding = { left = 1, right = 2 },
-					color = { fg = colors.green },
-					separator = { right = "" },
-				},
-				{
-					"copilot",
-					symbols = {
-						status = {
-							hl = {
-								enabled = colors.green,
-								sleep = colors.fg,
-								disabled = colors.red,
-								warning = colors.yellow,
-								unknown = colors.red,
-							},
-						},
-					},
-					show_colors = true,
-					show_loading = false,
-					padding = { left = 1, right = is_inside_docker and 1 or 2 },
-					separator = { right = "" },
-				},
-				-- {
-				-- 	function()
-				-- 		local ok, copilot_enabled = pcall(vim.api.nvim_buf_get_var, 0, "copilot_enabled")
-				--
-				-- 		if ok and copilot_enabled then
-				-- 			return signs.others.copilot
-				-- 		end
-				--
-				-- 		return signs.others.copilot_disabled
-				-- 	end,
-				-- 	-- cond = cond_disable_by_ft,
-				-- 	color = { fg = colors.fg },
-				-- 	separator = { right = "" },
-				-- 	padding = { left = 1, right = 2 },
-				-- },
-				{
-					function()
-						if is_inside_docker then
-							return " "
-						end
-						return ""
-					end,
-					separator = { right = "" },
-					color = { fg = colors.blue },
-					padding = { left = 1, right = 2 },
-				},
-				{
-					function()
-						return " "
-					end,
-					separator = { right = "" },
-					padding = { left = 0, right = 0 },
-				},
-			},
-			lualine_y = {
 				{
 					function()
 						local msg = " No Active Lsp"
@@ -366,48 +190,83 @@ return {
 						return msg
 					end,
 					icon = "",
-					color = { fg = colors.overlay1 },
-					padding = { left = 1, right = 2 },
-					separator = { right = "", left = "" },
+					color = { fg = colors.subtext0 },
+					padding = { left = conditions.check_git_workspace() and 2 or 4, right = 2 },
+				},
+				{
+					"diagnostics",
+					sources = { "nvim_lsp" },
+					symbols = {
+						ok = signs.full_diagnostic.ok .. " ",
+						error = signs.full_diagnostic.error .. " ",
+						warn = signs.full_diagnostic.warn .. " ",
+						hint = signs.full_diagnostic.hint .. " ",
+						info = signs.full_diagnostic.info .. " ",
+					},
+					-- diagnostics_color = {
+					-- 	error = { fg = c.error },
+					-- 	warn = { fg = c.warn },
+					-- 	info = { fg = c.info },
+					-- 	hint = { fg = c.hint },
+					-- },
+					colored = true,
+					padding = { left = 2, right = 2 },
+					color = { fg = colors.subtext0 },
 				},
 			},
-			lualine_z = {
-				-- {
-				-- 	"progress",
-				-- 	separator = { left = "" },
-				-- 	color = { fg = colors.base },
-				-- 	padding = { left = 1, right = 0 },
-				-- 	cond = function()
-				-- 		local ft = vim.api.nvim_get_option_value("filetype", { buf = 0 })
-				-- 		return not vim.tbl_contains(vim.g.noncode_ft, ft)
-				-- 	end,
-				-- },
+			lualine_c = {},
+			lualine_x = {
 				{
-					"location",
-					separator = { left = "", right = "" },
-					color = { fg = colors.base },
-					padding = { left = 1, right = 0 },
-					cond = function()
-						local ft = vim.api.nvim_get_option_value("filetype", { buf = 0 })
-						return not vim.tbl_contains(vim.g.noncode_ft, ft)
-					end,
+					require("lazy.status").updates,
+					cond = require("lazy.status").has_updates,
+					padding = { left = 1, right = 2 },
+					color = { fg = colors.green },
 				},
-				-- {
-				-- 	function()
-				-- 		if vim.fn.mode():find("[vV]") then
-				-- 			local ln_beg = vim.fn.line("v")
-				-- 			local ln_end = vim.fn.line(".")
-				--
-				-- 			local lines = ln_beg <= ln_end and ln_end - ln_beg + 1 or ln_beg - ln_end + 1
-				--
-				-- 			return "sel: " .. tostring(vim.fn.wordcount().visual_chars) .. " | " .. tostring(lines)
-				-- 		else
-				-- 			return ""
-				-- 		end
-				-- 	end,
-				-- 	color = { fg = colors.base },
-				-- 	separator = { left = "" },
-				-- },
+				{
+					"copilot",
+					symbols = {
+						status = {
+							hl = {
+								enabled = colors.green,
+								sleep = colors.fg,
+								disabled = colors.red,
+								warning = colors.yellow,
+								unknown = colors.red,
+							},
+						},
+					},
+					show_colors = true,
+					show_loading = false,
+					padding = { left = 1, right = is_inside_docker and 1 or 2 },
+				},
+				{
+					function()
+						if is_inside_docker then
+							return " "
+						end
+						return ""
+					end,
+					color = { fg = colors.blue },
+					padding = { left = 1, right = 1 },
+				},
+				{
+					function()
+						return " | "
+					end,
+					color = { fg = colors.surface2 },
+					padding = { left = 0, right = 0 },
+				},
+			},
+			lualine_y = {
+				{
+					"filetype",
+					color = { fg = colors.subtext0 },
+					separator = { right = "", left = "" },
+					cond = cond_disable_by_ft,
+					icon_only = false,
+					colored = true,
+					padding = { left = 2, right = 2 },
+				},
 				{
 					function()
 						local ft = vim.api.nvim_get_option_value("filetype", { buf = 0 })
@@ -436,25 +295,39 @@ return {
 							})
 						end
 
-						return ""
+						return table.concat({
+							string.format("%0" .. string.len(tostring(lines)) .. "d", vim.fn.line(".")),
+							"/",
+							tostring(lines),
+							" ",
+							string.format("%03d", vim.fn.col(".")),
+						})
 					end,
-					separator = { left = "" },
-					padding = { left = 1, right = 0 },
+					padding = { left = 2, right = 1 },
+					color = { fg = colors.subtext0 },
 				},
 				{
 					function()
 						return get_scrollbar()
 					end,
-					separator = { left = "" },
-					color = { fg = colors.surface0 },
+					color = { fg = colors.surface2 },
 					padding = { left = 1, right = 0 },
 				},
 			},
+			lualine_z = {},
 		}
 
 		local theme = require("lualine.themes.catppuccin")
+		local utils = require("utils")
 
-		theme.normal.c.bg = colors.mantle
+		for _, section in pairs(theme) do
+			if section.b then
+				section.b.bg = utils.darken(colors.surface0, 0.65, colors.base)
+			end
+			if section.c then
+				section.c.bg = utils.darken(colors.surface0, 0.65, colors.base)
+			end
+		end
 
 		local config = {
 			extensions = {
@@ -467,8 +340,8 @@ return {
 				disabled_filetypes = { statusline = { "alpha", "snacks_dashboard" } },
 				icons_enabled = true,
 				globalstatus = true,
-				component_separators = { left = "", right = "" },
-				section_separators = { left = "", right = "" },
+				component_separators = { left = "", right = "" },
+				section_separators = { left = "", right = "" },
 				-- section_separators = "",
 			},
 			sections = sections,
