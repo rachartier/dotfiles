@@ -82,6 +82,7 @@ return {
 						},
 						["?"] = {
 							hl = "MarkdownCheckboxQuestion",
+							scope_hl = "Normal",
 							text = "",
 						},
 						checked = {
