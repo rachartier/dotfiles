@@ -97,13 +97,13 @@ function M.get(colors)
 
 		-- SnacksPickerDir = { italic = true, fg = colors.overlay0 },
 		-- SnacksPickerTitle = { bg = "None", fg = colors.text, italic = true, bold = true },
-		-- SnacksDashboardHeader = { fg = colors.mauve },
-		-- SnacksDashboardIcon = { fg = colors.mauve },
-		-- SnacksDashboardDesc = { fg = colors.text },
-		-- SnacksDashboardKey = { fg = colors.peach },
+		SnacksDashboardHeader = { fg = colors.mauve },
+		SnacksDashboardIcon = { fg = colors.mauve },
+		SnacksDashboardDesc = { fg = colors.text },
+		SnacksDashboardKey = { fg = colors.peach },
+		SnacksDashboardFooter = { fg = colors.maroon },
 		-- SnacksPickerBoxCursorLine = { link = "PmenuSel" },
 		-- SnacksPickerListCursorLine = { link = "PmenuSel" },
-		-- SnacksDashboardFooter = { fg = colors.peach },
 		SnacksIndentScope = { fg = colors.surface1 },
 
 		StatusLine = { fg = colors.text, bg = colors.base },
@@ -205,6 +205,7 @@ function M.get(colors)
 
 		WinBarDir = { fg = colors.pink, bg = utils.darken(colors.surface0, 0.65, colors.base), bold = true },
 		Winbar = { fg = colors.overlay0, bg = utils.darken(colors.surface0, 0.65, colors.base), bold = false },
+		WinbarFile = { fg = colors.overlay1, bg = utils.darken(colors.surface0, 0.65, colors.base), bold = false },
 
 		-- === Lsp
 		["@keyword.operator.python"] = { link = "Conditional" },

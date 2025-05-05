@@ -4,6 +4,41 @@ local function is_compact()
 	return vim.o.columns < compact_value
 end
 
+local function build_header()
+	local header = [[
+
+███┐   ██┐███████┐ ██████┐ ██┐   ██┐██┐███┐   ███┐
+████┐  ██│██┌────┘██┌───██┐██│   ██│██│████┐ ████│
+██┌██┐ ██│█████┐  ██│   ██│██│   ██│██│██┌████┌██│
+██│└██┐██│██┌──┘  ██│   ██│└██┐ ██┌┘██│██│└██┌┘██│
+██│ └████│███████┐└██████┌┘ └████┌┘ ██│██│ └─┘ ██│
+└─┘  └───┘└──────┘ └─────┘   └───┘  └─┘└─┘     └─┘
+
+]]
+
+	local version = vim.version()
+
+	local version_str = string.format(
+		"%s v%d.%d.%d",
+		version.prerelease and "Nightly" or "Stable",
+		version.major,
+		version.minor,
+		version.patch
+	)
+	local version_width = vim.fn.strdisplaywidth(version_str)
+
+	local first_newline = string.find(header, "\n")
+	local header_width = vim.fn.strdisplaywidth(header:sub(1, first_newline - 1))
+
+	local padding = math.floor((header_width - version_width) / 2)
+
+	local version_line = string.rep(" ", padding) .. version_str .. "\n"
+
+	header = header .. version_line
+
+	return header
+end
+
 return {
 	enabled = true,
 	preset = {
@@ -60,78 +95,70 @@ return {
 			return items
 		end,
 
-		header = [[
+		header = build_header(),
+		formats = {
+			terminal = { align = "center" },
+			version = { "%s", align = "center" },
+		},
 
-███┐   ██┐███████┐ ██████┐ ██┐   ██┐██┐███┐   ███┐
-████┐  ██│██┌────┘██┌───██┐██│   ██│██│████┐ ████│
-██┌██┐ ██│█████┐  ██│   ██│██│   ██│██│██┌████┌██│
-██│└██┐██│██┌──┘  ██│   ██│└██┐ ██┌┘██│██│└██┌┘██│
-██│ └████│███████┐└██████┌┘ └████┌┘ ██│██│ └─┘ ██│
-└─┘  └───┘└──────┘ └─────┘   └───┘  └─┘└─┘     └─┘
-]],
-	},
-	formats = {
-		terminal = { align = "center" },
-		version = { "%s", align = "center" },
-	},
+		sections = {
+			function()
+				if is_compact() then
+					return {
+						text = { " NEOVIM    \n", hl = "SnacksDashboardHeader" },
+						hl = "Comment",
+						align = "center",
+						height = 5,
+						width = 20,
+					}
+				end
 
-	sections = {
-		function()
-			if is_compact() then
 				return {
-					text = { " NEOVIM    \n", hl = "SnacksDashboardHeader" },
-					hl = "Comment",
-					align = "center",
-					height = 5,
-					width = 20,
+					section = "header",
 				}
-			end
-
-			return {
-				section = "header",
-			}
-		end,
-		function()
-			local gap = 1
-			if vim.o.lines < 30 then
-				gap = 0
-			end
-			return {
-				section = "keys",
-				gap = gap,
-				padding = 1,
-			}
-		end,
-		{ section = "startup" },
-
-		function()
-			local in_git = Snacks.git.get_root() ~= nil
-			local cmds = {
-				{
-					title = "Git Graph",
-					icon = " ",
-					cmd = [[echo -e "$(git-graph --style round --color always --wrap 50 0 8 -f 'oneline')"]],
-					indent = 1,
-					height = 24,
-				},
-				-- {
-				-- 	icon = " ",
-				-- 	title = "Git Status",
-				-- 	cmd = "git diff --stat -B -M -C",
-				-- 	indent = 3,
-				-- },
-			}
-			return vim.tbl_map(function(cmd)
-				return vim.tbl_extend("force", {
-					pane = 2,
-					section = "terminal",
-					enabled = function()
-						return in_git and vim.o.columns > 130
-					end,
+			end,
+			function()
+				local gap = 1
+				if vim.o.lines < 30 then
+					gap = 0
+				end
+				return {
+					section = "keys",
+					gap = gap,
 					padding = 1,
-					-- ttl = 5 * 60,
-				}, cmd)
-			end, cmds)
-		end,
+				}
+			end,
+			{ section = "startup" },
+
+			function()
+				local in_git = Snacks.git.get_root() ~= nil
+				local cmds = {
+					{
+						title = "Git Graph",
+						icon = " ",
+						cmd = [[echo -e "$(git-graph --style round --color always --wrap 50 0 8 -f 'oneline')"]],
+						indent = 1,
+						height = 24,
+					},
+					-- {
+					-- 	icon = " ",
+					-- 	title = "Git Status",
+					-- 	cmd = "git diff --stat -B -M -C",
+					-- 	indent = 3,
+					-- },
+				}
+				return vim.tbl_map(function(cmd)
+					return vim.tbl_extend("force", {
+						pane = 2,
+						section = "terminal",
+						enabled = function()
+							return in_git and vim.o.columns > 130
+						end,
+						padding = 1,
+						-- ttl = 5 * 60,
+					}, cmd)
+				end, cmds)
+			end,
+		},
 	},
 }

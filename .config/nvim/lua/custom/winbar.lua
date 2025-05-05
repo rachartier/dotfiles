@@ -60,7 +60,9 @@ function M.render()
 
 						if ok then
 							local icon = mini_icons.get("filetype", extension)
-							return string.format("%%#Winbar#%s %s", icon, segment)
+							return string.format("%%#WinbarFile#%s %s", icon, segment)
+						else
+							return string.format("%%#WinbarFile#%s", segment)
 						end
 					end
 					return string.format("%%#Winbar#%s", segment)
