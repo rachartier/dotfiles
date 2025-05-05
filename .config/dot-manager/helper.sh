@@ -199,7 +199,7 @@ __install_package_release() {
             cd "/tmp/$filename"
         fi
     elif [[ "$filename" == *.zip ]]; then
-        unzip "$filename" -f && log "success" "$filename extracted." || return 1
+        unzip -oq "$filename" && log "success" "$filename extracted." || return 1
         filename=$(basename "$filename" ".zip")
         if [ -d "/tmp/$filename" ]; then
             cd "/tmp/$filename"
