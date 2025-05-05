@@ -19,18 +19,18 @@ local function build_header()
 	local version = vim.version()
 
 	local version_str = string.format(
-		"%s v%d.%d.%d",
-		version.prerelease and "Nightly" or "Stable",
+		"󱝁 v%d.%d.%d (%s)",
 		version.major,
 		version.minor,
-		version.patch
+		version.patch,
+		version.prerelease and "Nightly" or "Stable"
 	)
 	local version_width = vim.fn.strdisplaywidth(version_str)
 
 	local first_newline = string.find(header, "\n")
 	local header_width = vim.fn.strdisplaywidth(header:sub(1, first_newline - 1))
 
-	local padding = math.floor((header_width - version_width) / 2)
+	local padding = math.floor((header_width - version_width) / 2 - 1)
 
 	local version_line = string.rep(" ", padding) .. version_str .. "\n"
 
