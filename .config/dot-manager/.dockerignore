@@ -1,0 +1,24 @@
+# Version control
+.git
+.gitignore
+.gitmodules
+
+# Docker
+Dockerfile*
+docker-compose*
+.docker
+
+# Documentation
+README.md
+LICENSE
+*.md
+
+# Temporary files
+*.swp
+*.swo
+*~
+*.log
+
+# OS specific
+.DS_Store
+Thumbs.db
