@@ -101,12 +101,12 @@ end, {
 
 -- Corrige le problème d'indentation en python lorsque
 -- l'on sort du mode insertion si on a mit plusieurs tabulations
-utils.on_event("InsertLeave", function()
-	vim.cmd("normal! ==")
-end, {
-	target = "*.py",
-	desc = "Auto format line in python file",
-})
+-- utils.on_event("InsertLeave", function()
+-- 	vim.cmd("normal! ==")
+-- end, {
+-- 	target = "*.py",
+-- 	desc = "Auto format line in python file",
+-- })
 
 -- autocmd("User", {
 -- 	pattern = "CustomFormatCopilot",
