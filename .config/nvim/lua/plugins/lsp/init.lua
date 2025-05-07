@@ -70,11 +70,10 @@ return {
 	event = "LazyFile",
 	dependencies = {
 		"saghen/blink.cmp",
-		"williamboman/mason-lspconfig.nvim",
 		"jay-babu/mason-nvim-dap.nvim",
+		"mason-org/mason-lspconfig.nvim",
 		{
-			"williamboman/mason.nvim",
-			branch = "v2.x",
+			"mason-org/mason.nvim",
 			-- event = "LazyFile",
 			build = ":MasonUpdate",
 			opts = {
