@@ -5,10 +5,8 @@ repo_list=$(fd -u -t d -H "^\.git$" "$HOME/dev" -j 8 -x dirname {} |
     repo="$1"
     name=$(basename "$repo")
     if [ -d "$repo/.git" ]; then
-        # Use --max-count=1 instead of -1 and only get the date we need
         date=$(git -C "$repo" log --max-count=1 --format="%cd" --date=format:"%Y-%m-%d" 2>/dev/null)
         if [ -z "$date" ]; then
-            # Use a special prefix for sorting that will appear last
             echo "0|No commits|$repo|$name"
         else
             echo "1|$date|$repo|$name"
