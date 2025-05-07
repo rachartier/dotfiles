@@ -1,44 +1,35 @@
 #!/bin/bash
 
-get_last_modified() {
-    local repo="$1"
-    if [ -d "$repo/.git" ]; then
-        # Get the latest commit date in YYYY-MM-DD format
-        git -C "$repo" log -1 --format="%cd" --date=short 2>/dev/null || echo "No commits"
-    else
-        echo "Not a git repo"
-    fi
-}
-
-repos_raw=$(fd -u -t d -H "^\.git$" "$HOME/dev" -x dirname {})
-repos=""
-while IFS= read -r repo; do
-    last_modified=$(get_last_modified "$repo")
+fd -u -t d -H "^\.git$" "$HOME/dev" -j 8 -x dirname {} |
+    xargs -P "$(nproc)" -I{} bash -c '
+    repo="$1"
     name=$(basename "$repo")
-    repos="${repos}${repo} :: [${last_modified}] ${name}"$'\n'
-done <<<"$repos_raw"
+    if [ -d "$repo/.git" ]; then
+        # Use --max-count=1 instead of -1 and only get the date we need
+        date=$(git -C "$repo" log --max-count=1 --format="%cd" --date=format:"%Y-%m-%d" 2>/dev/null)
+        if [ -z "$date" ]; then
+            # Use a special prefix for sorting that will appear last
+            echo "0|No commits|$repo|$name"
+        else
+            echo "1|$date|$repo|$name"
+        fi
+    else
+        # Use a special prefix for sorting that will appear last
+        echo "0|Not a git repo|$repo|$name"
+    fi
+' -- {} |
+    sort -t"|" -k1,1r -k2,2r |
+    awk -F"|" '{print $3" :: \033[38;5;4m["$2"]\033[0m "$4}' |
+    fzf --ansi --with-nth 3,4,5 --preview "eza --color=always --long --no-filesize --icons=always --no-time --no-user --no-permissions {1}" |
+    {
+        # Extract project path from selection format "path :: [date] name"
+        project=$(echo "$REPLY" | awk -F" :: " '{print $1}')
+        name=$(echo "$REPLY" | awk '{print $NF}')
 
-repos=$(echo "$repos" | sort -k 3 -r)
-
-if [ -z "$repos" ]; then
-    echo "No projects found"
-    exit 1
-fi
-
-selection=$(echo -e "$repos" | fzf --ansi --with-nth 3,4,5 --preview "eza --color=always --long --no-filesize --icons=always --no-time --no-user --no-permissions {1}")
-
-if [ -z "$selection" ]; then
-    exit 2
-fi
-
-project=$(echo "$selection" | awk -F" :: " '{print $1}')
-
-name=$(echo "$selection" | awk '{print $NF}')
-name=$(echo "$name" | tr . _)
-
-if [ -z "$project" ]; then
-    exit 3
-fi
-
-tmux new -s "$name" -d -c "$project" -n "$name"
-tmux switch-client -t "$name"
+        if [ -n "$project" ]; then
+            # Convert dots to underscores for tmux session name
+            session_name=$(echo "$name" | tr . _)
+            tmux new -s "$session_name" -d -c "$project" -n "$session_name"
+            tmux switch-client -t "$session_name"
+        fi
+    }
