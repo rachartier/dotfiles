@@ -24,11 +24,6 @@ return {
 		on_attach = require("config.lsp.attach").on_attach,
 	},
 	config = function(_, opts)
-		-- FIXME: Can't deal with this shit anymore
-		local set_registries_save = require("mason-registry.sources").set_registries
-
-		require("mason-registry.sources").set_registries = function(foo) end
 		require("roslyn").setup(opts)
-		require("mason-registry.sources").set_registries = set_registries_save
 	end,
 }
