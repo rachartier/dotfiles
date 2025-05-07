@@ -24,17 +24,17 @@ alias -g -- -h='-h 2>&1 | bat --language=help --style=plain -P'
 alias -g -- --help='--help 2>&1 | bat --language=help --style=plain -P'
 
 alias ssh='TERM=tmux-256color ssh'
-alias ga='git add .'
-alias gb='git branch'
-alias gcb='git checkout -b'
-alias gcm='git commit'
-alias gc='git checkout'
-alias gs='git status'
-alias gp='git pull'
-alias gbd='git branch -D'
-alias gpu='git push'
-alias gpt='git push --tags'
-alias gfu='git fetch upstream'
+#alias ga='git add .'
+#alias gb='git branch'
+#alias gcb='git checkout -b'
+#alias gcm='git commit'
+#alias gc='git checkout'
+#alias gs='git status'
+#alias gp='git pull'
+#alias gbd='git branch -D'
+#alias gpu='git push'
+#alias gpt='git push --tags'
+#alias gfu='git fetch upstream'
 
 function gl() {
     if command -v git-graph &>/dev/null; then
@@ -114,3 +114,15 @@ function venv() {
     fi
 }
 
+function cat() {
+    if [ -z "$1" ]; then
+        echo "Usage: cat <file>"
+        return
+    fi
+
+    if [ ! -t 1 ] || ! command -v bat &>/dev/null; then
+        command cat "$1"
+    else
+        bat "$1"
+    fi
+}

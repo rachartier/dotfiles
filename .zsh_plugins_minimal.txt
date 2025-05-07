@@ -3,7 +3,9 @@ Freed-Wu/fzf-tab-source
 
 ohmyzsh/ohmyzsh path:plugins/command-not-found
 ohmyzsh/ohmyzsh path:lib/key-bindings.zsh
+ohmyzsh/ohmyzsh path:plugins/git kind:defer
 
 zsh-users/zsh-autosuggestions kind:defer
 zsh-users/zsh-syntax-highlighting
 zsh-users/zsh-history-substring-search kind:defer
+zsh-users/zsh-completions kind:defer
