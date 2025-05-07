@@ -23,6 +23,7 @@ DOT_MANAGER_COMPLETE_PROGRAMS=(
     "copilot_cli"
     "direnv"
     "win32yank"
+    "gping"
 )
 
 ###
