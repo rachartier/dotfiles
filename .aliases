@@ -114,15 +114,4 @@ function venv() {
     fi
 }
 
-function cat() {
-    if [ -z "$1" ]; then
-        echo "Usage: cat <file>"
-        return
-    fi
-
-    if [ ! -t 1 ] || ! command -v bat &>/dev/null; then
-        command cat "$1"
-    else
-        bat "$1"
-    fi
-}
+alias cat="bat --style=plain --color=always"
