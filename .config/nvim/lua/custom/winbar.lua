@@ -3,8 +3,11 @@
 -- Thanks MariaSolOs!
 --]]
 
-local folder_icon = require("config.ui.signs").others.folder
 local M = {}
+
+local colors = require("theme").get_colors()
+
+local utils = require("utils")
 
 function M.render()
 	local path = vim.fs.normalize(vim.fn.expand("%:p") --[[@as string]])
@@ -73,28 +76,45 @@ function M.render()
 	})
 end
 
-vim.api.nvim_create_autocmd("BufWinEnter", {
-	group = vim.api.nvim_create_augroup("custom_winbar", { clear = true }),
-	desc = "Attach winbar",
-	callback = function(args)
-		local buf = args.buf
-		local win = 0
+local function set_winbar(bufnr)
+	local buf = bufnr
+	local win = 0
 
-		local name = vim.api.nvim_buf_get_name(buf)
-		local config = vim.api.nvim_win_get_config(win)
+	local name = vim.api.nvim_buf_get_name(buf)
+	local config = vim.api.nvim_win_get_config(win)
 
-		if
-			not config.zindex -- Not a floating window
-			and vim.bo[buf].buftype == "" -- Normal buffer
-			and name ~= "" -- Has a file name
-			and not vim.wo[win].diff -- Not in diff mode
-			and not name:lower():find("git") -- Not in git diff
-		then
-			vim.wo[win].winbar = "%{%v:lua.require'custom.winbar'.render()%}"
-		else
-			vim.wo.winbar = ""
-		end
-	end,
-})
+	if
+		not config.zindex -- Not a floating window
+		and vim.bo[buf].buftype == "" -- Normal buffer
+		and name ~= "" -- Has a file name
+		and not vim.wo[win].diff -- Not in diff mode
+		and not name:lower():find("git") -- Not in git diff
+	then
+		vim.wo[win].winbar = "%{%v:lua.require'custom.winbar'.render()%}"
+	else
+		vim.wo.winbar = ""
+	end
+end
+
+function M.setup()
+	local bg = utils.darken(colors.surface0, 0.65, colors.base)
+
+	vim.api.nvim_set_hl(0, "Winbar", { bg = bg, fg = colors.overlay0 })
+	vim.api.nvim_set_hl(0, "WinbarSeparator", { fg = colors.overlay1, bg = bg })
+	vim.api.nvim_set_hl(0, "WinbarDir", { fg = colors.pink, bg = bg, bold = true })
+	vim.api.nvim_set_hl(0, "WinbarFile", { fg = colors.subtext0, bg = bg })
+
+	vim.api.nvim_create_autocmd("BufWinEnter", {
+		group = vim.api.nvim_create_augroup("custom_winbar", { clear = true }),
+		desc = "Attach winbar",
+		callback = function(args)
+			local bufnr = args.buf
+
+			set_winbar(bufnr)
+		end,
+	})
+
+	set_winbar(0)
+end
 
 return M

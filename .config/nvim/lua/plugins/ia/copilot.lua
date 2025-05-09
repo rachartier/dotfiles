@@ -209,7 +209,7 @@ return {
 				answer_header = "  Copilot ",
 				error_header = "  Error ",
 				separator = "───",
-				model = "claude-3.5-sonnet",
+				model = "claude-3.7-sonnet",
 				show_folds = false,
 				auto_follow_cursor = false,
 				debug = false,
@@ -380,7 +380,7 @@ Useful PEPs for this section (not exhaustive):
 			provider = "copilot",
 			cursor_applying_provider = "copilot",
 			copilot = {
-				model = "claude-3.5-sonnet",
+				model = "claude-3.7-sonnet",
 			},
 			web_search_engine = {
 				provider = "google", -- tavily, serpapi, searchapi, google or kagi

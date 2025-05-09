@@ -203,10 +203,6 @@ function M.get(colors)
 		CopilotSuggestion = { fg = colors.overlay1, italic = false },
 		-- CopilotChatSeparator = { fg = colors.surface1 },
 
-		WinBarDir = { fg = colors.pink, bg = utils.darken(colors.surface0, 0.65, colors.base), bold = true },
-		Winbar = { fg = colors.overlay0, bg = utils.darken(colors.surface0, 0.65, colors.base), bold = false },
-		WinbarFile = { fg = colors.overlay1, bg = utils.darken(colors.surface0, 0.65, colors.base), bold = false },
-
 		-- === Lsp
 		["@keyword.operator.python"] = { link = "Conditional" },
 	}
