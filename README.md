@@ -5,7 +5,7 @@ Full installation
 
 ```
 export GIT_CLONE_METHOD=ssh
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/rachartier/dotfiles/main/.config/scripts/first_install.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/rachartier/dotfiles/main/.config/dot-manager/first_install.sh)"
 ```
 
 Minimal installation
@@ -14,7 +14,7 @@ Minimal installation
 ```
 export DOTFILES_MINIMAL=1
 export GIT_CLONE_METHOD=ssh
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/rachartier/dotfiles/main/.config/scripts/first_install.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/rachartier/dotfiles/main/.config/dot-manager/first_install.sh)"
 ```
 
 Docker installation
@@ -23,12 +23,12 @@ Docker installation
 ```
 export DOTFILES_DOCKER=1
 export GIT_CLONE_METHOD=https
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/rachartier/dotfiles/main/.config/scripts/first_install.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/rachartier/dotfiles/main/.config/dot-manager/first_install.sh)"
 ```
 
 ## Testing inside a docker:
 
-Launch a docker container: 
+Launch a docker container:
 ```
 docker run --privileged  -ti ubuntu:22.04 /bin/bash
 ```
@@ -40,9 +40,9 @@ apt update && apt install -y curl sudo && yes | useradd -m -p $(perl -e 'print c
 
 Next, install the dotfiles, and when the password is asked, type "test":
 ```
-export DOTFILES_DOCKER=1 
+export DOTFILES_DOCKER=1
 export GIT_CLONE_METHOD=https
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/rachartier/dotfiles/main/.config/scripts/first_install.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/rachartier/dotfiles/main/.config/dot-manager/first_install.sh)"
 ```
 
 Finally, when all is finished, type:
