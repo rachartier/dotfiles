@@ -22,7 +22,7 @@ return {
     keys = {
         { "<leader>.",  function() Snacks.scratch() end,                     desc = "Toggle Scratch Buffer", },
         { "<leader>S",  function() Snacks.scratch.select() end,              desc = "Select Scratch Buffer", },
-        { "<leader>gb", function() Snacks.gitbrowse() end,                   desc = "Git Browser", },
+        { "<leader>gB", function() Snacks.gitbrowse() end,                   desc = "Git Browser", },
         { "<leader>ps", function() Snacks.profiler.scratch() end,            desc = "Profiler Scratch Buffer", },
         { "<leader>fI", function() Snacks.picker.lsp_implementations() end,  desc = "Goto Implementation" },
         { "<leader>fd", function() Snacks.picker.lsp_definitions() end,      desc = "Goto Definition" },
