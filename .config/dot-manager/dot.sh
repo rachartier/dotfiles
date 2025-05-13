@@ -220,6 +220,10 @@ do_command() {
     "update") update_all ;;
     "minimal") install_minimal ;;
     "docker") install_docker ;;
+    "terminal")
+        shift
+        source "$DOT_MANAGER_DIR/install/terminal.sh" "$@"
+        ;;
     "reinstall")
         shift
         do_reinstall "$@"

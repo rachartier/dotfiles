@@ -39,4 +39,20 @@ install_terminal() {
     esac
 }
 
-install_terminal "$@"
+do_command() {
+    local command="$1"
+    shift
+    local args=("$@")
+
+    case "$command" in
+    "install")
+        install_terminal "${args[@]}"
+        ;;
+    *)
+        log "error" "Unknown command: $command"
+        return 1
+        ;;
+    esac
+}
+
+do_command "$@"
