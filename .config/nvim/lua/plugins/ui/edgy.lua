@@ -21,6 +21,7 @@ return {
 		},
 		left = {
 			{ ft = "aerial", size = { width = 0.20 } },
+			{ title = "Neotest Summary", ft = "neotest-summary", size = { width = 0.25 } },
 		},
 		bottom = {
 			"trouble",
@@ -33,6 +34,7 @@ return {
 					return vim.bo[buf].buftype == "help"
 				end,
 			},
+			{ title = "Neotest Output", ft = "neotest-output-panel", size = { height = 15 } },
 		},
 	},
 	enabled = true,
