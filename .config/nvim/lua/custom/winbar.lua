@@ -58,11 +58,11 @@ function M.render()
 				:map(function(segment)
 					if segment == vim.fn.fnamemodify(path, ":t") then
 						local filename = segment
-						local extension = vim.fn.fnamemodify(filename, ":e")
+						local filetype = vim.api.nvim_get_option_value("filetype", { buf = 0 })
 						local ok, mini_icons = pcall(require, "mini.icons")
 
 						if ok then
-							local icon = mini_icons.get("filetype", extension)
+							local icon = mini_icons.get("filetype", filetype)
 							return string.format("%%#WinbarFile#%s %s", icon, segment)
 						else
 							return string.format("%%#WinbarFile#%s", segment)
