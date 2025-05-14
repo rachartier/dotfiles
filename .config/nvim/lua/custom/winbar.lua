@@ -60,10 +60,11 @@ function M.render()
 						local filename = segment
 						local filetype = vim.api.nvim_get_option_value("filetype", { buf = 0 })
 						local ok, mini_icons = pcall(require, "mini.icons")
+						local is_not_saved = vim.api.nvim_get_option_value("modified", { buf = 0 })
 
 						if ok then
 							local icon = mini_icons.get("filetype", filetype)
-							return string.format("%%#WinbarFile#%s %s", icon, segment)
+							return string.format("%%#WinbarFile#%s %s %s", icon, segment, is_not_saved and "" or "")
 						else
 							return string.format("%%#WinbarFile#%s", segment)
 						end
