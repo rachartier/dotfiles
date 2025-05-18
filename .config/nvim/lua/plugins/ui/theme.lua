@@ -77,6 +77,7 @@ return {
 			lsp_trouble = false,
 			mason = true,
 			markdown = true,
+			markview = true,
 			mini = true,
 			neotree = true,
 			neogit = true,

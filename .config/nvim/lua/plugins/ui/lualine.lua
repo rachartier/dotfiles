@@ -210,9 +210,18 @@ return {
 					-- 	hint = { fg = c.hint },
 					-- },
 					colored = true,
-					padding = { left = 2, right = 2 },
+					padding = { left = 2, right = 0 },
 					color = { fg = colors.subtext0 },
 				},
+				-- {
+				-- 	"diff",
+				-- 	symbols = {
+				-- 		added = signs.git.added,
+				-- 		modified = signs.git.modified,
+				-- 		removed = signs.git.removed,
+				-- 	},
+				-- 	padding = { left = 0, right = 2 },
+				-- },
 			},
 			lualine_c = {},
 			lualine_x = {

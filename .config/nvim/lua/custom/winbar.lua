@@ -8,6 +8,7 @@ local M = {}
 local colors = require("theme").get_colors()
 
 local utils = require("utils")
+local signs = require("config.ui.signs")
 
 function M.render()
 	local path = vim.fs.normalize(vim.fn.expand("%:p") --[[@as string]])
@@ -57,14 +58,40 @@ function M.render()
 			vim.iter(vim.split(path, "/"))
 				:map(function(segment)
 					if segment == vim.fn.fnamemodify(path, ":t") then
-						local filename = segment
 						local filetype = vim.api.nvim_get_option_value("filetype", { buf = 0 })
 						local ok, mini_icons = pcall(require, "mini.icons")
 						local is_not_saved = vim.api.nvim_get_option_value("modified", { buf = 0 })
 
+						-- local git_status = vim.b.gitsigns_status_dict
+						--
+						-- local line_added = git_status and git_status.added or 0
+						-- local line_removed = git_status and git_status.removed or 0
+						-- local line_changed = git_status and git_status.changed or 0
+
 						if ok then
 							local icon = mini_icons.get("filetype", filetype)
-							return string.format("%%#WinbarFile#%s %s %s", icon, segment, is_not_saved and "" or "")
+							local file_status =
+								string.format("%%#WinbarFile#%s %s %s", icon, segment, is_not_saved and "" or "")
+
+							-- if line_added > 0 or line_removed > 0 or line_changed > 0 then
+							-- 	file_status = string.format(
+							-- 		"%%#WinbarFile#%s %s %s %s",
+							-- 		icon,
+							-- 		segment,
+							-- 		is_not_saved and " " or "",
+							-- 		string.format(
+							-- 			"%%#GitSignsAdd#%s%d %%#GitSignsDelete#%s%d %%#GitSignsChange#%s%d",
+							-- 			signs.git.added,
+							-- 			line_added,
+							-- 			signs.git.removed,
+							-- 			line_removed,
+							-- 			signs.git.modified,
+							-- 			line_changed
+							-- 		)
+							-- 	)
+							-- end
+
+							return file_status
 						else
 							return string.format("%%#WinbarFile#%s", segment)
 						end

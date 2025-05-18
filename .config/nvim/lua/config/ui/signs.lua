@@ -7,9 +7,9 @@ return {
 		unnamed = " No Name",
 	},
 	git = {
-		added = " ",
-		modified = " ",
-		removed = " ",
+		added = " ",
+		modified = " ",
+		removed = " ",
 		renamed = "󰑕 ",
 		branch = "",
 		ignored = " ",
@@ -22,9 +22,9 @@ return {
 	},
 	fzf = {
 		git = {
-			added = "",
-			modified = "",
-			removed = "",
+			added = "",
+			modified = "",
+			removed = "",
 			renamed = "󰑕",
 		},
 	},
