@@ -34,7 +34,7 @@ config.freetype_load_flags = "NO_HINTING"
 config.freetype_load_target = "Normal"
 -- config.cell_width = 1
 config.line_height = 1.0
-config.font_size = 15
+config.font_size = 13
 config.font_rules = {
 	-- {
 	-- 	italic = true,
