@@ -6,11 +6,8 @@ local function indent_empty_line()
 	end
 end
 
-map("n", "<C-l>", "<C-i>", { desc = "Go to last location" })
-
 map("n", "<C-d>", "<C-d>zz")
 map("n", "<C-u>", "<C-u>zz")
-map("n", "<c-l>", "<c-i>")
 
 map("n", "J", "mzJ`z", { desc = "Join line" })
 map("i", "<C-c>", "<Esc>")
@@ -57,6 +54,8 @@ if not os.getenv("TMUX") then
 	map("n", "<M-k>", "<C-W>k", { silent = true })
 	map("n", "<M-j>", "<C-W>j", { silent = true })
 end
+
+map("n", "<C-l>", "<C-i>", { desc = "Go to last location" })
 
 -- map("n", "n", "nzzzv")
 -- map("n", "N", "Nzzzv")
