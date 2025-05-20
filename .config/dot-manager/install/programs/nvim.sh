@@ -16,7 +16,7 @@ install_luarocks() {
 
 install_nvim() {
     print_step "Installing Neovim"
-    local version=${1:-"nightly"}
+    local version=${1:-"stable"}
 
     log "info" "Removing existing Neovim installation"
     sudo apt-get autoremove neovim -y >/dev/null
