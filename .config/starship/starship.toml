@@ -14,7 +14,7 @@ ${custom.inside_docker}\
 $character"""
 
 add_newline = true
-command_timeout = 1000
+command_timeout = 500
 
 palette = "catppuccin_macchiato"
 

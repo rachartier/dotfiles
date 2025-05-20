@@ -62,20 +62,19 @@ bindkey "^[[1;5B" history-substring-search-down
 
 function _setup()  {
     [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-    # source $HOME/.zsh/transient_prompt.zsh
+
     source $HOME/.aliases
     source $HOME/.zsh/style.zsh
+    # source $HOME/.zsh/transient_prompt.zsh
 }
 
 zsh-defer _setup
 
-# check if pyenv is installed
+eval "$(zoxide init zsh --cmd cd)"
 
 if command -v pyenv &> /dev/null; then
     eval "$(pyenv init -)"
 fi
-
-eval "$(zoxide init zsh --cmd cd)"
 
 if command -v direnv &> /dev/null; then
     eval "$(direnv hook zsh)"
