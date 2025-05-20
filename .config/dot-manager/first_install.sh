@@ -63,6 +63,11 @@ prepare_dotfiles() {
     fi
 }
 
+if [ "$(basename "$SHELL")" != "zsh" ]; then
+    __echo_info "Changing default shell to zsh"
+    chsh -s "$(which zsh)"
+fi
+
 install_essentials
 install_dotfiles
 prepare_dotfiles
