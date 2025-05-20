@@ -35,7 +35,7 @@ install_dotfiles() {
         git clone --bare https://github.com/rachartier/dotfiles.git "$HOME"/.cfg
     fi
 
-    /usr/bin/git --git-dir="$HOME/.cfg/" --work-tree="$HOME" checkout
+    /usr/bin/git --git-dir="$HOME/.cfg/" --work-tree="$HOME" checkout -f
     /usr/bin/git --git-dir="$HOME/.cfg/" --work-tree="$HOME" reset --hard HEAD
     /usr/bin/git --git-dir="$HOME/.cfg/" --work-tree="$HOME" config --local status.showUntrackedFiles no
 }
@@ -63,16 +63,14 @@ prepare_dotfiles() {
     fi
 }
 
-if [ "$(basename "$SHELL")" != "zsh" ]; then
-    __echo_info "Changing default shell to zsh"
-    chsh -s "$(which zsh)"
-fi
+# if [ "$(basename "$SHELL")" != "zsh" ]; then
+#     __echo_info "Changing default shell to zsh"
+#     chsh -s "$(which zsh)"
+# fi
 
 install_essentials
 install_dotfiles
 prepare_dotfiles
-
-chsh -s "$(which zsh)"
 
 if [ -n "$DOTFILES_MINIMAL" ]; then
     "$HOME"/.config/dot-manager/dot.sh minimal
