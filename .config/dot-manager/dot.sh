@@ -1,4 +1,4 @@
-#!/bin/env bash
+#!/bin/bash
 
 DOT_MANAGER_VERSION="2"
 
