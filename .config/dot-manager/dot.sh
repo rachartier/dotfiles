@@ -45,7 +45,15 @@ DOT_MANAGER_MINIMAL_PROGRAMS=(
 ###
 ### Programs to install for a docker configuration
 ###
-DOT_MANAGER_DOCKER_PROGRAMS=("${DOT_MANAGER_MINIMAL_PROGRAMS[@]}")
+DOT_MANAGER_DOCKER_PROGRAMS=(
+    "fd_find"
+    "nvim"
+    "eza"
+    "fzf"
+    "zoxide"
+    "starship"
+    "git_tools"
+)
 
 # ---------------------------------------------------------------------------
 DOT_MANAGER_DIR="$HOME/.config/dot-manager"
