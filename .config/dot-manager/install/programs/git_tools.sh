@@ -3,7 +3,7 @@
 source "$DOT_MANAGER_DIR/helper.sh"
 
 install_git_tools() {
-    log "info" "Installing git-delta..."
+    print_step "Installing git-delta..."
 
     local git_delta_version
     git_delta_version=$(__get_latest_release "dandavison/delta")
