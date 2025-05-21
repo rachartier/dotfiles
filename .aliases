@@ -115,13 +115,33 @@ function venv() {
 }
 
 function attach_devcontainer() {
-    result=$(devcontainer up --workspace-folder . --dotfiles-repository='https://github.com/rachartier/devpod-dotfiles' 2>/dev/null)
+    if ! command -v devcontainer &>/dev/null; then
+        echo "devcontainer CLI is not installed. Please install it first."
+        return 1
+    fi
+
+    if ! command -v jq &>/dev/null; then
+        echo "jq is not installed. Please install it first."
+        return 1
+    fi
+
+    local dir=$(pwd)
+    while [ "$dir" != "/" ]; do
+        if [ -d "$dir/.devcontainer" ]; then
+            break
+        fi
+        dir=$(dirname "$dir")
+    done
+
+    result=$(devcontainer up --workspace-folder "$dir" --dotfiles-repository='https://github.com/rachartier/devpod-dotfiles' 2>/dev/null)
 
     container_id=$(echo "$result" | jq -r '.containerId')
     remote_user=$(echo "$result" | jq -r '.remoteUser')
     remote_workspace=$(echo "$result" | jq -r '.remoteWorkspaceFolder')
 
-    docker exec --user "$remote_user" -it "$container_id" zsh -c "cd $remote_workspace && exec zsh"
+    path_after_dir=$(realpath --relative-to="$dir" "$PWD")
+
+    docker exec --user "$remote_user" -it "$container_id" zsh -c "cd '$remote_workspace/$path_after_dir' && exec zsh"
 }
 
 alias cat="bat --style=plain --color=always"
