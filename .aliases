@@ -92,7 +92,7 @@ function ask() {
 
 function gitignore() {
     echo "Generating .gitignore file for $1"
-    copilot-cli  --action "gitignore" --prompt "$1" > .gitignore
+    copilot-cli --action "gitignore" --prompt "$1" >.gitignore
 }
 
 function venv() {
@@ -101,17 +101,28 @@ function venv() {
         return
     fi
 
-	if ! [ -d "$1" ]; then
+    if ! [ -d "$1" ]; then
         python3 -m venv "$1"
     fi
 
     source "$1/bin/activate"
 
     if command -v direnv &>/dev/null; then
-        echo 'export VIRTUAL_ENV=."venv"' > .envrc
-        echo "layout python python3" > .envrc
+        echo 'export VIRTUAL_ENV=."venv"' >.envrc
+        echo "layout python python3" >.envrc
         direnv allow
     fi
 }
 
+function attach_devcontainer() {
+    result=$(devcontainer up --workspace-folder . --dotfiles-repository='https://github.com/rachartier/devpod-dotfiles' 2>/dev/null)
+
+    container_id=$(echo "$result" | jq -r '.containerId')
+    remote_user=$(echo "$result" | jq -r '.remoteUser')
+    remote_workspace=$(echo "$result" | jq -r '.remoteWorkspaceFolder')
+
+    docker exec --user "$remote_user" -it "$container_id" zsh -c "cd $remote_workspace && exec zsh"
+}
+
 alias cat="bat --style=plain --color=always"
+alias ad="attach_devcontainer"

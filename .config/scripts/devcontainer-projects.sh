@@ -42,9 +42,10 @@ if [ -z "$project" ]; then
 fi
 
 session_name=$(echo "$name" | tr . _)
+
 tmux new -s "$session_name" -d -c "$project" -n "$session_name"
+
 tmux switch-client -t "$session_name"
 
-tmux send-keys -t "$session_name" "cd $project" C-m
-tmux send-keys -t "$session_name" "devpod up . --ide=none" C-m
-tmux send-keys -t "$session_name" "devpod ssh ." C-m
+tmux send-keys -t "$session_name" "source ~/.aliases && cd $project" C-m
+tmux send-keys -t "$session_name" "attach_devcontainer" C-m

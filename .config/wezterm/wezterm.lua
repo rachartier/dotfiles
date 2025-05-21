@@ -39,8 +39,8 @@ config.font_rules = {
 	-- {
 	-- 	italic = true,
 	-- 	font = wezterm.font("MonoLisa", { weight = "Regular", italic = true }),
-	-- font = wezterm.font("Cascadia Code", { weight = "Regular", italic = true }),
-	-- font = wezterm.font("Monaspace Radon", { weight = "Regular", italic = true }),
+	-- 	-- font = wezterm.font("Cascadia Code", { weight = "Regular", italic = true }),
+	-- 	-- font = wezterm.font("Monaspace Radon", { weight = "Regular", italic = true }),
 	-- },
 	--
 	-- {
@@ -70,7 +70,7 @@ config.harfbuzz_features = {
 	"clig=1",
 }
 
-config.underline_thickness = "0.08cell"
+config.underline_thickness = "0.12cell"
 config.underline_position = "-1pt"
 config.allow_square_glyphs_to_overflow_width = "Always"
 config.bold_brightens_ansi_colors = "BrightAndBold"
