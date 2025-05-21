@@ -3,6 +3,7 @@ local kinds = require("config.ui.kinds")
 
 return {
 	"mrjones2014/legendary.nvim",
+	enabled = false,
 	keys = {
 		{
 			"<C-p>",

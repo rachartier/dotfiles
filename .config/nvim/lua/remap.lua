@@ -55,7 +55,7 @@ if not os.getenv("TMUX") then
 	map("n", "<M-j>", "<C-W>j", { silent = true })
 end
 
-map("n", "<C-l>", "<C-i>", { desc = "Go to last location" })
+map("n", "<C-p>", "<C-i>", { desc = "Go to last location" })
 
 -- map("n", "n", "nzzzv")
 -- map("n", "N", "Nzzzv")
