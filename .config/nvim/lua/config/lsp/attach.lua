@@ -79,16 +79,7 @@ function M.on_attach(client, bufnr)
     })
 
     -- vim.keymap.set({"n"},  "<leader>ca",  function() vim.lsp.buf.code_action() end, { noremap = true, silent = true })
-    vim.keymap.set({"n"},  "<leader>ca",  function() require("tiny-code-action").code_action() end, { noremap = true, silent = true })
-    if client.name == "omnisharp" then
-        wk.add({
-            mode = "n",
-            { "<leader>gd", require("omnisharp_extended").lsp_definition, desc = "Omnisharp Go to definition" },
-            { "<leader>gr", require("omnisharp_extended").lsp_references, desc = "Omnisharp Find references" },
-            { "<leader>gi", require("omnisharp_extended").lsp_implementation, desc = "Omnisharp Go to implementation" },
-        })
-    end
-
+    vim.keymap.set({"n"},  "<leader>ca",  function() require("tiny-code-action").code_action({}) end, { noremap = true, silent = true })
 	-- stylua: ignore end
 end
 

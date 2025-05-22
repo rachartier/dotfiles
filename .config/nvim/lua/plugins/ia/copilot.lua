@@ -58,8 +58,7 @@ return {
 		build = "make tiktoken",
 		dependencies = {
 			"zbirenbaum/copilot.lua",
-			-- "github/copilot.vim",
-			"nvim-lua/plenary.nvim", -- for curl, log wrapper
+			"nvim-lua/plenary.nvim",
 		},
 		keys = {
 			{
@@ -72,9 +71,6 @@ return {
 				"<leader>ch",
 				mode = { "n", "v" },
 				function()
-					local actions = require("CopilotChat.actions")
-					-- require("CopilotChat.integrations.telescope").pick(actions.help_actions())
-					-- require("CopilotChat.integrations.telescope").pick(actions.help_actions())
 					require("CopilotChat").select_prompt()
 				end,
 				desc = "CopilotChat - Help actions",
@@ -83,11 +79,6 @@ return {
 			{
 				"<leader>cp",
 				function()
-					local actions = require("CopilotChat.actions")
-					-- require("CopilotChat.integrations.telescope").pick(actions.prompt_actions({
-					-- 	selection = require("CopilotChat.select").visual,
-					-- }))
-
 					require("CopilotChat").select_prompt({
 						selection = require("CopilotChat.select").visual,
 					})
@@ -95,16 +86,7 @@ return {
 				mode = { "n", "x", "v" },
 				desc = "CopilotChat - Prompt actions",
 			},
-			-- {
-			--     "<leader>cp",
-			--     function()
-			--         require("utils").copy_visual_selection()
-			--         local actions = require("CopilotChat.actions")
-			--         require("CopilotChat.integrations.telescope").pick(actions.prompt_actions())
-			--     end,
-			--     mode = { "x", "v" },
-			--     desc = "CopilotChat - Prompt actions",
-			-- },
+
 			{
 				"<leader>cq",
 				function()
@@ -114,53 +96,6 @@ return {
 					end
 				end,
 				desc = "CopilotChat - Quick chat",
-			},
-			{
-				"<leader>cdf",
-				function()
-					local ft = vim.bo.filetype
-
-					vim.cmd("normal vaf")
-
-					require("CopilotChat").ask([[
-	As an expert ]] .. ft .. [[ developer, generate comprehensive and precise documentation for the following function/method. Adhere strictly to ]] .. ft .. [['s official documentation standards and best practices.
-	Do not include implementation details, nor should you describe how the function works.
-	Do not include any code snippets or examples.
-	Do not include any information that is not directly related to the function's purpose and behavior.
-	Do not describe the function's behavior in terms of the implementation.
-	Do not assume any prior knowledge of the function's purpose or behavior.
-	The length of a good documentation is between 50 and 100 words.
-	The length of a line should not exceed 80 characters.
-
-	Do include the following:
-
-	1. A concise yet informative description of the function's purpose and behavior.
-	2. Detailed parameter information:
-	   - Name
-	   - Type (be specific, e.g., 'List[int]' instead of just 'List')
-	   - Description, including any constraints or expected formats
-	   - Whether the parameter is optional, and if so, its default value
-	3. Return value:
-	   - Type (be as specific as possible)
-	   - Detailed description of what is returned
-	   - Any special cases or conditions that affect the return value
-	4. Exceptions or errors:
-	   - Specific exceptions that may be raised/thrown
-	   - Conditions under which each exception occurs
-
-	Use appropriate ]] .. ft .. [[ specific documentation syntax and formatting.
-
-	Others conditions:
-	 - If the language is lua, use the 3 dashes comment format.
-
-	Function signature:
-	                    ]], {
-						selection = require("CopilotChat.select").visual,
-						callback = function(response)
-							vim.cmd("normal <C-y>")
-						end,
-					})
-				end,
 			},
 			{
 				"<leader>c",
@@ -229,31 +164,6 @@ return {
 					},
 					TestsxUnit = {
 						prompt = "/COPILOT_GENERATE Write a set of detailed unit test functions for the following code with the xUnit framework.",
-					},
-					AddPEP = {
-						prompt = [[
-	/COPILOT_GENERATE Analyze the selected code and add useful, related Python Enhancement Proposals (PEPs). The PEPs should be directly relevant to the concepts, functions, or constructs used in the code. Ensure the references are accurate and avoid including unrelated PEPs.
-
-	Example input:
-
-### Classes in Python
-	class MyClass:
-		def __init__(self, value: int):
-			self.value = value
-
-		def increment(self):
-			self.value += 1
-
-	Output:
-	:::info
-	Useful PEPs for this section (not exhaustive):
-	- [PEP 253 (Subtyping Built-in Types)](https://www.python.org/dev/peps/pep-0253/)
-	- [PEP 257 (Docstring Conventions)](https://www.python.org/dev/peps/pep-0257/)
-	- [PEP 526 (Syntax for Variable Annotations)](https://www.python.org/dev/peps/pep-0526/)
-	- [PEP 3107 (Function Annotations)](https://www.python.org/dev/peps/pep-3107/)
-	- [PEP 3119 (Introducing Abstract Base Classes)](https://www.python.org/dev/peps/pep-3119/)
-	:::
-							]],
 					},
 				},
 				mappings = {
