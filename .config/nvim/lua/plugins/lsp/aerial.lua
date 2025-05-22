@@ -12,7 +12,7 @@ return {
 	ft = open_on_ft,
 	enabled = true,
 	keys = {
-		{ "<leader>a", "<cmd>AerialToggle!<CR>", desc = "Toggle Aerial" },
+		{ "<leader>at", "<cmd>AerialToggle!<CR>", desc = "Toggle Aerial" },
 	},
 	dependencies = {
 		"nvim-treesitter/nvim-treesitter",
