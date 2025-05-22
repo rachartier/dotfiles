@@ -133,11 +133,29 @@ function attach_devcontainer() {
         dir=$(dirname "$dir")
     done
 
-    result=$(devcontainer up --workspace-folder "$dir" --dotfiles-repository='https://github.com/rachartier/devpod-dotfiles' 2>/dev/null)
+    remote_user=$(devcontainer read-configuration --workspace-folder . | jq -r ".configuration.remoteUser")
+    remote_copilot_path="/root/.config/github-copilot"
+
+    if [ -n "$remote_user" ]; then
+        remote_copilot_path="/home/$remote_user/.config/github-copilot"
+    fi
+
+    output=$(script -q -c "devcontainer up --workspace-folder $dir --mount=type=bind,source=$HOME/.config/github-copilot/,target=\"$remote_copilot_path\" --dotfiles-repository='https://github.com/rachartier/devpod-dotfiles'" /dev/null)
+
+    if [ $? -ne 0 ]; then
+        echo "Failed to start devcontainer. Please check the output above."
+        return 1
+    fi
+
+    result=$(echo "$output" | tail -n 1)
 
     container_id=$(echo "$result" | jq -r '.containerId')
     remote_user=$(echo "$result" | jq -r '.remoteUser')
     remote_workspace=$(echo "$result" | jq -r '.remoteWorkspaceFolder')
+
+    echo "Container ID: $container_id"
+    echo "Remote User: $remote_user"
+    echo "Remote Workspace: $remote_workspace"
 
     path_after_dir=$(realpath --relative-to="$dir" "$PWD")
 
