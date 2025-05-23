@@ -26,6 +26,7 @@ zstyle ':fzf-tab:complete:git-show:*' fzf-preview \
 	"commit tag") git show --color=always $word ;;
 	*) git show --color=always $word ;;
 	esac'
+
 zstyle ':fzf-tab:complete:git-checkout:*' fzf-preview \
 	'case "$group" in
     "modified file") git diff $word ;;
@@ -34,10 +35,10 @@ zstyle ':fzf-tab:complete:git-checkout:*' fzf-preview \
 	esac'
 
 
-zsh-defer zstyle ':fzf-tab:complete:ls:*' fzf-preview \
+zstyle ':fzf-tab:complete:ls:*' fzf-preview \
     'eza --tree --level 1 --group-directories-first --color=always --icons $word'
 
-zsh-defer zstyle ':fzf-tab:complete:cd:*' fzf-preview \
+zstyle ':fzf-tab:complete:cd:*' fzf-preview \
     'eza --tree --level 1 --group-directories-first --color=always --icons $realpath'
 
 
@@ -58,7 +59,7 @@ zstyle ':completion:*:expand:*'                     tag-order all-expansions    
 zstyle ':completion:*:man:*'                        menu yes select
 zstyle ':completion:*:manuals'                      separate-sections true
 zstyle ':completion:*:manuals.*'                    insert-sections   true
-# zstyle ':completion:*:messages'                     format ' %F{purple} %d %f'
+zstyle ':completion:*:messages'                     format ' %F{purple} %d %f'
 zstyle ':completion:*:urls'                         local 'www' '/var/www/' 'public_html'
 zstyle ':completion:*:warnings'                     format $'%{\e[0;31m%}No matches for:%{\e[0m%} %d' # set format for warnings
 zstyle ':completion::(^approximate*):*:functions'   ignored-patterns '_*'    # Ignore completion functions for commands you don't have:
