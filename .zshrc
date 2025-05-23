@@ -66,19 +66,19 @@ function _setup()  {
     source $HOME/.aliases
     source $HOME/.zsh/style.zsh
     # source $HOME/.zsh/transient_prompt.zsh
+
+    eval "$(zoxide init zsh --cmd cd)"
+
+    if command -v pyenv &> /dev/null; then
+        eval "$(pyenv init -)"
+    fi
+
+    if command -v direnv &> /dev/null; then
+        eval "$(direnv hook zsh)"
+    fi
 }
 
 zsh-defer _setup
-
-eval "$(zoxide init zsh --cmd cd)"
-
-if command -v pyenv &> /dev/null; then
-    eval "$(pyenv init -)"
-fi
-
-if command -v direnv &> /dev/null; then
-    eval "$(direnv hook zsh)"
-fi
 
 function ghcs() {
     if [ -z "$DOT_GITHUB_COPILOT_LOADED" ]; then
