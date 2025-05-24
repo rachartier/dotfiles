@@ -63,7 +63,7 @@ return {
 			local formatters_settings = {}
 
 			for _, server_config in pairs(languages) do
-				for _, language_name in pairs(server_config.filestypes) do
+				for _, language_name in pairs(server_config.filetypes) do
 					local formatters = {}
 					for tool_name, tool in pairs(server_config.formatter or {}) do
 						if type(tool) == "table" then
