@@ -41,7 +41,7 @@ return {
 			local linter_by_ft = require("config.languages")
 
 			for _, server_config in pairs(linter_by_ft) do
-				for _, language_name in pairs(server_config.languages) do
+				for _, language_name in pairs(server_config.filetypes) do
 					lint.linters_by_ft[language_name] = server_config.linter or {}
 				end
 			end
@@ -63,7 +63,7 @@ return {
 			local formatters_settings = {}
 
 			for _, server_config in pairs(languages) do
-				for _, language_name in pairs(server_config.languages) do
+				for _, language_name in pairs(server_config.filestypes) do
 					local formatters = {}
 					for tool_name, tool in pairs(server_config.formatter or {}) do
 						if type(tool) == "table" then

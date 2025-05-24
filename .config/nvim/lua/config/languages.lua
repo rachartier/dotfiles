@@ -1,6 +1,6 @@
 return {
 	{
-		languages = { "python" },
+		filetypes = { "python" },
 		mason = { "basedpyright", "ruff" },
 		dap = { "debugpy" },
 		formatter = {
@@ -14,7 +14,7 @@ return {
 		lsp_ignore = { "ruff" },
 	},
 	{
-		languages = { "cs" },
+		filetypes = { "cs" },
 		dap = { "netcoredbg" },
 		lsp_ignore = true,
 		formatter = {
@@ -25,57 +25,57 @@ return {
 		},
 	},
 	{
-		languages = { "lua" },
+		filetypes = { "lua" },
 		formatter = { "stylua" },
 		mason = { "lua_ls" },
 		linter = { "selene" },
 		lsp_ignore = false,
 	},
 	{
-		languages = { "c", "cpp", "h", "hpp" },
+		filetypes = { "c", "cpp", "h", "hpp" },
 		mason = { "clangd" },
 		formatter = {},
 	},
 	{
-		languages = { "typescript" },
+		filetypes = { "typescript" },
 		mason = { "vtsls" },
 		formatter = { "prettierd" },
 	},
 	{
-		languages = { "dockerfile" },
+		filetypes = { "dockerfile" },
 		mason = { "dockerls" },
 		formatter = {},
 		linter = { "hadolint" },
 		lsp_fallback = false,
 	},
 	{
-		languages = { "sh" },
+		filetypes = { "sh" },
 		mason = { "bashls" },
 		formatter = { "shfmt" },
 		linter = { "shellcheck" },
 	},
 	{
-		languages = { "json" },
+		filetypes = { "json" },
 		mason = { "jsonls" },
 		formatter = { "jq", "fixjson" },
 	},
 	{
-		languages = { "yaml" },
+		filetypes = { "yaml" },
 		mason = { "yamlls" },
 		formatter = {},
 	},
 	{
-		languages = { "markdown" },
+		filetypes = { "markdown" },
 		mason = { "marksman" },
 		formatter = { "markdown-toc" },
 	},
 	{
-		languages = { "text" },
+		filetypes = { "text" },
 		mason = {},
 		formatter = {},
 	},
 	{
-		languages = { "rust" },
+		filetypes = { "rust" },
 		mason = { "rust_analyzer" },
 		lsp_ignore = true,
 	},

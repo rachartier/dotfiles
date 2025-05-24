@@ -204,6 +204,11 @@ __install_package_release() {
         if [ -d "/tmp/$filename" ]; then
             cd "/tmp/$filename"
         fi
+    elif [[ "$filename" == *.gz ]]; then
+        gunzip -f "$filename" && log "success" "$filename extracted." || return 1
+        filename=$(basename "$filename" ".gz")
+
+        mv "$filename" "$name"
     else
         mv "$filename" "$name"
     fi
