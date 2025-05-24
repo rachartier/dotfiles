@@ -1,4 +1,6 @@
 local utils = require("utils")
+
+-- FIXME: Really a shitty update, seriously
 return {
 	"nvim-treesitter/nvim-treesitter",
 	branch = "main",
@@ -112,15 +114,20 @@ return {
 			"git_rebase",
 		}
 
+		-- Will output log garbage if not done one after another
 		for _, parser in ipairs(defaults) do
 			require("nvim-treesitter").install(parser)
 		end
 
-		utils.on_event("BufEnter", function(e)
-			local ok, parser = pcall(vim.treesitter.language.get_lang, vim.bo.ft)
+		utils.on_event("BufNew", function(e)
+			local ok, lang = pcall(vim.treesitter.language.get_lang, vim.bo.ft)
 
-			if ok and parser then
-				require("nvim-treesitter").install(parser)
+			if ok and lang then
+				require("nvim-treesitter").install(lang)
+
+				vim.schedule(function()
+					pcall(vim.treesitter.start)
+				end)
 			end
 		end, {
 			desc = "Install treesitter parser for current buffer",
