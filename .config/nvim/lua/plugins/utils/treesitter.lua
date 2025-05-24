@@ -6,7 +6,7 @@ return {
 	-- dependencies = {
 	-- "nvim-treesitter/nvim-treesitter-textobjects",
 	-- },
-	event = { "LazyFile", "VeryLazy" },
+	-- event = { "LazyFile", "VeryLazy" },
 	-- lazy = false,
 	-- opts = {
 	-- 	ignore_install = {},
@@ -117,9 +117,9 @@ return {
 		end
 
 		utils.on_event("BufEnter", function(e)
-			local parser = vim.treesitter.language.get_lang(vim.bo.ft)
+			local ok, parser = pcall(vim.treesitter.language.get_lang, vim.bo.ft)
 
-			if parser then
+			if ok and parser then
 				require("nvim-treesitter").install(parser)
 			end
 		end, {
