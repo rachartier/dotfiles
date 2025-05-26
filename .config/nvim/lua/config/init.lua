@@ -23,6 +23,7 @@ end
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+vim.treesitter.language.register("bash", "zsh")
 vim.filetype.add({
 	extension = {
 		["http"] = "http",
