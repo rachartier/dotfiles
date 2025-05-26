@@ -133,14 +133,7 @@ function attach_devcontainer() {
         dir=$(dirname "$dir")
     done
 
-    remote_user=$(devcontainer read-configuration --workspace-folder . | jq -r ".configuration.remoteUser")
-    remote_copilot_path="/root/.config/github-copilot"
-
-    if [ -n "$remote_user" ]; then
-        remote_copilot_path="/home/$remote_user/.config/github-copilot"
-    fi
-
-    output=$(script -q -c "devcontainer up --workspace-folder $dir --mount=type=bind,source=$HOME/.config/github-copilot/,target=\"$remote_copilot_path\" --dotfiles-repository='https://github.com/rachartier/devpod-dotfiles'" /dev/null)
+    output=$(script -q -c "devcontainer up --dotfiles-repository='https://github.com/rachartier/devpod-dotfiles' --workspace-folder $dir" /dev/null)
 
     if [ $? -ne 0 ]; then
         echo "Failed to start devcontainer. Please check the output above."
@@ -158,6 +151,12 @@ function attach_devcontainer() {
     echo "Remote Workspace: $remote_workspace"
 
     path_after_dir=$(realpath --relative-to="$dir" "$PWD")
+
+    if [ "$remote_user" = "root" ]; then
+        docker cp ~/.config/github-copilot "$container_id":"/root/.config/github-copilot"
+    else
+        docker cp ~/.config/github-copilot "$container_id":"/home/$remote_user/.config/github-copilot"
+    fi
 
     docker exec --user "$remote_user" -it "$container_id" zsh -c "cd '$remote_workspace/$path_after_dir' && exec zsh"
 }

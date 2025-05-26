@@ -53,6 +53,7 @@ DOT_MANAGER_DOCKER_PROGRAMS=(
     "zoxide"
     "starship"
     "git_tools"
+    "bat"
 )
 
 # ---------------------------------------------------------------------------
