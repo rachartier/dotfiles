@@ -36,6 +36,7 @@ function M.render()
 			DOTFILES = vim.g.path_dotfiles,
 			HOME = vim.env.HOME,
 			WORK = vim.g.path_dev,
+			DEV_WS = vim.g.path_dev_ws,
 		}
 
 		for dir_name, dir_path in pairs(special_dirs) do
