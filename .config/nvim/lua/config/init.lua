@@ -26,7 +26,7 @@ vim.filetype.add({
 	extension = {
 		["http"] = "http",
 		["p8"] = "pico8",
-		["dotfile*"] = "bash",
+		["dotfile_profile"] = "bash",
 		["zsh"] = "bash",
 		["zsh_*"] = "bash",
 		["tcss"] = "css",

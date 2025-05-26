@@ -14,6 +14,14 @@ install_luarocks() {
         ./configure && make && sudo make install
 }
 
+install_treesitter () {
+    log "info" "Installing treesitter..."
+
+    TS_VERSION=$(__get_latest_release "tree-sitter/tree-sitter")
+
+    __install_package_release "https://github.com/tree-sitter/tree-sitter/releases/download/$TS_VERSION/tree-sitter-linux-x64.gz" "tree-sitter"
+}
+
 install_nvim() {
     print_step "Installing Neovim"
     local version=${1:-"stable"}
@@ -51,5 +59,6 @@ install_nvim() {
     log "success" "Neovim installation completed"
 }
 
-install_luarocks "$@"
+install_luarocks
+install_treesitter
 install_nvim "$@"
