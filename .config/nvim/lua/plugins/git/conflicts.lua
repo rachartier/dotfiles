@@ -1,8 +1,12 @@
+-- return {
+-- 	"rhysd/conflict-marker.vim",
+-- 	init = function()
+-- 		vim.g.conflict_marker_enable_highlight = 1
+-- 	end,
+-- }
 return {
 	"akinsho/git-conflict.nvim",
-	version = "*",
-	event = "VeryLazy",
-	config = true,
+	event = "LazyFile",
 	-- keys = {
 	-- 	{ "<leader>gc", ":GitConflictListQf<CR>", { noremap = true, silent = true, desc = "List git conflicts" } },
 	-- },
@@ -17,4 +21,7 @@ return {
 			prev = "p",
 		},
 	},
+	config = function(_, opts)
+		require("git-conflict").setup(opts)
+	end,
 }

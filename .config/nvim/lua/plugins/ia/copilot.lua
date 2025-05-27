@@ -6,7 +6,7 @@ return {
 		dependencies = {
 			"saghen/blink.cmp",
 		},
-		event = "VeryLazy",
+		event = "LazyFile",
 		config = function()
 			require("copilot").setup({
 				suggestion = {
@@ -257,8 +257,10 @@ return {
 		"yetone/avante.nvim",
 		enabled = true,
 		version = false,
-		event = "VeryLazy",
 		build = "make",
+		keys = {
+			"<leader>aa",
+		},
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"MunifTanjim/nui.nvim",
