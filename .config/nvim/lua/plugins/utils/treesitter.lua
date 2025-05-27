@@ -5,10 +5,10 @@ return {
 	"nvim-treesitter/nvim-treesitter",
 	branch = "main",
 	build = ":TSUpdate",
+	event = { "LazyFile", "VeryLazy" },
 	-- dependencies = {
 	-- "nvim-treesitter/nvim-treesitter-textobjects",
 	-- },
-	-- event = { "LazyFile", "VeryLazy" },
 	-- lazy = false,
 	-- opts = {
 	-- 	ignore_install = {},

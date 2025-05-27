@@ -1,6 +1,7 @@
 return {
 	"akinsho/git-conflict.nvim",
 	version = "*",
+	event = "VeryLazy",
 	config = true,
 	-- keys = {
 	-- 	{ "<leader>gc", ":GitConflictListQf<CR>", { noremap = true, silent = true, desc = "List git conflicts" } },

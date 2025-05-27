@@ -290,7 +290,7 @@ return {
 			provider = "copilot",
 			cursor_applying_provider = "copilot",
 			copilot = {
-				model = "claude-3.7-sonnet",
+				model = "claude-sonnet-4",
 				timeout = 30000, -- Timeout in milliseconds
 				max_tokens = 64000,
 				reasoning_effort = "high",
