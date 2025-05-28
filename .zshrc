@@ -1,3 +1,5 @@
+skip_global_compinit=1
+
 source "$HOME/.profile"
 source "$HOME/.dotfile_profile"
 
@@ -13,14 +15,6 @@ if [ -n "$DOTFILES_MINIMAL" ]; then
 else
     antidote load ${ZDOTDIR:-$HOME}/.zsh_plugins.txt
 fi
-
-if ! [ -d "$HOME/.zsh/cache" ]; then
-    mkdir -p "$HOME/.zsh/cache"
-fi
-
-zstyle ':completion::complete:*' use-cache on
-zstyle ':completion::complete:*' cache-path ~/.zsh/cache
-compinit -d ~/.zsh/cache/zcompdump
 
 (( ${+ZSH_HIGHLIGHT_STYLES} )) || typeset -A ZSH_HIGHLIGHT_STYLES
 ZSH_HIGHLIGHT_STYLES[path]=none
