@@ -1,8 +1,5 @@
 skip_global_compinit=1
 
-source "$HOME/.profile"
-source "$HOME/.dotfile_profile"
-
 export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 eval "$(starship init zsh)"
 
@@ -11,17 +8,35 @@ source $HOME/.antidote/antidote.zsh
 
 #Plugins if minimal is set
 if [ -n "$DOTFILES_MINIMAL" ]; then
-    antidote load ${ZDOTDIR:-$HOME}/.zsh_plugins_minimal.txt
+    zsh_plugins=${ZDOTDIR:-$HOME}/.zsh_plugins_minimal
 else
-    antidote load ${ZDOTDIR:-$HOME}/.zsh_plugins.txt
+    zsh_plugins=${ZDOTDIR:-$HOME}/.zsh_plugins
 fi
 
+[[ -f ${zsh_plugins}.txt ]] || touch ${zsh_plugins}.txt
+
+# Lazy-load antidote from its functions directory.
+fpath=(/path/to/antidote/functions $fpath)
+autoload -Uz antidote
+
+# Generate a new static file whenever .zsh_plugins.txt is updated.
+if [[ ! ${zsh_plugins}.zsh -nt ${zsh_plugins}.txt ]]; then
+  antidote bundle <${zsh_plugins}.txt >|${zsh_plugins}.zsh
+fi
+
+# Source your static plugins file.
+source ${zsh_plugins}.zsh
+
 function zsh_core_setup()  {
+    source "$HOME/.profile"
+    source "$HOME/.dotfile_profile"
+
     [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
     source $HOME/.aliases
     source $HOME/.zsh/style.zsh
     # source $HOME/.zsh/transient_prompt.zsh
+
 
     eval "$(zoxide init zsh --cmd cd)"
 

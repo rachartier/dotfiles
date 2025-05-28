@@ -1,15 +1,15 @@
-MichaelAquilina/zsh-you-should-use kind:defer
+ohmyzsh/ohmyzsh path:lib/key-bindings.zsh
+zsh-users/zsh-completions
 
 Aloxaf/fzf-tab kind:defer
 Freed-Wu/fzf-tab-source kind:defer
 
 ohmyzsh/ohmyzsh path:plugins/command-not-found
-ohmyzsh/ohmyzsh path:plugins/tmux kind:defer
 ohmyzsh/ohmyzsh path:plugins/git kind:defer
-
-ohmyzsh/ohmyzsh path:lib/key-bindings.zsh
+ohmyzsh/ohmyzsh path:plugins/tmux kind:defer
 
 zsh-users/zsh-autosuggestions kind:defer
-zsh-users/zsh-syntax-highlighting kind:defer
+MichaelAquilina/zsh-you-should-use kind:defer
+
 zsh-users/zsh-history-substring-search kind:defer
-zsh-users/zsh-completions kind:defer
+zsh-users/zsh-syntax-highlighting kind:defer
