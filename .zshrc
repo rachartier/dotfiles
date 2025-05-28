@@ -1,5 +1,3 @@
-skip_global_compinit=1
-
 source "$HOME/.profile"
 source "$HOME/.dotfile_profile"
 
@@ -15,6 +13,14 @@ if [ -n "$DOTFILES_MINIMAL" ]; then
 else
     antidote load ${ZDOTDIR:-$HOME}/.zsh_plugins.txt
 fi
+
+if ! [ -d "$HOME/.zsh/cache" ]; then
+    mkdir -p "$HOME/.zsh/cache"
+fi
+
+zstyle ':completion::complete:*' use-cache on
+zstyle ':completion::complete:*' cache-path ~/.zsh/cache
+compinit -d ~/.zsh/cache/zcompdump
 
 (( ${+ZSH_HIGHLIGHT_STYLES} )) || typeset -A ZSH_HIGHLIGHT_STYLES
 ZSH_HIGHLIGHT_STYLES[path]=none
@@ -60,7 +66,8 @@ bindkey "^[[1;5B" history-substring-search-down
 # bindkey '^[' send-break
 
 
-function _setup()  {
+function zsh_core_setup()  {
+    echo "ok"
     [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
     source $HOME/.aliases
@@ -78,7 +85,7 @@ function _setup()  {
     fi
 }
 
-zsh-defer _setup
+zsh-defer zsh_core_setup
 
 function ghcs() {
     if [ -z "$DOT_GITHUB_COPILOT_LOADED" ]; then
