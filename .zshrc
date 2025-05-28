@@ -16,11 +16,31 @@ else
     antidote load ${ZDOTDIR:-$HOME}/.zsh_plugins.txt
 fi
 
+function zsh_core_setup()  {
+    [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+    source $HOME/.aliases
+    source $HOME/.zsh/style.zsh
+    # source $HOME/.zsh/transient_prompt.zsh
+
+    eval "$(zoxide init zsh --cmd cd)"
+
+    if command -v pyenv &> /dev/null; then
+        eval "$(pyenv init -)"
+    fi
+
+    if command -v direnv &> /dev/null; then
+        eval "$(direnv hook zsh)"
+    fi
+}
+
+zsh-defer zsh_core_setup
+
+
 (( ${+ZSH_HIGHLIGHT_STYLES} )) || typeset -A ZSH_HIGHLIGHT_STYLES
 ZSH_HIGHLIGHT_STYLES[path]=none
 ZSH_HIGHLIGHT_STYLES[path_prefix]=none
 ZSH_HIGHLIGHT_STYLES[sudo]=none
-
 
 setopt always_to_end          # cursor moved to the end in full completion
 setopt autocd
@@ -58,28 +78,6 @@ setopt share_history          # share command history data
 bindkey "^[[1;5A" history-substring-search-up
 bindkey "^[[1;5B" history-substring-search-down
 # bindkey '^[' send-break
-
-
-function zsh_core_setup()  {
-    echo "ok"
-    [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-    source $HOME/.aliases
-    source $HOME/.zsh/style.zsh
-    # source $HOME/.zsh/transient_prompt.zsh
-
-    eval "$(zoxide init zsh --cmd cd)"
-
-    if command -v pyenv &> /dev/null; then
-        eval "$(pyenv init -)"
-    fi
-
-    if command -v direnv &> /dev/null; then
-        eval "$(direnv hook zsh)"
-    fi
-}
-
-zsh-defer zsh_core_setup
 
 function ghcs() {
     if [ -z "$DOT_GITHUB_COPILOT_LOADED" ]; then
