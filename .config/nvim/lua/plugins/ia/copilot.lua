@@ -7,6 +7,26 @@ return {
 			"saghen/blink.cmp",
 		},
 		event = "LazyFile",
+		keys = {
+			{
+				"<leader>c",
+				function()
+					require("copilot.panel").toggle()
+				end,
+			},
+			{
+				"<C-n>",
+				function()
+					require("copilot.panel").jump_next()
+				end,
+			},
+			{
+				"<C-p>",
+				function()
+					require("copilot.panel").jump_prev()
+				end,
+			},
+		},
 		config = function()
 			require("copilot").setup({
 				suggestion = {
@@ -96,43 +116,6 @@ return {
 					end
 				end,
 				desc = "CopilotChat - Quick chat",
-			},
-			{
-				"<leader>c",
-				mode = { "n", "v" },
-				function()
-					local ft = vim.bo.filetype
-					local prompt = [[
-	                    /COPILOT_GENERATE
-	As an expert ]] .. ft .. [[ developer, respond concisely and accurately based only on the provided code selection. Do not provide too much detail or discuss unrelated topics. Follows this rules:
-	 	1. If you find a mistake in the code, please correct it.
-	    2. If you think an information can be interesting, please provide it.
-	    3. If you think the code can be improved, please provide a better version.
-	    4. Do only respond to the request, do not provide additional information.
-	Question or request: ]]
-
-					local mode = vim.api.nvim_get_mode().mode
-					local header = "Request"
-					local is_visual = mode == "v" or mode == "V" or mode == ""
-
-					if is_visual then
-						header = header .. " (visual)"
-					end
-
-					local question = vim.fn.input(header)
-					if question == "" then
-						return
-					end
-
-					if is_visual then
-						require("CopilotChat").ask(
-							prompt .. question,
-							{ selection = require("CopilotChat.select").visual }
-						)
-					else
-						require("CopilotChat").ask(prompt .. question)
-					end
-				end,
 			},
 		},
 		opts = function()
@@ -292,7 +275,7 @@ return {
 			provider = "copilot",
 			cursor_applying_provider = "copilot",
 			copilot = {
-				model = "claude-sonnet-4",
+				model = "claude-3.7-sonnet",
 				timeout = 30000, -- Timeout in milliseconds
 				max_tokens = 64000,
 				reasoning_effort = "high",

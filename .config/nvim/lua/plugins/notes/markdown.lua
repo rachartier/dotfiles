@@ -36,6 +36,15 @@ return {
 						sign = true,
 						sign_hl = nil,
 					},
+					list_items = {
+						marker_minus = {
+							add_padding = true,
+							conceal_on_checkboxes = true,
+
+							text = "󰧞",
+							hl = "MarkviewListItemMinus",
+						},
+					},
 				},
 				markdown_inline = {
 					internal_links = {

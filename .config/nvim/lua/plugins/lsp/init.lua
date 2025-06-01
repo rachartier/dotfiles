@@ -152,45 +152,13 @@ return {
 						vim.lsp.config(server_name, {
 							capabilities = capabilities,
 						})
-						vim.lsp.enable(server_name)
+
+						-- TODO: remove schedule once it's patched. Worked without in 0.11.1 but not in 0.11.2
+						vim.schedule(function()
+							vim.lsp.enable(server_name)
+						end)
 					end
 				end
-			end
-		end
-
-		require("mason-lspconfig").setup({
-			ensure_installed = tools.lsp,
-			automatic_enable = false,
-			automatic_installation = true,
-		})
-
-		if vim.g.dotfile_config_type ~= "minimal" then
-			local mr = require("mason-registry")
-
-			-- Refresh registry and install
-			local function ensure_tools_installed()
-				for _, tool in ipairs(tools.tools) do
-					local p = mr.get_package(tool)
-					if not p:is_installed() then
-						p:install()
-					end
-				end
-			end
-
-			-- Add hook to refresh FileType on new installs
-			mr:on("package:install:success", function()
-				vim.defer_fn(function()
-					require("lazy.core.handler.event").trigger({
-						event = "FileType",
-						buf = vim.api.nvim_get_current_buf(),
-					})
-				end, 100)
-			end)
-
-			if mr.refresh then
-				mr.refresh(ensure_tools_installed)
-			else
-				ensure_tools_installed()
 			end
 		end
 	end,

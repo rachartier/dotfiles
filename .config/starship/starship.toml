@@ -43,8 +43,6 @@ style = "blue"
 format = "[$symbol](fg:$style) "
 success_symbol = ""
 symbol = ""
-success_style = "green"
-failure_style = "red"
 disabled = false
 
 [username]

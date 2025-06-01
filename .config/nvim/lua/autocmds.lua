@@ -55,6 +55,7 @@ end, {
 		"Avante",
 		"AvanteInput",
 		"oil",
+		"copilot-panel",
 	},
 	desc = "Easy quit buffers",
 })

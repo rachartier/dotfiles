@@ -23,14 +23,12 @@ end
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-vim.treesitter.language.register("bash", "zsh")
 vim.filetype.add({
 	extension = {
 		["http"] = "http",
 		["p8"] = "pico8",
 		["dotfile_profile"] = "bash",
-		["zsh"] = "bash",
-		["zsh_*"] = "bash",
+		["profile"] = "bash",
 		["tcss"] = "css",
 		["xaml"] = "xml",
 	},
@@ -45,6 +43,8 @@ vim.filetype.add({
 		["%.env%.[%w_.-]+"] = "sh",
 	},
 })
+
+vim.treesitter.language.register("sh", "bash")
 
 vim.g.noncode_ft = {
 	"text",

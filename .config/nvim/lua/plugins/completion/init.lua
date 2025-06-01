@@ -3,7 +3,7 @@ return {
 	version = "*",
 	dependencies = {
 		"rafamadriz/friendly-snippets",
-		"fang2hou/blink-copilot",
+		-- "fang2hou/blink-copilot",
 		"Kaiser-Yang/blink-cmp-avante",
 		"brenoprata10/nvim-highlight-colors",
 	},
@@ -70,7 +70,6 @@ return {
 			default = function()
 				local sources = {
 					"avante",
-					"copilot",
 					"lsp",
 					"path",
 					"snippets",
@@ -93,16 +92,16 @@ return {
 			providers = {
 				-- dont show LuaLS require statements when lazydev has items
 				lazydev = { name = "LazyDev", module = "lazydev.integrations.blink", fallbacks = { "lsp" } },
-				copilot = {
-					name = "copilot",
-					module = "blink-copilot",
-					score_offset = 100,
-					async = true,
-					opts = {
-						max_completions = 3,
-						max_attempts = 4,
-					},
-				},
+				-- copilot = {
+				-- 	name = "copilot",
+				-- 	module = "blink-copilot",
+				-- 	score_offset = 100,
+				-- 	async = true,
+				-- 	opts = {
+				-- 		max_completions = 3,
+				-- 		max_attempts = 4,
+				-- 	},
+				-- },
 				avante = {
 					module = "blink-cmp-avante",
 					name = "Avante",

@@ -29,7 +29,7 @@ function M.get(colors)
 
 		BlinkCmpDoc = { bg = colors.surface0 },
 		BlinkCmpScrollBarGutter = { bg = colors.surface2 },
-		BlinkCmpScrollBarThumb = { bg = colors.lavender },
+		BlinkCmpScrollBarThumb = { bg = colors.subtext0 },
 		BlinkCmpMenuSelection = { bg = colors.surface1 },
 		BlinkCmpLabelDetail = { bg = colors.maroon, fg = colors.base },
 		BlinkCmpLabelDescription = { link = "BlinkCmpLabelDetail" },
