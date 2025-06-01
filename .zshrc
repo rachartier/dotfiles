@@ -3,28 +3,22 @@ skip_global_compinit=1
 export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 eval "$(starship init zsh)"
 
-[ ! -d $HOME/.antidote ] && git clone --depth=1 https://github.com/mattmc3/antidote.git $HOME/.antidote
-source $HOME/.antidote/antidote.zsh
+ANTIDOTE_DIR="$HOME/.antidote"
+[ ! -d $ANTIDOTE_DIR ] && git clone --depth=1 https://github.com/mattmc3/antidote.git $ANTIDOTE_DIR
+source $ANTIDOTE_DIR/antidote.zsh
 
-#Plugins if minimal is set
-if [ -n "$DOTFILES_MINIMAL" ]; then
-    zsh_plugins=${ZDOTDIR:-$HOME}/.zsh_plugins_minimal
-else
-    zsh_plugins=${ZDOTDIR:-$HOME}/.zsh_plugins
-fi
-
+# Set plugins file based on minimal mode
+zsh_plugins=${ZDOTDIR:-$HOME}/.zsh_plugins${DOTFILES_MINIMAL:+_minimal}
 [[ -f ${zsh_plugins}.txt ]] || touch ${zsh_plugins}.txt
 
-# Lazy-load antidote from its functions directory.
-fpath=(/path/to/antidote/functions $fpath)
+fpath=($ANTIDOTE_DIR/functions $fpath)
 autoload -Uz antidote
 
-# Generate a new static file whenever .zsh_plugins.txt is updated.
 if [[ ! ${zsh_plugins}.zsh -nt ${zsh_plugins}.txt ]]; then
   antidote bundle <${zsh_plugins}.txt >|${zsh_plugins}.zsh
 fi
 
-# Source your static plugins file.
+# Source generated plugins
 source ${zsh_plugins}.zsh
 
 function zsh_core_setup()  {
@@ -51,27 +45,36 @@ function zsh_core_setup()  {
 
 zsh-defer zsh_core_setup
 
-
 (( ${+ZSH_HIGHLIGHT_STYLES} )) || typeset -A ZSH_HIGHLIGHT_STYLES
 ZSH_HIGHLIGHT_STYLES[path]=none
 ZSH_HIGHLIGHT_STYLES[path_prefix]=none
 ZSH_HIGHLIGHT_STYLES[sudo]=none
 
 setopt always_to_end          # cursor moved to the end in full completion
-setopt autocd
-setopt automenu
+setopt autocd                 # change directory just by typing its name
+setopt automenu               # show completion menu on tab press
+setopt auto_menu              # show completion menu on successive tab press
+setopt auto_param_slash       # add a trailing slash for completed directories
+setopt auto_pushd             # make cd push old directory onto directory stack
 setopt complete_in_word       # allow completion from within a word/phrase
+setopt extended_glob          # use extended globbing syntax
 setopt hash_list_all          # hash everything before completion
 setopt inc_append_history     # add commands to HISTFILE in order of execution
-setopt list_ambiguous         # complete as much of a completion until it gets ambiguous.
-setopt listpacked
-setopt nocorrect              # spelling correction for commands
-setopt nolisttypes
+setopt list_ambiguous         # complete as much of a completion until it gets ambiguous
+setopt listpacked             # make completion lists more densely packed
+setopt menu_complete          # autoselect the first completion entry
+setopt nocorrect              # disable spelling correction for commands
+setopt nolisttypes            # disable showing completion types
 setopt interactivecomments    # allow comments in interactive shells
-setopt long_list_jobs
-setopt COMPLETE_ALIASES
-unsetopt correct_all
-unsetopt BEEP
+setopt long_list_jobs         # display PID when suspending processes
+setopt path_dirs              # perform path search even on command names with slashes
+setopt pushd_ignore_dups      # don't push multiple copies of the same directory onto the stack
+setopt pushd_minus            # exchanges the meanings of '+' and '-' when used with a number to specify a directory
+setopt pushd_silent           # do not print the directory stack after pushd or popd
+setopt COMPLETE_ALIASES       # complete aliases
+unsetopt correct_all          # disable spelling correction for arguments
+unsetopt BEEP                 # disable beep on error
+unsetopt flow_control         # disable start/stop characters in shell editor
 
 ## History file configuration
 [ -z "$HISTFILE" ] && HISTFILE="$HOME/.zsh_history"
@@ -100,15 +103,17 @@ function ghcs() {
         DOT_GITHUB_COPILOT_LOADED=1
     fi
 
-    ghcs $@
+    command gh copilot suggest "$@"
 }
 
 function tmuxp() {
     if [ -z "$DOT_TMUXP_LOADED" ]; then
-        for s in $($HOME/.local/bin/tmuxp ls); do alias "$s"="tmuxp load -y $s"; done
+        for s in $($HOME/.local/bin/tmuxp ls 2>/dev/null); do
+            alias "$s"="$HOME/.local/bin/tmuxp load -y $s"
+        done
         DOT_TMUXP_LOADED=1
     fi
 
-    "$HOME/.local/bin/tmuxp" $@
+    command "$HOME/.local/bin/tmuxp" "$@"
 }
 
