@@ -272,14 +272,18 @@ return {
 				enable_cursor_planning_mode = false,
 				support_paste_from_clipboard = true,
 			},
+			providers = {
+				copilot = {
+					model = "claude-3.7-sonnet",
+					timeout = 30000, -- Timeout in milliseconds
+					reasoning_effort = "high",
+					extra_request_body = {
+						max_tokens = 64000,
+					},
+				},
+			},
 			provider = "copilot",
 			cursor_applying_provider = "copilot",
-			copilot = {
-				model = "claude-3.7-sonnet",
-				timeout = 30000, -- Timeout in milliseconds
-				max_tokens = 64000,
-				reasoning_effort = "high",
-			},
 			web_search_engine = {
 				provider = "google", -- tavily, serpapi, searchapi, google or kagi
 			},
