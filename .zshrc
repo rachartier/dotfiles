@@ -1,5 +1,9 @@
 skip_global_compinit=1
 
+source "$HOME/.profile"
+source "$HOME/.dotfile_profile"
+
+
 export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 eval "$(starship init zsh)"
 
@@ -22,9 +26,6 @@ fi
 source ${zsh_plugins}.zsh
 
 function zsh_core_setup()  {
-    source "$HOME/.profile"
-    source "$HOME/.dotfile_profile"
-
     [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
     source $HOME/.aliases
