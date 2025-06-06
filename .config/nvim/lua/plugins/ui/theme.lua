@@ -80,6 +80,7 @@ return {
 				mason = true,
 				markdown = true,
 				mini = true,
+				neotest = true,
 				neotree = true,
 				neogit = true,
 				noice = true,
