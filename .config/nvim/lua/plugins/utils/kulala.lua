@@ -1,12 +1,14 @@
+local signs = require("config.ui.signs")
+
 return {
 	"mistweaverco/kulala.nvim",
 	ft = "http",
 	opts = {
 		icons = {
 			inlay = {
-				loading = "⏳",
-				done = "✅",
-				error = "❌",
+				loading = signs.others.loading,
+				done = signs.others.checkmark,
+				error = signs.others.error_x,
 			},
 		},
 		contenttypes = {

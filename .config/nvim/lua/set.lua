@@ -9,7 +9,6 @@ vim.defer_fn(function()
 	-- }
 	opt.spell = false -- Enable spell checking
 
-	vim.opt.clipboard = "unnamedplus"
 	vim.g.clipboard = {
 		cache_enabled = 1,
 		name = "OSC 52",

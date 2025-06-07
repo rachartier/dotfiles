@@ -51,6 +51,9 @@ return {
 		copilot_disabled = " ",
 		terminal = " ",
 		folder = "󰉖 ",
+		loading = " ",
+		checkmark = " ",
+		error_x = " ",
 	},
 }
 
