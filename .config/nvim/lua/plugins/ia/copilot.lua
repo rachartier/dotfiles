@@ -15,13 +15,13 @@ return {
 				end,
 			},
 			{
-				"<C-n>",
+				"<leader>cn",
 				function()
 					require("copilot.panel").jump_next()
 				end,
 			},
 			{
-				"<C-p>",
+				"<leader>cp",
 				function()
 					require("copilot.panel").jump_prev()
 				end,
