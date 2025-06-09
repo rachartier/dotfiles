@@ -63,6 +63,7 @@ return {
 
 				"score",
 				"sort_text",
+				"label",
 			},
 		},
 
