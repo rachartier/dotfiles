@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-FZF_PREVIEW_COMMAND="$HOME/.fzf/bin/fzf-preview.sh \$realpath"
+FZF_PREVIEW_COMMAND="$HOME/.fzf/bin/fzf-preview.sh $realpath"
 
 zstyle ':fzf-tab:*' use-fzf-default-opts yes
 zstyle ':fzf-tab:*' fzf-command fzf
@@ -53,6 +53,7 @@ zstyle ':completion:*'                            use-cache on # Enable caching 
 zstyle ':completion:*'                            cache-path "$HOME/.zcompcache" # Cache path
 zstyle ':completion:*'                            accept-exact '*(N)'
 zstyle ':completion:*'                            special-dirs true # Include . and .. in completion
+zstyle ':completion:*:descriptions' format '[%d]'
 zstyle ':completion:*:*:*:*:processes'            command 'ps -u $USER -o pid,user,comm,cmd -w -w'
 zstyle ':completion:*:correct:*'                  insert-unambiguous true # Start menu completion only if it could find no unambiguous initial string
 zstyle ':completion:*:correct:*'                  original true
@@ -70,3 +71,5 @@ zstyle ':completion:complete:*:options'           sort false
 zstyle ':completion:*'                            matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*' # Smart case-insensitive completion
 zstyle ':completion:*'                            group-name '' # Group results by categories
 zstyle ':completion:*'                            verbose yes # Verbose completion info
+zstyle ':fzf-tab:*' switch-group '<' '>'
+

@@ -10,18 +10,17 @@ local function get_args(config)
 end
 
 return {
-	"mfussenegger/nvim-dap",
-	-- cond = vim.g.dotfile_config_type ~= "minimal",
-	dependencies = {
-		-- { "igorlfs/nvim-dap-view", opts = {} },
-		-- "rcarriga/nvim-dap-ui",
-		"theHamsta/nvim-dap-virtual-text",
-		"mfussenegger/nvim-dap-python",
-		"mfussenegger/nvim-jdtls",
-		-- "nvim-neotest/nvim-nio",
-		-- "nvim-telescope/telescope-dap.nvim",
-	},
-	lazy = true,
+	{
+		"mfussenegger/nvim-dap",
+		-- cond = vim.g.dotfile_config_type ~= "minimal",
+		dependencies = {
+			-- { "igorlfs/nvim-dap-view", opts = {} },
+			-- "rcarriga/nvim-dap-ui",
+			"theHamsta/nvim-dap-virtual-text",
+			-- "nvim-neotest/nvim-nio",
+			-- "nvim-telescope/telescope-dap.nvim",
+		},
+		lazy = true,
 	-- priority = 100,
     -- stylua: ignore
 	keys = {
@@ -54,57 +53,84 @@ return {
             desc = "Scopes",
         },
 	},
-	config = function()
-		-- require("telescope").load_extension("dap")
-		-- require("dap.ext.vscode").load_launchjs()
+		config = function()
+			-- require("telescope").load_extension("dap")
+			-- require("dap.ext.vscode").load_launchjs()
 
-		require("nvim-dap-virtual-text").setup({
-			highlight_new_as_changed = true,
-		})
+			require("nvim-dap-virtual-text").setup({
+				highlight_new_as_changed = true,
+			})
 
-		vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
+			vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
 
-		require("dap-python").setup("python")
-		local vscode = require("dap.ext.vscode")
-		local json = require("plenary.json")
-		vscode.json_decode = function(str)
-			return vim.json.decode(json.json_strip_comments(str))
-		end
+			local vscode = require("dap.ext.vscode")
+			local json = require("plenary.json")
+			vscode.json_decode = function(str)
+				return vim.json.decode(json.json_strip_comments(str))
+			end
 
-		-- dap.configurations.cs = {
-		-- 	{
-		-- 		type = "coreclr",
-		-- 		request = "launch",
-		-- 		name = "launch - codageauto",
-		-- 		program = "./bin/Debug/net7.0/siemenscodageauto.dll",
-		-- 	},
-		-- }
+			-- dap.configurations.cs = {
+			-- 	{
+			-- 		type = "coreclr",
+			-- 		request = "launch",
+			-- 		name = "launch - codageauto",
+			-- 		program = "./bin/Debug/net7.0/siemenscodageauto.dll",
+			-- 	},
+			-- }
 
-		local sign = vim.fn.sign_define
+			local sign = vim.fn.sign_define
 
-		sign("DapBreakpoint", { text = "", texthl = "DapBreakpoint", linehl = "", numhl = "red" })
-		sign("DapBreakpointRejected", { text = "", texthl = "DapBreakpoint", linehl = "", numhl = "red" })
-		sign("DapBreakpointCondition", { text = "●", texthl = "DapBreakpointCondition", linehl = "", numhl = "red" })
-		sign("DapLogPoint", { text = "◆", texthl = "DapLogPoint", linehl = "", numhl = "" })
-		sign("DapStopped", { text = "󰧂", texthl = "DapStopped", linehl = "", numhl = "" })
+			sign("DapBreakpoint", { text = "", texthl = "DapBreakpoint", linehl = "", numhl = "red" })
+			sign("DapBreakpointRejected", { text = "", texthl = "DapBreakpoint", linehl = "", numhl = "red" })
+			sign(
+				"DapBreakpointCondition",
+				{ text = "●", texthl = "DapBreakpointCondition", linehl = "", numhl = "red" }
+			)
+			sign("DapLogPoint", { text = "◆", texthl = "DapLogPoint", linehl = "", numhl = "" })
+			sign("DapStopped", { text = "󰧂", texthl = "DapStopped", linehl = "", numhl = "" })
 
-		-- local dap, dapview = require("dap"), require("dap-view")
-		-- dap.listeners.after.event_initialized["dapview-config"] = function()
-		-- 	dapview.open()
-		--
-		-- 	vim.keymap.set(
-		-- 		"n",
-		-- 		"<leader><leader>",
-		-- 		"<cmd>lua require('dap').step_over()<cr>",
-		-- 		{ noremap = true, silent = true }
-		-- 	)
-		-- end
-		-- dap.listeners.before.event_terminated["dapview-config"] = function()
-		-- 	dapview.close()
-		-- 	vim.keymap.del("n", "<leader><leader>")
-		-- end
-		-- dap.listeners.before.event_exited["dapview-config"] = function()
-		-- 	dapview.close()
-		-- end
-	end,
+			-- local dap, dapview = require("dap"), require("dap-view")
+			-- dap.listeners.after.event_initialized["dapview-config"] = function()
+			-- 	dapview.open()
+			--
+			-- 	vim.keymap.set(
+			-- 		"n",
+			-- 		"<leader><leader>",
+			-- 		"<cmd>lua require('dap').step_over()<cr>",
+			-- 		{ noremap = true, silent = true }
+			-- 	)
+			-- end
+			-- dap.listeners.before.event_terminated["dapview-config"] = function()
+			-- 	dapview.close()
+			-- 	vim.keymap.del("n", "<leader><leader>")
+			-- end
+			-- dap.listeners.before.event_exited["dapview-config"] = function()
+			-- 	dapview.close()
+			-- end
+		end,
+	},
+	{
+		"mfussenegger/nvim-dap-python",
+		dependencies = { "mfussenegger/nvim-dap" },
+		ft = { "python" },
+		event = "VeryLazy",
+		config = function()
+			require("dap-python").setup("python")
+		end,
+	},
+	{
+		"mfussenegger/nvim-jdtls",
+		dependencies = { "mfussenegger/nvim-dap" },
+		ft = { "java" },
+		event = "VeryLazy",
+	},
+	{
+		"docker/nvim-dap-docker",
+		ft = { "dockerfile" },
+		dependencies = { "mfussenegger/nvim-dap" },
+		event = "VeryLazy",
+		config = function()
+			require("dap-docker").setup()
+		end,
+	},
 }
