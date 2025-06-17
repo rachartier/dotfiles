@@ -250,6 +250,7 @@ return {
 			-- "github/copilot.vim",
 			"zbirenbaum/copilot.lua",
 			"echasnovski/mini.icons",
+			"folke/snacks.nvim",
 			-- {
 			-- 	"HakonHarnes/img-clip.nvim",
 			-- 	event = "VeryLazy",
@@ -266,17 +267,18 @@ return {
 			-- },
 		},
 		opts = {
+			input = {
+				provider = "snacks",
+			},
 			behaviour = {
 				auto_set_keymaps = true,
 				auto_suggestions = false,
-				enable_cursor_planning_mode = false,
 				support_paste_from_clipboard = true,
+				enable_cursor_planning_mode = true,
 			},
 			providers = {
 				copilot = {
 					model = "claude-3.7-sonnet",
-					timeout = 30000, -- Timeout in milliseconds
-					reasoning_effort = "high",
 					extra_request_body = {
 						max_tokens = 64000,
 					},
@@ -294,20 +296,8 @@ return {
 				wrap = true, -- similar to vim.o.wrap
 				width = 30, -- default % based on available width
 				sidebar_header = {
-					enabled = false, -- true, false to enable/disable the header
-					rounded = true,
-				},
-				input = {
-					prefix = "> ",
-					height = 8, -- Height of the input window in vertical layout
-				},
-				edit = {
-					border = "none",
-					start_insert = true, -- Start insert mode when opening the edit window
-				},
-				ask = {
-					start_insert = true, -- Start insert mode when opening the ask window
-					border = "none",
+					enabled = true, -- true, false to enable/disable the header
+					rounded = false,
 				},
 			},
 		},
