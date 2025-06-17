@@ -68,7 +68,7 @@ return {
 			},
 			integrations = {
 				aerial = true,
-				alpha = true,
+				avante = true,
 				blink_cmp = true,
 				cmp = false,
 				dap = true,
