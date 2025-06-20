@@ -110,7 +110,7 @@ return {
 			local bufnr = args.buf
 
 			-- Skip specific clients
-			if client.name == "GitHub Copilot" or client.name == "copilot" or client.name == "ruff" then
+			if client and (client.name == "GitHub Copilot" or client.name == "copilot") then
 				return
 			end
 
