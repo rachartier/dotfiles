@@ -4,8 +4,8 @@ return {
 	dependencies = {
 		"rafamadriz/friendly-snippets",
 		"fang2hou/blink-copilot",
-		"Kaiser-Yang/blink-cmp-avante",
 		"brenoprata10/nvim-highlight-colors",
+		"saghen/blink.compat",
 	},
 	-- build = "cargo build --release",
 	event = { "InsertEnter", "CmdlineEnter" },
@@ -71,12 +71,14 @@ return {
 			default = function()
 				local sources = {
 					"copilot",
-					"avante",
 					"lsp",
 					"path",
 					"snippets",
 					"buffer",
 					"lazydev",
+					"avante_commands",
+					"avante_mentions",
+					"avante_files",
 				}
 				local ok, node = pcall(vim.treesitter.get_node)
 
@@ -104,9 +106,22 @@ return {
 						max_attempts = 4,
 					},
 				},
-				avante = {
-					module = "blink-cmp-avante",
-					name = "Avante",
+				avante_commands = {
+					name = "avante_commands",
+					module = "blink.compat.source",
+					score_offset = 90,
+					opts = {},
+				},
+				avante_files = {
+					name = "avante_files",
+					module = "blink.compat.source",
+					score_offset = 100,
+					opts = {},
+				},
+				avante_mentions = {
+					name = "avante_mentions",
+					module = "blink.compat.source",
+					score_offset = 1000,
 					opts = {},
 				},
 			},

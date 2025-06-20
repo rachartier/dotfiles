@@ -127,7 +127,7 @@ return {
 				answer_header = "  Copilot ",
 				error_header = "  Error ",
 				separator = "───",
-				model = "claude-3.7-sonnet",
+				model = "gpt-4.1",
 				show_folds = false,
 				auto_follow_cursor = false,
 				debug = false,
@@ -251,6 +251,7 @@ return {
 			"zbirenbaum/copilot.lua",
 			"echasnovski/mini.icons",
 			"folke/snacks.nvim",
+			"ravitemer/mcphub.nvim",
 			-- {
 			-- 	"HakonHarnes/img-clip.nvim",
 			-- 	event = "VeryLazy",
@@ -275,10 +276,11 @@ return {
 				auto_suggestions = false,
 				support_paste_from_clipboard = true,
 				enable_cursor_planning_mode = true,
+				enable_claude_text_editor_tool_mode = true,
 			},
 			providers = {
 				copilot = {
-					model = "claude-3.7-sonnet",
+					model = "gpt-4.1",
 					extra_request_body = {
 						max_tokens = 64000,
 					},
@@ -291,15 +293,28 @@ return {
 			},
 			hints = { enabled = true },
 			windows = {
-				---@type "right" | "left" | "top" | "bottom"
-				position = "right", -- the position of the sidebar
-				wrap = true, -- similar to vim.o.wrap
-				width = 30, -- default % based on available width
+				postion = "right",
+				width = 40,
 				sidebar_header = {
-					enabled = true, -- true, false to enable/disable the header
+					enabled = true,
+					align = "left",
 					rounded = false,
 				},
+				input = {
+					prefix = " ",
+					height = 12,
+				},
 			},
+			system_prompt = function()
+				local hub = require("mcphub").get_hub_instance()
+				return hub:get_active_servers_prompt()
+			end,
+
+			custom_tools = function()
+				return {
+					require("mcphub.extensions.avante").mcp_tool(),
+				}
+			end,
 		},
 	},
 }
