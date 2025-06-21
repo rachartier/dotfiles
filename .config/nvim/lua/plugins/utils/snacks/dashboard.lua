@@ -115,71 +115,71 @@ return {
 
       return items
     end,
+  },
 
-    header = build_header(),
-    formats = {
-      terminal = { align = "center" },
-      version = { "%s", align = "center" },
-    },
+  header = build_header(),
+  formats = {
+    terminal = { align = "center" },
+    version = { "%s", align = "center" },
+  },
 
-    sections = {
-      function()
-        if is_compact() then
-          return {
-            text = { " NEOVIM    \n", hl = "SnacksDashboardHeader" },
-            hl = "Comment",
-            align = "center",
-            height = 5,
-            width = 20,
-          }
-        end
-
+  sections = {
+    function()
+      if is_compact() then
         return {
-          section = "header",
+          text = { " NEOVIM    \n", hl = "SnacksDashboardHeader" },
+          hl = "Comment",
+          align = "center",
+          height = 5,
+          width = 20,
         }
-      end,
-      function()
-        local gap = 1
-        if vim.o.lines < 30 then
-          gap = 0
-        end
-        return {
-          section = "keys",
-          gap = gap,
+      end
+
+      return {
+        section = "header",
+      }
+    end,
+    function()
+      local gap = 1
+      if vim.o.lines < 30 then
+        gap = 0
+      end
+      return {
+        section = "keys",
+        gap = gap,
+        padding = 1,
+      }
+    end,
+    { section = "startup" },
+
+    function()
+      local in_git = Snacks.git.get_root() ~= nil
+      local cmds = {
+        {
+          title = "Git Graph",
+          icon = " ",
+          cmd = [[echo -e "$(git-graph --style round --color always --wrap 50 0 8 -f 'oneline')"]],
+          indent = 1,
+          height = 24,
+        },
+        -- {
+        -- 	icon = " ",
+        -- 	title = "Git Status",
+        -- 	cmd = "git diff --stat -B -M -C",
+        -- 	indent = 3,
+        -- },
+      }
+      return vim.tbl_map(function(cmd)
+        return vim.tbl_extend("force", {
+          pane = 2,
+          section = "terminal",
+          enabled = function()
+            return in_git and vim.o.columns > 130
+          end,
           padding = 1,
-        }
-      end,
-      { section = "startup" },
-
-      function()
-        local in_git = Snacks.git.get_root() ~= nil
-        local cmds = {
-          {
-            title = "Git Graph",
-            icon = " ",
-            cmd = [[echo -e "$(git-graph --style round --color always --wrap 50 0 8 -f 'oneline')"]],
-            indent = 1,
-            height = 24,
-          },
-          -- {
-          -- 	icon = " ",
-          -- 	title = "Git Status",
-          -- 	cmd = "git diff --stat -B -M -C",
-          -- 	indent = 3,
-          -- },
-        }
-        return vim.tbl_map(function(cmd)
-          return vim.tbl_extend("force", {
-            pane = 2,
-            section = "terminal",
-            enabled = function()
-              return in_git and vim.o.columns > 130
-            end,
-            padding = 1,
-            -- ttl = 5 * 60,
-          }, cmd)
-        end, cmds)
-      end,
-    },
+          -- ttl = 5 * 60,
+        }, cmd)
+      end, cmds)
+    end,
   },
 }
