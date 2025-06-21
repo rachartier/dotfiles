@@ -3,25 +3,25 @@ local opt = vim.opt
 opt.autowrite = true -- Enable auto write
 
 vim.defer_fn(function()
-	-- opt.spelllang = { -- Languages for spell checking
-	-- 	"fr",
-	-- 	"en",
-	-- }
-	opt.spell = false -- Enable spell checking
+  -- opt.spelllang = { -- Languages for spell checking
+  -- 	"fr",
+  -- 	"en",
+  -- }
+  opt.spell = false -- Enable spell checking
 
-	vim.opt.clipboard = "unnamedplus"
-	vim.g.clipboard = {
-		cache_enabled = 1,
-		name = "OSC 52",
-		copy = {
-			["+"] = require("vim.ui.clipboard.osc52").copy("+"),
-			["*"] = require("vim.ui.clipboard.osc52").copy("*"),
-		},
-		paste = {
-			["+"] = require("vim.ui.clipboard.osc52").paste("+"),
-			["*"] = require("vim.ui.clipboard.osc52").paste("*"),
-		},
-	}
+  vim.opt.clipboard = "unnamedplus"
+  vim.g.clipboard = {
+    cache_enabled = 1,
+    name = "OSC 52",
+    copy = {
+      ["+"] = require("vim.ui.clipboard.osc52").copy("+"),
+      ["*"] = require("vim.ui.clipboard.osc52").copy("*"),
+    },
+    paste = {
+      ["+"] = require("vim.ui.clipboard.osc52").paste("+"),
+      ["*"] = require("vim.ui.clipboard.osc52").paste("*"),
+    },
+  }
 end, 50)
 
 local conf = require("config")
@@ -59,22 +59,22 @@ opt.relativenumber = true -- Relative line numbers
 opt.scrolloff = 8 -- Lines of context
 opt.sidescrolloff = 8 -- Columns of context
 opt.sessionoptions = { -- Session options
-	"buffers",
-	"curdir",
-	"tabpages",
-	"winsize",
-	"help",
-	"globals",
-	"skiprtp",
+  "buffers",
+  "curdir",
+  "tabpages",
+  "winsize",
+  "help",
+  "globals",
+  "skiprtp",
 }
 opt.shiftround = true -- Round indent
 opt.shiftwidth = 4 -- Size of an indent
 opt.softtabstop = 4 -- Number of tabs for an indent
 opt.shortmess:append({ -- Short messages
-	W = true,
-	I = true,
-	c = true,
-	C = true,
+  W = true,
+  I = true,
+  c = true,
+  C = true,
 })
 opt.showmode = false -- Don't show mode since we have a status line
 opt.sidescrolloff = 8 -- Columns of context
@@ -96,15 +96,15 @@ opt.winminwidth = 5 -- Minimum window width
 opt.wrap = false -- Disable line wrap
 
 opt.fillchars = {
-	-- stl = "─",
-	-- stlnc = "─",
-	foldopen = "",
-	foldclose = "",
-	-- fold = "⸱",
-	fold = " ",
-	foldsep = " ",
-	diff = "╱",
-	eob = " ",
+  -- stl = "─",
+  -- stlnc = "─",
+  foldopen = "",
+  foldclose = "",
+  -- fold = "⸱",
+  fold = " ",
+  foldsep = " ",
+  diff = "╱",
+  eob = " ",
 }
 
 vim.o.timeout = true
@@ -127,13 +127,13 @@ opt.incsearch = true
 -- vim.g.netrw_winsize = 25
 
 if vim.fn.has("nvim-0.10") == 1 then
-	opt.smoothscroll = true
-	opt.foldexpr = "v:lua.require'lazyvim.util'.ui.foldexpr()"
-	opt.foldmethod = "expr"
-	opt.foldtext = ""
+  opt.smoothscroll = true
+  opt.foldexpr = "v:lua.require'lazyvim.util'.ui.foldexpr()"
+  opt.foldmethod = "expr"
+  opt.foldtext = ""
 else
-	opt.foldmethod = "indent"
-	opt.foldtext = "v:lua.require'lazyvim.util'.ui.foldtext()"
+  opt.foldmethod = "indent"
+  opt.foldtext = "v:lua.require'lazyvim.util'.ui.foldtext()"
 end
 
 vim.api.nvim_set_var("t_Cs", "\\e[4:3m")

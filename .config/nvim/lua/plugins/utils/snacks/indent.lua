@@ -1,11 +1,11 @@
 return {
-	animate = {
-		enabled = false,
-	},
-	indent = {
-		char = " ",
-	},
-	scope = {
-		char = "┆",
-	},
+  animate = {
+    enabled = false,
+  },
+  indent = {
+    char = " ",
+  },
+  scope = {
+    -- char = "┆",
+  },
 }

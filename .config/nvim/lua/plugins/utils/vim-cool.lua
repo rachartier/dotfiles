@@ -1,4 +1,4 @@
 return {
-	"romainl/vim-cool",
-	event = "CmdlineEnter",
+  "romainl/vim-cool",
+  event = "CmdlineEnter",
 }

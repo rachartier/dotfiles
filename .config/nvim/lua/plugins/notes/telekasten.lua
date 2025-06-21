@@ -1,6 +1,6 @@
 return {
-	"renerocksai/telekasten.nvim",
-	cond = vim.g.dotfile_config_type ~= "minimal",
+  "renerocksai/telekasten.nvim",
+  cond = vim.g.dotfile_config_type ~= "minimal",
     -- stylua: ignore
     keys = {
         { mode = { "n" }, "<leader>z",  "<cmd>Telekasten panel<CR>",                   { desc = "Show Telekasten panel" } },
@@ -17,21 +17,21 @@ return {
         { mode = { "n" }, "<leader>za", "<cmd>Telekasten show_tags()<CR>",             { desc = "Show tags" } },
         { mode = { "n" }, "<leader>zt", "<cmd>Telekasten toggle_todo({ i=true })<CR>", { desc = "Toggle todo" } },
     },
-	opts = {
-		home = vim.fn.expand("~/.config/nvim/notes"),
-		auto_set_filetype = false,
-		auto_set_syntax = false,
-	},
-	config = function(_, opts)
-		require("telekasten").setup(opts)
+  opts = {
+    home = vim.fn.expand("~/.config/nvim/notes"),
+    auto_set_filetype = false,
+    auto_set_syntax = false,
+  },
+  config = function(_, opts)
+    require("telekasten").setup(opts)
 
-		vim.api.nvim_create_autocmd("FileType", {
-			pattern = "markdown",
-			callback = function()
-				vim.keymap.set("i", "[[", "<cmd>Telekasten insert_link<CR>")
-			end,
-		})
+    vim.api.nvim_create_autocmd("FileType", {
+      pattern = "markdown",
+      callback = function()
+        vim.keymap.set("i", "[[", "<cmd>Telekasten insert_link<CR>")
+      end,
+    })
 
-		vim.g.vim_markdown_folding_disabled = 1
-	end,
+    vim.g.vim_markdown_folding_disabled = 1
+  end,
 }

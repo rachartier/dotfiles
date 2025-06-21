@@ -1,3 +1,3 @@
 return {
-	{ import = "plugins.lsp.csharp" },
+  { import = "plugins.lsp.csharp" },
 }

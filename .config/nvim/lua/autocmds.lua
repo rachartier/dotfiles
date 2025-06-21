@@ -12,92 +12,92 @@ local utils = require("utils")
 -- })
 
 utils.on_event({ "VimResized" }, function()
-	local ft = vim.bo.filetype
+  local ft = vim.bo.filetype
 
-	if not string.find(ft, "Avante") then
-		local current_tab = vim.fn.tabpagenr()
-		vim.cmd("tabdo wincmd =")
-		vim.cmd("tabnext " .. current_tab)
-	end
+  if not string.find(ft, "Avante") then
+    local current_tab = vim.fn.tabpagenr()
+    vim.cmd("tabdo wincmd =")
+    vim.cmd("tabnext " .. current_tab)
+  end
 end, {
-	target = "*",
-	desc = "Resize splits if window got resized",
+  target = "*",
+  desc = "Resize splits if window got resized",
 })
 
 utils.on_event({ "FileType" }, function(event)
-	if event.match:match("^json") then
-		vim.opt_local.conceallevel = 0
-	end
+  if event.match:match("^json") then
+    vim.opt_local.conceallevel = 0
+  end
 end, {
-	target = { "json", "jsonc", "json5" },
-	desc = "Disable conceallevel for json files",
+  target = { "json", "jsonc", "json5" },
+  desc = "Disable conceallevel for json files",
 })
 
 utils.on_event("FileType", function(event)
-	vim.bo[event.buf].buflisted = false
-	vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
+  vim.bo[event.buf].buflisted = false
+  vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
 end, {
-	target = {
-		"PlenaryTestPopup",
-		"help",
-		"lspinfo",
-		"man",
-		"notify",
-		"qf",
-		"query",
-		"spectre_panel",
-		"startuptime",
-		"tsplayground",
-		"neotest-output",
-		"checkhealth",
-		"neotest-summary",
-		"neotest-output-panel",
-		"Avante",
-		"AvanteInput",
-		"oil",
-		"copilot-panel",
-	},
-	desc = "Easy quit buffers",
+  target = {
+    "PlenaryTestPopup",
+    "help",
+    "lspinfo",
+    "man",
+    "notify",
+    "qf",
+    "query",
+    "spectre_panel",
+    "startuptime",
+    "tsplayground",
+    "neotest-output",
+    "checkhealth",
+    "neotest-summary",
+    "neotest-output-panel",
+    "Avante",
+    "AvanteInput",
+    "oil",
+    "copilot-panel",
+  },
+  desc = "Easy quit buffers",
 })
 
 utils.on_event({ "FileType" }, function()
-	vim.opt_local.wrap = true
-	vim.opt_local.spell = true
+  vim.opt_local.wrap = true
+  vim.opt_local.spell = true
 end, {
-	target = { "gitcommit", "markdown", "text" },
-	desc = "Enable wrap and spell for markdown and text files",
+  target = { "gitcommit", "markdown", "text" },
+  desc = "Enable wrap and spell for markdown and text files",
 })
 
 utils.on_event({ "BufWritePre" }, function(event)
-	if event.match:match("^%w%w+://") then
-		return
-	end
-	local file = vim.loop.fs_realpath(event.match) or event.match
-	vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
+  if event.match:match("^%w%w+://") then
+    return
+  end
+  local file = vim.loop.fs_realpath(event.match) or event.match
+  vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
 end, {
-	target = "*",
-	desc = "Create directory if it does not exist",
+  target = "*",
+  desc = "Create directory if it does not exist",
 })
 
 utils.on_event({ "BufWritePre" }, function()
-	vim.cmd([[%s/\s\+$//e]])
+  vim.cmd([[%s/\s\+$//e]])
 end, {
-	target = "*",
-	desc = "Remove trailing whitespace",
+  target = "*",
+  desc = "Remove trailing whitespace",
 })
 
 utils.on_event({ "BufReadPost" }, function()
-	vim.cmd('silent! normal! g`"zv')
+  vim.cmd('silent! normal! g`"zv')
 end, {
-	target = "*",
-	desc = "Restore cursor position",
+  target = "*",
+  desc = "Restore cursor position",
 })
 
 utils.on_event("FileType", function()
-	vim.opt_local.buflisted = false
+  vim.opt_local.buflisted = false
 end, {
-	target = "qf",
-	desc = "Do not list quickfix buffers",
+  target = "qf",
+  desc = "Do not list quickfix buffers",
 })
 
 -- Corrige le problème d'indentation en python lorsque
@@ -127,35 +127,35 @@ end, {
 -- })
 
 utils.on_event({ "FocusGained", "BufEnter", "CursorHold", "CursorHoldI" }, function()
-	if vim.fn.mode() ~= "c" then
-		vim.cmd("checktime")
-	end
+  if vim.fn.mode() ~= "c" then
+    vim.cmd("checktime")
+  end
 end)
 
 -- Notification after file change
 utils.on_event("FileChangedShellPost", function()
-	vim.api.nvim_echo({ { "File changed on disk. Buffer reloaded.", "WarningMsg" } }, false, {})
+  vim.api.nvim_echo({ { "File changed on disk. Buffer reloaded.", "WarningMsg" } }, false, {})
 end)
 
 -- Set local settings for terminal buffers
 utils.on_event("TermOpen", function(event)
-	if vim.opt.buftype:get() == "terminal" then
-		local set = vim.opt_local
-		set.number = false -- Don't show numbers
-		set.relativenumber = false -- Don't show relativenumbers
-		set.scrolloff = 0 -- Don't scroll when at the top or bottom of the terminal buffer
-		vim.opt.filetype = "terminal"
+  if vim.opt.buftype:get() == "terminal" then
+    local set = vim.opt_local
+    set.number = false -- Don't show numbers
+    set.relativenumber = false -- Don't show relativenumbers
+    set.scrolloff = 0 -- Don't scroll when at the top or bottom of the terminal buffer
+    vim.opt.filetype = "terminal"
 
-		vim.cmd.startinsert() -- Start in insert mode
-	end
+    vim.cmd.startinsert() -- Start in insert mode
+  end
 end, {
-	target = "term://*",
-	desc = "Settings for terminal buffers",
+  target = "term://*",
+  desc = "Settings for terminal buffers",
 })
 
 vim.api.nvim_create_autocmd("BufWritePost", {
-	pattern = vim.fn.expand("~/.config/kitty/kitty.conf"),
-	callback = function()
-		vim.fn.system("kill -SIGUSR1 $(pgrep kitty)")
-	end,
+  pattern = vim.fn.expand("~/.config/kitty/kitty.conf"),
+  callback = function()
+    vim.fn.system("kill -SIGUSR1 $(pgrep kitty)")
+  end,
 })

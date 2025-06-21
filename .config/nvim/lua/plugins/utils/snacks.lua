@@ -1,23 +1,24 @@
 local M = {}
 
 local function startup()
-	M.lazy_stats = M.lazy_stats and M.lazy_stats.startuptime > 0 and M.lazy_stats or require("lazy.stats").stats()
-	local ms = (math.floor(M.lazy_stats.startuptime * 100 + 0.5) / 100)
-	return {
-		align = "center",
-		text = {
-			{ "  Loaded ", hl = "footer" },
-			{ M.lazy_stats.loaded .. "/" .. M.lazy_stats.count, hl = "special" },
-			{ " plugins in ", hl = "footer" },
-			{ ms .. "ms", hl = "special" },
-		},
-	}
+  M.lazy_stats = M.lazy_stats and M.lazy_stats.startuptime > 0 and M.lazy_stats
+    or require("lazy.stats").stats()
+  local ms = (math.floor(M.lazy_stats.startuptime * 100 + 0.5) / 100)
+  return {
+    align = "center",
+    text = {
+      { "  Loaded ", hl = "footer" },
+      { M.lazy_stats.loaded .. "/" .. M.lazy_stats.count, hl = "special" },
+      { " plugins in ", hl = "footer" },
+      { ms .. "ms", hl = "special" },
+    },
+  }
 end
 
 return {
-	"folke/snacks.nvim",
-	priority = 9999,
-	lazy = false,
+  "folke/snacks.nvim",
+  priority = 9999,
+  lazy = false,
     -- stylua: ignore start
     keys = {
         { "<leader>.",  function() Snacks.scratch() end,                     desc = "Toggle Scratch Buffer", },
@@ -64,81 +65,81 @@ return {
         --     current = false,
         -- }) end, desc = "Find Git Files" },
     },
-	-- stylua: ignore end
-	opts = {
-		styles = {
-			dashboard = {
-				wo = {
-					winblend = require("config").winblend,
-				},
-			},
-			notification = {
-				border = require("config.ui.border").default_border,
-				wo = {
-					wrap = true,
-					winblend = require("config").winblend,
-				},
-			},
-		},
-		notifier = require("plugins.utils.snacks.notifier"),
-		dashboard = require("plugins.utils.snacks.dashboard"),
-		indent = require("plugins.utils.snacks.indent"),
-		picker = require("plugins.utils.snacks.picker"),
-		image = {},
-		input = {},
-		gitbrowse = {},
-		notify = {},
-		toggle = {},
-		bigfile = {},
-		quickfile = {},
-		rename = {},
-		layout = {},
-		terminal = {},
-		-- statuscolumn = { enabled = true },
-	},
-	init = function()
-		vim.api.nvim_create_autocmd("User", {
-			pattern = "VeryLazy",
-			callback = function()
-				_G.dd = function(...)
-					Snacks.debug.inspect(...)
-				end
-				_G.bt = function()
-					Snacks.debug.backtrace()
-				end
-				vim.print = _G.dd -- Override print to use snacks for `:=` command
-			end,
-		})
-	end,
-	config = function(_, opts)
-		Snacks.dashboard.sections.startup = startup
-		require("snacks").setup(opts)
+  -- stylua: ignore end
+  opts = {
+    styles = {
+      dashboard = {
+        wo = {
+          winblend = require("config").winblend,
+        },
+      },
+      notification = {
+        border = require("config.ui.border").default_border,
+        wo = {
+          wrap = true,
+          winblend = require("config").winblend,
+        },
+      },
+    },
+    notifier = require("plugins.utils.snacks.notifier"),
+    dashboard = require("plugins.utils.snacks.dashboard"),
+    indent = require("plugins.utils.snacks.indent"),
+    picker = require("plugins.utils.snacks.picker"),
+    image = {},
+    input = {},
+    gitbrowse = {},
+    notify = {},
+    toggle = {},
+    bigfile = {},
+    quickfile = {},
+    rename = {},
+    layout = {},
+    terminal = {},
+    -- statuscolumn = { enabled = true },
+  },
+  init = function()
+    vim.api.nvim_create_autocmd("User", {
+      pattern = "VeryLazy",
+      callback = function()
+        _G.dd = function(...)
+          Snacks.debug.inspect(...)
+        end
+        _G.bt = function()
+          Snacks.debug.backtrace()
+        end
+        vim.print = _G.dd -- Override print to use snacks for `:=` command
+      end,
+    })
+  end,
+  config = function(_, opts)
+    Snacks.dashboard.sections.startup = startup
+    require("snacks").setup(opts)
 
-		Snacks.toggle.profiler():map("<leader>pp")
-		Snacks.toggle.profiler_highlights():map("<leader>ph")
+    Snacks.toggle.profiler():map("<leader>pp")
+    Snacks.toggle.profiler_highlights():map("<leader>ph")
 
-		if vim.env.PROF then
-			local snacks = vim.fn.stdpath("data") .. "/lazy/snacks.nvim"
-			vim.opt.rtp:append(snacks)
-			require("snacks.profiler").startup({
-				startup = {
-					-- event = "VimEnter", -- stop profiler on this event. Defaults to `VimEnter`
-					-- event = "UIEnter",
-					event = "LspAttach",
-				},
-			})
-		end
+    if vim.env.PROF then
+      local snacks = vim.fn.stdpath("data") .. "/lazy/snacks.nvim"
+      vim.opt.rtp:append(snacks)
+      require("snacks.profiler").startup({
+        startup = {
+          -- event = "VimEnter", -- stop profiler on this event. Defaults to `VimEnter`
+          -- event = "UIEnter",
+          event = "LspAttach",
+        },
+      })
+    end
 
-		if opts.scroll then
-			require("utils").on_event({ "CmdlineEnter", "CmdlineLeave" }, function(ev)
-				if ev.event == "CmdlineEnter" then
-					Snacks.scroll.disable()
-				else
-					Snacks.scroll.enable()
-				end
-			end, {
-				target = "/",
-			})
-		end
-	end,
+    if opts.scroll then
+      require("utils").on_event({ "CmdlineEnter", "CmdlineLeave" }, function(ev)
+        if ev.event == "CmdlineEnter" then
+          Snacks.scroll.disable()
+        else
+          Snacks.scroll.enable()
+        end
+      end, {
+        target = "/",
+      })
+    end
+  end,
 }

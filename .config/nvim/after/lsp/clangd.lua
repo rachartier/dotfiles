@@ -1,8 +1,8 @@
 return {
-	settings = {
-		cmd = {
-			"clangd",
-			"--offset-encoding=utf-16",
-		},
-	},
+  settings = {
+    cmd = {
+      "clangd",
+      "--offset-encoding=utf-16",
+    },
+  },
 }

@@ -1,11 +1,11 @@
 local compact_value = 60
 
 local function is_compact()
-	return vim.o.columns < compact_value
+  return vim.o.columns < compact_value
 end
 
 local function build_header()
-	local header = [[
+  local header = [[
 
 ███┐   ██┐███████┐ ██████┐ ██┐   ██┐██┐███┐   ███┐
 ████┐  ██│██┌────┘██┌───██┐██│   ██│██│████┐ ████│
@@ -16,149 +16,170 @@ local function build_header()
 
 ]]
 
-	local version = vim.version()
+  local version = vim.version()
 
-	local version_str = string.format(
-		"󱝁 v%d.%d.%d (%s)",
-		version.major,
-		version.minor,
-		version.patch,
-		version.prerelease and "Nightly" or "Stable"
-	)
-	local version_width = vim.fn.strdisplaywidth(version_str)
+  local version_str = string.format(
+    "󱝁 v%d.%d.%d (%s)",
+    version.major,
+    version.minor,
+    version.patch,
+    version.prerelease and "Nightly" or "Stable"
+  )
+  local version_width = vim.fn.strdisplaywidth(version_str)
 
-	local first_newline = string.find(header, "\n")
-	local header_width = vim.fn.strdisplaywidth(header:sub(1, first_newline - 1))
+  local first_newline = string.find(header, "\n")
+  local header_width = vim.fn.strdisplaywidth(header:sub(1, first_newline - 1))
 
-	local padding = math.floor((header_width - version_width) / 2 - 1)
+  local padding = math.floor((header_width - version_width) / 2 - 1)
 
-	local version_line = string.rep(" ", padding) .. version_str .. "\n"
+  local version_line = string.rep(" ", padding) .. version_str .. "\n"
 
-	header = header .. version_line
+  header = header .. version_line
 
-	return header
+  return header
 end
 
 return {
-	enabled = true,
-	preset = {
-		---@type snacks.dashboard.Item[]|fun(items:snacks.dashboard.Item[]):snacks.dashboard.Item[]?
+  enabled = true,
+  preset = {
+    ---@type snacks.dashboard.Item[]|fun(items:snacks.dashboard.Item[]):snacks.dashboard.Item[]?
 
-		keys = function()
-			---@type snacks.dashboard.Item[]
-			local items = {
-				{ icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
-				{ icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
-				{ icon = " ", key = "g", desc = "Find Text", action = ":lua Snacks.dashboard.pick('live_grep')" },
-				{ icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
-				{
-					icon = " ",
-					key = "c",
-					desc = "Config",
-					action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})",
-				},
-				{ icon = " ", key = "s", desc = "Restore Session", section = "session" },
-				{ icon = "󰒲 ", key = "l", desc = "Lazy", action = ":Lazy", enabled = package.loaded.lazy },
-				{ icon = " ", key = "q", desc = "Quit", action = ":qa" },
-			}
+    keys = function()
+      ---@type snacks.dashboard.Item[]
+      local items = {
+        {
+          icon = " ",
+          key = "f",
+          desc = "Find File",
+          action = ":lua Snacks.dashboard.pick('files')",
+        },
+        { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
+        {
+          icon = " ",
+          key = "g",
+          desc = "Find Text",
+          action = ":lua Snacks.dashboard.pick('live_grep')",
+        },
+        {
+          icon = " ",
+          key = "r",
+          desc = "Recent Files",
+          action = ":lua Snacks.dashboard.pick('oldfiles')",
+        },
+        {
+          icon = " ",
+          key = "c",
+          desc = "Config",
+          action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})",
+        },
+        {
+          icon = "󰒲 ",
+          key = "l",
+          desc = "Lazy",
+          action = ":Lazy",
+          enabled = package.loaded.lazy,
+        },
+        { icon = " ", key = "q", desc = "Quit", action = ":qa" },
+      }
 
-			local width = vim.o.columns
-			local max_line_width = 0
+      local width = vim.o.columns
+      local max_line_width = 0
 
-			if is_compact() then
-				for _, item in ipairs(items) do
-					item.desc = {
-						{ "[" },
-						{ item.key, hl = "SnacksDashboardKey" },
-						{ "] ", hl = "Normal" },
-						{ item.desc, hl = "SnacksDashboardDesc" },
-					}
+      if is_compact() then
+        for _, item in ipairs(items) do
+          item.desc = {
+            { "[" },
+            { item.key, hl = "SnacksDashboardKey" },
+            { "] ", hl = "Normal" },
+            { item.desc, hl = "SnacksDashboardDesc" },
+          }
 
-					local item_width = 0
+          local item_width = 0
 
-					for _, part in ipairs(item.desc) do
-						if type(part) == "string" then
-							item_width = item_width + #part
-						elseif type(part) == "table" and part.hl then
-							item_width = item_width + vim.fn.strdisplaywidth(part[1])
-						end
-					end
+          for _, part in ipairs(item.desc) do
+            if type(part) == "string" then
+              item_width = item_width + #part
+            elseif type(part) == "table" and part.hl then
+              item_width = item_width + vim.fn.strdisplaywidth(part[1])
+            end
+          end
 
-					max_line_width = math.max(max_line_width, item_width + vim.fn.strdisplaywidth(item.icon))
-				end
+          max_line_width = math.max(max_line_width, item_width + vim.fn.strdisplaywidth(item.icon))
+        end
 
-				for _, item in ipairs(items) do
-					item.icon = string.rep(" ", (width - max_line_width) / 2 + max_line_width / 4) .. item.icon
-				end
-			end
+        for _, item in ipairs(items) do
+          item.icon = string.rep(" ", (width - max_line_width) / 2 + max_line_width / 4)
+            .. item.icon
+        end
+      end
 
-			return items
-		end,
+      return items
+    end,
 
-		header = build_header(),
-		formats = {
-			terminal = { align = "center" },
-			version = { "%s", align = "center" },
-		},
+    header = build_header(),
+    formats = {
+      terminal = { align = "center" },
+      version = { "%s", align = "center" },
+    },
 
-		sections = {
-			function()
-				if is_compact() then
-					return {
-						text = { " NEOVIM    \n", hl = "SnacksDashboardHeader" },
-						hl = "Comment",
-						align = "center",
-						height = 5,
-						width = 20,
-					}
-				end
+    sections = {
+      function()
+        if is_compact() then
+          return {
+            text = { " NEOVIM    \n", hl = "SnacksDashboardHeader" },
+            hl = "Comment",
+            align = "center",
+            height = 5,
+            width = 20,
+          }
+        end
 
-				return {
-					section = "header",
-				}
-			end,
-			function()
-				local gap = 1
-				if vim.o.lines < 30 then
-					gap = 0
-				end
-				return {
-					section = "keys",
-					gap = gap,
-					padding = 1,
-				}
-			end,
-			{ section = "startup" },
+        return {
+          section = "header",
+        }
+      end,
+      function()
+        local gap = 1
+        if vim.o.lines < 30 then
+          gap = 0
+        end
+        return {
+          section = "keys",
+          gap = gap,
+          padding = 1,
+        }
+      end,
+      { section = "startup" },
 
-			function()
-				local in_git = Snacks.git.get_root() ~= nil
-				local cmds = {
-					{
-						title = "Git Graph",
-						icon = " ",
-						cmd = [[echo -e "$(git-graph --style round --color always --wrap 50 0 8 -f 'oneline')"]],
-						indent = 1,
-						height = 24,
-					},
-					-- {
-					-- 	icon = " ",
-					-- 	title = "Git Status",
-					-- 	cmd = "git diff --stat -B -M -C",
-					-- 	indent = 3,
-					-- },
-				}
-				return vim.tbl_map(function(cmd)
-					return vim.tbl_extend("force", {
-						pane = 2,
-						section = "terminal",
-						enabled = function()
-							return in_git and vim.o.columns > 130
-						end,
-						padding = 1,
-						-- ttl = 5 * 60,
-					}, cmd)
-				end, cmds)
-			end,
-		},
-	},
+      function()
+        local in_git = Snacks.git.get_root() ~= nil
+        local cmds = {
+          {
+            title = "Git Graph",
+            icon = " ",
+            cmd = [[echo -e "$(git-graph --style round --color always --wrap 50 0 8 -f 'oneline')"]],
+            indent = 1,
+            height = 24,
+          },
+          -- {
+          -- 	icon = " ",
+          -- 	title = "Git Status",
+          -- 	cmd = "git diff --stat -B -M -C",
+          -- 	indent = 3,
+          -- },
+        }
+        return vim.tbl_map(function(cmd)
+          return vim.tbl_extend("force", {
+            pane = 2,
+            section = "terminal",
+            enabled = function()
+              return in_git and vim.o.columns > 130
+            end,
+            padding = 1,
+            -- ttl = 5 * 60,
+          }, cmd)
+        end, cmds)
+      end,
+    },
+  },
 }
