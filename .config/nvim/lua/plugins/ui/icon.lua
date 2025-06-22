@@ -2,9 +2,13 @@ return {
   "echasnovski/mini.icons",
   version = "*",
   opts = {
+    file = {
+      ["devcontainer.json"] = { glyph = "", hl = "MiniIconsAzure" },
+    },
     filetype = {
       json = { glyph = "" },
       jsonc = { glyph = "" },
+      dotenv = { glyph = "", hl = "MiniIconsYellow" },
 
       -- sh = { glyph = "󰐣", hl = "MiniIconsBlue" },
       -- zsh = { glyph = "󰐣" },
