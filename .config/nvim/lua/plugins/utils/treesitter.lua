@@ -58,10 +58,9 @@ return {
     build = { ":TSUpdate" },
     event = { "LazyFile" },
     enabled = true,
-    init = function()
-      setup_treesitter_autocmd()
-    end,
     config = function()
+      setup_treesitter_autocmd()
+
       local lang_config = require("config.languages")
       local ensure_installed = {}
 
