@@ -127,7 +127,7 @@ return {
         answer_header = "  Copilot ",
         error_header = "  Error ",
         separator = "───",
-        model = "gpt-4.1",
+        model = "gpt-4o",
         show_folds = false,
         auto_follow_cursor = false,
         debug = false,
@@ -280,7 +280,7 @@ return {
       },
       providers = {
         copilot = {
-          model = "gpt-4.1",
+          model = "gpt-4o",
           extra_request_body = {
             max_tokens = 64000,
           },

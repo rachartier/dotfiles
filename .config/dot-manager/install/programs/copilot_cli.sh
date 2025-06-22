@@ -10,7 +10,7 @@ install_copilot_cli() {
         rm "$HOME/.local/bin/copilot-cli"
     fi
 
-    __install_package_release "https://github.com/rachartier/copilot-cli/releases/latest/download/copilot-cli.tar.gz" copilot-cli
+    __install_package_release "https://github.com/rachartier/copilot-cli/releases/latest/download/copilot-cli-linux.tar.gz" copilot-cli
 }
 
 install_copilot_cli "$@"
