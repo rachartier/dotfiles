@@ -1,6 +1,5 @@
-
-[language-server.pyright]
-command = "pyright-langserver"
+[language-server.basedpyright]
+command = "basedpyright-langserver"
 args = ["--stdio"]
 # will get "Async jobs timed out" errors if this empty config is not added
 config = {}
@@ -15,7 +14,7 @@ file-types = ["py","pyi","py3","pyw","ptl",".pythonstartup",".pythonrc","SConstr
 shebangs = ["python"]
 roots = ["setup.py", "setup.cfg", "pyproject.toml"]
 comment-token = "#"
-language-servers = [ "pyright" ]
+language-servers = [ "basedpyright" ]
 formatter = { command = "black", args = ["-"] }
 indent = { tab-width = 4, unit = "    " }
 auto-format = true
