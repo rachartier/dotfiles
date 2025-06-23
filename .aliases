@@ -108,8 +108,11 @@ function venv() {
     source "$1/bin/activate"
 
     if command -v direnv &>/dev/null; then
-        echo 'export VIRTUAL_ENV=."venv"' >.envrc
-        echo "layout python python3" >.envrc
+        \cat <<EOF >.envrc
+export VIRTUAL_ENV="./venv"
+layout python3
+EOF
+
         direnv allow
     fi
 }
