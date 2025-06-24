@@ -6,7 +6,7 @@ return {
     formatter = {
       ruff_format = {
         command = "ruff",
-        args = { "format", "--config", os.getenv("HOME") .. "/.config/ruff/ruff.toml", "-" },
+        args = { "format", "-" },
         stdin = true,
       },
       "ruff_fix",
