@@ -1,3 +1,14 @@
+local function start_treesitter(bufnr)
+  local ok, _ = pcall(vim.treesitter.start, bufnr)
+
+  if not ok then
+    return
+  end
+
+  vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+  vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+end
+
 local function setup_treesitter_autocmd()
   local parsers = require("nvim-treesitter").get_available()
 
@@ -29,19 +40,18 @@ local function setup_treesitter_autocmd()
         return
       end
 
-      local parser_installed = pcall(vim.treesitter.get_parser, bufnr, parser_name)
-      if not parser_installed then
-        require("nvim-treesitter").install({ parser_name })
-      end
+      local installed_parser = require("nvim-treesitter").get_installed()
+      local is_installed = parsers and vim.tbl_contains(installed_parser, parser_name)
 
-      local ok, _ = pcall(vim.treesitter.start, bufnr)
+      if not is_installed then
+        require("nvim-treesitter").install({ parser_name }):await(function()
+          start_treesitter(bufnr)
+        end)
 
-      if not ok then
         return
       end
 
-      vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-      vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+      start_treesitter(bufnr)
     end,
   })
   vim.api.nvim_create_autocmd("BufEnter", {
@@ -60,7 +70,6 @@ return {
     enabled = true,
     config = function()
       setup_treesitter_autocmd()
-
       local lang_config = require("config.languages")
       local ensure_installed = {}
 
