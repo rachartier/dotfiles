@@ -44,6 +44,7 @@ return {
   preset = {
     ---@type snacks.dashboard.Item[]|fun(items:snacks.dashboard.Item[]):snacks.dashboard.Item[]?
 
+    header = build_header(),
     keys = function()
       ---@type snacks.dashboard.Item[]
       local items = {
@@ -117,7 +118,6 @@ return {
     end,
   },
 
-  header = build_header(),
   formats = {
     terminal = { align = "center" },
     version = { "%s", align = "center" },
