@@ -35,18 +35,26 @@ return {
     end,
   },
   {
-    -- dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-code-action.nvim",
-    "rachartier/tiny-code-action.nvim",
+    dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-code-action.nvim",
+    -- "rachartier/tiny-code-action.nvim",
     enabled = true,
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
-    event = "LazyFile",
+    lazy = false,
+    -- event = "LazyFile",
     config = function()
       require("tiny-code-action").setup({
         -- backend = "difftastic",
         backend = "delta",
-        picker = "snacks",
+        picker = {
+          "buffer",
+          opts = {
+            hotkeys = true,
+            auto_preview = false,
+            hotkeys_mode = "text_diff_based",
+          },
+        },
         backend_opts = {
           delta = {
             args = {

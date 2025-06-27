@@ -1,5 +1,7 @@
 local utils = require("utils")
 
+local model = "gpt-4o"
+
 return {
   {
     "zbirenbaum/copilot.lua",
@@ -73,7 +75,7 @@ return {
   },
   {
     "CopilotC-Nvim/CopilotChat.nvim",
-    enabled = true,
+    enabled = false,
     branch = "main",
     build = "make tiktoken",
     dependencies = {
@@ -81,42 +83,42 @@ return {
       "nvim-lua/plenary.nvim",
     },
     keys = {
-      {
-        "<leader>cc",
-        mode = { "n", "v" },
-        "<cmd>CopilotChat<CR>",
-        desc = "CopilotChat - Help actions",
-      },
-      {
-        "<leader>ch",
-        mode = { "n", "v" },
-        function()
-          require("CopilotChat").select_prompt()
-        end,
-        desc = "CopilotChat - Help actions",
-      },
-      -- Show prompts actions with telescope
-      {
-        "<leader>cp",
-        function()
-          require("CopilotChat").select_prompt({
-            selection = require("CopilotChat.select").visual,
-          })
-        end,
-        mode = { "n", "x", "v" },
-        desc = "CopilotChat - Prompt actions",
-      },
-
-      {
-        "<leader>cq",
-        function()
-          local input = vim.fn.input("Quick Chat: ")
-          if input ~= "" then
-            require("CopilotChat").ask(input, { selection = require("CopilotChat.select").buffer })
-          end
-        end,
-        desc = "CopilotChat - Quick chat",
-      },
+      -- {
+      --   "<leader>cc",
+      --   mode = { "n", "v" },
+      --   "<cmd>CopilotChat<CR>",
+      --   desc = "CopilotChat - Help actions",
+      -- },
+      -- {
+      --   "<leader>ch",
+      --   mode = { "n", "v" },
+      --   function()
+      --     require("CopilotChat").select_prompt()
+      --   end,
+      --   desc = "CopilotChat - Help actions",
+      -- },
+      -- -- Show prompts actions with telescope
+      -- {
+      --   "<leader>cp",
+      --   function()
+      --     require("CopilotChat").select_prompt({
+      --       selection = require("CopilotChat.select").visual,
+      --     })
+      --   end,
+      --   mode = { "n", "x", "v" },
+      --   desc = "CopilotChat - Prompt actions",
+      -- },
+      --
+      -- {
+      --   "<leader>cq",
+      --   function()
+      --     local input = vim.fn.input("Quick Chat: ")
+      --     if input ~= "" then
+      --       require("CopilotChat").ask(input, { selection = require("CopilotChat.select").buffer })
+      --     end
+      --   end,
+      --   desc = "CopilotChat - Quick chat",
+      -- },
     },
     opts = function()
       local user = vim.env.USER or "User"
@@ -127,7 +129,7 @@ return {
         answer_header = "  Copilot ",
         error_header = "  Error ",
         separator = "───",
-        model = "gpt-4o",
+        model = model,
         show_folds = false,
         auto_follow_cursor = false,
         debug = false,
@@ -236,85 +238,121 @@ return {
     end,
   },
   {
-    -- dir = os.getenv("HOME") .. "/dev/nvim_plugins/avante.nvim",
-    "yetone/avante.nvim",
-    enabled = true,
-    version = false,
-    build = "make",
-    keys = {
-      "<leader>aa",
-    },
+    "olimorris/codecompanion.nvim",
+    event = "VeryLazy",
     dependencies = {
-      "nvim-lua/plenary.nvim",
-      "MunifTanjim/nui.nvim",
-      -- "github/copilot.vim",
-      "zbirenbaum/copilot.lua",
-      "echasnovski/mini.icons",
-      "folke/snacks.nvim",
       "ravitemer/mcphub.nvim",
-      -- {
-      -- 	"HakonHarnes/img-clip.nvim",
-      -- 	event = "VeryLazy",
-      -- 	opts = {
-      -- 		default = {
-      -- 			embed_image_as_base64 = false,
-      -- 			prompt_for_file_name = false,
-      -- 			drag_and_drop = {
-      -- 				insert_mode = true,
-      -- 			},
-      -- 			use_absolute_path = true,
-      -- 		},
-      -- 	},
-      -- },
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    keys = {
+      {
+        "<leader>cc",
+        "<cmd>CodeCompanionChat Toggle<CR>",
+        desc = "Code Companion - Toggle",
+      },
     },
     opts = {
-      input = {
-        provider = "snacks",
+      strategies = {
+        chat = {
+          adapter = "copilot",
+        },
+        inline = {
+          adapter = "copilot",
+        },
       },
-      behaviour = {
-        auto_set_keymaps = true,
-        auto_suggestions = false,
-        support_paste_from_clipboard = true,
-        enable_cursor_planning_mode = true,
-        enable_claude_text_editor_tool_mode = true,
-      },
-      providers = {
-        copilot = {
-          model = "gpt-4o",
-          extra_request_body = {
-            max_tokens = 64000,
+      extensions = {
+        mcphub = {
+          callback = "mcphub.extensions.codecompanion",
+          opts = {
+            make_vars = true,
+            make_slash_commands = true,
+            show_result_in_chat = true,
           },
         },
       },
-      provider = "copilot",
-      cursor_applying_provider = "copilot",
-      web_search_engine = {
-        provider = "google", -- tavily, serpapi, searchapi, google or kagi
-      },
-      hints = { enabled = true },
-      windows = {
-        postion = "right",
-        width = 40,
-        sidebar_header = {
-          enabled = true,
-          align = "left",
-          rounded = false,
-        },
-        input = {
-          prefix = " ",
-          height = 12,
-        },
-      },
-      system_prompt = function()
-        local hub = require("mcphub").get_hub_instance()
-        return hub:get_active_servers_prompt()
-      end,
-
-      custom_tools = function()
-        return {
-          require("mcphub.extensions.avante").mcp_tool(),
-        }
-      end,
     },
   },
+  -- {
+  --   -- dir = os.getenv("HOME") .. "/dev/nvim_plugins/avante.nvim",
+  --   "yetone/avante.nvim",
+  --   enabled = true,
+  --   version = false,
+  --   build = "make",
+  --   keys = {
+  --     "<leader>aa",
+  --   },
+  --   dependencies = {
+  --     "nvim-lua/plenary.nvim",
+  --     "MunifTanjim/nui.nvim",
+  --     -- "github/copilot.vim",
+  --     "zbirenbaum/copilot.lua",
+  --     "echasnovski/mini.icons",
+  --     "folke/snacks.nvim",
+  --     "ravitemer/mcphub.nvim",
+  --     -- {
+  --     -- 	"HakonHarnes/img-clip.nvim",
+  --     -- 	event = "VeryLazy",
+  --     -- 	opts = {
+  --     -- 		default = {
+  --     -- 			embed_image_as_base64 = false,
+  --     -- 			prompt_for_file_name = false,
+  --     -- 			drag_and_drop = {
+  --     -- 				insert_mode = true,
+  --     -- 			},
+  --     -- 			use_absolute_path = true,
+  --     -- 		},
+  --     -- 	},
+  --     -- },
+  --   },
+  --   opts = {
+  --     input = {
+  --       provider = "snacks",
+  --     },
+  --     behaviour = {
+  --       auto_set_keymaps = true,
+  --       auto_suggestions = false,
+  --       support_paste_from_clipboard = true,
+  --       enable_cursor_planning_mode = true,
+  --       enable_claude_text_editor_tool_mode = true,
+  --     },
+  --     providers = {
+  --       copilot = {
+  --         model = model,
+  --         extra_request_body = {
+  --           max_tokens = 64000,
+  --         },
+  --       },
+  --     },
+  --     provider = "copilot",
+  --     cursor_applying_provider = "copilot",
+  --     web_search_engine = {
+  --       provider = "google", -- tavily, serpapi, searchapi, google or kagi
+  --     },
+  --     hints = { enabled = true },
+  --     windows = {
+  --       postion = "right",
+  --       width = 40,
+  --       sidebar_header = {
+  --         enabled = true,
+  --         align = "left",
+  --         rounded = false,
+  --       },
+  --       input = {
+  --         prefix = " ",
+  --         height = 12,
+  --       },
+  --     },
+  --     system_prompt = function()
+  --       local hub = require("mcphub").get_hub_instance()
+  --       return hub:get_active_servers_prompt()
+  --     end,
+  --
+  --     custom_tools = function()
+  --       return {
+  --         require("mcphub.extensions.avante").mcp_tool(),
+  --       }
+  --     end,
+  --   },
+  -- },
 }

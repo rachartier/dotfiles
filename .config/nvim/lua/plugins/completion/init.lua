@@ -68,6 +68,9 @@ return {
     },
 
     sources = {
+      per_filetype = {
+        codecompanion = { "codecompanion" },
+      },
       default = function()
         local sources = {
           "copilot",
@@ -76,9 +79,9 @@ return {
           "snippets",
           "buffer",
           "lazydev",
-          "avante_commands",
-          "avante_mentions",
-          "avante_files",
+          -- "avante_commands",
+          -- "avante_mentions",
+          -- "avante_files",
         }
         local ok, node = pcall(vim.treesitter.get_node)
 
@@ -106,24 +109,24 @@ return {
             max_attempts = 4,
           },
         },
-        avante_commands = {
-          name = "avante_commands",
-          module = "blink.compat.source",
-          score_offset = 90,
-          opts = {},
-        },
-        avante_files = {
-          name = "avante_files",
-          module = "blink.compat.source",
-          score_offset = 100,
-          opts = {},
-        },
-        avante_mentions = {
-          name = "avante_mentions",
-          module = "blink.compat.source",
-          score_offset = 1000,
-          opts = {},
-        },
+        -- avante_commands = {
+        --   name = "avante_commands",
+        --   module = "blink.compat.source",
+        --   score_offset = 90,
+        --   opts = {},
+        -- },
+        -- avante_files = {
+        --   name = "avante_files",
+        --   module = "blink.compat.source",
+        --   score_offset = 100,
+        --   opts = {},
+        -- },
+        -- avante_mentions = {
+        --   name = "avante_mentions",
+        --   module = "blink.compat.source",
+        --   score_offset = 1000,
+        --   opts = {},
+        -- },
       },
     },
 

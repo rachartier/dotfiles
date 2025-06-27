@@ -1,16 +1,16 @@
 return {
   {
     "OXY2DEV/markview.nvim",
-    enabled = true,
-    ft = { "markdown", "quarto", "rmd", "Avante" },
-    lazy = true,
+    enabled = false,
+    -- ft = { "markdown", "quarto", "rmd", "Avante", "codecompanion" },
+    -- lazy = true,
     opts = function(_, opts)
       local presets = require("markview.presets")
 
       opts = {
         max_length = 99999,
         preview = {
-          filetypes = { "markdown", "quarto", "rmd", "Avante" },
+          filetypes = { "markdown", "quarto", "rmd", "Avante", "codecompanion" },
           ignore_buftypes = {},
         },
 
