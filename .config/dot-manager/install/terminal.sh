@@ -29,12 +29,36 @@ install_terminal() {
         ;;
     *)
         log "info" "Installing ghostty..."
-        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/mkasberg/ghostty-ubuntu/HEAD/install.sh)"
-        # git clone https://github.com/ghostty-org/ghostty
-        # cd ghostty || return 1
-        # __install_package_apt libgtk-4-dev libadwaita-1-dev
-        # sudo snap install --beta zig --classic
-        # sudo zig build -p /usr -Doptimize=ReleaseFast
+        # /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/mkasberg/ghostty-ubuntu/HEAD/install.sh)"
+        if [ -d /tmp/ghostty ]; then
+            log "info" "Removing old ghostty directory."
+            rm -rf /tmp/ghostty
+        fi
+
+        git clone https://github.com/ghostty-org/ghostty
+        cd ghostty || return 1
+        __install_package_apt libgtk-4-dev libadwaita-1-dev libxml2-utils
+        if command -v zig &>/dev/null; then
+            log "info" "Zig is already installed."
+        else
+            wget https://ziglang.org/download/0.14.1/zig-x86_64-linux-0.14.1.tar.xz
+            tar -xf zig-x86_64-linux-0.14.1.tar.xz
+            sudo mv zig-x86_64-linux-0.14.1 /opt/zig-0.14.1
+            sudo ln -sf /opt/zig-0.14.1/zig /usr/local/bin/zig
+        fi
+
+        if [ $(ldconfig -p | grep gtk4-layer-shell) ]; then
+            log "info" "gtk4-layer-shell is already installed."
+        else
+            sudo apt install meson ninja-build libwayland-dev wayland-protocols libgtk-4-dev gobject-introspection libgirepository1.0-dev gtk-doc-tools python3 valac
+            meson setup build ninja -C build
+            sudo ninja -C build install
+            sudo ldconfig
+        fi
+
+        sudo snap install blueprint-compiler
+
+        zig build -p "$HOME/.local" -Doptimize=ReleaseFast
         ;;
     esac
 }

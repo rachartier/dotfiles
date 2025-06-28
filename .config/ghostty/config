@@ -20,6 +20,7 @@ font-feature = +zero, +calt, +liga, +clig, +ss01, +ss02
 font-thicken = true
 
 # custom-shader = /home/rachartier/.config/ghostty/ghostty-shaders/custom3.glsl
+custom-shader = cursor-shaders/cursor_smear.glsl
 
 gtk-wide-tabs = false
 shell-integration-features = true
