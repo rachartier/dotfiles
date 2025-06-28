@@ -1,7 +1,14 @@
 local Spinner = {
   timer = nil,
   is_running = false,
-  characters = { "◜", "◠", "◝", "◞", "◡", "◟" },
+  characters = {
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+  },
   index = 1,
   ns_id = vim.api.nvim_create_namespace("commit_spinner"),
 }
