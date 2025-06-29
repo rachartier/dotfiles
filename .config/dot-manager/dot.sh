@@ -233,6 +233,10 @@ do_command() {
         shift
         source "$DOT_MANAGER_DIR/install/terminal.sh" "$@"
         ;;
+    "fonts")
+        shift
+        source "$DOT_MANAGER_DIR/install/fonts.sh" "$@"
+        ;;
     "reinstall")
         shift
         do_reinstall "$@"
