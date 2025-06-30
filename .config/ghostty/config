@@ -37,7 +37,7 @@ window-padding-y = 8,0
 adjust-underline-thickness = -20%
 adjust-underline-position = 1
 adjust-strikethrough-thickness = -20%
-adjust-box-thickness = -20%
+adjust-box-thickness = 0%
 
 link-url = true
 focus-follows-mouse = true
