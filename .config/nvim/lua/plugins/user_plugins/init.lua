@@ -35,13 +35,13 @@ return {
     end,
   },
   {
-    dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-code-action.nvim",
-    -- "rachartier/tiny-code-action.nvim",
+    -- dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-code-action.nvim",
+    "rachartier/tiny-code-action.nvim",
     enabled = true,
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
-    lazy = false,
+    lazy = true,
     -- event = "LazyFile",
     config = function()
       require("tiny-code-action").setup({

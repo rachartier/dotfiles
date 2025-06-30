@@ -6,6 +6,6 @@ return {
     char = " ",
   },
   scope = {
-    -- char = "┆",
+    char = "┆",
   },
 }
