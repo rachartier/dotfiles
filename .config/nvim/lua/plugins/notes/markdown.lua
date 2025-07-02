@@ -2,8 +2,8 @@ return {
   {
     "OXY2DEV/markview.nvim",
     enabled = true,
-    -- ft = { "markdown", "quarto", "rmd", "Avante", "codecompanion" },
-    -- lazy = true,
+    ft = { "markdown", "quarto", "rmd", "Avante", "codecompanion" },
+    lazy = true,
     opts = function(_, opts)
       local presets = require("markview.presets")
 

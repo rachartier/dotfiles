@@ -79,7 +79,7 @@ function M.on_attach(client, bufnr)
     })
 
     -- vim.keymap.set({"n"},  "<leader>ca",  function() vim.lsp.buf.code_action() end, { noremap = true, silent = true })
-    vim.keymap.set({"n"},  "<leader>ca",  function() require("tiny-code-action").code_action({}) end, { noremap = true, silent = true })
+    vim.keymap.set({"n"},  "<leader>ca",  function() require("tiny-code-action").code_action() end, { noremap = true, silent = true })
   -- stylua: ignore end
 end
 
