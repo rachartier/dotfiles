@@ -35,8 +35,8 @@ return {
     end,
   },
   {
-    -- dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-code-action.nvim",
-    "rachartier/tiny-code-action.nvim",
+    dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-code-action.nvim",
+    -- "rachartier/tiny-code-action.nvim",
     enabled = true,
     dependencies = {
       "nvim-lua/plenary.nvim",
@@ -107,7 +107,7 @@ return {
           enabled = true,
           default_animation = {
             settings = {
-              from_color = utils.darken(require("theme").get_colors().red, 0.6),
+              from_color = utils.darken(require("theme").get_colors().red, 0.5),
             },
           },
         },
@@ -115,7 +115,7 @@ return {
           enabled = true,
           default_animation = {
             settings = {
-              from_color = utils.darken(require("theme").get_colors().green, 0.6),
+              from_color = utils.darken(require("theme").get_colors().green, 0.5),
             },
           },
         },
