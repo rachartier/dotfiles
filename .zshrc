@@ -117,4 +117,3 @@ function tmuxp() {
 
     command "$HOME/.local/bin/tmuxp" "$@"
 }
-

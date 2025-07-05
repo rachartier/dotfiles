@@ -64,6 +64,12 @@ end
 return {
   {
     "nvim-treesitter/nvim-treesitter",
+    dependencies = {
+      {
+        "OXY2DEV/markview.nvim",
+        ft = { "markdown", "quarto", "rmd", "Avante", "codecompanion" },
+      },
+    },
     branch = "main",
     build = { ":TSUpdate" },
     event = { "LazyFile" },
