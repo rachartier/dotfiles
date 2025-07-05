@@ -35,8 +35,8 @@ return {
     end,
   },
   {
-    dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-code-action.nvim",
-    -- "rachartier/tiny-code-action.nvim",
+    -- dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-code-action.nvim",
+    "rachartier/tiny-code-action.nvim",
     enabled = true,
     dependencies = {
       "nvim-lua/plenary.nvim",
@@ -123,8 +123,8 @@ return {
     },
   },
   {
-    dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-inline-diagnostic.nvim",
-    -- "rachartier/tiny-inline-diagnostic.nvim",
+    -- dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-inline-diagnostic.nvim",
+    "rachartier/tiny-inline-diagnostic.nvim",
     event = "LazyFile",
     enabled = true,
     -- commit = "0ac1133f0869730ced61b5f3c540748e29acca1a",
