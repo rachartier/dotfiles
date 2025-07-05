@@ -102,44 +102,60 @@ local function generate_message()
     end
 
     vim.schedule(function()
-      Snacks.picker({
-        previewer = false,
-        layout = {
-          preview = false,
-          layout = {
-            width = 0.5,
-            height = 0.6,
-          },
-        },
-        items = items,
-        format = function(item)
-          local ret = {}
+      local parent_win = vim.api.nvim_get_current_win()
+      local buf = vim.api.nvim_create_buf(false, true)
+      vim.bo[buf].filetype = "gitcommit"
+      vim.bo[buf].buftype = "nofile"
+      vim.bo[buf].bufhidden = "wipe"
+      vim.bo[buf].swapfile = false
+      vim.api.nvim_buf_set_lines(
+        buf,
+        0,
+        -1,
+        false,
+        vim.tbl_map(function(i)
+          return i.text
+        end, items)
+      )
 
-          -- Try matching: style(scope): message
-          local style, scope, message = item.text:match("^([%w_-]+)%(([%w_-]+)%)%s*:%s*(.+)$")
-          if not style then
-            -- Fallback: style: message (no scope)
-            style, message = item.text:match("^([%w_-]+)%s*:%s*(.+)$")
-          end
+      local win = vim.api.nvim_open_win(buf, true, {
+        relative = "editor",
+        width = math.floor(vim.o.columns * 0.5),
+        height = math.floor(vim.o.lines * 0.6),
+        row = math.floor((vim.o.lines * 0.2)),
+        col = math.floor((vim.o.columns * 0.25)),
+        style = "minimal",
+        border = "rounded",
+        noautocmd = true,
+      })
 
-          ret[#ret + 1] = { style, "CommitMessageStyle" }
+      vim.wo[win].statusline = ""
+      vim.wo[win].winbar = ""
+      vim.wo[win].number = false
+      vim.wo[win].relativenumber = false
+      vim.wo[win].signcolumn = "no"
 
-          if scope then
-            ret[#ret + 1] = { "(", "Normal" }
-            ret[#ret + 1] = { scope, "CommitMessageScope" }
-            ret[#ret + 1] = { ")", "Normal" }
-          end
-
-          ret[#ret + 1] = { ": " .. message, "SnacksPickerLabel" }
-
-          return ret
-        end,
-        confirm = function(picker, item)
-          picker:close()
-
-          vim.api.nvim_set_current_line(item.text)
+      vim.api.nvim_create_autocmd("BufEnter", {
+        buffer = buf,
+        callback = function()
+          vim.b._copilot_commit_picker_entered = true
         end,
       })
+
+      vim.api.nvim_create_autocmd("BufWipeout", {
+        buffer = buf,
+        callback = function()
+          vim.b._copilot_commit_picker_closed = true
+        end,
+      })
+
+      vim.keymap.set("n", "<CR>", function()
+        local lnum = vim.api.nvim_win_get_cursor(0)[1]
+        local line = vim.api.nvim_buf_get_lines(buf, lnum - 1, lnum, false)[1]
+        vim.api.nvim_win_close(win, true)
+        vim.api.nvim_set_current_win(parent_win)
+        vim.api.nvim_set_current_line(line)
+      end, { buffer = buf, nowait = true })
     end)
   end
 
