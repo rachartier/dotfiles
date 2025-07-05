@@ -8,6 +8,9 @@ return {
       local presets = require("markview.presets")
 
       opts = {
+        experimental = {
+          check_rtp = false,
+        },
         max_length = 99999,
         preview = {
           filetypes = { "markdown", "quarto", "rmd", "Avante", "codecompanion" },
