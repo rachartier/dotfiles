@@ -11,7 +11,9 @@ return {
   event = { "InsertEnter", "CmdlineEnter" },
   -- lazy = false,
   opts = {
-    keymap = { preset = "super-tab" },
+    keymap = {
+      preset = "super-tab",
+    },
 
     enabled = function()
       return not vim.tbl_contains({
@@ -132,6 +134,25 @@ return {
     },
   },
   config = function(_, opts)
+    opts.keymap = {
+      ["<Tab>"] = {
+        require("blink.cmp.keymap.presets").get("super-tab")["<Tab>"][1],
+
+        "snippet_forward",
+        function()
+          if require("copilot.suggestion").is_visible() then
+            require("copilot.suggestion").accept()
+            return true
+          end
+        end,
+        "fallback",
+      },
+      ["<S-Tab>"] = {
+        "snippet_backward",
+        "fallback",
+      },
+    }
+
     require("blink-cmp").setup(opts)
 
     vim.api.nvim_create_autocmd("User", {

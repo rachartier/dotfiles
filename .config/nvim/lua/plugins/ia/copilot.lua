@@ -61,13 +61,13 @@ return {
         },
       })
 
-      vim.keymap.set("i", "<tab>", function()
-        if require("copilot.suggestion").is_visible() then
-          require("copilot.suggestion").accept()
-          return "<Ignore>"
-        end
-        return "<tab>"
-      end, { expr = true, noremap = true })
+      -- vim.keymap.set("i", "<tab>", function()
+      --   if require("copilot.suggestion").is_visible() then
+      --     require("copilot.suggestion").accept()
+      --     return "<Ignore>"
+      --   end
+      --   return "<tab>"
+      -- end, { expr = true, noremap = true })
     end,
   },
   {
