@@ -1,13 +1,19 @@
 local Spinner = {
   timer = nil,
   is_running = false,
+  -- characters = {
+  --   "",
+  --   "",
+  --   "",
+  --   "",
+  --   "",
+  --   "",
+  -- },
   characters = {
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
+    "-",
+    "\\",
+    "|",
+    "/",
   },
   index = 1,
   ns_id = vim.api.nvim_create_namespace("commit_spinner"),
@@ -48,7 +54,9 @@ function Spinner:update()
     local cursor_line = vim.fn.line(".")
     vim.api.nvim_buf_clear_namespace(0, self.ns_id, 0, -1)
     vim.api.nvim_buf_set_extmark(0, self.ns_id, cursor_line - 1, 0, {
-      virt_text = { { self.characters[self.index] .. " Generating commit message...", "Comment" } },
+      virt_text = {
+        { " " .. self.characters[self.index] .. " Generating commit message...", "Comment" },
+      },
       virt_text_pos = "overlay",
     })
   end)
