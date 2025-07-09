@@ -26,7 +26,7 @@ function M.render()
   if vim.api.nvim_win_get_width(0) < 100 then
     local segments = vim.split(path, "/")
     if #segments > 3 then
-      path = " " .. separator .. table.concat(segments, "/", #segments - 2)
+      path = "%#WinBarDir#  " .. separator .. table.concat(segments, "/", #segments - 2)
     end
   else
     -- For some special folders, add a prefix instead of the full path (making
@@ -95,10 +95,10 @@ function M.render()
 
               return file_status
             else
-              return string.format("%%#WinbarFile#%s", segment)
+              return string.format("%%#Winbar#%s", segment)
             end
           end
-          return string.format("%%#Winbar#%s", segment)
+          return string.format("%%#WinbarSeparator#%s", segment)
         end)
         :totable(),
       separator
@@ -127,7 +127,7 @@ local function set_winbar(bufnr)
 end
 
 function M.setup()
-  local bg = utils.darken(colors.surface0, 0.65, colors.base)
+  local bg = utils.darken(colors.surface0, 0.65)
 
   vim.api.nvim_set_hl(0, "Winbar", { bg = bg, fg = colors.overlay0 })
   vim.api.nvim_set_hl(0, "WinbarSeparator", { fg = colors.overlay1, bg = bg })
