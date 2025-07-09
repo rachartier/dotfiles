@@ -15,8 +15,7 @@ end
 
 return {
   "monaqa/dial.nvim",
-  recommended = true,
-  desc = "Increment and decrement numbers, dates, and more",
+  event = "VeryLazy",
   -- stylua: ignore
   keys = {
     { "<C-a>", function() return M.dial(true) end, expr = true, desc = "Increment", mode = {"n", "v"} },
@@ -194,6 +193,12 @@ return {
     }
   end,
   config = function(_, opts)
+    -- copy defaults to each group
+    for name, group in pairs(opts.groups) do
+      if name ~= "default" then
+        vim.list_extend(group, opts.groups.default)
+      end
+    end
     require("dial.config").augends:register_group(opts.groups)
     vim.g.dials_by_ft = opts.dials_by_ft
   end,
