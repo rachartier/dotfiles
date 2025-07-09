@@ -1,4 +1,5 @@
 theme=catppuccin-macchiato
+# theme=rose-pine
 # theme=custom-latte-catppuccin
 
 shell-integration = zsh

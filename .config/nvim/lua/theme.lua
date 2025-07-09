@@ -5,6 +5,7 @@ local M = {}
 -- M._theme = require("themes.default.theme")
 
 M._theme = require("themes.catppuccin.theme")
+-- M._theme = require("themes.rosepine.theme")
 -- M._theme = require("themes.nano.theme")
 
 function M.setup()
