@@ -1,4 +1,5 @@
 local model = "gpt-4.1"
+
 return {
   {
     "zbirenbaum/copilot.lua",
@@ -155,8 +156,7 @@ return {
       },
       system_prompt = function()
         local hub = require("mcphub").get_hub_instance()
-        local system_prompt = require("plugins.ia.prompt.gpt41-system-prompt")
-        return system_prompt .. "\n\n" .. hub:get_active_servers_prompt()
+        return hub:get_active_servers_prompt()
       end,
 
       custom_tools = function()
