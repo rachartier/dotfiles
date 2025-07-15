@@ -16,7 +16,6 @@ map("n", "<leader>f", vim.lsp.buf.format)
 map("n", "<Leader>r", ":%s/<c-r><c-w>//g<left><left>", { desc = "Rename word under cursor" })
 
 map("v", "J", ":m '>+1<CR>gv=gv", { desc = "Lower the selection" })
-map("v", "K", ":m '<-2<CR>gv=gv", { desc = "Raise the selection" })
 map("v", "y", "ygv<esc>")
 map("x", ">", ">gv", { noremap = true })
 map("x", "<", "<gv", { noremap = true })

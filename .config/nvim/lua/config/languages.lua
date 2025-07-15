@@ -11,7 +11,7 @@ return {
       },
       "ruff_fix",
     },
-    -- lsp_ignore = { "ruff" },
+    lsp_ignore = { "ruff" },
   },
   {
     filetypes = { "cs" },
