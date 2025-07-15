@@ -109,7 +109,7 @@ function venv() {
 
     if command -v direnv &>/dev/null; then
         \cat <<EOF >.envrc
-export VIRTUAL_ENV="./venv"
+export VIRTUAL_ENV="./$1"
 layout python3
 EOF
 
