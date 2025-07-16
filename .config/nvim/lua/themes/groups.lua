@@ -4,19 +4,21 @@ local utils = require("utils")
 local darken_markdown_heading = 0.16
 
 function M.get(colors)
+  local default_bg = "None"
+
   return {
     -- Visual = { bg = "#234370" },
     -- Visual = { bg = colors.blue, fg = colors.base },
     Visual = { bg = colors.surface0, bold = false },
     VisualNonText = { bg = colors.surface0, fg = colors.surface1 },
 
-    CurSearch = { bg = "None" },
+    CurSearch = { bg = default_bg },
 
     -- NormalFloat = { bg = bg, fg = colors.text },
-    NormalFloat = { bg = "None", fg = colors.text },
-    FloatBorder = { fg = colors.lavender, bg = "None" },
+    NormalFloat = { bg = default_bg, fg = colors.text },
+    FloatBorder = { fg = colors.lavender, bg = default_bg },
     FloatTitle = { bg = colors.base, fg = colors.text, italic = true, bold = true },
-    LineNr = { fg = colors.surface2 },
+    LineNr = { fg = colors.overlay0 },
     SignColumn = { fg = colors.surface1 },
     -- Visual = { bg = colors.surface1 },
     Comment = { fg = colors.surface2, italic = true },
@@ -35,7 +37,7 @@ function M.get(colors)
     BlinkCmpLabelDescription = { link = "BlinkCmpLabelDetail" },
     -- BlinkCmpScrollBarThumb = { bg = colors.surface1 },
 
-    -- BlinkCmpLabelMatch = { bg = "None", fg = colors.blue },
+    -- BlinkCmpLabelMatch = { bg = default_bg, fg = colors.blue },
 
     CmpGhostText = { link = "Comment", default = true },
     CmpItemAbbrMatch = { fg = colors.yellow, underline = false },
@@ -47,11 +49,11 @@ function M.get(colors)
     PmenuSel = { bg = colors.surface0, bold = false },
     PopupNormal = { bg = colors.base, fg = colors.text },
 
-    -- CursorLine = { bg = colors.surface1 },
-    CursorLine = { bg = "None" },
+    CursorLine = { bg = utils.darken(colors.surface0, 0.62) },
+    -- CursorLine = { bg = default_bg },
     CursorLineNr = { fg = colors.mauve },
     CursorLineSign = { link = "SignColumn" },
-    CursorColumn = { bg = "None" },
+    CursorColumn = { bg = default_bg },
 
     FlashLabel = { fg = colors.base, bg = colors.yellow, bold = true },
 
@@ -70,17 +72,17 @@ function M.get(colors)
     LspSignatureActiveParameter = { bg = colors.peach, fg = colors.base },
 
     NeogitDiffContextCursor = { bg = colors.surface0, fg = colors.text },
-    NeogitSubtleText = { bg = "None", fg = colors.surface2, italic = false },
+    NeogitSubtleText = { bg = default_bg, fg = colors.surface2, italic = false },
     NeogitFloatHeader = { bg = colors.mauve, fg = colors.base },
 
     NeoTreeCursorLine = { link = "PmenuSel" },
     NeoTreeIndentMarker = { fg = colors.surface2 },
-    NeoTreeNormal = { bg = "None" },
-    NeoTreeNormalNC = { bg = "None" },
+    NeoTreeNormal = { bg = default_bg },
+    NeoTreeNormalNC = { bg = default_bg },
     NeoTreePreview = { link = "NeoTreeNormal" },
 
     NoiceCmdlineIcon = { fg = colors.yellow, italic = false, bold = true },
-    NoiceCmdlinePopup = { bg = "None", fg = colors.text },
+    NoiceCmdlinePopup = { bg = default_bg, fg = colors.text },
     NoiceCmdlinePopupTitle = { bg = colors.red, fg = colors.text },
     NoiceCmdlinePopupBorder = { link = "FloatBorder" },
     NoiceCmdlinePopupTitleInput = { bg = colors.yellow, fg = colors.base },
@@ -96,7 +98,7 @@ function M.get(colors)
     SwitchBufferStatusColor = { fg = colors.red },
 
     -- SnacksPickerDir = { italic = true, fg = colors.overlay0 },
-    -- SnacksPickerTitle = { bg = "None", fg = colors.text, italic = true, bold = true },
+    -- SnacksPickerTitle = { bg = default_bg, fg = colors.text, italic = true, bold = true },
     SnacksDashboardHeader = { fg = colors.mauve },
     SnacksDashboardIcon = { fg = colors.mauve },
     SnacksDashboardDesc = { fg = colors.text },
@@ -135,11 +137,11 @@ function M.get(colors)
     FzfPreviewTitle = { fg = colors.text, italic = true },
     FzfLuaPreviewTitle = { fg = colors.base, italic = true },
     FzfLuaBorder = { link = "FloatBorder" },
-    FzfLuaBackdrop = { bg = "None" },
+    FzfLuaBackdrop = { bg = default_bg },
 
     WinSeparator = { fg = colors.surface1 },
-    WinBar = { fg = colors.surface1, bg = "None" },
-    AvanteSidebarWinSeparator = { fg = colors.surface0, bg = "None" },
+    WinBar = { fg = colors.surface1, bg = default_bg },
+    AvanteSidebarWinSeparator = { fg = colors.surface0, bg = default_bg },
 
     DapUIPlayPauseNC = { link = "DapUIPlayPause" },
     DapUIRestartNC = { link = "DapUIRestart" },

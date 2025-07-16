@@ -59,7 +59,7 @@ return {
             -- fillchar = " ",
             maxwidth = 1,
             colwidth = 1,
-            fillcharhl = "MiniIndentscopeSymbol",
+            -- fillcharhl = "MiniIndentscopeSymbol",
           },
           condition = {
             function(args)
