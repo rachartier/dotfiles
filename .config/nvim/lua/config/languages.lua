@@ -4,14 +4,10 @@ return {
     mason = { "basedpyright", "ruff" },
     dap = { "debugpy" },
     formatter = {
-      ruff_format = {
-        command = "ruff",
-        args = { "format", "-" },
-        stdin = true,
-      },
+      "ruff_format",
       "ruff_fix",
     },
-    lsp_ignore = { "ruff" },
+    -- lsp_ignore = { "ruff" },
   },
   {
     filetypes = { "cs" },

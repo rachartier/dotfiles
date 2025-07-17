@@ -84,3 +84,4 @@ docstring-code-format = false
 # Set the line length limit used when formatting code snippets in
 # docstrings.
 docstring-code-line-length = "dynamic"
+
