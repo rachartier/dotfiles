@@ -3,7 +3,7 @@ return {
     "OXY2DEV/markview.nvim",
     enabled = true,
     ft = { "markdown", "quarto", "rmd", "Avante", "codecompanion" },
-    lazy = true,
+    lazy = false,
     opts = function(_, opts)
       local presets = require("markview.presets")
 
@@ -15,6 +15,9 @@ return {
         preview = {
           filetypes = { "markdown", "quarto", "rmd", "Avante", "codecompanion" },
           ignore_buftypes = {},
+          hybrid_modes = { "i" },
+          modes = { "n", "no", "c", "i" },
+          linewise_hybrid_mode = true,
         },
 
         yaml = {
@@ -40,7 +43,9 @@ return {
             sign_hl = nil,
           },
           list_items = {
+            shift_width = 2,
             marker_minus = {
+              indent_size = 3,
               add_padding = true,
               conceal_on_checkboxes = true,
 
@@ -133,6 +138,12 @@ return {
     end,
     config = function(_, opts)
       require("markview").setup(opts)
+
+      require("markview").setup({
+        markdown = {
+          headings = { shift_width = 1 },
+        },
+      })
 
       local colors = require("theme").get_colors()
       vim.api.nvim_set_hl(0, "MarkviewCode", { bg = colors.surface0 })
