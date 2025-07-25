@@ -127,7 +127,7 @@ local function set_winbar(bufnr)
 end
 
 function M.setup()
-  local bg = utils.darken(colors.surface0, 0.65)
+  local bg = utils.darken(colors.surface0, 0.62)
 
   vim.api.nvim_set_hl(0, "Winbar", { bg = bg, fg = colors.overlay0 })
   vim.api.nvim_set_hl(0, "WinbarSeparator", { fg = colors.overlay1, bg = bg })
