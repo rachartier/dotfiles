@@ -4,10 +4,10 @@
 #    --color=border:#cad3f5 \
 #    --color=marker:#f4dbd6,fg+:#cad3f5,prompt:#c6a0f6,hl+:bold:#eed49f"
 theme="\
-   --color=bg+:#494d64,bg:-1,spinner:#f4dbd6,hl:bold:#b8c0e0\
+   --color=bg+:#363a4f,bg:-1,spinner:#f4dbd6,hl:#b8c0e0\
    --color=fg:#8087a2,header:#ed8796,info:#c6a0f6,pointer:#f4dbd6 \
    --color=border:#cad3f5 \
-   --color=marker:#f4dbd6,fg+:#cad3f5,prompt:#c6a0f6,hl+:bold:#b8c0e0"
+   --color=marker:#f4dbd6,fg+:#cad3f5,prompt:#c6a0f6,hl+:bold:#8aadf4"
 
 # Latte Custom
 # theme="\

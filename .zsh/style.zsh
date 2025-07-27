@@ -5,7 +5,7 @@ FZF_PREVIEW_COMMAND="$HOME/.fzf/bin/fzf-preview.sh \$realpath"
 zstyle ':fzf-tab:*' use-fzf-default-opts yes
 zstyle ':fzf-tab:*' fzf-command fzf
 zstyle ':fzf-tab:*' switch-group ',' '.'  # Easily switch groups with , and .
-zstyle ':fzf-tab:*' fzf-flags '--height=50%' '--layout=reverse' '--border=rounded' '--preview-window=right:60%:wrap'
+zstyle ':fzf-tab:*' fzf-flags '--height=50%' '--border=rounded' '--preview-window=right:60%:wrap'
 zstyle ':fzf-tab:*' prefix ''  # No prefix for cleaner display
 zstyle ":fzf-tab:complete:*:*" fzf-preview $FZF_PREVIEW_COMMAND
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
