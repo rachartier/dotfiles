@@ -1,8 +1,13 @@
+# theme="\
+#    --color=bg+:#494d64,bg:-1,spinner:#f4dbd6,hl:bold:#eed49f\
+#    --color=fg:#cad3f5,header:#ed8796,info:#c6a0f6,pointer:#f4dbd6 \
+#    --color=border:#cad3f5 \
+#    --color=marker:#f4dbd6,fg+:#cad3f5,prompt:#c6a0f6,hl+:bold:#eed49f"
 theme="\
-   --color=bg+:#494d64,bg:-1,spinner:#f4dbd6,hl:bold:#eed49f\
-   --color=fg:#cad3f5,header:#ed8796,info:#c6a0f6,pointer:#f4dbd6 \
+   --color=bg+:#494d64,bg:-1,spinner:#f4dbd6,hl:bold:#b8c0e0\
+   --color=fg:#8087a2,header:#ed8796,info:#c6a0f6,pointer:#f4dbd6 \
    --color=border:#cad3f5 \
-   --color=marker:#f4dbd6,fg+:#cad3f5,prompt:#c6a0f6,hl+:bold:#eed49f"
+   --color=marker:#f4dbd6,fg+:#cad3f5,prompt:#c6a0f6,hl+:bold:#b8c0e0"
 
 # Latte Custom
 # theme="\
@@ -16,19 +21,17 @@ export FZF_DEFAULT_COMMAND="fd --type f"
 export KEYTIMEOUT=1
 export FZF_DEFAULT_OPTS="
     --multi \
-    --reverse \
     --margin=0,0 \
     --preview-window=right:50% \
     --preview-window=rounded \
     --preview-window=cycle \
     --scrollbar '▌' \
     --marker '✚ ' \
-    --pointer ' ' \
+    --pointer '' \
     --prompt ' ' \
     --no-separator \
-    --color gutter:-1 \
+    --color gutter:-1\
     --bind 'esc:abort' \
-    --info=inline \
     --no-clear \
     $theme \
 "
@@ -45,6 +48,20 @@ _fzf_compgen_path() {
 _fzf_compgen_dir() {
     fd --type=d --hidden --exclude .git . "$1"
 }
+
+if ! [ -d "/usr/lib/terminfo" ]; then
+    if [ "$TERM" = "wezterm" ]; then
+        tempfile=$(mktemp) &&
+            curl -o "$tempfile" https://raw.githubusercontent.com/wez/wezterm/master/termwiz/data/wezterm.terminfo &&
+            tic -x -o "$HOME/.terminfo" "$tempfile" &&
+            rm "$tempfile"
+    elif [ "$TERM" = "ghostty" ] || [ "$TERM" = "xterm-ghostty" ]; then
+        tempfile=$(mktemp) &&
+            curl -o "$tempfile" https://raw.githubusercontent.com/rachartier/dotfiles/refs/heads/main/.config/ghostty/terminfo/ghostty.terminfo &&
+            tic -x -o "$HOME/.terminfo" "$tempfile" &&
+            rm "$tempfile"
+    fi
+fi
 
 # Not inside a devcontainer
 if [ -z "$DOTFILES_DOCKER" ]; then
@@ -63,20 +80,6 @@ if [ -z "$DOTFILES_DOCKER" ]; then
     export DISABLE_AUTO_TITLE='true'
 else
     export TERM=$TERM
-
-    if ! [ -d "/usr/lib/terminfo" ]; then
-        if [ "$TERM" = "wezterm" ]; then
-            tempfile=$(mktemp) &&
-                curl -o "$tempfile" https://raw.githubusercontent.com/wez/wezterm/master/termwiz/data/wezterm.terminfo &&
-                tic -x -o "$HOME/.terminfo" "$tempfile" &&
-                rm "$tempfile"
-        elif [ "$TERM" = "ghostty" ] || [ "$TERM" = "xterm-ghostty" ]; then
-            tempfile=$(mktemp) &&
-                curl -o "$tempfile" https://raw.githubusercontent.com/rachartier/dotfiles/refs/heads/main/.config/ghostty/terminfo/ghostty.terminfo &&
-                tic -x -o "$HOME/.terminfo" "$tempfile" &&
-                rm "$tempfile"
-        fi
-    fi
 
     if [ -z "$LC_ALL" ]; then
         export LC_ALL=C
