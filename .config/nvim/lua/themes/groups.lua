@@ -18,7 +18,7 @@ function M.get(colors)
     NormalFloat = { bg = default_bg, fg = colors.text },
     FloatBorder = { fg = colors.lavender, bg = default_bg },
     FloatTitle = { bg = colors.base, fg = colors.text, italic = true, bold = true },
-    LineNr = { fg = colors.overlay0 },
+    LineNr = { fg = colors.surface1 },
     SignColumn = { fg = colors.surface1 },
     -- Visual = { bg = colors.surface1 },
     Comment = { fg = colors.surface2, italic = true },
@@ -51,7 +51,7 @@ function M.get(colors)
 
     CursorLine = { bg = utils.darken(colors.surface0, 0.62) },
     -- CursorLine = { bg = default_bg },
-    CursorLineNr = { fg = colors.mauve },
+    CursorLineNr = { fg = colors.subtext0 },
     CursorLineSign = { link = "SignColumn" },
     CursorColumn = { bg = default_bg },
 

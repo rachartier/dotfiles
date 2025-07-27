@@ -7,7 +7,6 @@ local M = {}
 
 local colors = require("theme").get_colors()
 
-local signs = require("config.ui.signs")
 local utils = require("utils")
 
 function M.render()
