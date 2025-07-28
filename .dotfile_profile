@@ -49,7 +49,7 @@ _fzf_compgen_dir() {
     fd --type=d --hidden --exclude .git . "$1"
 }
 
-if ! [ -d "/usr/lib/terminfo" ]; then
+if ! [ -d "$HOME/.terminfo" ]; then
     if [ "$TERM" = "wezterm" ]; then
         tempfile=$(mktemp) &&
             curl -o "$tempfile" https://raw.githubusercontent.com/wez/wezterm/master/termwiz/data/wezterm.terminfo &&
