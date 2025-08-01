@@ -5,8 +5,8 @@ source "$DOT_MANAGER_DIR/helper.sh"
 install_luarocks() {
     log "info" "Installing luarocks..."
 
-    __install_package_apt lua5.1
-    __install_package_apt liblua5.1-dev
+    __install_package_auto lua5.1
+    __install_package_auto liblua5.1-dev
 
     cd /tmp || exit 1
     wget -nv -q https://luarocks.org/releases/luarocks-3.11.1.tar.gz &&
@@ -43,7 +43,7 @@ install_nvim() {
     sudo rm -rf /opt/nvim-linux-x86_64/
     sudo tar -C /opt -xzf nvim-linux64.tar.gz
 
-    # __install_package_apt python3-pynvim
+    # __install_package_auto python3-pynvim
 
     if [ ! -f "$HOME/.local/share/nvim/site/spell/fr.utf-8.spl" ]; then
         mkdir -p ~/.local/share/nvim/site/spell

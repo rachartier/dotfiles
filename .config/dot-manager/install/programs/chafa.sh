@@ -7,7 +7,7 @@ install_chafa() {
 
     cd /tmp
 
-    __install_package_apt "libfreetype6-dev"
+    __install_package_auto "libfreetype6-dev"
 
     if [ -d "chafa" ]; then
         log "info" "Removing old chafa directory."

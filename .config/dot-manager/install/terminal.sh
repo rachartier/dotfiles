@@ -37,7 +37,7 @@ install_terminal() {
 
         git clone https://github.com/ghostty-org/ghostty
         cd ghostty || return 1
-        __install_package_apt libgtk-4-dev libadwaita-1-dev libxml2-utils
+        __install_package_auto libgtk-4-dev libadwaita-1-dev libxml2-utils
         if command -v zig &>/dev/null; then
             log "info" "Zig is already installed."
         else
@@ -50,7 +50,7 @@ install_terminal() {
         if [ $(ldconfig -p | grep gtk4-layer-shell) ]; then
             log "info" "gtk4-layer-shell is already installed."
         else
-            sudo apt install meson ninja-build libwayland-dev wayland-protocols libgtk-4-dev gobject-introspection libgirepository1.0-dev gtk-doc-tools python3 valac
+            __install_package_auto meson ninja-build libwayland-dev wayland-protocols libgtk-4-dev gobject-introspection libgirepository1.0-dev gtk-doc-tools python3 valac
             meson setup build ninja -C build
             sudo ninja -C build install
             sudo ldconfig

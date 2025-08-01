@@ -252,15 +252,18 @@ __install_zsh_plugin() {
     git clone "$url" "$installation_folder" && log "success" "$folder installed." || return 1
 }
 
-__install_package_apt() {
+__install_package_auto() {
     for pkg in "$@"; do
         if __is_pkg_installed "$pkg"; then
             log "info" "$pkg already installed."
         else
             if [ -f "/etc/arch-release" ]; then
                 sudo pacman -S --noconfirm --needed "$pkg" && log "success" "$pkg installed."
-            else
+            elif [ -f "/etc/debian_version" ]; then
                 sudo apt-get install -y -qq -o=Dpkg::Use-Pty=0 "$pkg" && log "success" "$pkg installed."
+            else
+                log "error" "Unsupported OS for package install: $pkg"
+                return 1
             fi
         fi
     done

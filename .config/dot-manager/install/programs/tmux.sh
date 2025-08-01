@@ -7,7 +7,7 @@ install_tmux() {
     TMUX_VERSION=$(__get_latest_release "tmux/tmux")
 
     log "info" "Installing dependencies"
-    __install_package_apt libevent-dev ncurses-dev build-essential bison pkg-config
+    __install_package_auto libevent-dev ncurses-dev build-essential bison pkg-config
 
     cd /tmp || exit 1
     wget -nv -q "https://github.com/tmux/tmux/releases/latest/download/tmux-${TMUX_VERSION}.tar.gz" -O tmux.tar.gz
