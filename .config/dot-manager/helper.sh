@@ -4,6 +4,32 @@ if [ -n "$_HELPER_ALREADY_LOADED" ]; then
     return 0
 fi
 
+declare -A PKG_MAP=(
+    ["autotools-dev"]="autoconf automake libtool m4"
+    ["build-essential"]="base-devel"
+    ["libgtk-4-dev"]="gtk4"
+    ["libadwaita-1-dev"]="libadwaita"
+    ["libxml2-utils"]="libxml2"
+    ["ninja-build"]="ninja"
+    ["libwayland-dev"]="wayland"
+    ["wayland-protocols"]="wayland-protocols"
+    ["libgirepository1.0-dev"]="gobject-introspection"
+    ["gtk-doc-tools"]="gtk-doc"
+    ["python3"]="python"
+    ["valac"]="vala"
+    ["libfreetype6-dev"]="freetype2"
+    ["lua5.1"]="lua51"
+    ["liblua5.1-dev"]="lua51"
+    ["libevent-dev"]="libevent"
+    ["ncurses-dev"]="ncurses"
+    ["pkg-config"]="pkgconf"
+    ["tty-clock"]="tty-clock"
+    ["python3-venv"]="python-virtualenv"
+    ["python3-pip"]="python-pip"
+    ["freetype2-devel"]="freetype2"
+    ["libglib2.0-dev"]="glib2"
+)
+
 show_spinner() {
     local pid=$1
     local message=$2
@@ -251,32 +277,6 @@ __install_zsh_plugin() {
 
     git clone "$url" "$installation_folder" && log "success" "$folder installed." || return 1
 }
-
-declare -A PKG_MAP=(
-    [autotools-dev]="autoconf automake libtool m4"
-    [build-essential]="base-devel"
-    [libgtk-4-dev]="gtk4"
-    [libadwaita-1-dev]="libadwaita"
-    [libxml2-utils]="libxml2"
-    [ninja-build]="ninja"
-    [libwayland-dev]="wayland"
-    [wayland-protocols]="wayland-protocols"
-    [libgirepository1.0-dev]="gobject-introspection"
-    [gtk-doc-tools]="gtk-doc"
-    [python3]="python"
-    [valac]="vala"
-    [libfreetype6-dev]="freetype2"
-    [lua5.1]="lua51"
-    [liblua5.1-dev]="lua51"
-    [libevent-dev]="libevent"
-    [ncurses-dev]="ncurses"
-    [pkg-config]="pkgconf"
-    [tty-clock]="tty-clock"
-    [python3-venv]="python-virtualenv"
-    [python3-pip]="python-pip"
-    [freetype2-devel]="freetype2"
-    [libglib2.0-dev]="glib2"
-)
 
 get_package_name() {
     local pkg="$1"
