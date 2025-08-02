@@ -6,7 +6,7 @@ local function start_treesitter(bufnr)
   end
 
   vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-  vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+  -- vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 end
 
 local function setup_treesitter_autocmd()
