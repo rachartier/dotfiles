@@ -23,7 +23,6 @@ DOT_MANAGER_COMPLETE_PROGRAMS=(
     "copilot_cli"
     "direnv"
     "win32yank"
-    "devpod"
 )
 
 ###
@@ -34,7 +33,6 @@ DOT_MANAGER_MINIMAL_PROGRAMS=(
     "nvim"
     "eza"
     "fzf"
-    "viu"
     "zoxide"
     "starship"
     "copilot_cli"
@@ -67,7 +65,8 @@ fi
 
 __install_program() {
     local program_name="$1"
-    local install_script="$DOT_MANAGER_DIR/install/programs/$program_name.sh"
+    local distro="$(__detect_distro)"
+    local install_script="$DOT_MANAGER_DIR/install/programs/$distro/$program_name.sh"
 
     if [ -f "$install_script" ]; then
         shift
@@ -76,7 +75,7 @@ __install_program() {
             return 1
         fi
     else
-        log "error" "'$program_name' unknown."
+        log "error" "'$program_name' unknown for distro '$distro'."
         return 1
     fi
 }

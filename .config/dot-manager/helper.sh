@@ -1,8 +1,19 @@
 #!/bin/env bash
 
-if [ -n "$_HELPER_ALREADY_LOADED" ]; then
+__detect_distro() {
+    if grep -qi 'arch' /etc/os-release; then
+        echo "arch"
+    elif grep -qi 'ubuntu' /etc/os-release; then
+        echo "ubuntu"
+    else
+        echo "unknown"
+    fi
+}
+
+if [ -n "$__HELPER_ALREADY_LOADED" ]; then
     return 0
 fi
+
 
 show_spinner() {
     local pid=$1
