@@ -306,6 +306,25 @@ __install_package_auto() {
     done
 }
 
+__remove_package_auto() {
+    for pkg in "$@"; do
+        for resolved in $(get_package_name "$pkg"); do
+            if __is_pkg_installed "$resolved"; then
+                if [ -f "/etc/arch-release" ]; then
+                    sudo pacman -R --noconfirm "$resolved" && log "success" "$resolved removed."
+                elif [ -f "/etc/debian_version" ]; then
+                    sudo apt-get remove -y -qq -o=Dpkg::Use-Pty=0 "$resolved" && log "success" "$resolved removed."
+                else
+                    log "error" "Unsupported OS for package removal: $resolved"
+                    return 1
+                fi
+            else
+                log "info" "$resolved is not installed."
+            fi
+        done
+    done
+}
+
 __make_symlink() {
     local path="$1"
     local oldname="$2"

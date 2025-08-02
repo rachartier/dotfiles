@@ -28,7 +28,7 @@ install_nvim() {
     local version=${1:-"stable"}
 
     log "info" "Removing existing Neovim installation"
-    sudo apt-get autoremove neovim -y >/dev/null
+    __remove_package_auto neovim
 
     if [ -f "$HOME/.local/bin/nvim" ]; then
         rm "$HOME/.local/bin/nvim"
