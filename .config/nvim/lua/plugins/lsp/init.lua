@@ -67,7 +67,7 @@ end
 
 return {
   "neovim/nvim-lspconfig",
-  event = "LazyFile",
+  event = "VeryLazy",
   dependencies = {
     "saghen/blink.cmp",
     "jay-babu/mason-nvim-dap.nvim",
@@ -139,7 +139,6 @@ return {
       ensure_installed = tools.tools,
       automatic_installation = true,
     })
-
 
     -- Setup Mason DAP if not minimal config
     if vim.g.dotfile_config_type ~= "minimal" then

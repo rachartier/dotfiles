@@ -51,12 +51,7 @@ local function setup_treesitter_autocmd()
         return
       end
 
-      start_treesitter(bufnr)
-    end,
-  })
-  vim.api.nvim_create_autocmd("BufEnter", {
-    callback = function(event)
-      pcall(vim.treesitter.start, event.buf)
+      start_treesitter()
     end,
   })
 end
@@ -64,15 +59,14 @@ end
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    dependencies = {
-      "OXY2DEV/markview.nvim",
-    },
     branch = "main",
     build = { ":TSUpdate" },
+    -- lazy = false,
     event = { "LazyFile" },
     enabled = true,
     config = function()
       setup_treesitter_autocmd()
+
       local lang_config = require("config.languages")
       local ensure_installed = {}
 
