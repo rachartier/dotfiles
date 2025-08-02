@@ -5,19 +5,35 @@ __echo_info() {
     tput sgr 0
 }
 
-install_essentials() {
+install_ubuntu_essentials() {
     sudo apt install -y -qq -o=Dpkg::Use-Pty=0 \
         git \
         wget \
         zsh \
         autotools-dev \
         coreutils \
-        curl
+        curl \
+		jq
 
     sudo apt install -y -qq -o=Dpkg::Use-Pty=0 \
         automake \
         autoconf \
         build-essential \
+        cmake
+}
+
+install_arch_essentials() {
+    sudo pacman -S --noconfirm --needed \
+        git \
+        wget \
+        zsh \
+        base-devel \
+        curl \
+        jq
+
+    sudo pacman -S --noconfirm --needed \
+        automake \
+        autoconf \
         cmake
 }
 
@@ -67,6 +83,17 @@ prepare_dotfiles() {
 #     __echo_info "Changing default shell to zsh"
 #     chsh -s "$(which zsh)"
 # fi
+
+if [ -f /etc/arch-release ]; then
+    __echo_info "Detected Arch Linux"
+    install_arch_essentials
+elif [ -f /etc/lsb-release ]; then
+    __echo_info "Detected Ubuntu"
+    install_ubuntu_essentials
+else
+    __echo_info "Unknown distribution, please install essentials manually."
+    exit 1
+fi
 
 install_essentials
 install_dotfiles
