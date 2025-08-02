@@ -1,4 +1,6 @@
-skip_global_compinit=1
+#skip_global_compinit=1
+
+autoload -Uz compinit && compinit
 
 source "$HOME/.profile"
 source "$HOME/.dotfile_profile"
@@ -34,10 +36,6 @@ function zsh_core_setup()  {
 
 
     eval "$(zoxide init zsh --cmd cd)"
-
-    if command -v pyenv &> /dev/null; then
-        eval "$(pyenv init -)"
-    fi
 
     if command -v direnv &> /dev/null; then
         eval "$(direnv hook zsh)"
@@ -116,4 +114,15 @@ function tmuxp() {
     fi
 
     command "$HOME/.local/bin/tmuxp" "$@"
+}
+
+function uv() {
+    if [ -z "$DOT_UV_LOADED" ]; then
+        if command -v uv &> /dev/null; then
+            eval "$(uv generate-shell-completion zsh)"
+        fi
+        DOT_UV_LOADED=1
+    fi
+
+    command "$HOME/.local/bin/uv" "$@"
 }
