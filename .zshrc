@@ -1,6 +1,6 @@
-#skip_global_compinit=1
+skip_global_compinit=1
 
-autoload -Uz compinit && compinit
+# autoload -Uz compinit && compinit
 
 source "$HOME/.profile"
 source "$HOME/.dotfile_profile"

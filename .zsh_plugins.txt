@@ -1,3 +1,5 @@
+mattmc3/ez-compinit
+
 ohmyzsh/ohmyzsh path:lib/key-bindings.zsh
 zsh-users/zsh-completions
 
