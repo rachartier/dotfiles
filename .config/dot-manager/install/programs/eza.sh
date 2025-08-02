@@ -5,13 +5,6 @@ source "$DOT_MANAGER_DIR/helper.sh"
 install_eza() {
     print_step "Installing eza"
 
-    if [ -f "/etc/arch-release" ] && is_pacman_pkg_available eza; then
-        log "info" "Installing eza via pacman..."
-        __install_package_auto eza
-        log "success" "eza installed via pacman."
-        return 0
-    fi
-
     local version
     version=$(__get_latest_release "eza-community/eza")
 

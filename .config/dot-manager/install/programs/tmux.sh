@@ -4,18 +4,10 @@ source "$DOT_MANAGER_DIR/helper.sh"
 
 install_tmux() {
     print_step "Installing Tmux"
-
-    if [ -f "/etc/arch-release" ] && is_pacman_pkg_available tmux; then
-        log "info" "Installing tmux via pacman..."
-        __install_package_auto tmux
-        log "success" "tmux installed via pacman."
-        return 0
-    fi
-
     TMUX_VERSION=$(__get_latest_release "tmux/tmux")
 
     log "info" "Installing dependencies"
-    __install_package_auto libevent-dev ncurses-dev build-essential bison pkg-config
+    __install_package_apt libevent-dev ncurses-dev build-essential bison pkg-config
 
     cd /tmp || exit 1
     wget -nv -q "https://github.com/tmux/tmux/releases/latest/download/tmux-${TMUX_VERSION}.tar.gz" -O tmux.tar.gz
@@ -29,12 +21,12 @@ install_tmux() {
     make >/dev/null && sudo make install >/dev/null
 
     log "info" "Installing tmux plugins manager"
-    if ! [ -d "$HOME".config/tmux/plugins/tpm ]; then
-        git clone https://github.com/tmux-plugins/tpm "$HOME".config/tmux/plugins/tpm
+    if ! [ -d "$HOME"/.config/tmux/plugins/tpm ]; then
+        git clone https://github.com/tmux-plugins/tpm "$HOME"/.config/tmux/plugins/tpm
     fi
 
     log "info" "Installing tmux plugins"
-    "$HOME".config/tmux/plugins/tpm/bin/install_plugins
+    "$HOME"/.config/tmux/plugins/tpm/bin/install_plugins
 
     log "success" "Tmux installation completed"
 }

@@ -1,6 +1,7 @@
 
 format = """
 $username\
+$hostname\
 $directory\
 $git_branch\
 $git_state\
@@ -9,7 +10,6 @@ $all\
 $status\
 $cmd_duration\
 $line_break\
-${custom.hostname}\
 ${custom.inside_docker}\
 $character"""
 
@@ -24,16 +24,10 @@ command = """echo "  (${HOSTNAME:0:5})" """
 when = """ test "$($HOME/.config/scripts/is_inside_docker.sh)" = "1" """
 style = "blue"
 
-[custom.hostname]
-command = "hostname"
-when = "test \"$(cat /etc/os-release | grep -E '^ID=')\" != 'ID=ubuntu'"
-
 [hostname]
-ssh_only = false
 ssh_symbol = " "
-format = '[$ssh_symbol](bold green) [$hostname]($style) '
+format = '[$ssh_symbol](bold green)'
 disabled = true
-when = "test \"$(lsb_release -is 2>/dev/null)\" != Ubuntu"
 
 [character]
 success_symbol = "[❯](bold purple)"

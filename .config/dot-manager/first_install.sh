@@ -6,8 +6,19 @@ __echo_info() {
 }
 
 install_essentials() {
-    __install_package_auto git wget zsh autotools-dev coreutils curl
-    __install_package_auto automake autoconf build-essential cmake
+    sudo apt install -y -qq -o=Dpkg::Use-Pty=0 \
+        git \
+        wget \
+        zsh \
+        autotools-dev \
+        coreutils \
+        curl
+
+    sudo apt install -y -qq -o=Dpkg::Use-Pty=0 \
+        automake \
+        autoconf \
+        build-essential \
+        cmake
 }
 
 install_dotfiles() {

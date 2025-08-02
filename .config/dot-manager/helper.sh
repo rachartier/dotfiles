@@ -4,37 +4,6 @@ if [ -n "$_HELPER_ALREADY_LOADED" ]; then
     return 0
 fi
 
-declare -A PKG_MAP=(
-    ["autotools-dev"]="autoconf automake libtool m4"
-    ["build-essential"]="base-devel"
-    ["libgtk-4-dev"]="gtk4"
-    ["libadwaita-1-dev"]="libadwaita"
-    ["libxml2-utils"]="libxml2"
-    ["ninja-build"]="ninja"
-    ["libwayland-dev"]="wayland"
-    ["wayland-protocols"]="wayland-protocols"
-    ["libgirepository1.0-dev"]="gobject-introspection"
-    ["gtk-doc-tools"]="gtk-doc"
-    ["python3"]="python"
-    ["valac"]="vala"
-    ["libfreetype6-dev"]="freetype2"
-    ["lua5.1"]="lua51"
-    ["liblua5.1-dev"]="lua51"
-    ["libevent-dev"]="libevent"
-    ["ncurses-dev"]="ncurses"
-    ["pkg-config"]="pkgconf"
-    ["tty-clock"]="tty-clock"
-    ["python3-venv"]="python-virtualenv"
-    ["python3-pip"]="python-pip"
-    ["freetype2-devel"]="freetype2"
-    ["libglib2.0-dev"]="glib2"
-)
-
-is_pacman_pkg_available() {
-    local pkg="$1"
-    pacman -Si "$pkg" &>/dev/null
-}
-
 show_spinner() {
     local pid=$1
     local message=$2
@@ -283,50 +252,17 @@ __install_zsh_plugin() {
     git clone "$url" "$installation_folder" && log "success" "$folder installed." || return 1
 }
 
-get_package_name() {
-    local pkg="$1"
-    if [ -f "/etc/arch-release" ]; then
-        echo "${PKG_MAP[$pkg]:-$pkg}"
-    else
-        echo "$pkg"
-    fi
-}
-
-__install_package_auto() {
+__install_package_apt() {
     for pkg in "$@"; do
-        for resolved in $(get_package_name "$pkg"); do
-            if __is_pkg_installed "$resolved"; then
-                log "info" "$resolved already installed."
+        if __is_pkg_installed "$pkg"; then
+            log "info" "$pkg already installed."
+        else
+            if [ -f "/etc/arch-release" ]; then
+                sudo pacman -S --noconfirm --needed "$pkg" && log "success" "$pkg installed."
             else
-                if [ -f "/etc/arch-release" ]; then
-                    sudo pacman -S --noconfirm --needed "$resolved" && log "success" "$resolved installed."
-                elif [ -f "/etc/debian_version" ]; then
-                    sudo apt-get install -y -qq -o=Dpkg::Use-Pty=0 "$resolved" && log "success" "$resolved installed."
-                else
-                    log "error" "Unsupported OS for package install: $resolved"
-                    return 1
-                fi
+                sudo apt-get install -y -qq -o=Dpkg::Use-Pty=0 "$pkg" && log "success" "$pkg installed."
             fi
-        done
-    done
-}
-
-__remove_package_auto() {
-    for pkg in "$@"; do
-        for resolved in $(get_package_name "$pkg"); do
-            if __is_pkg_installed "$resolved"; then
-                if [ -f "/etc/arch-release" ]; then
-                    sudo pacman -R --noconfirm "$resolved" && log "success" "$resolved removed."
-                elif [ -f "/etc/debian_version" ]; then
-                    sudo apt-get remove -y -qq -o=Dpkg::Use-Pty=0 "$resolved" && log "success" "$resolved removed."
-                else
-                    log "error" "Unsupported OS for package removal: $resolved"
-                    return 1
-                fi
-            else
-                log "info" "$resolved is not installed."
-            fi
-        done
+        fi
     done
 }
 

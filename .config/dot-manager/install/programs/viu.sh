@@ -5,13 +5,6 @@ source "$DOT_MANAGER_DIR/helper.sh"
 install_viu() {
     print_step "Installing Viu"
 
-    if [ -f "/etc/arch-release" ] && is_pacman_pkg_available viu; then
-        log "info" "Installing viu via pacman..."
-        __install_package_auto viu
-        log "success" "viu installed via pacman."
-        return 0
-    fi
-
     local version
     version=$(__get_latest_release "atanunq/viu")
 

@@ -107,7 +107,7 @@ install_packages() {
     fi
 
     print_step "Installing system packages"
-    __install_package_auto pkg-config \
+    __install_package_apt pkg-config \
         build-essential \
         wget \
         libfuse2 \
@@ -121,8 +121,8 @@ install_packages() {
         libglib2.0-dev
 
     if [ -z "$DOTFILES_MINIMAL" ]; then
-        __install_package_auto tty-clock
-        __install_package_auto grc
+        __install_package_apt tty-clock
+        __install_package_apt grc
     fi
 
     if [ -f "$HOME/.local/bin/fd" ]; then
