@@ -5,14 +5,11 @@ source "$DOT_MANAGER_DIR/helper.sh"
 install_luarocks() {
     log "info" "Installing luarocks..."
 
-    __install_package_apt lua5.1
-    __install_package_apt liblua5.1-dev
+    log "info" "Installing lua and luarocks via pacman..."
+    sudo pacman -S --noconfirm lua luarocks
 
-    cd /tmp || exit 1
-    wget -nv -q https://luarocks.org/releases/luarocks-3.11.1.tar.gz &&
-        tar zxpf luarocks-3.11.1.tar.gz &&
-        cd luarocks-3.11.1 &&
-        ./configure && make && sudo make install
+    # luarocks is now installed via pacman, no need for manual build
+    log "success" "luarocks installed via pacman."
 }
 
 install_treesitter() {
