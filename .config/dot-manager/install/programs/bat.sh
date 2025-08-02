@@ -5,6 +5,13 @@ source "$DOT_MANAGER_DIR/helper.sh"
 install_bat() {
     print_step "Installing Bat"
 
+    if [ -f "/etc/arch-release" ] && is_pacman_pkg_available bat; then
+        log "info" "Installing bat via pacman..."
+        __install_package_auto bat
+        log "success" "bat installed via pacman."
+        return 0
+    fi
+
     cd /tmp || exit
 
     local bat_version

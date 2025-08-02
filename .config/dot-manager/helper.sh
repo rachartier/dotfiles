@@ -30,6 +30,11 @@ declare -A PKG_MAP=(
     ["libglib2.0-dev"]="glib2"
 )
 
+is_pacman_pkg_available() {
+    local pkg="$1"
+    pacman -Si "$pkg" &>/dev/null
+}
+
 show_spinner() {
     local pid=$1
     local message=$2

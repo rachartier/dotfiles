@@ -27,6 +27,13 @@ install_nvim() {
     print_step "Installing Neovim"
     local version=${1:-"stable"}
 
+    if [ -f "/etc/arch-release" ] && is_pacman_pkg_available neovim; then
+        log "info" "Installing Neovim via pacman..."
+        __install_package_auto neovim
+        log "success" "Neovim installed via pacman."
+        return 0
+    fi
+
     log "info" "Removing existing Neovim installation"
     __remove_package_auto neovim
 

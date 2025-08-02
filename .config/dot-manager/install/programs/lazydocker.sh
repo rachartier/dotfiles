@@ -5,6 +5,13 @@ source "$DOT_MANAGER_DIR/helper.sh"
 install_lazydocker() {
     print_step "Installing Lazydocker"
 
+    if [ -f "/etc/arch-release" ] && is_pacman_pkg_available lazydocker; then
+        log "info" "Installing lazydocker via pacman..."
+        __install_package_auto lazydocker
+        log "success" "lazydocker installed via pacman."
+        return 0
+    fi
+
     LAZYDOCKER_VERSION=$(__get_latest_release "jesseduffield/lazydocker")
     LAZYDOCKER_VERSION="${LAZYDOCKER_VERSION:1}"
 

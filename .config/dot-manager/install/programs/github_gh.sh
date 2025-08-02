@@ -5,6 +5,13 @@ source "$DOT_MANAGER_DIR/helper.sh"
 install_github_gh() {
     log "info" "Installing gh"
 
+    if [ -f "/etc/arch-release" ] && is_pacman_pkg_available github-cli; then
+        log "info" "Installing gh via pacman..."
+        __install_package_auto github-cli
+        log "success" "gh installed via pacman."
+        return 0
+    fi
+
     local gh_version
     gh_version=$(__get_latest_release "cli/cli")
     gh_version="${gh_version:1}"

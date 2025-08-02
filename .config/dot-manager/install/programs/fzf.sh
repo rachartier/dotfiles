@@ -5,6 +5,13 @@ source "$DOT_MANAGER_DIR/helper.sh"
 install_fzf() {
     print_step "Installing Fzf"
 
+    if [ -f "/etc/arch-release" ] && is_pacman_pkg_available fzf; then
+        log "info" "Installing fzf via pacman..."
+        __install_package_auto fzf
+        log "success" "fzf installed via pacman."
+        return 0
+    fi
+
     if [ -d "$HOME/.fzf/" ]; then
         cd ~/.fzf || return 0
         git pull --quiet

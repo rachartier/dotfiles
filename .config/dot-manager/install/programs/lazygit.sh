@@ -5,6 +5,13 @@ source "$DOT_MANAGER_DIR/helper.sh"
 install_lazygit() {
     print_step "Installing Lazygit"
 
+    if [ -f "/etc/arch-release" ] && is_pacman_pkg_available lazygit; then
+        log "info" "Installing lazygit via pacman..."
+        __install_package_auto lazygit
+        log "success" "lazygit installed via pacman."
+        return 0
+    fi
+
     LAZYGIT_VERSION=$(__get_latest_release "jesseduffield/lazygit")
     LAZYGIT_VERSION="${LAZYGIT_VERSION:1}"
 
