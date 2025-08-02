@@ -71,6 +71,7 @@ return {
   dependencies = {
     "saghen/blink.cmp",
     "jay-babu/mason-nvim-dap.nvim",
+    "zapling/mason-conform.nvim",
     "mason-org/mason-lspconfig.nvim",
     {
       "mason-org/mason.nvim",
@@ -128,6 +129,17 @@ return {
 
     local server_settings = require("config.languages")
     local tools = collect_tools(server_settings)
+
+    require("mason-lspconfig").setup({
+      ensure_installed = tools.lsp,
+      automatic_installation = true,
+    })
+
+    require("mason-conform").setup({
+      ensure_installed = tools.tools,
+      automatic_installation = true,
+    })
+
 
     -- Setup Mason DAP if not minimal config
     if vim.g.dotfile_config_type ~= "minimal" then
