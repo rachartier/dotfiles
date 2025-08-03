@@ -115,3 +115,6 @@ export BROWSER="/mnt/c/Program\ Files/Mozilla\ Firefox/firefox.exe"
 # if [ -d "/mnt/wslg/runtime-dir" ]; then
 #     ln -sf /mnt/wslg/runtime-dir/wayland-* "$XDG_RUNTIME_DIR/"
 # fi
+
+export LANG="fr_FR.UTF-8"
+export LC_ALL="fr_FR.UTF-8"

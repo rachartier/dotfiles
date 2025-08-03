@@ -21,21 +21,22 @@ fpath=($ANTIDOTE_DIR/functions $fpath)
 autoload -Uz antidote
 
 if [[ ! ${zsh_plugins}.zsh -nt ${zsh_plugins}.txt ]]; then
-  antidote bundle <${zsh_plugins}.txt >|${zsh_plugins}.zsh
+    antidote bundle <${zsh_plugins}.txt >|${zsh_plugins}.zsh
 fi
 
 # Source generated plugins
 source ${zsh_plugins}.zsh
 
 function zsh_core_setup()  {
-    [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+    source <(fzf --zsh)
 
     source $HOME/.aliases
     source $HOME/.zsh/style.zsh
     # source $HOME/.zsh/transient_prompt.zsh
 
-
-    eval "$(zoxide init zsh --cmd cd)"
+    if command -v zoxide &> /dev/null; then
+        eval "$(zoxide init zsh --cmd cd)"
+    fi
 
     if command -v direnv &> /dev/null; then
         eval "$(direnv hook zsh)"
