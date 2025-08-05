@@ -101,6 +101,7 @@ export PATH="$HOME/.dotnet/tools:$PATH"
 export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
 export PATH="$PATH:/snap/bin"
 export PATH="$PATH:$HOME/.local/bin"
+export PATH="$PATH:$HOME/.fzf/bin"
 export PATH="$PATH:$HOME/.local/share/nvim/mason/bin"
 export PATH="$PATH:$HOME/.opencode/bin"
 
@@ -115,6 +116,3 @@ export BROWSER="/mnt/c/Program\ Files/Mozilla\ Firefox/firefox.exe"
 # if [ -d "/mnt/wslg/runtime-dir" ]; then
 #     ln -sf /mnt/wslg/runtime-dir/wayland-* "$XDG_RUNTIME_DIR/"
 # fi
-
-export LANG="fr_FR.UTF-8"
-export LC_ALL="fr_FR.UTF-8"

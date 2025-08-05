@@ -119,9 +119,7 @@ function tmuxp() {
 
 function uv() {
     if [ -z "$DOT_UV_LOADED" ]; then
-        if command -v uv &> /dev/null; then
-            eval "$(uv generate-shell-completion zsh)"
-        fi
+        eval "$($HOME/.local/bin/uv generate-shell-completion zsh)"
         DOT_UV_LOADED=1
     fi
 
