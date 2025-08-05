@@ -20,6 +20,7 @@ theme="\
 export FZF_DEFAULT_COMMAND="fd --type f"
 export KEYTIMEOUT=1
 export FZF_DEFAULT_OPTS="
+    --layout=default
     --multi \
     --margin=0,0 \
     --preview-window=right:50% \
