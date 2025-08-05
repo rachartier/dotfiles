@@ -35,7 +35,7 @@ return {
   {
     filetypes = { "typescript" },
     mason = { "vtsls" },
-    formatter = { "prettierd" },
+    formatter = { "prettier" },
   },
   {
     filetypes = { "dockerfile" },
