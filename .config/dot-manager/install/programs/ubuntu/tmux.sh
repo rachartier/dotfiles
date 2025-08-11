@@ -10,7 +10,10 @@ install_tmux() {
     __install_package_apt libevent-dev ncurses-dev build-essential bison pkg-config
 
     cd /tmp || exit 1
-    wget -nv -q "https://github.com/tmux/tmux/releases/latest/download/tmux-${TMUX_VERSION}.tar.gz" -O tmux.tar.gz
+    wget -nv -q "https://github.com/tmux/tmux/releases/download/${TMUX_VERSION}/tmux-${TMUX_VERSION}.tar.gz" -O tmux.tar.gz || {
+        log "error" "Failed to download tmux source code"
+        exit 1
+    }
     tar -xzvf tmux.tar.gz >/dev/null
     cd "tmux-$TMUX_VERSION" || exit
 

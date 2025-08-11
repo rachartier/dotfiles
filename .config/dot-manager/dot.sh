@@ -12,7 +12,6 @@ DOT_MANAGER_COMPLETE_PROGRAMS=(
     "eza"
     "glow"
     "fzf"
-    "viu"
     "lazygit"
     "lazydocker"
     "starship"
