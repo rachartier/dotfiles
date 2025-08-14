@@ -25,10 +25,16 @@ return {
         preview_split = "right",
         border = require("config.ui.border").default_border,
 
-        max_width = 0.40,
-        max_height = 0.80,
+        max_width = math.floor(vim.o.columns * vim.g.float_width),
+        max_height = math.floor(vim.o.lines * vim.g.float_height),
 
         override = function(conf)
+          -- conf.height = math.floor(vim.o.lines * vim.g.float_height)
+          -- conf.width = math.floor(vim.o.columns * vim.g.float_width)
+          --
+          -- conf.col = math.floor((vim.o.columns - conf.width) / 2)
+          -- conf.row = math.floor((vim.o.lines - conf.height) / 2)
+
           return conf
         end,
       },

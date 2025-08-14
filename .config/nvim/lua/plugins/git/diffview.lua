@@ -11,5 +11,10 @@ return {
     "DiffviewToggleFiles",
     "DiffviewFocusFiles",
   },
+  keys = {
+    { "<leader>gf", "<cmd>DiffviewFileHistory<cr>", desc = "File history" },
+    { "<leader>gd", "<cmd>DiffviewOpen<cr>", desc = "Diff view open" },
+    { "<leader>gc", "<cmd>DiffviewClose<cr>", desc = "Diff view close" },
+  },
   opts = {},
 }

@@ -9,6 +9,11 @@ return {
       transparent_background = not vim.g.neovide,
       show_end_of_buffer = false,
       term_colors = true,
+      auto_integrations = true,
+      float = {
+        transparent = true, -- enable transparent floating windows
+        solid = true, -- use solid styling for floating windows, see |winborder|
+      },
       dim_inactive = {
         enabled = false,
         shade = "dark",
@@ -67,32 +72,6 @@ return {
         operators = {},
       },
       integrations = {
-        aerial = true,
-        blink_cmp = true,
-        cmp = false,
-        dap = true,
-        dap_ui = true,
-        diffview = true,
-        gitsigns = true,
-        grug_far = true,
-        lsp_trouble = false,
-        mason = true,
-        markdown = true,
-        mini = true,
-        neotest = true,
-        neotree = true,
-        neogit = true,
-        noice = true,
-        notify = true,
-        render_markdown = true,
-        semantic_tokens = true,
-        symbols_outline = true,
-        snacks = true,
-        telekasten = true,
-        telescope = true,
-        treesitter = true,
-        treesitter_context = false,
-        which_key = true,
         native_lsp = {
           enabled = true,
           virtual_text = {

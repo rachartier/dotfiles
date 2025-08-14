@@ -125,3 +125,4 @@ function uv() {
 
     command "$HOME/.local/bin/uv" "$@"
 }
+

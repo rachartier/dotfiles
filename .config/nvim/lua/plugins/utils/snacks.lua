@@ -68,16 +68,10 @@ return {
   -- stylua: ignore end
   opts = {
     styles = {
-      dashboard = {
-        wo = {
-          winblend = require("config").winblend,
-        },
-      },
       notification = {
         border = require("config.ui.border").default_border,
         wo = {
           wrap = true,
-          winblend = require("config").winblend,
         },
       },
     },

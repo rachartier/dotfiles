@@ -68,7 +68,10 @@ return {
       setup_treesitter_autocmd()
 
       local lang_config = require("config.languages")
-      local ensure_installed = {}
+      local ensure_installed = {
+        "regex",
+        "bash",
+      }
 
       for _, lang in ipairs(lang_config) do
         local filetypes = lang.filetypes or {}

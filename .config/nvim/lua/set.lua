@@ -26,7 +26,7 @@ end, 50)
 
 local conf = require("config")
 opt.pumblend = conf.pumblend -- Popup blend
-opt.winblend = conf.winblend -- Window blend
+opt.winblend = conf.winblend
 
 -- TODO: to enable when winborder is more widespread
 -- if vim.fn.exists("+winborder") > 0 then

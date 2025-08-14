@@ -2,38 +2,54 @@ local signs = require("config.ui.signs")
 
 return {
   "ibhagwan/fzf-lua",
-  -- dependencies = {
-  --   -- "elanmed/fzf-lua-frecency.nvim",
-  -- },
-  keys = {
-    "<leader>ff",
-    "<leader>fb",
-    "<leader>fr",
-    "<leader>fG",
-    "<leader>fg",
-    "<leader>fl",
-    "<leader>fw",
-    "<leader>ft",
-    "<leader>fB",
-    "<leader>fd",
-
-    -- { "<Tab>", '<cmd>lua require("user_plugins.switchbuffer").select_buffers()<cr>' },
-    -- { "<S-Tab>", '<cmd>lua require("user_plugins.switchbuffer").select_buffers()<cr>' },
+  dependencies = {
+    -- "elanmed/fzf-lua-frecency.nvim",
   },
+  keys = {
+    -- stylua: ignore start
+    { "<leader>ff", function() require("fzf-lua").files({
+      winopts = {
+        preview = {
+          hidden = vim.o.columns < 120
+        },
+      },
+    }) end, desc = "find files" },
+    { "<leader>fp", function() require("fzf-lua").global() end, desc = "find globals" },
+    { "<leader>fb", function() require("fzf-lua").buffers() end, desc = "find buffers" },
+    { "<leader>fB", function() require("fzf-lua").builtin() end, desc = "show fzf builtins" },
+    { "<leader>fr", function() require("fzf-lua").lsp_references() end, desc = "find all lsp references" },
+    { "<leader>fG", function() require("fzf-lua").git_files() end, desc = "find git files" },
+    { "<leader>fg", function() require("fzf-lua").live_grep() end, desc = "grep words inside files" },
+    { "<leader>fl", function() require("fzf-lua").resume() end, desc = "resume grep" },
+    { "<leader>fw", function() require("fzf-lua").grep_cword() end, desc = "grep string under cursor" },
+    { "<leader>ft", function() require("fzf-lua").grep({ search = "TODO|HACK|PERF|NOTE|FIX|WARN", no_esc = true }) end, desc = "Search all todos" },
+    { "<leader>fd", function() require("fzf-lua").diagnostics_workspace() end, desc = "Toggle fzf diagnostic" },
+    -- stylua: ignore stop
+  },
+  lazy = false,
   enabled = true,
   opts = {
-    "hide",
+    { "border-fused", "hide" },
     fzf_colors = true,
+    fzf_opts = {
+      ["--layout"] = false,
+    },
     winopts = {
       border = require("config.ui.border").default_border,
-      backdrop = 100,
-      width = 0.8,
-      height = 0.8,
-      row = 0.5,
-      col = 0.5,
+      -- backdrop = 100,
+      height = vim.g.float_height,
+      width = vim.g.float_width,
+
       preview = {
-        scrollchars = { "┃", "" },
+        -- scrollchars = { "┃", "" },
         delay = 10,
+        scrollbar = false,
+        layout = "vertical",
+        vertical = "up:60%",
+
+        -- hidden = function()
+        --   return false
+        -- end, -- layout = "vertical",
       },
     },
     keymap = {
@@ -45,8 +61,7 @@ return {
     },
     files = {
       formatter = "path.filename_first",
-      ignore_patterns = { "*.gif" },
-      fd_opts = "--type f --hidden --follow",
+      git_icons = true,
     },
     diagnostics = {
       winopts = {
@@ -89,28 +104,6 @@ return {
     --   opts[1] = nil
     -- end
     fzf.setup(opts)
-
-    vim.keymap.set("n", "<leader>ff", fzf.files, { desc = "find files" })
-    vim.keymap.set("n", "<leader>fp", fzf.global, { desc = "find globals" })
-    vim.keymap.set("n", "<leader>fb", fzf.buffers, { desc = "find buffers" })
-    vim.keymap.set("n", "<leader>fB", fzf.builtin, { desc = "show fzf builtins" })
-    vim.keymap.set("n", "<leader>fr", fzf.lsp_references, { desc = "find all lsp references" })
-    vim.keymap.set("n", "<leader>fG", fzf.git_files, { desc = "find git files" })
-    vim.keymap.set("n", "<leader>fg", fzf.live_grep, { desc = "grep words inside files" })
-    vim.keymap.set("n", "<leader>fl", fzf.resume, { desc = "resume grep" })
-    vim.keymap.set("n", "<leader>fw", fzf.grep_cword, { desc = "grep string under cursor" })
-    vim.keymap.set("n", "<leader>ft", function()
-      fzf.grep({ search = "TODO|HACK|PERF|NOTE|FIX|WARN", no_esc = true })
-    end, { desc = "Search all todos" })
-
-    vim.keymap.set("n", "<leader>fd", fzf.diagnostics_workspace, { desc = "Toggle fzf diagnostic" })
-
-    -- vim.keymap.set("n", "<leader>fh", fzf.help_tags, { desc = "show documentations" })
-    -- vim.keymap.set("n", "<leader>fm", "<cmd>telescope harpoon marks<cr>", { desc = "open harpoon marks" })
-    -- vim.keymap.set("n", "<leader>c", function()
-    --     require("telescope.builtin").spell_suggest(require("telescope.themes").get_cursor({}))
-    --     end, { desc = "spelling suggestions" })
-    -- vim.keymap.set("n", "*", fuzzy_find_under_cursor, { desc = "fuzzy find in file under cursor" })
-    require("fzf-lua").register_ui_select()
+    fzf.register_ui_select()
   end,
 }

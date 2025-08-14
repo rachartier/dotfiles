@@ -1,8 +1,8 @@
 local utils = require("utils")
 return {
   {
-    -- dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny_buffers_switcher.nvim",
-    "rachartier/tiny-buffers-switcher.nvim",
+    dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny_buffers_switcher.nvim",
+    -- "rachartier/tiny-buffers-switcher.nvim",
     enabled = true,
     event = "VeryLazy",
     keys = {
@@ -22,7 +22,10 @@ return {
       },
     },
     opts = {
-      use_snacks = true,
+      window = {
+        width = vim.g.float_width,
+        height = vim.g.float_height,
+      },
     },
   },
   {
