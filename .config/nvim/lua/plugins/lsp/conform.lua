@@ -1,5 +1,3 @@
-local utils = require("utils")
-
 local function lint_triggers()
   local function do_lint()
     vim.defer_fn(function()
@@ -25,9 +23,12 @@ local function lint_triggers()
     end, 1)
   end
 
-  utils.on_event({ "BufReadPost", "InsertLeave", "TextChanged", "FocusGained" }, function()
-    do_lint()
-  end, { desc = "Auto lint" })
+  vim.api.nvim_create_autocmd({ "BufReadPost", "InsertLeave", "TextChanged", "FocusGained" }, {
+    callback = function()
+      do_lint()
+    end,
+    desc = "Auto lint",
+  })
 
   do_lint() -- run once on initialization
 end

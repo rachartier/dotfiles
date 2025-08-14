@@ -23,10 +23,11 @@ return {
     vim.g.vimwiki_global_ext = 1
     vim.g.vimwiki_use_mouse = 1
 
-    require("utils").on_event("FileType", function()
-      vim.o.filetype = "markdown"
-    end, {
-      target = "vimwiki",
+    vim.api.nvim_create_autocmd("FileType", {
+      pattern = "vimwiki",
+      callback = function()
+        vim.o.filetype = "markdown"
+      end,
     })
   end,
   config = function()

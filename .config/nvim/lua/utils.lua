@@ -109,53 +109,6 @@ function M.to_list(value)
   end
 end
 
-local group_index = 0
-
---- Creates an auto command that triggers on a given list of events
---- Inside user_opts, you can specify the target buffer or pattern like so: { target = 123 } or { target = "pattern" } or { target = { "pattern1", "pattern2" } }...
----@param events string|string[] # the list of events to trigger on
----@param callback function # the callback to call when the event is triggered
----@param user_opts table|nil # opts of the auto command
----@return number # the group id of the created group
-function M.on_event(events, callback, user_opts)
-  assert(type(callback) == "function")
-
-  events = M.to_list(events)
-  local group_name = user_opts
-      and user_opts.desc
-      and "custom_" .. user_opts.desc:gsub(" ", "_"):lower() .. "_" .. group_index
-    or "custom_" .. group_index
-  group_index = group_index + 1
-
-  local group = vim.api.nvim_create_augroup(group_name, { clear = true })
-  local opts = {
-    callback = function(evt)
-      callback(evt, group)
-    end,
-    group = group,
-    desc = user_opts and user_opts.desc or "Custom event",
-  }
-
-  if user_opts then
-    local valid_opts = { "target", "desc" }
-    for key in pairs(user_opts) do
-      assert(vim.tbl_contains(valid_opts, key), "Invalid option: " .. key)
-    end
-
-    local target = user_opts.target
-    if target then
-      if type(target) == "number" then
-        opts.buffer = target
-      else
-        opts.pattern = M.to_list(target)
-      end
-    end
-  end
-
-  vim.api.nvim_create_autocmd(events, opts)
-  return group
-end
-
 -- From: https://github.com/Wansmer/nvim-config/blob/76075092cf6a595f58d6150bb488b8b19f5d625a/lua/utils.lua#L50C1-L81C4
 function M.char_on_pos(pos)
   pos = pos or vim.fn.getpos(".")

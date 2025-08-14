@@ -1,5 +1,3 @@
-local utils = require("utils")
-
 return {
   {
     "echasnovski/mini.splitjoin",
@@ -75,11 +73,8 @@ return {
     event = { "LazyFile" },
     enabled = false,
     init = function()
-      utils.on_event("FileType", function()
-        ---@diagnostic disable-next-line: inject-field
-        vim.b.miniindentscope_disable = true
-      end, {
-        target = {
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = {
           "help",
           "alpha",
           "dashboard",
@@ -100,6 +95,10 @@ return {
           "snacks_terminal",
           "snacks_win",
         },
+        callback = function()
+          ---@diagnostic disable-next-line: inject-field
+          vim.b.miniindentscope_disable = true
+        end,
         desc = "Disable mini.indentscope",
       })
     end,

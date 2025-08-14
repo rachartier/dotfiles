@@ -16,20 +16,19 @@ return {
     },
   },
   config = function(_, opts)
-    local utils = require("utils")
-
     require("grug-far").setup(opts)
 
-    utils.on_event({ "FileType" }, function()
-      vim.schedule(function()
-        vim.opt_local.number = false
-        vim.opt_local.relativenumber = false
-        vim.opt_local.cursorline = false
-      end)
-    end, {
-      target = {
+    vim.api.nvim_create_autocmd({ "FileType" }, {
+      pattern = {
         "grug-far",
       },
+      callback = function()
+        vim.schedule(function()
+          vim.opt_local.number = false
+          vim.opt_local.relativenumber = false
+          vim.opt_local.cursorline = false
+        end)
+      end,
       desc = "GrugFar settings",
     })
   end,

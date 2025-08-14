@@ -125,14 +125,15 @@ return {
     end
 
     if opts.scroll then
-      require("utils").on_event({ "CmdlineEnter", "CmdlineLeave" }, function(ev)
-        if ev.event == "CmdlineEnter" then
-          Snacks.scroll.disable()
-        else
-          Snacks.scroll.enable()
-        end
-      end, {
-        target = "/",
+      vim.api.nvim_create_autocmd({ "CmdlineEnter", "CmdlineLeave" }, {
+        pattern = "/",
+        callback = function(ev)
+          if ev.event == "CmdlineEnter" then
+            Snacks.scroll.disable()
+          else
+            Snacks.scroll.enable()
+          end
+        end,
       })
     end
   end,

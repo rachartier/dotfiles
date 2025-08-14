@@ -1,4 +1,3 @@
-local utils = require("utils")
 local was_opened = {}
 local width_limit = 130
 
@@ -46,21 +45,23 @@ return {
 
     aerial.setup(opts)
 
-    utils.on_event({ "BufEnter", "VimResized" }, function()
-      local width = vim.o.columns
-      local bufnr = vim.api.nvim_get_current_buf()
+    vim.api.nvim_create_autocmd({ "BufEnter", "VimResized" }, {
+      callback = function()
+        local width = vim.o.columns
+        local bufnr = vim.api.nvim_get_current_buf()
 
-      if width < width_limit then
-        if aerial.is_open() then
-          was_opened[bufnr] = true
-          aerial.close()
+        if width < width_limit then
+          if aerial.is_open() then
+            was_opened[bufnr] = true
+            aerial.close()
+          end
+        else
+          if not aerial.is_open() and was_opened[bufnr] then
+            aerial.open()
+            was_opened[bufnr] = nil
+          end
         end
-      else
-        if not aerial.is_open() and was_opened[bufnr] then
-          aerial.open()
-          was_opened[bufnr] = nil
-        end
-      end
-    end)
+      end,
+    })
   end,
 }

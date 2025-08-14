@@ -1,6 +1,4 @@
-local utils = require("utils")
-
--- utils.on_event({ "TextYankPost" }, function()
+-- vim.api.nvim_create_autocmd({ "TextYankPost" }, {
 -- 	vim.highlight.on_yank({
 -- 		higroup = "CurSearch",
 -- 		timeout = 85,
@@ -11,33 +9,32 @@ local utils = require("utils")
 -- 	desc = "Highlight yanked text",
 -- })
 
-utils.on_event({ "VimResized" }, function()
-  local ft = vim.bo.filetype
+vim.api.nvim_create_autocmd({ "VimResized" }, {
+  pattern = "*",
+  callback = function()
+    local ft = vim.bo.filetype
 
-  if not string.find(ft, "Avante") then
-    local current_tab = vim.fn.tabpagenr()
-    vim.cmd("tabdo wincmd =")
-    vim.cmd("tabnext " .. current_tab)
-  end
-end, {
-  target = "*",
+    if not string.find(ft, "Avante") then
+      local current_tab = vim.fn.tabpagenr()
+      vim.cmd("tabdo wincmd =")
+      vim.cmd("tabnext " .. current_tab)
+    end
+  end,
   desc = "Resize splits if window got resized",
 })
 
-utils.on_event({ "FileType" }, function(event)
-  if event.match:match("^json") then
-    vim.opt_local.conceallevel = 0
-  end
-end, {
-  target = { "json", "jsonc", "json5" },
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  pattern = { "json", "jsonc", "json5" },
+  callback = function(event)
+    if event.match:match("^json") then
+      vim.opt_local.conceallevel = 0
+    end
+  end,
   desc = "Disable conceallevel for json files",
 })
 
-utils.on_event("FileType", function(event)
-  vim.bo[event.buf].buflisted = false
-  vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
-end, {
-  target = {
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = {
     "PlenaryTestPopup",
     "help",
     "lspinfo",
@@ -57,52 +54,61 @@ end, {
     "oil",
     "copilot-panel",
   },
+  callback = function(event)
+    vim.bo[event.buf].buflisted = false
+    vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
+  end,
   desc = "Easy quit buffers",
 })
 
-utils.on_event({ "FileType" }, function()
-  vim.opt_local.wrap = true
-  vim.opt_local.spell = true
-end, {
-  target = { "gitcommit", "markdown", "text" },
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  pattern = { "gitcommit", "markdown", "text" },
+  callback = function()
+    vim.opt_local.wrap = true
+    vim.opt_local.spell = true
+  end,
   desc = "Enable wrap and spell for markdown and text files",
 })
 
-utils.on_event({ "BufWritePre" }, function(event)
-  if event.match:match("^%w%w+://") then
-    return
-  end
-  local file = vim.loop.fs_realpath(event.match) or event.match
-  vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
-end, {
-  target = "*",
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+  pattern = "*",
+  callback = function(event)
+    if event.match:match("^%w%w+://") then
+      return
+    end
+    local file = vim.loop.fs_realpath(event.match) or event.match
+    vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
+  end,
   desc = "Create directory if it does not exist",
 })
 
-utils.on_event({ "BufWritePre" }, function()
-  vim.cmd([[%s/\s\+$//e]])
-end, {
-  target = "*",
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+  pattern = "*",
+  callback = function()
+    vim.cmd([[%s/\s\+$//e]])
+  end,
   desc = "Remove trailing whitespace",
 })
 
-utils.on_event({ "BufReadPost" }, function(args)
-  local mark = vim.api.nvim_buf_get_mark(args.buf, '"')
-  local line_count = vim.api.nvim_buf_line_count(args.buf)
-  if mark[1] > 0 and mark[1] <= line_count then
-    vim.api.nvim_buf_call(args.buf, function()
-      vim.cmd('normal! g`"zz')
-    end)
-  end
-end, {
-  target = "*",
+vim.api.nvim_create_autocmd({ "BufReadPost" }, {
+  pattern = "*",
+  callback = function(args)
+    local mark = vim.api.nvim_buf_get_mark(args.buf, '"')
+    local line_count = vim.api.nvim_buf_line_count(args.buf)
+    if mark[1] > 0 and mark[1] <= line_count then
+      vim.api.nvim_buf_call(args.buf, function()
+        vim.cmd('normal! g`"zz')
+      end)
+    end
+  end,
   desc = "Restore cursor position",
 })
 
-utils.on_event("FileType", function()
-  vim.opt_local.buflisted = false
-end, {
-  target = "qf",
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "qf",
+  callback = function()
+    vim.opt_local.buflisted = false
+  end,
   desc = "Do not list quickfix buffers",
 })
 
@@ -132,30 +138,35 @@ end, {
 -- 	desc = "Outline for markdown",
 -- })
 
-utils.on_event({ "FocusGained", "BufEnter", "CursorHold", "CursorHoldI" }, function()
-  if vim.fn.mode() ~= "c" then
-    vim.cmd("checktime")
-  end
-end)
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold", "CursorHoldI" }, {
+  callback = function()
+    if vim.fn.mode() ~= "c" then
+      vim.cmd("checktime")
+    end
+  end,
+})
 
 -- Notification after file change
-utils.on_event("FileChangedShellPost", function()
-  vim.api.nvim_echo({ { "File changed on disk. Buffer reloaded.", "WarningMsg" } }, false, {})
-end)
+vim.api.nvim_create_autocmd("FileChangedShellPost", {
+  callback = function()
+    vim.api.nvim_echo({ { "File changed on disk. Buffer reloaded.", "WarningMsg" } }, false, {})
+  end,
+})
 
 -- Set local settings for terminal buffers
-utils.on_event("TermOpen", function(event)
-  if vim.opt.buftype:get() == "terminal" then
-    local set = vim.opt_local
-    set.number = false -- Don't show numbers
-    set.relativenumber = false -- Don't show relativenumbers
-    set.scrolloff = 0 -- Don't scroll when at the top or bottom of the terminal buffer
-    vim.opt.filetype = "terminal"
+vim.api.nvim_create_autocmd("TermOpen", {
+  pattern = "term://*",
+  callback = function(event)
+    if vim.opt.buftype:get() == "terminal" then
+      local set = vim.opt_local
+      set.number = false -- Don't show numbers
+      set.relativenumber = false -- Don't show relativenumbers
+      set.scrolloff = 0 -- Don't scroll when at the top or bottom of the terminal buffer
+      vim.opt.filetype = "terminal"
 
-    vim.cmd.startinsert() -- Start in insert mode
-  end
-end, {
-  target = "term://*",
+      vim.cmd.startinsert() -- Start in insert mode
+    end
+  end,
   desc = "Settings for terminal buffers",
 })
 

@@ -1,4 +1,3 @@
-local utils = require("utils")
 local border = require("config.ui.border").default_border
 
 local function collect_tools(server_settings)
@@ -106,17 +105,18 @@ return {
     -- require("mason").setup(opts)
 
     local on_attach = require("config.lsp.attach").on_attach
-    utils.on_event("LspAttach", function(args)
-      local client = vim.lsp.get_client_by_id(args.data.client_id)
-      local bufnr = args.buf
+    vim.api.nvim_create_autocmd("LspAttach", {
+      callback = function(args)
+        local client = vim.lsp.get_client_by_id(args.data.client_id)
+        local bufnr = args.buf
 
-      -- Skip specific clients
-      if client and (client.name == "GitHub Copilot" or client.name == "copilot") then
-        return
-      end
+        -- Skip specific clients
+        if client and (client.name == "GitHub Copilot" or client.name == "copilot") then
+          return
+        end
 
-      on_attach(client, bufnr)
-    end, {
+        on_attach(client, bufnr)
+      end,
       desc = "LSP Attach",
     })
 

@@ -182,10 +182,11 @@ local function generate_message()
   }, { text = true }, callback)
 end
 
-require("utils").on_event("FileType", function()
-  vim.keymap.set({ "n", "i" }, "<M-a>", function()
-    generate_message()
-  end)
-end, {
-  target = "gitcommit",
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "gitcommit",
+  callback = function()
+    vim.keymap.set({ "n", "i" }, "<M-a>", function()
+      generate_message()
+    end)
+  end,
 })

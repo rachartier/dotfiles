@@ -41,16 +41,18 @@ return {
         return name == "" and (buftype == "" or buftype == "acwrite")
       end
 
-      require("utils").on_event("BufEnter", function()
-        vim.defer_fn(function()
-          local bufnr = vim.api.nvim_get_current_buf()
-          local filetype = vim.api.nvim_get_option_value("filetype", { buf = bufnr })
+      vim.api.nvim_create_autocmd("BufEnter", {
+        callback = function()
+          vim.defer_fn(function()
+            local bufnr = vim.api.nvim_get_current_buf()
+            local filetype = vim.api.nvim_get_option_value("filetype", { buf = bufnr })
 
-          if filetype == "snacks_dashboard" or (is_buffer_no_name(bufnr) and filetype == "") then
-            vim.cmd("qall!")
-          end
-        end, 50)
-      end)
+            if filetype == "snacks_dashboard" or (is_buffer_no_name(bufnr) and filetype == "") then
+              vim.cmd("qall!")
+            end
+          end, 50)
+        end,
+      })
     end
   end,
 }
