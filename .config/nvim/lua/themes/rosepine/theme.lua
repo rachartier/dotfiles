@@ -1,11 +1,8 @@
 local M = {}
-
-function M.setup()
-  require("themes.groups").override_hl(M.get_colors())
-end
+local base = require("themes.base_palette")
 
 function M.get_colors()
-  return {
+  local colors = {
     base = "#191724",
     mantle = "#1f1d2e",
     crust = "#16141f",
@@ -33,6 +30,8 @@ function M.get_colors()
     flamingo = "#ebbcba",
     rosewater = "#ebbcba",
   }
+  base.validate(colors)
+  return colors
 end
 
 return M

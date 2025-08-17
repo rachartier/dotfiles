@@ -30,7 +30,7 @@ end
 
 local function get_lualine_colors()
   -- local c = require("catppuccin.palettes").get_palette(vim.g.catppuccin_flavour)
-  local c = require("theme").get_colors()
+  local c = require("themes").get_colors()
 
   local lualine_colors = {
     -- bg = "#232639", --c.mantle,

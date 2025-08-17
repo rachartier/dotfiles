@@ -22,6 +22,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("config.lazy_file").lazy_file()
+require("themes").set_theme("catppuccin")
 
 require("lazy").setup({
   spec = {
@@ -86,4 +87,3 @@ vim.defer_fn(function()
 end, 10)
 
 require("autocmds")
-require("theme").setup()
