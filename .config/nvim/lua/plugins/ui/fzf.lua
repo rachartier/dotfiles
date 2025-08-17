@@ -26,7 +26,6 @@ return {
     { "<leader>fd", function() require("fzf-lua").diagnostics_workspace() end, desc = "Toggle fzf diagnostic" },
     -- stylua: ignore stop
   },
-  lazy = false,
   enabled = true,
   opts = {
     { "border-fused", "hide" },
@@ -36,9 +35,13 @@ return {
     },
     winopts = {
       border = require("config.ui.border").default_border,
-      -- backdrop = 100,
+      backdrop = 100,
       height = vim.g.float_height,
       width = vim.g.float_width,
+
+      -- center on screen
+      row = 0.55,
+      col = 0.51,
 
       preview = {
         -- scrollchars = { "┃", "" },

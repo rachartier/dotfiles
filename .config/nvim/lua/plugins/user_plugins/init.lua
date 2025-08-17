@@ -22,9 +22,10 @@ return {
       },
     },
     opts = {
+      picker = "buffer",
       window = {
-        width = vim.g.float_width,
-        height = vim.g.float_height,
+        width = 0.3,
+        height = 0.2,
       },
     },
   },
