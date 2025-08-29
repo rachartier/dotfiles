@@ -50,7 +50,7 @@ opt.inccommand = "nosplit" -- Preview incremental replacement
 opt.laststatus = 3 -- Configure status line display
 opt.statusline = " "
 
-opt.cmdheight = 1 -- Command line height
+opt.cmdheight = 0 -- Command line height
 opt.list = false -- Show some invisible characters (tabs...)
 opt.mouse = "a" -- Enable mouse mode
 opt.pumheight = 20 -- Maximum number of entries in a popup

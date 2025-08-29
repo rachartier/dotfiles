@@ -24,6 +24,13 @@ return {
     { "<leader>fw", function() require("fzf-lua").grep_cword() end, desc = "grep string under cursor" },
     { "<leader>ft", function() require("fzf-lua").grep({ search = "TODO|HACK|PERF|NOTE|FIX|WARN", no_esc = true }) end, desc = "Search all todos" },
     { "<leader>fd", function() require("fzf-lua").diagnostics_workspace() end, desc = "Toggle fzf diagnostic" },
+    { "<leader>fh", function() require("fzf-lua").highlights() end, desc = "Search highlight groups" },
+    { "<leader>fc", function() require("fzf-lua").commands() end, desc = "Search commands" },
+    { "<leader>fm", function() require("fzf-lua").marks() end, desc = "Search marks" },
+    { "<leader>fk", function() require("fzf-lua").keymaps() end, desc = "Search keymaps" },
+    { "<leader>fs", function() require("fzf-lua").lsp_document_symbols() end, desc = "Search document symbols" },
+    { "<leader>fS", function() require("fzf-lua").lsp_workspace_symbols() end, desc = "Search workspace symbols" },
+    { "<leader>fC", function() require("fzf-lua").colorschemes() end, desc = "Search colorschemes" },
     -- stylua: ignore stop
   },
   enabled = true,
@@ -63,7 +70,7 @@ return {
       },
     },
     files = {
-      formatter = "path.filename_first",
+      formatter = { "path.filename_first", 2 },
       git_icons = true,
     },
     diagnostics = {

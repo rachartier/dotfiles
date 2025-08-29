@@ -55,7 +55,6 @@ return {
           ["."] = true,
           markdown = true,
         },
-        copilot_model = "gpt-4.1",
         server = {
           type = "binary", -- "nodejs" | "binary"
           custom_server_filepath = nil,

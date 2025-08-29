@@ -55,10 +55,9 @@ return {
     event = { "BufWritePre" },
     cmd = { "ConformInfo" },
     enabled = true,
-    init = function()
-      vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
-    end,
     config = function()
+      vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+
       local languages = require("config.languages")
       local formatters_by_ft = {}
       local formatters_settings = {}
