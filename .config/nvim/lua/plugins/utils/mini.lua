@@ -1,6 +1,6 @@
 return {
   {
-    "echasnovski/mini.splitjoin",
+    "nvim-mini/mini.splitjoin",
     version = false,
     event = { "InsertEnter" },
     opts = {
@@ -14,12 +14,12 @@ return {
     },
   },
   {
-    "echasnovski/mini.surround",
+    "nvim-mini/mini.surround",
     event = "VeryLazy",
     opts = {},
   },
   -- {
-  -- 	"echasnovski/mini.hipatterns",
+  -- 	"nvim-mini/mini.hipatterns",
   -- 	enabled = false,
   -- 	event = { "VeryLazy" },
   -- 	config = function()
@@ -64,12 +64,12 @@ return {
   -- 	end,
   -- },
   {
-    "echasnovski/mini.align",
+    "nvim-mini/mini.align",
     event = { "VeryLazy" },
     opts = {},
   },
   {
-    "echasnovski/mini.indentscope",
+    "nvim-mini/mini.indentscope",
     event = { "LazyFile" },
     enabled = false,
     init = function()
@@ -118,50 +118,39 @@ return {
     end,
   },
   {
-    "echasnovski/mini.cursorword",
-    event = { "CursorMoved" },
-    version = false,
-    enabled = false,
-    opts = {
-      delay = 0,
-    },
-    config = function(_, opts)
-      require("mini.cursorword").setup(opts)
-      vim.api.nvim_set_hl(0, "MiniCursorwordCurrent", { link = "Visual" })
-      vim.api.nvim_set_hl(0, "MiniCursorword", { link = "Visual" })
+
+    "nvim-mini/mini.ai",
+    event = "VeryLazy",
+    opts = function()
+      local ai = require("mini.ai")
+      return {
+        n_lines = 500,
+        custom_textobjects = {
+          o = ai.gen_spec.treesitter({ -- code block
+            a = { "@block.outer", "@conditional.outer", "@loop.outer" },
+            i = { "@block.inner", "@conditional.inner", "@loop.inner" },
+          }),
+          f = ai.gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }), -- function
+          c = ai.gen_spec.treesitter({ a = "@class.outer", i = "@class.inner" }), -- class
+          t = { "<([%p%w]-)%f[^<%w][^<>]->.-</%1>", "^<.->().*()</[^/]->$" }, -- tags
+          d = { "%f[%d]%d+" }, -- digits
+          e = { -- Word with case
+            {
+              "%u[%l%d]+%f[^%l%d]",
+              "%f[%S][%l%d]+%f[^%l%d]",
+              "%f[%P][%l%d]+%f[^%l%d]",
+              "^[%l%d]+%f[^%l%d]",
+            },
+            "^().*()$",
+          },
+          u = ai.gen_spec.function_call(), -- u for "Usage"
+          U = ai.gen_spec.function_call({ name_pattern = "[%w_]" }), -- without dot in function name
+        },
+      }
     end,
   },
-  "echasnovski/mini.ai",
-  event = "VeryLazy",
-  opts = function()
-    local ai = require("mini.ai")
-    return {
-      n_lines = 500,
-      custom_textobjects = {
-        o = ai.gen_spec.treesitter({ -- code block
-          a = { "@block.outer", "@conditional.outer", "@loop.outer" },
-          i = { "@block.inner", "@conditional.inner", "@loop.inner" },
-        }),
-        f = ai.gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }), -- function
-        c = ai.gen_spec.treesitter({ a = "@class.outer", i = "@class.inner" }), -- class
-        t = { "<([%p%w]-)%f[^<%w][^<>]->.-</%1>", "^<.->().*()</[^/]->$" }, -- tags
-        d = { "%f[%d]%d+" }, -- digits
-        e = { -- Word with case
-          {
-            "%u[%l%d]+%f[^%l%d]",
-            "%f[%S][%l%d]+%f[^%l%d]",
-            "%f[%P][%l%d]+%f[^%l%d]",
-            "^[%l%d]+%f[^%l%d]",
-          },
-          "^().*()$",
-        },
-        u = ai.gen_spec.function_call(), -- u for "Usage"
-        U = ai.gen_spec.function_call({ name_pattern = "[%w_]" }), -- without dot in function name
-      },
-    }
-  end,
   -- {
-  -- 	"echasnovski/mini.animate",
+  -- 	"nvim-mini/mini.animate",
   -- 	event = { "VeryLazy" },
   -- 	opts = function(_, opts)
   -- 		local animate = require("mini.animate")
