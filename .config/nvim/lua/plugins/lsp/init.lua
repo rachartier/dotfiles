@@ -124,7 +124,7 @@ return {
       "force",
       {},
       vim.lsp.protocol.make_client_capabilities(),
-      require("blink.cmp").get_lsp_capabilities()
+      require("config.lsp.attach").make_capabilities()
     )
 
     local server_settings = require("config.languages")

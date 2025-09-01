@@ -61,7 +61,10 @@ M.lsp_rename = function()
 end
 
 function M.make_capabilities()
-  return require("blink.cmp").get_lsp_capabilities()
+  local c = require("blink.cmp").get_lsp_capabilities()
+  c.textDocument.onTypeFormatting = { dynamicRegistration = false }
+
+  return c
 end
 
 function M.on_attach(client, bufnr)
@@ -72,6 +75,7 @@ function M.on_attach(client, bufnr)
   -- end
 
   vim.lsp.document_color.enable(true, bufnr)
+  vim.lsp.on_type_formatting.enable()
 
   vim.keymap.del("n", "K", { buffer = bufnr })
   local wk = require("which-key")

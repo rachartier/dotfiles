@@ -170,6 +170,6 @@ return {
       end,
     })
 
-    vim.lsp.config("*", { capabilities = require("blink.cmp").get_lsp_capabilities(nil, true) })
+    -- vim.lsp.config("*", { capabilities = require("blink.cmp").get_lsp_capabilities(nil, true) })
   end,
 }
