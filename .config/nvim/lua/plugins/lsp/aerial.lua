@@ -1,11 +1,25 @@
 local was_opened = {}
 local width_limit = 130
 
+local M = {}
+
 local open_on_ft = {
   "markdown",
   "yaml",
   "json",
 }
+
+M.was_closed = false
+
+local function quit_aerial()
+  local aerial = require("aerial")
+  if aerial.is_open() then
+    aerial.close()
+  end
+
+  M.was_closed = true
+end
+
 return {
   "stevearc/aerial.nvim",
   ft = open_on_ft,
@@ -28,7 +42,16 @@ return {
     autojump = true,
     attach_mode = "global",
 
+    on_attach = function(bufnr)
+      vim.keymap.set("n", "q", quit_aerial, { buffer = bufnr, desc = "Quit Aerial" })
+      vim.keymap.set("n", "<ESC>", quit_aerial, { buffer = bufnr, desc = "Quit Aerial" })
+    end,
+
     open_automatic = function(bufnr)
+      if M.was_closed then
+        return false
+      end
+
       local aerial = require("aerial")
 
       local width = vim.o.columns

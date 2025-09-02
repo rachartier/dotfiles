@@ -36,8 +36,28 @@ return {
         ["vim.lsp.util.stylize_markdown"] = true,
         ["cmp.entry.get_documentation"] = true,
       },
+      hover = {
+        enabled = true,
+        opts = {
+          border = "rounded",
+          -- win_options = {
+          --   winhighlight = "Normal:CustomLspHover,FloatBorder:CustomLspHover",
+          -- },
+        },
+      },
       signature = {
-        auto_open = { enabled = true },
+        enabled = false,
+        auto_open = {
+          enabled = true,
+          trigger = true,
+          luasnip = false,
+        },
+        opts = {
+          border = "none",
+          -- win_options = {
+          --   -- winhighlight = "Normal:CustomLspHover,FloatBorder:CustomLspHover",
+          -- },
+        },
       },
     },
     -- you can enable a preset for easier configuration
