@@ -15,6 +15,7 @@ return {
       preset = "super-tab",
     },
 
+    signature = { enabled = true },
     enabled = function()
       return not vim.tbl_contains({
         "Avante",

@@ -76,6 +76,9 @@ function M.on_attach(client, bufnr)
 
   vim.lsp.document_color.enable(true, bufnr)
   vim.lsp.on_type_formatting.enable()
+  vim.lsp.document_color.enable(true, 0, {
+    style = "virtual",
+  })
 
   vim.keymap.del("n", "K", { buffer = bufnr })
   local wk = require("which-key")
@@ -91,9 +94,9 @@ function M.on_attach(client, bufnr)
             -- { "gd",          function() vim.lsp.buf.definition() end,                   desc = "Go to definition" },
             { "<leader>gn",  function() vim.diagnostic.jump({ count = 1 }) end,         desc = "Go to next diagnostic" },
             { "<leader>gp",  function() vim.diagnostic.jump({ count = -1 }) end,        desc = "Go to previous diagnostic" },
-            { "K", vim.lsp.hover, desc = "Hover Documentation"}
+            { "K", vim.lsp.hover, desc = "Hover Documentation"},
+            { "gK", function() vim.lsp.buf.signature_help() end, desc = "Help", mode = { "i" } },
         },
-        { "<C-h>", function() vim.lsp.buf.signature_help() end, desc = "Help", mode = { "i" } },
     })
 
   -- vim.keymap.set({"n"},  "<leader>ca",  function() vim.lsp.buf.code_action() end, { noremap = true, silent = true })
@@ -125,10 +128,6 @@ function M.on_attach(client, bufnr)
   --     callback = vim.lsp.buf.clear_references,
   --   })
   -- end
-
-  vim.lsp.document_color.enable(true, 0, {
-    style = "virtual",
-  })
 end
 
 return M

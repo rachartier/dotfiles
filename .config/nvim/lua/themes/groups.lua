@@ -19,7 +19,9 @@ function M.get(colors)
     -- Visual = { bg = colors.surface1 },
     Comment = { fg = colors.surface2, italic = true },
 
-    BlinkCmpSignatureHelpBorder = { link = "FloatBorder" },
+    BlinkCmpSignatureHelpBorder = { bg = colors.surface0 },
+    BlinkCmpSignatureHelp = { bg = colors.surface0, fg = colors.surface1 },
+    BlinkCmpSignatureHelpActiveParameter = { bg = colors.surface1, fg = colors.text },
     BlinkCmpDocBorder = { bg = colors.surface0 },
     BlinkCmpDocSeparator = { bg = colors.surface0 },
     -- BlinkCmpMenuBorder = { link = "FloatBorder" },
@@ -73,9 +75,9 @@ function M.get(colors)
     -- NoiceCmdlinePopupBorder = { link = "FloatBorder" },
     -- NoiceCmdlinePopupTitleInput = { bg = colors.yellow, fg = colors.base },
     -- NoiceFormatLevelOff = { bg = colors.yellow },
-    -- NoicePopupmenu = { bg = colors.mantle },
+    NoicePopupmenu = { bg = colors.mantle },
     -- NoicePopupmenuBorder = { link = "FloatBorder" },
-    -- NoicePopup = { link = "NoicePopupmenu" },
+    NoicePopup = { bg = colors.surface0, fg = colors.text },
     -- NoicePopupBorder = { link = "NoicePopup" },
 
     PopupBorder = { link = "FloatBorder" },
