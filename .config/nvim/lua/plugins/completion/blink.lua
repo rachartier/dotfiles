@@ -23,6 +23,10 @@ return {
       }, vim.bo.filetype) and vim.bo.buftype ~= "prompt" and vim.b.completion ~= false
     end,
 
+    cmdline = {
+      keymap = { preset = "inherit" },
+      completion = { menu = { auto_show = true } },
+    },
     completion = {
       ghost_text = {
         enabled = true,

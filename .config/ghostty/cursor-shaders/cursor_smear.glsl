@@ -66,7 +66,6 @@ const float DURATION = 0.1; //IN SECONDS
 
 void mainImage(out vec4 fragColor, in vec2 fragCoord)
 {
-
     #if !defined(WEB)
     fragColor = texture(iChannel0, fragCoord.xy / iResolution.xy);
     #endif
@@ -100,14 +99,21 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord)
     vec2 centerCP = getRectangleCenter(previousCursor);
     float lineLength = distance(centerCC, centerCP);
 
-    vec4 newColor = vec4(fragColor);
-    // Draw trail
-    if (lineLength > 0.125f) {
-        newColor = mix(newColor, TRAIL_COLOR, antialising(sdfTrail));
+    if(lineLength < 0.08) {
+        return;
     }
+
+    vec4 newColor = vec4(fragColor);
+    // Compute fade factor based on distance along the trail
+    float fadeFactor = 1.0 - smoothstep(lineLength, sdfCurrentCursor, easedProgress * lineLength);
+
+    // Apply fading effect to trail color
+    vec4 fadedTrailColor = TRAIL_COLOR * fadeFactor;
+
+    // Blend trail with fade effect
+    newColor = mix(newColor, fadedTrailColor, antialising(sdfTrail));
     // Draw current cursor
     newColor = mix(newColor, TRAIL_COLOR, antialising(sdfCurrentCursor));
     newColor = mix(newColor, fragColor, step(sdfCurrentCursor, 0.));
-    // newColor = mix(fragColor, newColor, OPACITY);
     fragColor = mix(fragColor, newColor, step(sdfCurrentCursor, easedProgress * lineLength));
 }
