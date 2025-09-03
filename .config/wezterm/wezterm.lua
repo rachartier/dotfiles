@@ -28,6 +28,7 @@ config.font = wezterm.font_with_fallback({ "Berkeley Mono", "Symbols Nerd Font" 
 -- config.freetype_load_target = "Light"
 -- config.freetype_render_target = "HorizontalLcd"
 
+config.scrollback_lines = 100000
 config.freetype_load_target = "Light"
 config.freetype_render_target = "HorizontalLcd"
 config.freetype_load_flags = "NO_HINTING"
