@@ -4,7 +4,7 @@ return {
   dependencies = {
     "rafamadriz/friendly-snippets",
     "fang2hou/blink-copilot",
-    "brenoprata10/nvim-highlight-colors",
+    -- "brenoprata10/nvim-highlight-colors",
     "saghen/blink.compat",
   },
   -- build = "cargo build --release",

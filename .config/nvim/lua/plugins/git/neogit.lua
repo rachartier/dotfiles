@@ -13,6 +13,11 @@ return {
   opts = {
     graph_style = "unicode",
     process_spinner = true,
+    highlight = {
+      italic = true,
+      bold = true,
+      underline = true,
+    },
     git_services = {
       ["github.com"] = "https://github.com/${owner}/${repository}/compare/${branch_name}?expand=1",
       ["bitbucket.org"] = "https://bitbucket.org/${owner}/${repository}/pull-requests/new?source=${branch_name}&t=1",
