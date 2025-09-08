@@ -99,6 +99,8 @@ function M.on_attach(client, bufnr)
         },
     })
 
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = bufnr, desc = "Hover Documentation" })
+
   -- vim.keymap.set({"n"},  "<leader>ca",  function() vim.lsp.buf.code_action() end, { noremap = true, silent = true })
   vim.keymap.set({ "n" }, "<leader>ca", function()
     require("tiny-code-action").code_action()
