@@ -1,7 +1,7 @@
 return {
   {
-    "OXY3DEV/markview.nvim",
-    enabled = false,
+    "OXY2DEV/markview.nvim",
+    enabled = true,
     ft = { "markdown", "quarto", "rmd", "Avante", "codecompanion" },
     lazy = true,
     opts = function(_, opts)
