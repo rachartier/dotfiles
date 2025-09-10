@@ -8,7 +8,7 @@ Freed-Wu/fzf-tab-source kind:defer
 
 ohmyzsh/ohmyzsh path:plugins/command-not-found
 ohmyzsh/ohmyzsh path:plugins/git kind:defer
-ohmyzsh/ohmyzsh path:plugins/tmux kind:defer
+# ohmyzsh/ohmyzsh path:plugins/tmux kind:defer
 
 zsh-users/zsh-autosuggestions kind:defer
 MichaelAquilina/zsh-you-should-use kind:defer
