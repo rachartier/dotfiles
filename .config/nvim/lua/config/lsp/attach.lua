@@ -80,7 +80,6 @@ function M.on_attach(client, bufnr)
     style = "virtual",
   })
 
-  vim.keymap.del("n", "K", { buffer = bufnr })
   local wk = require("which-key")
     -- stylua: ignore start
     wk.add({
