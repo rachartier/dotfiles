@@ -1,5 +1,6 @@
 return {
   "A7Lavinraj/fyler.nvim",
+  -- dir = "~/dev/nvim_plugins/fyler.nvim",
   dependencies = { "nvim-mini/mini.icons" },
   keys = {
     {
