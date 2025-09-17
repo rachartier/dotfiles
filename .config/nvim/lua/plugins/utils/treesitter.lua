@@ -1,4 +1,7 @@
+local utils = require("utils")
+
 local function start_treesitter(bufnr)
+  bufnr = bufnr or vim.api.nvim_get_current_buf()
   local ok, _ = pcall(vim.treesitter.start, bufnr)
 
   if not ok then
@@ -6,7 +9,7 @@ local function start_treesitter(bufnr)
   end
 
   vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-  -- vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+  vim.bo[bufnr].indentexpr = "v:lua.require'utils'.indentexpr()"
 end
 
 local function setup_treesitter_autocmd()
@@ -40,10 +43,7 @@ local function setup_treesitter_autocmd()
         return
       end
 
-      local installed_parser = require("nvim-treesitter").get_installed()
-      local is_installed = parsers and vim.tbl_contains(installed_parser, parser_name)
-
-      if not is_installed then
+      if not utils.ts_have(filetype) then
         require("nvim-treesitter").install({ parser_name }):await(function()
           start_treesitter(bufnr)
         end)
@@ -51,7 +51,7 @@ local function setup_treesitter_autocmd()
         return
       end
 
-      start_treesitter()
+      start_treesitter(bufnr)
     end,
   })
 end

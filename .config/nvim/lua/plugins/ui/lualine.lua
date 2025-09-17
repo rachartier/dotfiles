@@ -327,7 +327,7 @@ return {
       lualine_z = {},
     }
 
-    local theme = require("lualine.themes.catppuccin")
+    local theme = require("lualine.themes.auto")
     local utils = require("utils")
 
     for _, section in pairs(theme) do

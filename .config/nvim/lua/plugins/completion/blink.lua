@@ -15,7 +15,9 @@ return {
       preset = "super-tab",
     },
 
-    signature = { enabled = true },
+    signature = {
+      enabled = true,
+    },
     enabled = function()
       return not vim.tbl_contains({
         "Avante",
@@ -25,7 +27,11 @@ return {
 
     cmdline = {
       keymap = { preset = "inherit" },
-      completion = { menu = { auto_show = true } },
+      completion = {
+        menu = {
+          auto_show = true,
+        },
+      },
     },
     completion = {
       ghost_text = {

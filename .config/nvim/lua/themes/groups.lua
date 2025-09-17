@@ -59,9 +59,19 @@ function M.get(colors)
     GitSignsAdd = { fg = colors.green },
     GitSignsChange = { fg = colors.blue },
 
-    NeogitDiffContextCursor = { bg = colors.surface0, fg = colors.text },
-    NeogitSubtleText = { bg = default_bg, fg = colors.surface2, italic = false },
-    NeogitFloatHeader = { bg = colors.mauve, fg = colors.base },
+    NeogitChangeModified = { italic = true },
+    NeogitChangeAdded = { italic = true },
+    NeogitChangeDeleted = { italic = true },
+    NeogitChangeRenamed = { italic = true },
+    NeogitChangeUpdated = { italic = true },
+    NeogitChangeCopied = { italic = true },
+    NeogitChangeUnmerged = { italic = true },
+    NeogitChangeNewFile = { italic = true },
+    NeogitSectionHeader = { italic = true },
+
+    -- NeogitDiffContextCursor = { bg = colors.surface0, fg = colors.text },
+    -- NeogitSubtleText = { bg = default_bg, fg = colors.surface2, italic = false },
+    -- NeogitFloatHeader = { bg = colors.mauve, fg = colors.base },
 
     -- NeoTreeCursorLine = { link = "PmenuSel" },
     -- NeoTreeIndentMarker = { fg = colors.surface2 },
