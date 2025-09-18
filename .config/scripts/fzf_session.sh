@@ -5,6 +5,10 @@ in_tmux=${TMUX-}
 
 mapfile -t sessions < <(tmux list-sessions -F '#S' 2>/dev/null || true)
 
+session_exists() {
+  tmux has-session -t "=${1}" 2>/dev/null
+}
+
 pick_session() {
   if [[ $# -gt 0 && -n ${1:-} ]]; then
     echo "$1"
@@ -21,26 +25,36 @@ pick_session() {
     --history="$HOME/.cache/fzf_tmux_session_history" \
     --history-size=200 \
     --no-multi \
-    --ansi) || return 1
+    --ansi || true)
+
+  [[ -z $out ]] && return 1
 
   query=$(printf '%s' "$out" | sed -n '1p')
   selection=$(printf '%s' "$out" | sed -n '2p')
 
+  # Prefer a newly typed non-existing name
+  if [[ -n $query ]] && ! printf '%s\n' "${sessions[@]}" | grep -Fxq -- "$query"; then
+    echo "$query"
+    return 0
+  fi
+
   if [[ -n $selection ]]; then
     echo "$selection"
-  else
-    echo "$query"
+    return 0
   fi
+
+  # Fallback (user typed exact existing name and pressed enter)
+  echo "$query"
 }
 
-session_name=$(pick_session "$@")
+session_name=$(pick_session "$@" || true)
 
-if [[ -z ${session_name} ]]; then
+if [[ -z ${session_name:-} ]]; then
   echo "Aborted." >&2
   exit 1
 fi
 
-if tmux has-session -t "=${session_name}" 2>/dev/null; then
+if session_exists "$session_name"; then
   if [[ -n $in_tmux ]]; then
     tmux switch-client -t "$session_name"
   else
