@@ -4,7 +4,14 @@ return {
   {
     "zbirenbaum/copilot.lua",
     dependencies = {
+
       "saghen/blink.cmp",
+      {
+        "copilotlsp-nvim/copilot-lsp",
+        init = function()
+          vim.g.copilot_nes_debounce = 100
+        end,
+      },
     },
     event = "LazyFile",
     keys = {
@@ -29,6 +36,15 @@ return {
     },
     config = function()
       require("copilot").setup({
+        nes = {
+          enabled = true, -- requires copilot-lsp as a dependency
+          auto_trigger = true,
+          keymap = {
+            accept_and_goto = "<leader>p",
+            accept = false,
+            dismiss = "<Esc>",
+          },
+        },
         suggestion = {
           enabled = true,
           auto_trigger = true,
