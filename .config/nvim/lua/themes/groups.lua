@@ -20,7 +20,7 @@ function M.get(colors)
     Comment = { fg = colors.surface2, italic = true },
 
     BlinkCmpSignatureHelpBorder = { bg = colors.surface0 },
-    BlinkCmpSignatureHelp = { bg = colors.surface0, fg = colors.surface1 },
+    BlinkCmpSignatureHelp = { bg = colors.surface0, fg = colors.subtext0 },
     BlinkCmpSignatureHelpActiveParameter = { bg = colors.surface1, fg = colors.text },
     BlinkCmpDocBorder = { bg = colors.surface0 },
     BlinkCmpDocSeparator = { bg = colors.surface0 },
