@@ -1,13 +1,13 @@
 return {
   "stevearc/oil.nvim",
-  enabled = false,
-  -- keys = {
-  --   {
-  --     "<leader>te",
-  --     "<Cmd>Oil --float<CR>",
-  --     desc = "Open Oil",
-  --   },
-  -- },
+  enabled = true,
+  keys = {
+    {
+      "<leader>te",
+      "<Cmd>Oil --float<CR>",
+      desc = "Open Oil",
+    },
+  },
   opts = {
     skip_confirm_for_simple_edits = true,
     delete_to_trash = true,

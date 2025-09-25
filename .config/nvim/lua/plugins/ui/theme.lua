@@ -15,7 +15,7 @@ return {
     enabled = true,
     opts = {
       flavour = vim.g.catppuccin_flavour, -- latte, frappe, macchiato, mocha
-      transparent_background = false, -- not vim.g.neovide,
+      transparent_background = not vim.env.TMUX_NEOGIT_POPUP,
       show_end_of_buffer = false,
       term_colors = true,
       auto_integrations = true,
@@ -23,22 +23,33 @@ return {
         transparent = true, -- enable transparent floating windows
         solid = true, -- use solid styling for floating windows, see |winborder|
       },
-      dim_inactive = {
-        enabled = false,
-        shade = "dark",
-        percentage = 0.35,
-      },
       color_overrides = {
         [vim.g.catppuccin_flavour or "macchiato"] = get_custom_theme_palette(),
       },
-
       highlight_overrides = {
         all = function(colors)
           return require("themes.groups").get(colors)
         end,
       },
-      no_italic = false, -- Force no italic
-      no_bold = false, -- Force no bold
+      lsp_styles = {
+        virtual_text = {
+          errors = { "italic" },
+          hints = { "italic" },
+          warnings = { "italic" },
+          information = { "italic" },
+          ok = { "italic" },
+        },
+        underlines = {
+          errors = { "undercurl" },
+          hints = { "undercurl" },
+          warnings = { "undercurl" },
+          information = { "undercurl" },
+          ok = { "underline" },
+        },
+        inlay_hints = {
+          background = true,
+        },
+      },
       styles = {
         comments = { "italic" },
         conditionals = {},
@@ -52,28 +63,6 @@ return {
         -- properties = {},
         types = {},
         operators = {},
-      },
-      integrations = {
-        native_lsp = {
-          enabled = true,
-          virtual_text = {
-            errors = { "italic" },
-            hints = { "italic" },
-            warnings = { "italic" },
-            information = { "italic" },
-            ok = { "italic" },
-          },
-          underlines = {
-            errors = { "undercurl" },
-            hints = { "undercurl" },
-            warnings = { "undercurl" },
-            information = { "undercurl" },
-          },
-          inlay_hints = {
-            background = true,
-          },
-        },
-        -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
       },
     },
     config = function(_, opts)
@@ -106,6 +95,24 @@ return {
     init = function()
       vim.o.background = "dark" -- or "dark".
       vim.cmd.colorscheme("nano-theme")
+      vim.api.nvim_set_hl(0, "DiagnosticUnderlineError", {
+        undercurl = true,
+      })
+
+      -- Warning
+      vim.api.nvim_set_hl(0, "DiagnosticUnderlineWarn", {
+        undercurl = true,
+      })
+
+      -- Info
+      vim.api.nvim_set_hl(0, "DiagnosticUnderlineInfo", {
+        undercurl = true,
+      })
+
+      -- Hint
+      vim.api.nvim_set_hl(0, "DiagnosticUnderlineHint", {
+        undercurl = true,
+      })
     end,
   },
 }
