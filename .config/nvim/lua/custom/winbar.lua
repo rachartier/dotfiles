@@ -45,7 +45,7 @@ function M.render()
     end
     if prefix ~= "" then
       path = path:gsub("^" .. prefix_path, "")
-      prefix = string.format("%%#WinBarDir#%s%s", prefix, separator)
+      prefix = string.format("%%#WinBarDir#󰉋 %s%s", prefix, separator)
     end
   end
 
@@ -130,8 +130,8 @@ function M.setup()
 
   vim.api.nvim_set_hl(0, "Winbar", { bg = bg, fg = colors.overlay0 })
   vim.api.nvim_set_hl(0, "WinbarSeparator", { fg = colors.overlay1, bg = bg })
-  vim.api.nvim_set_hl(0, "WinbarDir", { fg = colors.pink, bg = bg, bold = true })
-  vim.api.nvim_set_hl(0, "WinbarFile", { fg = colors.subtext0, bg = bg })
+  vim.api.nvim_set_hl(0, "WinbarDir", { fg = colors.pink, bg = bg, bold = true, italic = true })
+  vim.api.nvim_set_hl(0, "WinbarFile", { fg = colors.subtext1, bg = bg })
 
   vim.api.nvim_create_autocmd("BufWinEnter", {
     group = vim.api.nvim_create_augroup("custom_winbar", { clear = true }),
