@@ -26,28 +26,6 @@ return {
     event = "VeryLazy",
     keys = {
       {
-        "<Tab>",
-        function()
-          local ls = require("luasnip")
-          if ls.expand_or_jumpable() then
-            ls.expand_or_jump()
-          else
-            vim.api.nvim_input("<C-V><Tab>")
-          end
-        end,
-        mode = { "i", "s" },
-        silent = true,
-      },
-      {
-        "<S-Tab>",
-        function()
-          local ls = require("luasnip")
-          ls.jump(-1)
-        end,
-        mode = { "i", "s" },
-        silent = true,
-      },
-      {
         "<C-E>",
         function()
           local ls = require("luasnip")

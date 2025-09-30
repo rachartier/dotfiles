@@ -101,7 +101,7 @@ return {
       },
     },
   },
-  config = function()
+  config = function(_, opts)
     -- require("mason").setup(opts)
 
     local on_attach = require("config.lsp.attach").on_attach
@@ -111,9 +111,9 @@ return {
         local bufnr = args.buf
 
         -- Skip specific clients
-        if client and (client.name == "GitHub Copilot" or client.name == "copilot") then
-          return
-        end
+        -- if client and (client.name == "GitHub Copilot" or client.name == "copilot") then
+        --   return
+        -- end
 
         on_attach(client, bufnr)
       end,
@@ -132,6 +132,7 @@ return {
 
     require("mason-lspconfig").setup({
       ensure_installed = tools.lsp,
+      automatic_enable = false,
       automatic_installation = true,
     })
 
@@ -148,6 +149,9 @@ return {
       })
     end
 
+    vim.lsp.enable("copilot")
+    vim.lsp.inline_completion.enable() -- enable inline completion with copilot
+
     for _, config in ipairs(server_settings) do
       if config.mason then
         for _, server_name in ipairs(config.mason) do
@@ -163,11 +167,8 @@ return {
             vim.lsp.config(server_name, {
               capabilities = capabilities,
             })
-
-            -- TODO: remove schedule once it's patched. Worked without in 0.11.1 but not in 0.11.2
-            vim.schedule(function()
-              vim.lsp.enable(server_name)
-            end)
+            print("LSP: Enabling " .. server_name)
+            vim.lsp.enable(server_name)
           end
         end
       end

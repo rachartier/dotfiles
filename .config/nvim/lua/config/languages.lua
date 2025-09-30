@@ -1,7 +1,7 @@
 return {
   {
     filetypes = { "python" },
-    mason = { "basedpyright", "ruff" },
+    mason = { "ty", "ruff" },
     dap = { "debugpy" },
     formatter = {
       "ruff_format",

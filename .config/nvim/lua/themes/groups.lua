@@ -153,7 +153,7 @@ function M.get(colors)
     -- StatusLineNC = { fg = colors.surface0 },
     -- StatusLine = { fg = colors.surface0 },
 
-    EdgyNormal = { bg = colors.base },
+    EdgyNormal = { bg = default_bg },
     EdgyWinBar = { bg = colors.surface0, fg = "None" },
     -- EdgyTitle = { bg = colors.surface0, fg = colors.blue },
     -- EdgyIconActive = { bg = colors.surface0, fg = colors.peach },

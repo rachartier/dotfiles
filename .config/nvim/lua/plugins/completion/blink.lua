@@ -34,8 +34,13 @@ return {
       },
     },
     completion = {
+      accept = {
+        auto_brackets = {
+          enabled = true,
+        },
+      },
       ghost_text = {
-        enabled = true,
+        enabled = false,
       },
       list = {
         selection = {
@@ -65,9 +70,9 @@ return {
           treesitter = { "lsp" },
         },
       },
-      trigger = {
-        show_on_insert_on_trigger_character = false,
-      },
+      -- trigger = {
+      --   show_on_insert_on_trigger_character = false,
+      -- },
     },
     fuzzy = {
       sorts = {
@@ -112,7 +117,7 @@ return {
         copilot = {
           name = "copilot",
           module = "blink-copilot",
-          score_offset = -1000,
+          score_offset = 999999,
           async = true,
           opts = {
             max_completions = 3,
@@ -148,14 +153,16 @@ return {
     opts.keymap = {
       ["<Tab>"] = {
         require("blink.cmp.keymap.presets").get("super-tab")["<Tab>"][1],
-
         "snippet_forward",
-        function()
-          if require("copilot.suggestion").is_visible() then
-            require("copilot.suggestion").accept()
-            return true
-          end
+        function() -- sidekick next edit suggestion
+          return require("sidekick").nes_jump_or_apply()
         end,
+        function()
+          return vim.lsp.inline_completion.get()
+        end,
+        -- function()
+        --   require("tiny-buffers-switcher").switcher()
+        -- end,
         "fallback",
       },
       ["<S-Tab>"] = {
@@ -169,15 +176,14 @@ return {
     vim.api.nvim_create_autocmd("User", {
       pattern = "BlinkCmpMenuOpen",
       callback = function()
-        require("copilot.suggestion").dismiss()
-        vim.b.copilot_suggestion_hidden = true
+        vim.lsp.inline_completion.enable(false)
       end,
     })
 
     vim.api.nvim_create_autocmd("User", {
       pattern = "BlinkCmpMenuClose",
       callback = function()
-        vim.b.copilot_suggestion_hidden = false
+        vim.lsp.inline_completion.enable(true)
       end,
     })
 

@@ -98,9 +98,9 @@ end
 
 return {
   "nvim-lualine/lualine.nvim",
-  dependencies = {
-    "AndreM222/copilot-lualine",
-  },
+  -- dependencies = {
+  --   "AndreM222/copilot-lualine",
+  -- },
   event = "VeryLazy",
   -- priority = 900,
   enabled = vim.env.TMUX_NEOGIT_POPUP == nil,
@@ -233,22 +233,39 @@ return {
           color = { fg = colors.green },
         },
         {
-          "copilot",
-          symbols = {
-            status = {
-              hl = {
-                enabled = colors.green,
-                sleep = colors.fg,
-                disabled = colors.red,
-                warning = colors.yellow,
-                unknown = colors.red,
-              },
-            },
-          },
-          show_colors = true,
-          show_loading = false,
-          padding = { left = 1, right = is_inside_docker and 1 or 2 },
+          function()
+            return " "
+          end,
+          color = function()
+            local status = require("sidekick.status").get()
+            if status then
+              return status.kind == "Error" and { fg = colors.red }
+                or status.busy and { fg = colors.yellow }
+                or { fg = colors.text }
+            end
+          end,
+          cond = function()
+            local status = require("sidekick.status")
+            return status.get() ~= nil
+          end,
         },
+        -- {
+        --   "copilot",
+        --   symbols = {
+        --     status = {
+        --       hl = {
+        --         enabled = colors.green,
+        --         sleep = colors.fg,
+        --         disabled = colors.red,
+        --         warning = colors.yellow,
+        --         unknown = colors.red,
+        --       },
+        --     },
+        --   },
+        --   show_colors = true,
+        --   show_loading = false,
+        --   padding = { left = 1, right = is_inside_docker and 1 or 2 },
+        -- },
         {
           function()
             if is_inside_docker then
