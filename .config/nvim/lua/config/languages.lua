@@ -1,5 +1,9 @@
 return {
   {
+    filetypes = { "*" },
+    mason = { "copilot" },
+  },
+  {
     filetypes = { "python" },
     mason = { "ty", "ruff" },
     dap = { "debugpy" },
