@@ -13,26 +13,6 @@ return {
   opts = {
     keymap = {
       preset = "super-tab",
-      ["<Tab>"] = {
-        "snippet_forward",
-        function() -- sidekick next edit suggestion
-          return require("sidekick").nes_jump_or_apply()
-        end,
-        function()
-          return vim.lsp.inline_completion.get()
-        end,
-        -- function()
-        --   require("tiny-buffers-switcher").switcher()
-        -- end,
-        -- function()
-        --   require("tiny-buffers-switcher").switcher()
-        -- end,
-        "fallback",
-      },
-      ["<S-Tab>"] = {
-        "snippet_backward",
-        "fallback",
-      },
     },
 
     signature = {
@@ -170,6 +150,30 @@ return {
     },
   },
   config = function(_, opts)
+    opts.keymap = {
+      ["<Tab>"] = {
+        require("blink.cmp.keymap.presets").get("super-tab")["<Tab>"][1],
+        "snippet_forward",
+        function() -- sidekick next edit suggestion
+          return require("sidekick").nes_jump_or_apply()
+        end,
+        function()
+          return vim.lsp.inline_completion.get()
+        end,
+        -- function()
+        --   require("tiny-buffers-switcher").switcher()
+        -- end,
+        -- function()
+        --   require("tiny-buffers-switcher").switcher()
+        -- end,
+        "fallback",
+      },
+      ["<S-Tab>"] = {
+        "snippet_backward",
+        "fallback",
+      },
+    }
+
     require("blink-cmp").setup(opts)
 
     vim.api.nvim_create_autocmd("User", {
