@@ -106,7 +106,7 @@ function M.get(colors)
     -- SnacksPickerListCursorLine = { link = "PmenuSel" },
     SnacksIndentScope = { fg = colors.surface1 },
 
-    StatusLine = { fg = colors.text, bg = colors.base },
+    StatusLine = { fg = colors.text, bg = "None" },
     StatusLineNC = { link = "StatusLine" },
 
     -- SnacksDashboardHeader = { fg = colors.yellow },
