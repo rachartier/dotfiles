@@ -9,6 +9,28 @@ return {
       nes = {
         enabled = true,
       },
+      mux = {
+        backend = "tmux",
+        enabled = true,
+      },
+      cli = {
+        win = {
+          keys = {
+            stopinsert = { "<esc>", "stopinsert", mode = "t" }, -- enter normal mode
+            win_p = { "<M-Left>", "blur" },
+          },
+        },
+      },
+    },
+    keys = {
+      {
+        "<leader>aa",
+        function()
+          require("sidekick.cli").toggle({ name = "copilot", focus = true })
+        end,
+        mode = { "n", "v" },
+        desc = "Sidekick Toggle CLI",
+      },
     },
     config = function(_, opts)
       require("sidekick").setup(opts)
