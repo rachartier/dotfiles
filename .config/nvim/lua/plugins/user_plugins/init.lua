@@ -5,10 +5,17 @@ return {
     "rachartier/tiny-buffers-switcher.nvim",
     enabled = true,
     event = "VeryLazy",
+    priority = 1000,
     keys = {
       {
         "<Tab>",
         function()
+          local ok, nes = pcall(require, "sidekick.nes")
+
+          if ok and nes.have() then
+            return require("sidekick").nes_jump_or_apply()
+          end
+
           require("tiny-buffers-switcher").switcher()
         end,
         { noremap = true, silent = true },

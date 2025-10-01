@@ -149,7 +149,6 @@ return {
       })
     end
 
-    vim.lsp.enable("copilot")
     vim.lsp.inline_completion.enable() -- enable inline completion with copilot
 
     for _, config in ipairs(server_settings) do
@@ -167,7 +166,6 @@ return {
             vim.lsp.config(server_name, {
               capabilities = capabilities,
             })
-            print("LSP: Enabling " .. server_name)
             vim.lsp.enable(server_name)
           end
         end

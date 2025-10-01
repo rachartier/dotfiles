@@ -3,7 +3,7 @@ local default_border = require("config.ui.border").default_border
 return {
   "folke/noice.nvim",
   enabled = true,
-  lazy = true,
+  lazy = false,
   event = { "VeryLazy" },
   opts = {
     messages = {
