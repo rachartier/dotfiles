@@ -216,7 +216,7 @@ function M.get(colors)
     -- CopilotChatSeparator = { fg = colors.surface1 },
 
     -- === Lsp
-    ["@keyword.operator.python"] = { link = "Conditional" },
+    -- ["@keyword.operator.python"] = { link = "Conditional" },
   }
 end
 
@@ -231,7 +231,7 @@ end
 function M.override_lsp_hl(colors_table)
   local colors = colors_table
 
-  vim.api.nvim_set_hl(0, "@keyword.operator.python", { link = "Conditional" })
+  -- vim.api.nvim_set_hl(0, "@keyword.operator.python", { link = "Conditional" })
 end
 
 return M

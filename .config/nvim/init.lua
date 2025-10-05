@@ -1,9 +1,5 @@
 require("config")
 
--- Disable deprecation warnings
--- TODO: remove this when deprecation warnings are fixed for 0.12
-vim.deprecate = function() end
-
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local lazyrepo = "https://github.com/folke/lazy.nvim.git"
