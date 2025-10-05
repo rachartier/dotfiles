@@ -45,7 +45,7 @@ function M.render()
     end
     if prefix ~= "" then
       path = path:gsub("^" .. prefix_path, "")
-      prefix = string.format("%%#WinBarDir#󰉋 %s%s", prefix, separator)
+      prefix = string.format("%%#WinBarDir#󰝰 %s%s", prefix, separator)
     end
   end
 

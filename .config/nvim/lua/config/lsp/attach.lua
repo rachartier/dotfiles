@@ -110,11 +110,7 @@ function M.on_attach(client, bufnr)
 
   if client:supports_method(methods.textDocument_codeAction) then
     vim.keymap.set({ "n" }, "<leader>ca", function()
-            require("tiny-code-action").code_action({
-                context = {
-          only = {"source"}
-        }
-      })
+            require("tiny-code-action").code_action({ })
     end, { noremap = true, silent = true })
   end
 
