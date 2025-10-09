@@ -28,9 +28,13 @@ return {
     cmdline = {
       keymap = { preset = "inherit" },
       completion = {
+        list = { selection = { preselect = false } },
         menu = {
-          auto_show = true,
+          auto_show = function(ctx)
+            return vim.fn.getcmdtype() == ":"
+          end,
         },
+        ghost_text = { enabled = true },
       },
     },
     completion = {

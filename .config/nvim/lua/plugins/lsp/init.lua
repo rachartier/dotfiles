@@ -110,10 +110,9 @@ return {
         local client = vim.lsp.get_client_by_id(args.data.client_id)
         local bufnr = args.buf
 
-        -- Skip specific clients
-        -- if client and (client.name == "GitHub Copilot" or client.name == "copilot") then
-        --   return
-        -- end
+        if client and (client.name == "GitHub Copilot" or client.name == "copilot") then
+          vim.lsp.inline_completion.enable()
+        end
 
         on_attach(client, bufnr)
       end,
@@ -148,8 +147,6 @@ return {
         automatic_installation = true,
       })
     end
-
-    vim.lsp.inline_completion.enable() -- enable inline completion with copilot
 
     for _, config in ipairs(server_settings) do
       if config.mason then

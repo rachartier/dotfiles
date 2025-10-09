@@ -62,8 +62,8 @@ return {
     branch = "main",
     build = { ":TSUpdate" },
     -- lazy = false,
-    event = { "LazyFile" },
-    enabled = true,
+    event = { "LazyFile", "VeryLazy" },
+    cmd = { "TSUpdate", "TSInstall", "TSLog", "TSUninstall" },
     config = function()
       setup_treesitter_autocmd()
 
