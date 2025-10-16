@@ -68,7 +68,6 @@ return {
   "neovim/nvim-lspconfig",
   event = "VeryLazy",
   dependencies = {
-    "saghen/blink.cmp",
     "jay-babu/mason-nvim-dap.nvim",
     "zapling/mason-conform.nvim",
     "mason-org/mason-lspconfig.nvim",

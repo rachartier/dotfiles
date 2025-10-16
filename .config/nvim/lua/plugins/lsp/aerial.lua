@@ -23,7 +23,7 @@ end
 return {
   "stevearc/aerial.nvim",
   ft = open_on_ft,
-  enabled = true,
+  enabled = false,
   keys = {
     { "<leader>at", "<cmd>AerialToggle!<CR>", desc = "Toggle Aerial" },
   },

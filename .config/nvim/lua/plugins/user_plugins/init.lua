@@ -134,8 +134,8 @@ return {
     },
   },
   {
-    -- dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-inline-diagnostic.nvim",
-    "rachartier/tiny-inline-diagnostic.nvim",
+    dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-inline-diagnostic.nvim",
+    -- "rachartier/tiny-inline-diagnostic.nvim",
     event = "LazyFile",
     enabled = true,
     -- commit = "0ac1133f0869730ced61b5f3c540748e29acca1a",
@@ -158,6 +158,8 @@ return {
         },
         disabled_ft = {},
       })
+
+      vim.diagnostic.open_float = require("tiny-inline-diagnostic.override").open_float
 
       -- require("tiny-inline-diagnostic").setup({
       -- 	signs = {

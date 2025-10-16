@@ -21,7 +21,7 @@ return {
   },
   {
     "L3MON4D3/LuaSnip",
-    lazy = true,
+    lazy = false,
     build = "make install_jsregexp",
     event = "VeryLazy",
     keys = {
