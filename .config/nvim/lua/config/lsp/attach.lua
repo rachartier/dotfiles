@@ -61,10 +61,12 @@ M.lsp_rename = function()
 end
 
 function M.make_capabilities()
-  local c = require("blink.cmp").get_lsp_capabilities()
-  c.textDocument.onTypeFormatting = { dynamicRegistration = false }
-
-  return c
+  -- local c = require("blink.cmp").get_lsp_capabilities()
+  -- c.textDocument.onTypeFormatting = { dynamicRegistration = false }
+  --
+  -- return c
+  --
+  return {}
 end
 
 function M.on_attach(client, bufnr)

@@ -1,6 +1,7 @@
 return {
   {
     "chrisgrieser/nvim-scissors",
+    enabled = false,
     event = { "VeryLazy" },
     opts = {
       backdrop = {
@@ -21,7 +22,8 @@ return {
   },
   {
     "L3MON4D3/LuaSnip",
-    lazy = false,
+    lazy = true,
+    enabled = false,
     build = "make install_jsregexp",
     event = "VeryLazy",
     keys = {

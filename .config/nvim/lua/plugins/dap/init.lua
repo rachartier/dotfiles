@@ -116,7 +116,6 @@ return {
     "mfussenegger/nvim-dap-python",
     dependencies = { "mfussenegger/nvim-dap" },
     ft = { "python" },
-    event = "VeryLazy",
     keys = {
       {
         "<leader>dPt",
@@ -143,13 +142,11 @@ return {
     "mfussenegger/nvim-jdtls",
     dependencies = { "mfussenegger/nvim-dap" },
     ft = { "java" },
-    event = "VeryLazy",
   },
   {
     "docker/nvim-dap-docker",
     ft = { "dockerfile" },
     dependencies = { "mfussenegger/nvim-dap" },
-    event = "VeryLazy",
     config = function()
       require("dap-docker").setup()
     end,

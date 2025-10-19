@@ -20,7 +20,6 @@ vim.opt.rtp:prepend(lazypath)
 require("config.lazy_file").lazy_file()
 require("themes").set_theme("catppuccin")
 
---
 require("lazy").setup({
   spec = {
     { import = "plugins.completion" },

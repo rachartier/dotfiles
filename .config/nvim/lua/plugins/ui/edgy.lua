@@ -1,5 +1,7 @@
 return {
   "folke/edgy.nvim",
+  enabled = true,
+  event = "VeryLazy",
   init = function()
     -- vim.opt.laststatus = 3
     vim.opt.splitkeep = "screen"
@@ -37,6 +39,4 @@ return {
       { title = "Neotest Output", ft = "neotest-output-panel", size = { height = 15 } },
     },
   },
-  enabled = true,
-  event = "VeryLazy",
 }

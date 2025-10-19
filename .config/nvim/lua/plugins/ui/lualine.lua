@@ -101,7 +101,7 @@ return {
   -- dependencies = {
   --   "AndreM222/copilot-lualine",
   -- },
-  event = "VeryLazy",
+  event = "LazyFile",
   -- priority = 900,
   enabled = vim.env.TMUX_NEOGIT_POPUP == nil,
   init = function()
