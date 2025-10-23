@@ -66,7 +66,7 @@ end
 
 return {
   "neovim/nvim-lspconfig",
-  event = "LazyFile",
+  event = { "VeryLazy", "LazyFile" },
   dependencies = {
     "jay-babu/mason-nvim-dap.nvim",
     "zapling/mason-conform.nvim",

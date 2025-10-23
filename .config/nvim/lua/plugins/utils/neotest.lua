@@ -82,7 +82,7 @@ return {
     require("neotest").setup({
       adapters = {
         require("neotest-python")({
-          runner = "unittest",
+          runner = "pytest",
         }),
       },
       is_test_file = function(file_path)
