@@ -104,11 +104,11 @@ function M.on_attach(client, bufnr)
 
   -- vim.keymap.set({"n"},  "<leader>ca",  function() vim.lsp.buf.code_action() end, { noremap = true, silent = true })
 
-  if client:supports_method(methods.textDocument_definition) then
-    vim.keymap.set("n", "gi", function() require("fzf-lua").lsp_implementations({ jump1 = true }) end, { desc = "Go to implementation" })
-    vim.keymap.set("n", "gd", function() require("fzf-lua").lsp_definitions({ jump1 = true }) end, { desc = "Go to definition" })
-    vim.keymap.set("n", "gD", function() require("fzf-lua").lsp_definitions({ jump1 = false }) end, { desc = "Peek definition" })
-  end
+  -- if client:supports_method(methods.textDocument_definition) then
+  --   vim.keymap.set("n", "gi", function() require("fzf-lua").lsp_implementations({ jump1 = true }) end, { desc = "Go to implementation" })
+  --   vim.keymap.set("n", "gd", function() require("fzf-lua").lsp_definitions({ jump1 = true }) end, { desc = "Go to definition" })
+  --   vim.keymap.set("n", "gD", function() require("fzf-lua").lsp_definitions({ jump1 = false }) end, { desc = "Peek definition" })
+  -- end
 
   if client:supports_method(methods.textDocument_codeAction) then
     vim.keymap.set({ "n" }, "<leader>ca", function()

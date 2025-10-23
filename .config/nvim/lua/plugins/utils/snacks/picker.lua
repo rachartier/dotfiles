@@ -14,6 +14,7 @@ return {
   },
   layout = {
     cycle = true,
+    reverse = true,
     --- Use the default layout or vertical if the window is too narrow
     preset = function()
       return vim.o.columns >= 130 and "custom" or "vertical"
