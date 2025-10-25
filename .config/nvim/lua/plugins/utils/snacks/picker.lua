@@ -40,8 +40,8 @@ return {
       layout = {
         box = "horizontal",
         backdrop = false,
-        width = 0.6,
-        height = 0.6,
+        width = vim.g.float_width,
+        height = vim.g.float_height,
         border = "none",
         {
           box = "vertical",
@@ -66,15 +66,12 @@ return {
     vertical = {
       layout = {
         backdrop = false,
-        width = 0.5,
-        min_width = 80,
-        height = 0.8,
-        min_height = 30,
+        width = vim.g.float_width,
+        height = vim.g.float_height,
         box = "vertical",
         border = border,
         title_pos = "center",
-        { win = "preview", height = 0.4, border = "none" },
-        { win = "list", border = "top" },
+        { win = "list", border = "none" },
         { win = "input", height = 1, border = "top" },
       },
     },
