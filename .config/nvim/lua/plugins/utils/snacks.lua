@@ -21,7 +21,7 @@ return {
   lazy = false,
     -- stylua: ignore start
     keys = {
-        -- Top Pickers & Explorer
+      -- Top Pickers & Explorer
       { "<leader>fg", function() Snacks.picker.grep() end, desc = "Grep" },
       { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
       { "<leader>n", function() Snacks.picker.notifications() end, desc = "Notification History" },
@@ -98,17 +98,22 @@ return {
     dashboard = require("plugins.utils.snacks.dashboard"),
     indent = require("plugins.utils.snacks.indent"),
     picker = require("plugins.utils.snacks.picker"),
-    image = {},
-    input = {},
-    gitbrowse = {},
-    git = {},
-    notify = {},
-    toggle = {},
-    bigfile = {},
-    quickfile = {},
-    rename = {},
-    layout = {},
-    terminal = {},
+    image = {
+      doc = {
+        enabled = false,
+        inline = false,
+      },
+    },
+    input = { enabled = true },
+    gitbrowse = { enabled = true },
+    git = { enabled = true },
+    notify = { enabled = true },
+    toggle = { enabled = true },
+    bigfile = { enabled = true },
+    quickfile = { enabled = true },
+    rename = { enabled = true },
+    layout = { enabled = true },
+    terminal = { enabled = true },
     -- statuscolumn = { enabled = true },
   },
   init = function()
