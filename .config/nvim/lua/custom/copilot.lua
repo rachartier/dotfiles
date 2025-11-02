@@ -1,0 +1,33 @@
+-- local augroup = vim.api.nvim_create_augroup("custom_copilot", { clear = true })
+--
+-- local function is_copilot(client)
+--   local name = type(client) == "table" and client.name or client --[[@as string]]
+--   return name and name:lower():find("copilot")
+-- end
+--
+-- local function on_status(err, res, ctx)
+--   if err then
+--     return
+--   end
+--
+--   if res.message and (res.kind == "Error" or res.kind == "Warning") then
+--     local msg = "**Copilot:** " .. res.message
+--     if msg:find("not signed") then
+--       msg = msg .. "\nPlease use `:LspCopilotSignIn` to sign in."
+--     end
+--     vim.notify(msg, res.kind == "Error" and vim.log.levels.ERROR or vim.log.levels.WARN)
+--   end
+--
+--   vim.print(res)
+-- end
+--
+-- vim.api.nvim_create_autocmd("LspAttach", {
+--   group = augroup,
+--   callback = function(ev)
+--     local client = vim.lsp.get_client_by_id(ev.data.client_id)
+--
+--     if client and is_copilot(client) then
+--       client.handlers.didChangeStatus = on_status
+--     end
+--   end,
+-- })

@@ -72,6 +72,11 @@ return {
       { "gy", function() Snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition" },
       { "gai", function() Snacks.picker.lsp_incoming_calls() end, desc = "C[a]lls Incoming" },
       { "gao", function() Snacks.picker.lsp_outgoing_calls() end, desc = "C[a]lls Outgoing" },
+      -- GH
+      { "<leader>gi", function() Snacks.picker.gh_issue() end, desc = "GitHub Issues (open)" },
+      { "<leader>gI", function() Snacks.picker.gh_issue({ state = "all" }) end, desc = "GitHub Issues (all)" },
+      { "<leader>gp", function() Snacks.picker.gh_pr() end, desc = "GitHub Pull Requests (open)" },
+      { "<leader>gP", function() Snacks.picker.gh_pr({ state = "all" }) end, desc = "GitHub Pull Requests (all)" },
       { "<leader>ss", function() Snacks.picker.lsp_symbols() end, desc = "LSP Symbols" },
       { "<leader>sS", function() Snacks.picker.lsp_workspace_symbols() end, desc = "LSP Workspace Symbols" },
         {
@@ -99,14 +104,12 @@ return {
     indent = require("plugins.utils.snacks.indent"),
     picker = require("plugins.utils.snacks.picker"),
     image = {
-      doc = {
-        enabled = false,
-        inline = false,
-      },
+      enabled = false,
     },
     input = { enabled = true },
     gitbrowse = { enabled = true },
     git = { enabled = true },
+    gh = { enabled = true },
     notify = { enabled = true },
     toggle = { enabled = true },
     bigfile = { enabled = true },

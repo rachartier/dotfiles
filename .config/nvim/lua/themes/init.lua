@@ -5,6 +5,7 @@ local themes = {
   default = require("themes.default.theme"),
   nano = require("themes.nano.theme"),
   rosepine = require("themes.rosepine.theme"),
+  selenized = require("themes.selenized.theme"),
 }
 
 M.current = "default"
