@@ -12,6 +12,14 @@ return {
       filename_first = true,
     },
   },
+  sources = {
+    gh_issue = {
+      layout = {
+        width = 0.8,
+        height = 0.8,
+      },
+    },
+  },
   layout = {
     cycle = true,
     reverse = true,
@@ -56,7 +64,7 @@ return {
         },
         {
           win = "preview",
-          width = 0.60,
+          width = 0.50,
           border = border,
           title = " Preview ",
           title_pos = "center",

@@ -21,7 +21,7 @@ return {
   lazy = false,
     -- stylua: ignore start
     keys = {
-        -- Top Pickers & Explorer
+      -- Top Pickers & Explorer
       { "<leader>fg", function() Snacks.picker.grep() end, desc = "Grep" },
       { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
       { "<leader>n", function() Snacks.picker.notifications() end, desc = "Notification History" },
@@ -72,6 +72,11 @@ return {
       { "gy", function() Snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition" },
       { "gai", function() Snacks.picker.lsp_incoming_calls() end, desc = "C[a]lls Incoming" },
       { "gao", function() Snacks.picker.lsp_outgoing_calls() end, desc = "C[a]lls Outgoing" },
+      -- GH
+      { "<leader>gi", function() Snacks.picker.gh_issue() end, desc = "GitHub Issues (open)" },
+      { "<leader>gI", function() Snacks.picker.gh_issue({ state = "all" }) end, desc = "GitHub Issues (all)" },
+      { "<leader>gp", function() Snacks.picker.gh_pr() end, desc = "GitHub Pull Requests (open)" },
+      { "<leader>gP", function() Snacks.picker.gh_pr({ state = "all" }) end, desc = "GitHub Pull Requests (all)" },
       { "<leader>ss", function() Snacks.picker.lsp_symbols() end, desc = "LSP Symbols" },
       { "<leader>sS", function() Snacks.picker.lsp_workspace_symbols() end, desc = "LSP Workspace Symbols" },
         {
@@ -98,17 +103,20 @@ return {
     dashboard = require("plugins.utils.snacks.dashboard"),
     indent = require("plugins.utils.snacks.indent"),
     picker = require("plugins.utils.snacks.picker"),
-    image = {},
-    input = {},
-    gitbrowse = {},
-    git = {},
-    notify = {},
-    toggle = {},
-    bigfile = {},
-    quickfile = {},
-    rename = {},
-    layout = {},
-    terminal = {},
+    image = {
+      enabled = false,
+    },
+    input = { enabled = true },
+    gitbrowse = { enabled = true },
+    git = { enabled = true },
+    gh = { enabled = true },
+    notify = { enabled = true },
+    toggle = { enabled = true },
+    bigfile = { enabled = true },
+    quickfile = { enabled = true },
+    rename = { enabled = true },
+    layout = { enabled = true },
+    terminal = { enabled = true },
     -- statuscolumn = { enabled = true },
   },
   init = function()
