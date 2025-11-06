@@ -7,9 +7,9 @@ shell-integration = zsh
 cursor-text = "#000000"
 
 font-family = ""
-# font-family = MonoLisai
+font-family = MonoLisa
 # font-family = Berkeley Mono
-font-family = MapleMono
+# font-family = MapleMono
 font-family = Symbols Nerd Fonts Mono
 # font-family = CommitMono
 # font-family = IBMPlexMono
@@ -31,8 +31,6 @@ clipboard-write = allow
 window-decoration = client
 window-theme = ghostty
 
-window-padding-x = 8
-window-padding-y = 8,0
 
 adjust-underline-thickness = -20%
 adjust-underline-position = -0
@@ -47,4 +45,12 @@ auto-update-channel = tip
 
 app-notifications = no-clipboard-copy
 
-term=xterm-ghostty
+# term=xterm-ghostty
+
+window-width = 90
+window-height = 30
+window-colorspace = display-p3
+window-padding-color = background
+window-padding-balance = true
+window-padding-x = 8
+window-padding-y = 8,0
