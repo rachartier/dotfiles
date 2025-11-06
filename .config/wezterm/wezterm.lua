@@ -17,13 +17,13 @@ end
 -- config.font = wezterm.font_with_fallback({ "IBM Plex Mono", "Symbols Nerd Font" })
 -- config.font = wezterm.font_with_fallback({ "Monaspace Neon", "Symbols Nerd Font" })
 -- config.font = wezterm.font_with_fallback({ "Symbols Nerd Font" })
--- config.font = wezterm.font_with_fallback({ "MonoLisa", "Symbols Nerd Font" })
+config.font = wezterm.font_with_fallback({ "MonoLisa", "Symbols Nerd Font" })
 -- config.font = wezterm.font_with_fallback({ "Berkeley Mono", "Symbols Nerd Font" })
 -- config.font = wezterm.font_with_fallback({ "CommitMono", "Symbols Nerd Font" })
 -- config.font = wezterm.font_with_fallback({ "0xProto", "Symbols Nerd Font" })
 -- config.font = wezterm.font_with_fallback({ "Fantasque Sans Mono", "Symbols Nerd Font" })
 -- config.font = wezterm.font_with_fallback({ "Cartograph CF", "Symbols Nerd Font" })
-config.font = wezterm.font_with_fallback({ "Maple Mono NF", "Symbols Nerd Font" })
+-- config.font = wezterm.font_with_fallback({ "Maple Mono NF", "Symbols Nerd Font" })
 -- config.font = wezterm.font_with_fallback({ "IBM Plex Mono", "Symbols Nerd Font" })
 -- config.freetype_load_target = "Light"
 -- config.freetype_render_target = "HorizontalLcd"
@@ -35,7 +35,7 @@ config.freetype_load_flags = "NO_HINTING"
 config.freetype_load_target = "Normal"
 -- config.cell_width = 1
 config.line_height = 1.0
-config.font_size = 16
+config.font_size = 14
 config.font_rules = {
 	-- {
 	-- 	italic = true,
@@ -57,7 +57,7 @@ config.font_rules = {
 
 -- == ~= != <= >= #################### 00000 =================> ==>
 config.harfbuzz_features = {
-	-- "zero=1",
+	"zero=1",
 	-- "ss01=1",
 	-- "cv01=1",
 	-- "ss02=1",
@@ -86,26 +86,17 @@ config.window_padding = {
 	top = 4,
 	bottom = 0,
 }
-config.win32_system_backdrop = "Acrylic"
+-- config.win32_system_backdrop = "Acrylic"
 -- config.win32_system_backdrop = "Mica"
 
 -- config.win32_acrylic_accent_color = "rgba(36, 39, 58, 0)"
 -- config.window_background_opacity = 0.0
-config.window_background_opacity = 0.92
+-- config.window_background_opacity = 0.92
 -- config.window_background_opacity = 1
 
 config.window_close_confirmation = "NeverPrompt"
+
 local theme = "Catppuccin Macchiato"
---
--- local custom = wezterm.color.get_builtin_schemes()[theme]
--- -- custom.ansi[6] = "#c6a0f6"
--- -- custom.ansi[7] = "#7dc4e4"
--- -- custom.brights[6] = "#c6a0f6"
--- -- custom.brights[7] = "#7dc4e4"
---
--- config.color_schemes = {
--- 	["CustomCatppuccin"] = custom,
--- }
 config.color_scheme = theme
 
 config.mouse_bindings = {

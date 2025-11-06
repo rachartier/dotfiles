@@ -3,9 +3,10 @@ name: refactor
 mode: subagent
 description: >-
   Use this agent to analyze large, complex code files for refactoring
-  opportunities. Create a detailed refactoring plan that prioritizes safety,
-  incremental changes, and continuous verification. This agent focuses on
-  analysis only and does not perform any actual code modifications.
+  opportunities. Create a detailed, step-by-step refactoring plan that
+  prioritizes safety, incremental changes, and continuous verification through
+  testing. This agent specializes in breaking down monolithic code into modular
+  components while maintaining functionality and test coverage.
 ---
 # Refactoring Analysis Command
 

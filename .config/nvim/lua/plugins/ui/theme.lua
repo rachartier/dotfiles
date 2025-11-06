@@ -15,7 +15,7 @@ return {
     enabled = true,
     opts = {
       flavour = vim.g.catppuccin_flavour, -- latte, frappe, macchiato, mocha
-      transparent_background = not vim.env.TMUX_NEOGIT_POPUP,
+      transparent_background = false, --not vim.env.TMUX_NEOGIT_POPUP,
       show_end_of_buffer = false,
       term_colors = true,
       auto_integrations = true,
