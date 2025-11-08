@@ -1,4 +1,18 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "theme": "catppuccin"
+  "theme": "catppuccin",
+  "mcp": {
+    "beads-mcp": {
+      "enabled": true,
+      "type": "local",
+      "command": [
+        "beads-mcp"
+      ]
+    },
+    "context7": {
+      "type": "remote",
+      "enabled": true,
+      "url": "https://mcp.context7.com/mcp"
+    }
+  }
 }
