@@ -43,7 +43,7 @@ local function setup_treesitter_autocmd()
         return
       end
 
-      if not utils.ts_have(filetype) then
+      if not utils.have(filetype) then
         require("nvim-treesitter").install({ parser_name }):await(function()
           start_treesitter(bufnr)
         end)

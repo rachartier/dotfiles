@@ -156,6 +156,7 @@ function M.get_visual_range()
 
   return range
 end
+
 -------------------------------
 
 function M.get_hl(group, attr)
@@ -209,33 +210,44 @@ function M.hl_str(hl, str)
   return "%#" .. hl .. "#" .. str .. "%*"
 end
 
-M._installed = nil ---@type table<string,string>?
+M._installed = nil ---@type table<string,boolean>?
+M._queries = {} ---@type table<string,boolean>
 
----@param force boolean?
-function M.ts_get_installed(force)
-  if not M._installed or force then
-    M._installed = {}
+---@param update boolean?
+function M.get_installed(update)
+  if update then
+    M._installed, M._queries = {}, {}
     for _, lang in ipairs(require("nvim-treesitter").get_installed("parsers")) do
-      M._installed[lang] = lang
+      M._installed[lang] = true
     end
   end
-  return M._installed
+  return M._installed or {}
 end
 
----@param ft string
-function M.ts_have(ft)
-  local lang = vim.treesitter.language.get_lang(ft)
-  return lang and M.ts_get_installed()[lang]
+---@param what string|number|nil
+---@param query? string
+---@overload fun(buf?:number):boolean
+---@overload fun(ft:string):boolean
+---@return boolean
+function M.have(what, query)
+  what = what or vim.api.nvim_get_current_buf()
+  what = type(what) == "number" and vim.bo[what].filetype or what --[[@as string]]
+  local lang = vim.treesitter.language.get_lang(what)
+  if lang == nil or M.get_installed()[lang] == nil then
+    return false
+  end
+  if query and not M.have_query(lang, query) then
+    return false
+  end
+  return true
 end
 
 function M.foldexpr()
-  local buf = vim.api.nvim_get_current_buf()
-  return M.ts_have(vim.bo[buf].filetype) and vim.treesitter.foldexpr() or "0"
+  return M.have(nil, "folds") and vim.treesitter.foldexpr() or "0"
 end
 
 function M.indentexpr()
-  local buf = vim.api.nvim_get_current_buf()
-  return M.ts_have(vim.bo[buf].filetype) and require("nvim-treesitter").indentexpr() or -1
+  return M.have(nil, "indents") and require("nvim-treesitter").indentexpr() or -1
 end
 
 return M
