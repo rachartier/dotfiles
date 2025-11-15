@@ -5,7 +5,8 @@
 #    --color=marker:#f4dbd6,fg+:#cad3f5,prompt:#c6a0f6,hl+:bold:#eed49f"
 theme="\
    --color=bg+:#363a4f,bg:-1,spinner:#f4dbd6,hl:#b8c0e0\
-   --color=fg:#8087a2,header:#ed8796,info:#c6a0f6,pointer:#f4dbd6 \
+   --color=fg:#8087a2,header:#ed8796,info:#c6a0f6,pointer:#c6a0f6\
+   --color=gutter:#363a4f \
    --color=border:#cad3f5 \
    --color=marker:#f4dbd6,fg+:#cad3f5,prompt:#c6a0f6,hl+:bold:#8aadf4"
 
@@ -22,16 +23,13 @@ export KEYTIMEOUT=1
 export FZF_DEFAULT_OPTS="
     --layout=default
     --multi \
-    --margin=0,0 \
     --preview-window=right:50% \
     --preview-window=rounded \
     --preview-window=cycle \
     --scrollbar '▌' \
-    --marker '✚ ' \
-    --pointer '' \
+    --marker '+' \
     --prompt ' ' \
     --no-separator \
-    --color gutter:-1\
     --bind 'esc:abort' \
     --no-clear \
     $theme \
