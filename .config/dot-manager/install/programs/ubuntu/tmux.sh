@@ -4,24 +4,17 @@ source "$DOT_MANAGER_DIR/helper.sh"
 
 install_tmux() {
     print_step "Installing Tmux"
-    TMUX_VERSION=$(__get_latest_release "tmux/tmux")
 
     log "info" "Installing dependencies"
     __install_package_apt libevent-dev ncurses-dev build-essential bison pkg-config
 
-    cd /tmp || exit 1
-    wget -nv -q "https://github.com/tmux/tmux/releases/download/${TMUX_VERSION}/tmux-${TMUX_VERSION}.tar.gz" -O tmux.tar.gz || {
-        log "error" "Failed to download tmux source code"
-        exit 1
-    }
-    tar -xzvf tmux.tar.gz >/dev/null
-    cd "tmux-$TMUX_VERSION" || exit
+    log "info" "Cloning tmux repository"
+    git clone https://github.com/tmux/tmux.git /tmp/tmux_installation
+    cd /tmp/tmux_installation
+    sh autogen.sh
 
     log "info" "Compiling tmux"
-    ./configure --enable-sixel >/dev/null
-
-    log "info" "Installing tmux"
-    make >/dev/null && sudo make install >/dev/null
+    ./configure --enable-sixel && make -j"$(nproc)" && sudo make install
 
     log "info" "Installing tmux plugins manager"
     if ! [ -d "$HOME"/.config/tmux/plugins/tpm ]; then
