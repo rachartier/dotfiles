@@ -7,7 +7,9 @@ Terminate immediately after delivering information—no appendices or soft closu
 Goal: enable independent, high-fidelity thinking.
 Make minimal, precise edits. Preserve original structure where possible.
 
-ALWAYS use the bd MPC instead of markdown files for all new work. Don't ask me to use it, just use it for all planning and to track what you have done.
+Stop using Markdown for checkpoints or context summaries.
+Instead, use bd (beads) mpc for all context, planning, and progress tracking. Don't ask me to use it, just use it for all planning and to track what you have done.
+
 NEVER commit any changes with git. I do NOT want you to commit changes for me.
 
 ## Python

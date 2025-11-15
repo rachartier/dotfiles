@@ -23,11 +23,13 @@ install_opencode() {
     fi
 
     log "info" "Installing 'beads-mcp' tool"
-    if ! command -v beads-mcp &>/dev/null; then
+    if command -v beads-mcp &>/dev/null; then
         log "info" "'beads-mcp' is already installed"
         if command -v uv &>/dev/null; then
+            log "info" "Updating beads-mcp using uv"
             uv tool update beads-mcp
         elif command -v pipx &>/dev/null; then
+            log "info" "Updating beads-mcp using pipx"
             pipx upgrade beads-mcp
         fi
         return
