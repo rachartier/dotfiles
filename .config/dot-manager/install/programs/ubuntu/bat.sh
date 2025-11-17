@@ -22,8 +22,9 @@ install_bat() {
         wget -nvq -P "$(bat --config-dir)/themes" https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Mocha.tmTheme
 
         log "success" "bat themes installed."
-        bat cache --build
     fi
+
+    bat cache --build
 }
 
 install_bat "$@"

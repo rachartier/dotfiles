@@ -5,9 +5,9 @@ skip_global_compinit=1
 source "$HOME/.profile"
 source "$HOME/.dotfile_profile"
 
-
 export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 eval "$(starship init zsh)"
+
 
 ANTIDOTE_DIR="$HOME/.antidote"
 [ ! -d $ANTIDOTE_DIR ] && git clone --depth=1 https://github.com/mattmc3/antidote.git $ANTIDOTE_DIR
@@ -96,15 +96,6 @@ setopt share_history          # share command history data
 bindkey "^[[1;5A" history-substring-search-up
 bindkey "^[[1;5B" history-substring-search-down
 # bindkey '^[' send-break
-
-function ghcs() {
-    if [ -z "$DOT_GITHUB_COPILOT_LOADED" ]; then
-        eval "$(gh copilot alias -- zsh)"
-        DOT_GITHUB_COPILOT_LOADED=1
-    fi
-
-    command gh copilot suggest "$@"
-}
 
 function tmuxp() {
     if [ -z "$DOT_TMUXP_LOADED" ]; then
