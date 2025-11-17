@@ -8,8 +8,13 @@ local function start_treesitter(bufnr)
     return
   end
 
-  vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-  vim.bo[bufnr].indentexpr = "v:lua.require'utils'.indentexpr()"
+  if utils.have("folds", "folds") then
+    vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+  end
+
+  if utils.have("indent", "indents") then
+    vim.bo[bufnr].indentexpr = "v:lua.require'utils'.indentexpr()"
+  end
 end
 
 local function setup_treesitter_autocmd()
