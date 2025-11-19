@@ -14,13 +14,10 @@ install_opencode() {
 
     log "info" "Downloading 'beads'"
 
-    if command -v bd &>/dev/null; then
-        log "info" "'beads' is already installed, updating..."
-        sudo npm update -g @beads/bd
-    else
-        log "info" "'beads' is not installed, installing..."
-        sudo npm install -g @beads/bd
-    fi
+    local bd_version
+    bd_version=$(__get_latest_release "steveyegge/beads")
+
+    __install_package_release "https://github.com/steveyegge/beads/releases/latest/download/beads_${bd_version#v}_linux_amd64.tar.gz" bd
 
     log "info" "Installing 'beads-mcp' tool"
     if command -v beads-mcp &>/dev/null; then
