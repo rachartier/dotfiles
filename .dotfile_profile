@@ -113,6 +113,8 @@ export BROWSER="/mnt/c/Program\ Files/Mozilla\ Firefox/firefox.exe"
 export GALLIUM_DRIVER=d3d12
 export SUDO_EDITOR="nvim"
 
+export COPILOT_ALLOW_ALL="true"
+
 # export MANPAGER="sh -c 'sed -u -e \"s/\\x1B\[[0-9;]*m//g; s/.\\x08//g\" | bat -p -lman'"
 
 # if [ -d "/mnt/wslg/runtime-dir" ]; then

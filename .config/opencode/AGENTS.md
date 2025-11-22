@@ -12,6 +12,10 @@ Instead, use beads-mcp for all context, planning, and progress tracking. Don't a
 
 NEVER commit any changes with git. I do NOT want you to commit changes for me.
 
+Only add USEFUL comments in code. Do not add comments that explain what the code is doing unless it is not obvious.
+
+When writing code, follow these language-specific rules:
+
 ## Python
 When writing Python code, and only then, follow these rules:
 * Use PEP 585 built-in generics:
