@@ -158,9 +158,9 @@ return {
         {
           title = "Git Graph",
           icon = " ",
-          cmd = [[echo -e "$(git-graph --style round --color always --wrap 50 0 8 -f 'oneline')"]],
+          cmd = [[echo -e "$(git-graph --style round --color always --wrap 40 0 8 -f 'oneline')"]],
           indent = 1,
-          height = 24,
+          height = vim.o.lines / 2 - 3,
         },
         -- {
         -- 	icon = " ",
