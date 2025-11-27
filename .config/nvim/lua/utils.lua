@@ -242,6 +242,16 @@ function M.have(what, query)
   return true
 end
 
+---@param lang string
+---@param query string
+function M.have_query(lang, query)
+  local key = lang .. ":" .. query
+  if M._queries[key] == nil then
+    M._queries[key] = vim.treesitter.query.get(lang, query) ~= nil
+  end
+  return M._queries[key]
+end
+
 function M.foldexpr()
   return M.have(nil, "folds") and vim.treesitter.foldexpr() or "0"
 end

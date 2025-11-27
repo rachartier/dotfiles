@@ -6,7 +6,7 @@ return {
   keys = {
     {
       "<leader>te",
-      "<Cmd>Fyler<CR>",
+      "<cmd>Fyler kind=float<cr>",
       desc = "Open Fyler",
     },
   },
@@ -18,9 +18,23 @@ return {
         border = "rounded",
       },
     },
-    win = {
-      border = require("config.ui.border").default_border,
-      kind = "float",
+    views = {
+      finder = {
+        win = {
+          border = require("config.ui.border").default_border,
+          kind = "float",
+          kinds = {
+            float = {
+              top = "12%",
+              width = "30%",
+              left = "35%",
+            },
+          },
+          win_opts = {
+            number = true,
+          },
+        },
+      },
     },
   },
 }
