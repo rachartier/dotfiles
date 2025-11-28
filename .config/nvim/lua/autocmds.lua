@@ -174,3 +174,22 @@ vim.api.nvim_create_autocmd("BufWritePost", {
     vim.fn.system("kill -SIGUSR1 $(pgrep kitty)")
   end,
 })
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "gitrebase",
+  callback = function()
+    local map = function(lhs, rhs)
+      vim.keymap.set("n", lhs, rhs, { buffer = true })
+    end
+
+    map("p", "ciwpick<esc>")
+    map("s", "ciwsquash<esc>")
+    map("e", "ciwedit<esc>")
+    map("r", "ciwreword<esc>")
+    map("f", "ciwfixup<esc>")
+    map("d", "ciwdrop<esc>")
+
+    map("J", ":m .+1<CR>==")
+    map("K", ":m .-2<CR>==")
+  end,
+})
