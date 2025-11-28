@@ -17,8 +17,6 @@ local function start_treesitter(bufnr)
 
   if utils.have("indent", "indents") and not vim.tbl_contains(disabled_indent, filetype) then
     vim.bo[bufnr].indentexpr = "v:lua.require'utils'.indentexpr()"
-  elseif vim.tbl_contains(disabled_indent, filetype) then
-    vim.bo[bufnr].indentexpr = ""
   end
 end
 

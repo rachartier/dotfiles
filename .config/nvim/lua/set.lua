@@ -109,7 +109,7 @@ opt.fillchars = {
 vim.o.timeout = true
 vim.o.timeoutlen = 300
 
-vim.api.nvim_command("filetype plugin on")
+vim.api.nvim_command("filetype plugin indent on")
 
 opt.swapfile = false
 opt.autoread = true
