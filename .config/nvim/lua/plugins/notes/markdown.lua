@@ -4,6 +4,9 @@ return {
     enabled = true,
     ft = { "markdown", "quarto", "rmd", "Avante", "codecompanion" },
     lazy = true,
+    dependencies = {
+      "yousefhadder/markdown-plus.nvim",
+    },
     opts = function(_, opts)
       local presets = require("markview.presets")
 
