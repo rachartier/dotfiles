@@ -31,9 +31,9 @@ opt.winblend = conf.winblend
 -- if vim.fn.exists("+winborder") > 0 then
 --   opt.winborder = require("config.ui.border").default_border
 -- end
-
 vim.o.background = "dark"
 opt.whichwrap:append("<>[]hl")
+opt.iskeyword = "@,48-57,_,192-255,-" -- Consider dash as part of a word
 opt.completeopt = "menu,menuone,noselect" -- Configure completion behavior
 opt.conceallevel = 0 -- Hide * markup for bold and italic
 opt.ruler = false
@@ -41,7 +41,8 @@ opt.foldenable = false -- Disable folding
 opt.confirm = false -- Confirm to save changes before exiting modified buffer
 opt.cursorline = true -- Enable highlighting of the current line
 opt.expandtab = true -- Use spaces instead of tabs
-opt.formatoptions = "jcroqlnt" -- Formatting options
+-- opt.formatoptions = "jcroqlnt" -- Formatting options
+opt.formatoptions = "rqnl1j"
 opt.grepformat = "%f:%l:%c:%m" -- Grep output format
 opt.grepprg = "rg --vimgrep" -- Program to use for grep
 opt.ignorecase = true -- Ignore case

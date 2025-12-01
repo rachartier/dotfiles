@@ -116,6 +116,10 @@ function M.on_attach(client, bufnr)
     end, { noremap = true, silent = true })
   end
 
+   if client:supports_method(vim.lsp.protocol.Methods.textDocument_inlineCompletion, bufnr) then
+    vim.lsp.inline_completion.enable(true, { bufnr = bufnr })
+  end
+
   -- stylua: ignore end
 
   -- if client:supports_method(methods.textDocument_documentHighlight) then
