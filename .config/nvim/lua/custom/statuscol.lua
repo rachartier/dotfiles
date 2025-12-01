@@ -90,7 +90,16 @@ end
 vim.o.statuscolumn = "%{%v:lua.Stc_signs()%}%=%{%v:lua.Stc_num()%} %{%v:lua.Stc_git()%}"
 
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "dapui_*", "dap-repl", "oil", "Trouble", "TelescopePrompt", "Avante", "AvanteInput" },
+  pattern = {
+    "dapui_*",
+    "dap-repl",
+    "oil",
+    "Trouble",
+    "TelescopePrompt",
+    "Avante",
+    "AvanteInput",
+    "snacks_dashboard",
+  },
   callback = function()
     vim.wo.statuscolumn = ""
   end,

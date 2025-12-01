@@ -141,6 +141,7 @@ return {
     config = function()
       -- vim.api.nvim_set_hl(0, "CursorLine", { bg = require("theme").get_colors().surface1, bold = false })
       require("tiny-inline-diagnostic").setup({
+        preset = "powerline",
         transparent_bg = false,
         hi = {
           mixing_color = require("theme").get_colors().base,
