@@ -32,6 +32,7 @@
   "mini.icons": { "branch": "main", "commit": "397ed3807e96b59709ef3292f0a3e253d5c1dc0a" },
   "mini.splitjoin": { "branch": "main", "commit": "9fcd8856efb95a505090c3225726466494076127" },
   "mini.surround": { "branch": "main", "commit": "88c52297ed3e69ecf9f8652837888ecc727a28ee" },
+  "nano-theme.nvim": { "branch": "main", "commit": "710c86bb90f963a7cf95f3dc15d287b59bc06b59" },
   "neogit": { "branch": "master", "commit": "40347fbc45bd87339eb702bb70dab23c40c15482" },
   "neotest": { "branch": "master", "commit": "deadfb1af5ce458742671ad3a013acb9a6b41178" },
   "neotest-python": { "branch": "master", "commit": "b0d3a861bd85689d8ed73f0590c47963a7eb1bf9" },

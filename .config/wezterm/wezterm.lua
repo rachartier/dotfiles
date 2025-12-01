@@ -72,8 +72,8 @@ config.harfbuzz_features = {
 	"clig=1",
 }
 
-config.underline_thickness = "0.09cell"
-config.underline_position = "-1pt"
+config.underline_thickness = "0.04cell"
+config.underline_position = "-1.6pt"
 config.allow_square_glyphs_to_overflow_width = "Always"
 config.bold_brightens_ansi_colors = "BrightAndBold"
 
