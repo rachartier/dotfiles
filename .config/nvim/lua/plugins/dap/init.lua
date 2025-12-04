@@ -80,17 +80,13 @@ return {
 
       local sign = vim.fn.sign_define
 
+      -- stylua: ignore start
       sign("DapBreakpoint", { text = "", texthl = "DapBreakpoint", linehl = "", numhl = "red" })
-      sign(
-        "DapBreakpointRejected",
-        { text = "", texthl = "DapBreakpoint", linehl = "", numhl = "red" }
-      )
-      sign(
-        "DapBreakpointCondition",
-        { text = "●", texthl = "DapBreakpointCondition", linehl = "", numhl = "red" }
-      )
+      sign("DapBreakpointRejected", { text = "", texthl = "DapBreakpoint", linehl = "", numhl = "red" })
+      sign("DapBreakpointCondition", { text = "●", texthl = "DapBreakpointCondition", linehl = "", numhl = "red" })
       sign("DapLogPoint", { text = "◆", texthl = "DapLogPoint", linehl = "", numhl = "" })
       sign("DapStopped", { text = "󰧂", texthl = "DapStopped", linehl = "", numhl = "" })
+      -- stylua: ignore end
 
       -- local dap, dapview = require("dap"), require("dap-view")
       -- dap.listeners.after.event_initialized["dapview-config"] = function()

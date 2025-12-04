@@ -1,7 +1,5 @@
 local opt = vim.opt
 
-opt.autowrite = true -- Enable auto write
-
 vim.defer_fn(function()
   -- opt.spelllang = { -- Languages for spell checking
   -- 	"fr",
@@ -31,7 +29,9 @@ opt.winblend = conf.winblend
 -- if vim.fn.exists("+winborder") > 0 then
 --   opt.winborder = require("config.ui.border").default_border
 -- end
-vim.o.background = "dark"
+
+opt.autowrite = true -- Enable auto write
+opt.background = "dark"
 opt.whichwrap:append("<>[]hl")
 opt.iskeyword = "@,48-57,_,192-255,-" -- Consider dash as part of a word
 opt.completeopt = "menu,menuone,noselect" -- Configure completion behavior
@@ -126,15 +126,7 @@ opt.incsearch = true
 -- vim.g.netrw_banner = 0
 -- vim.g.netrw_winsize = 25
 
-if vim.fn.has("nvim-0.10") == 1 then
-  opt.smoothscroll = true
-  opt.foldexpr = "v:lua.require'lazyvim.util'.ui.foldexpr()"
-  opt.foldmethod = "expr"
-  opt.foldtext = ""
-else
-  opt.foldmethod = "indent"
-  opt.foldtext = "v:lua.require'lazyvim.util'.ui.foldtext()"
-end
+opt.smoothscroll = true
 
 vim.api.nvim_set_var("t_Cs", "\\e[4:3m")
 vim.api.nvim_set_var("t_Ce", "\\e[4:0m")

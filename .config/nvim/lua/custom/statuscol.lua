@@ -1,3 +1,4 @@
+local M = {}
 local utils = require("utils")
 
 local ns_cache = {}
@@ -42,9 +43,9 @@ function _G.Stc_signs()
   end
   local sign = get_sign(vim.api.nvim_get_current_buf(), vim.v.lnum - 1, false)
   if not sign then
-    return "  "
+    return "   "
   end
-  return utils.hl_str(sign.sign_hl_group or "SignColumn", pad(vim.trim(sign.sign_text), 2))
+  return utils.hl_str(sign.sign_hl_group or "SignColumn", pad(vim.trim(sign.sign_text), 3))
 end
 
 function _G.Stc_num()
@@ -87,13 +88,23 @@ function _G.Stc_git()
   return utils.hl_str(sign.sign_hl_group or "SignColumn", vim.trim(sign.sign_text))
 end
 
-vim.o.statuscolumn = "%{%v:lua.Stc_signs()%}%=%{%v:lua.Stc_num()%} %{%v:lua.Stc_git()%}"
+function M.setup()
+  vim.o.statuscolumn = "%{%v:lua.Stc_signs()%}%=%{%v:lua.Stc_num()%} %{%v:lua.Stc_git()%}"
 
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "dapui_*", "dap-repl", "oil", "Trouble", "TelescopePrompt", "Avante", "AvanteInput" },
-  callback = function()
-    vim.wo.statuscolumn = ""
-  end,
-})
+  vim.api.nvim_create_autocmd("FileType", {
+    pattern = {
+      "dapui_*",
+      "dap-repl",
+      "oil",
+      "Trouble",
+      "TelescopePrompt",
+      "Avante",
+      "AvanteInput",
+    },
+    callback = function()
+      vim.wo.statuscolumn = ""
+    end,
+  })
+end
 
-return {}
+return M

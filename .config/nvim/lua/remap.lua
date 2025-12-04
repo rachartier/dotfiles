@@ -42,7 +42,7 @@ map("n", "dd", function()
 end, { expr = true, desc = "Smart dd" })
 
 -- Window navigation
-if not os.getenv("TMUX") then
+if not vim.env.TMUX then
   map("n", "<M-left>", "<C-W>h", { silent = true })
   map("n", "<M-right>", "<C-W>l", { silent = true })
   map("n", "<M-up>", "<C-W>k", { silent = true })
