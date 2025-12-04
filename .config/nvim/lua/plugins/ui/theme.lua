@@ -111,6 +111,10 @@ return {
       vim.api.nvim_set_hl(0, "DiagnosticUnderlineHint", {
         undercurl = true,
       })
+
+      vim.api.nvim_set_hl(0, "Normal", {
+        bg = "None",
+      })
     end,
   },
 }
