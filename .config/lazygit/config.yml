@@ -1,14 +1,12 @@
 git:
-  paging:
-    colorArg: always
-    pager: delta --paging=never
-
+  pagers:
+    - colorArg: always
+      pager: delta --paging=never
 customCommands:
   - key: "<c-a>" # ctrl + a
     description: "Generate commit message"
     context: "files"
     loadingText: "Generating commit message..."
-    subprocess: true
     prompts:
       - type: "menuFromCommand"
         title: "Copilot AI Convention Commit"
@@ -27,17 +25,21 @@ customCommands:
             value: "edit"
     command: >
       {{- if eq .Form.Confirm "commit" -}}
+
         git commit -m '{{.Form.Msg}}'
       {{- else if eq .Form.Confirm "edit" -}}
+
         git commit -e -m '{{.Form.Msg}}'
       {{- else -}}
+
         echo "Commit cancelled" && exit 0
       {{- end -}}
+
+    output: terminal
   - key: "<c-e>"
     description: "Generate commit message with a starting prompt"
     context: "files"
     loadingText: "Generating commit message..."
-    subprocess: true
     prompts:
       - type: "input"
         key: "Msg"
@@ -60,13 +62,17 @@ customCommands:
             value: "edit"
     command: >
       {{- if eq .Form.Confirm "commit" -}}
+
         git commit -m '{{.Form.Msg}}'
       {{- else if eq .Form.Confirm "edit" -}}
+
         git commit -e -m '{{.Form.Msg}}'
       {{- else -}}
+
         echo "Commit cancelled" && exit 0
       {{- end -}}
 
+    output: terminal
 gui:
   theme:
     activeBorderColor:
@@ -88,7 +94,6 @@ gui:
       - '#cad3f5'
     searchingActiveBorderColor:
       - '#eed49f'
-
   authorColors:
     '*': '#b7bdf8'
     'Raphaël CHARTIER': '#ed8796'
