@@ -13,7 +13,7 @@ local function start_treesitter(bufnr)
   end
 
   local filetype = vim.api.nvim_get_option_value("filetype", { buf = bufnr })
-  local disabled_indent = { "python", "yaml", "bash" }
+  local disabled_indent = { "yaml", "bash" }
 
   if utils.have("indent", "indents") and not vim.tbl_contains(disabled_indent, filetype) then
     vim.bo[bufnr].indentexpr = "v:lua.require'utils'.indentexpr()"
