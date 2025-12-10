@@ -33,10 +33,10 @@ return {
     { "<leader>fC", function() require("fzf-lua").colorschemes() end, desc = "Search colorschemes" },
     -- stylua: ignore stop
   },
-  enabled = false,
+  enabled = true,
   opts = {
     { "border-fused", "hide" },
-    fzf_colors = true,
+    fzf_colors = false,
     fzf_opts = {
       ["--layout"] = false,
     },
