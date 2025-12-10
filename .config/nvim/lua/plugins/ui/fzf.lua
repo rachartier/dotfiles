@@ -7,6 +7,7 @@ return {
   },
   keys = {
     -- stylua: ignore start
+    -- Files & Buffers
     { "<leader>ff", function() require("fzf-lua").files({
       winopts = {
         preview = {
@@ -17,25 +18,75 @@ return {
     { "<leader>fp", function() require("fzf-lua").global() end, desc = "find globals" },
     { "<leader>fb", function() require("fzf-lua").buffers() end, desc = "find buffers" },
     { "<leader>fB", function() require("fzf-lua").builtin() end, desc = "show fzf builtins" },
-    { "<leader>fr", function() require("fzf-lua").lsp_references() end, desc = "find all lsp references" },
+    { "<leader>fc", function() require("fzf-lua").files({ cwd = vim.fn.stdpath("config") }) end, desc = "find config files" },
     { "<leader>fG", function() require("fzf-lua").git_files() end, desc = "find git files" },
+    { "<leader>fo", function() require("fzf-lua").oldfiles() end, desc = "recent files" },
+    { "<leader>fT", function() require("fzf-lua").tabs() end, desc = "tabs" },
+    { "<leader>fl", function() require("fzf-lua").resume() end, desc = "resume last picker" },
+
+    -- Grep & Search
     { "<leader>fg", function() require("fzf-lua").live_grep() end, desc = "grep words inside files" },
-    { "<leader>fl", function() require("fzf-lua").resume() end, desc = "resume grep" },
     { "<leader>fw", function() require("fzf-lua").grep_cword() end, desc = "grep string under cursor" },
+    { "<leader>fw", function() require("fzf-lua").grep_visual() end, desc = "grep visual selection", mode = "x" },
     { "<leader>ft", function() require("fzf-lua").grep({ search = "TODO|HACK|PERF|NOTE|FIX|WARN", no_esc = true }) end, desc = "Search all todos" },
-    { "<leader>fd", function() require("fzf-lua").diagnostics_workspace() end, desc = "Toggle fzf diagnostic" },
-    { "<leader>fh", function() require("fzf-lua").highlights() end, desc = "Search highlight groups" },
-    { "<leader>fc", function() require("fzf-lua").commands() end, desc = "Search commands" },
-    { "<leader>fm", function() require("fzf-lua").marks() end, desc = "Search marks" },
-    { "<leader>fk", function() require("fzf-lua").keymaps() end, desc = "Search keymaps" },
+    { "<leader>sb", function() require("fzf-lua").lines() end, desc = "buffer lines" },
+    { "<leader>sB", function() require("fzf-lua").blines() end, desc = "current buffer lines" },
+    { "<leader>sg", function() require("fzf-lua").lgrep_curbuf() end, desc = "live grep current buffer" },
+
+    -- LSP
+    { "<leader>fr", function() require("fzf-lua").lsp_references() end, desc = "find all lsp references" },
     { "<leader>fs", function() require("fzf-lua").lsp_document_symbols() end, desc = "Search document symbols" },
     { "<leader>fS", function() require("fzf-lua").lsp_workspace_symbols() end, desc = "Search workspace symbols" },
+    { "<leader>fL", function() require("fzf-lua").lsp_live_workspace_symbols() end, desc = "Live workspace symbols" },
+    { "<leader>sF", function() require("fzf-lua").lsp_finder() end, desc = "LSP finder (all locations)" },
+    { "<leader>st", function() require("fzf-lua").treesitter() end, desc = "treesitter symbols" },
+    { "gd", function() require("fzf-lua").lsp_definitions() end, desc = "goto definition" },
+    { "gD", function() require("fzf-lua").lsp_declarations() end, desc = "goto declaration" },
+    { "gI", function() require("fzf-lua").lsp_implementations() end, desc = "goto implementation" },
+    { "gy", function() require("fzf-lua").lsp_typedefs() end, desc = "goto type definition" },
+    { "gai", function() require("fzf-lua").lsp_incoming_calls() end, desc = "incoming calls" },
+    { "gao", function() require("fzf-lua").lsp_outgoing_calls() end, desc = "outgoing calls" },
+
+    -- Diagnostics
+    { "<leader>fd", function() require("fzf-lua").diagnostics_workspace() end, desc = "workspace diagnostics" },
+    { "<leader>sD", function() require("fzf-lua").diagnostics_document() end, desc = "buffer diagnostics" },
+
+    -- Git
+    { "<leader>gb", function() require("fzf-lua").git_branches() end, desc = "git branches" },
+    { "<leader>gl", function() require("fzf-lua").git_commits() end, desc = "git log" },
+    { "<leader>gf", function() require("fzf-lua").git_bcommits() end, desc = "git log file" },
+    { "<leader>gs", function() require("fzf-lua").git_status() end, desc = "git status" },
+    { "<leader>gS", function() require("fzf-lua").git_stash() end, desc = "git stash" },
+    { "<leader>gd", function() require("fzf-lua").git_diff() end, desc = "git diff" },
+    { "<leader>gB", function() require("fzf-lua").git_blame() end, desc = "git blame" },
+    { "<leader>gt", function() require("fzf-lua").git_tags() end, desc = "git tags" },
+    { "<leader>gw", function() require("fzf-lua").git_worktrees() end, desc = "git worktrees" },
+
+    -- Neovim Utilities
+    { "<leader>:", function() require("fzf-lua").command_history() end, desc = "command history" },
+    { '<leader>s"', function() require("fzf-lua").registers() end, desc = "registers" },
+    { "<leader>s/", function() require("fzf-lua").search_history() end, desc = "search history" },
+    { "<leader>sa", function() require("fzf-lua").autocmds() end, desc = "autocmds" },
+    { "<leader>sh", function() require("fzf-lua").helptags() end, desc = "help pages" },
+    { "<leader>sj", function() require("fzf-lua").jumps() end, desc = "jumps" },
+    { "<leader>sc", function() require("fzf-lua").changes() end, desc = "changes" },
+    { "<leader>sl", function() require("fzf-lua").loclist() end, desc = "location list" },
+    { "<leader>sM", function() require("fzf-lua").manpages() end, desc = "man pages" },
+    { "<leader>sq", function() require("fzf-lua").quickfix() end, desc = "quickfix list" },
+    { "<leader>sr", function() require("fzf-lua").tagstack() end, desc = "tag stack" },
+    { "<leader>so", function() require("fzf-lua").nvim_options() end, desc = "neovim options" },
+    { "<leader>sp", function() require("fzf-lua").spell_suggest() end, desc = "spelling suggestions" },
+    { "<leader>fh", function() require("fzf-lua").highlights() end, desc = "Search highlight groups" },
+    { "<leader>sC", function() require("fzf-lua").commands() end, desc = "Search commands" },
+    { "<leader>fm", function() require("fzf-lua").marks() end, desc = "Search marks" },
+    { "<leader>fk", function() require("fzf-lua").keymaps() end, desc = "Search keymaps" },
     { "<leader>fC", function() require("fzf-lua").colorschemes() end, desc = "Search colorschemes" },
+    { "<leader>fA", function() require("fzf-lua").awesome_colorschemes() end, desc = "Awesome colorschemes" },
     -- stylua: ignore stop
   },
   enabled = true,
   opts = {
-    { "border-fused", "hide" },
+    "default-title",
     fzf_colors = false,
     fzf_opts = {
       ["--layout"] = false,
@@ -54,12 +105,11 @@ return {
         -- scrollchars = { "┃", "" },
         delay = 10,
         scrollbar = false,
-        layout = "vertical",
-        vertical = "up:60%",
-
-        -- hidden = function()
-        --   return false
-        -- end, -- layout = "vertical",
+        layout = "horizontal",
+        horizontal = "right:50%",
+        hidden = function()
+          return vim.o.columns < 120
+        end,
       },
     },
     keymap = {
