@@ -10,7 +10,7 @@ install_opencode() {
 
     log "download" "Installing opencode ${OPENCODE_VERSION} ..."
 
-    __install_package_release "https://github.com/sst/opencode/releases/latest/download/opencode-linux-x64.zip" opencode
+    __install_package_release "https://github.com/sst/opencode/releases/latest/download/opencode-linux-x64.tar.gz" opencode
 
     log "info" "Downloading 'beads'"
 

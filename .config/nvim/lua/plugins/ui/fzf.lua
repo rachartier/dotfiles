@@ -3,8 +3,11 @@ local signs = require("config.ui.signs")
 return {
   "ibhagwan/fzf-lua",
   dependencies = {
-    -- "elanmed/fzf-lua-frecency.nvim",
+    "elanmed/fzf-lua-frecency.nvim",
   },
+  event = { "VeryLazy" },
+  command = "FzfLua",
+  -- lazy = vim.fn.argc(-1) > 0,
   keys = {
     -- stylua: ignore start
     -- Files & Buffers
@@ -165,5 +168,13 @@ return {
     -- end
     fzf.setup(opts)
     fzf.register_ui_select()
+
+    -- vim.api.nvim_create_autocmd("VimEnter", {
+    --   callback = function()
+    --     vim.wo.number = false
+    --     vim.wo.relativenumber = false
+    --     fzf.files()
+    --   end,
+    -- })
   end,
 }

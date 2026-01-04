@@ -53,6 +53,7 @@ vim.api.nvim_create_autocmd("FileType", {
     "AvanteInput",
     "oil",
     "copilot-panel",
+    "nvim-undotree",
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
@@ -178,18 +179,22 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "gitrebase",
   callback = function()
-    local map = function(lhs, rhs)
-      vim.keymap.set("n", lhs, rhs, { buffer = true })
+    local function map_change(lhs, word)
+      vim.keymap.set("n", lhs, function()
+        local pos = vim.api.nvim_win_get_cursor(0)
+        vim.cmd.normal({ args = { "ciw" .. word }, bang = true })
+        vim.api.nvim_win_set_cursor(0, pos)
+      end, { buffer = true })
     end
 
-    map("p", "ciwpick<esc>")
-    map("s", "ciwsquash<esc>")
-    map("e", "ciwedit<esc>")
-    map("r", "ciwreword<esc>")
-    map("f", "ciwfixup<esc>")
-    map("d", "ciwdrop<esc>")
+    map_change("p", "pick")
+    map_change("s", "squash")
+    map_change("e", "edit")
+    map_change("r", "reword")
+    map_change("f", "fixup")
+    map_change("d", "drop")
 
-    map("J", ":m .+1<CR>==")
-    map("K", ":m .-2<CR>==")
+    vim.keymap.set("n", "J", ":m .+1<CR>==", { buffer = true })
+    vim.keymap.set("n", "K", ":m .-2<CR>==", { buffer = true })
   end,
 })

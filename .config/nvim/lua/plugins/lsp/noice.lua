@@ -6,10 +6,13 @@ return {
   lazy = false,
   event = { "VeryLazy" },
   opts = {
+    cmdline = {
+      enabled = false,
+    },
     messages = {
       -- NOTE: If you enable messages, then the cmdline is enabled automatically.
       -- This is a current Neovim limitation.
-      enabled = true, -- enables the Noice messages UI
+      enabled = false, -- enables the Noice messages UI
       view = "notify", -- default view for messages
       view_error = "notify", -- view for errors
       view_warn = "notify", -- view for warnings
@@ -74,6 +77,14 @@ return {
       opts = {},
     },
     routes = {
+      {
+        filter = {
+          event = "lsp",
+          kind = "progress",
+          client = "basedpyright",
+        },
+        opts = { skip = true },
+      },
       {
         filter = {
           event = "msg_show",

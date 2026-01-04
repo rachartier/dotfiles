@@ -49,6 +49,12 @@ function _G.Stc_signs()
 end
 
 function _G.Stc_num()
+  local nu, rnu = vim.wo.number, vim.wo.relativenumber
+
+  if not nu and not rnu then
+    return ""
+  end
+
   if vim.v.virtnum < 0 then
     return utils.hl_str("LineNr", " ")
   end
@@ -59,7 +65,8 @@ function _G.Stc_num()
     )["all"] - 1
     return utils.hl_str("LineNr", vim.v.virtnum == wraps and "└" or "├")
   end
-  local rnu, lnum, relnum = vim.wo.relativenumber, vim.v.lnum, vim.v.relnum
+
+  local lnum, relnum = vim.v.lnum, vim.v.relnum
   local num = rnu and (relnum == 0 and lnum or relnum) or lnum
   local cur = rnu and relnum == 0 or vim.fn.line(".") == lnum
   local mode = vim.fn.mode()

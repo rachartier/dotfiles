@@ -1,6 +1,7 @@
 return {
   "stevearc/oil.nvim",
   enabled = true,
+  event = "VeryLazy",
   keys = {
     {
       "<leader>te",
@@ -11,7 +12,7 @@ return {
   opts = {
     skip_confirm_for_simple_edits = true,
     delete_to_trash = true,
-    cleanup_delay_ms = false,
+    -- cleanup_delay_ms = false,
     watch_for_changes = true,
     columns = {
       "icon",
@@ -36,6 +37,9 @@ return {
       --
       -- return conf
       -- end,
+    },
+    confirmation = {
+      border = vim.g.float_border,
     },
     keymaps = {
       ["<BS>"] = { "actions.parent", mode = "n" },

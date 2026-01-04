@@ -1,5 +1,4 @@
 skip_global_compinit=1
-
 # autoload -Uz compinit && compinit
 
 source "$HOME/.profile"

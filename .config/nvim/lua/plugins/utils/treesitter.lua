@@ -80,10 +80,13 @@ return {
       }
 
       for _, lang in ipairs(lang_config) do
-        local filetypes = lang.filetypes or {}
+        local filetypes = lang.treesitter or lang.filetypes or {}
         for _, filetype in ipairs(filetypes) do
           if not vim.tbl_contains(ensure_installed, filetype) then
-            table.insert(ensure_installed, filetype)
+            -- Do not add custom parsers
+            if filetype ~= "*" and filetype ~= "text" then
+              table.insert(ensure_installed, filetype)
+            end
           end
         end
       end

@@ -90,33 +90,6 @@ function ask() {
     __copilot_cli_action "$1" 'ask'
 }
 
-function gitignore() {
-    echo "Generating .gitignore file for $1"
-    copilot-cli --action "gitignore" --prompt "$1" >.gitignore
-}
-
-function venv() {
-    if [ -z "$1" ]; then
-        echo "Usage: venv <name>"
-        return
-    fi
-
-    if ! [ -d "$1" ]; then
-        python3 -m venv "$1"
-    fi
-
-    source "$1/bin/activate"
-
-    if command -v direnv &>/dev/null; then
-        \cat <<EOF >.envrc
-export VIRTUAL_ENV="./$1"
-layout python3
-EOF
-
-        direnv allow
-    fi
-}
-
 function attach_devcontainer() {
     if ! command -v devcontainer &>/dev/null; then
         echo "devcontainer CLI is not installed. Please install it first."
@@ -164,5 +137,4 @@ function attach_devcontainer() {
     docker exec --user "$remote_user" -it "$container_id" zsh -c "cd '$remote_workspace/$path_after_dir' && exec zsh"
 }
 
-alias cat="bat --style=plain --color=always"
 alias ad="attach_devcontainer"

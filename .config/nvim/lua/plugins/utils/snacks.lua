@@ -103,6 +103,9 @@ return {
     dashboard = require("plugins.utils.snacks.dashboard"),
     indent = require("plugins.utils.snacks.indent"),
     -- picker = require("plugins.utils.snacks.picker"),
+    picker = {
+      enabled = false,
+    },
     image = {
       enabled = false,
     },

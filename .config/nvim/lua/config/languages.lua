@@ -15,6 +15,7 @@ return {
   },
   {
     filetypes = { "cs" },
+    treesitter = { "c_sharp" },
     dap = { "netcoredbg" },
     lsp_ignore = true,
     formatter = {
@@ -33,6 +34,7 @@ return {
   },
   {
     filetypes = { "c", "cpp", "h", "hpp" },
+    treesitter = { "c", "cpp" },
     mason = { "clangd" },
     formatter = {},
   },
@@ -50,6 +52,7 @@ return {
   },
   {
     filetypes = { "sh" },
+    treesitter = { "bash" },
     mason = { "bashls" },
     formatter = { "shfmt" },
     linter = { "shellcheck" },
@@ -78,5 +81,9 @@ return {
     filetypes = { "rust" },
     mason = { "rust_analyzer" },
     lsp_ignore = true,
+  },
+  {
+    filetypes = { "java" },
+    mason = { "jdtls" },
   },
 }

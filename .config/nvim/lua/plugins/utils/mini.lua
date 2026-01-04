@@ -2,7 +2,15 @@ return {
   "nvim-mini/mini.nvim",
   version = false,
   event = { "VeryLazy" },
+  specs = {
+    { "nvim-tree/nvim-web-devicons", enabled = false, optional = true },
+  },
   init = function()
+    package.preload["nvim-web-devicons"] = function()
+      require("mini.icons").mock_nvim_web_devicons()
+      return package.loaded["nvim-web-devicons"]
+    end
+
     vim.api.nvim_create_autocmd("FileType", {
       pattern = {
         "help",
@@ -80,6 +88,24 @@ return {
           u = ai.gen_spec.function_call(), -- u for "Usage"
           U = ai.gen_spec.function_call({ name_pattern = "[%w_]" }), -- without dot in function name
         },
+      },
+    })
+
+    require("mini.icons").setup({
+      file = {
+        ["devcontainer.json"] = { glyph = "", hl = "MiniIconsAzure" },
+      },
+      filetype = {
+        json = { glyph = "" },
+        jsonc = { glyph = "" },
+        dotenv = { glyph = "", hl = "MiniIconsYellow" },
+
+        -- sh = { glyph = "󰐣", hl = "MiniIconsBlue" },
+        -- zsh = { glyph = "󰐣" },
+        -- bash = { glyph = "󰐣" },
+      },
+      extension = {
+        conf = { glyph = "", hl = "MiniIconsBlue" },
       },
     })
   end,
