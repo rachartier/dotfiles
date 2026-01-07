@@ -76,8 +76,8 @@ return {
     end,
   },
   {
-    -- dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-glimmer.nvim",
-    "rachartier/tiny-glimmer.nvim",
+    dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-glimmer.nvim",
+    -- "rachartier/tiny-glimmer.nvim",
     event = "VeryLazy",
     -- "rachartier/tiny-glimmer.nvim",
     -- dependencies = {
@@ -96,52 +96,76 @@ return {
     -- event = "VeryLazy",
     -- enabled = true,
     opts = {
-      transparency_color = require("theme").get_colors().base,
       overwrite = {
-        yank = {
-          enabled = true,
-          default_animation = {
-            name = "fade",
-            settings = {
-              from_color = require("theme").get_colors().overlay1,
-            },
-          },
-        },
-        search = {
-          enabled = true,
-        },
-        paste = {
-          enabled = true,
-        },
-        undo = {
-          enabled = true,
-          default_animation = {
-            settings = {
-              from_color = utils.darken(require("theme").get_colors().red, 0.5),
-            },
-          },
-        },
-        redo = {
-          enabled = true,
-          default_animation = {
-            settings = {
-              from_color = utils.darken(require("theme").get_colors().green, 0.5),
-            },
-          },
-        },
+        auto_map = false, -- Disable auto-mapping
+        search = { enabled = true },
+        paste = { enabled = true },
+        undo = { enabled = true },
+        redo = { enabled = true },
+      },
+    },
+    keys = {
+      {
+        ",uG",
+        function()
+          require("tiny-glimmer").toggle()
+        end,
+        desc = "glimmer",
+      },
+      {
+        ",n2",
+        function()
+          require("tiny-glimmer").search_next()
+        end,
+        desc = "glimmer",
+      },
+      {
+        ",N2",
+        function()
+          require("tiny-glimmer").search_prev()
+        end,
+        desc = "glimmer",
+      },
+      {
+        ",*2",
+        function()
+          require("tiny-glimmer").search_under_cursor()
+        end,
+        desc = "glimmer",
+      },
+      {
+        ",p2",
+        function()
+          require("tiny-glimmer").paste()
+        end,
+        desc = "glimmer",
+      },
+      {
+        ",u2",
+        function()
+          require("tiny-glimmer").undo()
+        end,
+        desc = "glimmer",
+      },
+      {
+        "\\R2",
+        function()
+          require("tiny-glimmer").redo()
+        end,
+        desc = "glimmer",
       },
     },
   },
   {
-    -- dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-inline-diagnostic.nvim",
-    "rachartier/tiny-inline-diagnostic.nvim",
+    dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-inline-diagnostic.nvim",
+    -- "rachartier/tiny-inline-diagnostic.nvim",
     event = "LazyFile",
     enabled = true,
     -- commit = "0ac1133f0869730ced61b5f3c540748e29acca1a",
     config = function()
       -- vim.api.nvim_set_hl(0, "CursorLine", { bg = require("theme").get_colors().surface1, bold = false })
       require("tiny-inline-diagnostic").setup({
-        preset = "powerline",
+        -- preset = "powerline",
         transparent_bg = false,
         hi = {
           mixing_color = require("theme").get_colors().base,

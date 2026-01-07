@@ -1,5 +1,9 @@
 require("config")
 
+require("vim._extui").enable({
+  enable = true,
+})
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local lazyrepo = "https://github.com/folke/lazy.nvim.git"
@@ -87,7 +91,3 @@ vim.defer_fn(function()
 end, 10)
 
 require("autocmds")
-
-require("vim._extui").enable({
-  enable = true,
-})
