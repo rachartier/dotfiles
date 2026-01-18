@@ -2,7 +2,7 @@ local default_border = require("config.ui.border").default_border
 
 return {
   "folke/noice.nvim",
-  enabled = true,
+  enabled = false,
   lazy = false,
   event = { "VeryLazy" },
   opts = {
@@ -13,9 +13,6 @@ return {
       -- NOTE: If you enable messages, then the cmdline is enabled automatically.
       -- This is a current Neovim limitation.
       enabled = false, -- enables the Noice messages UI
-      view = "notify", -- default view for messages
-      view_error = "notify", -- view for errors
-      view_warn = "notify", -- view for warnings
       view_history = "messages", -- view for :messages
       view_search = "virtualtext", -- view for search count messages. Set to `false` to disable
     },

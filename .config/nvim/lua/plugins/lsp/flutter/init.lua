@@ -13,5 +13,6 @@ return {
       -- see |:help dap.set_exception_breakpoints()| for more info
       exception_breakpoints = {},
     },
+    flutter_path = "/opt/flutter/bin/flutter",
   },
 }
