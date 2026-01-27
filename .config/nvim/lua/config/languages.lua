@@ -82,8 +82,8 @@ return {
     mason = { "rust_analyzer" },
     lsp_ignore = true,
   },
-  {
-    filetypes = { "java" },
-    mason = { "jdtls" },
-  },
+  -- {
+  --   filetypes = { "java" },
+  --   mason = { "jdtls" },
+  -- },
 }

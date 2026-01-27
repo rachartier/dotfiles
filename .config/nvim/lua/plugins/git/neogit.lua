@@ -30,9 +30,6 @@ return {
       item = { "", "" },
       hunk = { "", "" },
     },
-    integrations = {
-      diffview = true,
-    },
   },
   config = function(_, opts)
     require("neogit").setup(opts)
