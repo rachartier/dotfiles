@@ -24,6 +24,7 @@ end
 -- config.font = wezterm.font_with_fallback({ "Fantasque Sans Mono", "Symbols Nerd Font" })
 -- config.font = wezterm.font_with_fallback({ "Cartograph CF", "Symbols Nerd Font" })
 config.font = wezterm.font_with_fallback({ "Maple Mono NF", "Symbols Nerd Font" })
+-- config.font = wezterm.font_with_fallback({ "Iosevka Custom Extended", "Symbols Nerd Font" })
 -- config.font = wezterm.font_with_fallback({ "IBM Plex Mono", "Symbols Nerd Font" })
 -- config.freetype_load_target = "Light"
 -- config.freetype_render_target = "HorizontalLcd"
