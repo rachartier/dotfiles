@@ -88,6 +88,7 @@ return {
       --       end,
       --       desc = "Find Files"
       --   },
+      { "<leader>go", function() Snacks.gitbrowse.open() end, desc = "Browse Git Repository" },
     },
   -- stylua: ignore end
   opts = {
@@ -103,23 +104,14 @@ return {
     dashboard = require("plugins.utils.snacks.dashboard"),
     indent = require("plugins.utils.snacks.indent"),
     -- picker = require("plugins.utils.snacks.picker"),
-    picker = {
-      enabled = false,
-    },
-    image = {
-      enabled = false,
-    },
-    input = { enabled = true },
+    picker = { enabled = false },
+    image = { enabled = false },
     gitbrowse = { enabled = true },
-    git = { enabled = true },
-    gh = { enabled = true },
-    notify = { enabled = true },
+    -- notify = { enabled = true },
     toggle = { enabled = true },
     bigfile = { enabled = true },
     quickfile = { enabled = true },
     rename = { enabled = true },
-    layout = { enabled = true },
-    terminal = { enabled = true },
     -- statuscolumn = { enabled = true },
   },
   init = function()

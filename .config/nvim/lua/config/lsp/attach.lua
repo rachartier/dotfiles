@@ -76,6 +76,8 @@ function M.on_attach(client, bufnr)
   -- 	vim.lsp.inlay_hint.enable(true)
   -- end
 
+  -- require("config.lsp.handlers")
+
   vim.lsp.document_color.enable(true, bufnr)
   vim.lsp.on_type_formatting.enable()
   vim.lsp.document_color.enable(true, 0, {
@@ -100,7 +102,7 @@ function M.on_attach(client, bufnr)
     },
   })
 
-  vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = bufnr, desc = "Hover Documentation" })
+  vim.keymap.set("n", "K", function() vim.lsp.buf.hover( {border = "rounded",}) end, { buffer = bufnr, desc = "Hover Documentation" })
 
   -- vim.keymap.set({"n"},  "<leader>ca",  function() vim.lsp.buf.code_action() end, { noremap = true, silent = true })
 

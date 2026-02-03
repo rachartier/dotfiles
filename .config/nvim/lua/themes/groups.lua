@@ -213,6 +213,9 @@ function M.get(colors)
     LualineCustomScrollBar = { fg = colors.base },
 
     CopilotSuggestion = { fg = colors.overlay1, italic = false },
+
+    LspHoverNormal = { bg = colors.surface0 },
+    LspHoverBorder = { bg = colors.surface0, fg = colors.overlay2 },
     -- CopilotChatSeparator = { fg = colors.surface1 },
 
     -- === Lsp
