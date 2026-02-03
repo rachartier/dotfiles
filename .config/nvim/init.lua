@@ -86,7 +86,7 @@ vim.defer_fn(function()
   vim.api.nvim_set_hl(0, "Visual", { bg = require("theme").get_colors().surface0, bold = false })
 
   vim.cmd("packadd nvim.undotree")
-  vim.keymap.set("n", "<leader>u", "<cmd>Undotree<cr>", { desc = "Open UndoTree" })
+  vim.keymap.set("n", "<leader>u", "<cmd>Undotree<cr>", { desc = "open undotree" })
 end, 10)
 
 require("autocmds")

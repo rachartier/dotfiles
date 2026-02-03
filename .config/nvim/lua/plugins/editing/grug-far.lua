@@ -7,12 +7,14 @@ return {
       function()
         require("grug-far").open({ prefills = { search = vim.fn.expand("<cword>") } })
       end,
+      desc = "search and replace word under cursor",
     },
     {
       "<leader>R",
       function()
         require("grug-far").open({ transient = true })
       end,
+      desc = "search and replace",
     },
   },
   config = function(_, opts)
@@ -29,7 +31,7 @@ return {
           vim.opt_local.cursorline = false
         end)
       end,
-      desc = "GrugFar settings",
+      desc = "grug-far settings",
     })
   end,
 }

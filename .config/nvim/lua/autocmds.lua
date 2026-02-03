@@ -20,7 +20,7 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
       vim.cmd("tabnext " .. current_tab)
     end
   end,
-  desc = "Resize splits if window got resized",
+  desc = "resize splits if window got resized",
 })
 
 vim.api.nvim_create_autocmd({ "FileType" }, {
@@ -30,7 +30,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
       vim.opt_local.conceallevel = 0
     end
   end,
-  desc = "Disable conceallevel for json files",
+  desc = "disable conceallevel for json files",
 })
 
 vim.api.nvim_create_autocmd("FileType", {
@@ -57,9 +57,9 @@ vim.api.nvim_create_autocmd("FileType", {
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
-    vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
+    vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true, desc = "close buffer" })
   end,
-  desc = "Easy quit buffers",
+  desc = "easy quit buffers",
 })
 
 vim.api.nvim_create_autocmd({ "FileType" }, {
@@ -68,7 +68,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
     vim.opt_local.wrap = true
     vim.opt_local.spell = true
   end,
-  desc = "Enable wrap and spell for markdown and text files",
+  desc = "enable wrap and spell for text files",
 })
 
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
@@ -80,7 +80,7 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
     local file = vim.loop.fs_realpath(event.match) or event.match
     vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
   end,
-  desc = "Create directory if it does not exist",
+  desc = "create directory if it does not exist",
 })
 
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
@@ -88,7 +88,7 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   callback = function()
     vim.cmd([[%s/\s\+$//e]])
   end,
-  desc = "Remove trailing whitespace",
+  desc = "remove trailing whitespace",
 })
 
 vim.api.nvim_create_autocmd({ "BufReadPost" }, {
@@ -102,7 +102,7 @@ vim.api.nvim_create_autocmd({ "BufReadPost" }, {
       end)
     end
   end,
-  desc = "Restore cursor position",
+  desc = "restore cursor position",
 })
 
 vim.api.nvim_create_autocmd("FileType", {
@@ -110,7 +110,7 @@ vim.api.nvim_create_autocmd("FileType", {
   callback = function()
     vim.opt_local.buflisted = false
   end,
-  desc = "Do not list quickfix buffers",
+  desc = "do not list quickfix buffers",
 })
 
 -- Corrige le problème d'indentation en python lorsque
@@ -143,13 +143,14 @@ vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold", "CursorHo
   callback = function()
     vim.cmd("checktime")
   end,
+  desc = "check if buffer changed outside of vim",
 })
 
--- Notification after file change
 vim.api.nvim_create_autocmd("FileChangedShellPost", {
   callback = function()
     vim.api.nvim_echo({ { "File changed on disk. Buffer reloaded.", "WarningMsg" } }, false, {})
   end,
+  desc = "notify when file changed on disk",
 })
 
 -- Set local settings for terminal buffers
@@ -166,7 +167,7 @@ vim.api.nvim_create_autocmd("TermOpen", {
       vim.cmd.startinsert() -- Start in insert mode
     end
   end,
-  desc = "Settings for terminal buffers",
+  desc = "settings for terminal buffers",
 })
 
 vim.api.nvim_create_autocmd("BufWritePost", {
@@ -174,6 +175,7 @@ vim.api.nvim_create_autocmd("BufWritePost", {
   callback = function()
     vim.fn.system("kill -SIGUSR1 $(pgrep kitty)")
   end,
+  desc = "reload kitty config on save",
 })
 
 vim.api.nvim_create_autocmd("FileType", {
@@ -184,7 +186,7 @@ vim.api.nvim_create_autocmd("FileType", {
         local pos = vim.api.nvim_win_get_cursor(0)
         vim.cmd.normal({ args = { "ciw" .. word }, bang = true })
         vim.api.nvim_win_set_cursor(0, pos)
-      end, { buffer = true })
+      end, { buffer = true, desc = "change to " .. word })
     end
 
     map_change("p", "pick")
@@ -194,7 +196,8 @@ vim.api.nvim_create_autocmd("FileType", {
     map_change("f", "fixup")
     map_change("d", "drop")
 
-    vim.keymap.set("n", "J", ":m .+1<CR>==", { buffer = true })
-    vim.keymap.set("n", "K", ":m .-2<CR>==", { buffer = true })
+    vim.keymap.set("n", "J", ":m .+1<CR>==", { buffer = true, desc = "move line down" })
+    vim.keymap.set("n", "K", ":m .-2<CR>==", { buffer = true, desc = "move line up" })
   end,
+  desc = "gitrebase keymaps",
 })

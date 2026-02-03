@@ -159,14 +159,14 @@ local function generate_message()
           vim.api.nvim_win_close(win, true)
           vim.api.nvim_set_current_win(parent_win)
           vim.api.nvim_set_current_line(line)
-        end, { buffer = buf, nowait = true })
+        end, { buffer = buf, nowait = true, desc = "select commit message" })
 
         local quit_picker = function()
           vim.api.nvim_win_close(win, true)
           vim.api.nvim_set_current_win(parent_win)
         end
-        vim.keymap.set("n", "<Esc>", quit_picker, { buffer = buf, nowait = true })
-        vim.keymap.set("n", "q", quit_picker, { buffer = buf, nowait = true })
+        vim.keymap.set("n", "<Esc>", quit_picker, { buffer = buf, nowait = true, desc = "close picker" })
+        vim.keymap.set("n", "q", quit_picker, { buffer = buf, nowait = true, desc = "close picker" })
       end
 
       open_commit_picker(items)
@@ -187,6 +187,7 @@ vim.api.nvim_create_autocmd("FileType", {
   callback = function()
     vim.keymap.set({ "n", "i" }, "<M-a>", function()
       generate_message()
-    end)
+    end, { buffer = true, desc = "generate commit message" })
   end,
+  desc = "setup commit message generation",
 })

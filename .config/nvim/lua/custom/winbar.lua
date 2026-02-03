@@ -135,7 +135,7 @@ function M.setup()
 
   vim.api.nvim_create_autocmd("BufWinEnter", {
     group = vim.api.nvim_create_augroup("custom_winbar", { clear = true }),
-    desc = "Attach winbar",
+    desc = "attach winbar",
     callback = function(args)
       local bufnr = args.buf
 

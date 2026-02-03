@@ -114,7 +114,7 @@ return {
 
         on_attach(client, bufnr)
       end,
-      desc = "LSP Attach",
+      desc = "lsp attach",
     })
 
     local capabilities = vim.tbl_deep_extend(

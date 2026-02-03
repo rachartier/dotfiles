@@ -61,6 +61,7 @@ local function setup_treesitter_autocmd()
 
       start_treesitter(bufnr)
     end,
+    desc = "start treesitter for filetype",
   })
 end
 
@@ -122,6 +123,7 @@ return {
             "textobjects"
           )
         end,
+        desc = "select outer function",
       },
       {
         "if",
@@ -132,6 +134,7 @@ return {
             "textobjects"
           )
         end,
+        desc = "select inner function",
       },
       {
         "ac",
@@ -142,6 +145,7 @@ return {
             "textobjects"
           )
         end,
+        desc = "select outer class",
       },
       {
         "ic",
@@ -152,6 +156,7 @@ return {
             "textobjects"
           )
         end,
+        desc = "select inner class",
       },
     },
     config = function()

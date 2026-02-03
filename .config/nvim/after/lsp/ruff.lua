@@ -10,7 +10,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
       client.server_capabilities.hoverProvider = false
     end
   end,
-  desc = "LSP: Disable hover capability from Ruff",
+  desc = "disable hover capability from ruff",
 })
 
 return {

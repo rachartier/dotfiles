@@ -185,6 +185,7 @@ return {
       callback = function()
         vim.lsp.inline_completion.enable(false)
       end,
+      desc = "disable inline completion when blink menu opens",
     })
 
     vim.api.nvim_create_autocmd("User", {
@@ -192,6 +193,7 @@ return {
       callback = function()
         vim.lsp.inline_completion.enable(true)
       end,
+      desc = "enable inline completion when blink menu closes",
     })
 
     -- vim.lsp.config("*", { capabilities = require("blink.cmp").get_lsp_capabilities(nil, true) })

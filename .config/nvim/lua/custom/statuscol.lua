@@ -113,6 +113,7 @@ function M.setup()
     callback = function()
       vim.wo.statuscolumn = ""
     end,
+    desc = "disable statuscolumn for special filetypes",
   })
 end
 

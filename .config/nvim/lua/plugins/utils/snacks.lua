@@ -88,7 +88,7 @@ return {
       --       end,
       --       desc = "Find Files"
       --   },
-      { "<leader>go", function() Snacks.gitbrowse.open() end, desc = "Browse Git Repository" },
+      { "<leader>go", function() Snacks.gitbrowse.open() end, desc = "browse git repository" },
     },
   -- stylua: ignore end
   opts = {
@@ -124,6 +124,7 @@ return {
         end
         vim.print = _G.dd -- Override print to use snacks for `:=` command
       end,
+      desc = "setup snacks debug functions",
     })
   end,
   config = function(_, opts)
@@ -155,6 +156,7 @@ return {
             Snacks.scroll.enable()
           end
         end,
+        desc = "toggle scroll on search cmdline",
       })
     end
   end,

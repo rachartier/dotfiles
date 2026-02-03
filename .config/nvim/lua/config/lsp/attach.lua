@@ -102,7 +102,7 @@ function M.on_attach(client, bufnr)
   --   },
   -- })
 
-  vim.keymap.set("n", "K", function() vim.lsp.buf.hover( {border = "rounded",}) end, { buffer = bufnr, desc = "Hover Documentation" })
+  vim.keymap.set("n", "K", function() vim.lsp.buf.hover( {border = "rounded",}) end, { buffer = bufnr, desc = "hover documentation" })
 
   -- vim.keymap.set({"n"},  "<leader>ca",  function() vim.lsp.buf.code_action() end, { noremap = true, silent = true })
 
@@ -115,7 +115,7 @@ function M.on_attach(client, bufnr)
   if client:supports_method(methods.textDocument_codeAction) then
     vim.keymap.set({ "n" }, "<leader>ca", function()
             require("tiny-code-action").code_action({ })
-    end, { noremap = true, silent = true })
+    end, { noremap = true, silent = true, desc = "code action" })
   end
 
    if client:supports_method(vim.lsp.protocol.Methods.textDocument_inlineCompletion, bufnr) then

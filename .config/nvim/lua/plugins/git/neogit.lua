@@ -8,7 +8,7 @@ return {
     "nvim-treesitter/nvim-treesitter",
   },
   keys = {
-    { "<leader>gg", "<cmd>Neogit<cr>", desc = "Neogit" },
+    { "<leader>gg", "<cmd>Neogit<cr>", desc = "open neogit" },
   },
   opts = {
     graph_style = "unicode",
@@ -59,6 +59,7 @@ return {
             end
           end, 50)
         end,
+        desc = "quit neogit popup when empty buffer",
       })
     end
   end,

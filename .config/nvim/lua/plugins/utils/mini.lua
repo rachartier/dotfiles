@@ -37,7 +37,7 @@ return {
         ---@diagnostic disable-next-line: inject-field
         vim.b.miniindentscope_disable = true
       end,
-      desc = "Disable mini.indentscope",
+      desc = "disable mini.indentscope",
     })
   end,
   config = function()

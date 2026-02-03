@@ -27,7 +27,7 @@ local function lint_triggers()
     callback = function()
       do_lint()
     end,
-    desc = "Auto lint",
+    desc = "auto lint",
   })
 
   do_lint() -- run once on initialization

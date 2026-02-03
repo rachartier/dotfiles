@@ -29,7 +29,7 @@ return {
           require("sidekick.cli").toggle({ name = "copilot", focus = true })
         end,
         mode = { "n", "v" },
-        desc = "Sidekick Toggle CLI",
+        desc = "toggle sidekick cli",
       },
     },
     config = function(_, opts)
@@ -43,6 +43,7 @@ return {
             require("tiny-inline-diagnostic").enable()
           end
         end,
+        desc = "enable diagnostics when sidekick nes hides",
       })
 
       vim.api.nvim_create_autocmd("User", {
@@ -51,6 +52,7 @@ return {
           tiny_diags_disabled_by_nes = true
           require("tiny-inline-diagnostic").disable()
         end,
+        desc = "disable diagnostics when sidekick nes shows",
       })
     end,
   },

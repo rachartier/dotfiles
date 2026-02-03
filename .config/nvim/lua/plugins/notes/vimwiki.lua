@@ -28,6 +28,7 @@ return {
       callback = function()
         vim.o.filetype = "markdown"
       end,
+      desc = "set vimwiki filetype to markdown",
     })
   end,
   config = function()
@@ -35,7 +36,7 @@ return {
       table_mappings = 0,
     }
 
-    vim.keymap.set("n", "<leader>nl", "<Plug>VimwikiNextLink", { silent = true }) -- For Tab
-    vim.keymap.set("n", "<leader>pl", "<Plug>VimwikiPrevLink", { silent = true }) -- For STab
+    vim.keymap.set("n", "<leader>nl", "<Plug>VimwikiNextLink", { silent = true, desc = "next vimwiki link" })
+    vim.keymap.set("n", "<leader>pl", "<Plug>VimwikiPrevLink", { silent = true, desc = "prev vimwiki link" })
   end,
 }
