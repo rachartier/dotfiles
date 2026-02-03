@@ -41,6 +41,11 @@ return {
     })
   end,
   config = function()
+    require("mini.surround").setup()
+    require("mini.align").setup()
+
+    require("mini.jump2d").setup({})
+
     require("mini.splitjoin").setup({
       mappings = {
         toggle = "gS",
@@ -48,20 +53,48 @@ return {
         join = "",
       },
     })
-    require("mini.surround").setup()
-    require("mini.align").setup()
-    -- require("mini.indentscope").setup({
-    --     draw = {
-    --       delay = 0,
-    --       animation = require("mini.indentscope").gen_animation.none(),
-    --     },
-    --     options = {
-    --       indent_at_cursor = true,
-    --       try_as_border = true,
-    --       border = "top",
-    --     },
-    --     symbol = "┆",
-    -- })
+
+    local miniclue = require("mini.clue")
+    require("mini.clue").setup({
+      triggers = {
+        -- Leader triggers
+        { mode = { "n", "x" }, keys = "<Leader>" },
+      },
+      clues = {
+        -- Enhance this by adding descriptions for <Leader> mapping groups
+        miniclue.gen_clues.square_brackets(),
+        miniclue.gen_clues.builtin_completion(),
+        miniclue.gen_clues.g(),
+        miniclue.gen_clues.marks(),
+        miniclue.gen_clues.registers(),
+        miniclue.gen_clues.windows(),
+        miniclue.gen_clues.z(),
+      },
+      window = {
+        -- Floating window config
+        config = {},
+
+        -- Delay before showing clue window
+        delay = 100,
+
+        -- Keys to scroll inside the clue window
+        scroll_down = "<C-d>",
+        scroll_up = "<C-u>",
+      },
+    })
+
+    require("mini.indentscope").setup({
+      draw = {
+        delay = 0,
+        animation = require("mini.indentscope").gen_animation.none(),
+      },
+      options = {
+        indent_at_cursor = true,
+        try_as_border = true,
+        border = "top",
+      },
+      -- symbol = "┆",
+    })
 
     local ai = require("mini.ai")
     require("mini.ai").setup({

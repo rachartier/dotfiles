@@ -89,8 +89,14 @@ return {
   },
   enabled = true,
   opts = {
-    "default-title",
-    fzf_colors = false,
+    { "border-fused", "hide" },
+    fzf_colors = {
+      bg = { "bg", "Normal" },
+      gutter = { "bg", "Normal" },
+      info = { "fg", "Conditional" },
+      scrollbar = { "bg", "Normal" },
+      separator = { "fg", "Comment" },
+    },
     fzf_opts = {
       ["--layout"] = false,
     },

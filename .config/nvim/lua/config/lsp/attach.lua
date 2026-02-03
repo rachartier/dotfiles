@@ -84,23 +84,23 @@ function M.on_attach(client, bufnr)
     style = "virtual",
   })
 
-  local wk = require("which-key")
+  -- local wk = require("which-key")
   -- stylua: ignore start
-  wk.add({
-    {
-      mode = "n",
-      -- { "gD",          function() vim.lsp.buf.declaration() end,                  desc = "Go to declaration" },
-      { "<leader>vws", function() vim.lsp.buf.workspace_symbol() end,             desc = "Workspace symbol" },
-      { "<leader>vd",  function() vim.diagnostic.open_float() end,                desc = "Open diagnostic inside a floating window" },
-      { "<leader>rr",  function() vim.lsp.buf.references() end,                   desc = "Find references" },
-      { "<leader>rn",  function() M.lsp_rename() end,                             desc = "Rename current symbol" },
-      -- { "gd",          function() vim.lsp.buf.definition() end,                   desc = "Go to definition" },
-      { "<leader>gn",  function() vim.diagnostic.jump({ count = 1 }) end,         desc = "Go to next diagnostic" },
-      { "<leader>gp",  function() vim.diagnostic.jump({ count = -1 }) end,        desc = "Go to previous diagnostic" },
-      { "K", vim.lsp.hover, desc = "Hover Documentation"},
-      { "gK", function() vim.lsp.buf.signature_help() end, desc = "Help", mode = { "i" } },
-    },
-  })
+  -- wk.add({
+  --   {
+  --     mode = "n",
+  --     -- { "gD",          function() vim.lsp.buf.declaration() end,                  desc = "Go to declaration" },
+  --     { "<leader>vws", function() vim.lsp.buf.workspace_symbol() end,             desc = "Workspace symbol" },
+  --     { "<leader>vd",  function() vim.diagnostic.open_float() end,                desc = "Open diagnostic inside a floating window" },
+  --     { "<leader>rr",  function() vim.lsp.buf.references() end,                   desc = "Find references" },
+  --     { "<leader>rn",  function() M.lsp_rename() end,                             desc = "Rename current symbol" },
+  --     -- { "gd",          function() vim.lsp.buf.definition() end,                   desc = "Go to definition" },
+  --     { "<leader>gn",  function() vim.diagnostic.jump({ count = 1 }) end,         desc = "Go to next diagnostic" },
+  --     { "<leader>gp",  function() vim.diagnostic.jump({ count = -1 }) end,        desc = "Go to previous diagnostic" },
+  --     { "K", vim.lsp.hover, desc = "Hover Documentation"},
+  --     { "gK", function() vim.lsp.buf.signature_help() end, desc = "Help", mode = { "i" } },
+  --   },
+  -- })
 
   vim.keymap.set("n", "K", function() vim.lsp.buf.hover( {border = "rounded",}) end, { buffer = bufnr, desc = "Hover Documentation" })
 
