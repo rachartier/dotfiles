@@ -57,7 +57,12 @@ vim.api.nvim_create_autocmd("FileType", {
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
-    vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true, desc = "close buffer" })
+    vim.keymap.set(
+      "n",
+      "q",
+      "<cmd>close<cr>",
+      { buffer = event.buf, silent = true, desc = "close buffer" }
+    )
   end,
   desc = "easy quit buffers",
 })
@@ -200,4 +205,65 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.keymap.set("n", "K", ":m .-2<CR>==", { buffer = true, desc = "move line up" })
   end,
   desc = "gitrebase keymaps",
+})
+
+vim.api.nvim_create_autocmd("BufReadPost", {
+  group = vim.api.nvim_create_augroup("bigfile", { clear = true }),
+  callback = function(ev)
+    local path = vim.api.nvim_buf_get_name(ev.buf)
+    if path == "" then
+      return
+    end
+
+    local size = vim.fn.getfsize(path)
+    if size <= 0 then
+      return
+    end
+
+    local threshold = 1.5 * 1024 * 1024 -- 1.5MB
+    local max_line_length = 1000
+
+    local is_big = size > threshold
+    if not is_big then
+      local lines = vim.api.nvim_buf_line_count(ev.buf)
+      is_big = (size - lines) / lines > max_line_length
+    end
+
+    if not is_big then
+      return
+    end
+
+    local ft = vim.filetype.match({ buf = ev.buf }) or ""
+
+    vim.bo[ev.buf].swapfile = false
+    vim.bo[ev.buf].undolevels = -1
+
+    if vim.fn.exists(":NoMatchParen") ~= 0 then
+      vim.cmd.NoMatchParen()
+    end
+
+    vim.api.nvim_buf_call(ev.buf, function()
+      vim.wo[0].foldmethod = "manual"
+      vim.wo[0].statuscolumn = ""
+      vim.wo[0].conceallevel = 0
+    end)
+
+    vim.b[ev.buf].completion = false
+    vim.b[ev.buf].minianimate_disable = true
+    vim.b[ev.buf].minihipatterns_disable = true
+
+    vim.schedule(function()
+      if vim.api.nvim_buf_is_valid(ev.buf) then
+        vim.bo[ev.buf].syntax = ft
+      end
+    end)
+
+    vim.notify(
+      ("Big file detected: %s\nSome features have been disabled."):format(
+        vim.fn.fnamemodify(path, ":p:~:.")
+      ),
+      vim.log.levels.WARN
+    )
+  end,
+  desc = "optimize performance for big files",
 })
