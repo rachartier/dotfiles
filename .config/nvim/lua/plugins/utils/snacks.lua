@@ -18,6 +18,7 @@ end
 return {
   "folke/snacks.nvim",
   priority = 9999,
+  enabled = false,
   lazy = false,
     -- stylua: ignore start
     keys = {
