@@ -55,6 +55,7 @@
   "tiny-buffers-switcher.nvim": { "branch": "main", "commit": "004c951d6c8169511e9b005ee6994154777456de" },
   "tiny-code-action.nvim": { "branch": "main", "commit": "6ded5f7cf53e8d804ab4fdc1d728f47ab772007e" },
   "tiny-glimmer.nvim": { "branch": "main", "commit": "932e6c2cc4a43ce578f007db1f8f61ad6798f938" },
+  "tiny-inline-diagnostic.nvim": { "branch": "main", "commit": "ecce93ff7db4461e942c03e0fcc64bd785df4057" },
   "vim-table-mode": { "branch": "master", "commit": "bb025308a45c67c7c8f0763ba37bc2ee3f534df0" },
   "vim-tmux-navigator": { "branch": "master", "commit": "e41c431a0c7b7388ae7ba341f01a0d217eb3a432" },
   "vimwiki": { "branch": "dev", "commit": "72792615e739d0eb54a9c8f7e0a46a6e2407c9e8" },
