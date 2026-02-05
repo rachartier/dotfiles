@@ -5,7 +5,6 @@ return {
   dependencies = {
     "elanmed/fzf-lua-frecency.nvim",
   },
-  event = { "VeryLazy" },
   command = "FzfLua",
   -- lazy = vim.fn.argc(-1) > 0,
   keys = {

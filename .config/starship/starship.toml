@@ -245,7 +245,7 @@ format = '$symbol($version)($style) '
 symbol = " "
 style = "yellow"
 format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\))]($style) '
-pyenv_version_name = true
+pyenv_version_name = false
 
 [rlang]
 symbol = "󰟔 "

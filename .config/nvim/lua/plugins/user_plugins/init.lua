@@ -76,8 +76,8 @@ return {
     end,
   },
   {
-    dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-glimmer.nvim",
-    -- "rachartier/tiny-glimmer.nvim",
+    -- dir = os.getenv("HOME") .. "/dev/nvim_plugins/tiny-glimmer.nvim",
+    "rachartier/tiny-glimmer.nvim",
     event = "VeryLazy",
     -- "rachartier/tiny-glimmer.nvim",
     -- dependencies = {
