@@ -77,13 +77,13 @@ return {
     mason = {},
     formatter = {},
   },
- -- {
- --   filetypes = { "rust" },
- --   mason = { "rust_analyzer" },
- --   lsp_ignore = true,
- -- },
- -- {
- --   filetypes = { "java" },
- --   mason = { "jdtls" },
- -- },
+  -- {
+  --   filetypes = { "rust" },
+  --   mason = { "rust_analyzer" },
+  --   lsp_ignore = true,
+  -- },
+  -- {
+  --   filetypes = { "java" },
+  --   mason = { "jdtls" },
+  -- },
 }

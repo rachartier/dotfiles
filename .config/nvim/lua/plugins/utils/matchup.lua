@@ -1,5 +1,4 @@
 return {
   "andymass/vim-matchup",
-  event = { "VeryLazy" },
-  opts = {},
+  enabled = false,
 }

@@ -40,7 +40,9 @@ return {
       require("plugins.utils.mini.indentscope").setup()
       require("plugins.utils.mini.ai").setup()
       require("plugins.utils.mini.icons").setup()
+      require("plugins.utils.mini.pairs").setup()
     end)
+
     require("plugins.utils.mini.starter").setup()
   end,
 }

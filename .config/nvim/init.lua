@@ -90,3 +90,7 @@ vim.defer_fn(function()
 end, 10)
 
 require("autocmds")
+require("custom.auto-nohlsearch")
+require("custom.detect-indent")
+require("custom.commit-diff-split")
+require("custom.todo-highlight")

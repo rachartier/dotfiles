@@ -131,6 +131,9 @@ return {
     files = {
       formatter = { "path.filename_first", 2 },
       git_icons = true,
+      find_opts = [[-type f \! -path '*/.git/*' \! -path '*/.venv/*' \! -path '*/__pycache__/*']],
+      rg_opts = [[--color=never --hidden --files -g "!.git" -g "!.venv" -g "!__pycache__"]],
+      fd_opts = [[--color=never --hidden --type f --type l --exclude .git --exclude .venv --exclude __pycache__]],
     },
     diagnostics = {
       winopts = {

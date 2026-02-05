@@ -8,7 +8,7 @@ function M.get(colors)
   return {
     -- Visual = { bg = "#234370" },
     -- Visual = { bg = colors.blue, fg = colors.base },
-    CurSearch = { bg = default_bg },
+    -- CurSearch = { bg = default_bg },
 
     -- NormalFloat = { bg = bg, fg = colors.text },
     -- NormalFloat = { bg = default_bg, fg = colors.text },
