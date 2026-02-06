@@ -36,7 +36,7 @@ return {
 
     if vim.env.TMUX_NEOGIT_POPUP == "1" then
       -- some visual bugs with extui
-      require("vim._extui").enable({
+      require("vim._core.ui2").enable({
         enable = false,
       })
 

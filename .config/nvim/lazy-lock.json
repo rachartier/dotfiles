@@ -48,7 +48,7 @@
   "nvim-treesitter-textobjects": { "branch": "main", "commit": "a0e182ae21fda68c59d1f36c9ed45600aef50311" },
   "oil.nvim": { "branch": "master", "commit": "f55b25e493a7df76371cfadd0ded5004cb9cd48a" },
   "plenary.nvim": { "branch": "master", "commit": "b9fd5226c2f76c951fc8ed5923d85e4de065e509" },
-  "roslyn.nvim": { "branch": "main", "commit": "24f7c91ee5e09c63104deaab68f932620f25c24a" },
+  "roslyn.nvim": { "branch": "main", "commit": "56c421a02451cc61c8d63cfe9dc2079453e1ea6d" },
   "rustaceanvim": { "branch": "master", "commit": "88575b98bb9937fb9983ddec5e532b67e75ce677" },
   "sidekick.nvim": { "branch": "main", "commit": "c2bdf8cfcd87a6be5f8b84322c1b5052e78e302e" },
   "sshfs.nvim": { "branch": "main", "commit": "6b65f3b8043f5920052bf483932180afddc58b78" },
