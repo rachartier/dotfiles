@@ -21,11 +21,10 @@ return {
         preview = {
           filetypes = { "markdown", "quarto", "rmd", "Avante", "codecompanion" },
           ignore_buftypes = {},
-          hybrid_modes = { "i" },
-          modes = { "n", "no", "c", "i" },
-          linewise_hybrid_mode = true,
+          -- hybrid_modes = { "i" },
+          -- modes = { "n", "no", "c", "i" },
+          -- linewise_hybrid_mode = true,
         },
-
         yaml = {
           enable = false,
         },
@@ -144,7 +143,6 @@ return {
     end,
     config = function(_, opts)
       require("markview").setup(opts)
-
       require("markview").setup({
         markdown = {
           headings = { shift_width = 1 },
