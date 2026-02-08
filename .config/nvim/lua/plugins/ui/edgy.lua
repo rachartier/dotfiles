@@ -2,10 +2,10 @@ return {
   "folke/edgy.nvim",
   enabled = true,
   event = "VeryLazy",
-  init = function()
-    -- vim.opt.laststatus = 3
-    vim.opt.splitkeep = "screen"
-  end,
+  -- init = function()
+  --   -- vim.opt.laststatus = 3
+  --   vim.opt.splitkeep = "screen"
+  -- end,
   opts = {
     icons = {
       closed = "  ",
