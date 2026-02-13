@@ -58,7 +58,6 @@ setopt auto_pushd             # make cd push old directory onto directory stack
 setopt complete_in_word       # allow completion from within a word/phrase
 setopt extended_glob          # use extended globbing syntax
 setopt hash_list_all          # hash everything before completion
-setopt inc_append_history     # add commands to HISTFILE in order of execution
 setopt list_ambiguous         # complete as much of a completion until it gets ambiguous
 setopt listpacked             # make completion lists more densely packed
 setopt menu_complete          # autoselect the first completion entry
@@ -81,7 +80,6 @@ unsetopt flow_control         # disable start/stop characters in shell editor
 [ "$SAVEHIST" -lt 10000 ] && SAVEHIST=10000
 
 ## History command configuration
-setopt appendhistory
 setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE
 setopt hist_ignore_all_dups   # ignore duplicated commands history list
 setopt hist_save_no_dups      # do not save duplicated commands history list

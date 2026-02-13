@@ -17,6 +17,13 @@ return {
         },
       },
     }) end, desc = "find files" },
+    { "<leader><leader>", function() require("fzf-lua").files({
+      winopts = {
+        preview = {
+          hidden = vim.o.columns < 120
+        },
+      },
+    }) end, desc = "find files" },
     { "<leader>fp", function() require("fzf-lua").global() end, desc = "find globals" },
     { "<leader>fb", function() require("fzf-lua").buffers() end, desc = "find buffers" },
     { "<leader>fB", function() require("fzf-lua").builtin() end, desc = "show fzf builtins" },

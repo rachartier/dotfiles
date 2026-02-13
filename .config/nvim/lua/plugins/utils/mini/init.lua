@@ -36,7 +36,7 @@ return {
       require("mini.jump2d").setup({})
 
       require("plugins.utils.mini.splitjoin").setup()
-      require("plugins.utils.mini.clue").setup()
+      -- require("plugins.utils.mini.clue").setup()
       require("plugins.utils.mini.indentscope").setup()
       require("plugins.utils.mini.ai").setup()
       require("plugins.utils.mini.icons").setup()

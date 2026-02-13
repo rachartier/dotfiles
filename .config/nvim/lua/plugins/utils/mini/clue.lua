@@ -17,7 +17,7 @@ function M.setup()
     },
     window = {
       config = {},
-      delay = 150,
+      delay = 0,
       scroll_down = "<C-d>",
       scroll_up = "<C-u>",
     },
