@@ -1,38 +1,11 @@
 local signs = require("config.ui.signs")
 
 vim.diagnostic.config({
-  -- float = {
-  -- 	border = require("config.ui.border").default_border,
-  -- },
   underline = true,
   update_in_insert = false,
-  -- virtual_lines = {
-  --     highlight_whole_line = false,
-  --     -- only_current_line = true,
-  -- },
-  virtual_text = false, -- virtual_text = {
-  -- 	prefix = function(diagnostic)
-  -- 		if diagnostic.severity == vim.diagnostic.severity.ERROR then
-  -- 			return U.signs.diagnostic.error
-  -- 		elseif diagnostic.severity == vim.diagnostic.severity.WARN then
-  -- 			return U.signs.diagnostic.warning
-  -- 		elseif diagnostic.severity == vim.diagnostic.severity.INFO then
-  -- 			return U.signs.diagnostic.info
-  -- 		else
-  -- 			return U.signs.diagnostic.hint
-  -- 		end
-  -- 	end,
-  -- },
+  virtual_text = false,
   document_highlight = {
     enabled = true,
-  },
-  capabilities = {
-    workspace = {
-      fileOperations = {
-        didRename = true,
-        willRename = true,
-      },
-    },
   },
   signs = {
     text = {

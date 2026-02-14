@@ -29,13 +29,9 @@ local function get_scrollbar()
 end
 
 local function get_lualine_colors()
-  -- local c = require("catppuccin.palettes").get_palette(vim.g.catppuccin_flavour)
   local c = require("themes").get_colors()
 
   local lualine_colors = {
-    -- bg = "#232639", --c.mantle,
-    -- bg = U.lighten(c.base, 0.99),
-    -- bg = c.mantle,
     bg = c.surface0,
     fg = c.subtext0,
     surface0 = c.surface0,
@@ -98,11 +94,7 @@ end
 
 return {
   "nvim-lualine/lualine.nvim",
-  -- dependencies = {
-  --   "AndreM222/copilot-lualine",
-  -- },
   event = "LazyFile",
-  -- priority = 900,
   enabled = vim.env.TMUX_NEOGIT_POPUP == nil,
   init = function()
     vim.g.lualine_laststatus = vim.o.laststatus
@@ -156,7 +148,6 @@ return {
       lualine_a = {
         {
           "mode",
-          -- icons_enabled = true,
           fmt = function()
             return mode_kirby[vim.fn.mode()] or vim.api.nvim_get_mode().mode
           end,
@@ -200,29 +191,14 @@ return {
           symbols = {
             ok = signs.full_diagnostic.ok .. " ",
             error = signs.full_diagnostic.error .. " ",
-            warn = signs.full_diagnostic.warn .. " ",
+            warn = signs.full_diagnostic.warning .. " ",
             hint = signs.full_diagnostic.hint .. " ",
             info = signs.full_diagnostic.info .. " ",
           },
-          -- diagnostics_color = {
-          -- 	error = { fg = c.error },
-          -- 	warn = { fg = c.warn },
-          -- 	info = { fg = c.info },
-          -- 	hint = { fg = c.hint },
-          -- },
           colored = true,
           padding = { left = 2, right = 0 },
           color = { fg = colors.subtext0 },
         },
-        -- {
-        -- 	"diff",
-        -- 	symbols = {
-        -- 		added = signs.git.added,
-        -- 		modified = signs.git.modified,
-        -- 		removed = signs.git.removed,
-        -- 	},
-        -- 	padding = { left = 0, right = 2 },
-        -- },
       },
       lualine_c = {},
       lualine_x = {
@@ -249,23 +225,6 @@ return {
             return status.get() ~= nil
           end,
         },
-        -- {
-        --   "copilot",
-        --   symbols = {
-        --     status = {
-        --       hl = {
-        --         enabled = colors.green,
-        --         sleep = colors.fg,
-        --         disabled = colors.red,
-        --         warning = colors.yellow,
-        --         unknown = colors.red,
-        --       },
-        --     },
-        --   },
-        --   show_colors = true,
-        --   show_loading = false,
-        --   padding = { left = 1, right = is_inside_docker and 1 or 2 },
-        -- },
         {
           function()
             if is_inside_docker then
@@ -369,13 +328,10 @@ return {
         globalstatus = true,
         component_separators = { left = "", right = "" },
         section_separators = { left = "", right = "" },
-        -- section_separators = "",
       },
       sections = sections,
       inactive_sections = sections,
     }
-
-    -- ins_left()
 
     return config
   end,

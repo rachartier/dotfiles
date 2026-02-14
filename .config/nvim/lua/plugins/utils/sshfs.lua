@@ -12,7 +12,7 @@ return {
     "<leader>mg",
     "<leader>mt",
   },
-  command = {
+  cmd = {
     "SSHConnect",
     "SSHDisconnect",
     "SSHConfig",

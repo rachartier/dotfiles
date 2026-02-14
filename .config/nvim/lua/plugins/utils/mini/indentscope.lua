@@ -16,7 +16,7 @@ M.disabled_filetypes = {
   "lazyterm",
   "fzf",
   "spectre_panel",
-  "snacks_dashoard",
+  "snacks_dashboard",
   "snacks_notif",
   "snacks_terminal",
   "snacks_win",

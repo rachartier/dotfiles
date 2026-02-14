@@ -41,7 +41,6 @@ map("n", "dd", function()
   end
 end, { expr = true, desc = "smart delete line" })
 
--- Window navigation
 if not vim.env.TMUX then
   map("n", "<M-left>", "<C-W>h", { silent = true, desc = "go to left window" })
   map("n", "<M-right>", "<C-W>l", { silent = true, desc = "go to right window" })
@@ -55,13 +54,3 @@ if not vim.env.TMUX then
 end
 
 map("n", "<C-p>", "<C-i>", { desc = "go to newer position in jumplist" })
-
--- map("n", "n", "nzzzv")
--- map("n", "N", "Nzzzv")
--- map("n", "<leader>o", "<cmd>!feh <cfile> &<CR>", { silent = true })
--- map("n", "<leader>ts", '<cmd>lua require("user_plugins.switchtheme").select_themes()<cr>')
--- map("n", "<leader>g", '<cmd>lua require("user_plugins.websearch").websearch_input("google")<cr>')
--- map("n", "<leader>G", "<cmd>WebSearchInput<cr>")
--- map("n", "p", "p=`]", { silent = true })
--- map({ "n", "x", "o" }, "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
--- map({ "n", "x", "o" }, "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })

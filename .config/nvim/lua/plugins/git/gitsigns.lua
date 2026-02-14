@@ -1,16 +1,15 @@
 return {
   "lewis6991/gitsigns.nvim",
   event = { "LazyFile" },
-  enabled = true,
   keys = {
     { "<leader>h", "", "+Git Hunk", mode = { "n" } },
   },
   opts = {
     signcolumn = true,
-    current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
+    current_line_blame = false,
     current_line_blame_opts = {
       virt_text = true,
-      virt_text_pos = "right_align", -- 'eol' | 'overlay' | 'right_align'
+      virt_text_pos = "right_align",
       ignore_whitespace = false,
     },
     preview_config = {
@@ -25,22 +24,8 @@ return {
     signs_staged = {
       add = { text = "▎" },
       change = { text = "▎" },
-      -- delete = { text = "" },
-      -- topdelete = { text = "" },
       changedelete = { text = "▎" },
     },
-    -- signs = {
-    -- 	add = { text = "▏" },
-    -- 	delete = { text = "" },
-    -- 	change = { text = "▏" },
-    -- 	untracked = { text = "┆" },
-    -- },
-    -- signs_staged = {
-    -- 	add = { text = "▏" },
-    -- 	delete = { text = "" },
-    -- 	change = { text = "▏" },
-    -- 	untracked = { text = "┆" },
-    -- },
     on_attach = function(bufnr)
       local gs = package.loaded.gitsigns
 

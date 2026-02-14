@@ -5,8 +5,7 @@ return {
   dependencies = {
     "elanmed/fzf-lua-frecency.nvim",
   },
-  command = "FzfLua",
-  -- lazy = vim.fn.argc(-1) > 0,
+  cmd = "FzfLua",
   keys = {
     -- stylua: ignore start
     -- Files & Buffers
@@ -93,7 +92,6 @@ return {
     { "<leader>fA", function() require("fzf-lua").awesome_colorschemes() end, desc = "search awesome colorschemes" },
     -- stylua: ignore stop
   },
-  enabled = true,
   opts = {
     { "border-fused", "hide" },
     fzf_colors = {
@@ -111,13 +109,9 @@ return {
       backdrop = 100,
       height = vim.g.float_height,
       width = vim.g.float_width,
-
-      -- center on screen
       row = 0.55,
       col = 0.51,
-
       preview = {
-        -- scrollchars = { "┃", "" },
         delay = 10,
         scrollbar = false,
         layout = "horizontal",
@@ -165,31 +159,7 @@ return {
   },
   config = function(_, opts)
     local fzf = require("fzf-lua")
-
-    -- if opts[1] == "default-title" then
-    --   -- use the same prompt for all pickers for profile `default-title` and
-    --   -- profiles that use `default-title` as base profile
-    --   local function fix(t)
-    --     t.prompt = t.prompt ~= nil and " " or nil
-    --     for _, v in pairs(t) do
-    --       if type(v) == "table" then
-    --         fix(v)
-    --       end
-    --     end
-    --     return t
-    --   end
-    --   opts = vim.tbl_deep_extend("force", fix(require("fzf-lua.profiles.default-title")), opts)
-    --   opts[1] = nil
-    -- end
     fzf.setup(opts)
     fzf.register_ui_select()
-
-    -- vim.api.nvim_create_autocmd("VimEnter", {
-    --   callback = function()
-    --     vim.wo.number = false
-    --     vim.wo.relativenumber = false
-    --     fzf.files()
-    --   end,
-    -- })
   end,
 }

@@ -1,4 +1,5 @@
 return {
+
   file = {
     modified = "•",
     not_saved = "󰉉",
@@ -16,9 +17,6 @@ return {
     unstaged = "󰄱 ",
     staged = " ",
     untracked = "",
-    -- added = " ",
-    -- modified = " ",
-    -- removed = " ",
   },
   fzf = {
     git = {
@@ -56,19 +54,3 @@ return {
     error_x = " ",
   },
 }
-
--- M.diagnostic_signs = {
--- 	error = "●",
--- 	warning = "●",
--- 	info = "●",
--- 	hint = "●",
--- 	other = "●",
--- }
-
--- M.diagnostic_signs = {
---     error = " ",
---     warning = " ",
---     info = " ",
---     hint = "󱤅 ",
---     other = "󰠠 ",
--- }

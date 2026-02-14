@@ -1,14 +1,3 @@
--- vim.api.nvim_create_autocmd({ "TextYankPost" }, {
--- 	vim.highlight.on_yank({
--- 		higroup = "CurSearch",
--- 		timeout = 85,
--- 		priority = 1,
--- 	})
--- end, {
--- 	target = "*",
--- 	desc = "Highlight yanked text",
--- })
-
 vim.api.nvim_create_autocmd({ "VimResized" }, {
   pattern = "*",
   callback = function()
@@ -118,32 +107,6 @@ vim.api.nvim_create_autocmd("FileType", {
   desc = "do not list quickfix buffers",
 })
 
--- Corrige le problème d'indentation en python lorsque
--- l'on sort du mode insertion si on a mit plusieurs tabulations
--- utils.on_event("InsertLeave", function()
--- 	vim.cmd("normal! ==")
--- end, {
--- 	target = "*.py",
--- 	desc = "Auto format line in python file",
--- })
-
--- autocmd("User", {
--- 	pattern = "CustomFormatCopilot",
--- 	callback = function(args)
--- 		local str_lines_count = tostring(args.data.lines_count)
---
--- 		vim.cmd("normal! " .. str_lines_count .. "k")
--- 		vim.cmd("normal! " .. str_lines_count .. "==")
--- 	end,
--- 	group = augroup("custom_copilot"),
--- })
--- utils.on_event("FileType", function(event)
--- 	vim.cmd("topleft Outline")
--- end, {
--- 	target = { "markdown" },
--- 	desc = "Outline for markdown",
--- })
-
 vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold", "CursorHoldI" }, {
   callback = function()
     vim.cmd("checktime")
@@ -158,18 +121,17 @@ vim.api.nvim_create_autocmd("FileChangedShellPost", {
   desc = "notify when file changed on disk",
 })
 
--- Set local settings for terminal buffers
 vim.api.nvim_create_autocmd("TermOpen", {
   pattern = "term://*",
   callback = function(event)
     if vim.opt.buftype:get() == "terminal" then
       local set = vim.opt_local
-      set.number = false -- Don't show numbers
-      set.relativenumber = false -- Don't show relativenumbers
-      set.scrolloff = 0 -- Don't scroll when at the top or bottom of the terminal buffer
+      set.number = false
+      set.relativenumber = false
+      set.scrolloff = 0
       vim.opt.filetype = "terminal"
 
-      vim.cmd.startinsert() -- Start in insert mode
+      vim.cmd.startinsert()
     end
   end,
   desc = "settings for terminal buffers",

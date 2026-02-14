@@ -117,12 +117,8 @@ return {
       desc = "lsp attach",
     })
 
-    local capabilities = vim.tbl_deep_extend(
-      "force",
-      {},
-      vim.lsp.protocol.make_client_capabilities(),
-      require("config.lsp.attach").make_capabilities()
-    )
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    -- require("config.lsp.attach").make_capabilities()
 
     local server_settings = require("config.languages")
     local tools = collect_tools(server_settings)

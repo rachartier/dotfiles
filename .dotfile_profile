@@ -1,25 +1,26 @@
-# theme="\
-#    --color=bg+:#494d64,bg:-1,spinner:#f4dbd6,hl:bold:#eed49f\
-#    --color=fg:#cad3f5,header:#ed8796,info:#c6a0f6,pointer:#f4dbd6 \
-#    --color=border:#cad3f5 \
-#    --color=marker:#f4dbd6,fg+:#cad3f5,prompt:#c6a0f6,hl+:bold:#eed49f"
+# Catppuccin Macchiato
 theme="\
-   --color=bg+:#363a4f,bg:-1,spinner:#f4dbd6,hl:#b8c0e0\
-   --color=fg:#8087a2,header:#ed8796,info:#c6a0f6,pointer:#c6a0f6\
-   --color=gutter:#363a4f \
-   --color=border:#cad3f5 \
-   --color=marker:#f4dbd6,fg+:#cad3f5,prompt:#c6a0f6,hl+:bold:#8aadf4"
+    --color=bg+:#363a4f,bg:-1,spinner:#f4dbd6,hl:#b8c0e0 \
+    --color=fg:#8087a2,header:#ed8796,info:#c6a0f6,pointer:#c6a0f6 \
+    --color=gutter:#363a4f \
+    --color=border:#cad3f5 \
+    --color=marker:#f4dbd6,fg+:#cad3f5,prompt:#c6a0f6,hl+:bold:#8aadf4"
+
+# Catppuccin Macchiato
+# theme="\
+#     --color=bg+:#494d64,bg:-1,spinner:#f4dbd6,hl:bold:#eed49f \
+#     --color=fg:#cad3f5,header:#ed8796,info:#c6a0f6,pointer:#f4dbd6 \
+#     --color=border:#cad3f5 \
+#     --color=marker:#f4dbd6,fg+:#cad3f5,prompt:#c6a0f6,hl+:bold:#eed49f"
 
 # Latte Custom
 # theme="\
-#     --color=bg+:#317da7,bg:-1,spinner:#a43b35,hl:bold:#bd8800\
+#     --color=bg+:#317da7,bg:-1,spinner:#a43b35,hl:bold:#bd8800 \
 #     --color=fg:#474155,header:#ff3532,info:#aa3685,pointer:#a43b35 \
 #     --color=border:#474155 \
 #     --color=marker:#a43b35,fg+:#474155,prompt:#aa3685,hl+:bold:#e8e2c8"
 
-# --preview \"$HOME/.config/scripts/preview_fzf.sh {}\" \
 export FZF_DEFAULT_COMMAND="fd --type f"
-export KEYTIMEOUT=1
 export FZF_DEFAULT_OPTS="
     --layout=default
     --multi \
@@ -35,10 +36,11 @@ export FZF_DEFAULT_OPTS="
     $theme \
 "
 
-export FZF_CTRL_T_COMMAND='fd --type f --hidden --strip-cwd-prefix --exclude .git'
-export FZF_ALT_C_COMMAND='fd --type d --hidden --strip-cwd-prefix --exclude .git'
-export FZF_ALT_C_OPTS='--preview "eza --tree --level 1 --group-directories-first --color=always --icons {}"'
-export FZF_CTRL_R_OPTS=''
+export FZF_CTRL_T_COMMAND="fd --type f --hidden --strip-cwd-prefix --exclude .git"
+export FZF_CTRL_T_OPTS="--preview 'bat --color=always --style=numbers --line-range=:200 {}'"
+export FZF_ALT_C_COMMAND="fd --type d --hidden --strip-cwd-prefix --exclude .git"
+export FZF_ALT_C_OPTS="--preview 'eza --tree --level 1 --group-directories-first --color=always --icons {}'"
+export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window=up:3:hidden:wrap --bind '?:toggle-preview'"
 
 _fzf_compgen_path() {
     fd --hidden --exclude .git . "$1"
@@ -48,75 +50,69 @@ _fzf_compgen_dir() {
     fd --type=d --hidden --exclude .git . "$1"
 }
 
-if ! [ -d "$HOME/.terminfo" ]; then
-    if [ "$TERM" = "wezterm" ]; then
+if [ ! -d "$HOME/.terminfo" ]; then
+    local tempfile
+    case "$TERM" in
+    wezterm)
         tempfile=$(mktemp) &&
-            curl -o "$tempfile" https://raw.githubusercontent.com/wez/wezterm/master/termwiz/data/wezterm.terminfo &&
+            curl -so "$tempfile" https://raw.githubusercontent.com/wez/wezterm/master/termwiz/data/wezterm.terminfo &&
             tic -x -o "$HOME/.terminfo" "$tempfile" &&
             rm "$tempfile"
-    elif [ "$TERM" = "ghostty" ] || [ "$TERM" = "xterm-ghostty" ]; then
+        ;;
+    ghostty | xterm-ghostty)
         tempfile=$(mktemp) &&
-            curl -o "$tempfile" https://raw.githubusercontent.com/rachartier/dotfiles/refs/heads/main/.config/ghostty/terminfo/ghostty.terminfo &&
+            curl -so "$tempfile" https://raw.githubusercontent.com/rachartier/dotfiles/refs/heads/main/.config/ghostty/terminfo/ghostty.terminfo &&
             tic -x -o "$HOME/.terminfo" "$tempfile" &&
             rm "$tempfile"
-    fi
+        ;;
+    esac
 fi
 
-# Not inside a devcontainer
 if [ -z "$DOTFILES_DOCKER" ]; then
     export FZF_TMUX=1
-    export FZF_TMUX_OPTS='-p80%,60%'
-
+    export FZF_TMUX_OPTS="-p80%,60%"
     export ZSH_TMUX_AUTOSTART=false
     export ZSH_TMUX_CONFIG="$HOME/.config/tmux/tmux.conf"
+    export DISABLE_AUTO_TITLE="true"
 
-    if [[ -n $SSH_CONNECTION ]]; then
-        export EDITOR='vim'
+    if [[ -n "$SSH_CONNECTION" ]]; then
+        export EDITOR="vim"
+        export VISUAL="vim"
     else
-        export EDITOR='nvim'
+        export EDITOR="nvim"
+        export VISUAL="nvim"
     fi
-
-    export DISABLE_AUTO_TITLE='true'
 else
-    export TERM=$TERM
-
-    if [ -z "$LC_ALL" ]; then
-        export LC_ALL=C
-    fi
+    [ -z "$LC_ALL" ] && export LC_ALL=C
 
     # For copilot.vim
     export NODE_TLS_REJECT_UNAUTHORIZED=0
-
     export APPIMAGE_EXTRACT_AND_RUN=1
-    export XDG_RUNTIME_DIR="/tmp/"
 fi
 
-# =====================
-# export GIT_PAGER="/bin/delta --config ~/.config/delta/delta.config"
+typeset -U path # deduplicate PATH entries
 
+path=(
+    "$HOME/.dotnet"
+    "$HOME/.dotnet/tools"
+    $path
+    "/opt/nvim-linux-x86_64/bin"
+    "/snap/bin"
+    "$HOME/.local/bin"
+    "$HOME/.fzf/bin"
+    "$HOME/.local/share/nvim/mason/bin"
+    "$HOME/.opencode/bin"
+)
+
+export PATH
+
+export KEYTIMEOUT=10
 export DOTNET_ROOT="$HOME/.dotnet"
-export PATH="$HOME/.dotnet:$PATH"
-export PATH="$HOME/.dotnet/tools:$PATH"
-export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
-export PATH="$PATH:/snap/bin"
-export PATH="$PATH:$HOME/.local/bin"
-export PATH="$PATH:$HOME/.fzf/bin"
-export PATH="$PATH:$HOME/.local/share/nvim/mason/bin"
-export PATH="$PATH:$HOME/.opencode/bin"
-
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export MANROFFOPT="-c"
-
-export COLORTERM=truecolor
-export BROWSER="/mnt/c/Program\ Files/Mozilla\ Firefox/firefox.exe"
-
-export GALLIUM_DRIVER=d3d12
 export SUDO_EDITOR="nvim"
-
+export BROWSER="/mnt/c/Program Files/Mozilla Firefox/firefox.exe"
+export GALLIUM_DRIVER=d3d12
 export COPILOT_ALLOW_ALL="true"
 
-# export MANPAGER="sh -c 'sed -u -e \"s/\\x1B\[[0-9;]*m//g; s/.\\x08//g\" | bat -p -lman'"
-
-# if [ -d "/mnt/wslg/runtime-dir" ]; then
-#     ln -sf /mnt/wslg/runtime-dir/wayland-* "$XDG_RUNTIME_DIR/"
-# fi
+[ -z "$COLORTERM" ] && export COLORTERM=truecolor

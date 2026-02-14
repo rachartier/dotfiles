@@ -4,12 +4,9 @@ return {
   dependencies = {
     "rafamadriz/friendly-snippets",
     "fang2hou/blink-copilot",
-    -- "brenoprata10/nvim-highlight-colors",
     "saghen/blink.compat",
   },
-  -- build = "cargo build --release",
   event = { "InsertEnter", "CmdlineEnter" },
-  -- lazy = false,
   opts = {
     keymap = {
       preset = "super-tab",
@@ -26,7 +23,6 @@ return {
     end,
 
     cmdline = {
-      -- keymap = { preset = "inherit" },
       completion = {
         list = { selection = { preselect = false } },
         menu = {
@@ -53,36 +49,18 @@ return {
         },
       },
       documentation = {
-        -- border = "padded",
-        -- border = require("config.ui.border").blink_empty,
         auto_show = true,
         auto_show_delay_ms = 200,
       },
       menu = {
-        -- cmdline_position = function()
-        --   if vim.g.ui_cmdline_pos ~= nil then
-        --     local pos = vim.g.ui_cmdline_pos -- (1, 0)-indexed
-        --     if vim.fn.mode() == "c" and vim.fn.getcmdtype() == "/" then
-        --       return { pos[1] - 1, pos[2] }
-        --     end
-        --     return { pos[1], pos[2] }
-        --   end
-        --
-        --   return { vim.o.lines + 1, 0 }
-        -- end,
         draw = {
           treesitter = { "lsp" },
         },
       },
-      -- trigger = {
-      --   show_on_insert_on_trigger_character = false,
-      -- },
     },
     fuzzy = {
       sorts = {
         "exact",
-        -- defaults
-
         "score",
         "sort_text",
         "label",
@@ -116,7 +94,6 @@ return {
         return sources
       end,
       providers = {
-        -- dont show LuaLS require statements when lazydev has items
         lazydev = { name = "LazyDev", module = "lazydev.integrations.blink", fallbacks = { "lsp" } },
         copilot = {
           name = "copilot",
@@ -158,18 +135,12 @@ return {
       ["<Tab>"] = {
         require("blink.cmp.keymap.presets").get("super-tab")["<Tab>"][1],
         "snippet_forward",
-        function() -- sidekick next edit suggestion
+        function()
           return require("sidekick").nes_jump_or_apply()
         end,
         function()
           return vim.lsp.inline_completion.get()
         end,
-        -- function()
-        --   require("tiny-buffers-switcher").switcher()
-        -- end,
-        -- function()
-        --   require("tiny-buffers-switcher").switcher()
-        -- end,
         "fallback",
       },
       ["<S-Tab>"] = {
@@ -195,7 +166,5 @@ return {
       end,
       desc = "enable inline completion when blink menu closes",
     })
-
-    -- vim.lsp.config("*", { capabilities = require("blink.cmp").get_lsp_capabilities(nil, true) })
   end,
 }

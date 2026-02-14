@@ -1,17 +1,7 @@
 if vim.g.neovide then
-  -- vim.o.guifont = "CaskaydiaCove NF"
-  -- vim.o.guifont = "Cascadia Code,Symbols Nerd Font"
-  -- vim.o.guifont = "MonoLisa,Symbols Nerd Font:h14"
-  -- vim.o.guifont = "MonoLisa Nerd Font:h12"
   vim.o.guifont = "Berkeley Mono,Symbols Nerd Font:h16"
 
   vim.g.neovide_underline_stroke_scale = 1.5
-  -- vim.g.neovide_underline_automatic_scaling = true
-
-  -- vim.g.neovide_scale_factor = 0.84
-  -- vim.g.neovide_floating_shadow = "v:true"
-  -- vim.g.neovide_floating_z_height = 10
-  -- vim.g.neovide_transparency = 1
 
   vim.g.neovide_cursor_animate_command_line = true
 
@@ -49,15 +39,6 @@ if vim.g.neovide then
   vim.g.neovide_normal_opacity = 1
   vim.g.neovide_opacity = 1
 
-  -- -- Helper function for transparency formatting
-  -- local alpha = function()
-  -- 	return string.format("%x", math.floor(255 * (vim.g.transparency or 0.8)))
-  -- end
-  -- -- -- g:neovide_transparency should be 0 if you want to unify transparency of content and title bar.
-  -- vim.g.neovide_transparency = 1
-  -- vim.g.transparency = 0.0
-  -- vim.g.neovide_background_color = require("theme").get_colors().base .. alpha()
-
   vim.keymap.set("n", "<D-s>", ":w<CR>", { desc = "save file" })
   vim.keymap.set("v", "<D-c>", '"+y', { desc = "copy to clipboard" })
   vim.keymap.set("n", "<D-v>", '"+P', { desc = "paste from clipboard" })
@@ -73,7 +54,7 @@ if vim.g.neovide then
   vim.keymap.set("i", "<C-S-v>", '<ESC>l"+Pli', { desc = "paste from clipboard" })
 end
 
-vim.api.nvim_set_keymap("", "<D-v>", "+p<CR>", { noremap = true, silent = true, desc = "paste from clipboard" })
-vim.api.nvim_set_keymap("!", "<D-v>", "<C-R>+", { noremap = true, silent = true, desc = "paste from clipboard" })
-vim.api.nvim_set_keymap("t", "<D-v>", "<C-R>+", { noremap = true, silent = true, desc = "paste from clipboard" })
-vim.api.nvim_set_keymap("v", "<D-v>", "<C-R>+", { noremap = true, silent = true, desc = "paste from clipboard" })
+vim.keymap.set("", "<D-v>", "+p<CR>", { noremap = true, silent = true, desc = "paste from clipboard" })
+vim.keymap.set("!", "<D-v>", "<C-R>+", { noremap = true, silent = true, desc = "paste from clipboard" })
+vim.keymap.set("t", "<D-v>", "<C-R>+", { noremap = true, silent = true, desc = "paste from clipboard" })
+vim.keymap.set("v", "<D-v>", "<C-R>+", { noremap = true, silent = true, desc = "paste from clipboard" })

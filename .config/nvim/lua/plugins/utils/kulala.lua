@@ -59,23 +59,8 @@ return {
       0,
       "n",
       "<leader>i",
-      "<cmd>lua require'kulala').inspect()<cr>",
+      "<cmd>lua require('kulala').inspect()<cr>",
       { noremap = true, silent = true, desc = "Inspect the current request" }
     )
   end,
 }
---
--- return {
--- 	"rest-nvim/rest.nvim",
--- 	lazy = false,
--- 	keys = {
--- 		{
--- 			"<CR>",
--- 			"<cmd>Rest run<cr>",
--- 			{ noremap = true, silent = true, desc = "Execute the request" },
--- 		},
--- 	},
--- 	config = function()
--- 		vim.g.rest_nvim = {}
--- 	end,
--- }

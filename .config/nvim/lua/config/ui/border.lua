@@ -1,5 +1,4 @@
 local M = {
-
   round = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
   none = { "", "", "", "", "", "", "", "" },
   empty = { " ", " ", " ", " ", " ", " ", " ", " " },
@@ -17,8 +16,6 @@ local M = {
   square_telescope = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
 }
 
--- M.default_border = M.square
--- M.default_border = M.border.empty
 M.default_border = "rounded"
 
 return M

@@ -26,7 +26,7 @@ return {
     vim.api.nvim_create_autocmd("FileType", {
       pattern = "vimwiki",
       callback = function()
-        vim.o.filetype = "markdown"
+        vim.bo.filetype = "markdown"
       end,
       desc = "set vimwiki filetype to markdown",
     })

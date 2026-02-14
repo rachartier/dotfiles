@@ -11,7 +11,6 @@ return {
       "ruff_format",
       "ruff_fix",
     },
-    -- lsp_ignore = { "ruff" },
   },
   {
     filetypes = { "cs" },
@@ -30,13 +29,11 @@ return {
     formatter = { "stylua" },
     mason = { "lua_ls" },
     linter = { "selene" },
-    lsp_ignore = false,
   },
   {
     filetypes = { "c", "cpp", "h", "hpp" },
     treesitter = { "c", "cpp" },
     mason = { "clangd" },
-    formatter = {},
   },
   {
     filetypes = { "typescript" },
@@ -46,7 +43,6 @@ return {
   {
     filetypes = { "dockerfile" },
     mason = { "dockerls" },
-    formatter = {},
     linter = { "hadolint" },
     lsp_fallback = false,
   },
@@ -65,7 +61,6 @@ return {
   {
     filetypes = { "yaml" },
     mason = { "yamlls" },
-    formatter = {},
   },
   {
     filetypes = { "markdown" },
@@ -74,16 +69,5 @@ return {
   },
   {
     filetypes = { "text" },
-    mason = {},
-    formatter = {},
   },
-  -- {
-  --   filetypes = { "rust" },
-  --   mason = { "rust_analyzer" },
-  --   lsp_ignore = true,
-  -- },
-  -- {
-  --   filetypes = { "java" },
-  --   mason = { "jdtls" },
-  -- },
 }

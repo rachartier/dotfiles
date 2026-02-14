@@ -35,10 +35,9 @@ return {
     require("neogit").setup(opts)
 
     if vim.env.TMUX_NEOGIT_POPUP == "1" then
-      -- some visual bugs with extui
-      require("vim._core.ui2").enable({
-        enable = false,
-      })
+      pcall(function()
+        require("vim._core.ui2").enable({ enable = false })
+      end)
 
       local function is_buffer_no_name(bufnr)
         bufnr = bufnr or vim.api.nvim_get_current_buf()
