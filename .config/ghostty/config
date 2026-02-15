@@ -7,8 +7,8 @@ shell-integration = zsh
 cursor-text = "#000000"
 
 font-family = ""
-font-family = MonoLisa
-# font-family = Berkeley Mono
+# font-family = MonoLisa
+font-family = Berkeley Mono
 # font-family = MapleMono
 font-family = Symbols Nerd Fonts Mono
 # font-family = CommitMono
@@ -19,8 +19,7 @@ font-size = 14
 font-feature = +zero, +calt, +liga, +clig, +ss01, +ss02
 font-thicken = true
 
-# custom-shader = /home/rachartier/.config/ghostty/ghostty-shaders/custom3.glsl
-custom-shader = cursor-shaders/cursor_smear.glsl
+custom-shader = shaders/cursor_tail.glsl
 
 gtk-wide-tabs = false
 shell-integration-features = true
