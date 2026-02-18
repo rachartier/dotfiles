@@ -35,7 +35,9 @@ function zsh_core_setup() {
         eval "$(direnv hook zsh)"
     fi
 
-    source <(fzf --zsh)
+    if command -v fzf &> /dev/null; then
+        source <(fzf --zsh)
+    fi
 }
 
 zsh-defer zsh_core_setup
@@ -69,8 +71,7 @@ setopt interactivecomments    # allow comments in interactive shells
 setopt long_list_jobs         # display PID when suspending processes
 setopt notify                 # report background job status immediately
 
-setopt nocorrect              # disable spelling correction for commands
-unsetopt correct_all          # disable spelling correction for arguments
+unsetopt correct correct_all
 setopt rm_star_wait           # 10-second pause before executing rm *
 
 unsetopt BEEP                 # disable beep on error
@@ -80,7 +81,6 @@ unsetopt flow_control         # disable start/stop characters in shell editor
 [ "$HISTSIZE" -lt 50000 ] && HISTSIZE=50000
 [ "$SAVEHIST" -lt 50000 ] && SAVEHIST=50000
 
-setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE
 setopt hist_ignore_all_dups   # ignore duplicated commands in history list
 setopt hist_save_no_dups      # do not save duplicated commands
 setopt hist_find_no_dups      # do not display duplicates when searching history
