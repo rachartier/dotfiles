@@ -14,6 +14,8 @@ install_yazi() {
     else
         log "error" "Yazi not installed."
     fi
+
+    ya pkg upgrade
 }
 
 install_yazi "$@"
