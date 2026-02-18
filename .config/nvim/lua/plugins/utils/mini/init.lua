@@ -40,6 +40,7 @@ return {
       require("plugins.utils.mini.ai").setup()
       require("plugins.utils.mini.icons").setup()
       require("plugins.utils.mini.pairs").setup()
+      require("plugins.utils.mini.notify").setup()
     end)
 
     require("plugins.utils.mini.clue").setup()
