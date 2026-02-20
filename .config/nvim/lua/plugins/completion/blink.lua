@@ -23,16 +23,20 @@ return {
     end,
 
     cmdline = {
-      completion = {
-        list = { selection = { preselect = false } },
-        menu = {
-          auto_show = function(ctx)
-            return vim.fn.getcmdtype() == ":"
-          end,
-        },
-        ghost_text = { enabled = true },
-      },
+      keymap = { preset = "inherit" },
+      completion = { menu = { auto_show = true } },
     },
+    -- cmdline = {
+    --   completion = {
+    --     list = { selection = { preselect = false } },
+    --     menu = {
+    --       auto_show = function(ctx)
+    --         return vim.fn.getcmdtype() == ":"
+    --       end,
+    --     },
+    --     ghost_text = { enabled = true },
+    --   },
+    -- },
     completion = {
       accept = {
         auto_brackets = {
