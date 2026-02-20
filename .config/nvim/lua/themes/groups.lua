@@ -55,9 +55,22 @@ function M.get(colors)
     SnacksDashboardKey = { fg = colors.peach },
     SnacksDashboardFooter = { fg = colors.maroon },
     SnacksIndentScope = { fg = colors.surface1 },
+
     MiniIndentscopeSymbol = { fg = colors.surface1 },
     MiniStarterItemPrefix = { fg = colors.peach },
     MiniStarterFooter = { fg = colors.maroon },
+
+    MiniPickBorder = { fg = colors.overlay2, bg = default_bg },
+    MiniPickHeader = { fg = colors.mauve, bold = true },
+    MiniPickMatchCurrent = { bg = colors.surface0 },
+    MiniPickMatchMarked = { fg = colors.green, bold = true },
+    MiniPickMatchRanges = { fg = colors.red, bold = true },
+    MiniPickNormal = { fg = colors.text, bg = default_bg },
+    MiniPickPreviewLine = { bg = colors.surface1 },
+    MiniPickPreviewRegion = { bg = colors.surface1 },
+    MiniPickPrompt = { fg = colors.text, bg = default_bg },
+    MiniPickPromptCaret = { fg = colors.text },
+    MiniPickPromptPrefix = { fg = colors.blue },
 
     StatusLine = { fg = colors.text, bg = "None" },
     StatusLineNC = { link = "StatusLine" },

@@ -41,6 +41,7 @@ return {
       require("plugins.utils.mini.icons").setup()
       require("plugins.utils.mini.pairs").setup()
       require("plugins.utils.mini.notify").setup()
+      require("plugins.utils.mini.picker").setup()
     end)
 
     require("plugins.utils.mini.clue").setup()
