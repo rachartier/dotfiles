@@ -76,7 +76,6 @@ function M.setup()
     autoopen = true,
     items = {
       { name = "New File", action = "ene | startinsert", section = "", keys = "n" },
-      { name = "Find File", action = "FzfLua files", section = "", keys = "f" },
       { name = "Lazy", action = "Lazy", section = "", keys = "l" },
       { name = "Quit", action = "qa", section = "", keys = "q" },
     },
