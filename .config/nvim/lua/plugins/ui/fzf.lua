@@ -5,6 +5,7 @@ return {
   dependencies = {
     "elanmed/fzf-lua-frecency.nvim",
   },
+  enabled = false,
   cmd = "FzfLua",
   keys = {
     -- stylua: ignore start
