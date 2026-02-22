@@ -3,6 +3,7 @@ local indentscope = require("plugins.utils.mini.indentscope")
 return {
   "nvim-mini/mini.nvim",
   version = false,
+  priority = 1000,
   specs = {
     { "nvim-tree/nvim-web-devicons", enabled = false, optional = true },
   },
@@ -30,6 +31,8 @@ return {
     vim.api.nvim_create_autocmd("User", au_opts)
   end,
   config = function()
+    require("plugins.utils.mini.base16").setup()
+
     vim.schedule(function()
       require("mini.surround").setup()
       require("mini.align").setup()

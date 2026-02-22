@@ -20,8 +20,6 @@ vim.g.float_width = 0.65
 vim.g.float_height = 0.85
 vim.g.float_winblend = 40
 
-vim.g.catppuccin_flavour = "macchiato"
-
 if os.getenv("DOTFILES_MINIMAL") then
   vim.g.dotfile_config_type = "minimal"
 end

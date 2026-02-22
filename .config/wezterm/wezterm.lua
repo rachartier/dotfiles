@@ -2,6 +2,52 @@ local wezterm = require("wezterm")
 local act = wezterm.action
 local config = {}
 
+local function read_file(rel_path)
+	local home = os.getenv("HOME")
+	if home then
+		local file = io.open(home .. rel_path, "r")
+		if file then
+			local content = file:read("*a")
+			file:close()
+			if content and content ~= "" then
+				return content
+			end
+		end
+	end
+	-- Fallback: read via WSL (needed when wezterm runs on Windows)
+	local success, stdout = wezterm.run_child_process({
+		"wsl", "-e", "sh", "-c", "cat $HOME" .. rel_path,
+	})
+	if success and stdout ~= "" then
+		return stdout
+	end
+	return nil
+end
+
+local function read_theme_name()
+	local content = read_file("/.config/custom-themes/.current")
+	if content then
+		local name = content:gsub("%s+$", "")
+		if name ~= "" then
+			return name
+		end
+	end
+	return "macchiato"
+end
+
+local function load_theme(name)
+	local content = read_file("/.config/custom-themes/" .. name .. ".sh")
+	if not content then
+		return nil
+	end
+
+	local colors = {}
+	for key, value in content:gmatch('export%s+COLOR_(%w+)="(#%x+)"') do
+		colors[key] = value
+	end
+	return colors
+end
+
 config.max_fps = 165
 
 config.check_for_updates = true
@@ -97,8 +143,64 @@ config.window_padding = {
 
 config.window_close_confirmation = "NeverPrompt"
 
-local theme = "Catppuccin Macchiato"
-config.color_scheme = theme
+wezterm.on("user-var-changed", function(window, pane, name, value)
+	if name == "reload_config" then
+		wezterm.reload_configuration()
+	end
+end)
+
+local theme = load_theme(read_theme_name())
+
+if theme then
+	config.colors = {
+		foreground = theme.text,
+		background = theme.base,
+		cursor_bg = theme.text,
+		cursor_fg = theme.base,
+		cursor_border = theme.text,
+		selection_bg = theme.surface,
+		selection_fg = theme.text,
+		scrollbar_thumb = theme.muted,
+		split = theme.muted,
+		ansi = {
+			theme.base,
+			theme.red,
+			theme.green,
+			theme.yellow,
+			theme.blue,
+			theme.mauve,
+			theme.teal,
+			theme.text,
+		},
+		brights = {
+			theme.muted,
+			theme.red,
+			theme.green,
+			theme.yellow,
+			theme.blue,
+			theme.mauve,
+			theme.teal,
+			theme.highlight,
+		},
+		tab_bar = {
+			background = theme.base,
+			active_tab = {
+				bg_color = theme.surface,
+				fg_color = theme.text,
+			},
+			inactive_tab = {
+				bg_color = theme.base,
+				fg_color = theme.muted,
+			},
+			inactive_tab_hover = {
+				bg_color = theme.surface,
+				fg_color = theme.subtle,
+			},
+		},
+	}
+else
+	config.color_scheme = "Catppuccin Mocha"
+end
 
 config.mouse_bindings = {
 	-- CTRL-Click open hyperlinks

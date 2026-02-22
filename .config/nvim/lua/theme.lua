@@ -11,48 +11,32 @@ function M.get_colors()
 end
 
 function M.get_lualine_colors()
-  local c = theme_manager.get_colors()
-  local lualine_colors = {
-    bg = c.surface0,
-    fg = c.subtext0,
-    surface0 = c.surface0,
-    yellow = c.yellow,
-    flamingo = c.flamingo,
-    cyan = c.sapphire,
-    darkblue = c.mantle,
-    green = c.green,
-    orange = c.peach,
-    violet = c.lavender,
-    mauve = c.mauve,
-    blue = c.blue,
-    red = c.red,
-  }
-  return vim.tbl_extend("force", lualine_colors, c)
+  return theme_manager.get_colors()
 end
 
 function M.get_kirby_colors()
-  local colors = M.get_lualine_colors()
+  local c = theme_manager.get_colors()
   return {
-    n = colors.red,
-    i = colors.green,
-    v = colors.blue,
-    ["\022"] = colors.blue,
-    V = colors.blue,
-    c = colors.mauve,
-    no = colors.red,
-    s = colors.orange,
-    S = colors.orange,
-    ["\019"] = colors.orange,
-    ic = colors.yellow,
-    R = colors.violet,
-    Rv = colors.violet,
-    cv = colors.red,
-    ce = colors.red,
-    r = colors.cyan,
-    rm = colors.cyan,
-    ["r?"] = colors.cyan,
-    ["!"] = colors.red,
-    t = colors.red,
+    n = c.red,
+    i = c.green,
+    v = c.blue,
+    ["\022"] = c.blue,
+    V = c.blue,
+    c = c.mauve,
+    no = c.red,
+    s = c.peach,
+    S = c.peach,
+    ["\019"] = c.peach,
+    ic = c.yellow,
+    R = c.mauve,
+    Rv = c.mauve,
+    cv = c.red,
+    ce = c.red,
+    r = c.teal,
+    rm = c.teal,
+    ["r?"] = c.teal,
+    ["!"] = c.red,
+    t = c.red,
   }
 end
 

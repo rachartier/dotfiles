@@ -126,12 +126,12 @@ local function set_winbar(bufnr)
 end
 
 function M.setup()
-  local bg = utils.darken(colors.surface0, 0.62)
+  local bg = utils.darken(colors.surface, 0.65)
 
-  vim.api.nvim_set_hl(0, "Winbar", { bg = bg, fg = colors.overlay0 })
-  vim.api.nvim_set_hl(0, "WinbarSeparator", { fg = colors.overlay1, bg = bg })
-  vim.api.nvim_set_hl(0, "WinbarDir", { fg = colors.pink, bg = bg, bold = true, italic = true })
-  vim.api.nvim_set_hl(0, "WinbarFile", { fg = colors.subtext1, bg = bg })
+  vim.api.nvim_set_hl(0, "Winbar", { bg = bg, fg = colors.subtle })
+  vim.api.nvim_set_hl(0, "WinbarSeparator", { fg = colors.subtle, bg = bg })
+  vim.api.nvim_set_hl(0, "WinbarDir", { fg = colors.mauve, bg = bg, bold = true, italic = true })
+  vim.api.nvim_set_hl(0, "WinbarFile", { fg = colors.text, bg = bg })
 
   vim.api.nvim_create_autocmd("BufWinEnter", {
     group = vim.api.nvim_create_augroup("custom_winbar", { clear = true }),

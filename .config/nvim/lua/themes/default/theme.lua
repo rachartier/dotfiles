@@ -1,36 +1,26 @@
 local M = {}
-local base = require("themes.base_palette")
+local palette = require("themes.palette")
 
 function M.get_colors()
   local colors = {
-    base = "#1e1e2e",
-    mantle = "#181825",
-    crust = "#11111b",
-    text = "#cdd6f4",
-    subtext1 = "#bac2de",
-    subtext0 = "#a6adc8",
-    overlay2 = "#9399b2",
-    overlay1 = "#7f849c",
-    overlay0 = "#6c7086",
-    surface2 = "#585b70",
-    surface1 = "#45475a",
-    surface0 = "#313244",
-    blue = "#89b4fa",
-    lavender = "#b4befe",
-    sapphire = "#74c7ec",
-    sky = "#89dceb",
-    teal = "#94e2d5",
-    green = "#a6e3a1",
-    yellow = "#f9e2af",
-    peach = "#fab387",
-    maroon = "#eba0ac",
-    red = "#f38ba8",
-    mauve = "#cba6f7",
-    pink = "#f5c2e7",
-    flamingo = "#f2cdcd",
-    rosewater = "#f5e0dc",
+    base = "#24273a",
+    mantle = "#1e2030",
+    surface = "#363a4f",
+    muted = "#494d64",
+    subtle = "#5b6078",
+    text = "#cad3f5",
+    subtext = "#f4dbd6",
+    highlight = "#b7bdf8",
+    red = "#ed8796",
+    peach = "#f5a97f",
+    yellow = "#eed49f",
+    green = "#a6da95",
+    teal = "#8bd5ca",
+    blue = "#8aadf4",
+    mauve = "#c6a0f6",
+    flamingo = "#f0c6c6",
   }
-  base.validate(colors)
+  palette.validate(colors)
   return colors
 end
 

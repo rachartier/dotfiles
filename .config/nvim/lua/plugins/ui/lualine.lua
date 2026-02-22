@@ -29,25 +29,7 @@ local function get_scrollbar()
 end
 
 local function get_lualine_colors()
-  local c = require("themes").get_colors()
-
-  local lualine_colors = {
-    bg = c.surface0,
-    fg = c.subtext0,
-    surface0 = c.surface0,
-    yellow = c.yellow,
-    flamingo = c.flamingo,
-    cyan = c.sapphire,
-    darkblue = c.mantle,
-    green = c.green,
-    orange = c.peach,
-    violet = c.lavender,
-    mauve = c.mauve,
-    blue = c.blue,
-    red = c.red,
-  }
-
-  return vim.tbl_extend("force", lualine_colors, c)
+  return require("themes").get_colors()
 end
 
 local conditions = {
@@ -159,7 +141,7 @@ return {
         {
           "branch",
           icon = signs.git.branch,
-          color = { fg = colors.violet },
+          color = { fg = colors.mauve },
           padding = { left = 4, right = 2 },
         },
         {
@@ -182,7 +164,7 @@ return {
             return msg
           end,
           icon = "",
-          color = { fg = colors.subtext0 },
+          color = { fg = colors.text },
           padding = { left = conditions.check_git_workspace() and 2 or 4, right = 2 },
         },
         {
@@ -197,7 +179,7 @@ return {
           },
           colored = true,
           padding = { left = 2, right = 0 },
-          color = { fg = colors.subtext0 },
+          color = { fg = colors.text },
         },
       },
       lualine_c = {},
@@ -239,14 +221,14 @@ return {
           function()
             return " | "
           end,
-          color = { fg = colors.surface2 },
+          color = { fg = colors.muted },
           padding = { left = 0, right = 0 },
         },
       },
       lualine_y = {
         {
           "filetype",
-          color = { fg = colors.subtext0 },
+          color = { fg = colors.text },
           separator = { right = "", left = "" },
           cond = cond_disable_by_ft,
           icon_only = false,
@@ -290,13 +272,13 @@ return {
             })
           end,
           padding = { left = 2, right = 1 },
-          color = { fg = colors.subtext0 },
+          color = { fg = colors.text },
         },
         {
           function()
             return get_scrollbar()
           end,
-          color = { fg = colors.surface2 },
+          color = { fg = colors.muted },
           padding = { left = 1, right = 0 },
         },
       },
@@ -306,12 +288,17 @@ return {
     local theme = require("lualine.themes.auto")
     local utils = require("utils")
 
+    theme.normal.a = { bg = colors.blue, fg = colors.base, gui = "bold" }
+
     for _, section in pairs(theme) do
+      local bg = utils.darken(colors.surface, 0.65, colors.base)
       if section.b then
-        section.b.bg = utils.darken(colors.surface0, 0.65, colors.base)
+        section.b.bg = bg
+        section.b.fg = colors.text
       end
       if section.c then
-        section.c.bg = utils.darken(colors.surface0, 0.65, colors.base)
+        section.c.bg = bg
+        section.c.fg = colors.text
       end
     end
 

@@ -1,24 +1,15 @@
-# Catppuccin Macchiato
+THEME_NAME="$(cat "$HOME/.config/custom-themes/.current" 2>/dev/null)"
+THEME_NAME="${THEME_NAME:-macchiato}"
+# shellcheck source=/dev/null
+. "$HOME/.config/custom-themes/$THEME_NAME.sh"
+sed 's/^export //' "$HOME/.config/custom-themes/$THEME_NAME.sh" >"$HOME/.config/tmux/conf/current_theme.conf"
+
 theme="\
-    --color=bg+:#363a4f,bg:-1,spinner:#f4dbd6,hl:#b8c0e0 \
-    --color=fg:#8087a2,header:#ed8796,info:#c6a0f6,pointer:#c6a0f6 \
-    --color=gutter:#363a4f \
-    --color=border:#cad3f5 \
-    --color=marker:#f4dbd6,fg+:#cad3f5,prompt:#c6a0f6,hl+:bold:#8aadf4"
-
-# Catppuccin Macchiato
-# theme="\
-#     --color=bg+:#494d64,bg:-1,spinner:#f4dbd6,hl:bold:#eed49f \
-#     --color=fg:#cad3f5,header:#ed8796,info:#c6a0f6,pointer:#f4dbd6 \
-#     --color=border:#cad3f5 \
-#     --color=marker:#f4dbd6,fg+:#cad3f5,prompt:#c6a0f6,hl+:bold:#eed49f"
-
-# Latte Custom
-# theme="\
-#     --color=bg+:#317da7,bg:-1,spinner:#a43b35,hl:bold:#bd8800 \
-#     --color=fg:#474155,header:#ff3532,info:#aa3685,pointer:#a43b35 \
-#     --color=border:#474155 \
-#     --color=marker:#a43b35,fg+:#474155,prompt:#aa3685,hl+:bold:#e8e2c8"
+    --color=bg+:$COLOR_surface,bg:-1,spinner:$COLOR_flamingo,hl:$COLOR_subtext \
+    --color=fg:$COLOR_subtle,header:$COLOR_red,info:$COLOR_mauve,pointer:$COLOR_mauve \
+    --color=gutter:$COLOR_surface \
+    --color=border:$COLOR_text \
+    --color=marker:$COLOR_flamingo,fg+:$COLOR_text,prompt:$COLOR_mauve,hl+:bold:$COLOR_blue"
 
 export FZF_DEFAULT_COMMAND="fd --type f"
 export FZF_DEFAULT_OPTS="
