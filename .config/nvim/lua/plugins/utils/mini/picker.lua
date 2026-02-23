@@ -50,6 +50,32 @@ function M.setup()
 
   vim.ui.select = MiniPick.ui_select
 
+  -- Auto-choose when LSP picker has exactly one result
+  vim.api.nvim_create_autocmd("User", {
+    pattern = "MiniPickMatch",
+    callback = function()
+      local opts = MiniPick.get_picker_opts()
+      if not opts or not opts.source or not opts.source.name then
+        return
+      end
+      if not opts.source.name:find("^LSP") then
+        return
+      end
+
+      local items = MiniPick.get_picker_items()
+      if not items or #items ~= 1 then
+        return
+      end
+
+      vim.schedule(function()
+        if not MiniPick.is_picker_active() then
+          return
+        end
+        vim.api.nvim_input("<CR>")
+      end)
+    end,
+  })
+
   -- Files & Buffers
   map("n", "<leader>ff", MiniPick.builtin.files, "find files")
   map("n", "<leader><leader>", MiniPick.builtin.files, "find files")

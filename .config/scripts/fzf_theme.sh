@@ -1,71 +1,41 @@
 #!/bin/bash
 
-all-panes() {
-	all-panes-bg_ "$1" &
-}
+THEMES_DIR="$HOME/.config/custom-themes"
+CACHE_FILE="$THEMES_DIR/.current"
 
-# The actual implementation of `all-panes` that runs in a background process.
-# This prevents the function from being suspended when we press ^z in each pane.
-all-panes-bg_() {
-	# Assign the argument to something readable
-	local COMMAND=$1
+themes=$(ls "$THEMES_DIR"/*.sh 2>/dev/null | xargs -n1 basename | sed 's/\.sh$//')
 
-	# Remember which window/pane we were originally at
-	local ORIG_WINDOW_INDEX=$(tmux display-message -p '#I')
-	local ORIG_PANE_INDEX=$(tmux display-message -p '#P')
+if [ -z "$themes" ]; then
+	echo "No themes found in $THEMES_DIR"
+	exit 1
+fi
 
-	# Loop through the windows
-	for WINDOW in $(tmux list-windows -F '#I'); do
-		# Select the window
-		tmux select-window -t $WINDOW
+selected=$(echo "$themes" | "$HOME/.fzf/bin/fzf" --preview '')
 
-		# Remember the window's current pane sync setting
-		local ORIG_PANE_SYNC=$(tmux show-window-options | grep '^synchronize-panes' | awk '{ print $2 }')
+if [ -z "$selected" ]; then
+	exit 0
+fi
 
-		# Send keystrokes to all panes within the current window simultaneously
-		tmux set-window-option synchronize-panes on
+echo -n "$selected" >"$CACHE_FILE"
 
-		# Send the escape key in case we are in a vim-like program.  This is
-		# repeated because the send-key command is not waiting for vim to complete
-		# its action...  And sending a `sleep 1` command seems to screw up the loop.
-		for i in {1..25}; do tmux send-keys 'C-['; done
+# Source theme for current shell env
+. "$THEMES_DIR/$selected.sh"
 
-		# Temporarily suspend any GUI that's running
-		tmux send-keys C-z
+# --- tmux ---
+sed 's/^export //' "$THEMES_DIR/$selected.sh" >"$HOME/.config/tmux/conf/current_theme.conf"
+tmux setenv THEME_NAME "$selected"
+tmux source-file "$HOME/.config/tmux/tmux.conf" 2>/dev/null
 
-		# If no GUI was running, kill any input the user may have typed on the
-		# command line to avoid A) concatenating our command with theirs, and
-		# B) accidentally running a command the user didn't want to run
-		# (e.g., rm -rf ~).
-		tmux send-keys C-c
+# --- wezterm ---
+# WSL2 fs notifications don't reach Windows file watchers, so touch the config from Windows
+if command -v wslpath &>/dev/null; then
+	win_cfg=$(wslpath -w "$HOME/.config/wezterm/wezterm.lua")
+	powershell.exe -NoProfile -Command "(Get-Item '$win_cfg').LastWriteTime = Get-Date" &>/dev/null &
+fi
 
-		# Run the command and switch back to the GUI if there was any
-		tmux send-keys "$COMMAND; fg 2>/dev/null; echo -n" C-m
-
-		# Restore the window's original pane sync setting
-		if [[ -n "$ORIG_PANE_SYNC" ]]; then
-			tmux set-window-option synchronize-panes "$ORIG_PANE_SYNC"
-		else
-			tmux set-window-option -u synchronize-panes
-		fi
-	done
-
-	# Select the original window and pane
-	tmux select-window -t "$ORIG_WINDOW_INDEX"
-	tmux select-pane -t "$ORIG_PANE_INDEX"
-}
-
-. "$HOME/.dotfile_profile"
-
-themes=$(ls "$HOME/.config/tmux/conf/themes/")
-theme=$(echo "$themes" | "$HOME/.fzf/bin/fzf" --preview '')
-
-windows_user=$(powershell.exe -command "echo \$env:USERNAME" | tr -d '\r\n')
-
-echo -n "$theme" >"/mnt/c/Users/$windows_user/AppData/Local/Temp/windows-tmux-theme.cache"
-echo -n "$theme" >"/tmp/tmux-theme.cache"
-
-tmux setenv TMUX_THEME "$theme"
-all-panes " export TMUX_THEME=$theme && source ~/.dotfile_profile"
-
-tmux source-file "$HOME/.config/tmux/tmux.conf"
+# --- nvim (reload theme in all running instances) ---
+for socket in /run/user/$(id -u)/nvim.*.0; do
+	[ -S "$socket" ] && nvim --server "$socket" --remote-expr \
+		'execute("lua require(\"themes\").reload_system_theme()")' 2>/dev/null &
+done
+wait

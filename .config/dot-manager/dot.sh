@@ -23,7 +23,6 @@ DOT_MANAGER_COMPLETE_PROGRAMS=(
     "direnv"
     "win32yank"
     "uv"
-    "yazi"
 )
 
 ###
@@ -39,7 +38,6 @@ DOT_MANAGER_MINIMAL_PROGRAMS=(
     "copilot_cli"
     "chafa"
     "git_tools"
-    "yazi"
 )
 
 ###
@@ -54,7 +52,6 @@ DOT_MANAGER_DOCKER_PROGRAMS=(
     "starship"
     "git_tools"
     "bat"
-    "yazi"
 )
 
 # ---------------------------------------------------------------------------

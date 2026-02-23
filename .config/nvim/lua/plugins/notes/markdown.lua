@@ -150,8 +150,8 @@ return {
       })
 
       local colors = require("theme").get_colors()
-      vim.api.nvim_set_hl(0, "MarkviewCode", { bg = colors.surface0 })
-      vim.api.nvim_set_hl(0, "MarkviewInlineCode", { bg = colors.surface0 })
+      vim.api.nvim_set_hl(0, "MarkviewCode", { bg = colors.surface })
+      vim.api.nvim_set_hl(0, "MarkviewInlineCode", { bg = colors.surface })
     end,
   },
   -- {

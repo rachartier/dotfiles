@@ -22,7 +22,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("config.lazy_file").lazy_file()
-require("themes").set_theme("catppuccin")
+require("themes").set_theme("system")
 
 require("lazy").setup({
   spec = {
@@ -82,12 +82,20 @@ vim.defer_fn(function()
 
   require("custom.copilot-commit-message")
 
-  -- Don't know why Visual do not accept "bold" settings in Catppuccin, so putting it here fix it
-  vim.api.nvim_set_hl(0, "Visual", { bg = require("theme").get_colors().surface0, bold = false })
+  vim.api.nvim_set_hl(0, "Visual", { bg = require("theme").get_colors().surface, bold = false })
 
   vim.cmd("packadd nvim.undotree")
   vim.keymap.set("n", "<leader>u", "<cmd>Undotree<cr>", { desc = "open undotree" })
 end, 10)
+
+vim.api.nvim_create_user_command("Theme", function(opts)
+  require("themes").switch_theme(opts.args)
+end, {
+  nargs = 1,
+  complete = function()
+    return vim.tbl_keys(require("themes").available())
+  end,
+})
 
 require("autocmds")
 require("custom.auto-nohlsearch")
