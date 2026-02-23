@@ -343,9 +343,9 @@ function M.get(colors)
 
     MiniPickBorder = { link = "FloatBorder" },
     MiniPickHeader = { link = "DiagnosticFloatingHint" },
-    MiniPickMatchCurrent = { fg = colors.flamingo, bg = colors.surface, bold = true },
-    MiniPickMatchMarked = { link = "Visual" },
-    MiniPickMatchRanges = { link = "DiagnosticFloatingHint" },
+    MiniPickMatchCurrent = { bg = colors.surface },
+    MiniPickMatchMarked = { fg = colors.green, bold = true },
+    MiniPickMatchRanges = { fg = colors.red, bold = true },
     MiniPickNormal = { link = "NormalFloat" },
     MiniPickPreviewLine = { link = "CursorLine" },
     MiniPickPreviewRegion = { link = "IncSearch" },
