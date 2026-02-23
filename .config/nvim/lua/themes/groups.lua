@@ -2,6 +2,7 @@ local M = {}
 
 function M.get(colors)
   local default_bg = "None"
+  local U = require("utils")
 
   return {
     NormalFloat = { bg = default_bg },
@@ -12,10 +13,10 @@ function M.get(colors)
     FloatTitle = { bg = default_bg, fg = colors.text, italic = true, bold = true },
     Comment = { fg = colors.muted, italic = true },
 
-    DiffAdd = { fg = colors.green },
-    DiffChange = { fg = colors.blue },
-    DiffDelete = { fg = colors.red },
-    DiffText = { fg = colors.blue, bold = true },
+    DiffAdd = { bg = U.darken(colors.green, 0.18, colors.base) },
+    DiffChange = { bg = U.darken(colors.blue, 0.07, colors.base) },
+    DiffDelete = { bg = U.darken(colors.red, 0.18, colors.base) },
+    DiffText = { bg = U.darken(colors.blue, 0.30, colors.base) },
 
     -- Treesitter: Identifiers
     ["@variable"] = { fg = colors.text },
@@ -226,7 +227,7 @@ function M.get(colors)
     FlashLabel = { fg = colors.base, bg = colors.yellow, bold = true },
 
     GitSignsAdd = { fg = colors.green },
-    GitSignsChange = { fg = colors.blue },
+    GitSignsChange = { fg = colors.yellow },
 
     NeogitBranch = { fg = colors.peach, bold = true },
     NeogitRemote = { fg = colors.green, bold = true },
@@ -391,6 +392,149 @@ function M.get(colors)
 
     LspHoverNormal = { bg = colors.surface },
     LspHoverBorder = { bg = colors.surface, fg = colors.subtle },
+
+    -- grug-far.nvim
+    GrugFarHelpHeader = { fg = colors.blue, bold = true },
+    GrugFarHelpHeaderKey = { fg = colors.peach },
+    GrugFarHelpWinHeader = { fg = colors.blue, bold = true },
+    GrugFarHelpWinActionPrefix = { fg = colors.peach },
+    GrugFarHelpWinActionText = { fg = colors.text },
+    GrugFarHelpWinActionKey = { fg = colors.yellow },
+    GrugFarHelpWinActionDescription = { fg = colors.muted },
+    GrugFarInputLabel = { fg = colors.mauve, bold = true },
+    GrugFarInputPlaceholder = { fg = colors.muted },
+    GrugFarResultsHeader = { link = "Comment" },
+    GrugFarResultsStats = { link = "Comment" },
+    GrugFarResultsActionMessage = { fg = colors.green },
+    GrugFarResultsMatch = { link = "IncSearch" },
+    GrugFarResultsMatchAdded = { link = "DiffAdd" },
+    GrugFarResultsMatchRemoved = { link = "DiffDelete" },
+    GrugFarResultsPath = { fg = colors.blue, underline = true },
+    GrugFarResultsLineNr = { link = "LineNr" },
+    GrugFarResultsLineNo = { link = "CursorLineNr" },
+    GrugFarResultsColumnNr = { link = "LineNr" },
+    GrugFarResultsNumbersSeparator = { link = "LineNr" },
+    GrugFarResultsChangeIndicator = { fg = colors.yellow },
+    GrugFarResultsRemoveIndicator = { fg = colors.red },
+    GrugFarResultsAddIndicator = { fg = colors.green },
+    GrugFarResultsDiffSeparatorIndicator = { fg = colors.subtle },
+    GrugFarResultsCmdHeader = { fg = colors.blue, underline = true },
+
+    -- git-conflict.nvim
+    GitConflictCurrent = { bg = colors.surface },
+    GitConflictIncoming = { bg = colors.surface },
+    GitConflictAncestor = { bg = colors.surface },
+    GitConflictCurrentLabel = { fg = colors.blue, bg = colors.surface, bold = true },
+    GitConflictIncomingLabel = { fg = colors.green, bg = colors.surface, bold = true },
+    GitConflictAncestorLabel = { fg = colors.mauve, bg = colors.surface, bold = true },
+
+    -- diffview.nvim
+    DiffviewDim1 = { link = "Comment" },
+    DiffviewPrimary = { fg = colors.blue },
+    DiffviewSecondary = { fg = colors.green },
+    DiffviewFilePanelTitle = { fg = colors.blue, bold = true },
+    DiffviewFilePanelCounter = { fg = colors.text },
+    DiffviewFilePanelRootPath = { fg = colors.highlight, bold = true },
+    DiffviewFilePanelFileName = { fg = colors.text },
+    DiffviewFilePanelSelected = { fg = colors.yellow },
+    DiffviewFilePanelPath = { link = "Comment" },
+    DiffviewFilePanelInsertions = { fg = colors.green },
+    DiffviewFilePanelDeletions = { fg = colors.red },
+    DiffviewFilePanelConflicts = { fg = colors.yellow },
+    DiffviewFolderName = { fg = colors.blue, bold = true },
+    DiffviewFolderSign = { fg = colors.blue },
+    DiffviewHash = { fg = colors.flamingo },
+    DiffviewReference = { fg = colors.blue, bold = true },
+    DiffviewStatusAdded = { fg = colors.green },
+    DiffviewStatusUntracked = { fg = colors.green },
+    DiffviewStatusModified = { fg = colors.yellow },
+    DiffviewStatusRenamed = { fg = colors.yellow },
+    DiffviewStatusCopied = { fg = colors.yellow },
+    DiffviewStatusTypeChange = { fg = colors.yellow },
+    DiffviewStatusUnmerged = { fg = colors.yellow },
+    DiffviewStatusUnknown = { fg = colors.red },
+    DiffviewStatusDeleted = { fg = colors.red },
+    DiffviewStatusBroken = { fg = colors.red },
+    DiffviewStatusIgnored = { fg = colors.muted },
+
+    -- oil.nvim
+    OilDir = { fg = colors.blue, bold = true },
+    OilDirIcon = { fg = colors.blue },
+    OilLink = { fg = colors.teal },
+    OilOrphanLink = { fg = colors.red },
+    OilLinkTarget = { fg = colors.muted },
+    OilOrphanLinkTarget = { fg = colors.red },
+    OilFile = { fg = colors.text },
+    OilCreate = { fg = colors.green },
+    OilDelete = { fg = colors.red },
+    OilMove = { fg = colors.yellow },
+    OilCopy = { fg = colors.blue },
+    OilChange = { fg = colors.yellow },
+    OilRestore = { fg = colors.teal },
+    OilPurge = { fg = colors.red, bold = true },
+    OilTrash = { fg = colors.red },
+    OilTrashSourcePath = { fg = colors.muted },
+
+    -- neotest
+    NeotestPassed = { fg = colors.green },
+    NeotestFailed = { fg = colors.red },
+    NeotestRunning = { fg = colors.yellow },
+    NeotestSkipped = { fg = colors.blue },
+    NeotestTest = { fg = colors.text },
+    NeotestNamespace = { fg = colors.mauve },
+    NeotestFocused = { bold = true, underline = true },
+    NeotestFile = { fg = colors.blue },
+    NeotestDir = { fg = colors.blue },
+    NeotestIndent = { fg = colors.muted },
+    NeotestExpandMarker = { fg = colors.muted },
+    NeotestAdapterName = { fg = colors.flamingo },
+    NeotestWinSelect = { fg = colors.blue, bold = true },
+    NeotestMarked = { fg = colors.peach, bold = true },
+    NeotestTarget = { fg = colors.red },
+    NeotestUnknown = { fg = colors.text },
+    NeotestWatching = { fg = colors.yellow },
+
+    -- codediff.nvim
+    CodeDiffConflictSign = { fg = colors.yellow },
+    CodeDiffConflictSignResolved = { fg = colors.muted },
+    CodeDiffConflictSignAccepted = { fg = colors.green },
+    CodeDiffConflictSignRejected = { fg = colors.red },
+    CodeDiffHistoryTitle = { link = "FloatTitle" },
+
+    -- sidekick.nvim
+    SidekickDiffAdd = { bg = U.darken(colors.green, 0.36, colors.base) },
+    SidekickDiffDelete = { bg = U.darken(colors.red, 0.36, colors.base) },
+    SidekickDiffContext = { bg = U.darken(colors.blue, 0.07, colors.base) },
+    SidekickSign = { fg = colors.mauve },
+    SidekickChat = { link = "NormalFloat" },
+    SidekickCliAttached = { fg = colors.green },
+    SidekickCliStarted = { fg = colors.yellow },
+    SidekickCliInstalled = { fg = colors.green },
+    SidekickCliMissing = { fg = colors.red },
+    SidekickCliUnavailable = { fg = colors.red },
+    SidekickLocFile = { fg = colors.blue, underline = true },
+    SidekickLocNum = { fg = colors.peach },
+    SidekickLocRow = { link = "SidekickLocDelim" },
+    SidekickLocCol = { link = "SidekickLocDelim" },
+    SidekickLocDelim = { fg = colors.subtle },
+
+    -- nvim-dap-virtual-text
+    NvimDapVirtualText = { fg = colors.muted, italic = true },
+    NvimDapVirtualTextChanged = { fg = colors.yellow, italic = true },
+    NvimDapVirtualTextError = { fg = colors.red, italic = true },
+    NvimDapVirtualTextInfo = { fg = colors.blue, italic = true },
+
+    -- GitSigns (additional variants)
+    GitSignsDelete = { fg = colors.red },
+    GitSignsChangedelete = { fg = colors.peach },
+    GitSignsTopdelete = { fg = colors.red },
+    GitSignsUntracked = { fg = colors.subtle },
+    GitSignsCurrentLineBlame = { fg = colors.surface },
+    GitSignsAddPreview = { link = "DiffAdd" },
+    GitSignsDeletePreview = { link = "DiffDelete" },
+    GitSignsAddInline = { bg = U.darken(colors.green, 0.36, colors.base) },
+    GitSignsDeleteInline = { bg = U.darken(colors.red, 0.36, colors.base) },
+    GitSignsChangeInline = { bg = U.darken(colors.blue, 0.14, colors.base) },
   }
 end
 
