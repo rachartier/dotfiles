@@ -177,7 +177,7 @@ function M.get(colors)
     BlinkCmpLabel = { fg = colors.subtle },
     BlinkCmpLabelDeprecated = { fg = colors.muted, strikethrough = true },
     BlinkCmpKind = { fg = colors.blue },
-    BlinkCmpMenu = { link = "Pmenu" },
+    BlinkCmpMenu = { bg = U.darken(colors.surface, 0.500, colors.base) },
     BlinkCmpDoc = { link = "NormalFloat" },
     BlinkCmpLabelMatch = { link = "PmenuMatch" },
     BlinkCmpMenuSelection = { bg = U.darken(colors.subtle, 0.300, colors.base) },
