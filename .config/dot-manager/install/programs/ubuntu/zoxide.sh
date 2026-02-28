@@ -3,13 +3,14 @@
 source "$DOT_MANAGER_DIR/helper.sh"
 
 install_zoxide() {
-    print_step "Installing Zoxide"
+	print_step "Installing zoxide"
 
-    log "info" "Installing zoxide..."
+	if ! curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh >/dev/null 2>&1; then
+		log "error" "zoxide installation failed"
+		return 1
+	fi
 
-    curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh >/dev/null
-
-    log "success" "zoxide installed."
+	log "success" "zoxide installed in ~/.local/bin/"
 }
 
 install_zoxide "$@"

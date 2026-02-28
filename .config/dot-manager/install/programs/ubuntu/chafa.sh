@@ -3,22 +3,23 @@
 source "$DOT_MANAGER_DIR/helper.sh"
 
 install_chafa() {
-    log "info" "Installing chafa..."
+	print_step "Installing chafa"
 
-    cd /tmp
+	__install_package libfreetype6-dev
 
-    __install_package_apt "libfreetype6-dev"
+	cd /tmp || exit 1
+	[ -d "chafa" ] && rm -rf chafa
 
-    if [ -d "chafa" ]; then
-        log "info" "Removing old chafa directory."
-        rm -rf chafa
-    fi
-
-    git clone https://github.com/hpjansson/chafa &&
-        cd chafa &&
-        ./autogen.sh &&
-        make &&
-        sudo make install
+	if git clone https://github.com/hpjansson/chafa >/dev/null 2>&1 &&
+		cd chafa &&
+		./autogen.sh >/dev/null 2>&1 &&
+		make -j"$(nproc)" >/dev/null 2>&1 &&
+		sudo make install >/dev/null 2>&1; then
+		log "success" "chafa installed in /usr/local/"
+	else
+		log "error" "chafa installation failed"
+		return 1
+	fi
 }
 
 install_chafa "$@"
