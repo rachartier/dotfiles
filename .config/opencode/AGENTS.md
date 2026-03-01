@@ -9,7 +9,7 @@ Make minimal, precise edits. Preserve original structure where possible.
 
 NEVER commit any changes with git. I do NOT want you to commit changes for me.
 
-Only add USEFUL comments in code. Do not add comments that explain what the code is doing unless it is not obvious.
+Only add USEFUL comments in code. Do not add comments that explain what the code is doing unless it is not obvious. No "sections" comments that designate areas.
 
 When writing code, follow these language-specific rules:
 
