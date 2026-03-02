@@ -3,18 +3,15 @@
 source "$DOT_MANAGER_DIR/helper.sh"
 
 install_lazygit() {
-    print_step "Installing Lazygit"
+	print_step "Installing lazygit"
 
-    LAZYGIT_VERSION=$(__get_latest_release "jesseduffield/lazygit")
-    LAZYGIT_VERSION="${LAZYGIT_VERSION:1}"
+	local version
+	version=$(__get_latest_release "jesseduffield/lazygit")
+	version="${version:1}"
 
-    log "download" "Installing lazygit ${LAZYGIT_VERSION} ..."
+	[ -f "/usr/local/bin/lazygit" ] && sudo rm "/usr/local/bin/lazygit"
 
-    if [ -f "/usr/local/bin/lazygit" ]; then
-        log "info" "Removing old lazygit symlink."
-        sudo rm "/usr/local/bin/lazygit"
-    fi
-    __install_package_release "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz" lazygit
+	__install_package_release "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${version}_Linux_x86_64.tar.gz" lazygit
 }
 
 install_lazygit "$@"

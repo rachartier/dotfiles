@@ -3,36 +3,28 @@
 source "$DOT_MANAGER_DIR/helper.sh"
 
 install_tmux() {
-    print_step "Installing Tmux"
+	print_step "Installing tmux"
 
-    log "info" "Installing dependencies"
-    __install_package_apt libevent-dev ncurses-dev build-essential bison pkg-config
+	__install_package libevent-dev ncurses-dev build-essential bison pkg-config
 
-    # log "info" "Cloning tmux repository"
-    # git clone https://github.com/tmux/tmux.git /tmp/tmux_installation
-    # cd /tmp/tmux_installation
-    # sh autogen.sh
+	local version
+	version=$(__get_latest_release "tmux/tmux")
 
-    TMUX_VERSION=$(__get_latest_release "tmux/tmux")
-    TMUX_VERSION="${TMUX_VERSION:latest}"
+	cd /tmp || exit 1
+	log "download" "Downloading tmux $version..."
+	wget -nv -q "https://github.com/tmux/tmux/releases/download/${version}/tmux-${version}.tar.gz" >/dev/null || return 1
+	tar -xf "tmux-${version}.tar.gz"
+	cd "tmux-${version}" || exit 1
 
-    cd /tmp
-    wget -nv -q "https://github.com/tmux/tmux/releases/download/${TMUX_VERSION}/tmux-${TMUX_VERSION}.tar.gz" && log "success" "Tmux ${TMUX_VERSION} downloaded." >/dev/null || return 1
-    tar -xf "tmux-${TMUX_VERSION}.tar.gz"
-    cd "tmux-${TMUX_VERSION}" || exit 1
+	./configure --enable-sixel >/dev/null 2>&1 && make -j"$(nproc)" >/dev/null 2>&1 && sudo make install >/dev/null 2>&1
 
-    log "info" "Compiling tmux"
-    ./configure --enable-sixel && make -j"$(nproc)" && sudo make install
+	if ! [ -d "$HOME/.config/tmux/plugins/tpm" ]; then
+		git clone https://github.com/tmux-plugins/tpm "$HOME/.config/tmux/plugins/tpm" >/dev/null 2>&1
+	fi
 
-    log "info" "Installing tmux plugins manager"
-    if ! [ -d "$HOME"/.config/tmux/plugins/tpm ]; then
-        git clone https://github.com/tmux-plugins/tpm "$HOME"/.config/tmux/plugins/tpm
-    fi
+	"$HOME/.config/tmux/plugins/tpm/bin/install_plugins" >/dev/null 2>&1
 
-    log "info" "Installing tmux plugins"
-    "$HOME"/.config/tmux/plugins/tpm/bin/install_plugins
-
-    log "success" "Tmux installation completed"
+	log "success" "tmux $version installed in /usr/local/bin/"
 }
 
 install_tmux "$@"

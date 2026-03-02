@@ -16,7 +16,11 @@ local function read_file(rel_path)
 	end
 	-- Fallback: read via WSL (needed when wezterm runs on Windows)
 	local success, stdout = wezterm.run_child_process({
-		"wsl", "-e", "sh", "-c", "cat $HOME" .. rel_path,
+		"wsl",
+		"-e",
+		"sh",
+		"-c",
+		"cat $HOME" .. rel_path,
 	})
 	if success and stdout ~= "" then
 		return stdout
@@ -63,8 +67,8 @@ end
 -- config.font = wezterm.font_with_fallback({ "IBM Plex Mono", "Symbols Nerd Font" })
 -- config.font = wezterm.font_with_fallback({ "Monaspace Neon", "Symbols Nerd Font" })
 -- config.font = wezterm.font_with_fallback({ "Symbols Nerd Font" })
--- config.font = wezterm.font_with_fallback({ "MonoLisa", "Symbols Nerd Font" })
-config.font = wezterm.font_with_fallback({ "Berkeley Mono", "Symbols Nerd Font" })
+config.font = wezterm.font_with_fallback({ "MonoLisa", "Symbols Nerd Font" })
+-- config.font = wezterm.font_with_fallback({ "Berkeley Mono", "Symbols Nerd Font" })
 -- config.font = wezterm.font_with_fallback({ "CommitMono", "Symbols Nerd Font" })
 -- config.font = wezterm.font_with_fallback({ "0xProto", "Symbols Nerd Font" })
 -- config.font = wezterm.font_with_fallback({ "Fantasque Sans Mono", "Symbols Nerd Font" })
