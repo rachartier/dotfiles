@@ -434,7 +434,61 @@ function M.get(colors)
     MarkdownCheckboxInfo = { fg = colors.teal },
     MarkdownCheckboxImportant = { fg = colors.peach },
 
-    MarkviewCode = { bg = colors.peach },
+    MarkviewBlockQuoteDefault = { fg = colors.subtle, bg = colors.mantle },
+    MarkviewBlockQuoteError = { fg = colors.red, bg = U.darken(colors.red, 0.095, colors.base) },
+    MarkviewBlockQuoteNote = { fg = colors.blue, bg = U.darken(colors.blue, 0.095, colors.base) },
+    MarkviewBlockQuoteOk = { fg = colors.green, bg = U.darken(colors.green, 0.095, colors.base) },
+    MarkviewBlockQuoteSpecial = { fg = colors.mauve, bg = U.darken(colors.mauve, 0.095, colors.base) },
+    MarkviewBlockQuoteWarn = { fg = colors.yellow, bg = U.darken(colors.yellow, 0.095, colors.base) },
+
+    MarkviewHyperlink = { link = "@markup.link.url" },
+
+    MarkviewCode = { bg = colors.mantle },
+    MarkviewCodeFg = { fg = colors.mantle },
+    MarkviewCodeInfo = { fg = colors.subtle, bg = colors.mantle },
+    MarkviewInlineCode = { bg = colors.surface },
+
+    MarkviewTableHeader = { fg = colors.blue },
+
+    MarkviewPalette0 = { fg = colors.subtle, bg = U.darken(colors.subtle, 0.095, colors.base) },
+    MarkviewPalette0Fg = { fg = colors.subtle },
+    MarkviewPalette0Bg = { bg = U.darken(colors.subtle, 0.095, colors.base) },
+    MarkviewIcon0 = { fg = colors.subtle, bg = colors.mantle },
+
+    MarkviewPalette1 = { fg = colors.red, bg = U.darken(colors.red, 0.095, colors.base) },
+    MarkviewPalette1Fg = { fg = colors.red },
+    MarkviewPalette1Bg = { bg = U.darken(colors.red, 0.095, colors.base) },
+    MarkviewIcon1 = { fg = colors.red, bg = colors.mantle },
+
+    MarkviewPalette2 = { fg = colors.peach, bg = U.darken(colors.peach, 0.095, colors.base) },
+    MarkviewPalette2Fg = { fg = colors.peach },
+    MarkviewPalette2Bg = { bg = U.darken(colors.peach, 0.095, colors.base) },
+    MarkviewIcon2 = { fg = colors.peach, bg = colors.mantle },
+
+    MarkviewPalette3 = { fg = colors.yellow, bg = U.darken(colors.yellow, 0.095, colors.base) },
+    MarkviewPalette3Fg = { fg = colors.yellow },
+    MarkviewPalette3Bg = { bg = U.darken(colors.yellow, 0.095, colors.base) },
+    MarkviewIcon3 = { fg = colors.yellow, bg = colors.mantle },
+
+    MarkviewPalette4 = { fg = colors.green, bg = U.darken(colors.green, 0.095, colors.base) },
+    MarkviewPalette4Fg = { fg = colors.green },
+    MarkviewPalette4Bg = { bg = U.darken(colors.green, 0.095, colors.base) },
+    MarkviewIcon4 = { fg = colors.green, bg = colors.mantle },
+
+    MarkviewPalette5 = { fg = colors.teal, bg = U.darken(colors.teal, 0.095, colors.base) },
+    MarkviewPalette5Fg = { fg = colors.teal },
+    MarkviewPalette5Bg = { bg = U.darken(colors.teal, 0.095, colors.base) },
+    MarkviewIcon5 = { fg = colors.teal, bg = colors.mantle },
+
+    MarkviewPalette6 = { fg = colors.highlight, bg = U.darken(colors.highlight, 0.095, colors.base) },
+    MarkviewPalette6Fg = { fg = colors.highlight },
+    MarkviewPalette6Bg = { bg = U.darken(colors.highlight, 0.095, colors.base) },
+    MarkviewIcon6 = { fg = colors.highlight, bg = colors.mantle },
+
+    MarkviewPalette7 = { fg = colors.mauve, bg = U.darken(colors.mauve, 0.095, colors.base) },
+    MarkviewPalette7Fg = { fg = colors.mauve },
+    MarkviewPalette7Bg = { bg = U.darken(colors.mauve, 0.095, colors.base) },
+    MarkviewIcon7 = { fg = colors.mauve, bg = colors.mantle },
 
     LualineCustomScrollBar = { fg = colors.base },
 
