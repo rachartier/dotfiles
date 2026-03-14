@@ -37,6 +37,24 @@
       "skillFolderHash": "657cdd6aef472054ffd3f0e7798494d79be9f807",
       "installedAt": "2026-03-06T13:49:45.896Z",
       "updatedAt": "2026-03-06T13:49:45.896Z"
+    },
+    "python-performance-optimization": {
+      "source": "wshobson/agents",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/wshobson/agents.git",
+      "skillPath": "plugins/python-development/skills/python-performance-optimization/SKILL.md",
+      "skillFolderHash": "ea26a709fa185e46b567c87f9206a4cf6346eeaf",
+      "installedAt": "2026-03-06T13:54:03.829Z",
+      "updatedAt": "2026-03-06T13:54:03.829Z"
+    },
+    "python-testing-patterns": {
+      "source": "wshobson/agents",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/wshobson/agents.git",
+      "skillPath": "plugins/python-development/skills/python-testing-patterns/SKILL.md",
+      "skillFolderHash": "79ea3b35b9b8bb7dd47b566fd085ec45f8a6efe2",
+      "installedAt": "2026-03-06T13:54:35.472Z",
+      "updatedAt": "2026-03-06T13:54:35.472Z"
     }
   },
   "dismissed": {
