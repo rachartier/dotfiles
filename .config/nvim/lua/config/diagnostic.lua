@@ -24,6 +24,8 @@ vim.lsp.util.open_floating_preview = function(contents, syntax, opts, ...)
   local bufnr, winid = orig(contents, syntax, opts, ...)
   if winid then
     vim.wo[winid].winhighlight = "Normal:LspHoverNormal,FloatBorder:LspHoverBorder"
+    vim.wo[winid].spell = false
+    vim.wo[winid].conceallevel = 3
   end
   return bufnr, winid
 end
