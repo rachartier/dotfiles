@@ -108,7 +108,7 @@ function M.setup()
       "TelescopePrompt",
       "Avante",
       "AvanteInput",
-      "snacks_dashboard",
+
     },
     callback = function()
       vim.wo.statuscolumn = ""

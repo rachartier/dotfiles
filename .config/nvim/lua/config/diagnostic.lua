@@ -21,6 +21,9 @@ vim.diagnostic.config({
 local orig = vim.lsp.util.open_floating_preview
 ---@diagnostic disable-next-line: duplicate-set-field
 vim.lsp.util.open_floating_preview = function(contents, syntax, opts, ...)
+  if syntax == "markdown" then
+    contents = vim.tbl_map(function(line) return line:gsub("\\_", "_") end, contents)
+  end
   local bufnr, winid = orig(contents, syntax, opts, ...)
   if winid then
     vim.wo[winid].winhighlight = "Normal:LspHoverNormal,FloatBorder:LspHoverBorder"

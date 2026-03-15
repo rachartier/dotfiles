@@ -1,36 +1,5 @@
 local M = {}
 
-M.linter_config_folder = os.getenv("HOME") .. "/.config/linter-configs"
-
-function M.trim(str, opts)
-  if not opts then
-    return str
-  end
-  local res = str
-  if opts.suffix then
-    res = str:sub(#str - #opts.suffix + 1) == opts.suffix and str:sub(1, #str - #opts.suffix) or str
-  end
-  if opts.prefix then
-    res = str:sub(1, #opts.prefix) == opts.prefix and str:sub(#opts.prefix + 1) or str
-  end
-  return res
-end
-
-function M.dump(o)
-  if type(o) == "table" then
-    local s = "{ "
-    for k, v in pairs(o) do
-      if type(k) ~= "number" then
-        k = '"' .. k .. '"'
-      end
-      s = s .. "[" .. k .. "] = " .. M.dump(v) .. ","
-    end
-    return s .. "} "
-  else
-    return tostring(o)
-  end
-end
-
 function M.hex_to_rgb(c)
   if c == nil then
     return { 0, 0, 0 }
@@ -108,56 +77,6 @@ function M.to_list(value)
     return { value }
   end
 end
-
--- From: https://github.com/Wansmer/nvim-config/blob/76075092cf6a595f58d6150bb488b8b19f5d625a/lua/utils.lua#L50C1-L81C4
-function M.char_on_pos(pos)
-  pos = pos or vim.fn.getpos(".")
-  return tostring(vim.fn.getline(pos[1])):sub(pos[2], pos[2])
-end
-
--- From: https://neovim.discourse.group/t/how-do-you-work-with-strings-with-multibyte-characters-in-lua/2437/4
-function M.char_byte_count(s, i)
-  if not s or s == "" then
-    return 1
-  end
-
-  local char = string.byte(s, i or 1)
-
-  -- Get byte count of unicode character (RFC 3629)
-  if char > 0 and char <= 127 then
-    return 1
-  elseif char >= 194 and char <= 223 then
-    return 2
-  elseif char >= 224 and char <= 239 then
-    return 3
-  elseif char >= 240 and char <= 244 then
-    return 4
-  end
-end
-
-function M.get_visual_range()
-  local sr, sc = unpack(vim.fn.getpos("v"), 2, 3)
-  local er, ec = unpack(vim.fn.getpos("."), 2, 3)
-
-  -- To correct work with non-single byte chars
-  local byte_c = M.char_byte_count(M.char_on_pos({ er, ec }))
-  ec = ec + (byte_c - 1)
-
-  local range = {}
-
-  if sr == er then
-    local cols = sc >= ec and { ec, sc } or { sc, ec }
-    range = { sr, cols[1] - 1, er, cols[2] }
-  elseif sr > er then
-    range = { er, ec - 1, sr, sc }
-  else
-    range = { sr, sc - 1, er, ec }
-  end
-
-  return range
-end
-
--------------------------------
 
 function M.get_hl(group, attr)
   local hl = vim.api.nvim_get_hl(0, { name = group })
@@ -250,14 +169,6 @@ function M.have_query(lang, query)
     M._queries[key] = vim.treesitter.query.get(lang, query) ~= nil
   end
   return M._queries[key]
-end
-
-function M.foldexpr()
-  return M.have(nil, "folds") and vim.treesitter.foldexpr() or "0"
-end
-
-function M.indentexpr()
-  return M.have(nil, "indents") and require("nvim-treesitter").indentexpr() or -1
 end
 
 return M

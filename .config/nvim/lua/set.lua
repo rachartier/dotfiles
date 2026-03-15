@@ -68,7 +68,6 @@ opt.shortmess:append({
   C = true,
 })
 opt.showmode = false
-opt.sidescrolloff = 8
 opt.signcolumn = "yes"
 opt.smartcase = true
 opt.smartindent = true
@@ -108,7 +107,6 @@ opt.autoread = true
 opt.backup = true
 opt.backupdir = os.getenv("HOME") .. "/.local/share/nvim/backup/"
 opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
-opt.undofile = true
 
 opt.hlsearch = false
 opt.incsearch = true

@@ -185,7 +185,7 @@ do_reinstall() {
 
 update_all() {
 	log "info" "Updating neovim plugins..."
-	"/opt/nvim-linux-x86_64/bin/nvim" --headless "+Lazy! sync" "+qall"
+	"/opt/nvim-linux-x86_64/bin/nvim" --headless "+lua vim.pack.update({}, {force = true})" "+qall"
 
 	log "info" "Updating tmux plugins..."
 	"$HOME/.config/tmux/plugins/tpm/bin/update_plugins" all
