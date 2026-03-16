@@ -1,5 +1,3 @@
-vim.pack.add({ "https://github.com/stevearc/oil.nvim" }, { confirm = false })
-
 local loaded = false
 
 local function load()
@@ -7,6 +5,8 @@ local function load()
     return
   end
   loaded = true
+
+  vim.pack.add({ "https://github.com/stevearc/oil.nvim" }, { confirm = false })
 
   require("oil").setup({
     skip_confirm_for_simple_edits = true,

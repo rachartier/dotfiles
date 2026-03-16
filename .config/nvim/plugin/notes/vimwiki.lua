@@ -1,9 +1,6 @@
-vim.pack.add({
-  "https://github.com/michal-h21/vimwiki-sync",
-  "https://github.com/vimwiki/vimwiki",
-}, { confirm = false })
-
 local loaded = false
+
+local trigger_keys = { "<leader>ww", "<leader>wt", "<leader>ws", "<leader>wi", "<leader>wI", "<leader>wr" }
 
 local function load()
   if loaded then
@@ -11,11 +8,22 @@ local function load()
   end
   loaded = true
 
+  -- Remove our wrappers before sourcing vimwiki so it can register its own mappings
+  for _, k in ipairs(trigger_keys) do
+    pcall(vim.keymap.del, "n", k)
+  end
+
   vim.g.vimwiki_list = {
     { path = "~/.config/nvim/notes/", syntax = "markdown", ext = ".md" },
   }
   vim.g.vimwiki_global_ext = 1
   vim.g.vimwiki_use_mouse = 1
+  vim.g.vimwiki_key_mappings = { table_mappings = 0 }
+
+  vim.pack.add({
+    "https://github.com/michal-h21/vimwiki-sync",
+    "https://github.com/vimwiki/vimwiki",
+  }, { confirm = false })
 
   vim.api.nvim_create_autocmd("FileType", {
     pattern = "vimwiki",
@@ -24,8 +32,6 @@ local function load()
     end,
     desc = "set vimwiki filetype to markdown",
   })
-
-  vim.g.vimwiki_key_mappings = { table_mappings = 0 }
 
   vim.keymap.set(
     "n",
@@ -41,16 +47,9 @@ local function load()
   )
 end
 
-for _, key in ipairs({
-  "<leader>ww",
-  "<leader>wt",
-  "<leader>ws",
-  "<leader>wi",
-  "<leader>wI",
-  "<leader>wr",
-}) do
+for _, key in ipairs(trigger_keys) do
   vim.keymap.set("n", key, function()
     load()
-    vim.cmd("normal! " .. key)
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, false, true), "m", false)
   end, { silent = true })
 end

@@ -1,8 +1,3 @@
-vim.pack.add({
-  "https://github.com/theHamsta/nvim-dap-virtual-text",
-  "https://github.com/mfussenegger/nvim-dap",
-})
-
 local loaded = false
 
 local function get_args(config)
@@ -20,6 +15,11 @@ local function load()
     return
   end
   loaded = true
+
+  vim.pack.add({
+    "https://github.com/theHamsta/nvim-dap-virtual-text",
+    "https://github.com/mfussenegger/nvim-dap",
+  })
 
   require("nvim-dap-virtual-text").setup({ highlight_new_as_changed = true })
 

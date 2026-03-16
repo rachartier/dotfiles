@@ -1,10 +1,3 @@
-vim.pack.add({
-  "https://github.com/nvim-lua/plenary.nvim",
-  "https://github.com/sindrets/diffview.nvim",
-  "https://github.com/nvim-treesitter/nvim-treesitter",
-  "https://github.com/NeogitOrg/neogit",
-}, { confirm = false })
-
 local loaded = false
 
 local function load()
@@ -12,6 +5,13 @@ local function load()
     return
   end
   loaded = true
+
+  vim.pack.add({
+    "https://github.com/nvim-lua/plenary.nvim",
+    "https://github.com/sindrets/diffview.nvim",
+    "https://github.com/nvim-treesitter/nvim-treesitter",
+    "https://github.com/NeogitOrg/neogit",
+  }, { confirm = false })
 
   require("neogit").setup({
     graph_style = "unicode",
