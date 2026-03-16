@@ -1,13 +1,22 @@
+vim.pack.add({
+  "https://github.com/mfussenegger/nvim-lint",
+  "https://github.com/stevearc/conform.nvim",
+}, { confirm = false })
+
 local function lint_triggers()
   local function do_lint()
     vim.defer_fn(function()
-      if vim.bo.buftype ~= "" then return end
+      if vim.bo.buftype ~= "" then
+        return
+      end
       require("lint").try_lint()
     end, 1)
   end
 
   vim.api.nvim_create_autocmd({ "BufReadPost", "InsertLeave", "TextChanged", "FocusGained" }, {
-    callback = function() do_lint() end,
+    callback = function()
+      do_lint()
+    end,
     desc = "auto lint",
   })
 
@@ -15,11 +24,6 @@ local function lint_triggers()
 end
 
 vim.schedule(function()
-  vim.pack.add({
-    "https://github.com/mfussenegger/nvim-lint",
-    "https://github.com/stevearc/conform.nvim",
-  }, { confirm = false })
-
   -- nvim-lint
   local lint = require("lint")
   local linter_by_ft = require("config.languages")
@@ -55,7 +59,8 @@ vim.schedule(function()
   require("conform").setup({
     formatters_by_ft = formatters_by_ft,
     format_on_save = function(bufnr)
-      local errors = vim.diagnostic.get(bufnr, { severity = { min = vim.diagnostic.severity.ERROR } })
+      local errors =
+        vim.diagnostic.get(bufnr, { severity = { min = vim.diagnostic.severity.ERROR } })
       local clients = vim.lsp.get_clients({ bufnr = bufnr })
       local ft = vim.bo[bufnr].filetype
 

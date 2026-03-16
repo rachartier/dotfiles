@@ -1,6 +1,6 @@
-vim.schedule(function()
-  vim.pack.add({ "https://github.com/lewis6991/gitsigns.nvim" }, { confirm = false })
+vim.pack.add({ "https://github.com/lewis6991/gitsigns.nvim" }, { confirm = false })
 
+vim.schedule(function()
   require("gitsigns").setup({
     signcolumn = true,
     current_line_blame = false,
@@ -13,21 +13,23 @@ vim.schedule(function()
       border = require("config.ui.border").default_border,
     },
     signs = {
-      add          = { text = "▎" },
-      change       = { text = "▎" },
+      add = { text = "▎" },
+      change = { text = "▎" },
       changedelete = { text = "▎" },
-      untracked    = { text = "▎" },
+      untracked = { text = "▎" },
     },
     signs_staged = {
-      add          = { text = "▎" },
-      change       = { text = "▎" },
+      add = { text = "▎" },
+      change = { text = "▎" },
       changedelete = { text = "▎" },
     },
     on_attach = function(bufnr)
       local gs = package.loaded.gitsigns
       local map = vim.keymap.set
 
-      local o = function(desc) return { buffer = bufnr, silent = true, desc = desc } end
+      local o = function(desc)
+        return { buffer = bufnr, silent = true, desc = desc }
+      end
       -- stylua: ignore start
       map("n", "]h", function()
         if vim.wo.diff then vim.cmd.normal({ "]c", bang = true }) else gs.nav_hunk("next") end

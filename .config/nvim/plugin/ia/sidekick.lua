@@ -1,3 +1,5 @@
+vim.pack.add({ "https://github.com/folke/sidekick.nvim" }, { confirm = false })
+
 local loaded = false
 local tiny_diags_disabled_by_nes = false
 
@@ -6,8 +8,6 @@ local function load()
     return
   end
   loaded = true
-
-  vim.pack.add({ "https://github.com/folke/sidekick.nvim" }, { confirm = false })
 
   require("sidekick").setup({
     nes = { enabled = true },

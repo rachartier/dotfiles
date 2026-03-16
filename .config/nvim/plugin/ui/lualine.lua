@@ -1,3 +1,9 @@
+vim.pack.add({
+  "https://github.com/nvim-lua/plenary.nvim",
+  "https://github.com/nvim-lualine/lualine.nvim",
+  "https://github.com/folke/sidekick.nvim",
+}, { confirm = false })
+
 if vim.env.TMUX_NEOGIT_POPUP then
   return
 end
@@ -10,12 +16,6 @@ else
 end
 
 vim.schedule(function()
-  vim.pack.add({
-    "https://github.com/nvim-lua/plenary.nvim",
-    "https://github.com/nvim-lualine/lualine.nvim",
-    "https://github.com/folke/sidekick.nvim",
-  }, { confirm = false })
-
   local function get_vlinecount_str()
     local raw_count = vim.fn.line(".") - vim.fn.line("v")
     raw_count = raw_count < 0 and raw_count - 1 or raw_count + 1

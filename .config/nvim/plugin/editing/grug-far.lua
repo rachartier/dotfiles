@@ -1,10 +1,13 @@
+vim.pack.add({ "https://github.com/MagicDuck/grug-far.nvim" }, { confirm = false })
+
 local loaded = false
 
 local function load()
-  if loaded then return end
+  if loaded then
+    return
+  end
   loaded = true
 
-  vim.pack.add({ "https://github.com/MagicDuck/grug-far.nvim" }, { confirm = false })
   require("grug-far").setup()
 
   vim.api.nvim_create_autocmd("FileType", {
@@ -28,7 +31,9 @@ local function create_cmd(name, fn)
   end, { nargs = "?" })
 end
 
-create_cmd("GrugFar", function() require("grug-far").open({ transient = true }) end)
+create_cmd("GrugFar", function()
+  require("grug-far").open({ transient = true })
+end)
 
 vim.keymap.set("n", "<leader>rw", function()
   load()

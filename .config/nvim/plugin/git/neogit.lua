@@ -1,15 +1,17 @@
+vim.pack.add({
+  "https://github.com/nvim-lua/plenary.nvim",
+  "https://github.com/sindrets/diffview.nvim",
+  "https://github.com/nvim-treesitter/nvim-treesitter",
+  "https://github.com/NeogitOrg/neogit",
+}, { confirm = false })
+
 local loaded = false
 
 local function load()
-  if loaded then return end
+  if loaded then
+    return
+  end
   loaded = true
-
-  vim.pack.add({
-    "https://github.com/nvim-lua/plenary.nvim",
-    "https://github.com/sindrets/diffview.nvim",
-    "https://github.com/nvim-treesitter/nvim-treesitter",
-    "https://github.com/NeogitOrg/neogit",
-  }, { confirm = false })
 
   require("neogit").setup({
     graph_style = "unicode",
@@ -18,14 +20,14 @@ local function load()
     git_services = {
       ["michelin.gitlab.com"] = {
         pull_request = "https://michelin.gitlab.com/${owner}/${repository}/merge_requests/new?merge_request[source_branch]=${branch_name}",
-        commit       = "https://michelin.gitlab.com/${owner}/${repository}/-/commit/${oid}",
-        tree         = "https://michelin.gitlab.com/${owner}/${repository}/-/tree/${branch_name}?ref_type=heads",
+        commit = "https://michelin.gitlab.com/${owner}/${repository}/-/commit/${oid}",
+        tree = "https://michelin.gitlab.com/${owner}/${repository}/-/tree/${branch_name}?ref_type=heads",
       },
     },
     signs = {
       section = { "", "" },
-      item    = { "", "" },
-      hunk    = { "", "" },
+      item = { "", "" },
+      hunk = { "", "" },
     },
   })
 

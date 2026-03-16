@@ -1,3 +1,8 @@
+vim.pack.add({
+  "https://github.com/nvim-treesitter/nvim-treesitter",
+  "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
+}, { confirm = false })
+
 local utils = require("utils")
 
 local function start_treesitter(bufnr)
@@ -64,11 +69,6 @@ local function setup_treesitter_autocmd()
   })
 end
 
-vim.pack.add({
-  "https://github.com/nvim-treesitter/nvim-treesitter",
-  "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
-}, { confirm = false })
-
 setup_treesitter_autocmd()
 
 local lang_config = require("config.languages")
@@ -104,21 +104,21 @@ require("nvim-treesitter-textobjects").setup({
     lookahead = true,
     selection_modes = {
       ["@parameter.outer"] = "v",
-      ["@function.outer"]  = "V",
-      ["@class.outer"]     = "<c-v>",
+      ["@function.outer"] = "V",
+      ["@class.outer"] = "<c-v>",
     },
     include_surrounding_whitespace = true,
   },
   move = {
-    enable    = true,
+    enable = true,
     set_jumps = true,
     goto_next_start = {
       ["<C-down>"] = "@function.outer",
-      ["<C-j>"]    = "@function.outer",
+      ["<C-j>"] = "@function.outer",
     },
     goto_previous_start = {
       ["<C-up>"] = "@function.outer",
-      ["<C-k>"]  = "@function.outer",
+      ["<C-k>"] = "@function.outer",
     },
     goto_previous_end = {
       ["<C-K>"] = "@function.outer",

@@ -1,3 +1,5 @@
+vim.pack.add({ "https://github.com/uhs-robert/sshfs.nvim" }, { confirm = false })
+
 local loaded = false
 
 local function load()
@@ -5,8 +7,6 @@ local function load()
     return
   end
   loaded = true
-
-  vim.pack.add({ "https://github.com/uhs-robert/sshfs.nvim" }, { confirm = false })
 
   require("sshfs").setup({
     mounts = {
@@ -35,7 +35,17 @@ local function create_cmd(name)
   end, { nargs = "?" })
 end
 
-for _, cmd in ipairs({ "SSHConnect", "SSHDisconnect", "SSHConfig", "SSHReload", "SSHFiles", "SSHGrep", "SSHLiveFind", "SSHLiveGrep", "SSHExpl" }) do
+for _, cmd in ipairs({
+  "SSHConnect",
+  "SSHDisconnect",
+  "SSHConfig",
+  "SSHReload",
+  "SSHFiles",
+  "SSHGrep",
+  "SSHLiveFind",
+  "SSHLiveGrep",
+  "SSHExpl",
+}) do
   create_cmd(cmd)
 end
 

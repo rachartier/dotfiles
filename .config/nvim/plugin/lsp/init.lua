@@ -1,10 +1,23 @@
+vim.pack.add({
+  "https://github.com/mfussenegger/nvim-dap", -- required by mason-nvim-dap at setup time
+  "https://github.com/jay-babu/mason-nvim-dap.nvim",
+  "https://github.com/zapling/mason-conform.nvim",
+  "https://github.com/mason-org/mason-lspconfig.nvim",
+  "https://github.com/mason-org/mason.nvim",
+  "https://github.com/neovim/nvim-lspconfig",
+}, { confirm = false })
+
 local border = require("config.ui.border").default_border
 
 local function collect_tools(server_settings)
   local excluded_tools = {
     "stylelint",
-    "trim_whitespace", "trim_newlines", "squeeze_blanks",
-    "injected", "ruff_fix", "ruff_format",
+    "trim_whitespace",
+    "trim_newlines",
+    "squeeze_blanks",
+    "injected",
+    "ruff_fix",
+    "ruff_format",
   }
   local lsp_servers, formatters_linters, dap_tools = {}, {}, {}
 
@@ -44,15 +57,6 @@ local function collect_tools(server_settings)
 end
 
 vim.schedule(function()
-  vim.pack.add({
-    "https://github.com/mfussenegger/nvim-dap",     -- required by mason-nvim-dap at setup time
-    "https://github.com/jay-babu/mason-nvim-dap.nvim",
-    "https://github.com/zapling/mason-conform.nvim",
-    "https://github.com/mason-org/mason-lspconfig.nvim",
-    "https://github.com/mason-org/mason.nvim",
-    "https://github.com/neovim/nvim-lspconfig",
-  }, { confirm = false })
-
   require("mason").setup({
     registries = {
       "github:mason-org/mason-registry",
@@ -62,14 +66,14 @@ vim.schedule(function()
     ui = {
       border = border,
       keymaps = {
-        toggle_server_expand  = "<CR>",
-        install_server        = "i",
-        update_server         = "u",
-        check_server_version  = "c",
-        update_all_servers    = "U",
+        toggle_server_expand = "<CR>",
+        install_server = "i",
+        update_server = "u",
+        check_server_version = "c",
+        update_all_servers = "U",
         check_outdated_servers = "C",
-        uninstall_server      = "X",
-        cancel_installation   = "<C-c>",
+        uninstall_server = "X",
+        cancel_installation = "<C-c>",
       },
     },
   })

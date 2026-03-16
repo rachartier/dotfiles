@@ -1,20 +1,20 @@
 local loaded = false
 
+vim.pack.add({
+  "https://github.com/rafamadriz/friendly-snippets",
+  "https://github.com/fang2hou/blink-copilot",
+  "https://github.com/saghen/blink.compat",
+  "https://github.com/folke/lazydev.nvim",
+  { src = "https://github.com/Saghen/blink.cmp", version = vim.version.range("*") },
+}, {
+  confirm = false,
+})
+
 local function load()
   if loaded then
     return
   end
   loaded = true
-
-  vim.pack.add({
-    "https://github.com/rafamadriz/friendly-snippets",
-    "https://github.com/fang2hou/blink-copilot",
-    "https://github.com/saghen/blink.compat",
-    "https://github.com/folke/lazydev.nvim",
-    { src = "https://github.com/Saghen/blink.cmp", version = vim.version.range("*") },
-  }, {
-    confirm = false,
-  })
 
   local opts = {
     keymap = {
