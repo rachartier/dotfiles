@@ -29,7 +29,7 @@ tmux source-file "$HOME/.config/tmux/tmux.conf" 2>/dev/null
 # --- wezterm ---
 # WSL2 fs notifications don't reach Windows file watchers, so touch the config from Windows
 if command -v wslpath &>/dev/null; then
-	win_cfg=$(wslpath -w "$HOME/.config/wezterm/wezterm.lua")
+	win_cfg=$(wslpath -w "C:/Users/Le_Bu/.wezterm.lua")
 	powershell.exe -NoProfile -Command "(Get-Item '$win_cfg').LastWriteTime = Get-Date" &>/dev/null &
 fi
 

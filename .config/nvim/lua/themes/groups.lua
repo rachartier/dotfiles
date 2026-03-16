@@ -164,11 +164,11 @@ function M.get(colors)
     ["@lsp.mod.deprecated"] = { fg = colors.red, strikethrough = true },
 
     MiniClueBorder = { link = "FloatBorder" },
-    MiniClueDescGroup = { link = "DiagnosticFloatingWarn" },
+    MiniClueDescGroup = { link = "DiagnosticWarn" },
     MiniClueDescSingle = { link = "NormalFloat" },
-    MiniClueNextKey = { link = "DiagnosticFloatingHint" },
-    MiniClueNextKeyWithPostkeys = { link = "DiagnosticFloatingError" },
-    MiniClueSeparator = { link = "DiagnosticFloatingInfo" },
+    MiniClueNextKey = { link = "DiagnosticHint" },
+    MiniClueNextKeyWithPostkeys = { link = "DiagnosticError" },
+    MiniClueSeparator = { link = "DiagnosticInfo" },
     MiniClueTitle = { link = "FloatTitle" },
 
     MiniIconsBlue = { fg = colors.blue },
@@ -438,8 +438,14 @@ function M.get(colors)
     MarkviewBlockQuoteError = { fg = colors.red, bg = U.darken(colors.red, 0.095, colors.base) },
     MarkviewBlockQuoteNote = { fg = colors.blue, bg = U.darken(colors.blue, 0.095, colors.base) },
     MarkviewBlockQuoteOk = { fg = colors.green, bg = U.darken(colors.green, 0.095, colors.base) },
-    MarkviewBlockQuoteSpecial = { fg = colors.mauve, bg = U.darken(colors.mauve, 0.095, colors.base) },
-    MarkviewBlockQuoteWarn = { fg = colors.yellow, bg = U.darken(colors.yellow, 0.095, colors.base) },
+    MarkviewBlockQuoteSpecial = {
+      fg = colors.mauve,
+      bg = U.darken(colors.mauve, 0.095, colors.base),
+    },
+    MarkviewBlockQuoteWarn = {
+      fg = colors.yellow,
+      bg = U.darken(colors.yellow, 0.095, colors.base),
+    },
 
     MarkviewHyperlink = { link = "@markup.link.url" },
 
@@ -480,7 +486,10 @@ function M.get(colors)
     MarkviewPalette5Bg = { bg = U.darken(colors.teal, 0.095, colors.base) },
     MarkviewIcon5 = { fg = colors.teal, bg = colors.mantle },
 
-    MarkviewPalette6 = { fg = colors.highlight, bg = U.darken(colors.highlight, 0.095, colors.base) },
+    MarkviewPalette6 = {
+      fg = colors.highlight,
+      bg = U.darken(colors.highlight, 0.095, colors.base),
+    },
     MarkviewPalette6Fg = { fg = colors.highlight },
     MarkviewPalette6Bg = { bg = U.darken(colors.highlight, 0.095, colors.base) },
     MarkviewIcon6 = { fg = colors.highlight, bg = colors.mantle },

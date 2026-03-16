@@ -1,0 +1,77 @@
+local function lint_triggers()
+  local function do_lint()
+    vim.defer_fn(function()
+      if vim.bo.buftype ~= "" then return end
+      require("lint").try_lint()
+    end, 1)
+  end
+
+  vim.api.nvim_create_autocmd({ "BufReadPost", "InsertLeave", "TextChanged", "FocusGained" }, {
+    callback = function() do_lint() end,
+    desc = "auto lint",
+  })
+
+  do_lint()
+end
+
+vim.schedule(function()
+  vim.pack.add({
+    "https://github.com/mfussenegger/nvim-lint",
+    "https://github.com/stevearc/conform.nvim",
+  }, { confirm = false })
+
+  -- nvim-lint
+  local lint = require("lint")
+  local linter_by_ft = require("config.languages")
+  for _, server_config in pairs(linter_by_ft) do
+    for _, language_name in pairs(server_config.filetypes) do
+      lint.linters_by_ft[language_name] = server_config.linter or {}
+    end
+  end
+  lint_triggers()
+
+  -- conform
+  vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+
+  local languages = require("config.languages")
+  local formatters_by_ft = {}
+  local formatters_settings = {}
+
+  for _, server_config in pairs(languages) do
+    for _, language_name in pairs(server_config.filetypes) do
+      local formatters = {}
+      for tool_name, tool in pairs(server_config.formatter or {}) do
+        if type(tool) == "table" then
+          table.insert(formatters, tool_name)
+          formatters_settings[tool_name] = tool
+        else
+          table.insert(formatters, tool)
+        end
+      end
+      formatters_by_ft[language_name] = formatters
+    end
+  end
+
+  require("conform").setup({
+    formatters_by_ft = formatters_by_ft,
+    format_on_save = function(bufnr)
+      local errors = vim.diagnostic.get(bufnr, { severity = { min = vim.diagnostic.severity.ERROR } })
+      local clients = vim.lsp.get_clients({ bufnr = bufnr })
+      local ft = vim.bo[bufnr].filetype
+
+      for _, client in pairs(clients) do
+        if client.name == "omnisharp" and #errors > 0 then
+          return
+        end
+      end
+
+      local lsp_fallback = true
+      if languages[ft] and languages[ft].lsp_fallback then
+        lsp_fallback = languages[ft].lsp_fallback
+      end
+
+      return { timeout_ms = 1500, lsp_fallback = lsp_fallback }
+    end,
+    formatters = formatters_settings,
+  })
+end)

@@ -27,11 +27,8 @@ local function build_header()
 end
 
 local function build_footer()
-  local stats = require("lazy").stats()
-  local ms = math.floor(stats.startuptime * 100 + 0.5) / 100
-  return center_text(
-    string.format("  %d/%d plugins loaded in %.2fms", stats.loaded, stats.count, ms)
-  )
+  local ms = math.floor((vim.uv.hrtime() - vim.g._start_time) / 1e6)
+  return center_text(string.format("  Neovim started in %dms", ms))
 end
 
 local function hook_center_items(content)
@@ -75,9 +72,10 @@ function M.setup()
     footer = "",
     autoopen = true,
     items = {
-      { name = "New File", action = "ene | startinsert", section = "", keys = "n" },
-      { name = "Lazy", action = "Lazy", section = "", keys = "l" },
-      { name = "Quit", action = "qa", section = "", keys = "q" },
+      { name = "New File",         action = "ene | startinsert",                                    section = "", keys = "n" },
+      { name = "Plugins",          action = "lua require('custom.plugin_dashboard').open()",        section = "", keys = "p" },
+      { name = "Update Plugins",   action = "lua vim.pack.update()",                                section = "", keys = "u" },
+      { name = "Quit",             action = "qa",                                                   section = "", keys = "q" },
     },
     content_hooks = {
       starter.gen_hook.adding_bullet(" "),
@@ -93,8 +91,8 @@ function M.setup()
     end,
   })
 
-  vim.api.nvim_create_autocmd("User", {
-    pattern = "LazyVimStarted",
+  vim.api.nvim_create_autocmd("VimEnter", {
+    once = true,
     callback = function()
       if vim.bo.filetype == "ministarter" then
         starter.config.footer = build_footer()
