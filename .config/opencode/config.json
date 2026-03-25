@@ -1,6 +1,14 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "theme": "catppuccin",
+  "permission": {
+    "read": {
+      "*": "allow",
+      "*.env": "deny",
+      "*.env.*": "deny",
+      "*.env.example": "allow"
+    }
+  },
   "mcp": {
     "context7": {
       "type": "remote",

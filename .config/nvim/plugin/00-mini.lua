@@ -36,7 +36,7 @@ vim.schedule(function()
   require("plugins.utils.mini.pairs").setup()
   require("plugins.utils.mini.notify").setup()
   require("plugins.utils.mini.picker").setup()
+  require("plugins.utils.mini.clue").setup()
 end)
 
-require("plugins.utils.mini.clue").setup()
 require("plugins.utils.mini.starter").setup()

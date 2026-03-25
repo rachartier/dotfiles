@@ -49,32 +49,77 @@ vim.api.nvim_create_autocmd("FileType", {
           default = function(_, item)
             local special_links = {
               ["git"] = "󰊢 ",
-              ["project"] = " ",
+              ["project"] = " ",
               ["todo"] = "󰒲 ",
-              ["terminal"] = " ",
+              ["terminal"] = " ",
             }
+
             for link, icon in pairs(special_links) do
               if string.lower(item.label):find(link) then
-                return { hl = "MarkviewSubscript", icon = icon }
+                return {
+                  hl = "MarkviewSubscript",
+                  icon = icon,
+                }
               end
             end
-            return { hl = "MarkviewSubscript", icon = "󱗖 " }
+
+            return {
+              hl = "MarkviewSubscript",
+              icon = "󱗖 ",
+            }
           end,
         },
         checkboxes = {
           enable = true,
-          ["!"] = { hl = "MarkdownCheckboxImportant", text = "󱅶" },
-          ["*"] = { hl = "MarkdownCheckboxIdea", text = "󰌵" },
-          ["-"] = { hl = "MarkdownCheckboxSkipped", text = "" },
-          ["/"] = { hl = "MarkviewCheckboxProgress", text = "" },
-          ["?"] = { hl = "MarkdownCheckboxQuestion", scope_hl = "Normal", text = "" },
-          checked = { hl = "MarkviewCheckboxChecked", text = "" },
-          f = { hl = "MarkdownCheckboxFire", text = "󰈸" },
-          i = { hl = "MarkdownCheckboxInfo", text = "" },
-          n = { hl = "MarkdownCheckboxNo", text = "󰔑" },
-          s = { hl = "MarkdownCheckboxStar", text = "" },
-          unchecked = { hl = "MarkviewCheckboxUnchecked", text = "" },
-          y = { hl = "MarkdownCheckboxYes", text = "󰔓" },
+          ["!"] = {
+            hl = "MarkdownCheckboxImportant",
+            text = "󱅶",
+          },
+          ["*"] = {
+            hl = "MarkdownCheckboxIdea",
+            text = "󰌵",
+          },
+          ["-"] = {
+            hl = "MarkdownCheckboxSkipped",
+            text = "",
+          },
+          ["/"] = {
+            hl = "MarkviewCheckboxProgress",
+            text = "",
+          },
+          ["?"] = {
+            hl = "MarkdownCheckboxQuestion",
+            scope_hl = "Normal",
+            text = "",
+          },
+          checked = {
+            hl = "MarkviewCheckboxChecked",
+            text = "",
+          },
+          f = {
+            hl = "MarkdownCheckboxFire",
+            text = "󰈸",
+          },
+          i = {
+            hl = "MarkdownCheckboxInfo",
+            text = "",
+          },
+          n = {
+            hl = "MarkdownCheckboxNo",
+            text = "󰔑",
+          },
+          s = {
+            hl = "MarkdownCheckboxStar",
+            text = "",
+          },
+          unchecked = {
+            hl = "MarkviewCheckboxUnchecked",
+            text = "",
+          },
+          y = {
+            hl = "MarkdownCheckboxYes",
+            text = "󰔓",
+          },
         },
       },
     })

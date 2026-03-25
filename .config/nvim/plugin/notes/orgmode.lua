@@ -1,12 +1,30 @@
-vim.pack.add({
-  { src = "https://github.com/nvim-orgmode/orgmode" },
-}, { confirm = false })
-
-vim.schedule(function()
-  require("orgmode").setup({
-    org_agenda_files = "~/.config/nvim/notes/**/*",
-    org_default_notes_file = "~/.config/nvim/notes/refile.org",
-  })
-
-  vim.lsp.enable("org")
-end)
+-- vim.pack.add({
+--   {
+--     src = "https://github.com/nvim-neorg/neorg",
+--     version = vim.version.range("*"),
+--   },
+--   { src = "https://github.com/nvim-neorg/lua-utils.nvim" },
+--   { src = "https://github.com/nvim-neotest/nvim-nio" },
+--   { src = "https://github.com/MunifTanjim/nui.nvim" },
+--   { src = "https://github.com/nvim-lua/plenary.nvim" },
+--   { src = "https://github.com/pysan3/pathlib.nvim" },
+--   "nvim-treesitter-legacy-api",
+-- }, { confirm = false })
+--
+-- vim.schedule(function()
+--   require("neorg").setup({
+--     load = {
+--       ["core.defaults"] = {},
+--       ["core.dirman"] = {
+--         config = {
+--           workspaces = {
+--             notes = "~/.config/nvim/notes",
+--           },
+--           default_workspace = "notes",
+--           index = "index.norg",
+--         },
+--       },
+--       ["core.concealer"] = {},
+--     },
+--   })
+-- end)
