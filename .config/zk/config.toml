@@ -72,7 +72,7 @@ idea      = 'zk new inbox --title "$*"'
 lit       = 'zk new literature --title "$*"'
 proj      = 'zk new projects --title "$*"'
 
-f         = 'zk list --interactive --format full'
+f         = 'zk edit --interactive'
 recent    = 'zk list --sort modified- --limit 15 --interactive'
 orphans   = 'zk list --orphan --sort created- --interactive'
 

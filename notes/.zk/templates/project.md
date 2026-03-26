@@ -5,10 +5,10 @@ Tags: :project:
 
 ---
 
-## Objectif
+## Objective
 
 ## Notes
 
 ---
 
-## Références
+## References

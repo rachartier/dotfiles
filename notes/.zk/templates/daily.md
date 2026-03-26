@@ -1,16 +1,12 @@
 # {{format-date now '%Y-%m-%d'}}
-:daily:
+
+Tags: :daily:
 
 ---
 
 ## Tasks
 - [ ]
 
+
 ## Notes
-
-
----
-
-## References
-
-
+-
