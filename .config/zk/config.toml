@@ -1,0 +1,101 @@
+[notebook]
+dir = "$HOME/notes"
+
+[note]
+language = "fr"
+default-title = "Untitled"
+filename = "{{id}}-{{slug title}}"
+extension = "md"
+id-charset = "alphanum"
+id-length = 4
+id-case = "lower"
+template = "default.md"
+
+[format.markdown]
+link-format = "markdown"
+hashtags = false
+colon-tags = true
+multiword-tags = false
+
+[group.daily]
+paths = ["journal/daily"]
+
+[group.daily.note]
+filename = "{{format-date now '%Y-%m-%d'}}"
+template = "daily.md"
+
+[group.project]
+paths = ["projects"]
+
+[group.project.note]
+filename = "{{slug title}}"
+template = "project.md"
+
+[format.list]
+path = "{{style 'underline' (rel-path)}}"
+title = "{{style 'yellow bold' title}}"
+
+[format.full]
+path = "{{style 'underline' (rel-path)}}"
+title = "{{style 'yellow bold' title}}"
+body = "{{prepend '  ' (style 'faint' body)}}"
+
+[tool]
+editor = "nvim"
+shell = "/bin/bash"
+pager = "less -FRX"
+fzf-preview = "bat --color=always --style=numbers {-1}"
+
+[lsp]
+[lsp.diagnostics]
+wiki-title = "hint"
+dead-link = "error"
+
+[lsp.completion]
+note-label = "{{title}}"
+note-filter-text = "{{title}} {{path}}"
+note-detail = "{{filename}}"
+
+[filter]
+recents = "--sort modified- --limit 20"
+orphans = "--orphan --sort created-"
+createdtoday = "--created-after 'today 00:00'"
+long = "--word-count 500.."
+short = "--word-count ..100"
+
+[alias]
+today     = 'zk new journal/daily'
+yesterday = 'zk list journal/daily --sort created- --limit 1'
+week      = 'zk list journal/daily --sort created- --limit 7'
+
+idea      = 'zk new inbox --title "$*"'
+lit       = 'zk new literature --title "$*"'
+proj      = 'zk new projects --title "$*"'
+
+f         = 'zk list --interactive --format full'
+recent    = 'zk list --sort modified- --limit 15 --interactive'
+orphans   = 'zk list --orphan --sort created- --interactive'
+
+tagged    = 'zk list --interactive --tag "$*"'
+untagged  = 'zk list --interactive --tag "" --sort created-'
+tags      = 'zk tag list --sort name'
+tagcount  = 'zk tag list --sort count-'
+seedlings = 'zk list --tag seedling --interactive --sort created-'
+evergreen = 'zk list --tag evergreen --interactive --sort modified-'
+mature    = 'zk list --tag "NOT seedling" --interactive --sort modified-'
+
+backlinks = 'zk list --link-to "$*" --interactive --format full'
+outlinks  = 'zk list --linked-by "$*" --interactive --format full'
+related   = 'zk list --related-to "$*" --interactive --sort path+'
+
+dangling  = 'zk list --orphan --sort modified --interactive'
+stale     = 'zk list --sort modified --limit 20 --interactive'
+wc        = 'zk list --format "{{word-count}}\t{{title}}" --sort word-count- --limit 20'
+stats     = 'zk list --format "{{format-date created \"%Y-%m\"}}" --quiet | sort | uniq -c | sort -rn'
+todo      = 'zk list --match "TODO|FIXME|XXX" --interactive'
+
+conf      = '$EDITOR .zk/config.toml'
+tpl       = '$EDITOR .zk/templates/'
+last      = 'zk edit --sort modified- --limit 1'
+random    = 'zk edit --sort random --limit 1'
+
