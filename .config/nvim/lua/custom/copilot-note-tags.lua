@@ -122,7 +122,6 @@ end
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "markdown", "text", "norg" },
   callback = function()
-    vim.print("Setting up note tag generation keymap for this buffer")
     vim.keymap.set("n", "<M-e>", generate_tags, { buffer = true, desc = "generate note tags" })
   end,
   desc = "setup note tag generation",
