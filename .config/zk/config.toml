@@ -4,7 +4,7 @@ dir = "$HOME/notes"
 [note]
 language = "fr"
 default-title = "Untitled"
-filename = "{{id}}-{{slug title}}"
+filename = "{{format-date now '%Y%m%d%H%M'}}{{id}}"
 extension = "md"
 id-charset = "alphanum"
 id-length = 4

@@ -10,6 +10,8 @@ require("set")
 require("custom.winbar").setup()
 require("custom.statuscol").setup()
 
+require("custom.copilot-note-tags")
+
 vim.defer_fn(function()
   require("config.diagnostic")
   require("remap")
