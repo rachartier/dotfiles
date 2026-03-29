@@ -249,6 +249,10 @@ function M.get(colors)
       bg = U.darken(colors.green, 0.095, colors.base),
       fg = U.darken(colors.green, 0.800, colors.base),
     },
+    NeogitDiffAddInline = {
+      bg = U.darken(colors.green, 0.445, colors.base),
+      fg = U.lighten(colors.green, 0.950, colors.text),
+    },
     NeogitDiffAddHighlight = {
       bg = U.darken(colors.green, 0.345, colors.base),
       fg = U.lighten(colors.green, 0.850, colors.text),
@@ -260,6 +264,10 @@ function M.get(colors)
     NeogitDiffDeleteHighlight = {
       bg = U.darken(colors.red, 0.345, colors.base),
       fg = U.lighten(colors.red, 0.850, colors.text),
+    },
+    NeogitDiffDeleteInline = {
+      bg = U.darken(colors.red, 0.445, colors.base),
+      fg = U.lighten(colors.red, 0.950, colors.text),
     },
     NeogitDiffHeader = { fg = colors.blue, bg = default_bg, bold = true },
     NeogitDiffHeaderHighlight = { fg = colors.peach, bg = default_bg, bold = true },

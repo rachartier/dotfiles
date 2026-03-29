@@ -59,10 +59,9 @@ M.lsp_rename = function()
 end
 
 function M.on_attach(client, bufnr)
-  vim.lsp.document_color.enable(true, bufnr, {
+  vim.lsp.document_color.enable(true, { bufnr = bufnr }, {
     style = "virtual",
   })
-  vim.lsp.on_type_formatting.enable()
 
   vim.keymap.set("n", "K", function() vim.lsp.buf.hover( {border = "rounded",}) end, { buffer = bufnr, desc = "hover documentation" })
 
