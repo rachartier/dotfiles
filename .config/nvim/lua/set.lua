@@ -97,6 +97,8 @@ opt.fillchars = {
   eob = " ",
 }
 
+opt.diffopt = "internal,filler,closeoff,indent-heuristic,linematch:60,inline:char"
+
 vim.o.timeout = true
 vim.o.timeoutlen = 300
 
