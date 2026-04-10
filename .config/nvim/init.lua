@@ -1,6 +1,8 @@
 vim.g._start_time = vim.uv.hrtime()
 vim.loader.enable()
 
+require("vim._core.ui2").enable({})
+
 require("config")
 
 require("themes").set_theme("system")

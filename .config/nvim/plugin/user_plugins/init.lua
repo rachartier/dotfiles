@@ -77,3 +77,8 @@ vim.schedule(function()
 
   vim.diagnostic.open_float = require("tiny-inline-diagnostic.override").open_float
 end)
+
+vim.pack.add({ "https://github.com/rachartier/tiny-cmdline.nvim" }, { confirm = false })
+require("tiny-cmdline").setup({
+  on_reposition = require("tiny-cmdline").adapters.blink,
+})

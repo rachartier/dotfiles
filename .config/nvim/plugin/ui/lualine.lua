@@ -51,6 +51,7 @@ vim.schedule(function()
     v = "(v•-•)v",
     [""] = "(v•-•)>",
     V = "(>•-•)>",
+    c = "^(•o•)^",
   }
   local kirby_default = "(>*-*)>"
 
