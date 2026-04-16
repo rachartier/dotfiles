@@ -9,6 +9,8 @@ install_github_gh() {
 	gh_version=$(__get_latest_release "cli/cli")
 	gh_version="${gh_version:1}"
 
+	echo "Latest gh version: $gh_version"
+
 	if gh --version 2>/dev/null | grep -q "gh version $gh_version"; then
 		log "info" "gh $gh_version already installed"
 	else
