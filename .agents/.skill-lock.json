@@ -16,45 +16,54 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel-labs/skills.git",
       "skillPath": "skills/find-skills/SKILL.md",
-      "skillFolderHash": "c2f31172b6f256272305a5e6e7228b258446899f",
+      "skillFolderHash": "3013fdeb8a11b10b1eb795ec3ae8bfca38f7c26d",
       "installedAt": "2026-03-06T13:47:38.591Z",
-      "updatedAt": "2026-03-06T13:47:38.591Z"
+      "updatedAt": "2026-04-16T11:01:05.845Z"
     },
     "brainstorming": {
       "source": "obra/superpowers",
       "sourceType": "github",
       "sourceUrl": "https://github.com/obra/superpowers.git",
       "skillPath": "skills/brainstorming/SKILL.md",
-      "skillFolderHash": "d28aa4ed67fe5a3f1336f0fcccb1e548c67dc864",
+      "skillFolderHash": "f260c775073816860fef8a37c032ac77e2ff5821",
       "installedAt": "2026-03-06T13:49:04.128Z",
-      "updatedAt": "2026-03-06T13:49:04.128Z"
+      "updatedAt": "2026-04-16T11:01:08.409Z"
     },
     "writing-skills": {
       "source": "obra/superpowers",
       "sourceType": "github",
       "sourceUrl": "https://github.com/obra/superpowers.git",
       "skillPath": "skills/writing-skills/SKILL.md",
-      "skillFolderHash": "657cdd6aef472054ffd3f0e7798494d79be9f807",
+      "skillFolderHash": "80e8c7d3be99d55d5d76c9516cc45a1e7f48f281",
       "installedAt": "2026-03-06T13:49:45.896Z",
-      "updatedAt": "2026-03-06T13:49:45.896Z"
+      "updatedAt": "2026-04-16T11:01:10.165Z"
     },
     "python-performance-optimization": {
       "source": "wshobson/agents",
       "sourceType": "github",
       "sourceUrl": "https://github.com/wshobson/agents.git",
       "skillPath": "plugins/python-development/skills/python-performance-optimization/SKILL.md",
-      "skillFolderHash": "ea26a709fa185e46b567c87f9206a4cf6346eeaf",
+      "skillFolderHash": "f0e64087a8f9685ef5d394b03aefa1dc0accd65a",
       "installedAt": "2026-03-06T13:54:03.829Z",
-      "updatedAt": "2026-03-06T13:54:03.829Z"
+      "updatedAt": "2026-04-16T11:01:12.631Z"
     },
     "python-testing-patterns": {
       "source": "wshobson/agents",
       "sourceType": "github",
       "sourceUrl": "https://github.com/wshobson/agents.git",
       "skillPath": "plugins/python-development/skills/python-testing-patterns/SKILL.md",
-      "skillFolderHash": "79ea3b35b9b8bb7dd47b566fd085ec45f8a6efe2",
+      "skillFolderHash": "28ce19935b2b48708af69e47e7686936a249c08b",
       "installedAt": "2026-03-06T13:54:35.472Z",
-      "updatedAt": "2026-03-06T13:54:35.472Z"
+      "updatedAt": "2026-04-16T11:01:15.041Z"
+    },
+    "refactor": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/github/awesome-copilot.git",
+      "skillPath": "skills/refactor/SKILL.md",
+      "skillFolderHash": "01cfb6a412faf9d680880cc3f631c419121a9916",
+      "installedAt": "2026-04-16T11:00:29.554Z",
+      "updatedAt": "2026-04-16T11:00:29.554Z"
     }
   },
   "dismissed": {
@@ -62,12 +71,16 @@
   },
   "lastSelectedAgents": [
     "amp",
+    "antigravity",
     "cline",
     "codex",
     "cursor",
+    "deepagents",
+    "firebender",
     "gemini-cli",
     "github-copilot",
     "kimi-cli",
-    "opencode"
+    "opencode",
+    "warp"
   ]
 }
