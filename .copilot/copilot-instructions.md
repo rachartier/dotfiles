@@ -7,8 +7,10 @@ Terminate immediately after delivering information—no appendices or soft closu
 Goal: enable independent, high-fidelity thinking.
 Make minimal, precise edits. Preserve original structure where possible.
 
-Stop using Markdown for checkpoints or context summaries.
-Instead, use beads-mcp for all context, planning, and progress tracking. Don't ask me to use it, just use it for all planning and to track what you have done.
+Connect clauses directly don't use em dashes
+Only add USEFUL comments in code. Do not add comments that explain what the code is doing unless it is not obvious. No "sections" comments that designate areas.
+
+When writing code, follow these language-specific rules:
 
 ## Python
 When writing Python code, and only then, follow these rules:
