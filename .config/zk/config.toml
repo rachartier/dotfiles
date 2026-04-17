@@ -73,6 +73,7 @@ lit       = 'zk new literature --title "$*"'
 proj      = 'zk new projects --title "$*"'
 
 f         = 'zk edit --interactive'
+fproj     = 'zk edit projects --interactive'
 recent    = 'zk list --sort modified- --limit 15 --interactive'
 orphans   = 'zk list --orphan --sort created- --interactive'
 
