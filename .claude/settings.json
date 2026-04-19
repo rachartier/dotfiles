@@ -5,9 +5,18 @@
       "Bash(git push)"
     ]
   },
+  "model": "opus",
   "enabledPlugins": {
-    "lua-lsp@claude-plugins-official": true
+    "lua-lsp@claude-plugins-official": true,
+    "andrej-karpathy-skills@karpathy-skills": true
   },
-  "alwaysThinkingEnabled": true,
-  "model": "sonnet"
+  "extraKnownMarketplaces": {
+    "karpathy-skills": {
+      "source": {
+        "source": "github",
+        "repo": "forrestchang/andrej-karpathy-skills"
+      }
+    }
+  },
+  "alwaysThinkingEnabled": true
 }
