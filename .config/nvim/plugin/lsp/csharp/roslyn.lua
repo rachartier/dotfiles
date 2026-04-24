@@ -4,6 +4,13 @@ vim.api.nvim_create_autocmd("FileType", {
   pattern = { "cs", "vb" },
   once = true,
   callback = function()
-    require("roslyn").setup({ filewatching = "auto" })
+    require("roslyn").setup({
+      filewatching = "auto",
+      extensions = {
+        razor = {
+          enabled = false,
+        },
+      },
+    })
   end,
 })
