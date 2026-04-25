@@ -61,7 +61,7 @@ return {
   },
   {
     filetypes = { "yaml" },
-    mason = { "yamlls" },
+    -- mason = { "yamlls" },
   },
   {
     filetypes = { "markdown" },
