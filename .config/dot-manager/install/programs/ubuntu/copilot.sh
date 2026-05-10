@@ -19,6 +19,7 @@ install_copilot() {
 
 	print_step "Installing RTK ($rtk_version)"
 	__install_package_release "https://github.com/rtk-ai/rtk/releases/download/$rtk_version/rtk-x86_64-unknown-linux-musl.tar.gz" "rtk"
+
 }
 
 install_copilot "$@"

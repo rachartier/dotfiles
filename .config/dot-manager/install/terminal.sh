@@ -27,30 +27,39 @@ install_terminal() {
 		[ -d /tmp/ghostty ] && rm -rf /tmp/ghostty
 
 		git clone https://github.com/ghostty-org/ghostty >/dev/null 2>&1
-		cd ghostty || return 1
+		cd /tmp/ghostty || return 1
 
 		__install_package libgtk-4-dev libadwaita-1-dev libxml2-utils
 
-		if ! command -v zig &>/dev/null; then
-			wget -q https://ziglang.org/download/0.14.1/zig-x86_64-linux-0.14.1.tar.xz
-			tar -xf zig-x86_64-linux-0.14.1.tar.xz
-			sudo mv zig-x86_64-linux-0.14.1 /opt/zig-0.14.1
-			sudo ln -sf /opt/zig-0.14.1/zig /usr/local/bin/zig
+		ZIG_VERSION="0.15.2"
+		if ! command -v zig &>/dev/null || [[ "$(zig version 2>/dev/null)" != "$ZIG_VERSION" ]]; then
+			print_step "Installing zig ${ZIG_VERSION}"
+			wget -q "https://ziglang.org/download/${ZIG_VERSION}/zig-x86_64-linux-${ZIG_VERSION}.tar.xz"
+			tar -xf "zig-x86_64-linux-${ZIG_VERSION}.tar.xz"
+			sudo rm -rf "/opt/zig-${ZIG_VERSION}"
+			sudo mv "zig-x86_64-linux-${ZIG_VERSION}" "/opt/zig-${ZIG_VERSION}"
+
+			print_step "Creating symlink for zig"
+			sudo ln -sf "/opt/zig-${ZIG_VERSION}/zig" /usr/local/bin/zig
 		fi
 
-		if ! ldconfig -p | grep -q gtk4-layer-shell; then
-			__install_package meson ninja-build libwayland-dev wayland-protocols \
-				libgtk-4-dev gobject-introspection libgirepository1.0-dev \
-				gtk-doc-tools python3 valac
-			meson setup build ninja -C build
-			sudo ninja -C build install
-			sudo ldconfig
-		fi
+		# if ! ldconfig -p | grep -q gtk4-layer-shell; then
+		# 	__install_package meson ninja-build libwayland-dev wayland-protocols \
+		# 		libgtk-4-dev gobject-introspection libgirepository1.0-dev \
+		# 		gtk-doc-tools python3 valac
+		# 	meson setup build ninja -C build
+		# 	sudo ninja -C build install
+		# 	sudo ldconfig
+		# fi
 
 		sudo snap install blueprint-compiler
 
-		zig build -p "$HOME/.local" -Doptimize=ReleaseFast
-		log "success" "ghostty installed in ~/.local/"
+		if zig build -p "$HOME/.local" -Doptimize=ReleaseFast -fno-sys=gtk4-layer-shell; then
+			log "success" "ghostty installed in ~/.local/"
+		else
+			log "error" "ghostty build failed"
+			return 1
+		fi
 		;;
 	esac
 }
