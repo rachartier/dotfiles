@@ -1,0 +1,24 @@
+# capsule config.toml
+# Place this file at ~/.config/capsule/config.toml (or $XDG_CONFIG_HOME/capsule/config.toml)
+
+[dotfiles]
+# Personal dotfiles mounted into every container.
+# Kept separate from project volumes so they travel with you across templates.
+# Format: "host_path:container_path[:options]"
+# The target path must match the container user's home. Microsoft devcontainer
+# images use "vscode" (/home/vscode); root-based images use /root.
+mounts = []
+
+[volumes]
+# Additional mounts applied to every run.
+# Format: "host_path:container_path[:options]"
+mounts = ["/tmp/.X11-unix:/tmp/.X11-unix"]
+
+[run]
+# Shell to launch after the container is ready.
+shell = "/bin/bash"
+
+[env]
+DISPLAY = ":0"
+WAYLAND_DISPLAY = "wayland-0"
+XDG_RUNTIME_DIR = "/mnt/wslg/runtime-dir"
