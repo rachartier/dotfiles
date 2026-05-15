@@ -17,6 +17,7 @@ mounts = ["/tmp/.X11-unix:/tmp/.X11-unix"]
 [run]
 # Shell to launch after the container is ready.
 shell = "/bin/bash"
+quiet = true
 
 [env]
 DISPLAY = ":0"
