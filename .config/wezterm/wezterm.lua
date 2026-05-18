@@ -67,8 +67,8 @@ end
 -- config.font = wezterm.font_with_fallback({ "IBM Plex Mono", "Symbols Nerd Font" })
 -- config.font = wezterm.font_with_fallback({ "Monaspace Neon", "Symbols Nerd Font" })
 -- config.font = wezterm.font_with_fallback({ "Symbols Nerd Font" })
-config.font = wezterm.font_with_fallback({ "MonoLisa", "Symbols Nerd Font" })
--- config.font = wezterm.font_with_fallback({ "Berkeley Mono", "Symbols Nerd Font" })
+-- config.font = wezterm.font_with_fallback({ "MonoLisa", "Symbols Nerd Font" })
+config.font = wezterm.font_with_fallback({ "Berkeley Mono", "Symbols Nerd Font" })
 -- config.font = wezterm.font_with_fallback({ "CommitMono", "Symbols Nerd Font" })
 -- config.font = wezterm.font_with_fallback({ "0xProto", "Symbols Nerd Font" })
 -- config.font = wezterm.font_with_fallback({ "Fantasque Sans Mono", "Symbols Nerd Font" })
@@ -86,7 +86,7 @@ config.freetype_load_flags = "NO_HINTING"
 config.freetype_load_target = "Normal"
 -- config.cell_width = 1
 config.line_height = 1.0
-config.font_size = 14
+config.font_size = 15
 config.font_rules = {
 	-- {
 	-- 	italic = true,

@@ -45,28 +45,43 @@ vim.schedule(function()
   require("tiny-glimmer").setup({
     overwrite = {
       auto_map = false,
-      search   = { enabled = true },
-      paste    = { enabled = true },
-      undo     = { enabled = true },
-      redo     = { enabled = true },
+      search = { enabled = true },
+      paste = { enabled = true },
+      undo = { enabled = true },
+      redo = { enabled = true },
     },
   })
 
-  vim.keymap.set("n", ",uG", function() require("tiny-glimmer").toggle() end,              { silent = true, desc = "glimmer toggle" })
-  vim.keymap.set("n", ",n2", function() require("tiny-glimmer").search_next() end,         { silent = true, desc = "glimmer search next" })
-  vim.keymap.set("n", ",N2", function() require("tiny-glimmer").search_prev() end,         { silent = true, desc = "glimmer search prev" })
-  vim.keymap.set("n", ",*2", function() require("tiny-glimmer").search_under_cursor() end, { silent = true, desc = "glimmer search under cursor" })
-  vim.keymap.set("n", ",p2", function() require("tiny-glimmer").paste() end,               { silent = true, desc = "glimmer paste" })
-  vim.keymap.set("n", ",u2", function() require("tiny-glimmer").undo() end,                { silent = true, desc = "glimmer undo" })
-  vim.keymap.set("n", "\\R2", function() require("tiny-glimmer").redo() end,               { silent = true, desc = "glimmer redo" })
+  vim.keymap.set("n", ",uG", function()
+    require("tiny-glimmer").toggle()
+  end, { silent = true, desc = "glimmer toggle" })
+  vim.keymap.set("n", ",n2", function()
+    require("tiny-glimmer").search_next()
+  end, { silent = true, desc = "glimmer search next" })
+  vim.keymap.set("n", ",N2", function()
+    require("tiny-glimmer").search_prev()
+  end, { silent = true, desc = "glimmer search prev" })
+  vim.keymap.set("n", ",*2", function()
+    require("tiny-glimmer").search_under_cursor()
+  end, { silent = true, desc = "glimmer search under cursor" })
+  vim.keymap.set("n", ",p2", function()
+    require("tiny-glimmer").paste()
+  end, { silent = true, desc = "glimmer paste" })
+  vim.keymap.set("n", ",u2", function()
+    require("tiny-glimmer").undo()
+  end, { silent = true, desc = "glimmer undo" })
+  vim.keymap.set("n", "\\R2", function()
+    require("tiny-glimmer").redo()
+  end, { silent = true, desc = "glimmer redo" })
 end)
 
 -- tiny-inline-diagnostic
 vim.schedule(function()
   vim.pack.add({ "https://github.com/rachartier/tiny-inline-diagnostic.nvim" }, { confirm = false })
 
+  vim.print(require("theme").get_colors().base)
   require("tiny-inline-diagnostic").setup({
-    transparent_bg = false,
+    transparency_color = require("theme").get_colors().base,
     hi = { mixing_color = require("theme").get_colors().base },
     options = {
       multilines = { enabled = true, always_show = false },

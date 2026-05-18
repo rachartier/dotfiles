@@ -1,7 +1,12 @@
 vim.g._start_time = vim.uv.hrtime()
 vim.loader.enable()
 
-require("vim._core.ui2").enable({})
+require("vim._core.ui2").enable({
+  enable = true,
+  msg = {
+    targets = "msg",
+  },
+})
 
 require("config")
 
@@ -40,3 +45,7 @@ require("custom.auto-nohlsearch")
 require("custom.detect-indent")
 require("custom.commit-diff-split")
 require("custom.todo-highlight")
+
+vim.defer_fn(function()
+  vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+end, 50)

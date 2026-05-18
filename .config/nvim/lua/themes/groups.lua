@@ -15,8 +15,8 @@ function M.get(colors)
     PmenuExtraSel = { bg = colors.surface, fg = colors.muted, bold = true },
     ComplHint = { fg = colors.subtext0 or colors.subtext },
     PreInsert = { fg = colors.subtle },
-    FloatBorder = { fg = colors.subtle, bg = default_bg },
-    FloatTitle = { bg = default_bg, fg = colors.text, italic = true, bold = true },
+    FloatBorder = { fg = colors.subtle, bg = colors.base },
+    FloatTitle = { bg = colors.base, fg = colors.text, italic = true, bold = true },
     Comment = { fg = colors.muted, italic = true },
 
     DiffAdd = { bg = U.darken(colors.green, 0.18, colors.base) },
