@@ -5,6 +5,7 @@ function M.get(colors)
   local U = require("utils")
 
   return {
+    Normal = { bg = default_bg },
     NormalFloat = { bg = default_bg },
     Pmenu = { bg = default_bg },
     PmenuSbar = { bg = colors.surface },

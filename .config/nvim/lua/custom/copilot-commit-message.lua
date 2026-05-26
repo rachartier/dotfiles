@@ -90,26 +90,26 @@ local function generate_message()
   spinner:start()
 
   local function callback(obj)
-    spinner:stop()
-
-    if obj.code ~= 0 then
-      vim.notify("Error generating commit message: " .. obj.stderr, vim.log.levels.ERROR)
-      return
-    end
-
-    local items = {}
-
-    for _, line in ipairs(vim.split(obj.stdout, "\n")) do
-      if line ~= "" then
-        items[#items + 1] = {
-          idx = #items,
-          score = #items,
-          text = line:gsub("^[0-9]+: ", ""),
-        }
-      end
-    end
-
     vim.schedule(function()
+      spinner:stop()
+
+      if obj.code ~= 0 then
+        vim.notify("Error generating commit message: " .. obj.stderr, vim.log.levels.ERROR)
+        return
+      end
+
+      local items = {}
+
+      for _, line in ipairs(vim.split(obj.stdout, "\n")) do
+        if line ~= "" then
+          items[#items + 1] = {
+            idx = #items,
+            score = #items,
+            text = line:gsub("^[0-9]+: ", ""),
+          }
+        end
+      end
+
       local function open_commit_picker(items)
         local parent_win = vim.api.nvim_get_current_win()
         local buf = vim.api.nvim_create_buf(false, true)
