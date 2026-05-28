@@ -79,7 +79,6 @@ end)
 vim.schedule(function()
   vim.pack.add({ "https://github.com/rachartier/tiny-inline-diagnostic.nvim" }, { confirm = false })
 
-  vim.print(require("theme").get_colors().base)
   require("tiny-inline-diagnostic").setup({
     transparency_color = require("theme").get_colors().base,
     hi = { mixing_color = require("theme").get_colors().base },
