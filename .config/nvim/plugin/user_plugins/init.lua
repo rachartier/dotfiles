@@ -1,5 +1,6 @@
 -- tiny-buffers-switcher
 vim.pack.add({ "https://github.com/rachartier/tiny-buffers-switcher.nvim" }, { confirm = false })
+-- vim.opt.rtp:prepend("/home/rachartier/dev/nvim_plugins/tiny_buffers_switcher.nvim")
 require("tiny-buffers-switcher").setup({
   picker = "buffer",
   window = { width = 0.3, height = 0.2 },
@@ -10,11 +11,11 @@ vim.keymap.set("n", "<Tab>", function()
   if ok and nes.have() then
     return require("sidekick").nes_jump_or_apply()
   end
-  require("tiny-buffers-switcher").switcher()
+  require("tiny-buffers-switcher").cycle_next()
 end, { silent = true })
 
 vim.keymap.set("n", "<S-Tab>", function()
-  require("tiny-buffers-switcher").switcher()
+  require("tiny-buffers-switcher").cycle_prev()
 end, { silent = true })
 
 -- tiny-code-action
@@ -95,4 +96,5 @@ end)
 vim.pack.add({ "https://github.com/rachartier/tiny-cmdline.nvim" }, { confirm = false })
 require("tiny-cmdline").setup({
   on_reposition = require("tiny-cmdline").adapters.blink,
+  native_types = {},
 })

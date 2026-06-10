@@ -28,21 +28,21 @@ function M.get_colors()
   }
 
   if colors.base:lower() == MACCHIATO_BASE then
-    colors.crust     = "#181926"
-    colors.lavender  = "#b7bdf8"
-    colors.sapphire  = "#7dc4e4"
-    colors.sky       = "#91d7e3"
-    colors.maroon    = "#ee99a0"
-    colors.pink      = "#f5bde6"
+    colors.crust = "#181926"
+    colors.lavender = "#b7bdf8"
+    colors.sapphire = "#7dc4e4"
+    colors.sky = "#91d7e3"
+    colors.maroon = "#ee99a0"
+    colors.pink = "#f5bde6"
     colors.rosewater = "#f4dbd6"
-    colors.surface0  = "#363a4f"
-    colors.surface1  = "#494d64"
-    colors.surface2  = "#5b6078"
-    colors.overlay0  = "#6e738d"
-    colors.overlay1  = "#8087a2"
-    colors.overlay2  = "#939ab7"
-    colors.subtext0  = "#a5adcb"
-    colors.subtext1  = "#b8c0e0"
+    colors.surface0 = "#363a4f"
+    colors.surface1 = "#494d64"
+    colors.surface2 = "#5b6078"
+    colors.overlay0 = "#6e738d"
+    colors.overlay1 = "#8087a2"
+    colors.overlay2 = "#939ab7"
+    colors.subtext0 = "#a5adcb"
+    colors.subtext1 = "#b8c0e0"
   end
 
   palette.validate(colors)
