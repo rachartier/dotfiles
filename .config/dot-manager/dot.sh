@@ -17,7 +17,7 @@ DOT_MANAGER_COMPLETE_PROGRAMS=(
 	"starship"
 	"zoxide"
 	"bat"
-	"chafa"
+	# "chafa"
 	"git_tools"
 	"copilot_cli"
 	"direnv"
@@ -36,7 +36,7 @@ DOT_MANAGER_MINIMAL_PROGRAMS=(
 	"zoxide"
 	"starship"
 	"copilot_cli"
-	"chafa"
+	# "chafa"
 	"git_tools"
 )
 
