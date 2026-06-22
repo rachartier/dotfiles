@@ -2,31 +2,12 @@
   "renderMarkdown": true,
   "screenReader": false,
   "theme": "auto",
-  "model": "claude-haiku-4.5",
   "enabledPlugins": {
     "context-engineering@awesome-copilot": true,
-    "awesome-copilot@awesome-copilot": true
+    "awesome-copilot@awesome-copilot": true,
+    "ponytail@ponytail": true
   },
-  "firstLaunchAt": "2026-03-11T00:00:00.000Z",
-  "installed_plugins": [
-    {
-      "name": "context-engineering",
-      "marketplace": "awesome-copilot",
-      "version": "1.0.0",
-      "installed_at": "2026-04-16T22:45:37.344Z",
-      "enabled": true,
-      "cache_path": "/home/rachartier/.copilot/installed-plugins/awesome-copilot/context-engineering"
-    },
-    {
-      "name": "awesome-copilot",
-      "marketplace": "awesome-copilot",
-      "version": "1.1.0",
-      "installed_at": "2026-04-16T22:49:50.739Z",
-      "enabled": true,
-      "cache_path": "/home/rachartier/.copilot/installed-plugins/awesome-copilot/awesome-copilot"
-    }
-  ],
-  "showReasoning": true,
+  "showReasoning": false,
   "footer": {
     "showModelEffort": true,
     "showDirectory": true,
@@ -35,5 +16,15 @@
     "showQuota": true,
     "showAgent": true,
     "showCodeChanges": true
+  },
+  "effortLevel": "high",
+  "colorMode": "default",
+  "extraKnownMarketplaces": {
+    "ponytail": {
+      "source": {
+        "source": "github",
+        "repo": "DietrichGebert/ponytail"
+      }
+    }
   }
 }

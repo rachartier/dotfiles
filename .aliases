@@ -56,11 +56,11 @@ function __get_clipboard_contents() {
 
 function __copilot_cli_action() {
     if [ -z "$1" ]; then
-        copilot-cli --copy-to-clipboard --action "$2" --prompt "$3: $(__get_clipboard_contents)"
+        copilot-cli --mode ollama --model qwen3.5:4b --copy-to-clipboard --action "$2" --prompt "$3: $(__get_clipboard_contents)"
         return
     fi
 
-    copilot-cli --copy-to-clipboard --action "$2" --prompt "$3: $1"
+    copilot-cli --mode ollama --model qwen3.5:4b --copy-to-clipboard --action "$2" --prompt "$3: $1"
 }
 
 function enhance() {
