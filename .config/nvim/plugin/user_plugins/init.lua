@@ -11,11 +11,11 @@ vim.keymap.set("n", "<Tab>", function()
   if ok and nes.have() then
     return require("sidekick").nes_jump_or_apply()
   end
-  require("tiny-buffers-switcher").cycle_next()
+  require("tiny-buffers-switcher").switcher()
 end, { silent = true })
 
 vim.keymap.set("n", "<S-Tab>", function()
-  require("tiny-buffers-switcher").cycle_prev()
+  require("tiny-buffers-switcher").switcher()
 end, { silent = true })
 
 -- tiny-code-action
@@ -44,6 +44,7 @@ vim.schedule(function()
   vim.pack.add({ "https://github.com/rachartier/tiny-glimmer.nvim" }, { confirm = false })
 
   require("tiny-glimmer").setup({
+    transparency_color = require("theme").get_colors().base,
     overwrite = {
       auto_map = false,
       search = { enabled = true },
