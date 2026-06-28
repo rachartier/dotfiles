@@ -18,7 +18,7 @@
     "showCodeChanges": true
   },
   "effortLevel": "high",
-  "colorMode": "default",
+  "colorMode": "github",
   "extraKnownMarketplaces": {
     "ponytail": {
       "source": {

@@ -72,7 +72,7 @@ setopt long_list_jobs         # display PID when suspending processes
 setopt notify                 # report background job status immediately
 
 unsetopt correct correct_all
-setopt rm_star_wait           # 10-second pause before executing rm *
+# setopt rm_star_wait           # 10-second pause before executing rm *
 
 unsetopt BEEP                 # disable beep on error
 unsetopt flow_control         # disable start/stop characters in shell editor
