@@ -136,8 +136,8 @@ M._queries = {} ---@type table<string,boolean>
 function M.get_installed(update)
   if update then
     M._installed, M._queries = {}, {}
-    for _, lang in ipairs(require("nvim-treesitter").get_installed("parsers")) do
-      M._installed[lang] = true
+    for _, path in ipairs(vim.api.nvim_get_runtime_file("parser/*", true)) do
+      M._installed[vim.fn.fnamemodify(path, ":t:r")] = true
     end
   end
   return M._installed or {}

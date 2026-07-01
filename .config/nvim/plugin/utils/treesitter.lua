@@ -1,102 +1,49 @@
 vim.pack.add({
-  "https://github.com/nvim-treesitter/nvim-treesitter",
+  "https://github.com/romus204/tree-sitter-manager.nvim",
   "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
 }, { confirm = false })
 
+local lang_config = require("config.languages")
 local utils = require("utils")
 
-local function start_treesitter(bufnr)
-  bufnr = bufnr or vim.api.nvim_get_current_buf()
-  local ok, _ = pcall(vim.treesitter.start, bufnr)
-
-  if not ok then
-    return
-  end
-
-  if utils.have("folds", "folds") then
-    vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-  end
-
-  local filetype = vim.api.nvim_get_option_value("filetype", { buf = bufnr })
-  local disabled_indent = { "yaml", "bash", "python" }
-
-  if utils.have("indent", "indents") and not vim.tbl_contains(disabled_indent, filetype) then
-    vim.bo[bufnr].indentexpr = "v:lua.require'utils'.indentexpr()"
-  end
-end
-
-local function setup_treesitter_autocmd()
-  local parsers = require("nvim-treesitter").get_available()
-
-  if not parsers or #parsers == 0 then
-    return
-  end
-
-  local ft_to_attach = {}
-  for _, parser in ipairs(parsers) do
-    local filetypes = vim.treesitter.language.get_filetypes(parser)
-
-    if filetypes and #filetypes > 0 then
-      for _, ft in ipairs(filetypes) do
-        if not vim.tbl_contains(ft_to_attach, ft) then
-          table.insert(ft_to_attach, ft)
-        end
-      end
-    end
-  end
-
-  vim.api.nvim_create_autocmd("FileType", {
-    pattern = ft_to_attach,
-    callback = function(event)
-      local bufnr = event.buf
-      local filetype = vim.api.nvim_get_option_value("filetype", { buf = bufnr })
-
-      local parser_name = vim.treesitter.language.get_lang(filetype)
-      if not parser_name then
-        return
-      end
-
-      if not utils.have(filetype) then
-        require("nvim-treesitter").install({ parser_name }):await(function()
-          start_treesitter(bufnr)
-        end)
-        return
-      end
-
-      start_treesitter(bufnr)
-    end,
-    desc = "start treesitter for filetype",
-  })
-end
-
-setup_treesitter_autocmd()
-
-local lang_config = require("config.languages")
 local ensure_installed = { "regex", "bash" }
-
 for _, lang in ipairs(lang_config) do
   local filetypes = lang.treesitter or lang.filetypes or {}
   for _, filetype in ipairs(filetypes) do
-    if not vim.tbl_contains(ensure_installed, filetype) then
-      if filetype ~= "*" and filetype ~= "text" then
-        table.insert(ensure_installed, filetype)
-      end
+    if
+      filetype ~= "*"
+      and filetype ~= "text"
+      and not vim.tbl_contains(ensure_installed, filetype)
+    then
+      table.insert(ensure_installed, filetype)
     end
   end
 end
 
-local already_installed = require("nvim-treesitter").get_installed()
-local parsers_to_install = {}
+require("tree-sitter-manager").setup({
+  ensure_installed = ensure_installed,
+  auto_install = true,
+})
 
-for _, parser in ipairs(ensure_installed) do
-  if not vim.tbl_contains(already_installed, parser) then
-    table.insert(parsers_to_install, parser)
-  end
-end
+local disabled_indent = { "yaml", "bash", "python" }
+vim.api.nvim_create_autocmd("FileType", {
+  callback = function(event)
+    local bufnr = event.buf
+    if not utils.have(bufnr) then
+      return
+    end
 
-if #parsers_to_install > 0 then
-  require("nvim-treesitter").install(parsers_to_install)
-end
+    if utils.have(bufnr, "folds") then
+      vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+    end
+
+    local filetype = vim.bo[bufnr].filetype
+    if utils.have(bufnr, "indents") and not vim.tbl_contains(disabled_indent, filetype) then
+      vim.bo[bufnr].indentexpr = "v:lua.require'utils'.indentexpr()"
+    end
+  end,
+  desc = "treesitter folds/indent",
+})
 
 require("nvim-treesitter-textobjects").setup({
   select = {
