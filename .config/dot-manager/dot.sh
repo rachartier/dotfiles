@@ -68,17 +68,22 @@ __install_program() {
 			return 1
 		fi
 	else
-		log "error" "'$program_name' unknown."
+		log "error" "'$program_name' unknown. Run 'dot list' to see available programs."
 		return 1
 	fi
 }
 
 __install_program_list() {
-	local program_list=("$@")
+	local failed=()
 
-	for program in "${program_list[@]}"; do
-		__install_program "$program" || return 1
+	for program in "$@"; do
+		__install_program "$program" || failed+=("$program")
 	done
+
+	if [ ${#failed[@]} -gt 0 ]; then
+		log "error" "Failed: ${failed[*]} (rerun with: dot reinstall <name>)"
+		return 1
+	fi
 }
 
 install_packages() {
@@ -100,7 +105,7 @@ install_packages() {
 
 	print_step "Installing system packages"
 	local base_packages=(
-		pkg-config build-essential wget libfuse2 jq
+		pkg-config build-essential wget libfuse2
 		python3-venv python3-pip npm unzip
 		ripgrep xsel libfreetype6-dev libglib2.0-dev
 	)
@@ -184,9 +189,29 @@ update_all() {
 
 show_programs_list() {
 	echo "Available programs:"
-	for program in "${DOT_MANAGER_COMPLETE_PROGRAMS[@]}"; do
-		echo "  - $program"
+	for script in "$DOT_MANAGER_DIR"/install/programs/ubuntu/*.sh; do
+		echo "  - $(basename "$script" .sh)"
 	done
+}
+
+show_help() {
+	cat <<EOF
+Usage: dot <command> [args]
+
+Commands:
+  list                     List installable programs
+  init                     Install the complete configuration
+  minimal                  Install the minimal configuration
+  docker                   Install the docker configuration
+  update                   Update nvim, tmux and antidote plugins
+  reinstall <name|all>     Reinstall a program (or everything)
+  terminal install <name>  Install a terminal (wezterm, kitty, ghostty)
+  fonts update             Install Nerd Fonts
+  tool <name>              Run a tool script (e.g. dotnet)
+  help                     Show this help
+
+Any other command is passed to git on the dotfiles repository.
+EOF
 }
 
 do_tool() {
@@ -204,6 +229,7 @@ do_tool() {
 
 do_command() {
 	case "$1" in
+	"help" | "-h" | "--help") show_help ;;
 	"list") show_programs_list ;;
 	"init") install_complete ;;
 	"update") update_all ;;

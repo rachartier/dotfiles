@@ -67,7 +67,8 @@ log() {
 }
 
 __get_latest_release() {
-	curl -s "https://api.github.com/repos/$1/releases/latest" | jq -r .tag_name
+	# ponytail: redirect follow instead of api.github.com, avoids the 60 req/hr unauthenticated limit
+	basename "$(curl -sI -o /dev/null -w '%{redirect_url}' "https://github.com/$1/releases/latest")"
 }
 
 __is_pkg_installed() {
