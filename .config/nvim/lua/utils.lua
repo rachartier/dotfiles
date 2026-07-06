@@ -42,15 +42,15 @@ end
 M._installed = nil ---@type table<string,boolean>?
 M._queries = {} ---@type table<string,boolean>
 
----@param update boolean?
-function M.get_installed(update)
-  if update then
-    M._installed, M._queries = {}, {}
+function M.get_installed()
+  -- ponytail: cached at first use, stale for parsers auto-installed this session
+  if M._installed == nil then
+    M._installed = {}
     for _, path in ipairs(vim.api.nvim_get_runtime_file("parser/*", true)) do
       M._installed[vim.fn.fnamemodify(path, ":t:r")] = true
     end
   end
-  return M._installed or {}
+  return M._installed
 end
 
 ---@param what string|number|nil

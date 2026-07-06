@@ -90,14 +90,6 @@ vim.api.nvim_create_autocmd({ "BufReadPost" }, {
   desc = "restore cursor position",
 })
 
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "qf",
-  callback = function()
-    vim.opt_local.buflisted = false
-  end,
-  desc = "do not list quickfix buffers",
-})
-
 vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold", "CursorHoldI" }, {
   callback = function()
     vim.cmd("checktime")

@@ -2,21 +2,9 @@ local M = {}
 
 M.disabled_filetypes = {
   "help",
-  "alpha",
-  "dashboard",
   "ministarter",
-  "neo-tree",
-  "Trouble",
-  "trouble",
-  "lazy",
   "mason",
-  "notify",
-  "toggleterm",
   "dapui_stacks",
-  "lazyterm",
-  "fzf",
-  "spectre_panel",
-
 }
 
 function M.setup()

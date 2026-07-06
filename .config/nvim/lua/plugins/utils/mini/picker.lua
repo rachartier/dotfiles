@@ -104,9 +104,6 @@ function M.setup()
   map("n", "<leader>sB", function()
     MiniExtra.pickers.buf_lines({ scope = "current" })
   end, "current buffer lines")
-  map("n", "<leader>sg", function()
-    MiniExtra.pickers.buf_lines({ scope = "current" })
-  end, "live grep current buffer")
 
   -- LSP
   map("n", "<leader>fr", function()

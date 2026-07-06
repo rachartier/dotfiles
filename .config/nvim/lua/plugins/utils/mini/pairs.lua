@@ -1,11 +1,8 @@
 local M = {}
 
 M.disabled_filetypes = {
-  "TelescopePrompt",
-  "spectre_panel",
   "copilot-chat",
   "ministarter",
-  "fzf",
 }
 
 function M.setup()

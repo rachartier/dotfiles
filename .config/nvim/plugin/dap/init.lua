@@ -136,15 +136,6 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- nvim-jdtls
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "java",
-  once = true,
-  callback = function()
-    vim.pack.add({ "https://github.com/mfussenegger/nvim-jdtls" }, { confirm = false })
-  end,
-})
-
 -- nvim-dap-docker
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "dockerfile",

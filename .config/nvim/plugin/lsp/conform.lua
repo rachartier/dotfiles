@@ -59,16 +59,7 @@ vim.schedule(function()
   require("conform").setup({
     formatters_by_ft = formatters_by_ft,
     format_on_save = function(bufnr)
-      local errors =
-        vim.diagnostic.get(bufnr, { severity = { min = vim.diagnostic.severity.ERROR } })
-      local clients = vim.lsp.get_clients({ bufnr = bufnr })
       local ft = vim.bo[bufnr].filetype
-
-      for _, client in pairs(clients) do
-        if client.name == "omnisharp" and #errors > 0 then
-          return
-        end
-      end
 
       local lsp_fallback = true
       if languages[ft] and languages[ft].lsp_fallback then

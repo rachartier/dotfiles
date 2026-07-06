@@ -1,13 +1,11 @@
 vim.pack.add({
   "https://github.com/nvim-lualine/lualine.nvim",
-  "https://github.com/folke/sidekick.nvim",
 }, { confirm = false })
 
 if vim.env.TMUX_NEOGIT_POPUP then
   return
 end
 
-vim.g.lualine_laststatus = vim.o.laststatus
 if vim.fn.argc(-1) > 0 then
   vim.o.statusline = " "
 else

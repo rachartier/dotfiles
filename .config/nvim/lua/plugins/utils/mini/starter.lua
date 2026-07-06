@@ -73,7 +73,6 @@ function M.setup()
     autoopen = true,
     items = {
       { name = "New File",         action = "ene | startinsert",                                    section = "", keys = "n" },
-      { name = "Plugins",          action = "lua require('custom.plugin_dashboard').open()",        section = "", keys = "p" },
       { name = "Update Plugins",   action = "lua vim.pack.update()",                                section = "", keys = "u" },
       { name = "Quit",             action = "qa",                                                   section = "", keys = "q" },
     },

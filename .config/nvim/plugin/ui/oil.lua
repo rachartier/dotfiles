@@ -14,13 +14,11 @@ local function load()
     watch_for_changes = true,
     columns = { "icon" },
     float = {
-      get_win_title = nil,
       preview_split = "right",
       border = require("config.ui.border").default_border,
       max_width = math.floor(vim.o.columns * vim.g.float_width) - 1,
       max_height = math.floor(vim.o.lines * vim.g.float_height) - 1,
     },
-    confirmation = { border = vim.g.float_border },
     keymaps = { ["<BS>"] = { "actions.parent", mode = "n" } },
   })
 end

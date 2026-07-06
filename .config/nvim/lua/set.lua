@@ -18,10 +18,6 @@ vim.defer_fn(function()
   }
 end, 50)
 
-local conf = require("config")
-opt.pumblend = conf.pumblend
-opt.winblend = conf.winblend
-
 opt.autowrite = true
 opt.background = "dark"
 opt.whichwrap:append("<>[]hl")
