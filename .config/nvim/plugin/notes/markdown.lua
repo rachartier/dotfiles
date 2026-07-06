@@ -4,7 +4,7 @@ vim.pack.add({
 }, { confirm = false })
 
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "markdown", "quarto", "rmd", "Avante", "codecompanion" },
+  pattern = { "markdown" },
   once = true,
   callback = function()
     require("markdown-plus").setup({})
@@ -13,12 +13,14 @@ vim.api.nvim_create_autocmd("FileType", {
       experimental = { check_rtp = false },
       max_length = 99999,
       preview = {
-        filetypes = { "markdown", "quarto", "rmd", "Avante", "codecompanion" },
+        filetypes = { "markdown" },
         ignore_buftypes = { "nofile" },
       },
       yaml = { enable = false },
       markdown = {
-        headings = require("markview.presets").headings.decorated,
+        -- presets.headings.decorated no longer exists in markview; shift_width
+        -- is what the old second setup() call effectively applied
+        headings = { shift_width = 1 },
         horizontal_rules = require("markview.presets").horizontal_rules.thin,
         tables = require("markview.presets").tables.rounded,
         code_blocks = {
@@ -124,9 +126,7 @@ vim.api.nvim_create_autocmd("FileType", {
       },
     })
 
-    require("markview").setup({ markdown = { headings = { shift_width = 1 } } })
-
-    local colors = require("theme").get_colors()
+    local colors = require("themes").get_colors()
     vim.api.nvim_set_hl(0, "MarkviewCode", { bg = colors.surface })
     vim.api.nvim_set_hl(0, "MarkviewInlineCode", { bg = colors.surface })
   end,

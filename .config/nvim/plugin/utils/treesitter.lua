@@ -39,7 +39,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
     local filetype = vim.bo[bufnr].filetype
     if utils.have(bufnr, "indents") and not vim.tbl_contains(disabled_indent, filetype) then
-      vim.bo[bufnr].indentexpr = "v:lua.require'utils'.indentexpr()"
+      vim.bo[bufnr].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
     end
   end,
   desc = "treesitter folds/indent",

@@ -8,17 +8,12 @@ else
   M.winblend = 0
 end
 
-M.gif_alpha_enabled = false
-M.tty_clock_alpha_enabled = true
-
 vim.g.dotfile_config_type = "normal"
 vim.g.path_dotfiles = vim.env.HOME .. "/.config"
 vim.g.path_dev = vim.env.HOME .. "/dev"
-vim.g.dev_ws = "/workspaces"
 
 vim.g.float_width = 0.65
 vim.g.float_height = 0.85
-vim.g.float_winblend = 40
 
 if os.getenv("DOTFILES_MINIMAL") then
   vim.g.dotfile_config_type = "minimal"

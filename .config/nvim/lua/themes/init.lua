@@ -45,43 +45,7 @@ function M.switch_theme(name)
   end
   M.current = name
   cache = {}
-  package.loaded["themes.apply"] = nil
-  require("themes.apply")
-end
-
-function M.reload_system_theme()
-  local home = vim.env.HOME or os.getenv("HOME")
-  if not home then
-    return
-  end
-
-  local current_file = home .. "/.config/custom-themes/.current"
-  local f = io.open(current_file, "r")
-  if not f then
-    return
-  end
-  local name = f:read("*l")
-  f:close()
-  if not name or name == "" then
-    return
-  end
-
-  local theme_file = home .. "/.config/custom-themes/" .. name .. ".sh"
-  f = io.open(theme_file, "r")
-  if not f then
-    return
-  end
-  local content = f:read("*a")
-  f:close()
-
-  for key, value in content:gmatch('export%s+COLOR_(%w+)="(#%x+)"') do
-    vim.env["COLOR_" .. key] = value
-  end
-
-  cache = {}
-  M.current = "system"
-  package.loaded["themes.apply"] = nil
-  require("themes.apply")
+  require("plugins.utils.mini.base16").setup()
 end
 
 function M.available()

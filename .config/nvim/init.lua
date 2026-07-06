@@ -25,7 +25,7 @@ vim.defer_fn(function()
 
   require("custom.copilot-commit-message")
 
-  vim.api.nvim_set_hl(0, "Visual", { bg = require("theme").get_colors().surface, bold = false })
+  vim.api.nvim_set_hl(0, "Visual", { bg = require("themes").get_colors().surface, bold = false })
 
   vim.cmd("packadd nvim.undotree")
   vim.keymap.set("n", "<leader>u", "<cmd>Undotree<cr>", { desc = "open undotree" })
@@ -44,6 +44,7 @@ require("autocmds")
 require("custom.auto-nohlsearch")
 require("custom.detect-indent")
 require("custom.commit-diff-split")
+require("custom.pack-clean")
 require("custom.todo-highlight")
 
 vim.defer_fn(function()

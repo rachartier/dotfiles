@@ -5,7 +5,7 @@
 
 local M = {}
 
-local colors = require("theme").get_colors()
+local colors = require("themes").get_colors()
 
 local utils = require("utils")
 
@@ -35,7 +35,6 @@ function M.render()
       DOTFILES = vim.g.path_dotfiles,
       HOME = vim.env.HOME,
       WORK = vim.g.path_dev,
-      DEV_WS = vim.g.path_dev_ws,
     }
 
     for dir_name, dir_path in pairs(special_dirs) do
@@ -63,36 +62,14 @@ function M.render()
             local ok, mini_icons = pcall(require, "mini.icons")
             local is_not_saved = vim.api.nvim_get_option_value("modified", { buf = 0 })
 
-            -- local git_status = vim.b.gitsigns_status_dict
-            --
-            -- local line_added = git_status and git_status.added or 0
-            -- local line_removed = git_status and git_status.removed or 0
-            -- local line_changed = git_status and git_status.changed or 0
-
             if ok then
               local icon = mini_icons.get("filetype", filetype)
-              local file_status =
-                string.format("%%#WinbarFile#%s %s %s", icon, segment, is_not_saved and "" or "")
-
-              -- if line_added > 0 or line_removed > 0 or line_changed > 0 then
-              -- 	file_status = string.format(
-              -- 		"%%#WinbarFile#%s %s %s %s",
-              -- 		icon,
-              -- 		segment,
-              -- 		is_not_saved and " " or "",
-              -- 		string.format(
-              -- 			"%%#GitSignsAdd#%s%d %%#GitSignsDelete#%s%d %%#GitSignsChange#%s%d",
-              -- 			signs.git.added,
-              -- 			line_added,
-              -- 			signs.git.removed,
-              -- 			line_removed,
-              -- 			signs.git.modified,
-              -- 			line_changed
-              -- 		)
-              -- 	)
-              -- end
-
-              return file_status
+              return string.format(
+                "%%#WinbarFile#%s %s %s",
+                icon,
+                segment,
+                is_not_saved and "●" or ""
+              )
             else
               return string.format("%%#Winbar#%s", segment)
             end

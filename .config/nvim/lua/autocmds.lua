@@ -1,13 +1,9 @@
 vim.api.nvim_create_autocmd({ "VimResized" }, {
   pattern = "*",
   callback = function()
-    local ft = vim.bo.filetype
-
-    if not string.find(ft, "Avante") then
-      local current_tab = vim.fn.tabpagenr()
-      vim.cmd("tabdo wincmd =")
-      vim.cmd("tabnext " .. current_tab)
-    end
+    local current_tab = vim.fn.tabpagenr()
+    vim.cmd("tabdo wincmd =")
+    vim.cmd("tabnext " .. current_tab)
   end,
   desc = "resize splits if window got resized",
 })
@@ -24,22 +20,17 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 
 vim.api.nvim_create_autocmd("FileType", {
   pattern = {
-    "PlenaryTestPopup",
     "help",
     "lspinfo",
     "man",
     "notify",
     "qf",
     "query",
-    "spectre_panel",
     "startuptime",
-    "tsplayground",
     "neotest-output",
     "checkhealth",
     "neotest-summary",
     "neotest-output-panel",
-    "Avante",
-    "AvanteInput",
     "oil",
     "copilot-panel",
     "nvim-undotree",

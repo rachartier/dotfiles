@@ -263,12 +263,6 @@ function M.get(colors)
     CursorLineSign = { link = "SignColumn" },
     CursorColumn = { bg = default_bg },
 
-    FlashBackdrop = { fg = colors.subtle },
-    FlashLabel = { fg = colors.green, bg = default_bg, bold = true },
-    FlashMatch = { fg = colors.highlight, bg = default_bg },
-    FlashCurrent = { fg = colors.peach, bg = default_bg },
-    FlashPrompt = { link = "NormalFloat" },
-
     GitSignsAdd = { fg = colors.green },
     GitSignsChange = { fg = colors.yellow },
 
@@ -365,28 +359,9 @@ function M.get(colors)
     NeogitTagDistance = { fg = colors.blue },
     NeogitWinSeparator = { link = "WinSeparator" },
 
-    NoiceCmdline = { fg = colors.text },
-    NoiceCmdlineIcon = { fg = colors.sky or colors.teal },
-    NoiceCmdlineIconSearch = { fg = colors.yellow },
-    NoiceCmdlinePopupBorder = { fg = colors.highlight },
-    NoiceCmdlinePopupBorderSearch = { fg = colors.yellow },
-    NoiceConfirmBorder = { fg = colors.blue },
-    NoiceMini = { fg = colors.subtext, blend = 0 },
-    NoiceFormatProgressDone = { bg = default_bg, fg = colors.subtext },
-    NoiceFormatProgressTodo = { bg = default_bg, fg = colors.subtext },
-    NoicePopupmenu = { bg = default_bg },
-    NoicePopup = { bg = default_bg, fg = colors.text },
-
     PopupBorder = { link = "FloatBorder" },
 
     SwitchBufferStatusColor = { fg = colors.red },
-
-    SnacksDashboardHeader = { fg = colors.mauve },
-    SnacksDashboardIcon = { fg = colors.mauve },
-    SnacksDashboardDesc = { fg = colors.text },
-    SnacksDashboardKey = { fg = colors.peach },
-    SnacksDashboardFooter = { fg = colors.red },
-    SnacksIndentScope = { fg = colors.muted },
 
     MiniIndentscopeSymbol = { fg = colors.muted },
     MiniStarterItemPrefix = { fg = colors.mauve },
@@ -429,7 +404,6 @@ function M.get(colors)
 
     WinSeparator = { fg = colors.muted },
     WinBar = { fg = colors.muted, bg = default_bg },
-    AvanteSidebarWinSeparator = { fg = colors.surface, bg = default_bg },
 
     DapBreakpoint = { fg = colors.red },
     DapBreakpointCondition = { fg = colors.yellow },
