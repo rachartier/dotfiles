@@ -10,31 +10,10 @@ install_ubuntu_essentials() {
         git \
         wget \
         zsh \
-        autotools-dev \
         coreutils \
         curl \
-		jq
-
-    sudo apt install -y -qq -o=Dpkg::Use-Pty=0 \
-        automake \
-        autoconf \
-        build-essential \
-        cmake
-}
-
-install_arch_essentials() {
-    sudo pacman -S --noconfirm --needed \
-        git \
-        wget \
-        zsh \
-        base-devel \
-        curl \
-        jq
-
-    sudo pacman -S --noconfirm --needed \
-        automake \
-        autoconf \
-        cmake
+        jq \
+        build-essential
 }
 
 install_dotfiles() {
@@ -65,16 +44,7 @@ prepare_dotfiles() {
     ln -sf "$HOME/.config/dot-manager/dot.sh" "$HOME/.local/bin/dot"
 }
 
-if [ -f /etc/arch-release ]; then
-    __echo_info "Detected Arch Linux"
-    install_arch_essentials
-elif [ -f /etc/lsb-release ]; then
-    __echo_info "Detected Ubuntu"
-    install_ubuntu_essentials
-else
-    __echo_info "Unknown distribution, please install essentials manually."
-    exit 1
-fi
+install_ubuntu_essentials
 
 install_dotfiles
 prepare_dotfiles

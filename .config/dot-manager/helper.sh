@@ -27,7 +27,6 @@ declare -A COLORS=(
 
 ICON_SUCCESS="✓"
 ICON_ERROR="✗"
-ICON_WARNING="⚠"
 ICON_DOWNLOAD="↓"
 ICON_GEAR="⚙ "
 
@@ -47,10 +46,6 @@ log() {
 	"success")
 		icon="${ICON_SUCCESS}"
 		color="${COLORS[green]}"
-		;;
-	"warning")
-		icon="${ICON_WARNING}"
-		color="${COLORS[yellow]}"
 		;;
 	"error")
 		icon="${ICON_ERROR}"

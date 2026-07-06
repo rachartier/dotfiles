@@ -5,7 +5,7 @@ source "$DOT_MANAGER_DIR/helper.sh"
 install_chafa() {
 	print_step "Installing chafa"
 
-	__install_package libfreetype6-dev
+	__install_package libfreetype6-dev libglib2.0-dev autotools-dev automake autoconf
 
 	cd /tmp || exit 1
 	[ -d "chafa" ] && rm -rf chafa

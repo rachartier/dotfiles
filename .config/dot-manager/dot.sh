@@ -119,7 +119,7 @@ install_packages() {
 	local base_packages=(
 		pkg-config build-essential wget libfuse2
 		python3-venv python3-pip npm unzip
-		ripgrep xsel libfreetype6-dev libglib2.0-dev
+		ripgrep xsel
 	)
 
 	if [ -z "$DOTFILES_MINIMAL" ]; then
@@ -175,7 +175,8 @@ do_reinstall() {
 	if [ -z "$tool_name" ] && command -v fzf >/dev/null; then
 		tool_name=$(basename -s .sh "$DOT_MANAGER_DIR"/install/programs/ubuntu/*.sh | fzf --prompt='reinstall> ')
 		[ -z "$tool_name" ] && return 0
-		set -- "$tool_name"
+		__install_program "$tool_name"
+		return
 	fi
 
 	if [ -z "$tool_name" ]; then

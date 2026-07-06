@@ -3,7 +3,6 @@ FROM ubuntu:24.04
 ARG USER_NAME
 ARG USER_ID=1000
 ARG GROUP_ID=1000
-ARG DEBIAN_FRONTEND=noninteractive
 
 ENV DEBIAN_FRONTEND=noninteractive \
     GIT_CLONE_METHOD=https \
@@ -29,8 +28,6 @@ RUN apt-get update && \
     && \
     # Generate locales
     locale-gen en_US.UTF-8 && \
-    # Remove existing neovim if present
-    apt-get remove -y neovim || true && \
     # Create user and group with handling for existing GID/UID
     if getent group ${GROUP_ID} > /dev/null 2>&1; then \
     existing_group=$(getent group ${GROUP_ID} | cut -d: -f1) && \
