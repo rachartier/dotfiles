@@ -15,11 +15,8 @@ install_terminal() {
 		print_step "Installing kitty"
 		curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
 
-		[ -L "$HOME/.local/bin/kitty" ] && rm "$HOME/.local/bin/kitty"
-		[ -L "$HOME/.local/bin/kitten" ] && rm "$HOME/.local/bin/kitten"
-
-		ln -s ~/.local/kitty.app/bin/kitty ~/.local/bin/kitty
-		ln -s ~/.local/kitty.app/bin/kitten ~/.local/bin/kitten
+		ln -sf ~/.local/kitty.app/bin/kitty ~/.local/bin/kitty
+		ln -sf ~/.local/kitty.app/bin/kitten ~/.local/bin/kitten
 		log "success" "kitty installed in ~/.local/kitty.app/"
 		;;
 	*)
@@ -43,15 +40,6 @@ install_terminal() {
 			sudo ln -sf "/opt/zig-${ZIG_VERSION}/zig" /usr/local/bin/zig
 		fi
 
-		# if ! ldconfig -p | grep -q gtk4-layer-shell; then
-		# 	__install_package meson ninja-build libwayland-dev wayland-protocols \
-		# 		libgtk-4-dev gobject-introspection libgirepository1.0-dev \
-		# 		gtk-doc-tools python3 valac
-		# 	meson setup build ninja -C build
-		# 	sudo ninja -C build install
-		# 	sudo ldconfig
-		# fi
-
 		sudo snap install blueprint-compiler
 
 		if zig build -p "$HOME/.local" -Doptimize=ReleaseFast -fno-sys=gtk4-layer-shell; then
@@ -64,20 +52,9 @@ install_terminal() {
 	esac
 }
 
-do_command() {
-	local command="$1"
-	shift
-	local args=("$@")
-
-	case "$command" in
-	"install")
-		install_terminal "${args[@]}"
-		;;
-	*)
-		log "error" "Unknown command: $command"
-		return 1
-		;;
-	esac
-}
-
-do_command "$@"
+if [ "$1" = "install" ]; then
+	install_terminal "$2"
+else
+	log "error" "Unknown command: $1"
+	return 1
+fi

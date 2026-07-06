@@ -1,4 +1,4 @@
-FROM ubuntu:24.04 AS builder
+FROM ubuntu:24.04
 
 ARG USER_NAME
 ARG USER_ID=1000
@@ -13,8 +13,6 @@ ENV DEBIAN_FRONTEND=noninteractive \
     APPIMAGE_EXTRACT_AND_RUN=1 \
     TERM=xterm-256color \
     PATH="/home/${USER_NAME}/.local/bin:${PATH}" \
-    # Security settings
-    DOCKER_CONTENT_TRUST=1 \
     # Disable history files
     HISTFILE=/dev/null
 
@@ -70,8 +68,5 @@ RUN sudo apt-get update && \
 
 ENV TERM=wezterm
 SHELL ["/bin/zsh", "-c"]
-
-HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-    CMD zsh -c 'ps aux | grep zsh | grep -v grep || exit 1'
 
 CMD ["/bin/zsh"]

@@ -12,10 +12,9 @@ install_bat() {
 
 	if ! [ -d "$(bat --config-dir)" ]; then
 		mkdir -p "$(bat --config-dir)/themes"
-		wget -nvq -P "$(bat --config-dir)/themes" https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Latte.tmTheme
-		wget -nvq -P "$(bat --config-dir)/themes" https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Frappe.tmTheme
-		wget -nvq -P "$(bat --config-dir)/themes" https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Macchiato.tmTheme
-		wget -nvq -P "$(bat --config-dir)/themes" https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Mocha.tmTheme
+		for theme in Latte Frappe Macchiato Mocha; do
+			wget -nvq -P "$(bat --config-dir)/themes" "https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20$theme.tmTheme"
+		done
 		bat cache --build
 		log "success" "bat themes installed"
 	fi

@@ -3,10 +3,7 @@
 source "$DOT_MANAGER_DIR/helper.sh"
 
 use_tool_dotnet() {
-    if [ ! -f "$HOME/.dotnet" ]; then
-        log "info" "Creating $HOME/.dotnet directory."
-        mkdir -p "$HOME/.dotnet"
-    fi
+    mkdir -p "$HOME/.dotnet"
 
     local script_path="$DOT_MANAGER_CACHE_DIR/dotnet-install.sh"
     if [ ! -f "$script_path" ]; then

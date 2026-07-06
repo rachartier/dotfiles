@@ -1,7 +1,5 @@
 #!/bin/bash
 
-DOT_MANAGER_VERSION="2"
-
 ###
 ### Programs to install by default
 ###
@@ -17,7 +15,6 @@ DOT_MANAGER_COMPLETE_PROGRAMS=(
 	"starship"
 	"zoxide"
 	"bat"
-	# "chafa"
 	"git_tools"
 	"copilot_cli"
 	"direnv"
@@ -36,7 +33,6 @@ DOT_MANAGER_MINIMAL_PROGRAMS=(
 	"zoxide"
 	"starship"
 	"copilot_cli"
-	# "chafa"
 	"git_tools"
 )
 
@@ -59,9 +55,7 @@ DOT_MANAGER_DIR="$HOME/.config/dot-manager"
 DOT_MANAGER_CACHE_DIR="$HOME/.cache/dot-manager"
 source "$DOT_MANAGER_DIR/helper.sh"
 
-if [ ! -d "$DOT_MANAGER_CACHE_DIR" ]; then
-	mkdir -p "$DOT_MANAGER_CACHE_DIR"
-fi
+mkdir -p "$DOT_MANAGER_CACHE_DIR"
 
 __install_program() {
 	local program_name="$1"
@@ -90,25 +84,25 @@ __install_program_list() {
 install_packages() {
 	print_step "Installing Base Packages"
 
-	if [ "$TERM" = "wezterm" ]; then
-		print_step "Setting up wezterm terminfo"
+	local terminfo_url=""
+	case "$TERM" in
+	"wezterm") terminfo_url="https://raw.githubusercontent.com/wez/wezterm/master/termwiz/data/wezterm.terminfo" ;;
+	"ghostty" | "xterm-ghostty") terminfo_url="https://raw.githubusercontent.com/rachartier/dotfiles/refs/heads/main/.config/ghostty/terminfo/ghostty.terminfo" ;;
+	esac
+
+	if [ -n "$terminfo_url" ]; then
+		print_step "Setting up $TERM terminfo"
 		tempfile=$(mktemp) &&
-			curl -sS -o "$tempfile" https://raw.githubusercontent.com/wez/wezterm/master/termwiz/data/wezterm.terminfo &&
-			tic -x -o "$HOME/.terminfo" "$tempfile" &&
-			rm "$tempfile"
-	elif [ "$TERM" = "ghostty" ] || [ "$TERM" = "xterm-ghostty" ]; then
-		print_step "Setting up ghostty terminfo"
-		tempfile=$(mktemp) &&
-			curl -sS -o "$tempfile" https://raw.githubusercontent.com/rachartier/dotfiles/refs/heads/main/.config/ghostty/terminfo/ghostty.terminfo &&
+			curl -sS -o "$tempfile" "$terminfo_url" &&
 			tic -x -o "$HOME/.terminfo" "$tempfile" &&
 			rm "$tempfile"
 	fi
 
 	print_step "Installing system packages"
 	local base_packages=(
-		pkg-config build-essential wget libfuse2
+		pkg-config build-essential wget libfuse2 jq
 		python3-venv python3-pip npm unzip
-		ripgrep xsel freetype2-devel libglib2.0-dev
+		ripgrep xsel libfreetype6-dev libglib2.0-dev
 	)
 
 	if [ -z "$DOTFILES_MINIMAL" ]; then
@@ -117,17 +111,11 @@ install_packages() {
 
 	__install_package "${base_packages[@]}"
 
-	if [ -f "$HOME/.local/bin/fd" ]; then
-		log "info" "Removing old fd symlink."
-		rm "$HOME/.local/bin/fd"
-	fi
-
-	ln -s $(which fdfind) ~/.local/bin/fd
-
+	ln -sf "$(which fdfind)" ~/.local/bin/fd
 }
 
 install_complete() {
-	print_header "Installing Complete Configuration"
+	print_step "Installing Complete Configuration"
 	install_packages
 
 	__install_program_list "${DOT_MANAGER_COMPLETE_PROGRAMS[@]}"
@@ -236,10 +224,6 @@ do_command() {
 	"tool")
 		shift
 		do_tool "$@"
-		;;
-	"migrate")
-		shift
-		source "$DOT_MANAGER_DIR/migrate.sh" "$@"
 		;;
 	*) __git_dot "$@" ;;
 	esac
