@@ -12,7 +12,7 @@ install_fonts() {
 		mkdir -p "$HOME/.local/share/fonts" &&
 		cp /tmp/nerdfonts/*.ttf "$HOME/.local/share/fonts" &&
 		rm -rf /tmp/nerdfonts NerdFontsSymbolsOnly.zip; then
-		fc-cache -fv >/dev/null 2>&1
+		fc-cache -fv >>"$DOT_MANAGER_LOG" 2>&1
 		log "success" "Nerd Fonts installed"
 	else
 		log "error" "Nerd Fonts installation failed"

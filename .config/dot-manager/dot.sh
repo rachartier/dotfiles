@@ -56,6 +56,7 @@ DOT_MANAGER_CACHE_DIR="$HOME/.cache/dot-manager"
 source "$DOT_MANAGER_DIR/helper.sh"
 
 mkdir -p "$DOT_MANAGER_CACHE_DIR"
+: >"$DOT_MANAGER_LOG"
 
 __install_program() {
 	local program_name="$1"
@@ -64,7 +65,7 @@ __install_program() {
 	if [ -f "$install_script" ]; then
 		shift
 		if ! source "$install_script" "$@"; then
-			log "error" "Failed to source '$program_name' script."
+			log "error" "Failed to source '$program_name' script. (details: $DOT_MANAGER_LOG)"
 			return 1
 		fi
 	else
@@ -75,19 +76,30 @@ __install_program() {
 
 __install_program_list() {
 	local failed=()
+	local total=$#
+	local i=0
+
+	sudo -v
+	SECONDS=0
 
 	for program in "$@"; do
+		i=$((i + 1))
+		DOT_STEP_PREFIX="[$i/$total]"
 		__install_program "$program" || failed+=("$program")
 	done
+	unset DOT_STEP_PREFIX
+
+	log "success" "$((total - ${#failed[@]}))/$total programs installed in $((SECONDS / 60))m$((SECONDS % 60))s"
 
 	if [ ${#failed[@]} -gt 0 ]; then
-		log "error" "Failed: ${failed[*]} (rerun with: dot reinstall <name>)"
+		log "error" "Failed: ${failed[*]} (rerun with: dot reinstall <name>, details: $DOT_MANAGER_LOG)"
 		return 1
 	fi
 }
 
 install_packages() {
 	print_step "Installing Base Packages"
+	sudo -v
 
 	local terminfo_url=""
 	case "$TERM" in
@@ -115,8 +127,6 @@ install_packages() {
 	fi
 
 	__install_package "${base_packages[@]}"
-
-	ln -sf "$(which fdfind)" ~/.local/bin/fd
 }
 
 install_complete() {
@@ -161,6 +171,12 @@ do_reinstall_all() {
 
 do_reinstall() {
 	local tool_name="$1"
+
+	if [ -z "$tool_name" ] && command -v fzf >/dev/null; then
+		tool_name=$(basename -s .sh "$DOT_MANAGER_DIR"/install/programs/ubuntu/*.sh | fzf --prompt='reinstall> ')
+		[ -z "$tool_name" ] && return 0
+		set -- "$tool_name"
+	fi
 
 	if [ -z "$tool_name" ]; then
 		log "error" "No tool name provided."

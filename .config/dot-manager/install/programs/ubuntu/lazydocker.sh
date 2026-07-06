@@ -3,7 +3,7 @@
 source "$DOT_MANAGER_DIR/helper.sh"
 
 install_lazydocker() {
-	print_step "Installing Lazydocker"
+	print_step "Installing lazydocker"
 
 	LAZYDOCKER_VERSION=$(__get_latest_release "jesseduffield/lazydocker")
 	LAZYDOCKER_VERSION="${LAZYDOCKER_VERSION:1}"

@@ -18,12 +18,12 @@ install_nvim() {
 	print_step "Installing Neovim"
 	local version=${1:-"stable"}
 
-	sudo apt-get autoremove neovim -y >/dev/null 2>&1
+	sudo apt-get autoremove neovim -y >>"$DOT_MANAGER_LOG" 2>&1
 	[ -f "$HOME/.local/bin/nvim" ] && rm "$HOME/.local/bin/nvim"
 
 	log "download" "Downloading Neovim $version..."
 	cd /tmp || exit 1
-	wget -q "https://github.com/neovim/neovim/releases/download/$version/nvim-linux-x86_64.tar.gz" -O nvim-linux64.tar.gz >/dev/null
+	wget -nv "https://github.com/neovim/neovim/releases/download/$version/nvim-linux-x86_64.tar.gz" -O nvim-linux64.tar.gz >>"$DOT_MANAGER_LOG" 2>&1
 
 	sudo rm -rf /opt/nvim-linux-x86_64/
 	sudo tar -C /opt -xzf nvim-linux64.tar.gz

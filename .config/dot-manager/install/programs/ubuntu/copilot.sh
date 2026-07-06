@@ -3,10 +3,10 @@
 source "$DOT_MANAGER_DIR/helper.sh"
 
 install_copilot() {
-	print_step "Installing Copilot"
+	print_step "Installing copilot"
 
 	if [ -f "/usr/local/bin/copilot" ]; then
-		sudo npm uninstall -g @github/copilot-cli >/dev/null 2>&1
+		sudo npm uninstall -g @github/copilot-cli >>"$DOT_MANAGER_LOG" 2>&1
 	fi
 
 	local copilot_version

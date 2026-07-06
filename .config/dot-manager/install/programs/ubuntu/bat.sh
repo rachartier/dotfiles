@@ -3,7 +3,7 @@
 source "$DOT_MANAGER_DIR/helper.sh"
 
 install_bat() {
-	print_step "Installing Bat"
+	print_step "Installing bat"
 
 	local bat_version
 	bat_version=$(__get_latest_release "sharkdp/bat")

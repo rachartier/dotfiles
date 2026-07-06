@@ -4,10 +4,13 @@ if [ -n "$__HELPER_ALREADY_LOADED" ]; then
 	return 0
 fi
 
+DOT_MANAGER_LOG="${DOT_MANAGER_CACHE_DIR:-$HOME/.cache/dot-manager}/last-run.log"
+mkdir -p "$(dirname "$DOT_MANAGER_LOG")"
+
 print_step() {
 	local message="$1"
 	echo
-	echo -e "${COLORS[blue]}${ICON_GEAR} ${COLORS[bold]}$message${COLORS[reset]}"
+	echo -e "${COLORS[blue]}${ICON_GEAR}${DOT_STEP_PREFIX:+$DOT_STEP_PREFIX }${COLORS[bold]}$message${COLORS[reset]}"
 }
 
 declare -A COLORS=(
@@ -27,6 +30,10 @@ ICON_ERROR="✗"
 ICON_WARNING="⚠"
 ICON_DOWNLOAD="↓"
 ICON_GEAR="⚙ "
+
+if [ ! -t 1 ]; then
+	for k in "${!COLORS[@]}"; do COLORS[$k]=""; done
+fi
 
 log() {
 	local level="$1"
@@ -50,7 +57,7 @@ log() {
 		color="${COLORS[red]}"
 		;;
 	"info")
-		icon=""
+		icon="•"
 		color="${COLORS[blue]}"
 		;;
 	"download")
@@ -88,7 +95,7 @@ __install_package_release() {
 	[ -d "/tmp/$name" ] && rm -rf "/tmp/$name"
 	[ -f "/tmp/$filename" ] && rm "/tmp/$filename"
 
-	if ! wget -nv -q "$url" >/dev/null 2>&1; then
+	if ! wget -nv "$url" >>"$DOT_MANAGER_LOG" 2>&1; then
 		log "error" "Failed to download $filename"
 		return 1
 	fi
@@ -137,12 +144,12 @@ __download_install_deb() {
 	log "download" "Downloading $name..."
 	cd /tmp || exit 1
 
-	if ! wget -nv -q "$url" >/dev/null 2>&1; then
+	if ! wget -nv "$url" >>"$DOT_MANAGER_LOG" 2>&1; then
 		log "error" "Failed to download $filename"
 		return 1
 	fi
 
-	if ! sudo dpkg -i "$filename" >/dev/null 2>&1; then
+	if ! sudo dpkg -i "$filename" >>"$DOT_MANAGER_LOG" 2>&1; then
 		log "error" "Failed to install $name"
 		return 1
 	fi
@@ -167,7 +174,7 @@ __install_package() {
 		return 0
 	fi
 
-	if ! sudo apt-get install -y -qq -o=Dpkg::Use-Pty=0 "${to_install[@]}" >/dev/null 2>&1; then
+	if ! sudo apt-get install -y -qq -o=Dpkg::Use-Pty=0 "${to_install[@]}" >>"$DOT_MANAGER_LOG" 2>&1; then
 		log "error" "Failed to install: ${to_install[*]}"
 		return 1
 	fi

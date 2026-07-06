@@ -23,7 +23,7 @@ install_terminal() {
 		print_step "Installing ghostty"
 		[ -d /tmp/ghostty ] && rm -rf /tmp/ghostty
 
-		git clone https://github.com/ghostty-org/ghostty >/dev/null 2>&1
+		git clone https://github.com/ghostty-org/ghostty >>"$DOT_MANAGER_LOG" 2>&1
 		cd /tmp/ghostty || return 1
 
 		__install_package libgtk-4-dev libadwaita-1-dev libxml2-utils

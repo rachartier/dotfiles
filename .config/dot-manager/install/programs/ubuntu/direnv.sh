@@ -5,7 +5,7 @@ source "$DOT_MANAGER_DIR/helper.sh"
 install_direnv() {
 	print_step "Installing direnv"
 
-	if ! curl -sfL https://direnv.net/install.sh | bash >/dev/null 2>&1; then
+	if ! curl -sfL https://direnv.net/install.sh | bash >>"$DOT_MANAGER_LOG" 2>&1; then
 		log "error" "direnv installation failed"
 		return 1
 	fi
