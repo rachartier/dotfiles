@@ -9,7 +9,6 @@ local function load()
   vim.pack.add({
     "https://github.com/rafamadriz/friendly-snippets",
     "https://github.com/fang2hou/blink-copilot",
-    "https://github.com/saghen/blink.compat",
     "https://github.com/folke/lazydev.nvim",
     { src = "https://github.com/Saghen/blink.cmp", version = vim.version.range("*") },
   }, {
@@ -38,7 +37,7 @@ local function load()
     signature = { enabled = true },
 
     enabled = function()
-      return not vim.tbl_contains({ "Avante", "copilot-chat" }, vim.bo.filetype)
+      return vim.bo.filetype ~= "copilot-chat"
         and vim.bo.buftype ~= "prompt"
         and vim.b.completion ~= false
     end,
@@ -71,9 +70,6 @@ local function load()
           "snippets",
           "buffer",
           "lazydev",
-          "avante_commands",
-          "avante_mentions",
-          "avante_files",
         }
         local ok, node = pcall(vim.treesitter.get_node)
         if ok and node then
@@ -94,24 +90,6 @@ local function load()
           score_offset = 999999,
           async = true,
           opts = { max_completions = 3, max_attempts = 4 },
-        },
-        avante_commands = {
-          name = "avante_commands",
-          module = "blink.compat.source",
-          score_offset = 90,
-          opts = {},
-        },
-        avante_files = {
-          name = "avante_files",
-          module = "blink.compat.source",
-          score_offset = 100,
-          opts = {},
-        },
-        avante_mentions = {
-          name = "avante_mentions",
-          module = "blink.compat.source",
-          score_offset = 1000,
-          opts = {},
         },
       },
     },

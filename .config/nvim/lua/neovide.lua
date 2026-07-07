@@ -1,6 +1,9 @@
 if vim.g.neovide then
   vim.o.guifont = "Berkeley Mono,Symbols Nerd Font:h16"
 
+  vim.o.pumblend = 25
+  vim.o.winblend = 40
+
   vim.g.neovide_underline_stroke_scale = 1.5
 
   vim.g.neovide_cursor_animate_command_line = true

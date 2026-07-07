@@ -104,11 +104,6 @@ function M.setup()
       "dapui_*",
       "dap-repl",
       "oil",
-      "Trouble",
-      "TelescopePrompt",
-      "Avante",
-      "AvanteInput",
-
     },
     callback = function()
       vim.wo.statuscolumn = ""

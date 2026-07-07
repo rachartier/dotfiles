@@ -18,10 +18,6 @@ vim.defer_fn(function()
   }
 end, 50)
 
-local conf = require("config")
-opt.pumblend = conf.pumblend
-opt.winblend = conf.winblend
-
 opt.autowrite = true
 opt.background = "dark"
 opt.whichwrap:append("<>[]hl")
@@ -43,7 +39,6 @@ opt.statusline = " "
 
 opt.cmdheight = 0
 opt.list = false
-opt.mouse = "a"
 opt.pumheight = 20
 opt.number = true
 opt.relativenumber = false
@@ -76,7 +71,6 @@ opt.splitbelow = true
 opt.splitkeep = "screen"
 opt.splitright = true
 opt.tabstop = 4
-opt.termguicolors = true
 opt.undofile = true
 opt.undolevels = 10000
 opt.updatetime = 100
@@ -99,21 +93,13 @@ opt.fillchars = {
 
 opt.diffopt = "internal,filler,closeoff,indent-heuristic,linematch:60,inline:char"
 
-vim.o.timeout = true
 vim.o.timeoutlen = 300
 
-vim.api.nvim_command("filetype plugin indent on")
-
 opt.swapfile = false
-opt.autoread = true
 opt.backup = true
 opt.backupdir = os.getenv("HOME") .. "/.local/share/nvim/backup/"
 opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 
 opt.hlsearch = false
-opt.incsearch = true
 
 opt.smoothscroll = true
-
-vim.api.nvim_set_var("t_Cs", "\\e[4:3m")
-vim.api.nvim_set_var("t_Ce", "\\e[4:0m")

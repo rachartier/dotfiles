@@ -7,8 +7,6 @@ vim.pack.add({
   "https://github.com/neovim/nvim-lspconfig",
 }, { confirm = false })
 
-local border = require("config.ui.border").default_border
-
 local function collect_tools(server_settings)
   local excluded_tools = {
     "stylelint",
@@ -64,7 +62,7 @@ vim.schedule(function()
     },
     ensure_installed = { "stylua", "shfmt" },
     ui = {
-      border = border,
+      border = require("config.ui.border").default_border,
       keymaps = {
         toggle_server_expand = "<CR>",
         install_server = "i",

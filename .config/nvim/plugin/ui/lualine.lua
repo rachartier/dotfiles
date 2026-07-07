@@ -1,14 +1,11 @@
 vim.pack.add({
-  "https://github.com/nvim-lua/plenary.nvim",
   "https://github.com/nvim-lualine/lualine.nvim",
-  "https://github.com/folke/sidekick.nvim",
 }, { confirm = false })
 
 if vim.env.TMUX_NEOGIT_POPUP then
   return
 end
 
-vim.g.lualine_laststatus = vim.o.laststatus
 if vim.fn.argc(-1) > 0 then
   vim.o.statusline = " "
 else
@@ -55,34 +52,16 @@ vim.schedule(function()
   }
   local kirby_default = "(>*-*)>"
 
-  local is_inside_docker = false
-  local Job = require("plenary.job")
-  Job:new({
-    command = os.getenv("HOME") .. "/.config/scripts/is_inside_docker.sh",
-    on_stdout = function(_, data)
-      if data == "1" then
-        is_inside_docker = true
-      end
-    end,
-  }):start()
+  local is_inside_docker = vim.uv.fs_stat("/.dockerenv") ~= nil
 
   local function cond_disable_by_ft()
     local ft = vim.api.nvim_get_option_value("filetype", { buf = 0 })
     local ignored = {
       "terminal",
       "help",
-      "alpha",
-      "dashboard",
-      "neo-tree",
-      "Trouble",
-      "trouble",
-      "lazy",
       "mason",
       "notify",
-      "toggleterm",
       "dapui_stacks",
-      "lazyterm",
-      "fzf",
     }
     if vim.tbl_contains(ignored, ft) then
       return false
@@ -258,10 +237,9 @@ vim.schedule(function()
   end
 
   require("lualine").setup({
-    extensions = { "neo-tree", "mason" },
+    extensions = { "mason" },
     options = {
       theme = theme,
-      disabled_filetypes = { "alpha" },
       icons_enabled = true,
       globalstatus = true,
       component_separators = { left = "", right = "" },

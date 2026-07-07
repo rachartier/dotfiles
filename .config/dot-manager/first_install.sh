@@ -10,31 +10,10 @@ install_ubuntu_essentials() {
         git \
         wget \
         zsh \
-        autotools-dev \
         coreutils \
         curl \
-		jq
-
-    sudo apt install -y -qq -o=Dpkg::Use-Pty=0 \
-        automake \
-        autoconf \
-        build-essential \
-        cmake
-}
-
-install_arch_essentials() {
-    sudo pacman -S --noconfirm --needed \
-        git \
-        wget \
-        zsh \
-        base-devel \
-        curl \
-        jq
-
-    sudo pacman -S --noconfirm --needed \
-        automake \
-        autoconf \
-        cmake
+        jq \
+        build-essential
 }
 
 install_dotfiles() {
@@ -61,41 +40,12 @@ prepare_dotfiles() {
 
     echo 'source "$HOME/.dotfile_profile"' >>"$HOME/.profile"
 
-    if [ ! -d "$HOME/.local/bin" ]; then
-        __echo_info "Creating $HOME/.local/bin"
-        mkdir -p "$HOME/.local/bin"
-    fi
-
-    dot_script_path="$HOME/.config/dot-manager/dot.sh"
-    dot_script_link="$HOME/.local/bin/dot"
-
-    if [ -L "$dot_script_link" ]; then
-        __echo_info "Removing old dot symlink"
-        rm "$dot_script_link"
-    fi
-
-    if [ ! -L "$dot_script_link" ] || [ ! -e "$dot_script_link" ]; then
-        ln -s "$dot_script_path" "$dot_script_link"
-    fi
+    mkdir -p "$HOME/.local/bin"
+    ln -sf "$HOME/.config/dot-manager/dot.sh" "$HOME/.local/bin/dot"
 }
 
-# if [ "$(basename "$SHELL")" != "zsh" ]; then
-#     __echo_info "Changing default shell to zsh"
-#     chsh -s "$(which zsh)"
-# fi
+install_ubuntu_essentials
 
-if [ -f /etc/arch-release ]; then
-    __echo_info "Detected Arch Linux"
-    install_arch_essentials
-elif [ -f /etc/lsb-release ]; then
-    __echo_info "Detected Ubuntu"
-    install_ubuntu_essentials
-else
-    __echo_info "Unknown distribution, please install essentials manually."
-    exit 1
-fi
-
-install_essentials
 install_dotfiles
 prepare_dotfiles
 
@@ -105,5 +55,4 @@ elif [ -n "$DOTFILES_DOCKER" ]; then
     "$HOME"/.config/dot-manager/dot.sh docker
 else
     "$HOME"/.config/dot-manager/dot.sh init
-    # "$HOME"/.config/dot-manager/dot.sh reinstall terminal
 fi

@@ -1,66 +1,7 @@
-local Spinner = {
-  timer = nil,
-  is_running = false,
-  characters = { "-", "\\", "|", "/" },
-  index = 1,
-  ns_id = vim.api.nvim_create_namespace("note_tags_spinner"),
-}
-
-function Spinner:new()
-  local instance = setmetatable({}, { __index = self })
-  return instance
-end
-
-function Spinner:start(line)
-  if self.is_running then
-    return
-  end
-
-  self.timer = vim.uv.new_timer()
-  if not self.timer then
-    vim.notify("Failed to create timer", vim.log.levels.ERROR)
-    return
-  end
-
-  self.is_running = true
-  self.timer:start(0, 80, function()
-    self:update(line)
-  end)
-end
-
-function Spinner:update(line)
-  if not self.is_running then
-    return
-  end
-
-  vim.schedule(function()
-    if not self.is_running then
-      return
-    end
-    self.index = (self.index % #self.characters) + 1
-    vim.api.nvim_buf_clear_namespace(0, self.ns_id, 0, -1)
-    vim.api.nvim_buf_set_extmark(0, self.ns_id, line - 1, 0, {
-      virt_text = {
-        { " " .. self.characters[self.index] .. " Generating tags...", "Comment" },
-      },
-      virt_text_pos = "overlay",
-    })
-  end)
-end
-
-function Spinner:stop()
-  self.is_running = false
-  if self.timer then
-    self.timer:stop()
-    self.timer:close()
-    self.timer = nil
-    vim.schedule(function()
-      vim.api.nvim_buf_clear_namespace(0, self.ns_id, 0, -1)
-    end)
-  end
-end
-
-local spinner = Spinner:new()
+local spinner_line = 1
+local spinner = require("custom.spinner").new("Generating tags...", function()
+  return spinner_line
+end)
 
 local function find_tags_line()
   local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
@@ -82,10 +23,11 @@ local function generate_tags()
   local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
   local content = table.concat(lines, "\n")
 
-  spinner:start(tags_lnum)
+  spinner_line = tags_lnum
+  spinner.start()
 
   local function callback(obj)
-    spinner:stop()
+    spinner.stop()
 
     if obj.code ~= 0 then
       vim.notify("Error generating tags: " .. obj.stderr, vim.log.levels.ERROR)

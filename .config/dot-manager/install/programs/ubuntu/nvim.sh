@@ -3,13 +3,8 @@
 source "$DOT_MANAGER_DIR/helper.sh"
 
 install_luarocks() {
-	__install_package lua5.1 liblua5.1-dev
-
-	cd /tmp || exit 1
-	wget -nv -q https://luarocks.org/releases/luarocks-3.11.1.tar.gz &&
-		tar zxpf luarocks-3.11.1.tar.gz &&
-		cd luarocks-3.11.1 &&
-		./configure >/dev/null 2>&1 && make >/dev/null 2>&1 && sudo make install >/dev/null 2>&1
+	# ponytail: apt luarocks accepts lua5.1; build from source only if a newer luarocks is ever required
+	__install_package lua5.1 liblua5.1-dev luarocks
 }
 
 install_treesitter() {
@@ -23,12 +18,12 @@ install_nvim() {
 	print_step "Installing Neovim"
 	local version=${1:-"stable"}
 
-	sudo apt-get autoremove neovim -y >/dev/null 2>&1
+	sudo apt-get autoremove neovim -y >>"$DOT_MANAGER_LOG" 2>&1
 	[ -f "$HOME/.local/bin/nvim" ] && rm "$HOME/.local/bin/nvim"
 
 	log "download" "Downloading Neovim $version..."
 	cd /tmp || exit 1
-	wget -q "https://github.com/neovim/neovim/releases/download/$version/nvim-linux-x86_64.tar.gz" -O nvim-linux64.tar.gz >/dev/null
+	wget -nv "https://github.com/neovim/neovim/releases/download/$version/nvim-linux-x86_64.tar.gz" -O nvim-linux64.tar.gz >>"$DOT_MANAGER_LOG" 2>&1
 
 	sudo rm -rf /opt/nvim-linux-x86_64/
 	sudo tar -C /opt -xzf nvim-linux64.tar.gz
@@ -38,9 +33,6 @@ install_nvim() {
 		wget -q https://ftp.nluug.nl/pub/vim/runtime/spell/fr.utf-8.spl \
 			-O ~/.local/share/nvim/site/spell/fr.utf-8.spl
 	fi
-
-	install_luarocks >/dev/null
-	/opt/nvim-linux-x86_64/bin/nvim --headless "+Lazy! sync" "+qall" >/dev/null 2>&1
 
 	log "success" "Neovim $version installed in /opt/nvim-linux-x86_64/"
 }

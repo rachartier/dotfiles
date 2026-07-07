@@ -68,7 +68,4 @@ return {
     mason = { "marksman" },
     formatter = { "markdown-toc" },
   },
-  {
-    filetypes = { "text" },
-  },
 }

@@ -1,97 +1,24 @@
-local Spinner = {
-  timer = nil,
-  is_running = false,
-  -- characters = {
-  --   "",
-  --   "",
-  --   "",
-  --   "",
-  --   "",
-  --   "",
-  -- },
-  characters = {
-    "-",
-    "\\",
-    "|",
-    "/",
-  },
-  index = 1,
-  ns_id = vim.api.nvim_create_namespace("commit_spinner"),
-}
+local spinner = require("custom.spinner").new("Generating commit message...", function()
+  return vim.fn.line(".")
+end)
 
-function Spinner:new()
-  local instance = setmetatable({}, { __index = self })
-  return instance
-end
-
-function Spinner:start()
-  if self.is_running then
-    return
-  end
-
-  self.timer = vim.uv.new_timer()
-  if not self.timer then
-    vim.notify("Failed to create timer", vim.log.levels.ERROR)
-    return
-  end
-
-  self.is_running = true
-  self.timer:start(0, 80, function()
-    self:update()
-  end)
-end
-
-function Spinner:update()
-  if not self.is_running then
-    return
-  end
-
-  vim.schedule(function()
-    if not self.is_running then
-      return
-    end
-    self.index = (self.index % #self.characters) + 1
-    local cursor_line = vim.fn.line(".")
-    vim.api.nvim_buf_clear_namespace(0, self.ns_id, 0, -1)
-    vim.api.nvim_buf_set_extmark(0, self.ns_id, cursor_line - 1, 0, {
-      virt_text = {
-        { " " .. self.characters[self.index] .. " Generating commit message...", "Comment" },
-      },
-      virt_text_pos = "overlay",
-    })
-  end)
-end
-
-function Spinner:stop()
-  self.is_running = false
-  if self.timer then
-    self.timer:stop()
-    self.timer:close()
-    self.timer = nil
-    vim.schedule(function()
-      vim.api.nvim_buf_clear_namespace(0, self.ns_id, 0, -1)
-    end)
-  end
-end
-
-local spinner = Spinner:new()
 vim.api.nvim_set_hl(
   0,
   "CopilotCommitMessageStyle",
-  { fg = require("theme").get_colors().green, bg = "None" }
+  { fg = require("themes").get_colors().green, bg = "None" }
 )
 vim.api.nvim_set_hl(
   0,
   "CommitMessageScope",
-  { fg = require("theme").get_colors().red, bg = "None" }
+  { fg = require("themes").get_colors().red, bg = "None" }
 )
 
 local function generate_message()
-  spinner:start()
+  spinner.start()
 
   local function callback(obj)
     vim.schedule(function()
-      spinner:stop()
+      spinner.stop()
 
       if obj.code ~= 0 then
         vim.notify("Error generating commit message: " .. obj.stderr, vim.log.levels.ERROR)

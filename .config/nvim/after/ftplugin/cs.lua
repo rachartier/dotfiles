@@ -1,5 +1,4 @@
 vim.b.dispatch = "dotnet test"
-vim.g.compiler = "dotnet_build"
 
 local makeprg_builder = "dotnet clean --verbosity:quiet --nologo "
 makeprg_builder = makeprg_builder
@@ -11,35 +10,6 @@ vim.o.errorformat = "%f(%l\\,%v): %t%*[^:]: %m,%trror%*[^:]: %m,%tarning%*[^:]: 
 
 local dap = require("dap")
 local dap_utils = require("dap.utils")
-
-local function execute_command(cmd)
-  return output, exit_code
-end
-
-local function build()
-  local output = ""
-  local exit_code = 0
-
-  local Job = require("plenary.job")
-  Job:new({
-    command = "dotnet",
-    args = { "build" },
-    on_stdout = function(_, data)
-      output = data
-    end,
-    on_exit = function(_, code)
-      exit_code = code
-    end,
-  }):start()
-
-  local build_succeeded = exit_code == 0
-
-  if not build_succeeded then
-    print("Build failed with the following output:" .. output)
-  end
-
-  return build_succeeded
-end
 
 local number_indices = function(array)
   local result = {}
@@ -83,7 +53,7 @@ local file_selection = function(cmd, opts)
 end
 
 local project_selection = function(project_path, allow_multiple)
-  local check_csproj_cmd = string.format('fd ".csproj$"', project_path)
+  local check_csproj_cmd = string.format('fd ".csproj$" %s', project_path)
   local project_file = file_selection(check_csproj_cmd, {
     empty_message = "No csproj files found in " .. project_path,
     multiple_title_message = "Select project:",
@@ -159,9 +129,7 @@ dap.configurations.cs = {
     request = "launch",
     program = function()
       local current_working_dir = vim.fn.getcwd()
-      local dll = select_dll(current_working_dir) or dap.ABORT
-      build()
-      return dll
+      return select_dll(current_working_dir) or dap.ABORT
     end,
   },
   {

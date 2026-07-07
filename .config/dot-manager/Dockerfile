@@ -1,9 +1,8 @@
-FROM ubuntu:24.04 AS builder
+FROM ubuntu:24.04
 
 ARG USER_NAME
 ARG USER_ID=1000
 ARG GROUP_ID=1000
-ARG DEBIAN_FRONTEND=noninteractive
 
 ENV DEBIAN_FRONTEND=noninteractive \
     GIT_CLONE_METHOD=https \
@@ -13,8 +12,6 @@ ENV DEBIAN_FRONTEND=noninteractive \
     APPIMAGE_EXTRACT_AND_RUN=1 \
     TERM=xterm-256color \
     PATH="/home/${USER_NAME}/.local/bin:${PATH}" \
-    # Security settings
-    DOCKER_CONTENT_TRUST=1 \
     # Disable history files
     HISTFILE=/dev/null
 
@@ -31,8 +28,6 @@ RUN apt-get update && \
     && \
     # Generate locales
     locale-gen en_US.UTF-8 && \
-    # Remove existing neovim if present
-    apt-get remove -y neovim || true && \
     # Create user and group with handling for existing GID/UID
     if getent group ${GROUP_ID} > /dev/null 2>&1; then \
     existing_group=$(getent group ${GROUP_ID} | cut -d: -f1) && \
@@ -70,8 +65,5 @@ RUN sudo apt-get update && \
 
 ENV TERM=wezterm
 SHELL ["/bin/zsh", "-c"]
-
-HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-    CMD zsh -c 'ps aux | grep zsh | grep -v grep || exit 1'
 
 CMD ["/bin/zsh"]

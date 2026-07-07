@@ -9,7 +9,7 @@ local keywords = {
 }
 
 local function setup_highlights()
-  local colors = require("theme").get_colors()
+  local colors = require("themes").get_colors()
   for name, kw in pairs(keywords) do
     vim.api.nvim_set_hl(0, "Todo" .. name, { fg = colors[kw.color], bold = true })
   end
@@ -36,11 +36,3 @@ vim.api.nvim_create_autocmd("ColorScheme", {
   callback = setup_highlights,
   desc = "reapply todo highlights on colorscheme change",
 })
-
-vim.keymap.set("n", "<leader>ft", function()
-  require("fzf-lua").grep({ search = "TODO|FIXME|FIX|HACK|WARN|NOTE|PERF|TEST", no_esc = true })
-end, { desc = "Todo" })
-
-vim.keymap.set("n", "<leader>fT", function()
-  require("fzf-lua").grep({ search = "TODO|FIX|FIXME", no_esc = true })
-end, { desc = "Todo/Fix/Fixme" })

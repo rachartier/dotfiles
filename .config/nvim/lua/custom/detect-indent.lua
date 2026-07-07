@@ -1,4 +1,4 @@
-local exclude_ft = { netrw = true, lazy = true, mason = true }
+local exclude_ft = { netrw = true, mason = true }
 local exclude_bt = { help = true, terminal = true, nofile = true }
 
 local function guess_indent(bufnr)
@@ -8,7 +8,8 @@ local function guess_indent(bufnr)
     return
   end
 
-  local lines = vim.api.nvim_buf_get_lines(bufnr, 0, math.min(256, vim.api.nvim_buf_line_count(bufnr)), false)
+  local lines =
+    vim.api.nvim_buf_get_lines(bufnr, 0, math.min(256, vim.api.nvim_buf_line_count(bufnr)), false)
 
   local tab_count = 0
   local space_counts = {}

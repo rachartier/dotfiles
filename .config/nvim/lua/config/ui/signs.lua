@@ -1,12 +1,4 @@
 return {
-
-  file = {
-    modified = "•",
-    not_saved = "󰉉",
-    readonly = "󰌾",
-    created = "●",
-    unnamed = " No Name",
-  },
   git = {
     added = " ",
     modified = " ",
@@ -17,14 +9,6 @@ return {
     unstaged = "󰄱 ",
     staged = " ",
     untracked = "",
-  },
-  fzf = {
-    git = {
-      added = "",
-      modified = "",
-      removed = "",
-      renamed = "󰑕",
-    },
   },
   full_diagnostic = {
     ok = "",

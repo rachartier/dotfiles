@@ -42,9 +42,10 @@ end)
 -- tiny-glimmer
 vim.schedule(function()
   vim.pack.add({ "https://github.com/rachartier/tiny-glimmer.nvim" }, { confirm = false })
+  -- vim.opt.rtp:prepend("/home/rachartier/dev/nvim_plugins/tiny-glimmer.nvim")
 
   require("tiny-glimmer").setup({
-    transparency_color = require("theme").get_colors().base,
+    transparency_color = require("themes").get_colors().base,
     overwrite = {
       auto_map = false,
       search = { enabled = true },
@@ -78,12 +79,13 @@ vim.schedule(function()
 end)
 
 -- tiny-inline-diagnostic
+-- vim.opt.rtp:prepend("/home/rachartier/dev/nvim_plugins/tiny-inline-diagnostic.nvim")
 vim.schedule(function()
   vim.pack.add({ "https://github.com/rachartier/tiny-inline-diagnostic.nvim" }, { confirm = false })
 
   require("tiny-inline-diagnostic").setup({
-    transparency_color = require("theme").get_colors().base,
-    hi = { mixing_color = require("theme").get_colors().base },
+    transparency_color = require("themes").get_colors().base,
+    hi = { mixing_color = require("themes").get_colors().base },
     options = {
       multilines = { enabled = true, always_show = false },
       virt_texts = { priority = 2048 },

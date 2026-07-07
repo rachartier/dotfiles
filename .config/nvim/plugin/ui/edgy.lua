@@ -12,12 +12,10 @@ vim.schedule(function()
       { ft = "grug-far", title = "Grug Far", size = { width = 0.40 } },
     },
     left = {
-      { ft = "aerial", size = { width = 0.20 } },
       { title = "Neotest Summary", ft = "neotest-summary", size = { width = 0.25 } },
       { ft = "nvim-undotree", size = { width = 0.25 } },
     },
     bottom = {
-      "trouble",
       { ft = "qf", title = "QuickFix" },
       {
         ft = "help",

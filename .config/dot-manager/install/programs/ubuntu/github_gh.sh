@@ -17,15 +17,15 @@ install_github_gh() {
 		__download_install_deb "https://github.com/cli/cli/releases/latest/download/gh_${gh_version}_linux_amd64.deb" "gh"
 	fi
 
-	if ! gh auth status >/dev/null 2>&1; then
+	if ! gh auth status >>"$DOT_MANAGER_LOG" 2>&1; then
 		log "info" "Please authenticate with gh"
 		gh auth login
 	fi
 
 	if gh extension list 2>/dev/null | grep -q "gh-copilot"; then
-		gh extension upgrade gh-copilot >/dev/null 2>&1
+		gh extension upgrade gh-copilot >>"$DOT_MANAGER_LOG" 2>&1
 	else
-		gh extension install github/gh-copilot >/dev/null 2>&1
+		gh extension install github/gh-copilot >>"$DOT_MANAGER_LOG" 2>&1
 	fi
 }
 

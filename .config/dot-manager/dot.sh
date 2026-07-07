@@ -1,7 +1,5 @@
 #!/bin/bash
 
-DOT_MANAGER_VERSION="2"
-
 ###
 ### Programs to install by default
 ###
@@ -17,7 +15,6 @@ DOT_MANAGER_COMPLETE_PROGRAMS=(
 	"starship"
 	"zoxide"
 	"bat"
-	# "chafa"
 	"git_tools"
 	"copilot_cli"
 	"direnv"
@@ -36,7 +33,6 @@ DOT_MANAGER_MINIMAL_PROGRAMS=(
 	"zoxide"
 	"starship"
 	"copilot_cli"
-	# "chafa"
 	"git_tools"
 )
 
@@ -59,9 +55,8 @@ DOT_MANAGER_DIR="$HOME/.config/dot-manager"
 DOT_MANAGER_CACHE_DIR="$HOME/.cache/dot-manager"
 source "$DOT_MANAGER_DIR/helper.sh"
 
-if [ ! -d "$DOT_MANAGER_CACHE_DIR" ]; then
-	mkdir -p "$DOT_MANAGER_CACHE_DIR"
-fi
+mkdir -p "$DOT_MANAGER_CACHE_DIR"
+: >"$DOT_MANAGER_LOG"
 
 __install_program() {
 	local program_name="$1"
@@ -70,36 +65,52 @@ __install_program() {
 	if [ -f "$install_script" ]; then
 		shift
 		if ! source "$install_script" "$@"; then
-			log "error" "Failed to source '$program_name' script."
+			log "error" "Failed to source '$program_name' script. (details: $DOT_MANAGER_LOG)"
 			return 1
 		fi
 	else
-		log "error" "'$program_name' unknown."
+		log "error" "'$program_name' unknown. Run 'dot list' to see available programs."
 		return 1
 	fi
 }
 
 __install_program_list() {
-	local program_list=("$@")
+	local failed=()
+	local total=$#
+	local i=0
 
-	for program in "${program_list[@]}"; do
-		__install_program "$program" || return 1
+	sudo -v
+	SECONDS=0
+
+	for program in "$@"; do
+		i=$((i + 1))
+		DOT_STEP_PREFIX="[$i/$total]"
+		__install_program "$program" || failed+=("$program")
 	done
+	unset DOT_STEP_PREFIX
+
+	log "success" "$((total - ${#failed[@]}))/$total programs installed in $((SECONDS / 60))m$((SECONDS % 60))s"
+
+	if [ ${#failed[@]} -gt 0 ]; then
+		log "error" "Failed: ${failed[*]} (rerun with: dot reinstall <name>, details: $DOT_MANAGER_LOG)"
+		return 1
+	fi
 }
 
 install_packages() {
 	print_step "Installing Base Packages"
+	sudo -v
 
-	if [ "$TERM" = "wezterm" ]; then
-		print_step "Setting up wezterm terminfo"
+	local terminfo_url=""
+	case "$TERM" in
+	"wezterm") terminfo_url="https://raw.githubusercontent.com/wez/wezterm/master/termwiz/data/wezterm.terminfo" ;;
+	"ghostty" | "xterm-ghostty") terminfo_url="https://raw.githubusercontent.com/rachartier/dotfiles/refs/heads/main/.config/ghostty/terminfo/ghostty.terminfo" ;;
+	esac
+
+	if [ -n "$terminfo_url" ]; then
+		print_step "Setting up $TERM terminfo"
 		tempfile=$(mktemp) &&
-			curl -sS -o "$tempfile" https://raw.githubusercontent.com/wez/wezterm/master/termwiz/data/wezterm.terminfo &&
-			tic -x -o "$HOME/.terminfo" "$tempfile" &&
-			rm "$tempfile"
-	elif [ "$TERM" = "ghostty" ] || [ "$TERM" = "xterm-ghostty" ]; then
-		print_step "Setting up ghostty terminfo"
-		tempfile=$(mktemp) &&
-			curl -sS -o "$tempfile" https://raw.githubusercontent.com/rachartier/dotfiles/refs/heads/main/.config/ghostty/terminfo/ghostty.terminfo &&
+			curl -sS -o "$tempfile" "$terminfo_url" &&
 			tic -x -o "$HOME/.terminfo" "$tempfile" &&
 			rm "$tempfile"
 	fi
@@ -108,7 +119,7 @@ install_packages() {
 	local base_packages=(
 		pkg-config build-essential wget libfuse2
 		python3-venv python3-pip npm unzip
-		ripgrep xsel freetype2-devel libglib2.0-dev
+		ripgrep xsel
 	)
 
 	if [ -z "$DOTFILES_MINIMAL" ]; then
@@ -116,18 +127,10 @@ install_packages() {
 	fi
 
 	__install_package "${base_packages[@]}"
-
-	if [ -f "$HOME/.local/bin/fd" ]; then
-		log "info" "Removing old fd symlink."
-		rm "$HOME/.local/bin/fd"
-	fi
-
-	ln -s $(which fdfind) ~/.local/bin/fd
-
 }
 
 install_complete() {
-	print_header "Installing Complete Configuration"
+	print_step "Installing Complete Configuration"
 	install_packages
 
 	__install_program_list "${DOT_MANAGER_COMPLETE_PROGRAMS[@]}"
@@ -169,6 +172,13 @@ do_reinstall_all() {
 do_reinstall() {
 	local tool_name="$1"
 
+	if [ -z "$tool_name" ] && command -v fzf >/dev/null; then
+		tool_name=$(basename -s .sh "$DOT_MANAGER_DIR"/install/programs/ubuntu/*.sh | fzf --prompt='reinstall> ')
+		[ -z "$tool_name" ] && return 0
+		__install_program "$tool_name"
+		return
+	fi
+
 	if [ -z "$tool_name" ]; then
 		log "error" "No tool name provided."
 		return 1
@@ -196,9 +206,29 @@ update_all() {
 
 show_programs_list() {
 	echo "Available programs:"
-	for program in "${DOT_MANAGER_COMPLETE_PROGRAMS[@]}"; do
-		echo "  - $program"
+	for script in "$DOT_MANAGER_DIR"/install/programs/ubuntu/*.sh; do
+		echo "  - $(basename "$script" .sh)"
 	done
+}
+
+show_help() {
+	cat <<EOF
+Usage: dot <command> [args]
+
+Commands:
+  list                     List installable programs
+  init                     Install the complete configuration
+  minimal                  Install the minimal configuration
+  docker                   Install the docker configuration
+  update                   Update nvim, tmux and antidote plugins
+  reinstall <name|all>     Reinstall a program (or everything)
+  terminal install <name>  Install a terminal (wezterm, kitty, ghostty)
+  fonts update             Install Nerd Fonts
+  tool <name>              Run a tool script (e.g. dotnet)
+  help                     Show this help
+
+Any other command is passed to git on the dotfiles repository.
+EOF
 }
 
 do_tool() {
@@ -216,6 +246,7 @@ do_tool() {
 
 do_command() {
 	case "$1" in
+	"help" | "-h" | "--help") show_help ;;
 	"list") show_programs_list ;;
 	"init") install_complete ;;
 	"update") update_all ;;
@@ -236,10 +267,6 @@ do_command() {
 	"tool")
 		shift
 		do_tool "$@"
-		;;
-	"migrate")
-		shift
-		source "$DOT_MANAGER_DIR/migrate.sh" "$@"
 		;;
 	*) __git_dot "$@" ;;
 	esac

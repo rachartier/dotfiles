@@ -107,9 +107,6 @@ end, "Terminate")
 map("<leader>dw", function()
   require("dap.ui.widgets").hover()
 end, "Widgets")
-map("<leader>dI", function()
-  require("dap.ui.widgets").hover()
-end, "Variables")
 map("<leader>dS", function()
   require("dap.ui.widgets").scopes()
 end, "Scopes")
@@ -136,15 +133,6 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.keymap.set("n", "<leader>dPc", function()
       require("dap-python").test_class()
     end, { silent = true, desc = "Debug Class" })
-  end,
-})
-
--- nvim-jdtls
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "java",
-  once = true,
-  callback = function()
-    vim.pack.add({ "https://github.com/mfussenegger/nvim-jdtls" }, { confirm = false })
   end,
 })
 
