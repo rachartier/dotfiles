@@ -17,13 +17,17 @@ require("set")
 require("custom.winbar").setup()
 require("custom.statuscol").setup()
 
-require("custom.copilot-note-tags")
-
 vim.defer_fn(function()
   require("config.diagnostic")
   require("remap")
 
   require("custom.copilot-commit-message")
+  require("custom.auto-nohlsearch")
+  require("custom.detect-indent")
+  require("custom.commit-diff-split")
+  require("custom.todo-highlight")
+  require("custom.mermaid-diag-generator")
+  require("custom.copilot-note-tags")
 
   vim.api.nvim_set_hl(0, "Visual", { bg = require("theme").get_colors().surface, bold = false })
 
@@ -41,11 +45,7 @@ end, {
 })
 
 require("autocmds")
-require("custom.auto-nohlsearch")
-require("custom.detect-indent")
-require("custom.commit-diff-split")
-require("custom.todo-highlight")
 
 vim.defer_fn(function()
-  vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+  vim.api.nvim_set_hl(0, "Normal", { bg = "None" })
 end, 50)
