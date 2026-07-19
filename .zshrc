@@ -1,8 +1,15 @@
-source "$HOME/.profile"
-source "$HOME/.dotfile_profile"
 
 export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
-eval "$(starship init zsh)"
+# eval "$(starship init zsh)"
+#
+# avoid it to launch starship a second time to init itself
+STARSHIP_INIT="${XDG_CACHE_HOME:-$HOME/.cache}/starship/init.zsh"
+if [[ ! -s $STARSHIP_INIT ]]; then
+  mkdir -p ${STARSHIP_INIT:h}
+  echo "ok"
+  starship init zsh --print-full-init >| $STARSHIP_INIT
+fi
+source $STARSHIP_INIT
 
 ANTIDOTE_DIR="$HOME/.antidote"
 [ ! -d $ANTIDOTE_DIR ] && git clone --depth=1 https://github.com/mattmc3/antidote.git $ANTIDOTE_DIR
@@ -21,6 +28,9 @@ fi
 source ${zsh_plugins}.zsh
 
 function zsh_core_setup() {
+    source "$HOME/.profile"
+    source "$HOME/.dotfile_profile"
+
     source $HOME/.aliases
     source $HOME/.zsh/style.zsh
     # source $HOME/.zsh/transient_prompt.zsh
