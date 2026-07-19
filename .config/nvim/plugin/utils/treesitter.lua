@@ -5,6 +5,8 @@ vim.pack.add({
 
 local utils = require("utils")
 
+local disabled_indent = { "yaml", "bash", "python" }
+
 local function start_treesitter(bufnr)
   bufnr = bufnr or vim.api.nvim_get_current_buf()
   local ok = pcall(vim.treesitter.start, bufnr)
@@ -19,10 +21,27 @@ local function start_treesitter(bufnr)
     vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
   end
 
-  local disabled_indent = { "yaml", "bash", "python" }
   if utils.have(filetype, "indents") and not vim.tbl_contains(disabled_indent, filetype) then
     vim.bo[bufnr].indentexpr = "v:lua.require'utils'.indentexpr()"
   end
+end
+
+local function attach_treesitter(bufnr)
+  local filetype = vim.api.nvim_get_option_value("filetype", { buf = bufnr })
+
+  local parser_name = vim.treesitter.language.get_lang(filetype)
+  if not parser_name then
+    return
+  end
+
+  if not utils.have(filetype) then
+    require("nvim-treesitter").install({ parser_name }):await(function()
+      start_treesitter(bufnr)
+    end)
+    return
+  end
+
+  start_treesitter(bufnr)
 end
 
 local function setup_treesitter_autocmd()
@@ -48,29 +67,12 @@ local function setup_treesitter_autocmd()
   vim.api.nvim_create_autocmd("FileType", {
     pattern = ft_to_attach,
     callback = function(event)
-      local bufnr = event.buf
-      local filetype = vim.api.nvim_get_option_value("filetype", { buf = bufnr })
-
-      local parser_name = vim.treesitter.language.get_lang(filetype)
-      if not parser_name then
-        return
-      end
-
-      if not utils.have(filetype) then
-        require("nvim-treesitter").install({ parser_name }):await(function()
-          start_treesitter(bufnr)
-        end)
-        return
-      end
-
-      start_treesitter(bufnr)
+      attach_treesitter(event.buf)
     end,
     desc = "start treesitter for filetype",
   })
 end
 
--- Runs once, on the first real file buffer (see the BufReadPost/BufNewFile
--- autocmd below). Everything here needs the plugins loaded via :packadd.
 local function load_treesitter()
   setup_treesitter_autocmd()
 
@@ -78,11 +80,19 @@ local function load_treesitter()
   local ensure_installed = { "regex", "bash" }
 
   for _, lang in ipairs(lang_config) do
-    local filetypes = lang.treesitter or lang.filetypes or {}
-    for _, filetype in ipairs(filetypes) do
-      if not vim.tbl_contains(ensure_installed, filetype) then
+    if lang.treesitter then
+      for _, parser_name in ipairs(lang.treesitter) do
+        if not vim.tbl_contains(ensure_installed, parser_name) then
+          table.insert(ensure_installed, parser_name)
+        end
+      end
+    else
+      for _, filetype in ipairs(lang.filetypes or {}) do
         if filetype ~= "*" and filetype ~= "text" then
-          table.insert(ensure_installed, filetype)
+          local parser_name = vim.treesitter.language.get_lang(filetype)
+          if parser_name and not vim.tbl_contains(ensure_installed, parser_name) then
+            table.insert(ensure_installed, parser_name)
+          end
         end
       end
     end
@@ -100,25 +110,6 @@ local function load_treesitter()
   if #parsers_to_install > 0 then
     require("nvim-treesitter").install(parsers_to_install)
   end
-
-  local disabled_indent = { "yaml", "bash", "python" }
-  vim.api.nvim_create_autocmd("FileType", {
-    callback = function(event)
-      local bufnr = event.buf
-      if not utils.have(bufnr) then
-        return
-      end
-      if utils.have(bufnr, "folds") then
-        vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-      end
-
-      local filetype = vim.bo[bufnr].filetype
-      if utils.have(bufnr, "indents") and not vim.tbl_contains(disabled_indent, filetype) then
-        vim.bo[bufnr].indentexpr = "v:lua.require'utils'.indentexpr()"
-      end
-    end,
-    desc = "treesitter folds/indent",
-  })
 
   require("nvim-treesitter-textobjects").setup({
     select = {
@@ -173,10 +164,9 @@ local function load_treesitter()
 end
 
 local group = vim.api.nvim_create_augroup("lazy_treesitter", { clear = true })
-vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
+vim.api.nvim_create_autocmd("FileType", {
   group = group,
   callback = function(ev)
-    -- skip scratch/dashboard/etc. buffers, wait for a real file
     if vim.bo[ev.buf].buftype ~= "" then
       return
     end
@@ -186,9 +176,7 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
     vim.cmd.packadd("nvim-treesitter-textobjects")
     load_treesitter()
 
-    -- this buffer's own FileType event already fired before treesitter was
-    -- loaded, so the autocmds registered above missed it: replay it once.
-    vim.api.nvim_exec_autocmds("FileType", { buffer = ev.buf })
+    attach_treesitter(ev.buf)
   end,
   desc = "lazy-load treesitter on first real file",
 })

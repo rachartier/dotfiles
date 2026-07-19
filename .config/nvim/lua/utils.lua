@@ -81,4 +81,8 @@ function M.have_query(lang, query)
   return M._queries[key]
 end
 
+function M.indentexpr()
+  return M.have(nil, "indents") and require("nvim-treesitter").indentexpr() or -1
+end
+
 return M
