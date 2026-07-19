@@ -42,15 +42,16 @@ end
 M._installed = nil ---@type table<string,boolean>?
 M._queries = {} ---@type table<string,boolean>
 
-function M.get_installed()
-  -- ponytail: cached at first use, stale for parsers auto-installed this session
-  if M._installed == nil then
-    M._installed = {}
-    for _, path in ipairs(vim.api.nvim_get_runtime_file("parser/*", true)) do
-      M._installed[vim.fn.fnamemodify(path, ":t:r")] = true
+---@param update boolean?
+function M.get_installed(update)
+  if update then
+    M._installed, M._queries = {}, {}
+    vim.print(require("nvim-treesitter").get_installed("parsers"))
+    for _, lang in ipairs(require("nvim-treesitter").get_installed("parsers")) do
+      M._installed[lang] = true
     end
   end
-  return M._installed
+  return M._installed or {}
 end
 
 ---@param what string|number|nil
