@@ -142,7 +142,7 @@ install_complete() {
 install_minimal() {
 	print_step "Installing Minimal Configuration"
 	log "info" "Exporting DOTFILES_MINIMAL=1 to $HOME/.profile"
-	echo "export DOTFILES_MINIMAL=1" >>"$HOME/.profile"
+	__append_once "$HOME/.profile" "export DOTFILES_MINIMAL=1"
 	export DOTFILES_MINIMAL=1
 
 	__install_program_list "${DOT_MANAGER_MINIMAL_PROGRAMS[@]}"
@@ -152,7 +152,7 @@ install_minimal() {
 install_docker() {
 	print_step "Installing Docker Configuration"
 	log "info" "Exporting DOTFILES_DOCKER=1 to $HOME/.profile"
-	echo "export DOTFILES_DOCKER=1" >>"$HOME/.profile"
+	__append_once "$HOME/.profile" "export DOTFILES_DOCKER=1"
 	export DOTFILES_DOCKER=1
 
 	__install_program_list "${DOT_MANAGER_DOCKER_PROGRAMS[@]}"
