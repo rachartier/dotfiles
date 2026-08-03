@@ -4,7 +4,7 @@
         "sessionStart": [
             {
                 "type": "prompt",
-                "prompt": "/ponytail:ponytail"
+                "prompt": "/ponytail"
             }
         ]
     }
