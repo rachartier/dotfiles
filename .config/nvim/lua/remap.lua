@@ -20,8 +20,8 @@ map("v", "y", "ygv<esc>", { desc = "yank and keep selection" })
 map("x", ">", ">gv", { desc = "indent and reselect" })
 map("x", "<", "<gv", { desc = "dedent and reselect" })
 
-map("n", "<C-k>", "<cmd>cnext<CR>zz", { silent = true, desc = "next quickfix item" })
-map("n", "<C-j>", "<cmd>cprev<CR>zz", { silent = true, desc = "previous quickfix item" })
+map("n", "]q", "<cmd>cnext<CR>zz", { silent = true, desc = "next quickfix item" })
+map("n", "[q", "<cmd>cprev<CR>zz", { silent = true, desc = "previous quickfix item" })
 map("n", "<leader>k", "<cmd>lnext<CR>zz", { silent = true, desc = "next location list item" })
 map("n", "<leader>j", "<cmd>lprev<CR>zz", { silent = true, desc = "previous location list item" })
 

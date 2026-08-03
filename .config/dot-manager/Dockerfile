@@ -55,9 +55,8 @@ RUN sudo apt-get update && \
     # Setup antidote
     git clone --depth=1 https://github.com/mattmc3/antidote.git ~/.antidote && \
     zsh -c ". '$HOME/.antidote/antidote.zsh' && antidote load '${ZDOTDIR:-$HOME}/.zsh_plugins.txt'" && \
-    # Update dotfiles and git submodules
+    # Update dotfiles
     /home/${USER_NAME}/.config/dot-manager/dot.sh update && \
-    /usr/bin/git --git-dir="$HOME/.cfg/" --work-tree="$HOME" submodule update --remote && \
     # Secure home directory
     chmod 700 /home/${USER_NAME} && \
     # Cleanup

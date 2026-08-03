@@ -185,4 +185,10 @@ __git_dot() {
 	/usr/bin/git --git-dir="$HOME/.cfg/" --work-tree="$HOME" "$@"
 }
 
+# -x -F so ".cfg" never matches ".cfg-backup" and metacharacters in the line can't misfire
+__append_once() {
+	local file="$1" line="$2"
+	grep -qxF -- "$line" "$file" 2>/dev/null || echo "$line" >>"$file"
+}
+
 __HELPER_ALREADY_LOADED=1

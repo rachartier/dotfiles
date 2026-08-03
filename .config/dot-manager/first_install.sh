@@ -5,6 +5,12 @@ __echo_info() {
     tput sgr 0
 }
 
+# duplicated from helper.sh: this runs before the dotfiles repo exists, so it can't source it
+__append_once() {
+    local file="$1" line="$2"
+    grep -qxF -- "$line" "$file" 2>/dev/null || echo "$line" >>"$file"
+}
+
 install_ubuntu_essentials() {
     sudo apt install -y -qq -o=Dpkg::Use-Pty=0 \
         git \
@@ -19,7 +25,7 @@ install_ubuntu_essentials() {
 install_dotfiles() {
     __echo_info "Configuring dotfiles"
 
-    echo ".cfg" >>"$HOME"/.gitignore
+    __append_once "$HOME/.gitignore" ".cfg"
     mkdir "$HOME"/.cfg
 
     if [ "$GIT_CLONE_METHOD" = "ssh" ]; then
@@ -38,7 +44,7 @@ install_dotfiles() {
 prepare_dotfiles() {
     __echo_info "Preparing dotfiles"
 
-    echo 'source "$HOME/.dotfile_profile"' >>"$HOME/.profile"
+    __append_once "$HOME/.profile" 'source "$HOME/.dotfile_profile"'
 
     mkdir -p "$HOME/.local/bin"
     ln -sf "$HOME/.config/dot-manager/dot.sh" "$HOME/.local/bin/dot"
