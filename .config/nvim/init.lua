@@ -28,6 +28,7 @@ vim.defer_fn(function()
 
   require("custom.winbar").setup()
   require("neovide")
+  require("custom.mermaid-diag-generator")
 
   vim.api.nvim_set_hl(0, "Visual", { bg = require("themes").get_colors().surface, bold = false })
 
