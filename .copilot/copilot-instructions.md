@@ -1,3 +1,4 @@
+<!-- rtk-instructions v2 -->
 # RTK — Token-Optimized CLI
 
 **rtk** is a CLI proxy that filters and compresses command outputs, saving 60-90% tokens.
@@ -12,7 +13,7 @@ git status                 rtk git status
 git log -10                rtk git log -10
 cargo test                 rtk cargo test
 docker ps                  rtk docker ps
-kubectl get pods           rtk kubectl pods
+kubectl get pods           rtk kubectl get pods
 ```
 
 ## Meta commands (use directly)
@@ -23,4 +24,4 @@ rtk gain --history    # Per-command savings history
 rtk discover          # Find missed rtk opportunities
 rtk proxy <cmd>       # Run raw (no filtering) but track usage
 ```
-
+<!-- /rtk-instructions -->
