@@ -50,20 +50,10 @@ actions:
       Output ONLY commit messages (one per line), no additional text.
     commands:
       diff:
-        - "git"
-        - "-C"
+        - "sh"
+        - "-c"
+        - 'git -C "$0" diff --no-color --no-ext-diff --cached -U1 -M --diff-filter=d -- ":(exclude)*.lock" ":(exclude)package-lock.json" ":(exclude)dist/**" | head -c 60000'
         - "$path"
-        - "diff"
-        - "--no-color"
-        - "--no-ext-diff"
-        - "--cached"
-        - "-U1"
-        - "-M"
-        - "--diff-filter=d"
-        - "--"
-        - ":(exclude)*.lock"
-        - ":(exclude)package-lock.json"
-        - ":(exclude)dist/**"
       logs:
         - "git"
         - "-C"
