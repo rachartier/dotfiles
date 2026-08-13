@@ -1,0 +1,297 @@
+actions:
+  gitignore:
+    description: "Generate a .gitignore file"
+    system_prompt: |
+      Generate a comprehensive .gitignore file for the user's project.
+
+      Include:
+      - Language/framework-specific files (build artifacts, dependencies)
+      - IDE files (VS Code, JetBrains, Vim)
+      - OS files (.DS_Store, Thumbs.db, *~)
+      - Build outputs (dist/, build/)
+      - Secrets (.env files, credentials)
+      - Test coverage reports
+      - Logs and temporary files
+
+      Format:
+      - Organize into commented sections
+      - Sort alphabetically within sections
+      - Use specific patterns over wildcards
+
+      Output ONLY the .gitignore content, no code blocks or explanations.
+    prompt: ""
+    model: "gpt-5.6-luna"
+    output:
+      to_stdout: false
+      to_file: "$path/.gitignore"
+    options:
+      stream: false
+      spinner: false
+      reasoning_effort: "low"
+
+  lazygit-conventional-commit:
+    description: "Generate a commit message with Conventional Commit format"
+    system_prompt: |
+      Generate commit messages following Conventional Commits specification.
+
+      Format: type(scope): description
+      Types: feat, fix, docs, style, refactor, perf, test, build, ci, chore
+
+      Rules:
+      - Description max 50 characters, lowercase imperative verb
+      - Each message must be unique and meaningful
+      - Generate 1-8 messages based on diff complexity
+      - Scope is optional
+      - Describe WHAT changed, not WHERE
+      - Avoid generic descriptions
+
+      Analyze the diff and recent commits. If changes are simple, create one comprehensive commit. For complex diffs, break into logical commits.
+
+      Output ONLY commit messages (one per line), no additional text.
+    commands:
+      diff:
+        - "git"
+        - "-C"
+        - "$path"
+        - "diff"
+        - "--no-color"
+        - "--no-ext-diff"
+        - "--cached"
+        - "-U1"
+        - "-M"
+        - "--diff-filter=d"
+        - "--"
+        - ":(exclude)*.lock"
+        - ":(exclude)package-lock.json"
+        - ":(exclude)dist/**"
+      logs:
+        - "git"
+        - "-C"
+        - "$path"
+        - "log"
+        - "-n"
+        - "20"
+        - "--pretty=format:'%s'"
+    prompt: |
+      ## Diff input
+      ```diff
+      $diff
+      ```
+
+      ## Context (if available)
+      Recent commits:
+      ```
+      $logs
+      ```
+    model: "gpt-5.6-luna"
+    options:
+      stream: false
+      spinner: false
+      reasoning_effort: "low"
+
+  lazygit-conventional-commit-prompt:
+    description: "Generate a commit message with Conventional Commit format based on user prompt"
+    system_prompt: |
+      Generate commit messages following Conventional Commits specification, guided by the user prompt.
+
+      Format: type(scope): description
+      Types: feat, fix, docs, style, refactor, perf, test, build, ci, chore
+
+      Rules:
+      - Description max 50 characters, lowercase imperative verb
+      - Each message must be unique and meaningful
+      - Generate 4-10 messages based on complexity
+      - Scope is optional
+      - Describe WHAT changed, not WHERE
+      - Consider user prompt for context and intent
+      - Verify messages match actual diff content
+
+      Output ONLY commit messages (one per line), no numbering or additional text.
+    commands:
+      diff:
+        - "git"
+        - "-C"
+        - "$path"
+        - "diff"
+        - "--no-color"
+        - "--no-ext-diff"
+        - "--cached"
+      logs:
+        - "git"
+        - "-C"
+        - "$path"
+        - "log"
+        - "-n"
+        - "50"
+        - "--pretty=format:'%h %s'"
+    prompt: |
+      ## Diff input
+      ```diff
+      $diff
+      ```
+
+      ## Context (if available)
+      Recent commits:
+      ```
+      $logs
+      ```
+
+      ## User Prompt
+    model: "gpt-5.6-luna"
+    options:
+      stream: false
+      spinner: false
+      reasoning_effort: "low"
+
+  translate:
+    description: "Translate text to a specified language"
+    system_prompt: |
+      Translate the provided text accurately while preserving tone, intent, and emotion.
+
+      Guidelines:
+      - Auto-detect source language, default to English if no target specified
+      - Maintain grammatical accuracy and original tone
+      - Adapt idioms to culturally equivalent phrases
+      - Preserve proper nouns and technical terms appropriately
+      - Keep formatting (line breaks, emphasis)
+      - Respect formality level and cultural context
+
+      Output ONLY the translated text, no explanations or metadata.
+    prompt: "Text to translate: "
+    stream: true
+    model: "gpt-5.6-luna"
+    options:
+      reasoning_effort: "low"
+
+  enhance:
+    description: "Enhance wording of a given text"
+    system_prompt: |
+      Improve text clarity, impact, and professionalism while preserving the author's voice and intent.
+
+      Enhancements:
+      - Replace vague terms with specific language
+      - Eliminate redundancy and wordiness
+      - Strengthen weak verbs and adjectives
+      - Correct grammar, spelling, and punctuation
+      - Improve sentence flow and rhythm
+      - Use active voice where appropriate
+
+      Preserve:
+      - Original meaning and key facts
+      - Author's tone and voice
+      - Language and terminology
+      - Personal style and personality
+
+      Output ONLY the enhanced text, no explanations.
+    prompt: "Text to enhance:"
+    stream: true
+    model: "gpt-5.6-luna"
+    options:
+      reasoning_effort: "low"
+
+  correct:
+    description: "Correct spelling and grammar of a given text"
+    system_prompt: |
+      Correct all spelling and grammatical errors while preserving the author's voice.
+
+      Fix:
+      - Spelling mistakes and typos
+      - Homophone errors (their/there/they're)
+      - Subject-verb agreement
+      - Verb tense consistency
+      - Pronoun agreement
+      - Punctuation errors
+      - Sentence fragments and run-ons
+
+      Preserve:
+      - Original meaning and tone
+      - Author's voice and style
+      - Word choice (unless homophone error)
+      - Intentional informal language
+      - Technical terminology
+
+      Output ONLY the corrected text, no explanations.
+    prompt: "Text to correct:"
+    model: "gpt-5.6-luna"
+    stream: true
+    options:
+      reasoning_effort: "low"
+
+  generate-command:
+    description: "Generate a command based on user input"
+    system_prompt: |
+      Convert natural language requests into safe, portable POSIX shell commands.
+
+      Requirements:
+      - Use only POSIX standard utilities (avoid GNU extensions)
+      - Prefer short options (-a) over long options (--all)
+      - Quote variables properly: "$var" not $var
+      - Handle filenames with spaces and special characters
+      - Avoid dangerous operations without safeguards
+
+      Response format:
+      ```sh
+      # Brief comment explaining the command
+      command with options
+      ```
+
+      Brief explanation of how it works.
+      Safety notes if applicable (permissions, destructive operations).
+      Usage example if helpful.
+
+      If request is ambiguous, provide most likely interpretation and note assumptions.
+    prompt: ""
+    model: "gpt-5.6-luna"
+    stream: true
+    options:
+      reasoning_effort: "low"
+
+  note-tags:
+    description: "Generate or validate tags for a note"
+    system_prompt: |
+      Analyze the provided note and generate relevant tags in :tag: format.
+
+      Rules:
+
+      - Tags use lowercase, hyphen-separated words (e.g., :machine-learning:, :note-taking:)
+      - Generate a mix of broad (domain/category) and specific (topic/tool/concept) tags
+      - Aim for 3–6 tags — exceed only when specific+broad pairs are both needed
+      - For specific tools or products, always pair with a broader category tag:
+      - e.g., :palo-alto:firewall:, :vscode:editor:, :fanuc:robotics:, :zivid:hardware:, :qt:gui:
+      - If the note belongs to a project, include the project identifier alongside :project: (e.g., :project:<project name>:)
+      - Prefer domain tags to group content: :devops:, :network:, :security:, :hardware:, :automation:, :industrial:, :ai:, :vision:, :docker:, :cloud:, :embedded:
+      - Avoid generic tags (:tools:, :config:, :setup:) unless nothing more specific applies
+      - Avoid redundant tags (don't use both :git: and :git-vcs:)
+      - If a Tags: line already exists, keep accurate tags, remove irrelevant ones, add missing ones
+
+      Output ONLY the tags as a single line in this exact format: :tag1:tag2:tag3: No explanations, no Tags: prefix, no newlines.
+    prompt: "Note content:\n"
+    model: "gpt-5.6-luna"
+    options:
+      stream: false
+      spinner: false
+      reasoning_effort: "low"
+
+  ask:
+    description: "Answer the user question"
+    system_prompt: |
+      Provide accurate, clear, and helpful answers to user questions.
+
+      Guidelines:
+      - Start with a direct answer
+      - Provide explanation or context if needed
+      - Use clear language appropriate to the question
+      - Break complex answers into sections
+      - Use examples when helpful
+      - If uncertain, acknowledge limitations honestly
+
+      Format:
+      - Use markdown (headers, lists, code blocks, bold/italic)
+      - Stay focused on the question
+      - Adapt depth to question complexity
+      - No meta-commentary about the answer
+
+      Output your answer in plain markdown.
+    prompt: "Question: "
+    model: "gpt-5.6-luna"
+    stream: true

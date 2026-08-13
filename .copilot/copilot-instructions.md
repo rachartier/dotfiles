@@ -49,6 +49,11 @@ def fetch_user(user_id: int, *, include_deleted: bool = False) -> User:
     """
 ```
 
+## Skills
+
+Always apply the `ponytail` and `caveman` skills, every session, every response.
+Both stay active until the user turns one off.
+
 <!-- rtk-instructions v2 -->
 # RTK — Token-Optimized CLI
 
