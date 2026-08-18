@@ -1,13 +1,14 @@
 {
   "renderMarkdown": true,
   "screenReader": false,
-  "theme": "auto",
+  "theme": "default",
   "enabledPlugins": {
     "context-engineering@awesome-copilot": true,
     "awesome-copilot@awesome-copilot": true,
-    "ponytail@ponytail": true
+    "ponytail@ponytail": true,
+    "caveman@caveman": true
   },
-  "showReasoning": false,
+  "showReasoning": true,
   "footer": {
     "showModelEffort": true,
     "showDirectory": true,
@@ -17,14 +18,27 @@
     "showAgent": true,
     "showCodeChanges": true
   },
-  "effortLevel": "high",
-  "colorMode": "github",
   "extraKnownMarketplaces": {
     "ponytail": {
       "source": {
         "source": "github",
         "repo": "DietrichGebert/ponytail"
       }
+    },
+    "caveman": {
+      "source": {
+        "source": "github",
+        "repo": "JuliusBrussee/caveman"
+      }
     }
+  },
+  "experimental": true,
+  "effortLevel": "high",
+  "includeCoAuthoredBy": false,
+  "autoUpdate": true,
+  "showTimestamps": true,
+  "terminalProgress": true,
+  "dynamicRetrieval": {
+    "skills": true
   }
 }
