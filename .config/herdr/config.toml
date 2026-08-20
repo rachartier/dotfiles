@@ -1,0 +1,83 @@
+# Ported from ~/.config/tmux
+
+[theme]
+name = "catppuccin"
+
+[terminal]
+default_shell = "/usr/bin/zsh"
+new_cwd = "follow"
+
+[ui]
+mouse_capture = true
+copy_on_select = true
+confirm_close = true
+pane_borders = true
+pane_outer_borders = true
+
+[keys]
+prefix = "²"
+
+reload_config = "prefix+r"
+close_tab = "prefix+k"
+
+# alt+hjkl / alt+arrows pane focus (tmux M-h..M-l, M-left..M-right)
+focus_pane_left = ["alt+h", "alt+left"]
+focus_pane_down = ["alt+j", "alt+down"]
+focus_pane_up = ["alt+k", "alt+up"]
+focus_pane_right = ["alt+l", "alt+right"]
+
+# tmux M-H = split-window -h (right), M-V = split-window -v (below)
+split_vertical = ["alt+shift+h", "ctrl+alt+h"]
+split_horizontal = ["alt+shift+v", "ctrl+alt+v"]
+
+zoom = "alt+f"
+close_pane = ["alt+shift+x", "ctrl+alt+x"]
+
+# tmux S-Left / S-Right window switch
+previous_tab = ["shift+left", "prefix+p"]
+next_tab = ["shift+right", "prefix+n"]
+
+# tmux bind < > - + resize-pane
+resize_pane_left = "prefix+comma"
+resize_pane_right = "prefix+period"
+resize_pane_down = "prefix+minus"
+resize_pane_up = "prefix+plus"
+
+# tmux M-s session picker / M-p project picker
+workspace_picker = "alt+s"
+goto = "prefix+g"
+
+[[keys.command]]
+key = "alt+g"
+type = "popup"
+command = "TMUX_NEOGIT_POPUP=1 nvim -c 'lua require(\"neogit\").open({ kind = \"replace\" })'"
+width = "90%"
+height = "90%"
+
+[[keys.command]]
+key = "alt+shift+g"
+type = "popup"
+command = "TMUX_NEOGIT_POPUP=1 GIT_DIR=$HOME/.cfg GIT_WORK_TREE=$HOME nvim -c 'lua require(\"neogit\").open({ kind = \"replace\" })'"
+width = "90%"
+height = "90%"
+
+[[keys.command]]
+key = "alt+d"
+type = "popup"
+command = "lazydocker"
+width = "90%"
+height = "90%"
+
+[[keys.command]]
+key = "alt+shift+s"
+type = "popup"
+command = "$HOME/.config/scripts/fzf_ssh_host.sh"
+width = "90%"
+height = "90%"
+
+[[keys.command]]
+key = "ctrl+alt+p"
+type = "popup"
+command = "$HOME/.config/scripts/herdr-projects.sh"
+width = "90%"
+height = "90%"
