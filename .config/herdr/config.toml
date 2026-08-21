@@ -43,6 +43,9 @@ resize_pane_right = "prefix+period"
 resize_pane_down = "prefix+minus"
 resize_pane_up = "prefix+plus"
 
+previous_workspace = "alt+shift+left"
+next_workspace = "alt+shift+right"
+
 # tmux M-s session picker / M-p project picker
 workspace_picker = "alt+s"
 goto = "prefix+g"
@@ -81,3 +84,8 @@ type = "popup"
 command = "$HOME/.config/scripts/herdr-projects.sh"
 width = "90%"
 height = "90%"
+
+[[keys.command]]
+key = "ctrl+r"
+type = "plugin_action"
+command = "persiyanov.reviewr.toggle"   # <plugin_id>.<action_id> — note the id, not the name

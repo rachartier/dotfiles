@@ -1,7 +1,6 @@
 
-format = """
+format = """$hostname\
 $username\
-$hostname\
 $directory\
 $git_branch\
 $git_state\
@@ -24,9 +23,9 @@ when = """ test "$($HOME/.config/scripts/is_inside_docker.sh)" = "1" """
 style = "blue"
 
 [hostname]
-ssh_symbol = " "
-format = '[$ssh_symbol](bold green)'
-disabled = true
+ssh_symbol = ''
+format = '[\(SSH\)](bold green) '
+# disabled = false
 
 [character]
 success_symbol = "[❯](bold purple)"

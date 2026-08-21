@@ -2,28 +2,54 @@
 # fzf-pick a git project under ~/dev, open it as a herdr workspace.
 set -uo pipefail
 
-repo_list=$(fd -u -t d -H "^\.git$" "$HOME/dev" -j 8 -x dirname {} |
-    xargs -P "$(nproc)" -I{} bash -c '
-    repo="$1"
-    name=$(basename "$repo")
-    date=$(git -C "$repo" log --max-count=1 --format="%cd" --date=format:"%Y-%m-%d" 2>/dev/null)
-    if [ -z "$date" ]; then
-        echo "0|No commits|$repo|$name"
-    else
-        echo "1|$date|$repo|$name"
+cache="${XDG_CACHE_HOME:-$HOME/.cache}/herdr-projects.tsv"
+
+# Repo date is the newest mtime of .git and .git/logs/HEAD: it tracks fetch and
+# checkout as well as commit, but costs two processes instead of one git log per repo.
+build_list() {
+    fd -u -t d -H --prune '^\.git$' "$HOME/dev" -0 |
+        awk 'BEGIN { RS = ORS = "\0" } { sub(/\/$/, ""); print; print $0 "/logs/HEAD" }' |
+        xargs -0 stat -c '%y|%n' 2>/dev/null |
+        awk -F'|' '{
+            path = $2
+            sub(/\/logs\/HEAD$/, "", path)
+            sub(/\/\.git$/, "", path)
+            stamp = substr($1, 1, 19)
+            if (stamp > newest[path]) newest[path] = stamp
+        }
+        END {
+            for (repo in newest) {
+                name = repo
+                sub(/.*\//, "", name)
+                print newest[repo] "|" substr(newest[repo], 1, 10) "|" repo "|" name
+            }
+        }' |
+        sort -t'|' -k1,1r |
+        awk -F'|' '{ print $3 " :: \033[38;5;4m[" $2 "]\033[0m " $4 }'
+}
+
+pick() {
+    fzf --ansi --with-nth 3,4,5 \
+        --prompt='herdr workspace> ' \
+        --preview "eza --color=always --long --no-filesize --icons=always --no-time --no-user --no-permissions {1}"
+}
+
+mkdir -p "$(dirname "$cache")"
+
+if [ "${1:-}" = "--refresh" ] || [ ! -s "$cache" ]; then
+    build_list >"$cache.$$"
+    if [ ! -s "$cache.$$" ]; then
+        rm -f "$cache.$$"
+        echo "No projects found" >&2
+        exit 1
     fi
-' -- {} |
-    sort -t"|" -k1,1r -k2,2r |
-    awk -F"|" '{print $3" :: \033[38;5;4m["$2"]\033[0m "$4}')
-
-if [ -z "$repo_list" ]; then
-    echo "No projects found" >&2
-    exit 1
+    mv "$cache.$$" "$cache"
+    selection=$(pick <"$cache")
+else
+    selection=$(pick <"$cache")
+    (build_list >"$cache.$$" && mv "$cache.$$" "$cache" || rm -f "$cache.$$") >/dev/null 2>&1 &
+    disown
 fi
-
-selection=$(echo -e "$repo_list" | fzf --ansi --with-nth 3,4,5 \
-    --prompt='herdr workspace> ' \
-    --preview "eza --color=always --long --no-filesize --icons=always --no-time --no-user --no-permissions {1}")
 
 [ -z "$selection" ] && exit 2
 

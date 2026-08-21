@@ -121,3 +121,7 @@ function uv() {
     command "$HOME/.local/bin/uv" "$@"
 }
 
+unset GALLIUM_DRIVER
+export GALLIUM_DRIVER=d3d12
+export MESA_D3D12_DEFAULT_ADAPTER_NAME=NVIDIA
+

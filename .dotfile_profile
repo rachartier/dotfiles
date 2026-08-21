@@ -81,8 +81,6 @@ else
     export APPIMAGE_EXTRACT_AND_RUN=1
 fi
 
-typeset -U path # deduplicate PATH entries
-
 path=(
     "$HOME/.dotnet"
     "$HOME/.dotnet/tools"

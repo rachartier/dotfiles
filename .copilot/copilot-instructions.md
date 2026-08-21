@@ -1,8 +1,8 @@
 # Copilot instructions
 
-Comment rules apply to all languages; docstring rules are Python only. An
-explicit instruction in the current prompt overrides anything here; otherwise
-these are hard constraints.
+Comment rules apply to all languages; docstring and type-hint rules are Python
+only. An explicit instruction in the current prompt overrides anything here;
+otherwise these are hard constraints.
 
 ## Comments
 
@@ -32,6 +32,52 @@ A justified comment is one line. If it needs a paragraph, it is a commit message
 ```python
 # Good: Upstream returns naive datetimes; see #412.
 # Bad:  We parsed this as UTC before, which caused duplicate rows in prod, so...
+```
+
+## Python type hints
+
+The signature is the contract. It is what the caller reads, what the checker
+enforces, and the reason docstrings never repeat a type (D3). Target 3.12+
+syntax; the pre-3.12 fallback is noted where it differs.
+
+- **T1** Annotate every parameter and every return, `-> None` included. Never
+  annotate `self` or `cls`. Annotate locals only where inference fails — empty
+  containers, a narrowed union, a value the checker types as `Any`.
+- **T2** Builtin generics: `list[str]`, `dict[str, int]`, `tuple[int, ...]`,
+  `type[User]`. Never `typing.List`/`Dict`/`Tuple`/`Type`, and never `# type:`
+  comments.
+- **T3** `X | None`, not `Optional[X]`. `X | Y`, not `Union[X, Y]`. A parameter
+  that can receive `None` says so — no implicit optional.
+- **T4** Accept wide, return narrow. Parameters take the `collections.abc`
+  protocol that covers what you actually do (`Iterable`, `Sequence`, `Mapping`,
+  `Callable`); `Mapping` when you only read, `MutableMapping` only when you
+  write. Returns are concrete: `list[str]`, `dict[str, User]`.
+- **T5** No mutable defaults. Default to `None`, widen the annotation with
+  `| None`, resolve in the body.
+- **T6** `Any` is not a shrug. Use `object` for a genuinely opaque value, a type
+  parameter when the return type follows an argument, a `Protocol` when you need
+  a shape rather than a class. A real `Any` earns one line saying why.
+- **T7** Generics and aliases use PEP 695: `def first[T](items: Sequence[T]) -> T:`,
+  `type UserId = int`. Below 3.12, `TypeVar` and `TypeAlias`. Decorators
+  preserve the wrapped signature with `ParamSpec`, not `Callable[..., Any]`.
+- **T8** `@overload` when the return type varies across call forms rather than
+  across one argument's type.
+- **T9** Type-only imports live under `if TYPE_CHECKING:`. Any module relying on
+  forward references starts with `from __future__ import annotations`.
+
+A signature that needs a comment to explain its types needs better types.
+
+```python
+# Good
+def load_config[T](
+    paths: Iterable[Path],
+    *,
+    parse: Callable[[str], T],
+    fallback: T | None = None,
+) -> dict[str, T]:
+
+# Bad: bare containers, legacy aliases, implicit optional, mutable default
+def load_config(paths: List, parse=None, fallback=None, seen: dict = {}) -> Dict:
 ```
 
 ## Python docstrings (Google style)
