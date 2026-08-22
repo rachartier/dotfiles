@@ -1,8 +1,10 @@
+onboarding = false
 # Ported from ~/.config/tmux
 
 [theme]
 name = "catppuccin"
 
+auto_switch = false
 [terminal]
 default_shell = "/usr/bin/zsh"
 new_cwd = "follow"
@@ -86,6 +88,6 @@ width = "90%"
 height = "90%"
 
 [[keys.command]]
-key = "ctrl+r"
+key = "ctrl+alt+r"
 type = "plugin_action"
 command = "persiyanov.reviewr.toggle"   # <plugin_id>.<action_id> — note the id, not the name
