@@ -252,5 +252,6 @@ config.mouse_bindings = {
 }
 
 config.term = "wezterm"
+config.enable_kitty_keyboard = true
 
 return config
