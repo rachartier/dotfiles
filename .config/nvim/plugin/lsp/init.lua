@@ -93,6 +93,7 @@ vim.schedule(function()
   })
 
   local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = true
   local server_settings = require("config.languages")
   local tools = collect_tools(server_settings)
 
