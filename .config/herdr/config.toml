@@ -83,7 +83,7 @@ height = "90%"
 [[keys.command]]
 key = "ctrl+alt+p"
 type = "popup"
-command = "$HOME/.config/scripts/herdr-projects.sh"
+command = "$HOME/.config/scripts/projects.sh"
 width = "90%"
 height = "90%"
 
