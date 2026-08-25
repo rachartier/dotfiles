@@ -4,6 +4,12 @@ Comment rules apply to all languages; docstring and type-hint rules are Python
 only. An explicit instruction in the current prompt overrides anything here;
 otherwise these are hard constraints.
 
+## Git safety
+
+- Never run `git add`.
+- Never create commits.
+- Never push to a remote repository.
+
 ## Comments
 
 Default: none. Write one only if all three hold:
@@ -129,9 +135,13 @@ def fetch_user(user_id: int, *, include_deleted: bool = False) -> User:
 
 <!-- rtk-instructions v2 -->
 # RTK — Token-Optimized CLI
+
 **rtk** is a CLI proxy that filters and compresses command outputs, saving 60-90% tokens.
+
 ## Rule
+
 Always prefix shell commands with `rtk`:
+
 ```bash
 # Instead of:              Use:
 git status                 rtk git status
@@ -140,7 +150,9 @@ cargo test                 rtk cargo test
 docker ps                  rtk docker ps
 kubectl get pods           rtk kubectl get pods
 ```
+
 ## Meta commands (use directly)
+
 ```bash
 rtk gain              # Token savings dashboard
 rtk gain --history    # Per-command savings history
