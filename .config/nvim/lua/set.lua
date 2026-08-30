@@ -3,35 +3,35 @@ local opt = vim.opt
 vim.defer_fn(function()
   opt.spell = false
 
-  -- vim.opt.clipboard = "unnamedplus"
-  if vim.fn.executable("win32yank.exe") == 1 then
-    vim.g.clipboard = {
-      cache_enabled = 0,
-      name = "win32yank",
-      copy = {
-        ["+"] = { "win32yank.exe", "-i", "--crlf" },
-        ["*"] = { "win32yank.exe", "-i", "--crlf" },
-      },
-      paste = {
-        ["+"] = { "win32yank.exe", "-o", "--lf" },
-        ["*"] = { "win32yank.exe", "-o", "--lf" },
-      },
-    }
-  else
-    -- OSC 52 paste needs the terminal to answer the query; tmux does, herdr does not.
-    vim.g.clipboard = {
-      cache_enabled = 1,
-      name = "OSC 52",
-      copy = {
-        ["+"] = require("vim.ui.clipboard.osc52").copy("+"),
-        ["*"] = require("vim.ui.clipboard.osc52").copy("*"),
-      },
-      paste = {
-        ["+"] = require("vim.ui.clipboard.osc52").paste("+"),
-        ["*"] = require("vim.ui.clipboard.osc52").paste("*"),
-      },
-    }
-  end
+  vim.opt.clipboard = "unnamedplus"
+  -- if vim.fn.executable("win32yank.exe") == 1 then
+  --   vim.g.clipboard = {
+  --     cache_enabled = 0,
+  --     name = "win32yank",
+  --     copy = {
+  --       ["+"] = { "win32yank.exe", "-i", "--crlf" },
+  --       ["*"] = { "win32yank.exe", "-i", "--crlf" },
+  --     },
+  --     paste = {
+  --       ["+"] = { "win32yank.exe", "-o", "--lf" },
+  --       ["*"] = { "win32yank.exe", "-o", "--lf" },
+  --     },
+  --   }
+  -- else
+  -- OSC 52 paste needs the terminal to answer the query; tmux does, herdr does not.
+  vim.g.clipboard = {
+    cache_enabled = 1,
+    name = "OSC 52",
+    copy = {
+      ["+"] = require("vim.ui.clipboard.osc52").copy("+"),
+      ["*"] = require("vim.ui.clipboard.osc52").copy("*"),
+    },
+    paste = {
+      ["+"] = require("vim.ui.clipboard.osc52").paste("+"),
+      ["*"] = require("vim.ui.clipboard.osc52").paste("*"),
+    },
+  }
+  -- end
 end, 50)
 
 opt.autowrite = true
