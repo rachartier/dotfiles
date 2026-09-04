@@ -3,9 +3,29 @@ local act = wezterm.action
 local config = {}
 
 local function read_file(rel_path)
-	local home = os.getenv("HOME")
-	if home then
-		local file = io.open(home .. rel_path, "r")
+	-- Try native HOME (works when config is loaded inside WSL)
+	-- local home = os.getenv("HOME")
+	-- if home then
+	-- 	local file = io.open(home .. rel_path, "r")
+	-- 	if file then
+	-- 		local content = file:read("*a")
+	-- 		file:close()
+	-- 		if content and content ~= "" then
+	-- 			return content
+	-- 		end
+	-- 	end
+	-- end
+
+	-- Windows: access WSL filesystem via UNC path
+	-- local distro = "michelin-ubuntu" -- match your WSL distro name
+	local distro = "wsl4bib" -- match your WSL distro name
+	local success, stdout = wezterm.run_child_process({ "wsl.exe", "-d", distro, "whoami" })
+	if success and stdout then
+		local username = stdout:gsub("%s+", "")
+		wezterm.log_info("WSL username: " .. username)
+		local unc_path = "//wsl.localhost/" .. distro .. "/home/" .. username .. rel_path
+		wezterm.log_info("Trying UNC path: " .. unc_path)
+		local file = io.open(unc_path, "r")
 		if file then
 			local content = file:read("*a")
 			file:close()
@@ -14,17 +34,7 @@ local function read_file(rel_path)
 			end
 		end
 	end
-	-- Fallback: read via WSL (needed when wezterm runs on Windows)
-	local success, stdout = wezterm.run_child_process({
-		"wsl",
-		"-e",
-		"sh",
-		"-c",
-		"cat $HOME" .. rel_path,
-	})
-	if success and stdout ~= "" then
-		return stdout
-	end
+
 	return nil
 end
 
@@ -41,7 +51,9 @@ end
 
 local function load_theme(name)
 	local content = read_file("/.config/custom-themes/" .. name .. ".sh")
+	wezterm.log_info("Loading theme: " .. name)
 	if not content then
+		wezterm.log_error("Failed to load theme: " .. name)
 		return nil
 	end
 
@@ -58,7 +70,7 @@ config.check_for_updates = true
 config.automatically_reload_config = true
 
 if not os.getenv("WSL_DISTRO_NAME") then
-	config.default_domain = "WSL:Ubuntu"
+	config.default_domain = "WSL:wsl4bib"
 end
 
 -- config.font = wezterm.font_with_fallback({ "Agave", "Symbols Nerd Font" })
@@ -124,6 +136,7 @@ config.harfbuzz_features = {
 }
 
 config.underline_thickness = "0.04cell"
+-- config.underline_thickness = "0.10cell"
 config.underline_position = "-1.6pt"
 config.allow_square_glyphs_to_overflow_width = "Always"
 config.bold_brightens_ansi_colors = "BrightAndBold"
@@ -142,7 +155,7 @@ config.window_padding = {
 
 -- config.win32_acrylic_accent_color = "rgba(36, 39, 58, 0)"
 -- config.window_background_opacity = 0.0
--- config.window_background_opacity = 0.92
+-- config.window_background_opacity = 0.80
 -- config.window_background_opacity = 1
 
 config.window_close_confirmation = "NeverPrompt"
@@ -154,6 +167,9 @@ wezterm.on("user-var-changed", function(window, pane, name, value)
 end)
 
 local theme = load_theme(read_theme_name())
+
+wezterm.log_info("theme_name: " .. read_theme_name())
+wezterm.log_info("theme loaded: " .. tostring(theme ~= nil))
 
 if theme then
 	config.colors = {

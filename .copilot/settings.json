@@ -1,14 +1,34 @@
 {
-  "renderMarkdown": true,
-  "screenReader": false,
-  "theme": "default",
-  "enabledPlugins": {
-    "context-engineering@awesome-copilot": true,
-    "awesome-copilot@awesome-copilot": true,
-    "ponytail@ponytail": true,
-    "caveman@caveman": true
+  "autoUpdate": true,
+  "dynamicRetrieval": {
+    "skills": true
   },
-  "showReasoning": true,
+  "effortLevel": "high",
+  "enabledPlugins": {
+    "awesome-copilot@awesome-copilot": true,
+    "context-engineering@awesome-copilot": true,
+    "ponytail@ponytail": true,
+    "caveman@caveman": true,
+    "devops-oncall@awesome-copilot": true,
+    "project-planning@awesome-copilot": true,
+    "arch@awesome-copilot": true,
+    "doublecheck@awesome-copilot": true
+  },
+  "experimental": true,
+  "extraKnownMarketplaces": {
+    "caveman": {
+      "source": {
+        "source": "github",
+        "repo": "JuliusBrussee/caveman"
+      }
+    },
+    "ponytail": {
+      "source": {
+        "source": "github",
+        "repo": "DietrichGebert/ponytail"
+      }
+    }
+  },
   "footer": {
     "showModelEffort": true,
     "showDirectory": true,
@@ -18,27 +38,14 @@
     "showAgent": true,
     "showCodeChanges": true
   },
-  "extraKnownMarketplaces": {
-    "ponytail": {
-      "source": {
-        "source": "github",
-        "repo": "DietrichGebert/ponytail"
-      }
-    },
-    "caveman": {
-      "source": {
-        "source": "github",
-        "repo": "JuliusBrussee/caveman"
-      }
-    }
-  },
-  "experimental": true,
-  "effortLevel": "high",
   "includeCoAuthoredBy": false,
-  "autoUpdate": true,
+  "renderMarkdown": true,
+  "screenReader": false,
+  "showReasoning": true,
   "showTimestamps": true,
   "terminalProgress": true,
-  "dynamicRetrieval": {
-    "skills": true
-  }
+  "theme": "default",
+  "skillDirectories": [
+    "/tmp/remove-ai-slop"
+  ]
 }
