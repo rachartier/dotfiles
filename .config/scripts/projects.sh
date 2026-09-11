@@ -29,7 +29,8 @@ fi
 build_list() {
     fd -u -t d -H --prune '^\.git$' "$HOME/dev" -0 |
         awk 'BEGIN { RS = ORS = "\0" } { sub(/\/$/, ""); print; print $0 "/logs/HEAD" }' |
-        xargs -0 stat -c '%y|%n' 2>/dev/null |
+        # Repos without commits have no logs/HEAD; don't let pipefail discard the whole list.
+        { xargs -0 stat -c '%y|%n' 2>/dev/null || true; } |
         awk -F'|' '{
             path = $2
             sub(/\/logs\/HEAD$/, "", path)
@@ -89,16 +90,15 @@ if [ -n "$refresh" ] || [ ! -s "$cache" ]; then
         exit 1
     fi
     mv "$cache.$$" "$cache"
-    selection=$(pick <"$cache")
 else
-    selection=$(pick <"$cache")
+    # Refresh while fzf is open: the popup closing after the pick would SIGHUP it.
     (build_list >"$cache.$$" && mv "$cache.$$" "$cache" || rm -f "$cache.$$") >/dev/null 2>&1 &
-    disown
 fi
 
+selection=$(pick <"$cache")
 [ -z "$selection" ] && exit 2
 
-project=$(echo "$selection" | awk -F" :: " '{print $1}')
+project=${selection%% :: *}
 name=$(basename "$project" | tr . _)
 
 "open_$backend" "$project" "$name"
