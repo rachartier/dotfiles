@@ -24,49 +24,38 @@ local function lint_triggers()
 end
 
 vim.schedule(function()
-  -- nvim-lint
   local lint = require("lint")
-  local linter_by_ft = require("config.languages")
-  for _, server_config in pairs(linter_by_ft) do
-    for _, language_name in pairs(server_config.filetypes) do
-      lint.linters_by_ft[language_name] = server_config.linter or {}
-    end
-  end
-  lint_triggers()
-
-  -- conform
-  vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
-
-  local languages = require("config.languages")
   local formatters_by_ft = {}
   local formatters_settings = {}
+  local no_lsp_format = {}
 
-  for _, server_config in pairs(languages) do
-    for _, language_name in pairs(server_config.filetypes) do
-      local formatters = {}
-      for tool_name, tool in pairs(server_config.formatter or {}) do
-        if type(tool) == "table" then
-          table.insert(formatters, tool_name)
-          formatters_settings[tool_name] = tool
-        else
-          table.insert(formatters, tool)
-        end
+  for _, config in ipairs(require("config.languages")) do
+    local formatters = {}
+    for tool_name, tool in pairs(config.formatter or {}) do
+      if type(tool) == "table" then
+        table.insert(formatters, tool_name)
+        formatters_settings[tool_name] = tool
+      else
+        table.insert(formatters, tool)
       end
-      formatters_by_ft[language_name] = formatters
+    end
+
+    for _, ft in ipairs(config.filetypes) do
+      lint.linters_by_ft[ft] = config.linter or {}
+      formatters_by_ft[ft] = formatters
+      no_lsp_format[ft] = config.lsp_fallback == false
     end
   end
+
+  lint_triggers()
+
+  vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 
   require("conform").setup({
     formatters_by_ft = formatters_by_ft,
     format_on_save = function(bufnr)
-      local ft = vim.bo[bufnr].filetype
-
-      local lsp_fallback = true
-      if languages[ft] and languages[ft].lsp_fallback then
-        lsp_fallback = languages[ft].lsp_fallback
-      end
-
-      return { timeout_ms = 1500, lsp_fallback = lsp_fallback }
+      local lsp_format = no_lsp_format[vim.bo[bufnr].filetype] and "never" or "fallback"
+      return { timeout_ms = 1500, lsp_format = lsp_format }
     end,
     formatters = formatters_settings,
   })

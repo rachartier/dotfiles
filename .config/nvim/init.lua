@@ -10,8 +10,6 @@ require("vim._core.ui2").enable({
 
 require("config")
 
-require("themes").set_theme("system")
-
 require("set")
 
 vim.defer_fn(function()
@@ -30,8 +28,6 @@ vim.defer_fn(function()
   require("neovide")
   require("custom.mermaid-diag-generator")
 
-  vim.api.nvim_set_hl(0, "Visual", { bg = require("themes").get_colors().surface, bold = false })
-
   vim.cmd("packadd nvim.undotree")
   vim.keymap.set("n", "<leader>u", "<cmd>Undotree<cr>", { desc = "open undotree" })
 end, 10)
@@ -43,7 +39,7 @@ vim.api.nvim_create_user_command("Theme", function(opts)
 end, {
   nargs = 1,
   complete = function()
-    return vim.tbl_keys(require("themes").available())
+    return require("themes").available()
   end,
 })
 

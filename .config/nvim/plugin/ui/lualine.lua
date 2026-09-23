@@ -24,22 +24,30 @@ vim.schedule(function()
     local cur_line = vim.api.nvim_win_get_cursor(0)[1]
     local lines = vim.api.nvim_buf_line_count(0)
     local i = math.floor((cur_line - 1) / lines * #sbar_chars) + 1
-    return string.rep(sbar_chars[i], 1)
+    return sbar_chars[i]
   end
 
   local colors = require("themes").get_colors()
   local signs = require("config.ui.signs")
   local utils = require("utils")
 
-  local conditions = {
-    buffer_not_empty = function()
-      return vim.fn.empty(vim.fn.expand("%:t")) ~= 1
-    end,
-    check_git_workspace = function()
-      local filepath = vim.fn.expand("%:p:h")
-      local gitdir = vim.fn.finddir(".git", filepath .. ";")
-      return gitdir and #gitdir > 0 and #gitdir < #filepath
-    end,
+  local function in_git_workspace()
+    local filepath = vim.fn.expand("%:p:h")
+    local gitdir = vim.fn.finddir(".git", filepath .. ";")
+    return #gitdir > 0 and #gitdir < #filepath
+  end
+
+  local noncode_ft = {
+    "text",
+    "help",
+    "gitcommit",
+    "gitrebase",
+    "svn",
+    "diff",
+    "markdown",
+    "txt",
+    "plaintext",
+    "jsonc",
   }
 
   local mode_kirby = {
@@ -66,7 +74,7 @@ vim.schedule(function()
     if vim.tbl_contains(ignored, ft) then
       return false
     end
-    return conditions.buffer_not_empty()
+    return vim.fn.expand("%:t") ~= ""
   end
 
   local sections = {
@@ -108,7 +116,7 @@ vim.schedule(function()
         end,
         icon = "",
         color = { fg = colors.text },
-        padding = { left = conditions.check_git_workspace() and 2 or 4, right = 2 },
+        padding = { left = in_git_workspace() and 2 or 4, right = 2 },
       },
       {
         "diagnostics",
@@ -146,10 +154,10 @@ vim.schedule(function()
       },
       {
         function()
-          if is_inside_docker then
-            return " "
-          end
-          return ""
+          return " "
+        end,
+        cond = function()
+          return is_inside_docker
         end,
         color = { fg = colors.blue },
         padding = { left = 1, right = 1 },
@@ -191,7 +199,7 @@ vim.schedule(function()
             })
           end
 
-          if vim.tbl_contains(vim.g.noncode_ft, ft) then
+          if vim.list_contains(noncode_ft, ft) then
             return table.concat({
               lines,
               " lines  ",
@@ -212,9 +220,7 @@ vim.schedule(function()
         color = { fg = colors.text },
       },
       {
-        function()
-          return get_scrollbar()
-        end,
+        get_scrollbar,
         color = { fg = colors.muted },
         padding = { left = 1, right = 0 },
       },

@@ -14,7 +14,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 
 return {
-  root_marker = {
+  root_markers = {
     "main.py",
     "pyproject.toml",
     "setup.py",

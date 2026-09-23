@@ -16,36 +16,22 @@ local function load()
   end
   loaded = true
 
-  vim.pack.add({
-    "https://github.com/theHamsta/nvim-dap-virtual-text",
-    "https://github.com/mfussenegger/nvim-dap",
-  })
+  vim.pack.add({ "https://github.com/theHamsta/nvim-dap-virtual-text" }, { confirm = false })
 
   require("nvim-dap-virtual-text").setup({ highlight_new_as_changed = true })
 
   vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
 
-  local vscode = require("dap.ext.vscode")
-  vscode.json_decode = function(str)
-    -- Strip single-line and block comments from JSONC (vscode launch.json)
-    str = str:gsub("/%*.-%*/", ""):gsub("//[^\n]*", "")
-    return vim.json.decode(str)
-  end
-
   local sign = vim.fn.sign_define
-  sign("DapBreakpoint", { text = "", texthl = "DapBreakpoint", linehl = "", numhl = "red" })
-  sign("DapBreakpointRejected", {
-    text = "",
-    texthl = "DapBreakpoint",
-    linehl = "",
-    numhl = "red",
+  sign("DapBreakpoint", { text = "", texthl = "DapBreakpoint", numhl = "DapBreakpoint" })
+  sign("DapBreakpointRejected", { text = "", texthl = "DapBreakpoint", numhl = "DapBreakpoint" })
+  sign("DapBreakpointCondition", {
+    text = "●",
+    texthl = "DapBreakpointCondition",
+    numhl = "DapBreakpoint",
   })
-  sign(
-    "DapBreakpointCondition",
-    { text = "●", texthl = "DapBreakpointCondition", linehl = "", numhl = "red" }
-  )
-  sign("DapLogPoint", { text = "◆", texthl = "DapLogPoint", linehl = "", numhl = "" })
-  sign("DapStopped", { text = "󰧂", texthl = "DapStopped", linehl = "", numhl = "" })
+  sign("DapLogPoint", { text = "◆", texthl = "DapLogPoint" })
+  sign("DapStopped", { text = "󰧂", texthl = "DapStopped" })
 end
 
 local function map(lhs, rhs, desc, mode)
@@ -112,9 +98,6 @@ map("<leader>dS", function()
 end, "Scopes")
 
 map("<F5>", function()
-  if vim.fn.filereadable(".vscode/launch.json") == 1 then
-    require("dap.ext.vscode").load_launchjs(nil, { coreclr = { "cs" } })
-  end
   require("dap").continue()
 end, "Continue (F5)")
 

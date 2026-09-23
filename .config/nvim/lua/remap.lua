@@ -34,23 +34,7 @@ map("n", "a", function()
 end, { expr = true, desc = "indent on empty line on append" })
 
 map("n", "dd", function()
-  if vim.api.nvim_get_current_line():match("^%s*$") then
-    return '"_dd'
-  else
-    return "dd"
-  end
+  return vim.api.nvim_get_current_line():match("^%s*$") and '"_dd' or "dd"
 end, { expr = true, desc = "smart delete line" })
-
-if not vim.env.TMUX then
-  map("n", "<M-left>", "<C-W>h", { silent = true, desc = "go to left window" })
-  map("n", "<M-right>", "<C-W>l", { silent = true, desc = "go to right window" })
-  map("n", "<M-up>", "<C-W>k", { silent = true, desc = "go to upper window" })
-  map("n", "<M-down>", "<C-W>j", { silent = true, desc = "go to lower window" })
-
-  map("n", "<M-h>", "<C-W>h", { silent = true, desc = "go to left window" })
-  map("n", "<M-l>", "<C-W>l", { silent = true, desc = "go to right window" })
-  map("n", "<M-k>", "<C-W>k", { silent = true, desc = "go to upper window" })
-  map("n", "<M-j>", "<C-W>j", { silent = true, desc = "go to lower window" })
-end
 
 map("n", "<C-p>", "<C-i>", { desc = "go to newer position in jumplist" })

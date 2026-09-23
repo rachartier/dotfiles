@@ -12,11 +12,6 @@ local utils = require("utils")
 function M.render()
   local path = vim.fs.normalize(vim.fn.expand("%:p") --[[@as string]])
 
-  -- No special styling for diff views.
-  if vim.startswith(path, "diffview") then
-    return string.format("%%#Winbar#%s", path)
-  end
-
   local separator = " %#WinbarSeparator#  "
 
   local prefix, prefix_path = "", ""
@@ -32,9 +27,9 @@ function M.render()
     -- sure to pick the longest prefix).
     ---@type table<string, string>
     local special_dirs = {
-      DOTFILES = vim.g.path_dotfiles,
+      DOTFILES = vim.env.HOME .. "/.config",
       HOME = vim.env.HOME,
-      WORK = vim.g.path_dev,
+      WORK = vim.env.HOME .. "/dev",
     }
 
     for dir_name, dir_path in pairs(special_dirs) do

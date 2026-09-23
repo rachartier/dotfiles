@@ -83,13 +83,6 @@ function M.setup()
     },
   })
 
-  vim.api.nvim_create_autocmd("FileType", {
-    pattern = "ministarter",
-    callback = function()
-      vim.b.miniindentscope_disable = true
-    end,
-  })
-
   vim.api.nvim_create_autocmd("VimEnter", {
     once = true,
     callback = function()

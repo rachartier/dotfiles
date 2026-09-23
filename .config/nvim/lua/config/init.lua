@@ -1,6 +1,4 @@
 vim.g.dotfile_config_type = "normal"
-vim.g.path_dotfiles = vim.env.HOME .. "/.config"
-vim.g.path_dev = vim.env.HOME .. "/dev"
 
 vim.g.float_width = 0.65
 vim.g.float_height = 0.85
@@ -34,16 +32,3 @@ vim.filetype.add({
 })
 
 vim.treesitter.language.register("sh", "bash")
-
-vim.g.noncode_ft = {
-  "text",
-  "help",
-  "gitcommit",
-  "gitrebase",
-  "svn",
-  "diff",
-  "markdown",
-  "txt",
-  "plaintext",
-  "jsonc",
-}

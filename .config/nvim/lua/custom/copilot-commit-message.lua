@@ -25,19 +25,14 @@ local function generate_message()
         return
       end
 
-      local items = {}
-
+      local lines = {}
       for _, line in ipairs(vim.split(obj.stdout, "\n")) do
         if line ~= "" then
-          items[#items + 1] = {
-            idx = #items,
-            score = #items,
-            text = line:gsub("^[0-9]+: ", ""),
-          }
+          table.insert(lines, (line:gsub("^[0-9]+: ", "")))
         end
       end
 
-      local function open_commit_picker(items)
+      local function open_commit_picker()
         local parent_win = vim.api.nvim_get_current_win()
         local buf = vim.api.nvim_create_buf(false, true)
 
@@ -45,12 +40,6 @@ local function generate_message()
         vim.api.nvim_set_option_value("buftype", "nofile", { buf = buf })
         vim.api.nvim_set_option_value("bufhidden", "wipe", { buf = buf })
         vim.api.nvim_set_option_value("swapfile", false, { buf = buf })
-
-        local lines = {}
-
-        for _, i in ipairs(items) do
-          table.insert(lines, i.text)
-        end
 
         vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
 
@@ -71,8 +60,6 @@ local function generate_message()
 
         vim.api.nvim_set_option_value("statusline", "", { win = win })
         vim.api.nvim_set_option_value("winbar", "", { win = win })
-        vim.api.nvim_set_option_value("number", false, { win = win })
-        vim.api.nvim_set_option_value("relativenumber", false, { win = win })
         vim.api.nvim_set_option_value("signcolumn", "no", { win = win })
 
         vim.api.nvim_set_option_value("modifiable", false, { buf = buf })
@@ -106,7 +93,7 @@ local function generate_message()
         )
       end
 
-      open_commit_picker(items)
+      open_commit_picker()
     end)
   end
 

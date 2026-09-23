@@ -1,5 +1,20 @@
 local loaded = false
 
+local dials_by_ft = {
+  css = "css",
+  javascript = "typescript",
+  javascriptreact = "typescript",
+  json = "json",
+  lua = "lua",
+  markdown = "markdown",
+  python = "python",
+  sass = "css",
+  scss = "css",
+  typescript = "typescript",
+  typescriptreact = "typescript",
+  yaml = "yaml",
+}
+
 local function load()
   if loaded then
     return
@@ -110,21 +125,6 @@ local function load()
   end
 
   require("dial.config").augends:register_group(groups)
-
-  vim.g.dials_by_ft = {
-    css = "css",
-    javascript = "typescript",
-    javascriptreact = "typescript",
-    json = "json",
-    lua = "lua",
-    markdown = "markdown",
-    python = "python",
-    sass = "css",
-    scss = "css",
-    typescript = "typescript",
-    typescriptreact = "typescript",
-    yaml = "yaml",
-  }
 end
 
 local function dial(increment, g)
@@ -134,7 +134,7 @@ local function dial(increment, g)
   local func = (increment and "inc" or "dec")
     .. (g and "_g" or "_")
     .. (is_visual and "visual" or "normal")
-  local group = vim.g.dials_by_ft[vim.bo.filetype] or "default"
+  local group = dials_by_ft[vim.bo.filetype] or "default"
   return require("dial.map")[func](group)
 end
 
