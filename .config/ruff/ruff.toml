@@ -30,22 +30,28 @@ exclude = [
 # Same as Black.
 line-length = 88
 indent-width = 4
-target-version = "py310"
+# 3.12+ matches copilot-instructions.md (PEP 695 generics, `type` aliases).
+target-version = "py312"
 
 [lint]
 # Enable rules that complement rather than overlap with basedpyright
 select = [
-    "E",    # pycodestyle errors
-    "W",    # pycodestyle warnings
-    "F401", # unused imports (let basedpyright handle other F rules)
-    "F841", # unused variables (let basedpyright handle assignment)
-    "I",    # isort
-    "UP",   # pyupgrade
-    "B",    # flake8-bugbear
-    "C4",   # flake8-comprehensions
-    "PIE",  # flake8-pie
-    "SIM",  # flake8-simplify
-    "RUF",  # Ruff-specific rules
+    "E",      # pycodestyle errors
+    "W",      # pycodestyle warnings
+    "F401",   # unused imports (let basedpyright handle other F rules)
+    "F841",   # unused variables (let basedpyright handle assignment)
+    "I",      # isort
+    "UP",     # pyupgrade: builtin generics, X | None, PEP 695
+    "B",      # flake8-bugbear (incl. B006 mutable defaults)
+    "C4",     # flake8-comprehensions
+    "PIE",    # flake8-pie
+    "SIM",    # flake8-simplify
+    "RUF",    # Ruff-specific rules (incl. RUF013 implicit Optional)
+    "ANN",    # annotate every parameter and return; flag Any
+    "TC",     # type-only imports under `if TYPE_CHECKING:`
+    "D",      # Google-style docstrings
+    "D401",   # imperative summary (off in the google convention by default)
+    "ERA001", # commented-out code
 ]
 
 ignore = [
@@ -54,6 +60,8 @@ ignore = [
     "F822",    # Undefined name in __all__ (let basedpyright handle this)
     "F823",    # Local variable referenced before assignment (let basedpyright handle this)
     "B008",    # Do not perform function calls in argument defaults (can conflict with type checkers)
+    "D105",    # Docstring in magic methods
+    "D107",    # Docstring in __init__
 ]
 
 # Allow fix for all enabled rules (when `--fix`) is provided.
@@ -62,6 +70,13 @@ unfixable = []
 
 # Allow unused variables when underscore-prefixed.
 dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+[lint.per-file-ignores]
+# Tests are not public API: no docstrings required.
+"tests/**" = ["D"]
+
+[lint.pydocstyle]
+convention = "google"
 
 [format]
 # Like Black, use double quotes for strings.
@@ -83,4 +98,3 @@ docstring-code-format = false
 # Set the line length limit used when formatting code snippets in
 # docstrings.
 docstring-code-line-length = "dynamic"
-
