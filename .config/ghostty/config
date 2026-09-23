@@ -10,16 +10,18 @@ font-family = ""
 # font-family = MonoLisa
 font-family = Berkeley Mono
 # font-family = MapleMono
-font-family = Symbols Nerd Fonts Mono
+font-family = Symbols Nerd Font Mono
+font-family = Noto Sans Symbols
 # font-family = CommitMono
 # font-family = IBMPlexMono
 # font-style = Regular
 font-size = 14
 
 font-feature = +zero, +calt, +liga, +clig, +ss01, +ss02
-font-thicken = true
 
+custom-shader = shaders/aurora_glow.glsl
 custom-shader = shaders/cursor_tail.glsl
+custom-shader-animation = always
 
 gtk-wide-tabs = false
 shell-integration-features = true
@@ -27,7 +29,7 @@ copy-on-select = clipboard
 clipboard-read = allow
 clipboard-write = allow
 
-window-decoration = client
+window-decoration = server
 window-theme = ghostty
 
 
@@ -39,8 +41,6 @@ adjust-font-baseline = 20%
 
 link-url = true
 focus-follows-mouse = true
-auto-update = download
-auto-update-channel = tip
 
 app-notifications = no-clipboard-copy
 
@@ -48,7 +48,6 @@ app-notifications = no-clipboard-copy
 
 window-width = 90
 window-height = 30
-window-colorspace = display-p3
 window-padding-color = background
 window-padding-balance = true
 window-padding-x = 8
