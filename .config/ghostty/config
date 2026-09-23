@@ -20,7 +20,8 @@ adjust-cell-height = 15%
 
 # font-feature = +zero, +calt, +liga, +clig, +ss01, +ss02
 
-custom-shader = shaders/aurora_glow.glsl
+# custom-shader = shaders/aurora_glow.glsl
+custom-shader = shaders/gradient_warp.glsl
 custom-shader = shaders/cursor_tail.glsl
 custom-shader-animation = always
 

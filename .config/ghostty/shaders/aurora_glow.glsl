@@ -3,16 +3,16 @@
 // or darker shades of the background, composited only onto background pixels.
 
 // -- CONFIGURATION --
-const float SPEED       = 0.12;  // time scale; the mesh takes about 2 min to loop
+const float SPEED       = 0.9;  // time scale; the mesh takes about 2 min to loop
 // Brightness offsets are relative to the background (0.08 = 8 % lighter).
 const float LIGHT       = 0.04;  // lift of the light blobs
 const float DARK        = 0.22;  // depth of the shadow blobs
-const float RIBBON      = 0.07;  // lift of the aurora ribbons
-const float RAYS        = 0.55;  // vertical ray texture inside the ribbons (0 = smooth bands)
+const float RIBBON      = 0.14;  // lift of the aurora ribbons
+const float RAYS        = 0.08;  // vertical ray texture inside the ribbons (0 = smooth bands)
 const float CURSOR_GLOW = 0.04;  // lift around the cursor (0 = off)
-const float WARP        = 0.60;  // organic wobble of the blob edges
-const float BREATHE     = 0.25;  // slow global pulse of the effect (0 = steady)
-const float VIGNETTE    = 0.0;  // edge darkening
+const float WARP        = 0.42;  // organic wobble of the blob edges
+const float BREATHE     = 0.28;  // slow global pulse of the effect (0 = steady)
+const float VIGNETTE    = 0.02;  // edge darkening
 const float CORNER      = 0.0;  // extra darkening toward the bottom-left prompt area
 const float DITHER      = 1.0 / 255.0; // anti-banding noise amplitude
 const float FLIP_Y      = 0.0;   // set to 1.0 if the ribbons sit at the bottom instead of the top
@@ -53,6 +53,25 @@ float valueNoise(vec2 p) {
     return mix(mix(a, b, u.x), mix(c, d, u.x), u.y);
 }
 
+vec2 hash22(vec2 p) {
+    vec3 p3 = fract(vec3(p.xyx) * vec3(0.1031, 0.1030, 0.0973));
+    p3 += dot(p3, p3.yzx + 33.33);
+    return fract((p3.xx + p3.yz) * p3.zy);
+}
+
+// Gradient noise, remapped to about 0..1. Value noise goes flat along its cell
+// borders, and through the warp those show as faint lines sweeping the screen.
+float gradientNoise(vec2 p) {
+    vec2 i = floor(p);
+    vec2 f = fract(p);
+    vec2 u = f * f * f * (f * (f * 6.0 - 15.0) + 10.0);
+    float a = dot(hash22(i) * 2.0 - 1.0, f);
+    float b = dot(hash22(i + vec2(1.0, 0.0)) * 2.0 - 1.0, f - vec2(1.0, 0.0));
+    float c = dot(hash22(i + vec2(0.0, 1.0)) * 2.0 - 1.0, f - vec2(0.0, 1.0));
+    float d = dot(hash22(i + vec2(1.0, 1.0)) * 2.0 - 1.0, f - vec2(1.0, 1.0));
+    return 0.5 + 1.2 * mix(mix(a, b, u.x), mix(c, d, u.x), u.y); // 1.2: match value noise spread
+}
+
 // Rotating each octave hides the axis-aligned lattice.
 const mat2 OCTAVE_ROT = mat2(0.80, 0.60, -0.60, 0.80);
 
@@ -60,7 +79,7 @@ float fbm(vec2 p) {
     float sum = 0.0;
     float amp = 0.5;
     for (int i = 0; i < 3; i++) {
-        sum += amp * valueNoise(p);
+        sum += amp * gradientNoise(p);
         p = OCTAVE_ROT * p * 2.02;
         amp *= 0.5;
     }
@@ -79,7 +98,11 @@ float ribbon(vec2 p, float height, float phase, float t) {
             + 0.10 * sin(p.x * 1.4 + t * 1.3 + phase)
             + 0.05 * sin(p.x * 3.1 - t * 0.9 + phase * 2.0);
     float d = p.y - y;
-    float body = d > 0.0 ? exp(-d * 5.0) : exp(-d * d * 220.0);
+    // Soft underside: a sharper one reads as a hard line sweeping across the
+    // screen. The hyperbolic round-off avoids a cusp at the peak; 0.0833 = 5/(2*30)
+    // matches the gaussian's curvature.
+    float body = d > 0.0 ? exp(-5.0 * (sqrt(d * d + 0.0833 * 0.0833) - 0.0833))
+                         : exp(-d * d * 30.0);
     float rays = valueNoise(vec2(p.x * 5.0 + phase * 7.0, t * 0.6));
     rays = mix(1.0, 0.35 + 0.9 * rays, RAYS);
     // Fade the ribbon ends so it never touches the window sides at full strength.
@@ -139,10 +162,14 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
     float bgMask = max(baseMask, altMask);
     vec3 effect = (altMask > baseMask ? ALT_BG : base) * shade;
 
-    // Static dither so dark gradients don't band; per-frame noise would shimmer.
-    effect += (hash12(fragCoord) - 0.5) * DITHER;
-
     // Composite: text, app cell backgrounds, selection and cursor pass through.
     vec3 outSrgb = mix(termSrgb, clamp(effect, 0.0, 1.0), bgMask);
-    fragColor = vec4(LINEAR_CHANNEL ? toLinear(outSrgb) : outSrgb, term.a);
+    vec3 outColor = LINEAR_CHANNEL ? toLinear(outSrgb) : outSrgb;
+
+    // Static dither, applied in the output encoding: the output is stored as
+    // 8-bit linear, where a dark background gets only a few levels, so sRGB-space
+    // dither is too small and the gradient bands into hard moving contours.
+    // Per-frame noise would shimmer.
+    outColor += (hash12(fragCoord) - 0.5) * DITHER * bgMask;
+    fragColor = vec4(outColor, term.a);
 }
