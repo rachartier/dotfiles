@@ -16,8 +16,9 @@ font-family = Noto Sans Symbols
 # font-family = IBMPlexMono
 # font-style = Regular
 font-size = 14
+adjust-cell-height = 15%
 
-font-feature = +zero, +calt, +liga, +clig, +ss01, +ss02
+# font-feature = +zero, +calt, +liga, +clig, +ss01, +ss02
 
 custom-shader = shaders/aurora_glow.glsl
 custom-shader = shaders/cursor_tail.glsl
