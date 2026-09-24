@@ -1,21 +1,5 @@
 local M = {}
 
-M.semantic_keys = {
-  "base", "mantle", "surface", "muted",
-  "subtle", "text", "subtext", "highlight",
-  "red", "peach", "yellow", "green",
-  "teal", "blue", "mauve", "flamingo",
-}
-
-function M.validate(colors)
-  for _, key in ipairs(M.semantic_keys) do
-    if not colors[key] then
-      error("Theme missing required color: " .. key)
-    end
-  end
-  return true
-end
-
 function M.to_base16(colors)
   return {
     base00 = colors.base,

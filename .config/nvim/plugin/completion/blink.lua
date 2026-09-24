@@ -1,11 +1,4 @@
-local loaded = false
-
 local function load()
-  if loaded then
-    return
-  end
-  loaded = true
-
   vim.pack.add({
     "https://github.com/rafamadriz/friendly-snippets",
     "https://github.com/fang2hou/blink-copilot",
@@ -37,9 +30,7 @@ local function load()
     signature = { enabled = true },
 
     enabled = function()
-      return vim.bo.filetype ~= "copilot-chat"
-        and vim.bo.buftype ~= "prompt"
-        and vim.b.completion ~= false
+      return vim.bo.buftype ~= "prompt" and vim.b.completion ~= false
     end,
 
     cmdline = {

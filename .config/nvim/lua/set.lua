@@ -1,23 +1,7 @@
 local opt = vim.opt
 
 vim.defer_fn(function()
-  opt.spell = false
-
   vim.opt.clipboard = "unnamedplus"
-  -- if vim.fn.executable("win32yank.exe") == 1 then
-  --   vim.g.clipboard = {
-  --     cache_enabled = 0,
-  --     name = "win32yank",
-  --     copy = {
-  --       ["+"] = { "win32yank.exe", "-i", "--crlf" },
-  --       ["*"] = { "win32yank.exe", "-i", "--crlf" },
-  --     },
-  --     paste = {
-  --       ["+"] = { "win32yank.exe", "-o", "--lf" },
-  --       ["*"] = { "win32yank.exe", "-o", "--lf" },
-  --     },
-  --   }
-  -- else
   -- OSC 52 paste needs the terminal to answer the query; tmux does, herdr does not.
   vim.g.clipboard = {
     cache_enabled = 1,
@@ -31,33 +15,27 @@ vim.defer_fn(function()
       ["*"] = require("vim.ui.clipboard.osc52").paste("*"),
     },
   }
-  -- end
 end, 50)
 
 opt.autowrite = true
-opt.background = "dark"
+opt.termguicolors = true
 opt.whichwrap:append("<>[]hl")
 opt.iskeyword = "@,48-57,_,192-255,-"
 opt.completeopt = "menu,menuone,noselect"
-opt.conceallevel = 0
 opt.ruler = false
 opt.foldenable = false
-opt.confirm = false
 opt.cursorline = true
 opt.expandtab = true
 opt.formatoptions = "rqnl1j"
 opt.grepformat = "%f:%l:%c:%m"
 opt.grepprg = "rg --vimgrep"
 opt.ignorecase = true
-opt.inccommand = "nosplit"
 opt.laststatus = 3
 opt.statusline = " "
 
 opt.cmdheight = 0
-opt.list = false
 opt.pumheight = 20
 opt.number = true
-opt.relativenumber = false
 opt.scrolloff = 8
 opt.sidescrolloff = 8
 opt.sessionoptions = {
@@ -96,11 +74,8 @@ opt.winminwidth = 5
 opt.wrap = false
 
 opt.fillchars = {
-  -- stl = "─",
-  -- stlnc = "─",
   foldopen = "",
   foldclose = "",
-  -- fold = "⸱",
   fold = " ",
   foldsep = " ",
   diff = "╱",

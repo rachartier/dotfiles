@@ -17,7 +17,6 @@ return {
     warn = "",
     info = "",
     hint = "",
-    -- other = "󰠠 ",
   },
   diagnostic = {
     error = "●",

@@ -10,10 +10,8 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
 
 vim.api.nvim_create_autocmd({ "FileType" }, {
   pattern = { "json", "jsonc", "json5" },
-  callback = function(event)
-    if event.match:match("^json") then
-      vim.opt_local.conceallevel = 0
-    end
+  callback = function()
+    vim.opt_local.conceallevel = 0
   end,
   desc = "disable conceallevel for json files",
 })
@@ -194,8 +192,6 @@ vim.api.nvim_create_autocmd("BufReadPost", {
     end)
 
     vim.b[ev.buf].completion = false
-    vim.b[ev.buf].minianimate_disable = true
-    vim.b[ev.buf].minihipatterns_disable = true
 
     vim.schedule(function()
       if vim.api.nvim_buf_is_valid(ev.buf) then

@@ -1,5 +1,5 @@
 return {
-  root_marker = {
+  root_markers = {
     "main.py",
     "pyproject.toml",
     "setup.py",

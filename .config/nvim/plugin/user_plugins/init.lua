@@ -1,6 +1,5 @@
 -- tiny-buffers-switcher
 vim.pack.add({ "https://github.com/rachartier/tiny-buffers-switcher.nvim" }, { confirm = false })
--- vim.opt.rtp:prepend("/home/rachartier/dev/nvim_plugins/tiny_buffers_switcher.nvim")
 require("tiny-buffers-switcher").setup({
   picker = "buffer",
   window = { width = 0.3, height = 0.2 },
@@ -42,7 +41,6 @@ end)
 -- tiny-glimmer
 vim.schedule(function()
   vim.pack.add({ "https://github.com/rachartier/tiny-glimmer.nvim" }, { confirm = false })
-  -- vim.opt.rtp:prepend("/home/rachartier/dev/nvim_plugins/tiny-glimmer.nvim")
 
   require("tiny-glimmer").setup({
     transparency_color = require("themes").get_colors().base,
@@ -79,7 +77,6 @@ vim.schedule(function()
 end)
 
 -- tiny-inline-diagnostic
--- vim.opt.rtp:prepend("/home/rachartier/dev/nvim_plugins/tiny-inline-diagnostic.nvim")
 vim.schedule(function()
   vim.pack.add({ "https://github.com/rachartier/tiny-inline-diagnostic.nvim" }, { confirm = false })
 

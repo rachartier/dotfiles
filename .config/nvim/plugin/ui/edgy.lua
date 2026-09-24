@@ -5,7 +5,6 @@ vim.schedule(function()
     icons = { closed = "  ", open = "  " },
     animate = { enabled = false },
     right = {
-      { ft = "copilot-chat", title = "Copilot Chat", size = { width = 0.30 } },
       { ft = "kulala-json", title = "Kulala (JSON)", size = { width = 0.30 } },
       { ft = "kulala-xml", title = "Kulala (XML)", size = { width = 0.30 } },
       { ft = "kulala-html", title = "Kulala (HTML)", size = { width = 0.30 } },

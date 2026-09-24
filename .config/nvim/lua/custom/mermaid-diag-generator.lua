@@ -1,24 +1,8 @@
-local M = {}
-
-local default_opts = {
-  format = "png",
-  theme = "default",
-  background = "white",
-  output_dir = "/tmp",
-  open_cmd = nil,
-  mmdc = "mmdc",
-  width = 1600,
-  height = nil,
-  config_file = nil,
-  auto_width = true,
-  mermaid_config = {
-    gantt = { useMaxWidth = false },
-    flowchart = { useMaxWidth = false },
-    sequence = { useMaxWidth = false },
-  },
+local mermaid_config = {
+  gantt = { useMaxWidth = false },
+  flowchart = { useMaxWidth = false },
+  sequence = { useMaxWidth = false },
 }
-
-local opts = vim.deepcopy(default_opts)
 
 local function get_block_under_cursor()
   local cur = vim.api.nvim_win_get_cursor(0)[1]
@@ -68,86 +52,59 @@ local function estimate_width(lines)
     local trimmed = line:gsub("^%s+", "")
     if trimmed ~= "" and not trimmed:match("^%%%%") then
       count = count + 1
-      if #trimmed > max_label then
-        max_label = #trimmed
-      end
+      max_label = math.max(max_label, #trimmed)
     end
   end
 
-  local width = math.max(count * 90, max_label * 14)
-  width = math.max(width, 1200)
-  width = math.min(width, 6000)
-  return width
+  return math.min(math.max(count * 90, max_label * 14, 1200), 6000)
 end
 
-local function write_config()
-  if opts.config_file then
-    return vim.fn.expand(opts.config_file)
+local function render()
+  if vim.fn.executable("mmdc") == 0 then
+    vim.notify(
+      "mermaid-render: 'mmdc' not found on PATH (npm i -g @mermaid-js/mermaid-cli)",
+      vim.log.levels.ERROR
+    )
+    return
   end
-  if not opts.mermaid_config then
-    return nil
-  end
-  local tmp = vim.fn.tempname() .. ".json"
-  vim.fn.writefile({ vim.json.encode(opts.mermaid_config) }, tmp)
-  return tmp
-end
 
-local function output_path(src_name)
-  local base
-  if src_name and src_name ~= "" then
-    base = vim.fn.fnamemodify(src_name, ":t:r")
+  local buf = vim.api.nvim_get_current_buf()
+  local name = vim.api.nvim_buf_get_name(buf)
+  local ext = name:match("%.([^.]+)$")
+
+  local lines, err
+  if vim.bo[buf].filetype == "mermaid" or ext == "mmd" or ext == "mermaid" then
+    lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
   else
-    base = "mermaid_" .. os.time()
+    lines, err = get_block_under_cursor()
+    if not lines then
+      vim.notify("mermaid-render: " .. err, vim.log.levels.WARN)
+      return
+    end
   end
 
-  local dir
-  if opts.output_dir then
-    dir = vim.fn.expand(opts.output_dir)
-  elseif src_name and src_name ~= "" then
-    dir = vim.fn.fnamemodify(src_name, ":h")
-  else
-    dir = vim.fn.getcwd()
-  end
+  local base = name ~= "" and vim.fn.fnamemodify(name, ":t:r") or ("mermaid_" .. os.time())
+  local out_file = "/tmp/" .. base .. ".png"
+  local in_file = vim.fn.tempname() .. ".mmd"
+  local config_file = vim.fn.tempname() .. ".json"
+  vim.fn.writefile(lines, in_file)
+  vim.fn.writefile({ vim.json.encode(mermaid_config) }, config_file)
 
-  return string.format("%s/%s.%s", dir, base, opts.format)
-end
-
-local function run_mmdc(in_file, out_file, width)
   local cmd = {
-    opts.mmdc,
+    "mmdc",
     "-i",
     in_file,
     "-o",
     out_file,
     "-t",
-    opts.theme,
+    "default",
     "-b",
-    opts.background,
+    "white",
+    "-w",
+    tostring(estimate_width(lines)),
+    "-c",
+    config_file,
   }
-
-  if width then
-    table.insert(cmd, "-w")
-    table.insert(cmd, tostring(width))
-  end
-  if opts.height then
-    table.insert(cmd, "-H")
-    table.insert(cmd, tostring(opts.height))
-  end
-  local cfg = write_config()
-  if cfg then
-    table.insert(cmd, "-c")
-    table.insert(cmd, cfg)
-  end
-
-  if vim.fn.executable(opts.mmdc) == 0 then
-    vim.notify(
-      ("mermaid-render: '%s' not found on PATH (npm i -g @mermaid-js/mermaid-cli)"):format(
-        opts.mmdc
-      ),
-      vim.log.levels.ERROR
-    )
-    return
-  end
 
   vim.system(cmd, { text = true }, function(res)
     vim.schedule(function()
@@ -157,42 +114,12 @@ local function run_mmdc(in_file, out_file, width)
         return
       end
       vim.notify("mermaid-render: wrote " .. out_file, vim.log.levels.INFO)
-      if opts.open_cmd then
-        vim.system({ opts.open_cmd, out_file }, { detach = true })
-      end
     end)
   end)
 end
 
-function M.render()
-  local buf = vim.api.nvim_get_current_buf()
-  local ft = vim.bo[buf].filetype
-  local name = vim.api.nvim_buf_get_name(buf)
-  local ext = name:match("%.([^.]+)$")
-
-  local is_mermaid_file = ft == "mermaid" or ext == "mmd" or ext == "mermaid"
-
-  local out = output_path(name)
-
-  if is_mermaid_file then
-    local tmp = vim.fn.tempname() .. ".mmd"
-    local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
-    vim.fn.writefile(lines, tmp)
-    local width = opts.auto_width and estimate_width(lines) or opts.width
-    run_mmdc(tmp, out, width)
-  else
-    local block, err = get_block_under_cursor()
-    if not block then
-      vim.notify("mermaid-render: " .. err, vim.log.levels.WARN)
-      return
-    end
-    local tmp = vim.fn.tempname() .. ".mmd"
-    vim.fn.writefile(block, tmp)
-    local width = opts.auto_width and estimate_width(block) or opts.width
-    run_mmdc(tmp, out, width)
-  end
-end
-
-vim.api.nvim_create_user_command("MermaidRender", function()
-  M.render()
-end, { desc = "Render mermaid diagram from buffer or block under cursor" })
+vim.api.nvim_create_user_command(
+  "MermaidRender",
+  render,
+  { desc = "Render mermaid diagram from buffer or block under cursor" }
+)
