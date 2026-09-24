@@ -10,6 +10,10 @@ otherwise these are hard constraints.
 - Never create commits.
 - Never push to a remote repository.
 
+## System
+
+- Do NOT search for packages at "/". First, check the current working directory, then the user's home directory, then the system directories only. Never search the entire filesystem.
+
 ## Comments
 
 Default: none. Write one only if all three hold:
@@ -132,31 +136,3 @@ def fetch_user(user_id: int, *, include_deleted: bool = False) -> User:
   affect the other, and it stays off for the rest of the session. Session
   length, context compaction, and topic changes do not deactivate them.
 - **S3** Skills shape prose to the user. File contents follow the rules above.
-
-<!-- rtk-instructions v2 -->
-# RTK — Token-Optimized CLI
-
-**rtk** is a CLI proxy that filters and compresses command outputs, saving 60-90% tokens.
-
-## Rule
-
-Always prefix shell commands with `rtk`:
-
-```bash
-# Instead of:              Use:
-git status                 rtk git status
-git log -10                rtk git log -10
-cargo test                 rtk cargo test
-docker ps                  rtk docker ps
-kubectl get pods           rtk kubectl get pods
-```
-
-## Meta commands (use directly)
-
-```bash
-rtk gain              # Token savings dashboard
-rtk gain --history    # Per-command savings history
-rtk discover          # Find missed rtk opportunities
-rtk proxy <cmd>       # Run raw (no filtering) but track usage
-```
-<!-- /rtk-instructions -->
