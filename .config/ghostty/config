@@ -22,7 +22,8 @@ adjust-cell-height = 15%
 
 # custom-shader = shaders/aurora_glow.glsl
 custom-shader = shaders/gradient_warp.glsl
-custom-shader = shaders/cursor_tail.glsl
+# custom-shader = shaders/cursor_tail.glsl
+custom-shader = shaders/cursor_neovide.glsl
 custom-shader-animation = always
 
 gtk-wide-tabs = false
@@ -35,7 +36,7 @@ window-decoration = server
 window-theme = ghostty
 
 
-adjust-underline-thickness = -20%
+adjust-underline-thickness = -40%
 adjust-underline-position = -0
 adjust-strikethrough-thickness = -20%
 adjust-box-thickness = -20%
