@@ -44,8 +44,11 @@ adjust-font-baseline = 20%
 
 link-url = true
 focus-follows-mouse = true
+mouse-scroll-multiplier = precision:3,discrete:5
+
 
 app-notifications = no-clipboard-copy
+desktop-notifications = false
 
 # term=xterm-ghostty
 
