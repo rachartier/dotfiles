@@ -316,6 +316,15 @@
       "skillFolderHash": "11e6c906e0bb9619a4965895aad28400d2f11c8b",
       "installedAt": "2026-09-06T13:42:55.708Z",
       "updatedAt": "2026-09-06T13:42:55.708Z"
+    },
+    "multi-stage-dockerfile": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/github/awesome-copilot.git",
+      "skillPath": "skills/multi-stage-dockerfile/SKILL.md",
+      "skillFolderHash": "c48773c7887197168099307c60b5dab2a553259c",
+      "installedAt": "2026-09-30T17:55:32.386Z",
+      "updatedAt": "2026-09-30T17:55:32.386Z"
     }
   },
   "dismissed": {

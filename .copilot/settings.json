@@ -1,8 +1,40 @@
 {
   "enabledPlugins": {
     "ponytail@ponytail": true,
-    "context-engineering@awesome-copilot": true,
+    "context-engineering@awesome-copilot": false,
     "caveman@caveman": true,
-    "awesome-copilot@awesome-copilot": true
+    "awesome-copilot@awesome-copilot": false
+  },
+  "experimental": true,
+  "includeCoAuthoredBy": false,
+  "pinnedPrompts": true,
+  "showReasoning": true,
+  "showTimestamps": true,
+  "footer": {
+    "showAgent": true,
+    "showAiUsed": true,
+    "showBranch": true,
+    "showCodeChanges": true,
+    "showContextWindow": true,
+    "showCustom": true,
+    "showDirectory": true,
+    "showModelEffort": true,
+    "showQuota": true,
+    "showYolo": true
+  },
+  "theme": "default",
+  "extraKnownMarketplaces": {
+    "ponytail": {
+      "source": {
+        "source": "github",
+        "repo": "DietrichGebert/ponytail"
+      }
+    },
+    "caveman": {
+      "source": {
+        "source": "github",
+        "repo": "JuliusBrussee/caveman"
+      }
+    }
   }
 }
