@@ -8,8 +8,7 @@ description: >-
 # README
 
 Goal: in 10 seconds the reader knows what the project does; in 2 minutes they
-have it installed and running. Reference for tone and shape:
-https://github.com/rachartier/tiny-inline-diagnostic.nvim
+have it installed and running.
 
 ## Before writing
 

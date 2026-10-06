@@ -1,15 +1,9 @@
 ---
 name: remove-ai-slop
 description: >-
-  Edit a markdown document to strip AI-generated writing tells (em dashes, "not
-  X but Y" constructions, delve/leverage/robust vocabulary, filler transitions,
-  restated conclusions) while preserving meaning exactly. Use this whenever the
-  user asks to de-slop, de-AI, humanize, or clean up the wording of a document,
-  or says text "sounds like ChatGPT," "sounds AI-written," "reads like a bot,"
-  or asks to remove em dashes from prose. Also use when the user asks for an
-  edit pass on a README, blog post, or doc where the complaint is tone or
-  wording rather than facts. Prefer this over an ad-hoc rewrite, since an ad-hoc
-  rewrite tends to introduce the same tells it is meant to remove.
+  Strip AI writing tells from a markdown document without changing its meaning.
+  Use when asked to de-slop or humanize text, to remove em dashes from prose, or
+  when the complaint is that a document sounds AI-written.
 ---
 # Remove AI slop
 
