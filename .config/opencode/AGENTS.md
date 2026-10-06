@@ -1,27 +1,12 @@
-# OpenCode instructions
+# Global Instructions
 
-Eliminate emojis, filler, hype, soft asks, transitions, and call-to-actions.
-Assume high cognitive acuity despite reduced expression.
-Use direct, austere phrasing aimed at cognitive restoration, not tone matching.
-Disable all behaviors optimizing engagement, sentiment, or flow.
-Do not mirror diction or affect.
-Terminate immediately after delivering information—no appendices or soft closures.
-Goal: enable independent, high-fidelity thinking.
-Make minimal, precise edits. Preserve original structure where possible.
-
-An explicit instruction in the current prompt overrides these rules.
-Ruff (pyproject.toml) enforces Python annotations, generics and docstring
-format: run `ruff check` on Python files you touch and fix what it reports.
-
-# Engineering principles
+## Engineering principles
 
 Apply these principles to every piece of code or instructions you write or modify. They describe how to work, not extra deliverables: never mention them in your output unless asked.
 
-1. **KISS (Keep It Simple)**: Choose the simplest solution that fully meets the requirement. Prefer plain, readable code over clever or generic constructs.
+1. **KISS / YAGNI**: Simplest solution that fully meets the requirement. Implement only what is explicitly requested; no speculative features, options or abstraction layers.
 
-1. **YAGNI (You Aren't Gonna Need It)**: Implement only what is explicitly requested. Do not add speculative features, configuration options, abstraction layers, or "future-proofing" hooks.
-
-1. **DRY (Don't Repeat Yourself)**: Avoid duplicating business logic. Extract shared code only when it makes the code clearer; tolerate small, incidental repetition rather than introducing a premature abstraction.
+1. **DRY**: Avoid duplicating business logic. Tolerate small, incidental repetition rather than introducing a premature abstraction.
 
 1. **Separation of Concerns**: Keep I/O, business logic, orchestration, and presentation in distinct functions or modules. Business logic should be testable without touching the network, filesystem, or UI.
 
@@ -29,9 +14,7 @@ Apply these principles to every piece of code or instructions you write or modif
 
 1. **Fail Fast**: Validate inputs and preconditions at the boundary. When state is invalid, raise a clear, specific error immediately. Never swallow exceptions, return silent defaults, or add fallbacks that hide failures.
 
-1. **Boy Scout Rule**: Leave the code you touch slightly cleaner than you found it (naming, dead code, obvious small issues). Limit this to the area you are already modifying; do not perform unrelated refactors.
-
-## When principles conflict
+### When principles conflict
 
 Resolve in this order:
 1. Correctness and the explicit requirement
@@ -39,17 +22,8 @@ Resolve in this order:
 3. KISS and YAGNI
 4. Separation of Concerns and cohesion/coupling
 5. DRY
-6. Boy Scout Rule
 
 If a requirement seems to call for violating these principles, implement what was asked and flag the concern in one short sentence.
-
-## Git
-
-Never run `git add`, commit, or push.
-
-## System
-
-- Do NOT search for packages at "/". First, check the current working directory, then the user's home directory, then the system directories only. Never search the entire filesystem.
 
 ## Scope and cost
 
@@ -60,44 +34,55 @@ Never run `git add`, commit, or push.
   whole files back.
 - Clear request: finish it without asking for confirmation. Ambiguous one:
   ask once, up front.
-- Verify once at the end (ruff, then the relevant tests), not after every edit.
+- Verify once at the end (`uv run ruff check`, then the relevant tests with
+  `uv run pytest`), not after every edit, unless a skill such as /tdd
+  defines its own test loop.
+
+## System
+
+- Never search from `/`. Look in the working directory, then `~`, then
+  system directories. Never scan the entire filesystem.
+
+## Git
+
+- Write commit messages following the Conventional Commits spec:
+  `<type>(<optional scope>): <description>`
+  - Types: feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert
+  - Description: imperative mood, lowercase, no trailing period, max ~72 chars
+  - Optional body after a blank line explaining what and why, not how
+  - Breaking changes: add `!` after the type/scope and a `BREAKING CHANGE:` footer
+- Never add `Co-Authored-By:` trailers or any AI/agent attribution to commit messages.
+- No "Generated with…" lines, no bot signatures, no emojis crediting the agent.
 
 ## Comments (all languages)
 
 Comment like a good senior developer: rarely, one short line, plain words.
 Say why, never what, and never how you got here. Keep comments true when the
-code changes.
-Do not add section comments that designate areas.
+code changes. Do not add section comments that designate areas.
 
 ```python
 # Good: API returns naive datetimes; treat as UTC (#412).
 # Bad:  loop over users / changed this to fix the bug
 ```
 
-## Python types (3.12+)
+## Python
 
-Write `list[str]`, `X | None`, PEP 695 generics and `type` aliases from the
-start. Beyond what ruff checks:
-
-- Accept wide, return narrow: parameters take the `collections.abc` protocol
-  you actually use (`Mapping` if you only read); returns are concrete.
-- Before `Any`, try `object`, a type parameter, or a `Protocol`. A kept `Any`
-  gets `# noqa: ANN401 - <reason>`.
-- Decorators preserve signatures with `ParamSpec`. Use `@overload` when the
-  return type depends on the call form.
-- Never import `List`, `Dict`, `Set`, `Tuple`, `Optional`, or `Union` from `typing`.
-- Never import inside functions; all imports go at file top.
-- Unless instructed otherwise, always use the uv Python environment and package manager for Python.
-
-## Python docstrings (Google)
-
-Write for a caller who sees only the signature. Never repeat types, restate
-the name, or open with filler ("This function..."). `Args:` gives meaning,
-not type. `Raises:` lists exceptions a caller should handle and their trigger.
+- Before writing, editing or reviewing Python, load the `python-style` skill.
+- Unless instructed otherwise, always use uv as the Python environment and
+  package manager.
 
 ## Skills
 
-- Load `ponytail` and `caveman` at session start. Apply both to every
-  response: short replies, follow-ups, tool turns, error reports.
-- Only an explicit user request turns one off; the other stays on. Session
-  length, compaction and topic changes never turn them off.
+- Load `ponytail` and `caveman` at session start if they are not already
+  active. Keep both on for the whole session: session length, compaction and
+  topic changes never turn them off. Only an explicit user request turns one
+  off; the other stays on.
+- Caveman applies to chat replies only, never to code, comments, docstrings
+  or commit messages. Keep its built-in exceptions (security warnings,
+  irreversible actions).
+
+## Code review
+
+- When finishing work from /implement, /tdd or /diagnosing-bugs, run
+  /ponytail-review on the diff before /code-review. Apply its deletions
+  only within the diff; report anything outside it in one line.

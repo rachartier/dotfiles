@@ -39,7 +39,6 @@
     "lua-lsp@claude-plugins-official": true,
     "andrej-karpathy-skills@karpathy-skills": true,
     "clangd-lsp@claude-plugins-official": true,
-    "agent-skills@addy-agent-skills": true,
     "ponytail@ponytail": true,
     "caveman@caveman": true
   },
@@ -71,5 +70,10 @@
   },
   "alwaysThinkingEnabled": true,
   "effortLevel": "high",
+  "modelSettings": {
+    "claude-opus-5-5": {
+      "effortLevel": "high"
+    }
+  },
   "tui": "fullscreen"
 }
