@@ -342,6 +342,33 @@
       "skillFolderHash": "ce6b7ff0b692d2cd445989bf7e6ce74698aa9a57",
       "installedAt": "2026-10-06T22:45:19.536Z",
       "updatedAt": "2026-10-06T22:45:19.536Z"
+    },
+    "frontend-ui-engineering": {
+      "source": "addyosmani/agent-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/addyosmani/agent-skills.git",
+      "skillPath": "skills/frontend-ui-engineering/SKILL.md",
+      "skillFolderHash": "8fdd24f2b93c198e4973f4008d694929a6082406",
+      "installedAt": "2026-10-06T23:59:27.795Z",
+      "updatedAt": "2026-10-06T23:59:27.795Z"
+    },
+    "modern-python": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/trailofbits/skills.git",
+      "skillPath": "plugins/modern-python/skills/modern-python/SKILL.md",
+      "skillFolderHash": "e84fa2b3a076b4333e4cc6187510f2b180eed427",
+      "installedAt": "2026-10-06T23:59:30.522Z",
+      "updatedAt": "2026-10-06T23:59:30.522Z"
+    },
+    "impeccable": {
+      "source": "pbakaus/impeccable",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/pbakaus/impeccable.git",
+      "skillPath": ".agents/skills/impeccable/SKILL.md",
+      "skillFolderHash": "cf0c4efe93ac2a840130648c466c68eb958dbb48",
+      "installedAt": "2026-10-07T00:01:14.373Z",
+      "updatedAt": "2026-10-07T00:02:23.105Z"
     }
   },
   "dismissed": {
