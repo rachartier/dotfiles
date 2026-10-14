@@ -78,6 +78,9 @@ code changes. Do not add section comments that designate areas.
 # Bad:  loop over users / changed this to fix the bug
 ```
 
+Never write "ponytail" in code comments (e.g. `# ponytail: ...`), even when the ponytail skill asks for it.
+If a simplification needs explaining, write a plain comment without the tag.
+
 ## Python
 
 - Before writing, editing or reviewing Python, load the `python-style` skill.
