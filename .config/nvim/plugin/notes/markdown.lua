@@ -1,7 +1,31 @@
 vim.pack.add({
   "https://github.com/yousefhadder/markdown-plus.nvim",
   "https://github.com/OXY2DEV/markview.nvim",
+  "https://github.com/iamcco/markdown-preview.nvim",
+  "https://github.com/blackhat-7/vellum.nvim",
 }, { confirm = false })
+
+vim.api.nvim_create_autocmd("PackChanged", {
+  callback = function(ev)
+    local name, kind = ev.data.spec.name, ev.data.kind
+    if name == "vellum.nvim" and (kind == "install" or kind == "update") then
+      vim.notify("vellum.nvim: building renderer…")
+      dofile(ev.data.path .. "/build.lua")
+      vim.notify("vellum.nvim: build done")
+    end
+  end,
+})
+
+vim.api.nvim_create_autocmd("PackChanged", {
+  callback = function(ev)
+    local d = ev.data
+    if d.spec.name == "markdown-preview.nvim" and (d.kind == "install" or d.kind == "update") then
+      vim.schedule(function()
+        vim.fn["mkdp#util#install"]()
+      end)
+    end
+  end,
+})
 
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "markdown" },
