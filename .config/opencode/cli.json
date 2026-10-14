@@ -1,6 +1,9 @@
 {
-  "$schema": "https://opencode.ai/v2/cli.json",
-  "theme": {
-    "name": "catppuccin-macchiato"
-  }
+    "$schema": "https://opencode.ai/v2/cli.json",
+    "theme": {
+        "name": "catppuccin-macchiato"
+    },
+    "session": {
+        "thinking": "show"
+    }
 }

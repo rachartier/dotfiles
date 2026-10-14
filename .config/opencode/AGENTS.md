@@ -54,6 +54,19 @@ If a requirement seems to call for violating these principles, implement what wa
 - Never add `Co-Authored-By:` trailers or any AI/agent attribution to commit messages.
 - No "Generated with…" lines, no bot signatures, no emojis crediting the agent.
 
+These files are local agent configuration and must never be committed:
+
+- `AGENTS.md`
+- `GLOSSARY.md`
+- `docs/` (everything in it)
+
+When committing:
+
+- Never stage these paths, and never use `git add -f` on them.
+- Prefer staging specific files over `git add .` or `git add -A`.
+- Before committing, check `git status` and unstage any of these files if they appear.
+- If a skill creates or updates these files, leave the changes uncommitted.
+
 ## Comments (all languages)
 
 Comment like a good senior developer: rarely, one short line, plain words.
