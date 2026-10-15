@@ -1,24 +1,14 @@
+source "$HOME/.profile"
+source "$HOME/.dotfile_profile"
 
-    source "$HOME/.profile"
-    source "$HOME/.dotfile_profile"
-
-export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
-# eval "$(starship init zsh)"
-#
-# avoid it to launch starship a second time to init itself
-STARSHIP_INIT="${XDG_CACHE_HOME:-$HOME/.cache}/starship/init.zsh"
-if [[ ! -s $STARSHIP_INIT ]]; then
-  mkdir -p ${STARSHIP_INIT:h}
-  echo "ok"
-  starship init zsh --print-full-init >| $STARSHIP_INIT
-fi
-source $STARSHIP_INIT
+# WSL-appended /mnt/c dirs cost ~110 ms when zsh hashes $PATH; keep only explorer.exe and powershell.exe dirs.
+typeset -U path
+path=(${path:#/mnt/*} /mnt/c/WINDOWS /mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0)
 
 ANTIDOTE_DIR="$HOME/.antidote"
 [ ! -d $ANTIDOTE_DIR ] && git clone --depth=1 https://github.com/mattmc3/antidote.git $ANTIDOTE_DIR
-source $ANTIDOTE_DIR/antidote.zsh
 
-zsh_plugins=${ZDOTDIR:-$HOME}/.zsh_plugins${DOTFILES_MINIMAL:+_minimal}
+zsh_plugins=${ZDOTDIR:-$HOME}/.zsh_plugins
 [[ -f ${zsh_plugins}.txt ]] || touch ${zsh_plugins}.txt
 
 fpath=($ANTIDOTE_DIR/functions $fpath)
@@ -28,20 +18,64 @@ if [[ ! ${zsh_plugins}.zsh -nt ${zsh_plugins}.txt ]]; then
     antidote bundle <${zsh_plugins}.txt >|${zsh_plugins}.zsh
 fi
 
+# Regenerate uv completions only when the uv binary changes.
+() {
+    local dir=$HOME/.zsh/completions uv=$HOME/.local/bin/uv
+    fpath=($dir $fpath)
+    [[ ! -x $uv || $dir/_uv -nt $uv ]] && return
+    mkdir -p $dir
+    $uv generate-shell-completion zsh >| $dir/_uv || rm -f $dir/_uv
+    ${uv}x --generate-shell-completion zsh >| $dir/_uvx || rm -f $dir/_uvx
+}
+
+zstyle ':plugin:ez-compinit' 'use-cache' 'yes'
 source ${zsh_plugins}.zsh
 
-function zsh_core_setup() {
+autoload -Uz promptinit && promptinit
+prompt pure
 
+# Insert a Python segment (psvar[24]) after Pure's git block.
+PROMPT=${PROMPT/'%(21V.'/'%(24V. %F{yellow}%24v%f.)%(21V.'}
+
+# Python version from $VIRTUAL_ENV, nearest .venv, or nearest .python-version; no subprocesses.
+_pure_python_detect() {
+  psvar[24]=
+  local dir=$PWD cfg ver line
+
+  if [[ -r $VIRTUAL_ENV/pyvenv.cfg ]]; then
+    cfg=$VIRTUAL_ENV/pyvenv.cfg
+  else
+    while :; do
+      if [[ -r $dir/.venv/pyvenv.cfg ]]; then
+        cfg=$dir/.venv/pyvenv.cfg; break
+      elif [[ -r $dir/.python-version ]]; then
+        read -r ver < $dir/.python-version; break
+      fi
+      [[ $dir == / || $dir == $HOME ]] && break
+      dir=${dir:h}
+    done
+  fi
+
+  if [[ -n $cfg ]]; then
+    while IFS= read -r line; do
+      # uv writes "version_info = 3.12.4", stdlib venv writes "version = 3.12.4"
+      [[ $line == version*=* ]] && { ver=${line##*= }; break; }
+    done < $cfg
+  fi
+
+  ver=${ver#cpython-}; ver=${ver%%-*}
+  [[ -n $ver ]] && psvar[24]=$''" v${ver}"   # Nerd Font python icon
+}
+
+autoload -Uz add-zsh-hook
+add-zsh-hook precmd _pure_python_detect
+
+function zsh_core_setup() {
     source $HOME/.aliases
     source $HOME/.zsh/style.zsh
-    # source $HOME/.zsh/transient_prompt.zsh
 
     if command -v zoxide &> /dev/null; then
         eval "$(zoxide init zsh --cmd cd)"
-    fi
-
-    if command -v direnv &> /dev/null; then
-        eval "$(direnv hook zsh)"
     fi
 
     if command -v fzf &> /dev/null; then
@@ -63,11 +97,7 @@ setopt pushd_minus            # exchange meanings of '+' and '-' for directory s
 setopt pushd_silent           # do not print the directory stack after pushd or popd
 
 setopt always_to_end          # cursor moved to the end in full completion
-setopt auto_menu              # show completion menu on successive tab press
-setopt auto_param_slash       # add trailing slash for completed directories
 setopt complete_in_word       # allow completion from within a word/phrase
-setopt hash_list_all          # hash everything before completion
-setopt list_ambiguous         # complete as much as possible, then show menu
 setopt listpacked             # make completion lists more densely packed
 setopt nolisttypes            # disable showing completion types
 setopt glob_dots              # include dotfiles in tab completion without leading dot
@@ -78,10 +108,6 @@ setopt path_dirs              # perform path search even on commands with slashe
 setopt interactivecomments    # allow comments in interactive shells
 
 setopt long_list_jobs         # display PID when suspending processes
-setopt notify                 # report background job status immediately
-
-unsetopt correct correct_all
-# setopt rm_star_wait           # 10-second pause before executing rm *
 
 unsetopt BEEP                 # disable beep on error
 unsetopt flow_control         # disable start/stop characters in shell editor
@@ -101,27 +127,4 @@ setopt share_history          # share command history across sessions
 bindkey "^[[1;5A" history-substring-search-up
 bindkey "^[[1;5B" history-substring-search-down
 
-function tmuxp() {
-    if [ -z "$DOT_TMUXP_LOADED" ]; then
-        for s in $($HOME/.local/bin/tmuxp ls 2>/dev/null); do
-            alias "$s"="$HOME/.local/bin/tmuxp load -y $s"
-        done
-        DOT_TMUXP_LOADED=1
-    fi
-
-    command "$HOME/.local/bin/tmuxp" "$@"
-}
-
-function uv() {
-    if [ -z "$DOT_UV_LOADED" ]; then
-        eval "$($HOME/.local/bin/uv generate-shell-completion zsh)"
-        DOT_UV_LOADED=1
-    fi
-
-    command "$HOME/.local/bin/uv" "$@"
-}
-
-unset GALLIUM_DRIVER
-export GALLIUM_DRIVER=d3d12
 export MESA_D3D12_DEFAULT_ADAPTER_NAME=NVIDIA
-
