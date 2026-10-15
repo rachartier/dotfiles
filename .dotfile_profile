@@ -1,8 +1,11 @@
-THEME_NAME="$(cat "$HOME/.config/custom-themes/.current" 2>/dev/null)"
+theme_current="$HOME/.config/custom-themes/.current"
+[[ -r $theme_current ]] && THEME_NAME=$(<$theme_current)
 THEME_NAME="${THEME_NAME:-macchiato}"
+theme_file="$HOME/.config/custom-themes/$THEME_NAME.sh"
 # shellcheck source=/dev/null
-. "$HOME/.config/custom-themes/$THEME_NAME.sh"
-sed 's/^export //' "$HOME/.config/custom-themes/$THEME_NAME.sh" >"$HOME/.config/tmux/conf/current_theme.conf"
+. "$theme_file"
+tmux_theme="$HOME/.config/tmux/conf/current_theme.conf"
+[[ $tmux_theme -nt $theme_file && $tmux_theme -nt $theme_current ]] || sed 's/^export //' "$theme_file" >"$tmux_theme"
 
 theme="\
     --color=bg+:$COLOR_surface,bg:-1,spinner:$COLOR_flamingo,hl:$COLOR_subtext \
