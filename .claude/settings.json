@@ -1,36 +1,35 @@
 {
-    "permissions": {
-        "deny": [
-            "Bash(git commit)",
-            "Bash(git push)"
-        ]
+  "permissions": {
+    "deny": [
+      "Bash(git commit)",
+      "Bash(git push)"
+    ]
+  },
+  "model": "opus",
+  "enabledPlugins": {
+    "lua-lsp@claude-plugins-official": true,
+    "clangd-lsp@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {
+    "caveman": {
+      "source": {
+        "source": "github",
+        "repo": "JuliusBrussee/caveman"
+      }
+    }
+  },
+  "alwaysThinkingEnabled": true,
+  "effortLevel": "high",
+  "modelSettings": {
+    "claude-opus-5-5": {
+      "effortLevel": "medium"
     },
-    "model": "opus",
-    "enabledPlugins": {
-        "lua-lsp@claude-plugins-official": true,
-        "clangd-lsp@claude-plugins-official": true,
-        "caveman@caveman": true
+    "claude-haiku-5-5": {
+      "effortLevel": "high"
     },
-    "extraKnownMarketplaces": {
-        "caveman": {
-            "source": {
-                "source": "github",
-                "repo": "JuliusBrussee/caveman"
-            }
-        }
-    },
-    "alwaysThinkingEnabled": true,
-    "effortLevel": "high",
-    "modelSettings": {
-        "claude-opus-5-5": {
-            "effortLevel": "medium"
-        },
-        "claude-haiku-5-5": {
-            "effortLevel": "high"
-        },
-        "claude-sonnet-5-5": {
-            "effortLevel": "high"
-        }
-    },
-    "tui": "fullscreen"
+    "claude-sonnet-5-5": {
+      "effortLevel": "high"
+    }
+  },
+  "tui": "fullscreen"
 }
