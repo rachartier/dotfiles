@@ -324,15 +324,6 @@
       "installedAt": "2026-10-06T22:40:58.243Z",
       "updatedAt": "2026-10-06T22:40:58.243Z"
     },
-    "caveman": {
-      "source": "JuliusBrussee/caveman",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/JuliusBrussee/caveman.git",
-      "skillPath": "skills/caveman/SKILL.md",
-      "skillFolderHash": "b314dd99b2b8723aae2de5a22079914567f2e58f",
-      "installedAt": "2026-10-06T22:45:19.536Z",
-      "updatedAt": "2026-10-12T14:08:45.173Z"
-    },
     "frontend-ui-engineering": {
       "source": "addyosmani/agent-skills",
       "sourceType": "github",
@@ -406,13 +397,13 @@
       "updatedAt": "2026-10-13T08:08:45.068Z"
     },
     "ponytail-review": {
-      "source": "DietrichGebert/ponytail",
+      "source": "dietrichgebert/ponytail",
       "sourceType": "github",
-      "sourceUrl": "https://github.com/DietrichGebert/ponytail.git",
+      "sourceUrl": "https://github.com/dietrichgebert/ponytail.git",
       "skillPath": "skills/ponytail-review/SKILL.md",
       "skillFolderHash": "8ad8430c42a6f8cd18758dddb70cfee399725de6",
       "installedAt": "2026-10-13T08:08:45.072Z",
-      "updatedAt": "2026-10-13T08:08:45.072Z"
+      "updatedAt": "2026-10-16T22:23:43.162Z"
     }
   },
   "dismissed": {

@@ -1,79 +1,36 @@
 {
-  "permissions": {
-    "deny": [
-      "Bash(git commit)",
-      "Bash(git push)"
-    ]
-  },
-  "model": "opus",
-  "hooks": {
-    "PreToolUse": [
-      {
-        "matcher": "Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "rtk hook claude"
-          }
+    "permissions": {
+        "deny": [
+            "Bash(git commit)",
+            "Bash(git push)"
         ]
-      }
-    ],
-    "SessionStart": [
-      {
-        "matcher": "*",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash '/home/rachartier/.claude/hooks/herdr-agent-state.sh' session",
-            "timeout": 10
-          }
-        ]
-      }
-    ]
-  },
-  "statusLine": {
-    "type": "command",
-    "command": "bash \"/home/rachartier/.claude/plugins/cache/ponytail/ponytail/4.7.0/hooks/ponytail-statusline.sh\""
-  },
-  "enabledPlugins": {
-    "lua-lsp@claude-plugins-official": true,
-    "andrej-karpathy-skills@karpathy-skills": true,
-    "clangd-lsp@claude-plugins-official": true,
-    "ponytail@ponytail": true,
-    "caveman@caveman": true
-  },
-  "extraKnownMarketplaces": {
-    "karpathy-skills": {
-      "source": {
-        "source": "github",
-        "repo": "forrestchang/andrej-karpathy-skills"
-      }
     },
-    "addy-agent-skills": {
-      "source": {
-        "source": "github",
-        "repo": "addyosmani/agent-skills"
-      }
+    "model": "opus",
+    "enabledPlugins": {
+        "lua-lsp@claude-plugins-official": true,
+        "clangd-lsp@claude-plugins-official": true,
+        "caveman@caveman": true
     },
-    "ponytail": {
-      "source": {
-        "source": "github",
-        "repo": "DietrichGebert/ponytail"
-      }
+    "extraKnownMarketplaces": {
+        "caveman": {
+            "source": {
+                "source": "github",
+                "repo": "JuliusBrussee/caveman"
+            }
+        }
     },
-    "caveman": {
-      "source": {
-        "source": "github",
-        "repo": "JuliusBrussee/caveman"
-      }
-    }
-  },
-  "alwaysThinkingEnabled": true,
-  "effortLevel": "high",
-  "modelSettings": {
-    "claude-opus-5-5": {
-      "effortLevel": "high"
-    }
-  },
-  "tui": "fullscreen"
+    "alwaysThinkingEnabled": true,
+    "effortLevel": "high",
+    "modelSettings": {
+        "claude-opus-5-5": {
+            "effortLevel": "medium"
+        },
+        "claude-haiku-5-5": {
+            "effortLevel": "high"
+        },
+        "claude-sonnet-5-5": {
+            "effortLevel": "high"
+        }
+    },
+    "tui": "fullscreen"
 }
