@@ -34,6 +34,8 @@ source ${zsh_plugins}.zsh
 autoload -Uz promptinit && promptinit
 prompt pure
 
+functions[prompt_pure_set_path_separator]=${functions[prompt_pure_set_path_separator]//'%~'/'%(4~|…/%2~|%~)'}
+
 # Insert a Python segment (psvar[24]) after Pure's git block.
 PROMPT=${PROMPT/'%(21V.'/'%(24V. %F{yellow}%24v%f.)%(21V.'}
 
