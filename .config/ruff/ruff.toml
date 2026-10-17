@@ -32,6 +32,8 @@ line-length = 88
 indent-width = 4
 # 3.12+ matches copilot-instructions.md (PEP 695 generics, `type` aliases).
 target-version = "py312"
+# One line per finding instead of a code snippet.
+output-format = "concise"
 
 [lint]
 # Enable rules that complement rather than overlap with basedpyright
