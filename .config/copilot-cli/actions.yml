@@ -20,7 +20,7 @@ actions:
 
       Output ONLY the .gitignore content, no code blocks or explanations.
     prompt: ""
-    model: "gpt-5.6-luna"
+    model: "claude-haiku-5.5"
     output:
       to_stdout: false
       to_file: "$path/.gitignore"
@@ -73,7 +73,7 @@ actions:
       ```
       $logs
       ```
-    model: "gpt-5.6-luna"
+    model: "claude-haiku-5.5"
     options:
       stream: false
       spinner: false
@@ -127,7 +127,7 @@ actions:
       ```
 
       ## User Prompt
-    model: "gpt-5.6-luna"
+    model: "claude-haiku-5.5"
     options:
       stream: false
       spinner: false
@@ -149,7 +149,7 @@ actions:
       Output ONLY the translated text, no explanations or metadata.
     prompt: "Text to translate: "
     stream: true
-    model: "gpt-5.6-luna"
+    model: "claude-haiku-5.5"
     options:
       reasoning_effort: "low"
 
@@ -175,7 +175,7 @@ actions:
       Output ONLY the enhanced text, no explanations.
     prompt: "Text to enhance:"
     stream: true
-    model: "gpt-5.6-luna"
+    model: "claude-haiku-5.5"
     options:
       reasoning_effort: "low"
 
@@ -202,7 +202,7 @@ actions:
 
       Output ONLY the corrected text, no explanations.
     prompt: "Text to correct:"
-    model: "gpt-5.6-luna"
+    model: "claude-haiku-5.5"
     stream: true
     options:
       reasoning_effort: "low"
@@ -231,7 +231,7 @@ actions:
 
       If request is ambiguous, provide most likely interpretation and note assumptions.
     prompt: ""
-    model: "gpt-5.6-luna"
+    model: "claude-haiku-5.5"
     stream: true
     options:
       reasoning_effort: "low"
@@ -256,7 +256,7 @@ actions:
 
       Output ONLY the tags as a single line in this exact format: :tag1:tag2:tag3: No explanations, no Tags: prefix, no newlines.
     prompt: "Note content:\n"
-    model: "gpt-5.6-luna"
+    model: "claude-haiku-5.5"
     options:
       stream: false
       spinner: false
@@ -283,5 +283,5 @@ actions:
 
       Output your answer in plain markdown.
     prompt: "Question: "
-    model: "gpt-5.6-luna"
+    model: "claude-haiku-5.5"
     stream: true
