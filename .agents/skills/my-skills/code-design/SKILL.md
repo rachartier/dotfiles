@@ -66,6 +66,10 @@ Before adding behavior (anything beyond a local fix):
    piece you need is buried in a larger function), first refactor just that
    code without changing behavior: this preparatory refactoring is part of
    the task. Don't do a larger refactor; propose it at the end.
+5. On a change that spans several modules, name the next request the
+   change makes likely. Where two designs cost the same today, pick the one
+   that makes that request easy (where a responsibility lives, how data is
+   shaped or stored). Build none of it, and name it in one line at the end.
 
 Don't impose an architecture (layered, hexagonal, clean architecture)
 unless the project already uses one or the user asks.
