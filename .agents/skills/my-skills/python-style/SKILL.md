@@ -47,11 +47,11 @@ Leave an existing project's ruff config as it is.
 
 ### I/O and wiring
 
-Put logic worth testing in functions that take data and return data, and do
-the I/O around them (in `main` or the caller). Test those functions directly;
-that needs no injection. The I/O code still gets a test: parse responses in a
-pure function, and test the rest (requests, error handling, exit codes)
-through the one seam.
+Put logic worth testing in functions, or methods on data classes, that take
+data and return data, and do the I/O around them (in `main` or the caller).
+Test them directly; that needs no injection. The I/O code still gets a test:
+parse responses in a pure function, and test the rest (requests, error
+handling, exit codes) through the one seam.
 
 Inject only when a test can't avoid the I/O otherwise, for example when the
 logic and the I/O interleave (retries, polling, paging). Then add one seam per
