@@ -1,0 +1,75 @@
+{
+  "configs": {
+    "old_skill": [
+      "skills/old/python-style/SKILL.md"
+    ],
+    "new_skill": [
+      "skills/new/python-style/SKILL.md",
+      "skills/new/code-design/SKILL.md"
+    ]
+  },
+  "runs_per_config": 2,
+  "evals": [
+    {
+      "id": 1,
+      "name": "fx-report",
+      "fixture": "fx-report",
+      "prompt": "Make me a small command-line tool in this folder that reads a CSV of transactions (columns: date as YYYY-MM-DD, amount, currency) and prints the total spent per month, converted to EUR. Exchange rates come from the Frankfurter API (GET https://api.frankfurter.app/latest?from=EUR returns {\"rates\": {\"USD\": 1.08, ...}}). Add tests. Note: the API isn't reachable from this machine, so don't try calling it for real.",
+      "checks": [
+        {
+          "text": "Project set up with uv (pyproject.toml and uv.lock)",
+          "cmd": "test -f pyproject.toml && test -f uv.lock"
+        },
+        {
+          "text": "Each new runtime dependency is reported with its license",
+          "cmd": "python3 -c \"import tomllib,re,os,sys; d=tomllib.load(open('pyproject.toml','rb')).get('project',{}).get('dependencies',[]); r=open(os.environ['REPORT']).read(); sys.exit(any(not re.search(re.split(r'[<>=!~\\\\[ ;]',x)[0]+r'.*licen[sc]e', r, re.I|re.S) for x in d))\""
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "legacy-discount",
+      "fixture": "legacy-shop",
+      "prompt": "Add discounts to the shop: orders with a subtotal over 100 EUR get 10% off, and VIP customers get 15% off instead (never both). The discount applies before tax in OrderService.total. Add tests."
+    },
+    {
+      "id": 3,
+      "name": "retry-backoff",
+      "fixture": "weather-client",
+      "prompt": "The forecast API sometimes answers 503 or times out. Make fetch_forecast retry those with exponential backoff (up to 3 attempts), but fail right away on other errors. Add tests.",
+      "hidden_tests": [
+        {
+          "file": "hidden/test_hidden_retry_backoff.py",
+          "dest": "tests",
+          "text": "Hidden behaviour tests pass: retries 503 and timeouts, no retry on 404, at most 3 attempts"
+        }
+      ],
+      "checks": [
+        {
+          "text": "The test suite doesn't really sleep through the backoff (under 5 s)",
+          "cmd": "uv run --quiet pytest -q -p no:cacheprovider",
+          "max_seconds": 5
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "dedupe-function",
+      "fixture": "event-dedupe",
+      "prompt": "I get event records as JSON: a list of dicts with keys id, updated_at (ISO 8601 string, with timezone) and payload. Write a function in dedupe.py that removes duplicates by id, keeping the most recently updated one. Add a test.",
+      "hidden_tests": [
+        {
+          "file": "hidden/test_hidden_dedupe_function.py",
+          "dest": ".",
+          "text": "Hidden behaviour tests pass: keeps the latest record by real time, across time zones"
+        }
+      ],
+      "checks": [
+        {
+          "text": "dedupe.py stays plain functions (no class, Protocol or dataclass; a TypedDict is fine)",
+          "cmd": "python3 -c \"import ast,sys; t=ast.parse(open('dedupe.py').read()); sys.exit(any(isinstance(n,ast.ClassDef) and 'TypedDict' not in [ast.unparse(b) for b in n.bases] for n in ast.walk(t)))\""
+        }
+      ]
+    }
+  ]
+}
