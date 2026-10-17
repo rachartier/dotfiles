@@ -15,7 +15,7 @@ if ! systemctl is-active --quiet docker; then
     sudo systemctl start docker
 fi
 
-CONTAINER_NAME="dotfile-env-container"
+CONTAINER_NAME="dotfile-dev"
 if [ "$(docker ps -q -f name=$CONTAINER_NAME)" ]; then
     echo "The container $CONTAINER_NAME is already running. Opening a zsh terminal inside it..."
     sudo docker exec -it $CONTAINER_NAME zsh
