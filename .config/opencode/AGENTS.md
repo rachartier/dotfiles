@@ -42,6 +42,10 @@ In replies, show the changed parts, never whole files.
 - Solve the general problem, not the test cases: no hard-coded values or
   special cases that only make tests pass. If a test looks wrong or the task
   can't be done as asked, say so instead of working around it.
+  Never make a check pass by weakening it: no deleting, skipping or
+  loosening tests, and no suppression or config change that only hides a
+  finding. Change an existing test only when the requested behavior changes
+  it, and say which test and why.
 - When the user says a service is unreachable or off-limits, don't call it,
   even to check; exercise the code through a fake.
 - When asked for ideas, options or a plan, give them and stop; change code
