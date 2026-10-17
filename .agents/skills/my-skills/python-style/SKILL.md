@@ -74,8 +74,8 @@ to verify the change.
 ### Size signals
 
 The check reports long functions, high complexity, many parameters and many
-public methods (C901, PLR09xx); also take a second look at a class over ~150
-lines. These are signals, not limits.
+public methods (C901, PLR09xx); also take a second look at a function over
+~40 lines or a class over ~150 lines. These are signals, not limits.
 
 When one is crossed, check whether the unit still does one thing. If it
 does (a cohesive public API, a dispatch table, a long but linear

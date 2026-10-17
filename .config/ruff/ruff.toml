@@ -50,8 +50,9 @@ select = [
     "ANN",    # annotate every parameter and return; flag Any
     "TC",     # type-only imports under `if TYPE_CHECKING:`
     "D",      # Google-style docstrings
-    "D401",   # imperative summary (off in the google convention by default)
     "ERA001", # commented-out code
+    "PGH003", # rule-specific type-checker ignores only
+    "C90",    # mccabe complexity: catches only tangled functions
 ]
 
 ignore = [
@@ -62,6 +63,7 @@ ignore = [
     "B008",    # Do not perform function calls in argument defaults (can conflict with type checkers)
     "D105",    # Docstring in magic methods
     "D107",    # Docstring in __init__
+    "D401",    # summaries are descriptive ("Fetches…"), not imperative
 ]
 
 # Allow fix for all enabled rules (when `--fix`) is provided.
@@ -72,8 +74,13 @@ unfixable = []
 dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
 
 [lint.per-file-ignores]
-# Tests are not public API: no docstrings required.
-"tests/**" = ["D"]
+# Tests are not public API: no docstrings or annotations required.
+"tests/**" = ["D", "ANN"]
+"**/test_*.py" = ["D", "ANN"]
+"**/conftest.py" = ["D", "ANN"]
+
+[lint.mccabe]
+max-complexity = 15
 
 [lint.pydocstyle]
 convention = "google"
