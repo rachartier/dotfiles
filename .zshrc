@@ -1,9 +1,12 @@
 source "$HOME/.profile"
 source "$HOME/.dotfile_profile"
 
-# WSL-appended /mnt/c dirs cost ~110 ms when zsh hashes $PATH; keep only explorer.exe and powershell.exe dirs.
+# WSL-appended /mnt/c dirs cost ~110 ms when zsh hashes $PATH; drop them and hash only the Windows commands used.
 typeset -U path
-path=(${path:#/mnt/*} /mnt/c/WINDOWS /mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0)
+path=(${path:#/mnt/*})
+hash explorer.exe=/mnt/c/WINDOWS/explorer.exe
+hash powershell.exe=/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/powershell.exe
+hash wsl.exe=/mnt/c/WINDOWS/System32/wsl.exe
 
 ANTIDOTE_DIR="$HOME/.antidote"
 [ ! -d $ANTIDOTE_DIR ] && git clone --depth=1 https://github.com/mattmc3/antidote.git $ANTIDOTE_DIR
@@ -28,7 +31,6 @@ fi
     ${uv}x --generate-shell-completion zsh >| $dir/_uvx || rm -f $dir/_uvx
 }
 
-zstyle ':plugin:ez-compinit' 'use-cache' 'yes'
 source ${zsh_plugins}.zsh
 
 autoload -Uz promptinit && promptinit
