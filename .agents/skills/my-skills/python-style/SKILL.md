@@ -1,9 +1,9 @@
 ---
 name: python-style
 description: >-
-  Python-specific rules: uv tooling, data and module structure, I/O wiring, size
-  signals, type annotations, docstrings and vertical spacing. Use before
-  writing, editing or reviewing any Python code.
+  Python rules: uv, the ruff and ty check, data and module structure, I/O
+  wiring, typing, docstrings and vertical spacing. Use when writing, editing or
+  reviewing Python code.
 ---
 # Python style
 
@@ -12,72 +12,75 @@ to Python. Like it, these rules apply to code you write or change.
 
 ## Tooling
 
-- Use uv unless the project uses another tool or you're told otherwise:
-  `uv add` for dependencies, `uv add --dev` for tooling.
-- Check with `uv run ruff check`, the project's type checker
-  (`uvx ty check` when it has none), then the relevant tests with
-  `uv run pytest`.
+Use uv unless the project uses another tool or you're told otherwise:
+`uv add` for dependencies, `uv add --dev` for tooling.
+
+Verify in this order:
+
+1. Reread each function you wrote against Vertical spacing below.
+2. If the project has a formatter, run it on the changed files.
+3. Run `scripts/check.sh <changed files>` from this skill's folder: one ruff
+   run with the project's rules plus this skill's annotation, docstring,
+   syntax and size rules.
+4. Run the project's type checker (`uvx ty check` when it has none).
+5. Run the relevant tests with `uv run pytest`.
+
+The check ignores D401 on purpose: it asks for imperative summaries and this
+skill asks for descriptive ones ("Fetches…"). Never reword a summary to
+satisfy it.
+
+- Fix every finding on a line you wrote or changed. Leave findings on lines
+  you didn't touch.
+- C901 and PLR09xx findings are size signals: handle them as Size signals
+  says, never with `# noqa`.
+
+When you create a project, add the rules in
+[references/pyproject.md](references/pyproject.md) to `pyproject.toml`.
+Leave an existing project's ruff config as it is.
 
 ## Structure
 
 - Data is a `@dataclass(frozen=True)`, or the project's model library.
-- Define a `Protocol` in the module that consumes it, with only the methods
-  that consumer calls.
 - Name modules after their responsibility, never `utils.py`, `helpers.py`,
   `common.py`, `manager.py` or `misc.py`.
 - Subclass at most one level below a Protocol or ABC.
 
 ### I/O and wiring
 
-Logic worth testing on its own receives the collaborators that do I/O
-through `__init__` or parameters, instead of creating them, opening
-connections or files, or reading env or config. Wire concrete objects at the
-program's entry point. A small script may call I/O directly. No DI
-framework, service locator or global singleton. Tests pass small fakes that
-implement the Protocol instead of `mock.patch`-ing module paths.
+Put logic worth testing in functions that take data and return data, and do
+the I/O around them (in `main` or the caller). Test those functions directly;
+that needs no injection. The I/O code still gets a test: parse responses in a
+pure function, and test the rest (requests, error handling, exit codes)
+through the one seam.
 
-```python
-class RateSource(Protocol):
-    """A source of exchange rates."""
+Inject only when a test can't avoid the I/O otherwise, for example when the
+logic and the I/O interleave (retries, polling, paging). Then add one seam per
+I/O dependency, at the outermost function that needs it, and none below it:
 
-    def rate(self, currency: str) -> Decimal: ...
+- a single function: a keyword-only `Callable` parameter whose default is the
+  real one;
+- an object whose several methods you call (a client, a repository): a
+  `Protocol` in the consuming module, with only those methods, passed through
+  `__init__`.
 
+No seam that no test uses, no DI framework, service locator or global
+singleton. Tests pass small fakes instead of `mock.patch`-ing module paths.
 
-@dataclass(frozen=True)
-class PriceConverter:
-    """Converts prices between currencies."""
-
-    rates: RateSource
-
-    def convert(self, amount: Decimal, currency: str) -> Decimal:
-        """Returns `amount` expressed in `currency`."""
-        return amount * self.rates.rate(currency)
-
-
-# At the entry point
-converter = PriceConverter(rates=EcbRateSource(http_client))
-```
+In existing code, keep public signatures and constructors and test in the
+project's current style (patching a stdlib seam such as `time.sleep` is
+fine). Add a parameter to an existing signature only if it is the only way
+to verify the change.
 
 ### Size signals
 
-These numbers prompt a second look; they are not limits: a module over ~300
-lines; a class over ~150 lines or ~7 public methods; a function over ~30
-statements, complexity over ~8, or more than ~5 parameters.
+The check reports long functions, high complexity, many parameters and many
+public methods (C901, PLR09xx); also take a second look at a class over ~150
+lines. These are signals, not limits.
 
 When one is crossed, check whether the unit still does one thing. If it
 does (a cohesive public API, a dispatch table, a long but linear
-procedure), keep it and give the reason in one line in your final report.
-If not and your change pushes it over, split it as preparatory refactoring;
-otherwise report it in one line. This advisory check lists them for the
-files you changed. It never fails, and its thresholds don't go in the
-project's config or in `# noqa` comments:
-
-```bash
-uv run ruff check --preview --select C90,PLR09 --exit-zero \
-  --config 'lint.mccabe.max-complexity = 8' \
-  --config 'lint.pylint.max-statements = 30' \
-  --config 'lint.pylint.max-public-methods = 7' <changed files>
-```
+procedure), keep it. If not and your change pushes it over, split it as
+preparatory refactoring; otherwise report it in one line.
 
 ## Types
 
@@ -86,8 +89,10 @@ the project's `requires-python` allows (3.12 when it sets none): built-in
 generics, `X | None`, PEP 695 generics and `type` aliases (on older
 versions, `TypeVar` and `TypeAlias`).
 
-- Annotate every parameter and return type, but not `self` or `cls`. Use
-  `Self` when a method takes or returns its own type.
+- Use `Self` when a method takes or returns its own type. A function whose
+  body you change gets full annotations and a docstring, even if it had
+  none; an existing docstring stays unless the change makes it wrong. Its
+  neighbours stay as they are.
 - Annotate a variable only when the checker can't infer its type: an empty
   container, a `None` start, or a value assigned in branches.
 - Accept wide, return narrow: parameters take the `collections.abc` type
@@ -102,19 +107,15 @@ versions, `TypeVar` and `TypeAlias`).
   (`def deco[**P, R](f: Callable[P, R]) -> Callable[P, R]`). Use
   `@overload` when the return type depends on the call form. Mark
   overriding methods with `@override`.
-- Silence the type checker with its rule-specific comment
-  (`# ty: ignore[rule]` for ty), never a bare `# type: ignore`, which
-  ignores everything on the line.
+- Silence ty with its rule-specific comment: `# ty: ignore[rule]`.
 - `if TYPE_CHECKING:` only to avoid a runtime import; an import cycle caused
   by typing is a design problem to fix first.
 
 ## Docstrings
 
-Google style (3.8), always `"""`.
+Google style (3.8), always `"""`. The check enforces where they are
+required; also document any non-obvious private function.
 
-- Required on modules, public classes, public API and any non-obvious
-  function. Skip trivial private helpers, `test_` functions (unless the
-  setup is unusual) and `@override` methods that keep the base contract.
 - Write for a caller who sees only the signature: semantics and side
   effects (e.g. mutates an argument), not implementation. Decorated
   functions describe their behavior after decoration.
@@ -143,40 +144,28 @@ def fetch_rows(table: Table, keys: Sequence[str]) -> Mapping[str, Row]:
 
 ## Vertical spacing
 
-Write function bodies as paragraphs of code: each group of lines is one
-complete step (guard clauses, gathering inputs, the computation, side
-effects, the result), with one blank line between steps. The formatter keeps
-single blank lines but never adds them, so this is on you.
+Function bodies are paragraphs: one blank line between steps (guards,
+inputs, computation, side effects, result). The formatter never adds these
+lines, so write them yourself, even when the surrounding code is dense.
 
-- Never two blank lines inside a function. No blank line inside a step,
-  right after the `def` line or docstring, or at the start or end of an
-  indented block. Keep a call next to the check of its result.
-- A multi-line `if`/`for`/`with`/`try` that is its own step gets a blank
-  line before and after it. Bodies of three lines or fewer stay dense.
-- Past about five paragraphs, or when a paragraph needs a heading comment
-  to be understood, extract a function.
+- A step's lines stay together, and a call stays next to the check of its
+  result.
+- The body starts right after the `def` line or docstring, and a block's
+  first and last lines touch its header and the next line.
+- A multi-line `if`/`for`/`with`/`try` that is its own step has a blank
+  line before and after it; bodies of three lines or fewer stay dense.
+- Past about five paragraphs, extract a function.
 
 ```python
-def export_report(path: Path, rows: Iterable[Row], *, overwrite: bool = False) -> int:
-    """Writes valid rows to a CSV report, sorted by date.
-
-    Returns:
-        The number of rows written.
-
-    Raises:
-        FileExistsError: The report exists and `overwrite` is false.
-    """
-    if path.exists() and not overwrite:
+def export_report(path: Path, rows: Iterable[Row]) -> int:
+    """Writes valid rows to a CSV report and returns how many."""
+    if path.exists():
         raise FileExistsError(path)
 
-    valid = [row for row in rows if row.is_valid()]
-    valid.sort(key=attrgetter("date"))
+    valid = sorted((row for row in rows if row.is_valid()), key=attrgetter("date"))
 
     with path.open("w", newline="") as f:
-        writer = csv.DictWriter(f, fieldnames=HEADER)
-        writer.writeheader()
-        writer.writerows(row.as_dict() for row in valid)
+        csv.writer(f).writerows(row.as_tuple() for row in valid)
 
     return len(valid)
 ```
-
