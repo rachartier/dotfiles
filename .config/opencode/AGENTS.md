@@ -18,7 +18,7 @@ skills. If a conflict blocks you, name both instructions and ask.
 ## Code
 
 Before writing, editing or reviewing code, load the `code-design` skill,
-then the language's skill (`python-style` for Python).
+then the language's skill (`python-code` for Python).
 
 ## Scope
 
@@ -61,13 +61,10 @@ unless a skill such as `tdd` runs its own loop.
 
 ## Code review
 
-When the user asks for a review, apply `ponytail-review` to the diff, then
-`code-review`. Change only code inside the diff; report anything outside it
-in one line.
-
-- code-review's coding standards are `code-design` and the language skill.
-- Its fixed point is the commit the work started from, unless the user
-  names another.
+For a Python project, review with `python-review --base <fixed-point>`. The
+fixed point is the commit the work started from, unless the user names
+another. Change only code inside the diff; report anything outside it in one
+line.
 
 ## Git
 
