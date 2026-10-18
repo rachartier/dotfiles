@@ -1,0 +1,47 @@
+[tool.ruff]
+output-format = "concise"
+
+[tool.ruff.lint]
+select = [
+    "E",      # pycodestyle errors
+    "W",      # pycodestyle warnings
+    "F",      # pyflakes
+    "I",      # isort
+    "UP",     # pyupgrade: builtin generics, X | None, PEP 695
+    "B",      # flake8-bugbear (incl. B006 mutable defaults)
+    "C4",     # flake8-comprehensions
+    "PIE",    # flake8-pie
+    "SIM",    # flake8-simplify
+    "RUF",    # Ruff-specific rules (incl. RUF013 implicit Optional)
+    "ANN",    # annotate every parameter and return; flag Any
+    "TC",     # type-only imports under `if TYPE_CHECKING:`
+    "D",      # Google-style docstrings
+    "ERA001", # commented-out code
+    "PGH003", # rule-specific type-checker ignores only
+    "C90",    # mccabe complexity (size signal)
+    "PLR09",  # too many statements/args/branches/returns (size signal)
+]
+ignore = [
+    "E501", # line length is the formatter's job
+    "B008", # function calls in defaults (FastAPI/Typer style)
+    "D105", # docstring in magic methods
+    "D107", # docstring in __init__
+    "D401", # summaries are descriptive ("Fetches…"), not imperative
+]
+
+[tool.ruff.lint.per-file-ignores]
+# Tests are not public API: no docstrings or annotations required.
+"tests/**" = ["D", "ANN"]
+"**/test_*.py" = ["D", "ANN"]
+"**/conftest.py" = ["D", "ANN"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ty.terminal]
+output-format = "concise"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = ["--strict-markers", "--strict-config"]
+xfail_strict = true

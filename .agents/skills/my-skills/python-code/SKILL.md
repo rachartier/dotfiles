@@ -1,5 +1,5 @@
 ---
-name: python-style
+name: python-code
 description: >-
   Python rules: uv, the ruff and ty check, data and module structure, I/O
   wiring, typing, docstrings and vertical spacing. Use when writing, editing or
@@ -22,21 +22,15 @@ Verify in this order:
 3. Run `scripts/check.sh <changed files>` from this skill's folder: one ruff
    run with the project's rules plus this skill's annotation, docstring,
    syntax and size rules.
-4. Run the project's type checker (`uvx ty check` when it has none).
+4. Run the project's type checker (`uvx ty check --output-format concise`
+   when it has none).
 5. Run the relevant tests with `uv run pytest`.
 
-The check ignores D401 on purpose: it asks for imperative summaries and this
-skill asks for descriptive ones ("Fetches…"). Never reword a summary to
-satisfy it.
+Fix every finding on a line you wrote or changed. Leave findings on lines
+you didn't touch.
 
-- Fix every finding on a line you wrote or changed. Leave findings on lines
-  you didn't touch.
-- C901 and PLR09xx findings are size signals: handle them as Size signals
-  says, never with `# noqa`.
-
-When you create a project, add the rules in
-[references/pyproject.md](references/pyproject.md) to `pyproject.toml`.
-Leave an existing project's ruff config as it is.
+To create a project or update its default config, use the `python-tooling`
+skill. Otherwise leave a project's ruff config as it is.
 
 ## Structure
 
@@ -73,14 +67,15 @@ to verify the change.
 
 ### Size signals
 
-The check reports long functions, high complexity, many parameters and many
-public methods (C901, PLR09xx); also take a second look at a function over
-~40 lines or a class over ~150 lines. These are signals, not limits.
+The check reports long functions, high complexity and many parameters (C901,
+PLR09xx); also take a second look at a function over ~40 lines or a class
+over ~150 lines or with many public methods. These are signals, not limits.
 
 When one is crossed, check whether the unit still does one thing. If it
 does (a cohesive public API, a dispatch table, a long but linear
-procedure), keep it. If not and your change pushes it over, split it as
-preparatory refactoring; otherwise report it in one line.
+procedure), keep it and leave the finding as it is, without `# noqa`. If
+not and your change pushes it over, split it as preparatory refactoring;
+otherwise report it in one line.
 
 ## Types
 

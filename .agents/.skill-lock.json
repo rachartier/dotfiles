@@ -333,15 +333,6 @@
       "installedAt": "2026-10-06T23:59:27.795Z",
       "updatedAt": "2026-10-12T14:08:48.018Z"
     },
-    "modern-python": {
-      "source": "trailofbits/skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/trailofbits/skills.git",
-      "skillPath": "plugins/modern-python/skills/modern-python/SKILL.md",
-      "skillFolderHash": "e84fa2b3a076b4333e4cc6187510f2b180eed427",
-      "installedAt": "2026-10-06T23:59:30.522Z",
-      "updatedAt": "2026-10-06T23:59:30.522Z"
-    },
     "impeccable": {
       "source": "pbakaus/impeccable",
       "sourceType": "github",
