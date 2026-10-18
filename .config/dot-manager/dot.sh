@@ -20,6 +20,7 @@ DOT_MANAGER_COMPLETE_PROGRAMS=(
 	"direnv"
 	"win32yank"
 	"uv"
+	"casquette"
 )
 
 ###
