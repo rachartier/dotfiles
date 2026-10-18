@@ -36,12 +36,10 @@ target-version = "py312"
 output-format = "concise"
 
 [lint]
-# Enable rules that complement rather than overlap with basedpyright
 select = [
     "E",      # pycodestyle errors
     "W",      # pycodestyle warnings
-    "F401",   # unused imports (let basedpyright handle other F rules)
-    "F841",   # unused variables (let basedpyright handle assignment)
+    "F",      # pyflakes
     "I",      # isort
     "UP",     # pyupgrade: builtin generics, X | None, PEP 695
     "B",      # flake8-bugbear (incl. B006 mutable defaults)
@@ -59,9 +57,6 @@ select = [
 
 ignore = [
     "E501",    # Line too long
-    "F821",    # Undefined name (let basedpyright handle this)
-    "F822",    # Undefined name in __all__ (let basedpyright handle this)
-    "F823",    # Local variable referenced before assignment (let basedpyright handle this)
     "B008",    # Do not perform function calls in argument defaults (can conflict with type checkers)
     "D105",    # Docstring in magic methods
     "D107",    # Docstring in __init__
