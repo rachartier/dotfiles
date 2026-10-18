@@ -1,11 +1,11 @@
 {
   "configs": {
     "old_skill": [
-      "skills/old/python-style/SKILL.md"
+      "skills/old/casquette-python/SKILL.md"
     ],
     "new_skill": [
-      "skills/new/python-style/SKILL.md",
-      "skills/new/code-design/SKILL.md"
+      "skills/new/casquette-python/SKILL.md",
+      "skills/new/casquette-code-design/SKILL.md"
     ]
   },
   "runs_per_config": 2,

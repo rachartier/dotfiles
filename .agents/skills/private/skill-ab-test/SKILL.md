@@ -10,7 +10,7 @@ and by a blind judge, and reported with the trade-offs.
 
 The scripts in `scripts/` run with plain `python3` (3.12+) and need `uv`, `ruff`
 and `uvx ty` for Python grading. `references/example/` is a complete worked
-spec from a real test (python-style old vs new + code-design).
+spec from a real test (casquette-python old vs new + casquette-code-design).
 
 ## 1. Pin down the comparison before spending anything
 
@@ -20,9 +20,10 @@ pair, so settle these first, in one round of questions:
 - **The exact versions.** Get the old version as a file (attached, or from git).
   Skill files usually carry no version number, and rebuilding one from memory or
   past chats tests the wrong thing.
-- **The setups.** Each setup is a list of skill files: e.g. "old python-style
-  alone" vs "new python-style + code-design". A no-skill baseline is a third
-  setup; the blind judge only pairs two, so pick the two that matter.
+- **The setups.** Each setup is a list of skill files: e.g. "old
+  casquette-python alone" vs "new casquette-python + casquette-code-design". A
+  no-skill baseline is a third setup; the blind judge only pairs two, so pick
+  the two that matter.
 - **Runs per setup.** 2 is the useful minimum (one run can mislead); say what it
   costs.
 

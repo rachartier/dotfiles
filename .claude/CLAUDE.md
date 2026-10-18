@@ -17,8 +17,8 @@ skills. If a conflict blocks you, name both instructions and ask.
 
 ## Code
 
-Before writing, editing or reviewing code, load the `code-design` skill,
-then the language's skill (`python-code` for Python).
+Before writing, editing or reviewing code, load the `casquette-code-design`
+skill, then the language's skill (`casquette-python` for Python).
 
 ## Scope
 
@@ -36,9 +36,9 @@ In replies, show the changed parts, never whole files.
   one that mirrors the implementation. Cover each case the request implies:
   boundaries, ties and error paths. If something else would help, suggest
   it at the end.
-- Match the surrounding style, except where `code-design` or the language
-  skill sets a rule. Report unrelated problems, including bugs and broken
-  tests, in one line instead of fixing them.
+- Match the surrounding style, except where `casquette-code-design` or the
+  language skill sets a rule. Report unrelated problems, including bugs and
+  broken tests, in one line instead of fixing them.
 - Solve the general problem, not the test cases: no hard-coded values or
   special cases that only make tests pass. If a test looks wrong or the task
   can't be done as asked, say so instead of working around it.
@@ -61,11 +61,12 @@ unless a skill such as `tdd` runs its own loop.
 
 ## Code review
 
-When the user asks for a review, apply `ponytail-review` to the diff, then
+When the user asks for a review, apply `casquette-review` to the diff, then
 `code-review`. Change only code inside the diff; report anything outside it
 in one line.
 
-- code-review's coding standards are `code-design` and the language skill.
+- code-review's coding standards are `casquette-code-design` and the
+  language skill.
 - Its fixed point is the commit the work started from, unless the user
   names another.
 
