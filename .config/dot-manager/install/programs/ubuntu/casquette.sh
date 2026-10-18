@@ -6,7 +6,7 @@ install_casquette() {
 	print_step "Installing casquette skills"
 
 	local repo="$HOME/dev/casquette"
-	local link="$HOME/.agents/skills/my-skills"
+	local link="$HOME/.agents/skills/casquette"
 
 	if [ -d "$link" ] && [ ! -L "$link" ]; then
 		log "error" "$link is a directory, move it away first"
