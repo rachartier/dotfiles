@@ -25,7 +25,7 @@ style = "blue"
 [hostname]
 ssh_symbol = ''
 format = '[\(SSH\)](bold green) '
-# disabled = false
+disabled = true
 
 [character]
 success_symbol = "[❯](bold purple)"

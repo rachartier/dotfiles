@@ -27,7 +27,7 @@ actions:
     options:
       stream: false
       spinner: false
-      reasoning_effort: "low"
+      reasoning_effort: "none"
 
   lazygit-conventional-commit:
     description: "Generate a commit message with Conventional Commit format"
@@ -77,7 +77,7 @@ actions:
     options:
       stream: false
       spinner: false
-      reasoning_effort: "low"
+      reasoning_effort: "none"
 
   lazygit-conventional-commit-prompt:
     description: "Generate a commit message with Conventional Commit format based on user prompt"
@@ -131,7 +131,7 @@ actions:
     options:
       stream: false
       spinner: false
-      reasoning_effort: "low"
+      reasoning_effort: "none"
 
   translate:
     description: "Translate text to a specified language"
@@ -151,7 +151,7 @@ actions:
     stream: true
     model: "claude-haiku-5.5"
     options:
-      reasoning_effort: "low"
+      reasoning_effort: "none"
 
   enhance:
     description: "Enhance wording of a given text"
@@ -177,7 +177,7 @@ actions:
     stream: true
     model: "claude-haiku-5.5"
     options:
-      reasoning_effort: "low"
+      reasoning_effort: "none"
 
   correct:
     description: "Correct spelling and grammar of a given text"
@@ -205,7 +205,7 @@ actions:
     model: "claude-haiku-5.5"
     stream: true
     options:
-      reasoning_effort: "low"
+      reasoning_effort: "none"
 
   generate-command:
     description: "Generate a command based on user input"
@@ -234,7 +234,7 @@ actions:
     model: "claude-haiku-5.5"
     stream: true
     options:
-      reasoning_effort: "low"
+      reasoning_effort: "none"
 
   note-tags:
     description: "Generate or validate tags for a note"
@@ -260,7 +260,7 @@ actions:
     options:
       stream: false
       spinner: false
-      reasoning_effort: "low"
+      reasoning_effort: "none"
 
   ask:
     description: "Answer the user question"
