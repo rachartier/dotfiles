@@ -1,10 +1,4 @@
 {
-  "enabledPlugins": {
-    "ponytail@ponytail": true,
-    "context-engineering@awesome-copilot": false,
-    "caveman@caveman": true,
-    "awesome-copilot@awesome-copilot": false
-  },
   "experimental": true,
   "includeCoAuthoredBy": false,
   "pinnedPrompts": true,
@@ -22,19 +16,5 @@
     "showQuota": true,
     "showYolo": true
   },
-  "theme": "default",
-  "extraKnownMarketplaces": {
-    "ponytail": {
-      "source": {
-        "source": "github",
-        "repo": "DietrichGebert/ponytail"
-      }
-    },
-    "caveman": {
-      "source": {
-        "source": "github",
-        "repo": "JuliusBrussee/caveman"
-      }
-    }
-  }
+  "theme": "default"
 }
