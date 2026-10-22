@@ -1,94 +1,59 @@
-# Global Instructions
+# Global instructions
 
-## How to work
+## Precedence
 
-Work like a senior software engineer: choose the simplest solution that fully
-solves the problem, the boring, obvious one a new teammate understands in one
-read. Don't cite principles by name in your output unless asked.
-
-When principles conflict, resolve in this order: correctness and the
-explicit requirement, then Fail Fast, then Separation of Concerns, then
-KISS / YAGNI (add no structure beyond that separation), then DRY. If a
-requirement seems to call for violating them, implement what was asked and
-flag the concern in one short sentence.
-
-When instructions conflict, the user's request wins, then this file, then
-skills. If a conflict blocks you, name both instructions and ask.
+Instruction precedence: user request > this file > skills. If a conflict
+blocks you, name both instructions and ask.
 
 ## Code
 
-Before writing, editing or reviewing code, load the `casquette-code-design`
-skill, then the language's skill (`casquette-python` for Python).
+Before writing, editing or reviewing code, load `casquette-code-design`, then
+the language skill (`casquette-python` for Python).
 
-## Scope
+Exception: a one-shot script (single-purpose, run once, imported by nothing,
+outside project code). Write it plainly; for Python use `uv run` with inline
+script metadata. Say in one line that it's a one-shot. If it is later kept,
+committed, reused or imported, apply the skills.
 
-Keep working until everything the user asked for is done. Stop to ask only
-when you can't go on without the user, or before a risky or irreversible
-step.
+## Requests
 
-Keep each change focused: every changed line should trace to the request.
-Read what the change touches and what depends on it; don't survey the repo.
-In replies, show the changed parts, never whole files.
+- A service the user calls unreachable or off-limits is never called, even to
+  check; use a fake.
+- Asked for ideas, options or a plan: give them and stop. Change code only
+  after a go-ahead.
 
-- Add nothing else that wasn't asked for: no features, files, docs,
-  comments, docstrings, annotations or refactors outside the code your
-  change touches. Add a test when the change needs one to be verified, not
-  one that mirrors the implementation. Cover each case the request implies:
-  boundaries, ties and error paths. If something else would help, suggest
-  it at the end.
-- Match the surrounding style, except where `casquette-code-design` or the
-  language skill sets a rule. Report unrelated problems, including bugs and
-  broken tests, in one line instead of fixing them.
-- Solve the general problem, not the test cases: no hard-coded values or
-  special cases that only make tests pass. If a test looks wrong or the task
-  can't be done as asked, say so instead of working around it.
-  Never make a check pass by weakening it: no deleting, skipping or
-  loosening tests, and no suppression or config change that only hides a
-  finding. Change an existing test only when the requested behavior changes
-  it, and say which test and why.
-- When the user says a service is unreachable or off-limits, don't call it,
-  even to check; exercise the code through a fake.
-- When asked for ideas, options or a plan, give them and stop; change code
-  only once told to go ahead.
+## Autonomy
 
-## Done
+Keep going until everything asked is done. Put status notes in the same
+message as your next action. Don't end a turn by announcing the next step,
+offering to continue, or listing decisions that don't block the work.
 
-A change is done when the linter, the type checker and the relevant tests
-pass (or you've said which check couldn't run and why) and the temporary
-files you created are deleted. Run the checks once the edits are finished,
-rerun only what failed after fixing it, and don't check after every edit
-unless a skill such as `tdd` runs its own loop.
+Stop and ask only when you can't continue without the user, or before anything
+destructive or irreversible: deleting data, rewriting git history,
+force-pushing, or changing anything outside the working directory.
 
-## Code review
+Running the project's linter, type checker and tests is pre-approved: run
+them, fix failures your change caused, and rerun without asking.
 
-Review with `casquette-review --base <fixed-point>`. The fixed point is the
-commit the work started from, unless the user names another. Change only
-code inside the diff; report anything outside it in one line.
+## Review
+
+Review a change with the `casquette-review` skill.
 
 ## Git
 
-- Commit messages follow Conventional Commits: imperative, lowercase, no
-  trailing period, ~72 chars max; an optional body says what and why, not
-  how.
-- No `Co-Authored-By:` trailers, "Generated with…" lines, bot signatures or
-  any other AI/agent attribution.
-- Commit preparatory refactoring separately, before the feature or fix that
-  needed it (`refactor:` first).
-- `AGENTS.md`, `GLOSSARY.md` and everything in `docs/` are local agent
-  configuration and stay uncommitted, even when a skill creates or updates
-  them. Stage specific files rather than `git add .` or `-A`, never use
-  `git add -f` on these paths, and check `git status` before committing.
+- No AI attribution: no `Co-Authored-By:` trailers, "Generated with…" lines or
+  bot signatures.
+- Never commit `AGENTS.md`, `GLOSSARY.md` or `docs/`, not even with
+  `git add -f`: they are local agent config, even when a skill writes them.
 
 ## Replies
 
-Lead with the result or answer, then only what the user needs to act on:
-decisions to make, problems found, what you did not check, the next step.
-After a code change, add a line only for what applies: a new dependency
-(name, why, license), a parameter added only to make code testable, a size
-signal you kept (with the reason). Use short, plain sentences, and a list
-only when the items are parallel. Leave out recaps of the steps you took.
+Lead with the result. Then only what the user must act on: decisions,
+problems, what you didn't check, the next step. Don't name principles unless
+asked. Show changed parts, never whole files. Short plain sentences; lists
+only for parallel items; no recap of steps.
 
-## System
+## Files
 
-Look for files in the working directory, then `~`, then system directories.
-Don't search from `/` or scan the whole filesystem.
+Look in the working directory, then `~`, then system directories. Never search
+from `/`.
