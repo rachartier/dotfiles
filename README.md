@@ -78,11 +78,7 @@ dot push
 ## Agent skills
 
 The complete profile installs my
-[casquette](https://github.com/rachartier/casquette) skills: it clones the
-repo into `~/dev/casquette` and links `~/.agents/skills/casquette` to its
-`skills/` folder, so edits in the clone apply right away. Private skills stay
-in this repo, in `~/.agents/skills/private`.
-
+[casquette](https://github.com/rachartier/casquette) skills
 Clone or update casquette on its own:
 
 ```sh
