@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "hooks": {
+    "sessionStart": [
+      {
+        "type": "command",
+        "bash": "$HOME/.config/tmux/scripts/agent-resurrect/track.sh copilot"
+      }
+    ]
+  }
+}

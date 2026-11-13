@@ -31,5 +31,17 @@
       "effortLevel": "high"
     }
   },
-  "tui": "fullscreen"
+  "tui": "fullscreen",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.config/tmux/scripts/agent-resurrect/track.sh claude"
+          }
+        ]
+      }
+    ]
+  }
 }
