@@ -40,6 +40,11 @@ symbol-map = [
   { start = "ED00", end = "F385", font-family = "Symbols Nerd Font" },
   { start = "F400", end = "F533", font-family = "Symbols Nerd Font" },
   { start = "F0001", end = "F1AF0", font-family = "Symbols Nerd Font" },
+  # Loads the colour emoji font up front. Otherwise the first symbol that only
+  # Segoe UI Symbol has loads that font, and every later emoji renders monochrome.
+  # Noto, not Segoe UI Emoji: Rio places a fallback font by its own ascent, and
+  # Segoe's is 4px shorter than Berkeley Mono's at this size, so its emoji sit high.
+  { start = "1F300", end = "1FB00", font-family = "Noto Color Emoji" },
 ]
 
 # Berkeley Mono's obliques carry no italic flag, so Rio would slant them a second time.
